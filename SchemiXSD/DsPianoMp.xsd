@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="DsPianoMp" targetNamespace="http://tempuri.org/DsPianoMp.xsd" elementFormDefault="qualified"
+	xmlns="http://tempuri.org/DsPianoMp.xsd" xmlns:mstns="http://tempuri.org/DsPianoMp.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="TblMain">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="NOME_EDIFICIO" type="xs:string" />
+				<xs:element name="INDIRIZZO" type="xs:string" />
+				<xs:element name="CODICE_EDIFICIO" type="xs:string" />
+				<xs:element name="ID_EDIFICIO" type="xs:integer" />
+				<xs:element name="MESE" type="xs:string" />
+				<xs:element name="ANNO" type="xs:string" />
+				<xs:element name="MESE_ESTESO" type="xs:string" />
+				<xs:element name="SERVIZIO" type="xs:string" />
+				<xs:element name="ID_SERVIZIO" type="xs:integer" />
+				<xs:element name="ID_PMP" type="xs:integer" />
+				<xs:element name="PROCEDURA_MANUTENZIONE" type="xs:string" />
+				<xs:element name="ID_CLASSE_ELEMENTO" type="xs:integer" />
+				<xs:element name="CODICE_ELEMENTO" type="xs:string" />
+				<xs:element name="CLASSE_ELEMENTO" type="xs:string" />
+				<xs:element name="PIANO" type="xs:string" />
+				<xs:element name="ORDINE_PIANO" type="xs:integer" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TblPassi">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ISTRUZIONE" type="xs:string" />
+				<xs:element name="PASSO" type="xs:integer" />
+				<xs:element name="ID_PMP" type="xs:integer" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

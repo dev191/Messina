@@ -1,0 +1,551 @@
+body
+{
+	font-size: 11px;
+	color: #000077;
+	font-family: Verdana, Arial;
+	background-color: #ffffff;
+}
+
+table
+{
+	font-size: 11px;
+	color: #000077;
+	font-family: Verdana, Arial;
+}
+
+table#tblForm
+{
+	border-top-width: 1px;
+	border-left-width: 1px;
+	font-size: 11px;
+	border-left-color: #666666;
+	border-bottom-width: 1px;
+	border-bottom-color: #666666;
+	width: 98%;
+	color: #000077;
+	border-top-color: #666666;
+	font-family: Verdana, Arial;
+	height: 99%;
+	background-color: white;
+	border-right-width: 1px;
+	border-right-color: #666666;
+}
+
+table#tblFormInput
+{
+	border-top-width: 1px;
+	border-left-width: 1px;
+	font-size: 11px;
+	border-left-color: #666666;
+	border-bottom-width: 1px;
+	border-bottom-color: #666666;
+	width: 100%;
+	color: #000077;
+	border-top-color: #666666;
+	font-family: Verdana, Arial;	
+	background-color: white;
+	border-right-width: 1px;
+	border-right-color: #666666;
+}
+
+
+table#tblGridTitle
+{
+	border-right: slategray 1px solid;
+	border-top: slategray 1px solid;
+	font-size: 11px;
+	border-left: slategray 1px solid;
+	width: 100%;
+	color: #ffffff;
+	border-bottom: slategray 1px solid;
+	font-family: Verdana, Arial;
+	height: 20px;
+	background-color: lightslategray;
+	filter:progid:DXImageTransform.Microsoft.Gradient
+	(GradientType=0, StartColorStr='#00778899', EndColorStr='#30f5f5f5');
+}
+
+.TDCommon
+{
+	border-right: slategray 1px solid;
+	border-top: slategray 1px solid;
+	font-size: 11px;
+	border-left: slategray 1px solid;
+	width: 100%;
+	color: #ffffff;
+	border-bottom: slategray 1px solid;
+	font-family: Verdana, Arial;
+	height: 20px;
+	background-color: lightslategray;
+	filter:progid:DXImageTransform.Microsoft.Gradient
+	(GradientType=0, StartColorStr='#00778899', EndColorStr='#30f5f5f5');
+}
+
+table#tblSearch75
+{	
+	border-right: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	border-left: darkgray 1px solid;
+	width: 75%;
+	color: #000077;
+	border-bottom: darkgray 1px solid;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+table#tblSearch100
+{	
+	font-size: 11px;
+	width: 100%;
+	color: #000077;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+table#tblSearch75Dettaglio
+{	
+	border-right: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	border-left: #666666 1px solid;
+	width: 75%;
+	color: #000077;
+	border-bottom: darkgray 1px solid;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+table#tblSearch90
+{
+	border-right: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	border-left: darkgray 1px solid;
+	width: 90%;
+	color: #000077;
+	border-bottom: darkgray 1px solid;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+table#tblSearch95
+{
+	border-right: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	border-left: darkgray 1px solid;
+	width: 95%;
+	color: #000077;
+	border-bottom: darkgray 1px solid;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+table#tblSearch98
+{
+	border-right: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	border-left: darkgray 1px solid;
+	width: 98%;
+	color: #000077;
+	border-bottom: darkgray 1px solid;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+table#tblBlSearch
+{	
+	border-right: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	border-left: darkgray 1px solid;
+	width: 100%;
+	color: #000077;
+	border-bottom: darkgray 1px solid;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+.tblSearch100Dettaglio
+{	
+	border-right: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	border-left: #666666 1px solid;
+	width: 100%;
+	color: #000077;
+	border-bottom: darkgray 1px solid;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+.tdtop
+{	
+	
+	border-bottom: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	border-left: #666666 1px solid;
+	color: #000077;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+.tdcenter
+{	
+	border-bottom: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	color: #000077;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+.tdbottom
+{	
+	border-top: darkgray 1px solid;
+	border-right: darkgray 1px solid;
+	font-size: 11px;
+	color: #000077;
+	border-bottom: darkgray 1px solid;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+.StyleTreeView
+{
+	SCROLLBAR-3DLIGHT-COLOR: darkgray;
+	SCROLLBAR-ARROW-COLOR: darkgray;
+	SCROLLBAR-TRACK-COLOR: #666666;
+	SCROLLBAR-BASE-COLOR: #666666;
+}
+Input
+{
+	font-size: 10px;
+	color: #000099;
+	font-family: Verdana, Arial;
+}
+input.btn
+{
+	color:#333;
+	font-family:'trebuchet ms',helvetica,sans-serif;
+	font-size:95%;
+
+	border:1px solid;
+	border-top-color:#999;
+	border-left-color:#999;
+	border-right-color:#666;
+	border-bottom-color:#666;
+   background-color:#ddd;
+   filter:progid:DXImageTransform.Microsoft.Gradient(
+		GradientType=0,StartColorStr='#ffF2F2F2',EndColorStr='#ff9BA4CF');
+}
+Select
+{
+	font-size: 11px;
+	color: #000099;
+	font-family: Verdana, Arial;
+}
+
+tr#trSerch
+{
+	font-weight: bold;
+	color: white;
+	font-family: Verdana, Arial;
+	background-color: lightslategray;
+}
+
+.TestoNormale
+{
+	font-size: 11px;
+	color: #000077;
+	font-family: Verdana, Arial;
+}
+
+.LabelErrore
+{
+	font-weight: bold;
+	color: red;
+	font-family: Verdana, Arial;
+	font-size: 11px;
+}
+
+.MainTitle
+{
+	font-size: 15px;
+	color: darkblue;
+	font-family: Verdana, Arial;
+	font-weight: bold;
+}
+
+.Title
+{
+	font-weight: bold;
+	font-size: 14px;
+	color: darkblue;
+	font-family: Verdana, Arial;
+	font-variant: small-caps;
+}
+
+.TitleOperazione
+{
+	font-weight: normal;
+	font-size: 12px;
+	color: #000077;
+	font-family: Verdana, Arial;
+	font-variant: small-caps;
+}
+
+.NuovoLink
+{
+	font-weight: bold;
+	cursor: hand;
+	color: white;
+	text-decoration: underline;
+}
+
+.LabelOperatore
+{
+	font-family: Verdana, Arial;
+	font-size: 9px;
+	color: #000077;
+}
+
+.LabelLogout
+{
+	font-size: 9px;
+	color: #000077;
+	font-family: Verdana, Arial;
+	text-decoration: underline;
+}
+
+.LabelReadOnly
+{
+	font-weight: bold;
+	font-size: 11px;
+	width: 75%;
+	color: #000099;
+	font-family: Verdana, Arial;
+}
+
+.transparent {
+filter:alpha(opacity=45);
+background-color:green;
+display:none;
+position:absolute;
+color: white;
+border: 1 green solid;
+}
+
+.transparentGray {
+filter:progid:DXImageTransform.Microsoft.Gradient
+	(GradientType=0, StartColorStr='#00778899', EndColorStr='#30f5f5f5');
+}
+
+.DataGrid
+{
+	width: 100%;    
+    behavior: url(../Js/sort.htc);		
+}
+
+.DataGridHeaderStyle
+{
+	font-weight: bold;
+	font-size: 11px;
+	color: darkblue;
+	font-family: Verdana, Arial;
+	background-color: gainsboro;
+}
+
+.DataGridItemStyle
+{
+	font-size: 11px;
+	color: #000077;
+	font-family: Verdana, Arial;
+	background-color: white;
+}
+
+.DataGridItemStyleDark
+{
+	font-size: 11px;
+	color: #000077;
+	font-family: Verdana, Arial;
+	background-color: white;
+}
+
+.DataGridAlternatingItemStyle
+{
+	font-size: 11px;
+	color: #000077;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+.DataGridAlternatingItemStyleDark
+{
+	font-size: 11px;
+	color: #000077;
+	font-family: Verdana, Arial;
+	background-color: #EEEEEE;
+}
+
+.DataPanel75
+{	
+	border-right: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	border-left: darkgray 1px solid;
+	width: 75%;
+	color: #000077;
+	border-bottom: darkgray 1px solid;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+.DataPanel100
+{	
+	border-right: darkgray 1px solid;
+	border-top: darkgray 1px solid;
+	font-size: 11px;
+	border-left: darkgray 1px solid;
+	width: 100%;
+	color: #000077;
+	border-bottom: darkgray 1px solid;
+	font-family: Verdana, Arial;
+	background-color: whitesmoke;
+}
+
+.ErrorPanel
+{
+	border-right: orangered 1px ridge;
+	border-top: orangered 1px ridge;
+	font-size: 11px;
+	border-left: orangered 1px ridge;
+	width: 350px;
+	color: red;
+	border-bottom: orangered 1px ridge;
+	font-family: Verdana, Arial;
+	background-color: navajowhite;
+	
+}
+
+.TitleSearch
+{
+	
+	font-weight: bold;
+	color: white;
+	font-family: Verdana, Arial;
+	background-color: lightslategray;
+	filter:progid:DXImageTransform.Microsoft.Gradient
+	(GradientType=0, StartColorStr='#00778899', EndColorStr='#30f5f5f5');
+}
+
+.ShowInfoPanel
+{
+	border-right: #000000 1px solid;
+	border-top: #000000 1px solid;
+	font-size: 11px;
+	border-left: #000000 1px solid;
+	width: 300px;
+	border-bottom: #000000 1px solid;
+	font-family: Verdana;
+	position: absolute;
+	height: 150px;
+	background-color: gainsboro;	 	
+}
+
+.LabelInfo
+{
+	font-size: 9px;
+	color: #000077;
+	font-family: Verdana, Arial;
+	text-decoration: underline;
+}
+
+.LabelChiudi
+{
+	font-size: 9px;
+	color: #ffffff;
+	font-family: Verdana, Arial;
+	text-decoration: underline;
+}
+.BordiTabella
+{
+	border-right: black 1px solid;
+	border-top: black 1px solid;
+	border-left: black 1px solid;
+	color: black;	
+}
+
+.BordiCella
+{
+	border-right: black 1px solid;
+	color: black;
+	border-bottom: black 1px solid;
+	background-color: white;
+}
+
+.BordiCellaR
+{		
+	color: black;
+	border-bottom: black 1px solid;
+}
+
+.BordiCellaL
+{		
+	color: black;
+	border-right: black 1px solid;
+	background-color: white;
+}
+
+.BordiCellaTop
+{
+	border-right: black 1px solid;
+	color: white;
+	border-bottom: black 1px solid;
+	background-color: red;
+	border-top: black 1px solid;
+}
+
+.BordiCellaRTop
+{		
+	border-top: black 1px solid;
+	color: white;
+	border-bottom: black 1px solid;
+	background-color: red;
+}
+
+.tabblu {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #003366;
+	text-align: center;
+}
+
+.ShowInfoPanel350
+{
+	border-right: #000000 1px solid;
+	border-top: #000000 1px solid;
+	font-size: 11px;
+	border-left: #000000 1px solid;
+	width: 350px;
+	border-bottom: #000000 1px solid;
+	font-family: Verdana;
+	position: absolute;
+	height: 150px;
+	background-color: gainsboro;	 	
+}
+
+.MsgError
+{
+	font: lighter 15px Arial;
+	vertical-align: baseline;
+	text-transform: none;
+	color: red;
+	letter-spacing: normal;
+	position: static;
+	text-align: left;
+	text-decoration: none;
+}

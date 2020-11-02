@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Questo file viene generato automaticamente dalla Progettazione schema XML. Contiene informazioni sul layout dei componenti nell'area di progettazione.-->
+<XSDDesignerLayout layoutVersion="2" viewPortLeft="0" viewPortTop="0" zoom="100">
+    <Query_XmlElement left="10980" top="3836" width="2911" height="3387" selected="0" zOrder="1" index="0" expanded="1" />
+    <Campi_XmlElement left="15716" top="4260" width="5292" height="2963" selected="0" zOrder="2" index="1" expanded="1" />
+    <TuttiCampi_XmlElement left="21642" top="4260" width="5292" height="2963" selected="0" zOrder="4" index="2" expanded="1" />
+</XSDDesignerLayout>

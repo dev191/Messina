@@ -1,0 +1,196 @@
+
+A:link{ COLOR: #000099;
+	FONT-FAMILY: arial;
+	FONT-SIZE: 12px;
+	FONT-STYLE: normal;
+	font-weight: normal;
+	TEXT-DECORATION: none; }
+A:active { COLOR: #FF0000;
+	FONT-FAMILY: arial;
+	FONT-SIZE: 12px;
+	FONT-STYLE: normal;
+	font-weight: bold;
+	text-decoration: none }
+A:visited { COLOR: #000099;
+	FONT-FAMILY: arial;
+	FONT-SIZE: 12px;
+	FONT-STYLE: normal;
+	font-weight: normal;
+	text-decoration: none }
+A:hover { COLOR: #00aa00;
+	FONT-FAMILY: arial;
+	FONT-SIZE: 12px;
+	FONT-STYLE: normal;
+	font-weight: normal;
+	text-decoration: underline }
+
+.Table
+{
+	border-top-width: 1px;
+	border-left-width: 1px;
+	font-size: 11px;
+	border-left-color: #666666;
+	border-bottom-width: 1px;
+	border-bottom-color: #666666;
+	width: 100%;
+	color: #000077;
+	border-top-color: #666666;
+	font-family: Verdana, Arial;	
+	background-color: white;
+	border-right-width: 1px;
+	border-right-color: #666666;
+}
+
+.TableHeaderCampi
+{
+	font-size: 15px;
+	color:#000077;
+	font-weight:bold;
+	   filter:progid:DXImageTransform.Microsoft.Gradient(
+		GradientType=0,StartColorStr='#ffF2F2F2',EndColorStr='#ff9BA4CF');
+}
+
+.TableHeaderCampi2
+{
+	font-size: 12px;
+	color:#000077;
+	font-weight:bold;
+	height:12;
+}
+
+.TableCellCampiSel
+{
+	font-size: 12px;
+	color:Blue;
+	height:12;
+	cursor:hand;
+}
+
+.TableRowCampiSelAlt
+{
+	font-size: 12px;
+	color:Blue;
+	height:12;
+	background-color:#F0C090;
+}
+
+.TableRowCampiSel
+{
+	font-size: 12px;
+	color:Blue;
+	height:12;
+	background-color:#F0C090;
+}
+
+
+
+.TableCellTuttiCampi
+{
+	font-size: 12px;
+	color:Blue;
+	height:12;
+	cursor:hand;
+}
+
+.TableRowTuttiCampiAlt
+{
+	font-size: 12px;
+	color:Blue;
+	height:12;
+	background-color:#F0C090;
+}
+
+.TableRowTuttiCampi
+{
+	font-size: 12px;
+	color:Blue;
+	height:12;
+	background-color:#F0C090;
+}
+
+.TableContCampi
+{
+	height:190px;
+    overflow:scroll;
+	background-color:gainsboro;
+	scrollbar-3dlight-color : #FFFFFF;
+	scrollbar-arrow-color : #FFFFFF;
+	scrollbar-base-color : #FF0000;
+	scrollbar-darkshadow-color : #0000FF;
+	scrollbar-face-color : #9BA4CF;
+	scrollbar-highlight-color : #FFFF66;
+	scrollbar-shadow-color : #000000;
+	scrollbar-track-color : gainsboro;
+}
+
+.TableCellInfoCampi
+{
+	border: solid,1,black; 
+}
+
+.ButtonCampi
+{
+	font-size:8;
+	height:15px;
+	cursor:hand;
+}
+
+.DataGridHeaderStyle
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: black;
+	background-color: #F2F2F2;
+}
+.DataGridAlternatingItemStyle
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: black;
+	background-color: whitesmoke;
+}
+.DataGridItemStyle
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: black;
+	background-color: white;
+}
+
+.TableInt
+{
+	font-size: 15px;
+	color:Green;
+	font-weight:bold;
+
+}
+
+.Titolo
+{
+	font-size: 22px;
+	color:#000099;
+	font-weight:bold;
+
+}
+Input
+{
+	font-size: 10px;
+	color: #000099;
+	font-family: Verdana, Arial;
+}
+input.btn
+{
+	color:#333;
+	font-family:'trebuchet ms',helvetica,sans-serif;
+	font-size:90%;
+
+	border:1px solid;
+	border-top-color:#999;
+	border-left-color:#999;
+	border-right-color:#666;
+	border-bottom-color:#666;
+   background-color:#ddd;
+   filter:progid:DXImageTransform.Microsoft.Gradient(
+		GradientType=0,StartColorStr='#ffF2F2F2',EndColorStr='#ff9BA4CF');
+}

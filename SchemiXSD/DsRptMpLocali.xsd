@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="DsRptMpLocali" targetNamespace="http://tempuri.org/DsRptMpLocali.xsd" elementFormDefault="qualified"
+	xmlns="http://tempuri.org/DsRptMpLocali.xsd" xmlns:mstns="http://tempuri.org/DsRptMpLocali.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="tblMain">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="WO_ID" type="xs:integer" />
+				<xs:element name="DESC_BL_ESTESA" type="xs:string" />
+				<xs:element name="NOMECOGNOME" type="xs:string" />
+				<xs:element name="DATA_SCADENZA" type="xs:string" />
+				<xs:element name="SERVIZIO" type="xs:string" />
+				<xs:element name="DITTA" type="xs:string" />
+				<xs:element name="COD_PROCEDURA" type="xs:string" />
+				<xs:element name="COD_FREQ" type="xs:string" nillable="true" />
+				<xs:element name="DESC_PROCEDURA" type="xs:string" />
+				<xs:element name="ID_PMP" type="xs:integer" nillable="true" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tblPassi">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="WO_ID" type="xs:integer" nillable="true" />
+				<xs:element name="ID_PMP" type="xs:integer" nillable="true" />
+				<xs:element name="PASSO" type="xs:integer" nillable="true" />
+				<xs:element name="ISTRUZIONE" type="xs:string" nillable="true" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TblDetRdl">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="WO_ID" type="xs:integer" nillable="true" />
+				<xs:element name="ID_PMP" type="xs:integer" />
+				<xs:element name="DESC_EQSTD" type="xs:string" />
+				<xs:element name="WR_ID" type="xs:string" />
+				<xs:element name="FL_ID" type="xs:string" />
+				<xs:element name="EQ_ID" type="xs:string" />
+				<xs:element name="RM_ID" type="xs:string" />
+				<xs:element name="STATUS" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TblDetRdlEstesa">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="WO_ID" type="xs:integer" nillable="true" />
+				<xs:element name="ID_PMP" type="xs:integer" />
+				<xs:element name="DESC_EQSTD" type="xs:string" />
+				<xs:element name="WR_ID0" type="xs:string" />
+				<xs:element name="FL_ID0" type="xs:string" />
+				<xs:element name="EQ_ID0" type="xs:string" />
+				<xs:element name="RM_ID0" type="xs:string" />
+				<xs:element name="STATUS0" type="xs:string" nillable="true" />
+				<xs:element name="WR_ID1" type="xs:string" nillable="true" />
+				<xs:element name="FL_ID1" type="xs:string" nillable="true" />
+				<xs:element name="EQ_ID1" type="xs:string" nillable="true" />
+				<xs:element name="RM_ID1" type="xs:string" nillable="true" />
+				<xs:element name="STATUS1" type="xs:string" nillable="true" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tblAllRpt">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="WO_ID" type="xs:integer" />
+				<xs:element name="WR_ID" type="xs:integer" />
+				<xs:element name="DESC_BL_ESTESA" type="xs:string" />
+				<xs:element name="NOMECOGNOME" type="xs:string" />
+				<xs:element name="DATA_SCADENZA" type="xs:string" />
+				<xs:element name="SERVIZIO" type="xs:string" />
+				<xs:element name="DITTA" type="xs:string" />
+				<xs:element name="COD_PROCEDURA" type="xs:string" />
+				<xs:element name="COD_FREQ" type="xs:string" />
+				<xs:element name="DESC_PROCEDURA" type="xs:string" />
+				<xs:element name="ID_PMP" type="xs:integer" />
+				<xs:element name="ISTRUZIONE" type="xs:string" />
+				<xs:element name="PASSO" type="xs:integer" />
+				<xs:element name="DESC_EQSTD" type="xs:string" />
+				<xs:element name="FL_ID" type="xs:string" />
+				<xs:element name="EQ_ID" type="xs:string" />
+				<xs:element name="RM_ID" type="xs:string" />
+				<xs:element name="STATUS" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TblLeggendaPassi">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CODICE" type="xs:string" />
+				<xs:element name="DESCRIZIONE" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tblLeggendaStatus">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CODICE" type="xs:string" />
+				<xs:element name="DESCRIZIONE" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

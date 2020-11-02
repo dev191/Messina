@@ -1,0 +1,307 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 10 (filtered)">
+<title>Sfoglia RdL</title>
+
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.corpomanualeCarattereCarattereCarattereCarattereCarattere, li.corpomanualeCarattereCarattereCarattereCarattereCarattere, div.corpomanualeCarattereCarattereCarattereCarattereCarattere
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	line-height:150%;
+	font-size:12.0pt;
+	font-family:Arial;}
+span.corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere
+	{font-family:Arial;}
+p.text, li.text, div.text
+	{margin-right:0cm;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 2.0cm 2.0cm 2.0cm;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=IT>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><b><span
+style='font-size:9.0pt;font-family:Arial'>Sfoglia RdL</span></b></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial'>Selezionando
+la voce di menu <b>SfogliaRdL</b>, l’utente visualizza la seguente maschera che
+permette di visualizzare delle Richieste di Lavoro gia esistenti.</span></p>
+
+<p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial'><img
+width=642 height=308 src="SfogliaRdL_file/image001.jpg"></span></p>
+
+<p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify;text-autospace:none'><span
+style='font-size:9.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify;text-autospace:none'><span
+style='font-size:9.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify;text-autospace:none'><span
+style='font-size:9.0pt;font-family:Arial'>Per effettuare la ricerca l'utente
+può utilizzare come filtri uno o più campi visualizzati all'interno della
+maschera. L’inserimento di più campi di ricerca determina la selezione di Ordini
+di Lavoro che soddisfano tutti i criteri inseriti (AND logico).</span></p>
+
+<p class=MsoNormal style='text-align:justify;text-autospace:none'><span
+style='font-size:9.0pt;font-family:Arial'>I campi visualizzati sono:</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;text-indent:
+-18.0pt;text-autospace:none'><span style='font-size:9.0pt;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><b><span
+style='font-size:9.0pt'>Cod.Edificio:</span></b></span><b><span
+style='font-size:9.0pt;font-family:Arial'> </span></b><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'>conoscendo esattamente il numero dell’Edificio/Complesso,
+lo si può digitare direttamente nel campo. Se si seleziona il match code <img
+width=32 height=22 src="SfogliaRdL_file/image002.jpg"> dopo aver compilato il
+campo, si apre una PopUp che mostra solo quei Codici Edificio che contengono i
+numeri inseriti. Ad esempio, digitando “</span></span><span class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+ style='font-size:9.0pt'>37”</span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'> e selezionando il match code verranno presentati tutti
+gli edifici contenenti “</span></span><span
+ class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+ style='font-size:9.0pt'>3”</span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'> e “</span></span><span
+ class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+ style='font-size:9.0pt'>7”</span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'> nel proprio Codice Edificio, del tipo “</span></span><span class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+ style='font-size:9.0pt'>037”</span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'>, “</span></span><span
+ class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+ style='font-size:9.0pt'>337”</span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'>, “</span></span><span
+ class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+ style='font-size:9.0pt'>370”</span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'>, etc. e/o nel numero civico dell’indirizzo. Se</span></span></p>
+
+<p class=MsoNormal style='margin-left:1.0cm;text-align:justify;text-indent:
+-14.15pt'><span style='font-size:8.0pt;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span
+style='font-size:9.0pt;font-family:Arial'>Richiesta di Lavoro: </span></b><span
+style='font-size:9.0pt;font-family:Arial'>è un campo di ricerca libera in cui
+inserire il numero della richiesta da cercare.</span></p>
+
+<p class=MsoNormal style='margin-left:1.0cm;text-align:justify;text-indent:
+-14.15pt'><span style='font-size:8.0pt;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span
+style='font-size:9.0pt;font-family:Arial'>Addetto:</span></b><span
+style='font-size:9.0pt;font-family:Arial'> selezionare l’addetto attraverso il
+match code <span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><img
+width=32 height=22 src="SfogliaRdL_file/image002.jpg"></span></span></p>
+
+<p class=MsoNormal style='margin-left:1.0cm;text-align:justify;text-indent:
+-14.15pt'><span style='font-size:8.0pt;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span
+style='font-size:9.0pt;font-family:Arial'>Da              A: </span></b><span
+style='font-size:9.0pt;font-family:Arial'>selezionare le date, attraverso il
+match code <span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><img
+width=32 height=22 src="SfogliaRdL_file/image002.jpg"></span>, per filtrare il
+periodo in cui sono state inserite le richieste.</span></p>
+
+<p class=MsoNormal style='margin-left:1.0cm;text-align:justify;text-indent:
+-14.15pt'><span style='font-size:8.0pt;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span
+style='font-size:9.0pt;font-family:Arial'>Ordine di Lavoro: </span></b><span
+style='font-size:9.0pt;font-family:Arial'>è un campo di ricerca libera in cui
+inserire il numero della OdL da cercare.</span></p>
+
+<p class=MsoNormal style='margin-left:1.0cm;text-align:justify;text-indent:
+-14.15pt'><span style='font-size:8.0pt;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span
+style='font-size:9.0pt;font-family:Arial'>Stato Richiesta: </span></b><span
+style='font-size:9.0pt;font-family:Arial'>selezionare un valore attraverso
+l’elenco a tendina per filtrare lo stato delle richieste da approvare/emettere.</span></p>
+
+<p class=MsoNormal style='margin-left:1.0cm;text-align:justify;text-indent:
+-14.15pt'><span style='font-size:8.0pt;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span
+style='font-size:9.0pt;font-family:Arial'>Servizio:</span></b><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'> </span></span><span style='font-size:9.0pt;font-family:
+Arial'>conoscendo esattamente il Servizio lo si può digitare direttamente nel
+campo. È possibile, altrimenti, effettuare la ricerca attraverso il match code,
+per aprire la finestra <b>Servizi</b> con l’elenco dei Servizi disponibili. Il
+filtro di ricerca evidenzierà le apparecchiature con una particolare tipologia
+di Servizio (Elettrico, Idrico, Sollevamento, etc.).</span></p>
+
+<p class=MsoNormal style='margin-left:1.0cm;text-align:justify;text-indent:
+-14.15pt'><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:8.0pt;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><b><span
+style='font-size:9.0pt'>Gruppo</span></b></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'>: selezionare un valore attraverso l’elenco a tendina
+per filtrare il gruppo di appartenenza del Richiedente .</span></span></p>
+
+<p class=MsoNormal style='margin-left:1.0cm;text-align:justify;text-indent:
+-14.15pt'><span style='font-size:8.0pt;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><b><span
+style='font-size:9.0pt'>Richiedente</span></b></span><span style='font-size:
+9.0pt;font-family:Arial'>:<b> </b>indicare il nome della persona che richiede intervento</span></p>
+
+<p class=MsoNormal style='margin-left:1.0cm;text-align:justify;text-indent:
+-14.15pt'><span style='font-size:8.0pt;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><b><span
+style='font-size:9.0pt;font-family:Arial'>Urgenza:</span></b><span
+style='font-size:9.0pt;font-family:Arial'> selezionare un valore attraverso
+l’elenco a tendina per filtrale la priorità della OdL (Emergenza,
+Critico,Ordinario ecc….).</span></p>
+
+<p class=MsoNormal style='margin-left:1.0cm;text-align:justify;text-indent:
+-14.15pt'><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:8.0pt;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><b><span
+style='font-size:9.0pt'>Descrizione</span></b></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'>:</span></span><b><span style='font-size:9.0pt;
+font-family:Arial'> </span></b><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'>è un campo in cui inserire una parola chiave della
+descrizione del problema del componente interessato e/o dell’ubicazione.</span></span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='margin-left:1.0cm;text-indent:-14.15pt;line-height:normal'><span
+style='font-size:8.0pt;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><b><span
+style='font-size:9.0pt'>Tipo Intervento</span></b></span><span
+class=corpomanualeCarattereCarattereCarattereCarattereCarattereCarattere><span
+style='font-size:9.0pt'>:</span></span><span style='font-size:9.0pt;color:black'>
+selezionare un valore attraverso il match code per indicare la tipologia
+dell’intervento all’Addetto. Il sistema apre </span><span style='font-size:9.0pt;color:black'>la PopUp</span><span style='font-size:9.0pt;
+color:black'> in cui scegliere il tipo di intervento da assegnare alla
+richiesta.</span></p>
+
+<p class=text style='margin-left:1.0cm;text-align:justify;text-indent:-14.15pt'><span
+style='font-size:8.0pt;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b><span style='font-size:9.0pt;font-family:Arial'>Data prevista
+Inizio: </span></b><span style='font-size:9.0pt;font-family:Arial'>campo
+obbligatorio dove indicare la data prevista per l’intervento</span></p>
+
+<p class=text style='margin-left:1.0cm;text-align:justify;text-indent:-14.15pt'><span
+style='font-size:8.0pt;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b><i><span style='font-size:9.0pt;font-family:Arial;color:black'>Data
+prevista Fine</span></i></b><i><span style='font-size:9.0pt;font-family:Arial;
+color:black'>: </span></i><i><span style='font-size:9.0pt;font-family:Arial'>indicare
+la data prevista per l’intervento</span></i></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>Selezionare il
+pulsante <img width=132 height=17 src="SfogliaRdL_file/image003.jpg"> per
+rimuovere il contenuto dai campi valorizzati.</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>Per rimuovere invece,
+il valore dal singolo campo, utilizzare il tasto Canc della tastiera per i
+campi testo o selezionare la voce vuota nel menu a tendina.</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>Selezionare il
+pulsante <img width=59 height=17 src="SfogliaRdL_file/image004.jpg"> per
+salvare o visualizzare in un documento excel il dettaglio, riportato in forma
+tabellare, delle RdL.</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial'><img
+width=642 height=282 src="SfogliaRdL_file/image005.jpg"></span></p>
+
+<p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<p class=corpomanualeCarattereCarattereCarattereCarattereCarattere
+style='line-height:normal'><span style='font-size:9.0pt'>Selezionando l’icona <img
+width=19 height=18 src="SfogliaRdL_file/image006.jpg"> corrispondente a una RdL
+con stato “Attività completata” si apre la maschera <b>Gestione e Completamento
+Ordini di Lavoro </b>con il dettaglio della creazione RdL dell’emissione
+dell’OdL e del completamento dello stesso, senza poter apportare modifiche ma
+solo con la possibilità di visualizzare il Rapporto Tecnico di intervento.</span></p>
+
+<p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial'>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>

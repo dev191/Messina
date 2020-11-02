@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="DataSetReport" targetNamespace="http://tempuri.org/DataSetReport.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/DataSetReport.xsd" xmlns:mstns="http://tempuri.org/DataSetReport.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="DataSetReport" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Query">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdQuery" type="xs:int" minOccurs="0" />
+							<xs:element name="Denominazione" type="xs:string" minOccurs="0" />
+							<xs:element name="Descrizione" type="xs:string" minOccurs="0" />
+							<xs:element name="username" type="xs:string" minOccurs="0" />
+							<xs:any />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Campi">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Aggregazione" type="xs:string" minOccurs="0" />
+							<xs:element name="Filtro" type="xs:string" minOccurs="0" />
+							<xs:element name="Nascosto" type="xs:boolean" minOccurs="0" />
+							<xs:element name="Ordinamento" type="xs:string" minOccurs="0" />
+							<xs:element name="NomeCampo" type="xs:string" minOccurs="0" />
+							<xs:element name="NomeTabella" type="xs:string" minOccurs="0" />
+							<xs:element name="IdGlossario" type="xs:int" minOccurs="0" />
+							<xs:element name="Tipologia" type="xs:string" minOccurs="0" />
+							<xs:element name="TipoDato" type="xs:string" minOccurs="0" />
+							<xs:element name="Alias" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TuttiCampi">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="NomeTabella" type="xs:string" minOccurs="0" />
+							<xs:element name="NomeCampo" type="xs:string" minOccurs="0" />
+							<xs:element name="IdGlossario" type="xs:int" minOccurs="0" />
+							<xs:element name="Tipologia" type="xs:string" minOccurs="0" />
+							<xs:element name="TipoDato" type="xs:string" minOccurs="0" />
+							<xs:element name="Alias" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

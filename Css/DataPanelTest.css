@@ -1,0 +1,33 @@
+body
+{
+	font-family: Arial;
+	background-color: #a60a0b;
+}
+.dpHeader
+{
+	font-weight: bold;
+	font-size: 10pt;
+	color: #000000;
+	font-family: Arial;
+	background-color: #ffcc99;
+}
+.dpBody
+{
+	font-size: 9pt;
+	font-family: Arial;
+	background-color: #ffffc0;
+}
+.lbl
+{
+	font-size: 9pt;
+	color: #000099;
+	font-family: Arial;
+}
+.txt
+{
+	font-size: 9pt;
+	color: #006600;
+	font-family: Arial;
+}
+
+

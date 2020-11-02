@@ -1,0 +1,87 @@
+<?xml version="1.0" standalone="yes" ?>
+<xs:schema id="DatasetReport" targetNamespace="http://www.tempuri.org/DatasetReport.xsd" xmlns:mstns="http://www.tempuri.org/DatasetReport.xsd"
+	xmlns="http://www.tempuri.org/DatasetReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+	<xs:element name="DatasetReport" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="MP_REPORT_LONG">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="WO_ID" type="xs:integer" minOccurs="0" />
+							<xs:element name="WR_ID" type="xs:integer" />
+							<xs:element name="EDIFICIO" type="xs:string" minOccurs="0" />
+							<xs:element name="DATASCADENZA" type="xs:string" minOccurs="0" />
+							<xs:element name="STDAPPARATO" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="PMP_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="PROB_TYPE" type="xs:string" minOccurs="0" />
+							<xs:element name="STATUS" type="xs:string" />
+							<xs:element name="TR_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="ATTIVITAMP" type="xs:string" minOccurs="0" />
+							<xs:element name="INTERVAL_TYPE" type="xs:string" />
+							<xs:element name="NUMEROPASSO" type="xs:string" minOccurs="0" />
+							<xs:element name="PASSO" type="xs:string" minOccurs="0" />
+							<xs:element name="NOMECOGNOME" type="xs:string" minOccurs="0" />
+							<xs:element name="DATACOMPLETAMENTO" type="xs:string" minOccurs="0" />
+							<xs:element name="DITTA" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Data_Report_Ricerca">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="wo_id" type="xs:integer" minOccurs="0" />
+							<xs:element name="qty_open_wr" type="xs:integer" minOccurs="0" />
+							<xs:element name="city_id" type="xs:string" minOccurs="0" />
+							<xs:element name="bl_id" type="xs:string" minOccurs="0" />
+							<xs:element name="indirizzo" type="xs:string" minOccurs="0" />
+							<xs:element name="contact_name" type="xs:string" minOccurs="0" />
+							<xs:element name="anno" type="xs:string" minOccurs="0" />
+							<xs:element name="mese" type="xs:string" minOccurs="0" />
+							<xs:element name="mesenum" type="xs:string" minOccurs="0" />
+							<xs:element name="prob_type" type="xs:string" minOccurs="0" />
+							<xs:element name="addetto_id" type="xs:integer" minOccurs="0" />
+							<xs:element name="nomecognome" type="xs:string" minOccurs="0" />
+							<xs:element name="data_completamento" type="xs:date" minOccurs="0" />
+							<xs:element name="mesecompletamento" type="xs:string" minOccurs="0" />
+							<xs:element name="mesenumcompletamento" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="DownloadFile">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="nome_file" type="xs:string" minOccurs="0" />
+							<xs:element name="data_created" type="xs:date" minOccurs="0" />
+							<xs:element name="data_assegnazione_init" type="xs:date" minOccurs="0" />
+							<xs:element name="data_assegnazione_end" type="xs:date" minOccurs="0" />
+							<xs:element name="data_completamento_end" type="xs:date" minOccurs="0" />
+							<xs:element name="comune" type="xs:string" minOccurs="0" />
+							<xs:element name="ditta" type="xs:string" minOccurs="0" />
+							<xs:element name="categoria" type="xs:string" minOccurs="0" />
+							<xs:element name="addetto" type="xs:string" minOccurs="0" />
+							<xs:element name="solo_non_completate" type="xs:string" minOccurs="0" />
+							<xs:element name="solo_completate" type="xs:string" minOccurs="0" />
+							<xs:element name="data_di_completamento" type="xs:string" minOccurs="0" />
+							<xs:element name="dimensione_file" type="xs:string" minOccurs="0" />
+							<xs:element name="edificio" type="xs:string" minOccurs="0" />
+							<xs:element name="data_completamento_init" type="xs:date" minOccurs="0" />
+							<xs:element name="intervallo_odl_selezionati" type="xs:string" minOccurs="0" />
+							<xs:element name="tipologia_report" type="xs:string" minOccurs="0" />
+							<xs:element name="id" type="xs:integer" minOccurs="0" />
+							<xs:element name="dimensione_file_zip" type="xs:string" minOccurs="0" />
+							<xs:element name="DATA_ASS_IN_OUT" type="xs:string" minOccurs="0" />
+							<xs:element name="DIMENSIONEFILE_PDF_ZIP" type="xs:string" minOccurs="0" />
+							<xs:element name="COMPLETATE" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:key name="DatasetReportKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:Data_Report_Ricerca" />
+			<xs:field xpath="mstns:wo_id" />
+		</xs:key>
+	</xs:element>
+</xs:schema>

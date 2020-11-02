@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="GestioneMateriali" targetNamespace="http://tempuri.org/GestioneMateriali.xsd"
+	elementFormDefault="qualified" xmlns="http://tempuri.org/GestioneMateriali.xsd" xmlns:mstns="http://tempuri.org/GestioneMateriali.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="TblGestioneMateriali">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ID" type="xs:decimal" minOccurs="0" />
+				<xs:element name="WR_ID" type="xs:decimal" minOccurs="0" />
+				<xs:element name="ID_MATERIALE" type="xs:decimal" minOccurs="0" />
+				<xs:element name="DESCRIZIONE" type="xs:string" minOccurs="0" />
+				<xs:element name="PREZZO_UNITARIO" type="xs:decimal" minOccurs="0" />
+				<xs:element name="QUANTITA" type="xs:decimal" minOccurs="0" />
+				<xs:element name="TOTALE" type="xs:decimal" minOccurs="0" />
+				<xs:element name="TOTALEENTRATA" type="xs:decimal" minOccurs="0" />
+				<xs:element name="TOTALEUSCITA" type="xs:decimal" minOccurs="0" />
+				<xs:element name="QUANTITAENTRATA" type="xs:decimal" minOccurs="0" />
+				<xs:element name="QUANTITAUSCITA" type="xs:decimal" minOccurs="0" />
+				<xs:element name="DATA_INSERIMENTO" type="xs:dateTime" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

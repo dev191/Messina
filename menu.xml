@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<menu>	
+	<menuItem>
+		<text>Navigazione Servizi</text>
+		<tooltip>Sfoglia Assets</tooltip>
+		<cssclass>mainsection</cssclass>
+		<subMenu>
+			<menuItem>
+				<text>Navigazione</text>
+				<url>files/TrovaServizi-r00.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Anagrafe Impianti</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Navigazione Documenti</text>
+				<url>files/planimetrie-r00.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Anagrafe Impianti</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Navigazione Certificati</text>
+				<url>files/selezione_certificati.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Anagrafe Impianti</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Navigazione Apparecchiature</text>
+				<url>files/SelezioneApparecchiature.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Anagrafe Impianti</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+		</subMenu>
+	</menuItem>
+	<menuItem>
+		<text>Interventi a Guasto</text>
+		<tooltip>Interventi a Guasto</tooltip>
+		<cssclass>mainsection</cssclass>
+		<subMenu>
+			<menuItem>
+				<text>Creazione Richiesta di lavoro</text>
+				<url>files/createworkrequest-r00.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione su Richiesta</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Approva ed Emetti RdL</text>
+				<url>files/approveandissuewr.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione su Richiesta</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Gestione e Completamento OdL</text>
+				<url>files/craftpersons_updateworkrequests.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione su Richiesta</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Sfoglia RdL e OdL</text>
+				<url>files/craftpersons_sfogliarequests-cfselect.asp?</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Accorpa RdL</text>
+				<url>files/accorpa_wr.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione su Richiesta</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Analisi RdL</text>
+				<url>files/historyworkrequests.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione su Richiesta</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+		</subMenu>
+	</menuItem>
+	<menuItem>
+		<text>Manutenzione Preventiva</text>
+		<tooltip>Manutenzione Preventiva</tooltip>
+		<cssclass>mainsection</cssclass>
+		<subMenu>
+			<menuItem>
+				<text>Rapporto Procedure e Passi</text>
+				<url>files/proceduresandsteps.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione Programmata</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Piano Annuale</text>
+				<url>files/reporcalendardata.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione Programmata</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Schedula Apparecchiature con Attività MP</text>
+				<url>files/schedula/default.aspx</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Rapporto Interventi MP</text>
+				<url>files/schedula/pages/RapportinoMP.aspx</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Completamento MP</text>
+				<url>files/completamento_mp.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione Programmata</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Sfoglia RdL e OdL</text>
+				<url>files/sfoglia_rdl_odl_mp.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione Programmata</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Gestione Addetto</text>
+				<url>files/Filtra_Gestione_Addetti.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione Programmata</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+		</subMenu>
+	</menuItem>
+	<menuItem>
+		<text>Manutenzione ExtraCanone</text>
+		<tooltip>Manutenzione ExtraCanone</tooltip>
+		<cssclass>mainsection</cssclass>
+		<subMenu>
+			<menuItem>
+				<text>Sfoglia RdL</text>
+				<url>files/Manutenzione_Straordinaria/Codice/Sfoglia_rdl.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione Straordinaria</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Crea RdL</text>
+				<url>files/Manutenzione_Straordinaria/Codice/Frmins.asp?cat=Manutenzione Straordinaria</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Report</text>
+				<url>files/Manutenzione_Straordinaria/Codice/Report.asp?SuperCat=2) Manutenzione e Impianti &amp; Cat=Manutenzione Straordinaria</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>			
+		</subMenu>
+	</menuItem>
+	<menuItem>
+		<text>Gestione Parametri Prestazionali</text>
+		<tooltip>Gestione Parametri Prestazionali</tooltip>
+		<cssclass>mainsection</cssclass>
+		<subMenu>
+			<menuItem>
+				<text>Gestione Parametri Prestazionali</text>
+				<url>files/Parametri.htm</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>				
+		</subMenu>
+	</menuItem>
+	<menuItem>
+		<text>Report e Analisi Dati</text>
+		<tooltip>Report e Analisi Dati</tooltip>
+		<cssclass>mainsection</cssclass>
+		<subMenu>
+			<menuItem>
+				<text>Grafici MOR</text>
+				<url>files/stat/pagine/grafic_mor.aspx</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>	
+			<menuItem>
+				<text>Grafici MOP</text>
+				<url>files/stat/pagine/grafic_mop.aspx</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Grafici MS</text>
+				<url>files/stat/pagine/grafic_ms.aspx</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>					
+		</subMenu>
+	</menuItem>
+	<menuItem>
+		<text>Gestione Ruoli e Profili</text>
+		<tooltip>Gestione Ruoli e Profili</tooltip>
+		<cssclass>mainsection</cssclass>
+		<subMenu>
+			<menuItem>
+				<text>Creazione Nuova categoria</text>
+				<url>files/GestioneMenu/Categoria/Frmins.asp?cat=Gestione Menu</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>	
+			<menuItem>
+				<text>Ricerca Categoria</text>
+				<url>files/GestioneMenu/Categoria/FrmRisultatoRicerca.asp</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>						
+		</subMenu>
+	</menuItem>
+	<menuItem>
+		<text>Gestione Anagrafiche</text>
+		<tooltip>Gestione Anagrafiche</tooltip>	
+		<cssclass>mainsection</cssclass>	
+	</menuItem>
+	<menuItem>
+		<text>Supporto</text>
+		<tooltip>Supporto</tooltip>
+		<cssclass>mainsection</cssclass>
+		<subMenu>
+			<menuItem>
+				<text>AutoDesk Express Viewer</text>
+				<url>download/download.asp</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>	
+			<menuItem>
+				<text>Help</text>
+				<url>prova.asp</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>	
+			<menuItem>
+				<text>Cambia Password</text>
+				<url>prova.asp</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>
+			<menuItem>
+				<text>Cambia Utente</text>
+				<url>prova.asp</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>	
+			<menuItem>
+				<text>Home Page</text>
+				<url>prova.asp</url>
+				<target>rbottom</target>
+				<cssclass>subsection</cssclass>
+			</menuItem>							
+		</subMenu>
+	</menuItem>
+	<menuItem>
+		<text>SPACER</text>
+		<cssclass>Spacer</cssclass>	
+	</menuItem>
+		<menuItem>
+		<text>Powered by</text>
+		<cssclass>Stile1</cssclass>	
+	</menuItem>
+	<menuItem>
+		<text></text>
+		<tooltip>Creato da</tooltip>	
+		<cssclass>Stile1</cssclass>	
+	</menuItem>
+</menu>

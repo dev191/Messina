@@ -1,0 +1,222 @@
+<?xml version="1.0" standalone="yes" ?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:Locale="it-IT">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="TblGenerale">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="EQ_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_OPTION1" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_CONDITION" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_CRITICALITY" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_OPTION2" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_GARANZIA" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_MODELNO" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_IMAGE_EQ_ASSY" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_RM_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_BL_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_VN_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_LOC_COLUMN" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_LOC_MAINT_MANL" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_EQ_COMMENTS" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_POTENZA" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_FUEL_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_DATE_MANUFACTURED" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_DATE_INSTALLED" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_DATE_IN_SERVICE" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_UTENZA" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_EQSTD" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_EQSTD_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_QTY_PMS" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_OPTION2" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_NUM_SERIAL" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_SOTTOCOMPONENTE" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_MFR" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_CATEGORY" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_OPTION1" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_DESCRIPTION" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_EQ_STD" type="xs:string" minOccurs="0" />
+							<xs:element name="PIANI_DESC_ID_DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="RM_RM_ID_DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="BL_NAME" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_IMMAGINI_IMMAGINE" type="xs:base64Binary" minOccurs="0" />
+							<xs:element name="IdEqstd" type="xs:decimal" minOccurs="0" />
+							<xs:element name="IdEq" type="xs:decimal" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TblDatiTecnici">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DATITECNICIID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="EQID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="TIPOLOGIAID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="TIPOLOGIA" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TblPmpPassi">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="FREQUENZA" type="xs:string" minOccurs="0" />
+							<xs:element name="UNITS" type="xs:string" minOccurs="0" />
+							<xs:element name="UNITS_HOUR" type="xs:decimal" minOccurs="0" />
+							<xs:element name="TR_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="ID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="PM_GROUP" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_STD" type="xs:string" minOccurs="0" />
+							<xs:element name="PMP" type="xs:string" minOccurs="0" />
+							<xs:element name="PASSO" type="xs:decimal" minOccurs="0" />
+							<xs:element name="ISTRUZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="TEMPO" type="xs:decimal" minOccurs="0" />
+							<xs:element name="IdEqstd" type="xs:decimal" minOccurs="0" />
+							<xs:element name="IdEq" type="xs:decimal" minOccurs="0" />
+							<xs:element name="description" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TblAllData">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="EQ_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_OPTION1" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_CONDITION" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_CRITICALITY" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_OPTION2" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_GARANZIA" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_MODELNO" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_IMAGE_EQ_ASSY" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_RM_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_BL_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_VN_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_LOC_COLUMN" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_LOC_MAINT_MANL" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_EQ_COMMENTS" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_POTENZA" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_FUEL_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_DATE_MANUFACTURED" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_DATE_INSTALLED" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_DATE_IN_SERVICE" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_UTENZA" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_EQSTD" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_EQSTD_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_QTY_PMS" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_OPTION2" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_NUM_SERIAL" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_SOTTOCOMPONENTE" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_MFR" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_CATEGORY" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_OPTION1" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_DESCRIPTION" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD_EQ_STD" type="xs:string" minOccurs="0" />
+							<xs:element name="PIANI_DESC_ID_DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="RM_RM_ID_DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="BL_NAME" type="xs:string" minOccurs="0" />
+							<xs:element name="IDEQSTD" type="xs:decimal" minOccurs="0" />
+							<xs:element name="IDEQ" type="xs:decimal" minOccurs="0" />
+							<xs:element name="FREQUENZA" type="xs:string" minOccurs="0" />
+							<xs:element name="UNITS" type="xs:string" minOccurs="0" />
+							<xs:element name="UNITS_HOUR" type="xs:decimal" minOccurs="0" />
+							<xs:element name="TR_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="ID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="PM_GROUP" type="xs:string" minOccurs="0" />
+							<xs:element name="PMP" type="xs:string" minOccurs="0" />
+							<xs:element name="PASSO" type="xs:decimal" minOccurs="0" />
+							<xs:element name="ISTRUZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="TEMPO" type="xs:decimal" minOccurs="0" />
+							<xs:element name="EQSTD_ID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="DATITECNICIID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="EQID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="TIPOLOGIAID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="TIPOLOGIA" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_IMMAGINI_IMMAGINE" type="xs:base64Binary" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TblAllegati">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DOC_EQ_ID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="NOMEFILE" type="xs:string" minOccurs="0" />
+							<xs:element name="DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_ID" type="xs:decimal" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TblDatiTecniciEstesa">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DESCRIZIONEP" type="xs:string" minOccurs="0" />
+							<xs:element name="TIPOLOGIAP" type="xs:string" minOccurs="0" />
+							<xs:element name="DESCRIZIONED" type="xs:string" minOccurs="0" />
+							<xs:element name="TIPOLOOGIAD" type="xs:string" minOccurs="0" />
+							<xs:element name="IDEq" type="xs:decimal" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TblAllegatiEstesa">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="NOMEFILEP" type="xs:string" minOccurs="0" />
+							<xs:element name="DESCRIZIONEP" type="xs:string" minOccurs="0" />
+							<xs:element name="NOMEFILED" type="xs:string" minOccurs="0" />
+							<xs:element name="DESCRIZIONED" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_ID" type="xs:decimal" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TblManRic">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdEq" type="xs:decimal" minOccurs="0" />
+							<xs:element name="WR_ID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="DATA_WR" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="WO_ID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="PIANIFICATA" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="COMPLETATA" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="STATO" type="xs:string" minOccurs="0" />
+							<xs:element name="DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="ADDETTO" type="xs:string" minOccurs="0" />
+							<xs:element name="MANUTENZIONE" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TblManProg">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdEq" type="xs:decimal" minOccurs="0" />
+							<xs:element name="WR_ID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="DATA_WR" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="WO_ID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="PIANIFICATA" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="COMPLETATA" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="STATO" type="xs:string" minOccurs="0" />
+							<xs:element name="DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="ADDETTO" type="xs:string" minOccurs="0" />
+							<xs:element name="MANUTENZIONE" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TblManStra">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="IdEq" type="xs:decimal" minOccurs="0" />
+							<xs:element name="WR_ID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="DATA_WR" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="WO_ID" type="xs:decimal" minOccurs="0" />
+							<xs:element name="PIANIFICATA" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="COMPLETATA" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="STATO" type="xs:string" minOccurs="0" />
+							<xs:element name="DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="ADDETTO" type="xs:string" minOccurs="0" />
+							<xs:element name="MANUTENZIONE" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

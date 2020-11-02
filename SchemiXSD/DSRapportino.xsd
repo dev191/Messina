@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="dsRapportino" targetNamespace="http://tempuri.org/DataSet1.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="dsRapportino" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Table">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="WR_ID" type="xs:integer" minOccurs="0" />
+							<xs:element name="WO_ID" type="xs:integer" minOccurs="0" />
+							<xs:element name="BL_ID" type="xs:integer" minOccurs="0" />
+							<xs:element name="CAMPUS" type="xs:string" minOccurs="0" />
+							<xs:element name="BL_NAME" type="xs:string" minOccurs="0" />
+							<xs:element name="ADDETTO" type="xs:string" minOccurs="0" />
+							<xs:element name="DATA_ASSIGNED" type="xs:string" minOccurs="0" />
+							<xs:element name="SERVIZIO" type="xs:string" minOccurs="0" />
+							<xs:element name="DITTA" type="xs:string" minOccurs="0" />
+							<xs:element name="EQSTD" type="xs:string" minOccurs="0" />
+							<xs:element name="EQ_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="STATUS" type="xs:string" minOccurs="0" />
+							<xs:element name="PMP" type="xs:string" minOccurs="0" />
+							<xs:element name="FREQUENZA" type="xs:string" minOccurs="0" />
+							<xs:element name="PMP_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="NUMPASSO" type="xs:integer" minOccurs="0" />
+							<xs:element name="PASSO" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="rapportoTecnicoIntervento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="VAR_WR_WR_ID" type="xs:integer" minOccurs="0" />
+							<xs:element name="VAR_WR_DESCRIPTION" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_STATUD" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_EQ_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_TR_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_AC_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_REQUESTOR" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_PHONE" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_EM_PHONE" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_PRIORITY" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_PROB_TYPE" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_PROBTYPE_PT_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="ID_OPERATORE" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_OPERATORE" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_GRUPPO" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_NOTA_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_PMD_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_BL_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_BL_CAMPUS" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_BL_CENTRO_COSTO" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_BL_ADDRESS1" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_BL_CITY_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_TME_REQESTED" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_TIME_REQUESTED" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_DATE_ASSIGNED" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_TIME-ASSIGNED" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_DATE_STAT_CHG" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_TIME_STAT_CHG" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WO_WO_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WRCF_COMMENTS" type="xs:string" minOccurs="0" />
+							<xs:element name="DATE_START" type="xs:string" minOccurs="0" />
+							<xs:element name="DATE_END" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WRCF_DITTA" type="xs:string" minOccurs="0" />
+							<xs:element name="ADDETTO_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="DESC_PRIORITY" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_NOTA_RIC" type="xs:string" minOccurs="0" />
+							<xs:element name="VAR_WR_DATE_REQUESTED" type="xs:string" minOccurs="0" />
+							<xs:element name="SODDISFAZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="var_wr_bl_id_name" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ListaManodopera">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ID" type="xs:string" minOccurs="0" />
+							<xs:element name="COGNOMENOME" type="xs:string" minOccurs="0" />
+							<xs:element name="DESCRIZIONEINTERVENTO" type="xs:string" minOccurs="0" />
+							<xs:element name="LIVELLO" type="xs:string" minOccurs="0" />
+							<xs:element name="PREZZOUNITARIO" type="xs:float" minOccurs="0" />
+							<xs:element name="ORELAVORATE" type="xs:string" minOccurs="0" />
+							<xs:element name="TOTALE" type="xs:float" minOccurs="0" />
+							<xs:element name="IDADDETTO" type="xs:string" minOccurs="0" />
+							<xs:element name="IDADDETTOWR" type="xs:string" minOccurs="0" />
+							<xs:element name="WR_ID" type="xs:integer" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ListaMateriali">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ID" type="xs:string" minOccurs="0" />
+							<xs:element name="MATERIALE" type="xs:string" minOccurs="0" />
+							<xs:element name="PREZZO_UNITARIO" type="xs:float" minOccurs="0" />
+							<xs:element name="UNITAMISURA" type="xs:string" minOccurs="0" />
+							<xs:element name="QUANTITA" type="xs:string" minOccurs="0" />
+							<xs:element name="PREZZOTOTALE" type="xs:float" minOccurs="0" />
+							<xs:element name="ID_MATERIALI" type="xs:string" minOccurs="0" />
+							<xs:element name="WR_ID" type="xs:integer" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Totali">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="TotaleManodopera" type="xs:float" minOccurs="0" />
+							<xs:element name="TotaleMateriali" type="xs:float" minOccurs="0" />
+							<xs:element name="WR_ID" type="xs:integer" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="rapportoTecnicoInterventoCumulativo">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="C0DICE_EDIFICIO" type="xs:string" minOccurs="0" />
+							<xs:element name="RICHIESTA_DI_LAVORO" type="xs:string" minOccurs="0" />
+							<xs:element name="ADDETTO_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="DATA_DA" type="xs:string" minOccurs="0" />
+							<xs:element name="DATA_A" type="xs:string" minOccurs="0" />
+							<xs:element name="ORDINE_LAVORO" type="xs:string" minOccurs="0" />
+							<xs:element name="STATO_RICHIESTA" type="xs:string" minOccurs="0" />
+							<xs:element name="SERVIZIO_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="RICHIEDENTI_TIPO_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="EM_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="ID_PRIORITY" type="xs:string" minOccurs="0" />
+							<xs:element name="DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="TIPOMANUTENZIONE_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="DATA_ASSEGNAZIONE_INIT" type="xs:string" minOccurs="0" />
+							<xs:element name="DATA_ASEGNAZIONE_END" type="xs:string" minOccurs="0" />
+							<xs:element name="RPT_ID" type="xs:integer" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="MainTable">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="WR_ID" type="xs:integer" minOccurs="0" />
+							<xs:element name="WO_ID" type="xs:string" minOccurs="0" />
+							<xs:element name="HA_MANODOPERA" type="xs:string" minOccurs="0" />
+							<xs:element name="HA_MATERIALI" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="DsAnalisiStatistiche" targetNamespace="http://tempuri.org/DsAnalisiStatistiche.xsd"
+	elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/DsAnalisiStatistiche.xsd"
+	xmlns:mstns="http://tempuri.org/DsAnalisiStatistiche.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="DsAnalisiStatistiche" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Table">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="I_RDL" type="xs:integer" minOccurs="0" />
+							<xs:element name="I_PERCENTUALE" type="xs:float" minOccurs="0" />
+							<xs:element name="S_DITTA" type="xs:string" minOccurs="0" />
+							<xs:element name="S_DITTAM" type="xs:string" minOccurs="0" />
+							<xs:element name="S_SERVIZIO" type="xs:string" minOccurs="0" />
+							<xs:element name="S_STATO" type="xs:string" minOccurs="0" />
+							<xs:element name="S_DESCRIZIONE" type="xs:string" minOccurs="0" />
+							<xs:element name="S_GIORNO" type="xs:string" minOccurs="0" />
+							<xs:element name="S_LGIORNO" type="xs:string" minOccurs="0" />
+							<xs:element name="S_MESE" type="xs:string" minOccurs="0" />
+							<xs:element name="S_LMESE" type="xs:string" minOccurs="0" />
+							<xs:element name="S_ANNO" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="tblgiudizio">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="n_giudizio" type="xs:integer" minOccurs="0" />
+							<xs:element name="desc_giud" type="xs:string" minOccurs="0" />
+							<xs:element name="desc_serv" type="xs:string" minOccurs="0" />
+							<xs:element name="tip_giudizio" type="xs:string" minOccurs="0" />
+							<xs:element name="i_percentuale" type="xs:float" minOccurs="0" />
+							<xs:element name="s_mese" type="xs:string" minOccurs="0" />
+							<xs:element name="s_lmese" type="xs:string" minOccurs="0" />
+							<xs:element name="s_anno" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ChartRadar">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="GG" type="xs:integer" minOccurs="0" />
+							<xs:element name="DELTA" type="xs:integer" minOccurs="0" />
+							<xs:element name="PRIORITY" type="xs:integer" minOccurs="0" />
+							<xs:element name="PENALE" type="xs:integer" minOccurs="0" />
+							<xs:element name="MEDIA" type="xs:double" minOccurs="0" />
+							<xs:element name="VARIANZA" type="xs:double" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
