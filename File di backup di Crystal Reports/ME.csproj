@@ -53,18 +53,38 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>TheSite</RootNamespace>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ApplicationSecurity">
+      <HintPath>bin\ApplicationSecurity.dll</HintPath>
+    </Reference>
+    <Reference Include="arTreeMenu">
+      <HintPath>bin\arTreeMenu.dll</HintPath>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.Web.dll</HintPath>
+    </Reference>
     <Reference Include="CsyWebControls">
       <HintPath>bin\CsyWebControls.dll</HintPath>
     </Reference>
     <Reference Include="DataLayer">
       <HintPath>bin\DataLayer.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.UI.WebControls">
+      <HintPath>bin\Microsoft.Web.UI.WebControls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -75,210 +95,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\EditFunzioni.aspx.cs">
-      <DependentUpon>EditFunzioni.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\EditFunzioni.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\EditMenu.aspx.cs">
-      <DependentUpon>EditMenu.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\EditMenu.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\EditRuoli.aspx.cs">
-      <DependentUpon>EditRuoli.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\EditRuoli.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\EditUtenti.aspx.cs">
-      <DependentUpon>EditUtenti.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\EditUtenti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Funzioni.aspx.cs">
-      <DependentUpon>Funzioni.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Funzioni.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Menu.aspx.cs">
-      <DependentUpon>Menu.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Menu.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Ruoli.aspx.cs">
-      <DependentUpon>Ruoli.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Ruoli.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\RuoliEdifici.aspx.cs">
-      <DependentUpon>RuoliEdifici.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\RuoliEdifici.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\RuoliEdificiServizi.aspx.cs">
-      <DependentUpon>RuoliEdificiServizi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\RuoliEdificiServizi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Utenti.aspx.cs">
-      <DependentUpon>Utenti.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Utenti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Utenti1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\Apparecchiatura.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\DataRoom.aspx.cs">
-      <DependentUpon>DataRoom.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\DataRoom.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\DatiTecnici.aspx.cs">
-      <DependentUpon>DatiTecnici.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\DatiTecnici.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\DocImageGalery.aspx.cs">
-      <DependentUpon>DocImageGalery.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\DocImageGalery.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\EditPrestazioniEnergetiche.aspx.cs">
-      <DependentUpon>EditPrestazioniEnergetiche.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\Eq_DocumentiAllegati.aspx.cs">
-      <DependentUpon>Eq_DocumentiAllegati.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\Eq_DocumentiAllegati.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\FullImage.aspx.cs">
-      <DependentUpon>FullImage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\FullImage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\ListaApparecchiatureServ.aspx.cs">
-      <DependentUpon>ListaApparecchiatureServ.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\ListaApparecchiatureServ.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\ListaDatiApparecchiatura.aspx.cs">
-      <DependentUpon>ListaDatiApparecchiatura.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\NavigazioneApparecchiature.aspx.cs">
-      <DependentUpon>NavigazioneApparecchiature.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\NavigazioneApparecchiature.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\NavigazioneAppDEMO.aspx.cs">
-      <DependentUpon>NavigazioneAppDEMO.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\NavigazioneAppDEMO.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\NavigazioneCertificati.aspx.cs">
-      <DependentUpon>NavigazioneCertificati.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\NavigazioneCertificati.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\NavigazioneDocumenti.aspx.cs">
-      <DependentUpon>NavigazioneDocumenti.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\NavigazioneDocumenti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\NavigazioneServizi.aspx.cs">
-      <DependentUpon>NavigazioneServizi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\NavigazioneServizi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\PageImage.aspx.cs">
-      <DependentUpon>PageImage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\PageImage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\PrestazioniEnergetiche.aspx.cs">
-      <DependentUpon>PrestazioniEnergetiche.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\RichiesteApparecchiatura.aspx.cs">
-      <DependentUpon>RichiesteApparecchiatura.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\RichiesteApparecchiatura.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\SchedaApparecchiatura.aspx.cs">
-      <DependentUpon>SchedaApparecchiatura.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\ServiceDettail.aspx.cs">
-      <DependentUpon>ServiceDettail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\ServiceDettail.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\ServiziEdifici.aspx.cs">
-      <DependentUpon>ServiziEdifici.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\ServiziEdifici.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\VisualDWF.aspx.cs">
-      <DependentUpon>VisualDWF.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnagrafeImpianti\VisualDWF.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="AnalisiStatistiche\chart\Chart.aspx.cs">
       <DependentUpon>Chart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -289,9 +105,6 @@
     <Compile Include="AnalisiStatistiche\chart\classi\TrasfCoord.cs" />
     <Compile Include="AnalisiStatistiche\chart\GraficiLV.aspx.cs">
       <DependentUpon>GraficiLV.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnalisiStatistiche\chart\GraficiLV.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AnalisiStatistiche\chart\Pagine\demo.aspx.cs">
@@ -306,51 +119,111 @@
       <DependentUpon>DisplayReportGiudizio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AnalisiStatistiche\DysplayReport.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnalisiStatistiche\DysplayReportGiudizio.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="AnalisiStatistiche\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnalisiStatistiche\Error.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AnalisiStatistiche\GraficiGiudizio.aspx.cs">
       <DependentUpon>GraficiGiudizio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AnalisiStatistiche\GraficiGiudizio.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="AnalisiStatistiche\GraficiMop.aspx.cs">
       <DependentUpon>GraficiMop.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AnalisiStatistiche\GraficiMop.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AnalisiStatistiche\GraficiMor.aspx.cs">
       <DependentUpon>GraficiMor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AnalisiStatistiche\GraficiMor.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="AnalisiStatistiche\GraficiMs.aspx.cs">
       <DependentUpon>GraficiMs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AnalisiStatistiche\GraficiMs.cs">
+    <Compile Include="AslMobile\CalendarioUserControl.ascx.cs">
+      <DependentUpon>CalendarioUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\ClassFactory\Abstract.cs" />
+    <Compile Include="AslMobile\Class\ClassApparecchiatura.cs" />
+    <Compile Include="AslMobile\Class\ClassCompletaOrdine.cs" />
+    <Compile Include="AslMobile\Class\ClassDitta.cs" />
+    <Compile Include="AslMobile\Class\ClassEdifici.cs" />
+    <Compile Include="AslMobile\Class\ClassFunction.cs" />
+    <Compile Include="AslMobile\Class\ClassGlobal.cs" />
+    <Compile Include="AslMobile\Class\ClassGruppo.cs" />
+    <Compile Include="AslMobile\Class\ClassManProgrammata.cs" />
+    <Compile Include="AslMobile\Class\ClassProcAndSteps.cs" />
+    <Compile Include="AslMobile\Class\ClassRDL.cs" />
+    <Compile Include="AslMobile\Class\ClassRicerca.cs" />
+    <Compile Include="AslMobile\Class\ClassRichiedenti.cs" />
+    <Compile Include="AslMobile\Class\ClassRichiesta.cs" />
+    <Compile Include="AslMobile\Class\ClassServizi.cs" />
+    <Compile Include="AslMobile\Class\ClassSession.cs" />
+    <Compile Include="AslMobile\Class\ClassUrgenza.cs" />
+    <Compile Include="AslMobile\Class\ClassUser.cs" />
+    <Compile Include="AslMobile\Class\StateType.cs" />
+    <Compile Include="AslMobile\Class\TipoManutenzioneType.cs" />
+    <Compile Include="AslMobile\CodiceEdificio.aspx.cs">
+      <DependentUpon>CodiceEdificio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\Completa.aspx.cs">
+      <DependentUpon>Completa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\CompletamentoMP.aspx.cs">
+      <DependentUpon>CompletamentoMP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\CompletamentoUserControl.ascx.cs">
+      <DependentUpon>CompletamentoUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\Completamento_MP_WRList.aspx.cs">
+      <DependentUpon>Completamento_MP_WRList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\CreazioneRichiesta1.ascx.cs">
+      <DependentUpon>CreazioneRichiesta1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\CreazioneRichiesta2.ascx.cs">
+      <DependentUpon>CreazioneRichiesta2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\CreazioneRichiesta3.ascx.cs">
+      <DependentUpon>CreazioneRichiesta3.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\DettProcedurePassi.aspx.cs">
+      <DependentUpon>DettProcedurePassi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\ExecuteType.cs" />
+    <Compile Include="AslMobile\LogOut.aspx.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\MyDelegate.cs" />
+    <Compile Include="AslMobile\Rcompleta.aspx.cs">
+      <DependentUpon>Rcompleta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\Richiesta.aspx.cs">
+      <DependentUpon>Richiesta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AslMobile\VisualRdl.aspx.cs">
+      <DependentUpon>VisualRdl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="calendar\Calendar.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClassError.cs" />
     <Compile Include="Classi\AbstractBase.cs" />
     <Compile Include="Classi\AnagrafeImpianti\AnagrafeDocDWF.cs" />
     <Compile Include="Classi\AnagrafeImpianti\AnagrafeServizi.cs" />
@@ -413,8 +286,6 @@
     <Compile Include="Classi\CostiGesioneCumulativi\AbstractBase.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\AgganciaDatalayer.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\ClManCorrettiva.cs" />
-    <Compile Include="Classi\CostiGesioneCumulativi\clMyCollection.cs" />
-    <Compile Include="Classi\CostiGesioneCumulativi\clMyControl.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\clMyDataGridCollection.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\CostiOperativiCumulativo.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\ExecuteType.cs" />
@@ -493,21 +364,12 @@
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CommonPage\ChangePassword.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CommonPage\ListaApparecchiature.aspx.cs">
       <DependentUpon>ListaApparecchiature.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CommonPage\ListaApparecchiature.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CommonPage\ListaDestinazioneUso.aspx.cs">
       <DependentUpon>ListaDestinazioneUso.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPage\ListaDestinazioneUso.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ListaEdifici.aspx.cs">
@@ -518,28 +380,16 @@
       <DependentUpon>ListaFascicoli.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CommonPage\ListaFascicoli.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CommonPage\ListaMateriali.aspx.cs">
       <DependentUpon>ListaMateriali.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPage\ListaMateriali.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ListaMatricole.aspx.cs">
       <DependentUpon>ListaMatricole.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CommonPage\ListaMatricole.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CommonPage\ListaPmp.aspx.cs">
       <DependentUpon>ListaPmp.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPage\ListaPmp.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ListaRDL.aspx.cs">
@@ -550,96 +400,48 @@
       <DependentUpon>ListaReparto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CommonPage\ListaReparto.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CommonPage\ListaStanze.aspx.cs">
       <DependentUpon>ListaStanze.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPage\ListaStanze.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPage\ListaStanzeRic.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\ListaStdApparecchiature.aspx.cs">
       <DependentUpon>ListaStdApparecchiature.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CommonPage\ListaStdApparecchiature.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CommonPage\PageCalendar.aspx.cs">
       <DependentUpon>PageCalendar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPage\PageCalendar.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\RicercaMateriali.aspx.cs">
       <DependentUpon>RicercaMateriali.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CommonPage\RicercaMateriali.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CommonPage\RiepilogoReperibilita.aspx.cs">
       <DependentUpon>RiepilogoReperibilita.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPage\RiepilogoReperibilita.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPage\RiepilogoReperibilita1.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\RiepilogoSolleciti.aspx.cs">
       <DependentUpon>RiepilogoSolleciti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CommonPage\RiepilogoSolleciti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPage\SchedaApparecchiatura.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CommonPage\Sollecito.aspx.cs">
       <DependentUpon>Sollecito.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CommonPage\Sollecito.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Contabilita\InserimentoFattura.aspx.cs">
       <DependentUpon>InserimentoFattura.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Contabilita\InserimentoFattura.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Contabilita\SfogliaFatture.aspx.cs">
       <DependentUpon>SfogliaFatture.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Contabilita\SfogliaFatture.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CostiGesioneCumulativi\AnalisiCostiOperativiDiGestioneCumulativo.aspx.cs">
       <DependentUpon>AnalisiCostiOperativiDiGestioneCumulativo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CostiGesioneCumulativi\AnalisiCostiOperativiDiGestioneCumulativo.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CostiGesioneCumulativi\Pagina_Download_Cumulativi.aspx.cs">
       <DependentUpon>Pagina_Download_Cumulativi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CostiGesioneCumulativi\Pagina_Download_Cumulativi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CostiGesioneCumulativi\RapportoTecnicoInterventoCumulativo.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CostiGesioneCumulativi\VisualizzaRapportoTecnicoInterventoCumulativo.aspx.cs">
@@ -650,387 +452,201 @@
       <DependentUpon>CostiOperativi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CostiOperativi\CostiOperativi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CreazioneTemp.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DocPmP.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DocType.cs" />
-    <Compile Include="chart\demo.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="chart\Chart.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="chart\classi\LayerGrafico.cs" />
-    <Compile Include="chart\classi\StatisticheDati.cs" />
-    <Compile Include="chart\classi\TrAngoliDate.cs" />
-    <Compile Include="chart\classi\TrasfCoord.cs" />
-    <Compile Include="AslMobile\Completamento_MP_WRList.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Eccezioni\NoDataForReportFoundException.cs" />
-    <Compile Include="ErrorPage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GestioneSpazi\RicercaSpazi.aspx.cs">
-      <DependentUpon>RicercaSpazi.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GestioneSpazi\RicercaSpazi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\Addetti.aspx.cs">
       <DependentUpon>Addetti.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\Addetti.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Buildings.aspx.cs">
       <DependentUpon>Buildings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Buildings.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\Categorie.aspx.cs">
       <DependentUpon>Categorie.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\Categorie.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Contab.aspx.cs">
       <DependentUpon>Contab.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Contab.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\Contatti.aspx.cs">
       <DependentUpon>Contatti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Contatti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\DateAndTime.cs" />
-    <Compile Include="Gestione\DateInterval.cs" />
     <Compile Include="Gestione\DescrizioneApparecchiatura.aspx.cs">
       <DependentUpon>DescrizioneApparecchiatura.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\DescrizioneApparecchiatura.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\DescrizioneDoc_Dwf.aspx.cs">
       <DependentUpon>DescrizioneDoc_Dwf.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\DescrizioneDoc_Dwf.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\DestUso.aspx.cs">
       <DependentUpon>DestUso.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\DestUso.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Ditte.aspx.cs">
       <DependentUpon>Ditte.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Ditte.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditAddetti.aspx.cs">
       <DependentUpon>EditAddetti.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditAddetti.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditAnagrafica.aspx.cs">
       <DependentUpon>EditAnagrafica.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditAnagrafica.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditBuilding.aspx.cs">
       <DependentUpon>EditBuilding.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditBuilding.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditCategorie.aspx.cs">
       <DependentUpon>EditCategorie.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditCategorie.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditContab.aspx.cs">
       <DependentUpon>EditContab.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditContab.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditDestUso.aspx.cs">
       <DependentUpon>EditDestUso.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditDestUso.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditDitte.aspx.cs">
       <DependentUpon>EditDitte.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditDitte.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditEnti.aspx.cs">
       <DependentUpon>EditEnti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditEnti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditEqstd.aspx.cs">
       <DependentUpon>EditEqstd.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditEqstd.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditFondi.aspx.cs">
       <DependentUpon>EditFondi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditFondi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditFornitori.aspx.cs">
       <DependentUpon>EditFornitori.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditFornitori.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditLetturaContatori.aspx.cs">
       <DependentUpon>EditLetturaContatori.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditLetturaContatori.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditLivelli.aspx.cs">
       <DependentUpon>EditLivelli.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditLivelli.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditMateriale.aspx.cs">
       <DependentUpon>EditMateriale.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditMateriale.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditMisura.aspx.cs">
       <DependentUpon>EditMisura.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditMisura.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditPercentualeStraordinari.aspx.cs">
       <DependentUpon>EditPercentualeStraordinari.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditPercentualeStraordinari.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditPianoFerie.aspx.cs">
       <DependentUpon>EditPianoFerie.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditPianoFerie.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditPmp.aspx.cs">
       <DependentUpon>EditPmp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditPmp.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditPmpFrequenza.aspx.cs">
       <DependentUpon>EditPmpFrequenza.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditPmpFrequenza.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditRepAddetti.aspx.cs">
       <DependentUpon>EditRepAddetti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditRepAddetti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditRepAddetti1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditReparti.aspx.cs">
       <DependentUpon>EditReparti.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditReparti.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditRichiedenti.aspx.cs">
       <DependentUpon>EditRichiedenti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditRichiedenti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditRichiedenti_tipo.aspx.cs">
       <DependentUpon>EditRichiedenti_tipo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditRichiedenti_tipo.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditServizi.aspx.cs">
       <DependentUpon>EditServizi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditServizi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditSettori.aspx.cs">
       <DependentUpon>EditSettori.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditSettori.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\EditSpecializzazioni.aspx.cs">
       <DependentUpon>EditSpecializzazioni.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\EditSpecializzazioni.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\EditTipoIntervento.aspx.cs">
       <DependentUpon>EditTipoIntervento.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\EditTipoIntervento.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Enti.aspx.cs">
       <DependentUpon>Enti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Enti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\Eqstd.aspx.cs">
       <DependentUpon>Eqstd.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\Eqstd.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Fondi.aspx.cs">
       <DependentUpon>Fondi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Fondi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\Fornitori.aspx.cs">
       <DependentUpon>Fornitori.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\Fornitori.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\LetturaContatori.aspx.cs">
       <DependentUpon>LetturaContatori.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\LetturaContatori.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\ListaApparecchiature.aspx.cs">
       <DependentUpon>ListaApparecchiature.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\ListaApparecchiature.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\ListaDoc_Dwf.aspx.cs">
       <DependentUpon>ListaDoc_Dwf.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\ListaDoc_Dwf.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\ListaMateriali.aspx.cs">
       <DependentUpon>ListaMateriali.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\ListaMateriali.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Livelli.aspx.cs">
       <DependentUpon>Livelli.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Livelli.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\PageType.cs" />
     <Compile Include="Gestione\PercentualiStraordinari.aspx.cs">
       <DependentUpon>PercentualiStraordinari.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\PercentualiStraordinari.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\PianoFerie.aspx.cs">
       <DependentUpon>PianoFerie.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\PianoFerie.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\Pmp.aspx.cs">
       <DependentUpon>Pmp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Pmp.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\PmpFrequenza.aspx.cs">
       <DependentUpon>PmpFrequenza.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\PmpFrequenza.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\PmpIntervalli.aspx.cs">
@@ -1041,157 +657,57 @@
       <DependentUpon>PmpS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\PmpS.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\RepAddetti.aspx.cs">
       <DependentUpon>RepAddetti.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\RepAddetti.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Reparti.aspx.cs">
       <DependentUpon>Reparti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Reparti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\RicercaAnagrafica.ascx.cs">
       <DependentUpon>RicercaAnagrafica.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\RicercaAnagrafica1.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Richiedenti.aspx.cs">
       <DependentUpon>Richiedenti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Richiedenti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\Richiedenti_tipo.aspx.cs">
       <DependentUpon>Richiedenti_tipo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\Richiedenti_tipo.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Servizi.aspx.cs">
       <DependentUpon>Servizi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Servizi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\Settori.aspx.cs">
       <DependentUpon>Settori.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\Settori.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Specializzazioni.aspx.cs">
       <DependentUpon>Specializzazioni.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\Specializzazioni.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\TipoIntervento.aspx.cs">
       <DependentUpon>TipoIntervento.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\TipoIntervento.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\TipologiaDitta.aspx.cs">
       <DependentUpon>TipologiaDitta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\TipologiaDitta.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\TipoManutenzione.aspx.cs">
       <DependentUpon>TipoManutenzione.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gestione\TipoManutenzione.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\UnitaMisura.aspx.cs">
       <DependentUpon>UnitaMisura.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\UnitaMisura.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Global.cs" />
-    <Compile Include="LeftFrame.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ListaEdifici.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ListaRDL.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Login.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Logoff.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MainContent.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\AccorpaRdl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\AnalisiRdl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\AnalisiRdlStorico.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\Conti.cs" />
-    <Compile Include="ManutenzioneCorretiva\CreazioneRdl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\RapportoRichiestaRdl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\RapportoTecnicoIntervento.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\Report.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\ReportDettaglio.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\ReportDettaglioFondo.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\ReportDettaglioPresunto.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\ReportDettaglioSaldo.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\VisualizzaRdl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\VisualizzaRdl1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\VisualizzaRdl2.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorretiva\VisualPdf.cs">
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="GIC\App_Code\Consultazioni\interogazioni.cs" />
+    <Compile Include="GIC\App_Code\DataSetDef\DataSetReport.cs">
+      <DependentUpon>DataSetReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\AccorpaRdl.aspx.cs">
       <DependentUpon>AccorpaRdl.aspx</DependentUpon>
@@ -1201,21 +717,12 @@
       <DependentUpon>AnalisiCostiMateriali.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneCorrettiva\AnalisiCostiMateriali.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneCorrettiva\AnalisiCostiOperativiDiGestione.aspx.cs">
       <DependentUpon>AnalisiCostiOperativiDiGestione.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneCorrettiva\AnalisiCostiOperativiDiGestione.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneCorrettiva\AnalisiCostiOperativiDiGestioneDettaglio.aspx.cs">
       <DependentUpon>AnalisiCostiOperativiDiGestioneDettaglio.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\AnalisiCostiOperativiDiGestioneDettaglio.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\AnalisiRdl.aspx.cs">
@@ -1230,76 +737,28 @@
       <DependentUpon>ApprovaRDL.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneCorrettiva\ApprovaRDL.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\ApprovaRDL1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\CompletaRdl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\CompletaRdl1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\CostiAddetti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\CostoMateriali.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneCorrettiva\CreazioneRdl.aspx.cs">
       <DependentUpon>CreazioneRdl.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\CreazioneSGA.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\CreazioneSGA1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\CreazioneSGA2.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\DettDestinatariInvio.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\EditApprovaEmetti.aspx.cs">
       <DependentUpon>EditApprovaEmetti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneCorrettiva\EditApprovaEmetti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneCorrettiva\EditCompletamento.aspx.cs">
       <DependentUpon>EditCompletamento.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\EditCompletamento.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\EditCreazione.aspx.cs">
       <DependentUpon>EditCreazione.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneCorrettiva\EditCreazione.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneCorrettiva\EditSfoglia.aspx.cs">
       <DependentUpon>EditSfoglia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneCorrettiva\EditSfoglia.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneCorrettiva\GestioneCompleta.aspx.cs">
       <DependentUpon>GestioneCompleta.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\GestioneCompleta.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\GestioneCompleta1.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\ModificaRdl.aspx.cs">
@@ -1316,12 +775,6 @@
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\RapportoTecnicoInterventoPdf.aspx.cs">
       <DependentUpon>RapportoTecnicoInterventoPdf.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\RapportoTecnicoInterventoPdf.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\rendicontazione.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\Report.aspx.cs">
@@ -1356,32 +809,8 @@
       <DependentUpon>SfogliaRdLEliminare.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneCorrettiva\SfogliaRdLEliminare.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlPaging.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlPaging1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlPaging2.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlPaging4.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlPaging5.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\SfogliDoc.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneCorrettiva\VisualizzaGestioneMaterialiPdf.aspx.cs">
       <DependentUpon>VisualizzaGestioneMaterialiPdf.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\VisualizzaGestioneMaterialiPdf.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\VisualizzaRdl.aspx.cs">
@@ -1392,9 +821,6 @@
       <DependentUpon>VisualizzaRdlEliminare.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneCorrettiva\VisualizzaRdlEliminare.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneCorrettiva\VisualPdf.aspx.cs">
       <DependentUpon>VisualPdf.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1403,115 +829,48 @@
       <DependentUpon>Aggiona_WO.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\Aggiona_WO.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\Associazione_EQ_PMS.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneProgrammata\CompletamentoMP.aspx.cs">
       <DependentUpon>CompletamentoMP.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\CompletamentoMP.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneProgrammata\Completamento_MP_WRList.aspx.cs">
       <DependentUpon>Completamento_MP_WRList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\Completamento_MP_WRList.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneProgrammata\Completa_WO.aspx.cs">
       <DependentUpon>Completa_WO.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\Completa_WO.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\CreaOttimizzaRDL_MP.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneProgrammata\CreaPianoMP.aspx.cs">
       <DependentUpon>CreaPianoMP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\CreaPianoMP.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\CreazioneODL_MP.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\DataGridField.cs" />
-    <Compile Include="ManutenzioneProgrammata\DettailList.cs" />
     <Compile Include="ManutenzioneProgrammata\DettPianoAnnuale.aspx.cs">
       <DependentUpon>DettPianoAnnuale.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\DettPianoAnnuale.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneProgrammata\DettProcedurePassi.aspx.cs">
       <DependentUpon>DettProcedurePassi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\DettProcedurePassi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneProgrammata\Impostazioni.aspx.cs">
       <DependentUpon>Impostazioni.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\Impostazioni.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\KPIVod_Upload.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\KPI_Download.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\MostraMessaggi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\MostraPianoMP.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\OrdineLavoro.cs" />
     <Compile Include="ManutenzioneProgrammata\PassiPianoAnnuale.aspx.cs">
       <DependentUpon>PassiPianoAnnuale.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\PassiPianoAnnuale.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneProgrammata\PianoAnnuale.aspx.cs">
       <DependentUpon>PianoAnnuale.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\PianoAnnuale.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\PianoManutenzioneProgrammata.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneProgrammata\ProcedurePassi.aspx.cs">
       <DependentUpon>ProcedurePassi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\ProcedurePassi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\Rapportino.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\resultSchedula.cs" />
     <Compile Include="ManutenzioneProgrammata\Schedulazione.aspx.cs">
       <DependentUpon>Schedulazione.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\Schedulazione.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneProgrammata\Schedula\Associazione_EQ_PMS.aspx.cs">
@@ -1534,28 +893,16 @@
       <DependentUpon>DisplayRapportino.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\Schedula\DisplayRapportino.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneProgrammata\Schedula\OttimizzaPiano.aspx.cs">
       <DependentUpon>OttimizzaPiano.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\Schedula\OttimizzaPiano.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneProgrammata\Schedula\OttimizzaPianoEQ.aspx.cs">
       <DependentUpon>OttimizzaPianoEQ.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\Schedula\OttimizzaPianoEQ.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneProgrammata\Schedula\OttimizzaPianoSalva.aspx.cs">
       <DependentUpon>OttimizzaPianoSalva.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\Schedula\OttimizzaPianoSalva.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneProgrammata\Schedula\Rapportino.aspx.cs">
@@ -1566,155 +913,22 @@
       <DependentUpon>SfogliaOdlRdl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\SfogliaOdlRdl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\SfogliaPiani.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\SfogliaRdlOdlPaging.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneProgrammata\SfogliaRdlOdl_MP.aspx.cs">
       <DependentUpon>SfogliaRdlOdl_MP.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\SfogliaRdlOdl_MP.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneProgrammata\WRList.cs" />
-    <Compile Include="MobileWebForm1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MyCollection\ParentType.cs" />
-    <Compile Include="MyCollection\clMyCollection.cs" />
-    <Compile Include="MyCollection\clMyControl.cs" />
-    <Compile Include="OpenWebCad.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ReportGestioneSpazi\DisplayReportSpazi.aspx.cs">
       <DependentUpon>DisplayReportSpazi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ReportGestioneSpazi\DisplayReportSpazi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ReportGestioneSpazi\ReportGestioneSpazi.aspx.cs">
       <DependentUpon>ReportGestioneSpazi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ReportGestioneSpazi\ReportGestioneSpazi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Report\CachedReport_Long.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedReport_Short.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptChedeEq_V9.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptDitta.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptDittaMesi.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptGestioneMateriali_V9.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptGiudizioServizio.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptGiudizioServizioMesi.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptGiudizioServizioTipologia.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptLEggendaPmpPassi.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptLeggendaStatus.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedrptLogo.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptMese.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptMpDettagliLocaliCorto.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptMpDettagliLocaliCortoDinamico.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptMpDettagliLocaliLungo.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptMpDettagliLocaliLungo2P.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptMpDettagliLocaliLungoDinamico.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptPianoMp.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptProgrammataPassi.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptProgrammattaRdl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptServizio.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptServizioMesi.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptSpaziDistrCategorie_V9.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptSpaziDistrDestUso_V9.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptSpaziDistrMusure_V9.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptSpaziDistrReparti_V9.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptStato.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptTecnicoIntervento2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedRptTecnicoIntervento2Cumulativo.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedSubRptDetRdlDin.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\CachedSubRptPassi1C.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\Report_Long.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\Report_Long1.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\Report_Long2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Report_Long.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\Report_Short.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\Report_Short1.cs">
@@ -1723,22 +937,10 @@
       <DependentUpon>Report_Short.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptChedeEq_V9.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptChedeEq_V91.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptChedeEq_V9.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptChedeEq_V93.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptDitta.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptDitta1.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptDitta2.cs">
@@ -1747,22 +949,10 @@
       <DependentUpon>RptDitta.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptDittaMesi.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptDittaMesi1.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptDittaMesi2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptDittaMesi.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptGestioneMateriali_V9.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptGestioneMateriali_V91.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptGestioneMateriali_V92.cs">
@@ -1771,22 +961,10 @@
       <DependentUpon>RptGestioneMateriali_V9.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptGiudizioServizio.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptGiudizioServizio1.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptGiudizioServizio2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptGiudizioServizio.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptGiudizioServizioMesi.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptGiudizioServizioMesi1.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptGiudizioServizioMesi2.cs">
@@ -1795,19 +973,10 @@
       <DependentUpon>RptGiudizioServizioMesi.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptGiudizioServizioTipologia.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptGiudizioServizioTipologia1.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptGiudizioServizioTipologia2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptGiudizioServizioTipologia.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptLEggendaPmpPassi.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptLEggendaPmpPassi1.cs">
@@ -1816,16 +985,10 @@
       <DependentUpon>RptLEggendaPmpPassi.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptLeggendaStatus.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptLeggendaStatus1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptLeggendaStatus.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\rptLogo.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\rptLogo1.cs">
@@ -1834,19 +997,10 @@
       <DependentUpon>rptLogo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptMese.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptMese1.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptMese2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptMese.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptMpDettagliLocaliCorto.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptMpDettagliLocaliCorto1.cs">
@@ -1855,16 +1009,10 @@
       <DependentUpon>RptMpDettagliLocaliCorto.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptMpDettagliLocaliCortoDinamico.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptMpDettagliLocaliCortoDinamico1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptMpDettagliLocaliCortoDinamico.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptMpDettagliLocaliLungo.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptMpDettagliLocaliLungo1.cs">
@@ -1873,16 +1021,10 @@
       <DependentUpon>RptMpDettagliLocaliLungo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptMpDettagliLocaliLungo2P.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptMpDettagliLocaliLungo2P1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptMpDettagliLocaliLungo2P.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptMpDettagliLocaliLungoDinamico.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptMpDettagliLocaliLungoDinamico1.cs">
@@ -1891,16 +1033,10 @@
       <DependentUpon>RptMpDettagliLocaliLungoDinamico.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptPianoMp.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptPianoMp1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptPianoMp.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptProgrammataPassi.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptProgrammataPassi1.cs">
@@ -1909,19 +1045,10 @@
       <DependentUpon>RptProgrammataPassi.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptProgrammattaRdl.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptProgrammattaRdl1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptProgrammattaRdl.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptServizio.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptServizio1.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptServizio2.cs">
@@ -1930,19 +1057,10 @@
       <DependentUpon>RptServizio.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptServizioMesi.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptServizioMesi1.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptServizioMesi2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptServizioMesi.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptSpaziDistrCategorie_V9.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptSpaziDistrCategorie_V91.cs">
@@ -1951,16 +1069,10 @@
       <DependentUpon>RptSpaziDistrCategorie_V9.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptSpaziDistrDestUso_V9.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptSpaziDistrDestUso_V91.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptSpaziDistrDestUso_V9.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptSpaziDistrMusure_V9.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptSpaziDistrMusure_V91.cs">
@@ -1969,19 +1081,10 @@
       <DependentUpon>RptSpaziDistrMusure_V9.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptSpaziDistrReparti_V9.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptSpaziDistrReparti_V91.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptSpaziDistrReparti_V9.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptStato.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptStato1.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptStato2.cs">
@@ -1990,19 +1093,10 @@
       <DependentUpon>RptStato.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\RptTecnicoIntervento2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptTecnicoIntervento21.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\RptTecnicoIntervento22.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptTecnicoIntervento2.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\RptTecnicoIntervento2Cumulativo.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\RptTecnicoIntervento2Cumulativo1.cs">
@@ -2011,16 +1105,10 @@
       <DependentUpon>RptTecnicoIntervento2Cumulativo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\SubRptDetRdlDin.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Report\SubRptDetRdlDin1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SubRptDetRdlDin.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\SubRptPassi1C.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\SubRptPassi1C1.cs">
@@ -2051,20 +1139,13 @@
       <DependentUpon>Autentica.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RichiesteDati\Autentica.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="RichiesteDati\prova.aspx.cs">
       <DependentUpon>prova.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RichiesteDati\prova.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SchemiXSD\DsAnalisiStatistiche.cs">
       <DependentUpon>DsAnalisiStatistiche.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SchemiXSD\DsAnalisiStatistiche1.cs" />
     <Compile Include="SchemiXSD\DsGestioneSpazi.cs">
       <DependentUpon>DsGestioneSpazi.xsd</DependentUpon>
     </Compile>
@@ -2084,9 +1165,6 @@
     <Compile Include="SchemiXSD\ScmReport.cs">
       <DependentUpon>ScmReport.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SfogliaDieSga.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="SgaRtf\ClRtf.cs" />
     <Compile Include="SgaRtf\SGA.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -2095,225 +1173,26 @@
       <DependentUpon>FiltraApparecchiature.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShedeEq\FiltraApparecchiature.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ShedeEq\VisualizzaSchedaHtml.aspx.cs">
       <DependentUpon>VisualizzaSchedaHtml.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ShedeEq\VisualizzaSchedaHtml.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ShedeEq\VisulizzaSchedaEqPdf.aspx.cs">
       <DependentUpon>VisulizzaSchedaEqPdf.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShedeEq\VisulizzaSchedaEqPdf.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="SoddisfazioneCliente\EditGiudizio.aspx.cs">
       <DependentUpon>EditGiudizio.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SoddisfazioneCliente\EditGiudizio.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SoddisfazioneCliente\Giudizio.aspx.cs">
       <DependentUpon>Giudizio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SoddisfazioneCliente\Giudizio.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SoddisfazioneCliente\IndicePrestazione.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SoddisfazioneCliente\IndiceSoddifazione.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SoddisfazioneCliente\KPI.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SoddisfazioneCliente\KpiPianiProp.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SoddisfazioneCliente\KPI_vod_report.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="SoddisfazioneCliente\ReportGiudizioCliente.aspx.cs">
       <DependentUpon>ReportGiudizioCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SoddisfazioneCliente\ReportGiudizioCliente.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\Servizi.cs" />
-    <Compile Include="WebCad\apparecchiature.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\TipoDatagrid.cs" />
-    <Compile Include="WebCad\bottomFrame.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\_Default.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\ErrorPage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\ParametriRicerca.cs" />
-    <Compile Include="WebCad\LeftFrame2.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\ListLink.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\StandardApp.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\Stanze.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\TopFrame.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\Apparecchiature\NavigazioneDocumenti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\Apparecchiature\PageImage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\Apparecchiature\SchedaApparecchiatura.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\Apparecchiature\VisualDWF.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\CAD\CadViewer.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\Classi\AbstractBase.cs" />
-    <Compile Include="WebCad\Classi\PmpS.cs" />
-    <Compile Include="WebCad\Classi\Funzione.cs" />
-    <Compile Include="WebCad\Classi\ClassMail.cs" />
-    <Compile Include="WebCad\Classi\clMyDataGridCollection.cs" />
-    <Compile Include="WebCad\Classi\Function.cs" />
-    <Compile Include="WebCad\Classi\Menu.cs" />
-    <Compile Include="WebCad\Classi\Navigazione.cs" />
-    <Compile Include="WebCad\Classi\ProvinceComuni.cs" />
-    <Compile Include="WebCad\Classi\Ruolo.cs" />
-    <Compile Include="WebCad\Classi\Sicurezza.cs" />
-    <Compile Include="WebCad\Classi\NumberType.cs" />
-    <Compile Include="WebCad\Classi\ExecuteType.cs" />
-    <Compile Include="WebCad\Classi\DismissioneType.cs" />
-    <Compile Include="WebCad\Classi\StateType.cs" />
-    <Compile Include="WebCad\Classi\TipoManutenzioneType.cs" />
-    <Compile Include="WebCad\Classi\GestoreDropDownList.cs" />
-    <Compile Include="WebCad\Classi\SiteJavaScript.cs" />
-    <Compile Include="WebCad\Classi\SiteMenu.cs" />
-    <Compile Include="WebCad\Classi\SiteModule.cs" />
-    <Compile Include="WebCad\Classi\Utente.cs" />
-    <Compile Include="WebCad\Classi\AnagrafeImpianti\AnagrafeDocDWF.cs" />
-    <Compile Include="WebCad\Classi\AnagrafeImpianti\AnagrafeServizi.cs" />
-    <Compile Include="WebCad\Classi\AnagrafeImpianti\Apparecchiature.cs" />
-    <Compile Include="WebCad\Classi\AnagrafeImpianti\Certificati.cs" />
-    <Compile Include="WebCad\Classi\AnagrafeImpianti\DataRoom.cs" />
-    <Compile Include="WebCad\Classi\AnagrafeImpianti\DatiApparecchiatura.cs" />
-    <Compile Include="WebCad\Classi\AnagrafeImpianti\DocDWF.cs" />
-    <Compile Include="WebCad\Classi\AnagrafeImpianti\Passi.cs" />
-    <Compile Include="WebCad\Classi\AnagrafeImpianti\ServiziEdifici.cs" />
-    <Compile Include="WebCad\Classi\AnagrafeImpianti\SeviceDettail.cs" />
-    <Compile Include="WebCad\Classi\ClassiDettaglio\DatiTecnici.cs" />
-    <Compile Include="WebCad\Classi\ClassiDettaglio\DatiTecniciApparecchiatura.cs" />
-    <Compile Include="WebCad\Classi\ClassiDettaglio\SchedaApparecchiatura.cs" />
-    <Compile Include="WebCad\Classi\ClassiDettaglio\Edificio.cs" />
-    <Compile Include="WebCad\Classi\ClassiDettaglio\RichiedentiTipo.cs" />
-    <Compile Include="WebCad\Classi\ClassiDettaglio\Servizi.cs" />
-    <Compile Include="WebCad\Classi\ClassiDettaglio\UnitaMisura.cs" />
-    <Compile Include="WebCad\Classi\ClassiDettaglio\Urgenza.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Addetti.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\AllegatiEQ.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Buildings.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Categorie.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Contab.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Contatti.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Contatti_tipo.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\DestUso.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Ditte.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Eqstd.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Fondi.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Fornitori.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\ListaMateriali.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Livelli.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Motivo_assenza.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\PercentualiStraordinari.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\PianoFerie.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Pmp.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\PmpFrequenza.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Reparti.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Reperibilita.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Richiedenti.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Richiedenti_tipo.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Settori.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\Stanze.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\TipoIntervento.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\TipologiaDitta.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\TipoManutenzione.cs" />
-    <Compile Include="WebCad\Classi\ClassiAnagrafiche\UnitaMisura.cs" />
-    <Compile Include="WebCad\Classi\ManOrdinaria\Richiesta.cs" />
-    <Compile Include="WebCad\UserControl\DataGridImageCheckFileTemplate.cs" />
-    <Compile Include="WebCad\UserControl\DatagridImageCoordTemplate.cs" />
-    <Compile Include="WebCad\UserControl\DataGridImageTemplate.cs" />
-    <Compile Include="WebCad\UserControl\DataGridImageTemplate2Par.cs" />
-    <Compile Include="WebCad\UserControl\DataGridImageTemplate5Par.cs" />
-    <Compile Include="WebCad\UserControl\DataGridImageTemplate6Par.cs" />
-    <Compile Include="WebCad\UserControl\DataGridTemplate.cs" />
-    <Compile Include="WebCad\WiewCad\Apparecchiature.cs" />
-    <Compile Include="WebCad\WiewCad\Edifici.cs" />
-    <Compile Include="WebCad\WiewCad\IDataGridDinamico.cs" />
-    <Compile Include="WebCad\WiewCad\RiferimentiCad.cs" />
-    <Compile Include="WebCad\MyCollection\ParentType.cs" />
-    <Compile Include="WebCad\MyCollection\clMyCollection.cs" />
-    <Compile Include="WebCad\MyCollection\clMyControl.cs" />
-    <Compile Include="WebCad\Eccezioni\NoDataForReportFoundException.cs" />
-    <Compile Include="WebCad\CommonPage\ListaEdifici.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\Edifici\DataRoom.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\Edifici\EditBuilding.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\Edifici\NavigazioneAppDEMO.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\RedirectPages\RedirectDettaglioApparecchiatura.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\RedirectPages\Redirect_Eq_DocumentiAllegati.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\RedirectPages\RedirectSchedaEq.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\WebControls\CalendarPicker.cs" />
-    <Compile Include="WebCad\WebControls\CodiceApparecchiature.cs" />
-    <Compile Include="WebCad\WebControls\CodiceStdApparecchiatura.cs" />
-    <Compile Include="WebCad\WebControls\DataGridRicercaCad.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebCad\WebControls\GridTitle.cs" />
-    <Compile Include="WebCad\WebControls\MyDropDownList.cs" />
-    <Compile Include="WebCad\WebControls\PageTitle.cs" />
-    <Compile Include="WebCad\WebControls\DelegateCodiceEdificio.cs" />
-    <Compile Include="WebCad\WebControls\DelegateIDBLEdificio.cs" />
-    <Compile Include="WebCad\WebControls\DelegateCodiceServizio.cs" />
-    <Compile Include="WebCad\WebControls\RicercaModulo.cs" />
-    <Compile Include="WebCad\WebControls\UserStanze.cs" />
-    <Compile Include="WebCad\WebControls\SelezioneDelegate.cs" />
-    <Compile Include="WebCad\WebControls\WebUserControlTreeView.cs" />
     <Compile Include="GIC\App_Code\BaseControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2327,9 +1206,6 @@
     <Compile Include="GIC\App_Code\Datagrid\DatagridControl.cs" />
     <Compile Include="GIC\App_Code\Datagrid\QueryDTControl.cs" />
     <Compile Include="GIC\App_Code\Datagrid\StandardDTControl.cs" />
-    <Compile Include="GIC\Report\DefaultReport.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="GIC\Report\ModificaCampo.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2340,25 +1216,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="GIC\Report\UserControl\ConsultazioniDataGrid.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GIC\Report\UserControl\SelezioneQuery.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GIC\Report\UserControl\VisSelCampi.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="HelpApplication\SiteMenu.cs" />
-    <Compile Include="HelpApplication\Default.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="HelpApplication\LeftFrame.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="HelpApplication\Login.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="HelpApplication\MainContent.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="StampaRapportiPdf\Classi\AbstractBase.cs" />
@@ -2386,6 +1243,14 @@
     <Compile Include="StampaRapportiPdf\Pagine\VisualDWF.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="StampaRapportiPdf\Schemixsd\DatasetReport.cs">
+      <DependentUpon>DatasetReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="StampaRapportiPdf\Schemixsd\DatasetReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="StampaRapportiPdf\WebControls\CalendarPicker.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2395,413 +1260,138 @@
     <Compile Include="StampaRapportiPdf\WebControls\PageTitle.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="WebControls\Addetti.ascx.cs">
       <DependentUpon>Addetti.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\Addetti.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\AggiungiSollecito.ascx.cs">
       <DependentUpon>AggiungiSollecito.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\AggiungiSollecito.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\BottomMenu.ascx.cs">
       <DependentUpon>BottomMenu.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\BottomMenu.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\BottomMenu2.ascx.cs">
       <DependentUpon>BottomMenu2.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\BottomMenu2.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\CalendarPicker.ascx.cs">
       <DependentUpon>CalendarPicker.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\CalendarPicker.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\CalendarPickerOLD.ascx.cs">
       <DependentUpon>CalendarPickerOLD.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\CalendarPickerOLD.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\CodiceApparecchiature.ascx.cs">
       <DependentUpon>CodiceApparecchiature.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\CodiceApparecchiature.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\CodiceStdApparecchiatura.ascx.cs">
       <DependentUpon>CodiceStdApparecchiatura.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\CodiceStdApparecchiatura.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\CollapseDiv.ascx.cs">
       <DependentUpon>CollapseDiv.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\CollapseDiv.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\CostiAddetti.ascx.cs">
       <DependentUpon>CostiAddetti.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\CostiAddetti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\CostiManodopera.ascx.cs">
       <DependentUpon>CostiManodopera.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\CostiManodopera.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\DataPicker.ascx.cs">
       <DependentUpon>DataPicker.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\DelegateCodiceEdificio.cs" />
-    <Compile Include="WebControls\DelegateCodicePMP.cs" />
-    <Compile Include="WebControls\DelegateCodiceRDL.cs" />
-    <Compile Include="WebControls\DelegateCodiceServizio.cs" />
-    <Compile Include="WebControls\DelegateIDBLEdificio.cs" />
-    <Compile Include="WebControls\DelegateIDRDL.cs" />
-    <Compile Include="WebControls\DelegatePresidio.cs" />
     <Compile Include="WebControls\Fascicolo.ascx.cs">
       <DependentUpon>Fascicolo.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\Fascicolo.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\GridTitle.ascx.cs">
       <DependentUpon>GridTitle.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\GridTitle.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\GridTitleServer.ascx.cs">
       <DependentUpon>GridTitleServer.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\GridTitleServer.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\materiali.ascx.cs">
       <DependentUpon>materiali.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\materiali.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\Matricole.ascx.cs">
       <DependentUpon>Matricole.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\Matricole.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\NuovoRec.cs" />
     <Compile Include="WebControls\PageTitle.ascx.cs">
       <DependentUpon>PageTitle.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\PageTitle.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\RicercaModulo.ascx.cs">
       <DependentUpon>RicercaModulo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\RicercaModulo.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\RicercaRDL.ascx.cs">
       <DependentUpon>RicercaRDL.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\RicercaRDL.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\Richiedenti.ascx.cs">
       <DependentUpon>Richiedenti.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\Richiedenti.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\RichiedentiSollecito.ascx.cs">
       <DependentUpon>RichiedentiSollecito.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\RichiedentiSollecito.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\TipoPostFile.cs" />
     <Compile Include="WebControls\UserMateriali.ascx.cs">
       <DependentUpon>UserMateriali.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\UserMateriali.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\UserMeseGiorno.ascx.cs">
       <DependentUpon>UserMeseGiorno.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\UserMeseGiorno.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\UserOption.ascx.cs">
       <DependentUpon>UserOption.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\UserOption.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\UserPmp.ascx.cs">
       <DependentUpon>UserPmp.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\UserPmp.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\UserRdlInail.ascx.cs">
       <DependentUpon>UserRdlInail.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\UserRdlInail.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\UserRdlInailLabel.ascx.cs">
       <DependentUpon>UserRdlInailLabel.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\UserRdlInailLabel.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\UserStanze.ascx.cs">
       <DependentUpon>UserStanze.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\UserStanze.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\UserStanzeRic.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\VisualizzaReperibilita.ascx.cs">
       <DependentUpon>VisualizzaReperibilita.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebControls\VisualizzaReperibilita.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="WebControls\VisualizzaSolleciti.ascx.cs">
       <DependentUpon>VisualizzaSolleciti.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\VisualizzaSolleciti.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="XSLT\DIE.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Admin\EditFunzioni.aspx.resx">
-      <DependentUpon>EditFunzioni.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\EditFunzioni.resx">
-      <DependentUpon>EditFunzioni.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\EditMenu.aspx.resx">
-      <DependentUpon>EditMenu.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\EditMenu.resx">
-      <DependentUpon>EditMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\EditRuoli.aspx.resx">
-      <DependentUpon>EditRuoli.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\EditRuoli.resx">
-      <DependentUpon>EditRuoli.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\EditUtenti.aspx.resx">
-      <DependentUpon>EditUtenti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\EditUtenti.resx">
-      <DependentUpon>EditUtenti.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\Funzioni.aspx.resx">
-      <DependentUpon>Funzioni.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\Funzioni.resx">
-      <DependentUpon>Funzioni.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\Menu.aspx.resx">
-      <DependentUpon>Menu.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\Menu.resx">
-      <DependentUpon>Menu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\Ruoli.aspx.resx">
-      <DependentUpon>Ruoli.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\Ruoli.resx">
-      <DependentUpon>Ruoli.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\RuoliEdifici.aspx.resx">
-      <DependentUpon>RuoliEdifici.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\RuoliEdifici.resx">
-      <DependentUpon>RuoliEdifici.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\RuoliEdificiServizi.aspx.resx">
-      <DependentUpon>RuoliEdificiServizi.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\RuoliEdificiServizi.resx">
-      <DependentUpon>RuoliEdificiServizi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\Utenti.aspx.resx">
-      <DependentUpon>Utenti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\Utenti.resx">
-      <DependentUpon>Utenti.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Admin\Utenti1.aspx.resx" />
-    <EmbeddedResource Include="Admin\Utenti1.resx">
-      <DependentUpon>Utenti1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\Apparecchiatura.resx">
-      <DependentUpon>Apparecchiatura.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\DataRoom.aspx.resx">
-      <DependentUpon>DataRoom.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\DataRoom.resx">
-      <DependentUpon>DataRoom.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\DatiTecnici.aspx.resx">
-      <DependentUpon>DatiTecnici.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\DatiTecnici.resx">
-      <DependentUpon>DatiTecnici.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\DocImageGalery.aspx.resx">
-      <DependentUpon>DocImageGalery.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\DocImageGalery.resx">
-      <DependentUpon>DocImageGalery.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\Eq_DocumentiAllegati.aspx.resx">
-      <DependentUpon>Eq_DocumentiAllegati.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\Eq_DocumentiAllegati.resx">
-      <DependentUpon>Eq_DocumentiAllegati.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\FullImage.aspx.resx">
-      <DependentUpon>FullImage.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\FullImage.resx">
-      <DependentUpon>FullImage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\ListaApparecchiatureServ.aspx.resx">
-      <DependentUpon>ListaApparecchiatureServ.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\ListaApparecchiatureServ.resx">
-      <DependentUpon>ListaApparecchiatureServ.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\ListaDatiApparecchiatura.aspx.resx">
-      <DependentUpon>ListaDatiApparecchiatura.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneApparecchiature.aspx.resx">
-      <DependentUpon>NavigazioneApparecchiature.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneApparecchiature.resx">
-      <DependentUpon>NavigazioneApparecchiature.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneAppDEMO.aspx.resx">
-      <DependentUpon>NavigazioneAppDEMO.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneAppDEMO.resx">
-      <DependentUpon>NavigazioneAppDEMO.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneCertificati.aspx.resx">
-      <DependentUpon>NavigazioneCertificati.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneCertificati.resx">
-      <DependentUpon>NavigazioneCertificati.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneDocumenti.aspx.resx">
-      <DependentUpon>NavigazioneDocumenti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneDocumenti.resx">
-      <DependentUpon>NavigazioneDocumenti.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneServizi.aspx.resx">
-      <DependentUpon>NavigazioneServizi.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneServizi.resx">
-      <DependentUpon>NavigazioneServizi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\PageImage.aspx.resx">
-      <DependentUpon>PageImage.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\PageImage.resx">
-      <DependentUpon>PageImage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\RichiesteApparecchiatura.aspx.resx">
-      <DependentUpon>RichiesteApparecchiatura.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\RichiesteApparecchiatura.resx">
-      <DependentUpon>RichiesteApparecchiatura.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\SchedaApparecchiatura.aspx.resx">
-      <DependentUpon>SchedaApparecchiatura.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\ServiceDettail.aspx.resx">
-      <DependentUpon>ServiceDettail.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\ServiceDettail.resx">
-      <DependentUpon>ServiceDettail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\ServiziEdifici.aspx.resx">
-      <DependentUpon>ServiziEdifici.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\ServiziEdifici.resx">
-      <DependentUpon>ServiziEdifici.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\VisualDWF.aspx.resx">
-      <DependentUpon>VisualDWF.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnagrafeImpianti\VisualDWF.resx">
-      <DependentUpon>VisualDWF.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AnalisiStatistiche\chart\Chart.aspx.resx">
       <DependentUpon>Chart.aspx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AnalisiStatistiche\chart\GraficiLV.aspx.resx">
       <DependentUpon>GraficiLV.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnalisiStatistiche\chart\GraficiLV.resx">
-      <DependentUpon>GraficiLV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AnalisiStatistiche\chart\Pagine\demo.aspx.resx">
       <DependentUpon>demo.aspx.cs</DependentUpon>
@@ -2812,66 +1402,79 @@
     <EmbeddedResource Include="AnalisiStatistiche\DisplayReportGiudizio.aspx.resx">
       <DependentUpon>DisplayReportGiudizio.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AnalisiStatistiche\DysplayReport.resx">
-      <DependentUpon>DysplayReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnalisiStatistiche\DysplayReportGiudizio.resx">
-      <DependentUpon>DysplayReportGiudizio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AnalisiStatistiche\Error.aspx.resx">
       <DependentUpon>Error.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnalisiStatistiche\Error.resx">
-      <DependentUpon>Error.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AnalisiStatistiche\GraficiGiudizio.aspx.resx">
       <DependentUpon>GraficiGiudizio.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AnalisiStatistiche\GraficiGiudizio.resx">
-      <DependentUpon>GraficiGiudizio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AnalisiStatistiche\GraficiMop.aspx.resx">
       <DependentUpon>GraficiMop.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnalisiStatistiche\GraficiMop.resx">
-      <DependentUpon>GraficiMop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AnalisiStatistiche\GraficiMor.aspx.resx">
       <DependentUpon>GraficiMor.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AnalisiStatistiche\GraficiMor.resx">
-      <DependentUpon>GraficiMor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AnalisiStatistiche\GraficiMs.aspx.resx">
       <DependentUpon>GraficiMs.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AnalisiStatistiche\GraficiMs.resx">
-      <DependentUpon>GraficiMs.cs</DependentUpon>
+    <EmbeddedResource Include="AslMobile\CalendarioUserControl.ascx.resx">
+      <DependentUpon>CalendarioUserControl.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AslMobile\Completamento_MP_WRList.resx" />
+    <EmbeddedResource Include="AslMobile\CodiceEdificio.aspx.resx">
+      <DependentUpon>CodiceEdificio.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\Completa.aspx.resx">
+      <DependentUpon>Completa.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\CompletamentoMP.aspx.resx">
+      <DependentUpon>CompletamentoMP.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\CompletamentoUserControl.ascx.resx">
+      <DependentUpon>CompletamentoUserControl.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\CompletamentoUserControl\ascx.resx" />
+    <EmbeddedResource Include="AslMobile\Completamento_MP_WRList.aspx.resx">
+      <DependentUpon>Completamento_MP_WRList.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\CreazioneRichiesta1.ascx.resx">
+      <DependentUpon>CreazioneRichiesta1.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\CreazioneRichiesta2.ascx.resx">
+      <DependentUpon>CreazioneRichiesta2.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\CreazioneRichiesta3.ascx.resx">
+      <DependentUpon>CreazioneRichiesta3.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\Default.aspx.resx">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\DettProcedurePassi.aspx.resx">
+      <DependentUpon>DettProcedurePassi.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\LogOut.aspx.resx">
+      <DependentUpon>LogOut.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\Rcompleta.aspx.resx">
+      <DependentUpon>Rcompleta.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\Richiesta.aspx.resx">
+      <DependentUpon>Richiesta.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AslMobile\VisualRdl.aspx.resx">
+      <DependentUpon>VisualRdl.aspx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="calendar\Calendar.ascx.resx" />
     <EmbeddedResource Include="calendar\Calendar.resx">
       <DependentUpon>Calendar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="chart\Chart.resx" />
-    <EmbeddedResource Include="chart\demo.resx" />
     <EmbeddedResource Include="CommonPage\ChangePassword.aspx.resx">
       <DependentUpon>ChangePassword.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\ChangePassword.resx">
-      <DependentUpon>ChangePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ListaApparecchiature.aspx.resx">
       <DependentUpon>ListaApparecchiature.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\ListaApparecchiature.resx">
-      <DependentUpon>ListaApparecchiature.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ListaDestinazioneUso.aspx.resx">
       <DependentUpon>ListaDestinazioneUso.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\ListaDestinazioneUso.resx">
-      <DependentUpon>ListaDestinazioneUso.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ListaEdifici.aspx.resx">
       <DependentUpon>ListaEdifici.aspx.cs</DependentUpon>
@@ -2879,26 +1482,14 @@
     <EmbeddedResource Include="CommonPage\ListaFascicoli.aspx.resx">
       <DependentUpon>ListaFascicoli.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\ListaFascicoli.resx">
-      <DependentUpon>ListaFascicoli.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ListaMateriali.aspx.resx">
       <DependentUpon>ListaMateriali.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\ListaMateriali.resx">
-      <DependentUpon>ListaMateriali.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ListaMatricole.aspx.resx">
       <DependentUpon>ListaMatricole.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\ListaMatricole.resx">
-      <DependentUpon>ListaMatricole.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ListaPmp.aspx.resx">
       <DependentUpon>ListaPmp.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\ListaPmp.resx">
-      <DependentUpon>ListaPmp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ListaRDL.aspx.resx">
       <DependentUpon>ListaRDL.aspx.cs</DependentUpon>
@@ -2906,88 +1497,40 @@
     <EmbeddedResource Include="CommonPage\ListaReparto.aspx.resx">
       <DependentUpon>ListaReparto.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\ListaReparto.resx">
-      <DependentUpon>ListaReparto.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ListaStanze.aspx.resx">
       <DependentUpon>ListaStanze.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\ListaStanze.resx">
-      <DependentUpon>ListaStanze.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ListaStanzeRic.aspx.resx" />
-    <EmbeddedResource Include="CommonPage\ListaStanzeRic.resx">
-      <DependentUpon>ListaStanzeRic.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ListaStdApparecchiature.aspx.resx">
       <DependentUpon>ListaStdApparecchiature.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\ListaStdApparecchiature.resx">
-      <DependentUpon>ListaStdApparecchiature.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\PageCalendar.aspx.resx">
       <DependentUpon>PageCalendar.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\PageCalendar.resx">
-      <DependentUpon>PageCalendar.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\RicercaMateriali.aspx.resx">
       <DependentUpon>RicercaMateriali.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\RicercaMateriali.resx">
-      <DependentUpon>RicercaMateriali.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\RiepilogoReperibilita.aspx.resx">
       <DependentUpon>RiepilogoReperibilita.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\RiepilogoReperibilita.resx">
-      <DependentUpon>RiepilogoReperibilita.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\RiepilogoReperibilita1.aspx.resx" />
-    <EmbeddedResource Include="CommonPage\RiepilogoReperibilita1.resx">
-      <DependentUpon>RiepilogoReperibilita1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\RiepilogoSolleciti.aspx.resx">
       <DependentUpon>RiepilogoSolleciti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\RiepilogoSolleciti.resx">
-      <DependentUpon>RiepilogoSolleciti.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\SchedaApparecchiatura.resx">
-      <DependentUpon>SchedaApparecchiatura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\Sollecito.aspx.resx">
       <DependentUpon>Sollecito.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CommonPage\Sollecito.resx">
-      <DependentUpon>Sollecito.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Contabilita\InserimentoFattura.aspx.resx">
       <DependentUpon>InserimentoFattura.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Contabilita\InserimentoFattura.resx">
-      <DependentUpon>InserimentoFattura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilita\SfogliaFatture.aspx.resx">
       <DependentUpon>SfogliaFatture.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Contabilita\SfogliaFatture.resx">
-      <DependentUpon>SfogliaFatture.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CostiGesioneCumulativi\AnalisiCostiOperativiDiGestioneCumulativo.aspx.resx">
       <DependentUpon>AnalisiCostiOperativiDiGestioneCumulativo.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CostiGesioneCumulativi\AnalisiCostiOperativiDiGestioneCumulativo.resx">
-      <DependentUpon>AnalisiCostiOperativiDiGestioneCumulativo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CostiGesioneCumulativi\Pagina_Download_Cumulativi.aspx.resx">
       <DependentUpon>Pagina_Download_Cumulativi.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CostiGesioneCumulativi\Pagina_Download_Cumulativi.resx">
-      <DependentUpon>Pagina_Download_Cumulativi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CostiGesioneCumulativi\RapportoTecnicoInterventoCumulativo.resx">
-      <DependentUpon>RapportoTecnicoInterventoCumulativo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CostiGesioneCumulativi\VisualizzaRapportoTecnicoInterventoCumulativo.aspx.resx">
       <DependentUpon>VisualizzaRapportoTecnicoInterventoCumulativo.aspx.cs</DependentUpon>
@@ -2995,85 +1538,37 @@
     <EmbeddedResource Include="CostiOperativi\CostiOperativi.aspx.resx">
       <DependentUpon>CostiOperativi.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CostiOperativi\CostiOperativi.resx">
-      <DependentUpon>CostiOperativi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CreazioneTemp.resx">
-      <DependentUpon>CreazioneTemp.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Default.aspx.resx" />
-    <EmbeddedResource Include="DocPmP.resx">
-      <DependentUpon>DocPmP.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ErrorPage.aspx.resx" />
-    <EmbeddedResource Include="ErrorPage.resx">
-      <DependentUpon>ErrorPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GestioneSpazi\RicercaSpazi.aspx.resx">
-      <DependentUpon>RicercaSpazi.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GestioneSpazi\RicercaSpazi.resx">
-      <DependentUpon>RicercaSpazi.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Addetti.aspx.resx">
       <DependentUpon>Addetti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Addetti.resx">
-      <DependentUpon>Addetti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Buildings.aspx.resx">
       <DependentUpon>Buildings.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Buildings.resx">
-      <DependentUpon>Buildings.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Categorie.aspx.resx">
       <DependentUpon>Categorie.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Categorie.resx">
-      <DependentUpon>Categorie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Contab.aspx.resx">
       <DependentUpon>Contab.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Contab.resx">
-      <DependentUpon>Contab.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Contatti.aspx.resx">
       <DependentUpon>Contatti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Contatti.resx">
-      <DependentUpon>Contatti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\DescrizioneApparecchiatura.aspx.resx">
       <DependentUpon>DescrizioneApparecchiatura.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\DescrizioneApparecchiatura.resx">
-      <DependentUpon>DescrizioneApparecchiatura.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\DescrizioneDoc_Dwf.aspx.resx">
       <DependentUpon>DescrizioneDoc_Dwf.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\DescrizioneDoc_Dwf.resx">
-      <DependentUpon>DescrizioneDoc_Dwf.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\DestUso.aspx.resx">
       <DependentUpon>DestUso.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\DestUso.resx">
-      <DependentUpon>DestUso.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Ditte.aspx.resx">
       <DependentUpon>Ditte.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Ditte.resx">
-      <DependentUpon>Ditte.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditAddetti.aspx.resx">
       <DependentUpon>EditAddetti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditAddetti.resx">
-      <DependentUpon>EditAddetti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditAnagrafica.aspx.resx">
       <DependentUpon>EditAnagrafica.aspx.cs</DependentUpon>
@@ -3082,234 +1577,117 @@
     <EmbeddedResource Include="Gestione\EditBuilding.aspx.resx">
       <DependentUpon>EditBuilding.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditBuilding.resx">
-      <DependentUpon>EditBuilding.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditCategorie.aspx.resx">
       <DependentUpon>EditCategorie.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditCategorie.resx">
-      <DependentUpon>EditCategorie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditContab.aspx.resx">
       <DependentUpon>EditContab.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditContab.resx">
-      <DependentUpon>EditContab.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditDestUso.aspx.resx">
       <DependentUpon>EditDestUso.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditDestUso.resx">
-      <DependentUpon>EditDestUso.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditDitte.aspx.resx">
       <DependentUpon>EditDitte.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditDitte.resx">
-      <DependentUpon>EditDitte.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditEnti.aspx.resx">
       <DependentUpon>EditEnti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditEnti.resx">
-      <DependentUpon>EditEnti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditEqstd.aspx.resx">
       <DependentUpon>EditEqstd.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditEqstd.resx">
-      <DependentUpon>EditEqstd.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditFondi.aspx.resx">
       <DependentUpon>EditFondi.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditFondi.resx">
-      <DependentUpon>EditFondi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditFornitori.aspx.resx">
       <DependentUpon>EditFornitori.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditFornitori.resx">
-      <DependentUpon>EditFornitori.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditLetturaContatori.aspx.resx">
       <DependentUpon>EditLetturaContatori.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditLetturaContatori.resx">
-      <DependentUpon>EditLetturaContatori.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditLivelli.aspx.resx">
       <DependentUpon>EditLivelli.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditLivelli.resx">
-      <DependentUpon>EditLivelli.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditMateriale.aspx.resx">
       <DependentUpon>EditMateriale.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditMateriale.resx">
-      <DependentUpon>EditMateriale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditMisura.aspx.resx">
       <DependentUpon>EditMisura.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditMisura.resx">
-      <DependentUpon>EditMisura.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditPercentualeStraordinari.aspx.resx">
       <DependentUpon>EditPercentualeStraordinari.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditPercentualeStraordinari.resx">
-      <DependentUpon>EditPercentualeStraordinari.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditPianoFerie.aspx.resx">
       <DependentUpon>EditPianoFerie.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditPianoFerie.resx">
-      <DependentUpon>EditPianoFerie.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditPmp.aspx.resx">
       <DependentUpon>EditPmp.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditPmp.resx">
-      <DependentUpon>EditPmp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditPmpFrequenza.aspx.resx">
       <DependentUpon>EditPmpFrequenza.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditPmpFrequenza.resx">
-      <DependentUpon>EditPmpFrequenza.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditRepAddetti.aspx.resx">
       <DependentUpon>EditRepAddetti.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditRepAddetti.resx">
-      <DependentUpon>EditRepAddetti.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditRepAddetti1.aspx.resx" />
-    <EmbeddedResource Include="Gestione\EditRepAddetti1.resx">
-      <DependentUpon>EditRepAddetti1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditReparti.aspx.resx">
       <DependentUpon>EditReparti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditReparti.resx">
-      <DependentUpon>EditReparti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditRichiedenti.aspx.resx">
       <DependentUpon>EditRichiedenti.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditRichiedenti.resx">
-      <DependentUpon>EditRichiedenti.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditRichiedenti_tipo.aspx.resx">
       <DependentUpon>EditRichiedenti_tipo.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditRichiedenti_tipo.resx">
-      <DependentUpon>EditRichiedenti_tipo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditServizi.aspx.resx">
       <DependentUpon>EditServizi.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditServizi.resx">
-      <DependentUpon>EditServizi.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditSettori.aspx.resx">
       <DependentUpon>EditSettori.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditSettori.resx">
-      <DependentUpon>EditSettori.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditSpecializzazioni.aspx.resx">
       <DependentUpon>EditSpecializzazioni.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditSpecializzazioni.resx">
-      <DependentUpon>EditSpecializzazioni.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\EditTipoIntervento.aspx.resx">
       <DependentUpon>EditTipoIntervento.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditTipoIntervento.resx">
-      <DependentUpon>EditTipoIntervento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Enti.aspx.resx">
       <DependentUpon>Enti.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Enti.resx">
-      <DependentUpon>Enti.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Eqstd.aspx.resx">
       <DependentUpon>Eqstd.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Eqstd.resx">
-      <DependentUpon>Eqstd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Fondi.aspx.resx">
       <DependentUpon>Fondi.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Fondi.resx">
-      <DependentUpon>Fondi.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Fornitori.aspx.resx">
       <DependentUpon>Fornitori.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Fornitori.resx">
-      <DependentUpon>Fornitori.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\LetturaContatori.aspx.resx">
       <DependentUpon>LetturaContatori.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\LetturaContatori.resx">
-      <DependentUpon>LetturaContatori.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\ListaApparecchiature.aspx.resx">
       <DependentUpon>ListaApparecchiature.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\ListaApparecchiature.resx">
-      <DependentUpon>ListaApparecchiature.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\ListaDoc_Dwf.aspx.resx">
       <DependentUpon>ListaDoc_Dwf.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\ListaDoc_Dwf.resx">
-      <DependentUpon>ListaDoc_Dwf.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\ListaMateriali.aspx.resx">
       <DependentUpon>ListaMateriali.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\ListaMateriali.resx">
-      <DependentUpon>ListaMateriali.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Livelli.aspx.resx">
       <DependentUpon>Livelli.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Livelli.resx">
-      <DependentUpon>Livelli.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\PercentualiStraordinari.aspx.resx">
       <DependentUpon>PercentualiStraordinari.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\PercentualiStraordinari.resx">
-      <DependentUpon>PercentualiStraordinari.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\PianoFerie.aspx.resx">
       <DependentUpon>PianoFerie.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\PianoFerie.resx">
-      <DependentUpon>PianoFerie.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Pmp.aspx.resx">
       <DependentUpon>Pmp.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Pmp.resx">
-      <DependentUpon>Pmp.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\PmpFrequenza.aspx.resx">
       <DependentUpon>PmpFrequenza.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\PmpFrequenza.resx">
-      <DependentUpon>PmpFrequenza.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\PmpIntervalli.aspx.resx">
       <DependentUpon>PmpIntervalli.aspx.cs</DependentUpon>
@@ -3317,184 +1695,64 @@
     <EmbeddedResource Include="Gestione\PmpS.aspx.resx">
       <DependentUpon>PmpS.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\PmpS.resx">
-      <DependentUpon>PmpS.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\RepAddetti.aspx.resx">
       <DependentUpon>RepAddetti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\RepAddetti.resx">
-      <DependentUpon>RepAddetti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Reparti.aspx.resx">
       <DependentUpon>Reparti.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Reparti.resx">
-      <DependentUpon>Reparti.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\RicercaAnagrafica.ascx.resx">
       <DependentUpon>RicercaAnagrafica.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\RicercaAnagrafica1.resx">
-      <DependentUpon>RicercaAnagrafica1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Richiedenti.aspx.resx">
       <DependentUpon>Richiedenti.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Richiedenti.resx">
-      <DependentUpon>Richiedenti.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Richiedenti_tipo.aspx.resx">
       <DependentUpon>Richiedenti_tipo.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Richiedenti_tipo.resx">
-      <DependentUpon>Richiedenti_tipo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Servizi.aspx.resx">
       <DependentUpon>Servizi.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Servizi.resx">
-      <DependentUpon>Servizi.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Settori.aspx.resx">
       <DependentUpon>Settori.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Settori.resx">
-      <DependentUpon>Settori.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Specializzazioni.aspx.resx">
       <DependentUpon>Specializzazioni.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\Specializzazioni.resx">
-      <DependentUpon>Specializzazioni.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\TipoIntervento.aspx.resx">
       <DependentUpon>TipoIntervento.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\TipoIntervento.resx">
-      <DependentUpon>TipoIntervento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\TipologiaDitta.aspx.resx">
       <DependentUpon>TipologiaDitta.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\TipologiaDitta.resx">
-      <DependentUpon>TipologiaDitta.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\TipoManutenzione.aspx.resx">
       <DependentUpon>TipoManutenzione.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\TipoManutenzione.resx">
-      <DependentUpon>TipoManutenzione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestione\UnitaMisura.aspx.resx">
       <DependentUpon>UnitaMisura.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\UnitaMisura.resx">
-      <DependentUpon>UnitaMisura.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GIC\Report\DefaultReport.resx" />
     <EmbeddedResource Include="GIC\Report\ModificaCampo.resx" />
     <EmbeddedResource Include="GIC\Report\UserControl\ConsultazioniDataGrid.resx" />
-    <EmbeddedResource Include="GIC\Report\UserControl\SelezioneQuery.resx" />
     <EmbeddedResource Include="GIC\Report\UserControl\VisSelCampi.resx" />
     <EmbeddedResource Include="GIC\Report\ValoriCampo.resx" />
     <EmbeddedResource Include="GIC\Report\Visualizza.resx" />
     <EmbeddedResource Include="Global.asax.resx" />
-    <EmbeddedResource Include="Global.resx">
-      <DependentUpon>Global.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HelpApplication\Default.resx" />
-    <EmbeddedResource Include="HelpApplication\LeftFrame.resx" />
-    <EmbeddedResource Include="HelpApplication\Login.resx" />
-    <EmbeddedResource Include="HelpApplication\MainContent.resx" />
     <EmbeddedResource Include="LeftFrame.aspx.resx" />
-    <EmbeddedResource Include="LeftFrame.resx">
-      <DependentUpon>LeftFrame.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListaEdifici.resx">
-      <DependentUpon>ListaEdifici.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListaRDL.resx">
-      <DependentUpon>ListaRDL.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Login.aspx.resx" />
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LoginMobile.aspx.resx" />
     <EmbeddedResource Include="Logoff.aspx.resx" />
-    <EmbeddedResource Include="Logoff.resx">
-      <DependentUpon>Logoff.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainContent.aspx.resx" />
-    <EmbeddedResource Include="MainContent.resx">
-      <DependentUpon>MainContent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\AccorpaRdl.resx">
-      <DependentUpon>AccorpaRdl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\AnalisiRdl.resx">
-      <DependentUpon>AnalisiRdl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\AnalisiRdlStorico.resx">
-      <DependentUpon>AnalisiRdlStorico.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\CreazioneRdl.resx">
-      <DependentUpon>CreazioneRdl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\RapportoRichiestaRdl.resx">
-      <DependentUpon>RapportoRichiestaRdl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\RapportoTecnicoIntervento.resx">
-      <DependentUpon>RapportoTecnicoIntervento.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\Report.resx">
-      <DependentUpon>Report.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\ReportDettaglio.resx">
-      <DependentUpon>ReportDettaglio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\ReportDettaglioFondo.resx">
-      <DependentUpon>ReportDettaglioFondo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\ReportDettaglioPresunto.resx">
-      <DependentUpon>ReportDettaglioPresunto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\ReportDettaglioSaldo.resx">
-      <DependentUpon>ReportDettaglioSaldo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\VisualizzaRdl.resx">
-      <DependentUpon>VisualizzaRdl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\VisualizzaRdl1.resx">
-      <DependentUpon>VisualizzaRdl1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\VisualizzaRdl2.resx">
-      <DependentUpon>VisualizzaRdl2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorretiva\VisualPdf.resx">
-      <DependentUpon>VisualPdf.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\AccorpaRdl.aspx.resx">
       <DependentUpon>AccorpaRdl.aspx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\AnalisiCostiMateriali.aspx.resx">
       <DependentUpon>AnalisiCostiMateriali.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\AnalisiCostiMateriali.resx">
-      <DependentUpon>AnalisiCostiMateriali.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\AnalisiCostiOperativiDiGestione.aspx.resx">
       <DependentUpon>AnalisiCostiOperativiDiGestione.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\AnalisiCostiOperativiDiGestione.resx">
-      <DependentUpon>AnalisiCostiOperativiDiGestione.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\AnalisiCostiOperativiDiGestioneDettaglio.aspx.resx">
       <DependentUpon>AnalisiCostiOperativiDiGestioneDettaglio.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\AnalisiCostiOperativiDiGestioneDettaglio.resx">
-      <DependentUpon>AnalisiCostiOperativiDiGestioneDettaglio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\AnalisiRdl.aspx.resx">
       <DependentUpon>AnalisiRdl.aspx.cs</DependentUpon>
@@ -3505,83 +1763,35 @@
     <EmbeddedResource Include="ManutenzioneCorrettiva\ApprovaRDL.aspx.resx">
       <DependentUpon>ApprovaRDL.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\ApprovaRDL.resx">
-      <DependentUpon>ApprovaRDL.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\ApprovaRDL1.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\ApprovaRDL1.resx">
-      <DependentUpon>ApprovaRDL1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\CompletaRdl.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\CompletaRdl.resx">
-      <DependentUpon>CompletaRdl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\CompletaRdl1.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\CompletaRdl1.resx">
-      <DependentUpon>CompletaRdl1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\CostiAddetti.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\CostiAddetti.resx">
-      <DependentUpon>CostiAddetti.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\CostoMateriali.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\CostoMateriali.resx">
-      <DependentUpon>CostoMateriali.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\CreazioneRdl.aspx.resx">
       <DependentUpon>CreazioneRdl.aspx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\CreazioneSGA.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\CreazioneSGA.resx">
-      <DependentUpon>CreazioneSGA.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\CreazioneSGA1.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\CreazioneSGA1.resx">
-      <DependentUpon>CreazioneSGA1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\CreazioneSGA2.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\CreazioneSGA2.resx">
-      <DependentUpon>CreazioneSGA2.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\CreazioneTemp.aspx.resx" />
     <EmbeddedResource Include="ManutenzioneCorrettiva\DettDestinatariInvio.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\DettDestinatariInvio.resx">
-      <DependentUpon>DettDestinatariInvio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\EditApprovaEmetti.aspx.resx">
       <DependentUpon>EditApprovaEmetti.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\EditApprovaEmetti.resx">
-      <DependentUpon>EditApprovaEmetti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\EditCompletamento.aspx.resx">
       <DependentUpon>EditCompletamento.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\EditCompletamento.resx">
-      <DependentUpon>EditCompletamento.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\EditCreazione.aspx.resx">
       <DependentUpon>EditCreazione.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\EditCreazione.resx">
-      <DependentUpon>EditCreazione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\EditSfoglia.aspx.resx">
       <DependentUpon>EditSfoglia.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\EditSfoglia.resx">
-      <DependentUpon>EditSfoglia.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\GestioneCompleta.aspx.resx">
       <DependentUpon>GestioneCompleta.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\GestioneCompleta.resx">
-      <DependentUpon>GestioneCompleta.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\GestioneCompleta1.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\GestioneCompleta1.resx">
-      <DependentUpon>GestioneCompleta1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\ModificaRdl.aspx.resx">
       <DependentUpon>ModificaRdl.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -3594,13 +1804,7 @@
     <EmbeddedResource Include="ManutenzioneCorrettiva\RapportoTecnicoInterventoPdf.aspx.resx">
       <DependentUpon>RapportoTecnicoInterventoPdf.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\RapportoTecnicoInterventoPdf.resx">
-      <DependentUpon>RapportoTecnicoInterventoPdf.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\rendicontazione.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\rendicontazione.resx">
-      <DependentUpon>rendicontazione.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\Report.aspx.resx">
       <DependentUpon>Report.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -3627,37 +1831,13 @@
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdLEliminare.aspx.resx">
       <DependentUpon>SfogliaRdLEliminare.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdLEliminare.resx">
-      <DependentUpon>SfogliaRdLEliminare.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlPaging.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlPaging.resx">
-      <DependentUpon>SfogliaRdlPaging.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlPaging1.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlPaging1.resx">
-      <DependentUpon>SfogliaRdlPaging1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlPaging2.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlPaging2.resx">
-      <DependentUpon>SfogliaRdlPaging2.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlPaging4.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlPaging4.resx">
-      <DependentUpon>SfogliaRdlPaging4.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlPaging5.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlPaging5.resx">
-      <DependentUpon>SfogliaRdlPaging5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliDoc.resx">
-      <DependentUpon>SfogliDoc.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\VisualizzaGestioneMaterialiPdf.aspx.resx">
       <DependentUpon>VisualizzaGestioneMaterialiPdf.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\VisualizzaGestioneMaterialiPdf.resx">
-      <DependentUpon>VisualizzaGestioneMaterialiPdf.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\VisualizzaRdl.aspx.resx">
       <DependentUpon>VisualizzaRdl.aspx.cs</DependentUpon>
@@ -3667,112 +1847,49 @@
     <EmbeddedResource Include="ManutenzioneCorrettiva\VisualizzaRdlEliminare.aspx.resx">
       <DependentUpon>VisualizzaRdlEliminare.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\VisualizzaRdlEliminare.resx">
-      <DependentUpon>VisualizzaRdlEliminare.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\VisualPdf.aspx.resx">
       <DependentUpon>VisualPdf.aspx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Aggiona_WO.aspx.resx">
       <DependentUpon>Aggiona_WO.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Aggiona_WO.resx">
-      <DependentUpon>Aggiona_WO.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Associazione_EQ_PMS.resx">
-      <DependentUpon>Associazione_EQ_PMS.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\CompletamentoMP.aspx.resx">
       <DependentUpon>CompletamentoMP.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\CompletamentoMP.resx">
-      <DependentUpon>CompletamentoMP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Completamento_MP_WRList.aspx.resx">
       <DependentUpon>Completamento_MP_WRList.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Completamento_MP_WRList.resx">
-      <DependentUpon>Completamento_MP_WRList.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Completa_WO.aspx.resx">
       <DependentUpon>Completa_WO.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Completa_WO.resx">
-      <DependentUpon>Completa_WO.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\CreaOttimizzaRDL_MP.resx">
-      <DependentUpon>CreaOttimizzaRDL_MP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\CreaPianoMP.aspx.resx">
       <DependentUpon>CreaPianoMP.aspx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\CreaPianoMP\aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneProgrammata\CreazioneODL_MP.resx">
-      <DependentUpon>CreazioneODL_MP.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\DettPianoAnnuale.aspx.resx">
       <DependentUpon>DettPianoAnnuale.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\DettPianoAnnuale.resx">
-      <DependentUpon>DettPianoAnnuale.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\DettProcedurePassi.aspx.resx">
       <DependentUpon>DettProcedurePassi.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\DettProcedurePassi.resx">
-      <DependentUpon>DettProcedurePassi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\DocPmP.aspx.resx" />
     <EmbeddedResource Include="ManutenzioneProgrammata\Impostazioni.aspx.resx">
       <DependentUpon>Impostazioni.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Impostazioni.resx">
-      <DependentUpon>Impostazioni.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\KPIVod_Upload.resx">
-      <DependentUpon>KPIVod_Upload.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\KPI_Download.resx">
-      <DependentUpon>KPI_Download.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\MostraMessaggi.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneProgrammata\MostraMessaggi.resx">
-      <DependentUpon>MostraMessaggi.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\MostraPianoMP.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneProgrammata\MostraPianoMP.resx">
-      <DependentUpon>MostraPianoMP.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\PassiPianoAnnuale.aspx.resx">
       <DependentUpon>PassiPianoAnnuale.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\PassiPianoAnnuale.resx">
-      <DependentUpon>PassiPianoAnnuale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\PianoAnnuale.aspx.resx">
       <DependentUpon>PianoAnnuale.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\PianoAnnuale.resx">
-      <DependentUpon>PianoAnnuale.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\PianoManutenzioneProgrammata.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneProgrammata\PianoManutenzioneProgrammata.resx">
-      <DependentUpon>PianoManutenzioneProgrammata.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\ProcedurePassi.aspx.resx">
       <DependentUpon>ProcedurePassi.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\ProcedurePassi.resx">
-      <DependentUpon>ProcedurePassi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Rapportino.resx">
-      <DependentUpon>Rapportino.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Schedulazione.aspx.resx">
       <DependentUpon>Schedulazione.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Schedulazione.resx">
-      <DependentUpon>Schedulazione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\Associazione_EQ_PMS.aspx.resx">
       <DependentUpon>Associazione_EQ_PMS.aspx.cs</DependentUpon>
@@ -3789,26 +1906,14 @@
     <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\DisplayRapportino.aspx.resx">
       <DependentUpon>DisplayRapportino.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\DisplayRapportino.resx">
-      <DependentUpon>DisplayRapportino.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\OttimizzaPiano.aspx.resx">
       <DependentUpon>OttimizzaPiano.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\OttimizzaPiano.resx">
-      <DependentUpon>OttimizzaPiano.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\OttimizzaPianoEQ.aspx.resx">
       <DependentUpon>OttimizzaPianoEQ.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\OttimizzaPianoEQ.resx">
-      <DependentUpon>OttimizzaPianoEQ.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\OttimizzaPianoSalva.aspx.resx">
       <DependentUpon>OttimizzaPianoSalva.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\OttimizzaPianoSalva.resx">
-      <DependentUpon>OttimizzaPianoSalva.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\Rapportino.aspx.resx">
       <DependentUpon>Rapportino.aspx.cs</DependentUpon>
@@ -3816,37 +1921,16 @@
     <EmbeddedResource Include="ManutenzioneProgrammata\SfogliaOdlRdl.aspx.resx">
       <DependentUpon>SfogliaOdlRdl.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\SfogliaOdlRdl.resx">
-      <DependentUpon>SfogliaOdlRdl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\SfogliaPiani.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneProgrammata\SfogliaPiani.resx">
-      <DependentUpon>SfogliaPiani.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\SfogliaRdlOdlPaging.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneProgrammata\SfogliaRdlOdlPaging.resx">
-      <DependentUpon>SfogliaRdlOdlPaging.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\SfogliaRdlOdl_MP.aspx.resx">
       <DependentUpon>SfogliaRdlOdl_MP.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\SfogliaRdlOdl_MP.resx">
-      <DependentUpon>SfogliaRdlOdl_MP.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MobileWebForm1.resx">
-      <DependentUpon>MobileWebForm1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportGestioneSpazi\DisplayReportSpazi.aspx.resx">
       <DependentUpon>DisplayReportSpazi.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportGestioneSpazi\DisplayReportSpazi.resx">
-      <DependentUpon>DisplayReportSpazi.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ReportGestioneSpazi\ReportGestioneSpazi.aspx.resx">
       <DependentUpon>ReportGestioneSpazi.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ReportGestioneSpazi\ReportGestioneSpazi.resx">
-      <DependentUpon>ReportGestioneSpazi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportXls\PaginaProvaClasse.aspx.resx" />
     <EmbeddedResource Include="Report\Report_Long.rpt">
@@ -3896,9 +1980,6 @@
     <EmbeddedResource Include="Report\rptLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptLogo1.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\RptMese.resx">
-      <DependentUpon>RptMese.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\RptMese.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -3964,9 +2045,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptStato2.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\RptTecnicoIntervento2.resx">
-      <DependentUpon>RptTecnicoIntervento2.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Report\RptTecnicoIntervento2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptTecnicoIntervento22.cs</LastGenOutput>
@@ -3998,17 +2076,8 @@
     <EmbeddedResource Include="RichiesteDati\Autentica.aspx.resx">
       <DependentUpon>Autentica.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RichiesteDati\Autentica.resx">
-      <DependentUpon>Autentica.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RichiesteDati\prova.aspx.resx">
       <DependentUpon>prova.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RichiesteDati\prova.resx">
-      <DependentUpon>prova.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SfogliaDieSga.resx">
-      <DependentUpon>SfogliaDieSga.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SgaRtf\SGA.aspx.resx" />
     <EmbeddedResource Include="SgaRtf\SGA.resx">
@@ -4017,60 +2086,27 @@
     <EmbeddedResource Include="ShedeEq\FiltraApparecchiature.aspx.resx">
       <DependentUpon>FiltraApparecchiature.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShedeEq\FiltraApparecchiature.resx">
-      <DependentUpon>FiltraApparecchiature.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ShedeEq\VisualizzaSchedaHtml.aspx.resx">
       <DependentUpon>VisualizzaSchedaHtml.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ShedeEq\VisualizzaSchedaHtml.resx">
-      <DependentUpon>VisualizzaSchedaHtml.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShedeEq\VisulizzaSchedaEqPdf.aspx.resx">
       <DependentUpon>VisulizzaSchedaEqPdf.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShedeEq\VisulizzaSchedaEqPdf.resx">
-      <DependentUpon>VisulizzaSchedaEqPdf.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SoddisfazioneCliente\EditGiudizio.aspx.resx">
       <DependentUpon>EditGiudizio.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SoddisfazioneCliente\EditGiudizio.resx">
-      <DependentUpon>EditGiudizio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SoddisfazioneCliente\Giudizio.aspx.resx">
       <DependentUpon>Giudizio.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SoddisfazioneCliente\Giudizio.resx">
-      <DependentUpon>Giudizio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SoddisfazioneCliente\IndicePrestazione.aspx.resx" />
-    <EmbeddedResource Include="SoddisfazioneCliente\IndicePrestazione.resx">
-      <DependentUpon>IndicePrestazione.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SoddisfazioneCliente\IndiceSoddifazione.aspx.resx" />
-    <EmbeddedResource Include="SoddisfazioneCliente\IndiceSoddifazione.resx">
-      <DependentUpon>IndiceSoddifazione.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SoddisfazioneCliente\KPI.aspx.resx" />
-    <EmbeddedResource Include="SoddisfazioneCliente\KPI.resx">
-      <DependentUpon>KPI.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SoddisfazioneCliente\KpiPianiProp.aspx.resx" />
-    <EmbeddedResource Include="SoddisfazioneCliente\KpiPianiProp.resx">
-      <DependentUpon>KpiPianiProp.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SoddisfazioneCliente\KPIVod_Upload.aspx.resx" />
     <EmbeddedResource Include="SoddisfazioneCliente\KPI_Download.aspx.resx" />
     <EmbeddedResource Include="SoddisfazioneCliente\KPI_vod_report.aspx.resx" />
-    <EmbeddedResource Include="SoddisfazioneCliente\KPI_vod_report.resx">
-      <DependentUpon>KPI_vod_report.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SoddisfazioneCliente\ReportGiudizioCliente.aspx.resx">
       <DependentUpon>ReportGiudizioCliente.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SoddisfazioneCliente\ReportGiudizioCliente.resx">
-      <DependentUpon>ReportGiudizioCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StampaRapportiPdf\Pagine\dettaglioFile.resx" />
     <EmbeddedResource Include="StampaRapportiPdf\Pagine\Pagina_Download.resx" />
@@ -4079,98 +2115,38 @@
     <EmbeddedResource Include="StampaRapportiPdf\WebControls\CalendarPicker.resx" />
     <EmbeddedResource Include="StampaRapportiPdf\WebControls\GridTitle.resx" />
     <EmbeddedResource Include="StampaRapportiPdf\WebControls\PageTitle.resx" />
-    <EmbeddedResource Include="WebCad\_Default.resx" />
-    <EmbeddedResource Include="WebCad\apparecchiature.resx" />
-    <EmbeddedResource Include="WebCad\Apparecchiature\NavigazioneDocumenti.resx" />
-    <EmbeddedResource Include="WebCad\Apparecchiature\PageImage.resx" />
-    <EmbeddedResource Include="WebCad\Apparecchiature\SchedaApparecchiatura.resx" />
-    <EmbeddedResource Include="WebCad\Apparecchiature\VisualDWF.resx" />
-    <EmbeddedResource Include="WebCad\CAD\CadViewer.resx" />
-    <EmbeddedResource Include="WebCad\CommonPage\ListaEdifici.resx" />
-    <EmbeddedResource Include="WebCad\Edifici\DataRoom.resx" />
-    <EmbeddedResource Include="WebCad\Edifici\EditBuilding.resx" />
-    <EmbeddedResource Include="WebCad\Edifici\NavigazioneAppDEMO.resx" />
-    <EmbeddedResource Include="WebCad\ErrorPage.resx" />
-    <EmbeddedResource Include="WebCad\ListLink.resx" />
-    <EmbeddedResource Include="WebCad\RedirectPages\Redirect_Eq_DocumentiAllegati.resx" />
-    <EmbeddedResource Include="WebCad\RedirectPages\RedirectDettaglioApparecchiatura.resx" />
-    <EmbeddedResource Include="WebCad\RedirectPages\RedirectSchedaEq.resx" />
-    <EmbeddedResource Include="WebCad\StandardApp.resx" />
-    <EmbeddedResource Include="WebCad\Stanze.resx" />
-    <EmbeddedResource Include="WebCad\TopFrame.resx" />
-    <EmbeddedResource Include="WebCad\WebControls\CalendarPicker.resx" />
-    <EmbeddedResource Include="WebCad\WebControls\CodiceApparecchiature.resx" />
-    <EmbeddedResource Include="WebCad\WebControls\CodiceStdApparecchiatura.resx" />
-    <EmbeddedResource Include="WebCad\WebControls\DataGridRicercaCad.resx" />
-    <EmbeddedResource Include="WebCad\WebControls\GridTitle.resx" />
-    <EmbeddedResource Include="WebCad\WebControls\MyDropDownList.resx" />
-    <EmbeddedResource Include="WebCad\WebControls\PageTitle.resx" />
-    <EmbeddedResource Include="WebCad\WebControls\UserStanze.resx" />
     <EmbeddedResource Include="WebControls\Addetti.ascx.resx">
       <DependentUpon>Addetti.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\Addetti.resx">
-      <DependentUpon>Addetti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\AggiungiSollecito.ascx.resx">
       <DependentUpon>AggiungiSollecito.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\AggiungiSollecito.resx">
-      <DependentUpon>AggiungiSollecito.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\BottomMenu.ascx.resx">
       <DependentUpon>BottomMenu.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\BottomMenu.resx">
-      <DependentUpon>BottomMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\BottomMenu2.ascx.resx">
       <DependentUpon>BottomMenu2.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\BottomMenu2.resx">
-      <DependentUpon>BottomMenu2.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\CalendarPicker.ascx.resx">
       <DependentUpon>CalendarPicker.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\CalendarPicker.resx">
-      <DependentUpon>CalendarPicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\CalendarPickerOLD.ascx.resx">
       <DependentUpon>CalendarPickerOLD.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\CalendarPickerOLD.resx">
-      <DependentUpon>CalendarPickerOLD.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\CodiceApparecchiature.ascx.resx">
       <DependentUpon>CodiceApparecchiature.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\CodiceApparecchiature.resx">
-      <DependentUpon>CodiceApparecchiature.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\CodiceStdApparecchiatura.ascx.resx">
       <DependentUpon>CodiceStdApparecchiatura.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\CodiceStdApparecchiatura.resx">
-      <DependentUpon>CodiceStdApparecchiatura.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\CollapseDiv.ascx.resx">
       <DependentUpon>CollapseDiv.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\CollapseDiv.resx">
-      <DependentUpon>CollapseDiv.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\CostiAddetti.ascx.resx">
       <DependentUpon>CostiAddetti.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\CostiAddetti.resx">
-      <DependentUpon>CostiAddetti.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\CostiManodopera.ascx.resx">
       <DependentUpon>CostiManodopera.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\CostiManodopera.resx">
-      <DependentUpon>CostiManodopera.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\DataPicker.ascx.resx">
       <DependentUpon>DataPicker.ascx.cs</DependentUpon>
@@ -4178,14 +2154,8 @@
     <EmbeddedResource Include="WebControls\Fascicolo.ascx.resx">
       <DependentUpon>Fascicolo.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\Fascicolo.resx">
-      <DependentUpon>Fascicolo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\GridTitle.ascx.resx">
       <DependentUpon>GridTitle.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\GridTitle.resx">
-      <DependentUpon>GridTitle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\GridTitleServer.ascx.resx">
       <DependentUpon>GridTitleServer.ascx.cs</DependentUpon>
@@ -4194,20 +2164,11 @@
     <EmbeddedResource Include="WebControls\materiali.ascx.resx">
       <DependentUpon>materiali.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\materiali.resx">
-      <DependentUpon>materiali.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\Matricole.ascx.resx">
       <DependentUpon>Matricole.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\Matricole.resx">
-      <DependentUpon>Matricole.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\PageTitle.ascx.resx">
       <DependentUpon>PageTitle.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\PageTitle.resx">
-      <DependentUpon>PageTitle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\RicercaModulo.ascx.resx">
       <DependentUpon>RicercaModulo.ascx.cs</DependentUpon>
@@ -4220,32 +2181,17 @@
     <EmbeddedResource Include="WebControls\Richiedenti.ascx.resx">
       <DependentUpon>Richiedenti.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\Richiedenti.resx">
-      <DependentUpon>Richiedenti.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\RichiedentiSollecito.ascx.resx">
       <DependentUpon>RichiedentiSollecito.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\RichiedentiSollecito.resx">
-      <DependentUpon>RichiedentiSollecito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\UserMateriali.ascx.resx">
       <DependentUpon>UserMateriali.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\UserMateriali.resx">
-      <DependentUpon>UserMateriali.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\UserMeseGiorno.ascx.resx">
       <DependentUpon>UserMeseGiorno.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\UserMeseGiorno.resx">
-      <DependentUpon>UserMeseGiorno.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\UserOption.ascx.resx">
       <DependentUpon>UserOption.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\UserOption.resx">
-      <DependentUpon>UserOption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\UserPmp.ascx.resx">
       <DependentUpon>UserPmp.ascx.cs</DependentUpon>
@@ -4257,31 +2203,16 @@
     <EmbeddedResource Include="WebControls\UserRdlInailLabel.ascx.resx">
       <DependentUpon>UserRdlInailLabel.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\UserRdlInailLabel.resx">
-      <DependentUpon>UserRdlInailLabel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\UserRdlInail\ascx.resx" />
     <EmbeddedResource Include="WebControls\UserStanze.ascx.resx">
       <DependentUpon>UserStanze.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\UserStanze.resx">
-      <DependentUpon>UserStanze.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\UserStanzeRic.ascx.resx" />
-    <EmbeddedResource Include="WebControls\UserStanzeRic.resx">
-      <DependentUpon>UserStanzeRic.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\VisualizzaReperibilita.ascx.resx">
       <DependentUpon>VisualizzaReperibilita.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\VisualizzaReperibilita.resx">
-      <DependentUpon>VisualizzaReperibilita.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\VisualizzaSolleciti.ascx.resx">
       <DependentUpon>VisualizzaSolleciti.ascx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\VisualizzaSolleciti.resx">
-      <DependentUpon>VisualizzaSolleciti.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -4302,37 +2233,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\EditFunzioni.aspx" />
-    <Content Include="Admin\EditMenu.aspx" />
-    <Content Include="Admin\EditRuoli.aspx" />
-    <Content Include="Admin\EditUtenti.aspx" />
-    <Content Include="Admin\Funzioni.aspx" />
-    <Content Include="Admin\Menu.aspx" />
-    <Content Include="Admin\Ruoli.aspx" />
-    <Content Include="Admin\RuoliEdifici.aspx" />
-    <Content Include="Admin\RuoliEdificiServizi.aspx" />
-    <Content Include="Admin\Utenti.aspx" />
-    <Content Include="Admin\Utenti1.aspx" />
-    <Content Include="AnagrafeImpianti\DataRoom.aspx" />
-    <Content Include="AnagrafeImpianti\DatiTecnici.aspx" />
-    <Content Include="AnagrafeImpianti\DocImageGalery.aspx" />
-    <Content Include="AnagrafeImpianti\EditPrestazioniEnergetiche.aspx" />
-    <Content Include="AnagrafeImpianti\Eq_DocumentiAllegati.aspx" />
-    <Content Include="AnagrafeImpianti\FullImage.aspx" />
-    <Content Include="AnagrafeImpianti\ListaApparecchiatureServ.aspx" />
-    <Content Include="AnagrafeImpianti\ListaDatiApparecchiatura.aspx" />
-    <Content Include="AnagrafeImpianti\NavigazioneApparecchiature.aspx" />
-    <Content Include="AnagrafeImpianti\NavigazioneAppDEMO.aspx" />
-    <Content Include="AnagrafeImpianti\NavigazioneCertificati.aspx" />
-    <Content Include="AnagrafeImpianti\NavigazioneDocumenti.aspx" />
-    <Content Include="AnagrafeImpianti\NavigazioneServizi.aspx" />
-    <Content Include="AnagrafeImpianti\PageImage.aspx" />
-    <Content Include="AnagrafeImpianti\PrestazioniEnergetiche.aspx" />
-    <Content Include="AnagrafeImpianti\RichiesteApparecchiatura.aspx" />
-    <Content Include="AnagrafeImpianti\SchedaApparecchiatura.aspx" />
-    <Content Include="AnagrafeImpianti\ServiceDettail.aspx" />
-    <Content Include="AnagrafeImpianti\ServiziEdifici.aspx" />
-    <Content Include="AnagrafeImpianti\VisualDWF.aspx" />
     <Content Include="AnalisiStatistiche\chart\Chart.aspx" />
     <Content Include="AnalisiStatistiche\chart\GraficiLV.aspx" />
     <Content Include="AnalisiStatistiche\chart\Pagine\demo.aspx" />
@@ -4343,6 +2243,32 @@
     <Content Include="AnalisiStatistiche\GraficiMop.aspx" />
     <Content Include="AnalisiStatistiche\GraficiMor.aspx" />
     <Content Include="AnalisiStatistiche\GraficiMs.aspx" />
+    <Content Include="AslMobile\CalendarioUserControl.ascx" />
+    <Content Include="AslMobile\CodiceEdificio.aspx" />
+    <Content Include="AslMobile\Completa.aspx" />
+    <Content Include="AslMobile\CompletamentoMP.aspx" />
+    <Content Include="AslMobile\CompletamentoUserControl.ascx" />
+    <Content Include="AslMobile\Completamento_MP_WRList.aspx" />
+    <Content Include="AslMobile\CreazioneRichiesta1.ascx" />
+    <Content Include="AslMobile\CreazioneRichiesta2.ascx" />
+    <Content Include="AslMobile\CreazioneRichiesta3.ascx" />
+    <Content Include="AslMobile\Default.aspx" />
+    <Content Include="AslMobile\DettProcedurePassi.aspx" />
+    <Content Include="AslMobile\images\edit.gif" />
+    <Content Include="AslMobile\images\giallo.GIF" />
+    <Content Include="AslMobile\images\gnome-fs-home.gif" />
+    <Content Include="AslMobile\images\head.jpg" />
+    <Content Include="AslMobile\images\logo2.jpg" />
+    <Content Include="AslMobile\images\Nota1.gif" />
+    <Content Include="AslMobile\images\Nota2.gif" />
+    <Content Include="AslMobile\images\Nota3.gif" />
+    <Content Include="AslMobile\images\rosso.GIF" />
+    <Content Include="AslMobile\images\uscita.gif" />
+    <Content Include="AslMobile\images\verde.GIF" />
+    <Content Include="AslMobile\LogOut.aspx" />
+    <Content Include="AslMobile\Rcompleta.aspx" />
+    <Content Include="AslMobile\Richiesta.aspx" />
+    <Content Include="AslMobile\VisualRdl.aspx" />
     <Content Include="calendar\Calendar.ascx" />
     <Content Include="calendar\dhtmlgoodies_calendar.css" />
     <Content Include="calendar\dhtmlgoodies_calendar.js" />
@@ -4394,7 +2320,6 @@
     <Content Include="Errore\Sir-Messaggio-errore.jpg" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="FileWebStat\statisticheWeb_Anno_2020_Week_41.txt" />
-    <Content Include="GestioneSpazi\RicercaSpazi.aspx" />
     <Content Include="Gestione\Addetti.aspx" />
     <Content Include="Gestione\Buildings.aspx" />
     <Content Include="Gestione\Categorie.aspx" />
@@ -4736,14 +2661,17 @@
     <Content Include="XSLT\XSLTDIEVod.xslt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AslMobile\images\Thumbs.db" />
+    <None Include="AslMobile\Web.config" />
     <None Include="FileWebStat\FileWebStat.rar" />
+    <None Include="GIC\App_Code\DataSetDef\DataSetReport.xsd" />
+    <None Include="GIC\App_Code\DataSetDef\DataSetReport.xsx">
+      <DependentUpon>DataSetReport.xsd</DependentUpon>
+    </None>
+    <None Include="GIC\App_Code\DataSetDef\vssver.scc" />
     <None Include="ReportXls\MasterQuartoTrimestre_r3.xls" />
     <None Include="Report\52pqfzahzxxmz245bgtrweyw.pdf" />
-    <None Include="Report\cblzp055lwpdtd45cgycjd45.pdf" />
-    <None Include="Report\g2oz0t45wdbn3b55elq0xub2.pdf" />
-    <None Include="Report\gj5wkuydcqozac45znhkc045.pdf" />
     <None Include="Report\papardo.rar" />
-    <None Include="Report\z23xxn55bnvfyi2t0mteyo45.pdf" />
     <None Include="SchemiXSD\DsAnalisiStatistiche.xsd" />
     <None Include="SchemiXSD\DsAnalisiStatistiche.xsx">
       <DependentUpon>DsAnalisiStatistiche.xsd</DependentUpon>
@@ -4777,6 +2705,20 @@
     <None Include="SchemiXSD\ScmReport.xsd" />
     <None Include="SchemiXSD\ScmReport.xsx">
       <DependentUpon>ScmReport.xsd</DependentUpon>
+    </None>
+    <None Include="StampaRapportiPdf\Schemixsd\DatasetReport.xsc">
+      <DependentUpon>DatasetReport.xsd</DependentUpon>
+    </None>
+    <None Include="StampaRapportiPdf\Schemixsd\DatasetReport.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatasetReport.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="StampaRapportiPdf\Schemixsd\DatasetReport.xss">
+      <DependentUpon>DatasetReport.xsd</DependentUpon>
+    </None>
+    <None Include="StampaRapportiPdf\Schemixsd\DatasetReport.xsx">
+      <DependentUpon>DatasetReport.xsd</DependentUpon>
     </None>
     <None Include="Stampe\CostoGestioneCumulativo\reportRDLcomulativo17052018123220.pdf" />
     <None Include="Stampe\CostoGestioneCumulativo\reportRDLcomulativo17052018123220.zip" />
