@@ -32,7 +32,19 @@ namespace TheSite.Admin
 		protected S_Controls.S_TextBox txtsLinkHelp;
 		protected Csy.WebControls.MessagePanel PanelMess;
 		int itemId = 0;
-	
+
+		TheSite.Admin.Funzioni _fp;
+		MyCollection.clMyCollection _myColl = new MyCollection.clMyCollection();
+		public MyCollection.clMyCollection _Contenitore
+		{ 
+			get 
+			{
+				if(this.ViewState["mioContenitore"]!=null)
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
+				else
+					return new MyCollection.clMyCollection();
+			}
+		}
 		private void Page_Load(object sender, System.EventArgs e)
 		{
 			FunId = Int32.Parse(Request.Params["FunId"]);
@@ -50,6 +62,12 @@ namespace TheSite.Admin
 
 			if (!Page.IsPostBack )
 			{
+				if(Context.Handler is TheSite.Admin.Funzioni) 
+				{
+					_fp = (TheSite.Admin.Funzioni) Context.Handler;
+					this.ViewState.Add("mioContenitore",_fp._Contenitore); 
+				}	
+
 				if (itemId != 0) 
 				{
 					Classi.Funzione _Funzione = new TheSite.Classi.Funzione();					
@@ -116,7 +134,7 @@ namespace TheSite.Admin
 		/// <param name="e"></param>
 		private void btnAnnulla_Click(object sender, System.EventArgs e)
 		{
-			Response.Redirect((String) ViewState["UrlReferrer"]);
+			Server.Transfer("Funzioni.aspx?FunId="+FunId);
 		}
 
 		/// <summary>

@@ -17,7 +17,7 @@ namespace TheSite.Admin
 	/// <summary>
 	/// Descrizione di riepilogo per EditRuoli.
 	/// </summary>
-	public class EditRuoli : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditRuoli : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Label lblOperazione;
 		protected System.Web.UI.WebControls.Panel PanelEdit;

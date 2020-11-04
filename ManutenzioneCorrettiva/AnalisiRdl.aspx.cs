@@ -10,14 +10,14 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.ManutenzioneCorretiva
 {
 	/// <summary>
 	/// Descrizione di riepilogo per AnalisiRdl.
 	/// </summary>
-	public class AnalisiRdl : System.Web.UI.Page    // System.Web.UI.Page
+	public class AnalisiRdl : System.Web.UI.Page
 	{	
 		protected S_Controls.S_Button btnsRicerca;
 		protected Csy.WebControls.DataPanel PanelRicerca;
@@ -29,7 +29,7 @@ namespace TheSite.ManutenzioneCorretiva
 		protected WebControls.CalendarPicker CalendarPicker1;
 		protected WebControls.CalendarPicker CalendarPicker2;
 		public static string HelpLink = string.Empty;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		protected S_Controls.S_ComboBox cmbsid_status;
 		protected S_Controls.S_TextBox txtswo_id;
 		protected S_Controls.S_TextBox txtswr_id;
@@ -63,7 +63,7 @@ namespace TheSite.ManutenzioneCorretiva
 
 		}
 		#endregion
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
@@ -143,7 +143,7 @@ namespace TheSite.ManutenzioneCorretiva
 							{
 								_myColl=_fp._Contenitore;
 								_myColl.SetValues(this.Page.Controls);
-								Ricerca();
+								Ricerca(true);
 							}					
 					}		
 
@@ -153,15 +153,12 @@ namespace TheSite.ManutenzioneCorretiva
 		
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{
-			Ricerca();
+			DataGridRicerca.CurrentPageIndex =0; 
+			Ricerca(true);
 //			btnExcel.Visible=true;
 		}
 
-		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
-		{
-			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;			
-			Ricerca();
-		}
+		
 
 		//routine che gestisce il transfer dei valori da AnalisiRdl a AnalisiRdlStorico
 		private void DataGridRicerca_ItemCommand(object source, System.Web.UI.WebControls.DataGridCommandEventArgs e)
@@ -177,7 +174,7 @@ namespace TheSite.ManutenzioneCorretiva
 		private void DataGridRicerca_PageIndexChanged_1(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{		
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;			
-			Ricerca();
+			Ricerca(false);
 		}
 
 		#region FunzioniPrivate
@@ -193,7 +190,7 @@ namespace TheSite.ManutenzioneCorretiva
 
 		}
 
-		private void Ricerca()
+		private void Ricerca(bool reset)
 		{
 			//Classi.ManOrdinaria.Richiesta _Richiesta = new TheSite.Classi.ManOrdinaria.Richiesta();
 			Classi.ManCorrettiva.ClManCorrettiva _Richiesta = new TheSite.Classi.ManCorrettiva.ClManCorrettiva();	
@@ -202,11 +199,51 @@ namespace TheSite.ManutenzioneCorretiva
 			this.cmbsid_status.DBDefaultValue =0;							
 			S_ControlsCollection _SCollection = new S_ControlsCollection();
 			_SCollection.AddItems(PanelRicerca.Controls);
+
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca.PageSize;			
+			_SCollection.Add(s_p_pagesize);
+
 			DataSet _MyDs = _Richiesta.GetAnalisiRDL(_SCollection,Context.User.Identity.Name).Copy();
+
 			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
+
+			Double _totalPages = 1;
+			if (reset==true)
+			{
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				int _totalRecords = _Richiesta.GetAnalisiRDLCount(_SCollection,Context.User.Identity.Name);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+				if ((_totalRecords % DataGridRicerca.PageSize) == 0)
+					_totalPages = _totalRecords / DataGridRicerca.PageSize;
+				else
+					_totalPages = (_totalRecords / DataGridRicerca.PageSize)+1;
+			}
+			else
+			{
+				_totalPages = Double.Parse (this.GridTitle1.NumeroRecords);
+			}
+
+
+			
 			DataGridRicerca.Visible = true;
 			this.GridTitle1.Visible =true;
-			if (_MyDs.Tables[0].Rows.Count == 0 )
+			if (int.Parse(GridTitle1.NumeroRecords) == 0 )
 			{
 				DataGridRicerca.CurrentPageIndex=0;
 				GridTitle1.DescriptionTitle="Nessun dato trovato."; 
@@ -214,21 +251,11 @@ namespace TheSite.ManutenzioneCorretiva
 			else
 			{
 				GridTitle1.DescriptionTitle=""; 
-				int Pagina = 0;
-				if ((_MyDs.Tables[0].Rows.Count % DataGridRicerca.PageSize) >0)
-				{
-					Pagina ++;
-				}
-				if (DataGridRicerca.PageCount != Convert.ToInt16((_MyDs.Tables[0].Rows.Count / DataGridRicerca.PageSize) + Pagina))
-					//if (DataGridRicerca.PageCount != DataGridRicerca.CurrentPageIndex)				
-				{					
-					DataGridRicerca.CurrentPageIndex=0;					
-				}
+				
 			}
 			
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
 			this.DataGridRicerca.DataBind();
-			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();	
 			
 		}
 		
@@ -271,14 +298,14 @@ namespace TheSite.ManutenzioneCorretiva
 
 		public DataSet GetWordExcel()
 		{
-			Classi.ManOrdinaria.Richiesta _Richiesta = new TheSite.Classi.ManOrdinaria.Richiesta();
-
+			//Classi.ManOrdinaria.Richiesta _Richiesta = new TheSite.Classi.ManOrdinaria.Richiesta();
+			Classi.ManCorrettiva.ClManCorrettiva _Richiesta = new TheSite.Classi.ManCorrettiva.ClManCorrettiva();
 			this.txtswo_id.DBDefaultValue = 0;
 			this.txtswr_id .DBDefaultValue = 0;
 			this.cmbsid_status.DBDefaultValue =0;							
 			S_ControlsCollection _SCollection = new S_ControlsCollection();
 			_SCollection.AddItems(PanelRicerca.Controls);
-			return _Richiesta.GetAnalisiRDL(_SCollection,Context.User.Identity.Name).Copy();
+			return _Richiesta.GetAnalisiRDLExcel(_SCollection,Context.User.Identity.Name).Copy();
 		}
 
 		private void DataGridRicerca_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)

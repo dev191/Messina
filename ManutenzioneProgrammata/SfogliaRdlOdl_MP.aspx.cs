@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 using System.Reflection; 
 
 namespace TheSite.ManutenzioneProgrammata
@@ -18,20 +18,20 @@ namespace TheSite.ManutenzioneProgrammata
 	/// <summary>
 	/// Descrizione di riepilogo per SfogliaRdlOdl_MP.
 	/// </summary>
-	public class SfogliaRdlOdl_MP : System.Web.UI.Page    // System.Web.UI.Page
+	public class SfogliaRdlOdl_MP : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGrid1;
 		protected System.Web.UI.WebControls.DataGrid DataGrid2;
 		protected System.Web.UI.WebControls.Button btIndietro;
 	    protected WebControls.GridTitle GridTitle1;
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 

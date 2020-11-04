@@ -11,14 +11,15 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
+
 
 namespace TheSite.Gestione
 {	
 	/// <summary>
 	/// Descrizione di riepilogo per EditPmp
 	/// </summary>
-	public class EditPmp : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditPmp : System.Web.UI.Page
 	{
 		protected Csy.WebControls.MessagePanel PanelMess;
 		protected System.Web.UI.WebControls.Panel PanelEdit;
@@ -47,6 +48,7 @@ namespace TheSite.Gestione
 		protected System.Web.UI.WebControls.RangeValidator Rangevalidator1;
 		protected System.Web.UI.WebControls.RangeValidator RfvServ;
 		protected System.Web.UI.WebControls.DropDownList cmbsServ;
+		protected S_Controls.S_CheckBox ChekDismesso;
 		TheSite.Gestione.Pmp _fp;
 	
 	
@@ -115,6 +117,8 @@ namespace TheSite.Gestione
 						}														
 						if (_Dr["pmp_id"] != DBNull.Value)
 							this.txtspmp_id.Text = _Dr["pmp_id"].ToString();
+						if (_Dr["ac_id"] != DBNull.Value)
+							this.ChekDismesso.Checked =true;
 					
 						this.lblOperazione.Text = "Modifica Procedura di Manutenzione: " + _Dr["pmp_id"].ToString();
 						this.lblFirstAndLast.Visible = true;						
@@ -147,14 +151,14 @@ namespace TheSite.Gestione
 			}
 		}
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 
@@ -196,9 +200,6 @@ namespace TheSite.Gestione
 		private void InitializeComponent()
 		{	
 			this.cmbsServ.SelectedIndexChanged += new System.EventHandler(this.cmbsServ_SelectedIndexChanged);
-			this.cmbseq_std.SelectedIndexChanged += new System.EventHandler(this.cmbseq_std_SelectedIndexChanged);
-			this.cmbspmp.SelectedIndexChanged += new System.EventHandler(this.cmbspmp_SelectedIndexChanged);
-			
 			this.btnsSalva.Click += new System.EventHandler(this.btnsSalva_Click);
 			this.btnsElimina.Click += new System.EventHandler(this.btnsElimina_Click);
 			this.btnAnnulla.Click += new System.EventHandler(this.btnAnnulla_Click);
@@ -214,18 +215,81 @@ namespace TheSite.Gestione
 				
 				Classi.ClassiAnagrafiche.Pmp  _Pmp = new TheSite.Classi.ClassiAnagrafiche.Pmp();
 				
-				this.txtsdescrizione.DBDefaultValue = DBNull.Value;
-				this.txtsunitshour.DBDefaultValue = "0";
-				this.txtspmp_id.DBDefaultValue = DBNull.Value;
-				this.cmbseq_std.DBDefaultValue = "-1";
-				this.cmbspmp.DBDefaultValue = -1;
-				this.cmbstr .DBDefaultValue = "-1";
+				//				this.txtsdescrizione.DBDefaultValue = DBNull.Value;
+				//				this.txtsunitshour.DBDefaultValue = "0";
+				//				this.txtspmp_id.DBDefaultValue = DBNull.Value;
+				//				this.cmbseq_std.DBDefaultValue = "-1";
+				//				this.cmbspmp.DBDefaultValue = -1;
+				//				this.cmbstr .DBDefaultValue = "-1";
+			
+				S_Controls.Collections.S_Object s_p_descrizione = new S_Object();
+				s_p_descrizione.ParameterName = "p_descrizione";
+				s_p_descrizione.DbType = CustomDBType.VarChar;
+				s_p_descrizione.Direction = ParameterDirection.Input;			
+				s_p_descrizione.Index = 0;
+				s_p_descrizione.Value = txtsdescrizione.Text;
+				s_p_descrizione.Size=255;
+			
+				S_Controls.Collections.S_Object s_p_unitshour = new S_Object();
+				s_p_unitshour.ParameterName="p_unitshour";
+				s_p_unitshour.DbType=CustomDBType.Integer;
+				s_p_unitshour.Direction=ParameterDirection.Input;
+				s_p_unitshour.Index=1;
+				s_p_unitshour.Value=txtsunitshour.Text;
+
+				S_Controls.Collections.S_Object s_p_eq_std_id = new S_Object();
+				s_p_eq_std_id.ParameterName="p_eq_std_id";
+				s_p_eq_std_id.DbType=CustomDBType.Integer;
+				s_p_eq_std_id.Direction=ParameterDirection.Input;
+				s_p_eq_std_id.Index=2;
+				s_p_eq_std_id.Value=cmbseq_std.SelectedValue;
+			
+				S_Controls.Collections.S_Object s_p_pmp = new S_Object();
+				s_p_pmp.ParameterName="p_pmp";
+				s_p_pmp.DbType=CustomDBType.Integer;
+				s_p_pmp.Direction=ParameterDirection.Input;
+				s_p_pmp.Index=3;
+				s_p_pmp.Value=cmbspmp.SelectedValue;
+			
+				S_Controls.Collections.S_Object s_p_id_tr = new S_Object();
+				s_p_id_tr.ParameterName="p_id_tr";
+				s_p_id_tr.DbType=CustomDBType.Integer;
+				s_p_id_tr.Direction=ParameterDirection.Input;
+				s_p_id_tr.Index=4;
+				s_p_id_tr.Value=cmbstr.SelectedValue;
+			
+				S_Controls.Collections.S_Object s_p_pmp_id = new S_Object();
+				s_p_pmp_id.ParameterName = "p_pmp_id";
+				s_p_pmp_id.DbType = CustomDBType.VarChar;
+				s_p_pmp_id.Direction = ParameterDirection.Input;			
+				s_p_pmp_id.Index = 5;
+				s_p_pmp_id.Value = txtspmp_id.Text;
+				s_p_pmp_id.Size=16;
+
+				S_Controls.Collections.S_Object s_p_ac_id = new S_Object();
+				s_p_ac_id.ParameterName = "p_ac_id";
+				s_p_ac_id.DbType=CustomDBType.VarChar ;			
+				s_p_ac_id.Direction = ParameterDirection.Input;
+				s_p_ac_id.Index =6;
+				s_p_ac_id.Value =(ChekDismesso.Checked==true)?"1":"0";
 			
 				int i_RowsAffected = 0;
-
 				S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
-
-				_SCollection.AddItems(this.PanelEdit.Controls);
+				_SCollection.Add(s_p_descrizione);
+				_SCollection.Add(s_p_unitshour);
+				_SCollection.Add(s_p_eq_std_id);
+				_SCollection.Add(s_p_pmp);
+				_SCollection.Add(s_p_id_tr);
+				_SCollection.Add(s_p_pmp_id);
+				_SCollection.Add(s_p_ac_id);
+				
+				
+				
+				//				int i_RowsAffected = 0;
+				//
+				//				S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
+				//
+				//				_SCollection.AddItems(this.PanelEdit.Controls);
 			
 				i_RowsAffected = _Pmp.Delete(_SCollection, itemId);
 
@@ -241,22 +305,80 @@ namespace TheSite.Gestione
 
 		private void btnsSalva_Click(object sender, System.EventArgs e)
 		{	
-			this.txtsdescrizione.DBDefaultValue = DBNull.Value;
-			this.txtsunitshour.DBDefaultValue = "0";
-			this.txtspmp_id.DBDefaultValue = DBNull.Value;
-			this.cmbseq_std.DBDefaultValue = "-1";
-			this.cmbspmp.DBDefaultValue = "-1";
-			this.cmbstr .DBDefaultValue = "-1";
+			//			this.txtsdescrizione.DBDefaultValue = DBNull.Value;
+			//			this.txtsunitshour.DBDefaultValue = "0";
+			//			this.txtspmp_id.DBDefaultValue = DBNull.Value;
+			//			this.cmbseq_std.DBDefaultValue = "-1";
+			//			this.cmbspmp.DBDefaultValue = "-1";
+			//			this.cmbstr .DBDefaultValue = "-1";
+			//			this.ChekDismesso.DBDefaultValue=false;
+			//			this.txtsdescrizione.Text=this.txtsdescrizione.Text.Trim();
+			//			this.txtsunitshour.Text= this.txtsunitshour.Text.Trim();
+	
 			
-				
+			S_Controls.Collections.S_Object s_p_descrizione = new S_Object();
+			s_p_descrizione.ParameterName = "p_descrizione";
+			s_p_descrizione.DbType = CustomDBType.VarChar;
+			s_p_descrizione.Direction = ParameterDirection.Input;			
+			s_p_descrizione.Index = 0;
+			s_p_descrizione.Value = txtsdescrizione.Text;
+			s_p_descrizione.Size=255;
 			
-			this.txtsdescrizione.Text=this.txtsdescrizione.Text.Trim();
-			this.txtsunitshour.Text= this.txtsunitshour.Text.Trim();	
+			S_Controls.Collections.S_Object s_p_unitshour = new S_Object();
+			s_p_unitshour.ParameterName="p_unitshour";
+			s_p_unitshour.DbType=CustomDBType.Integer;
+			s_p_unitshour.Direction=ParameterDirection.Input;
+			s_p_unitshour.Index=1;
+			s_p_unitshour.Value=txtsunitshour.Text;
+
+			S_Controls.Collections.S_Object s_p_eq_std_id = new S_Object();
+			s_p_eq_std_id.ParameterName="p_eq_std_id";
+			s_p_eq_std_id.DbType=CustomDBType.Integer;
+			s_p_eq_std_id.Direction=ParameterDirection.Input;
+			s_p_eq_std_id.Index=2;
+			s_p_eq_std_id.Value=cmbseq_std.SelectedValue;
+			
+			S_Controls.Collections.S_Object s_p_pmp = new S_Object();
+			s_p_pmp.ParameterName="p_pmp";
+			s_p_pmp.DbType=CustomDBType.Integer;
+			s_p_pmp.Direction=ParameterDirection.Input;
+			s_p_pmp.Index=3;
+			s_p_pmp.Value=cmbspmp.SelectedValue;
+			
+			S_Controls.Collections.S_Object s_p_id_tr = new S_Object();
+			s_p_id_tr.ParameterName="p_id_tr";
+			s_p_id_tr.DbType=CustomDBType.Integer;
+			s_p_id_tr.Direction=ParameterDirection.Input;
+			s_p_id_tr.Index=4;
+			s_p_id_tr.Value=cmbstr.SelectedValue;
+			
+			S_Controls.Collections.S_Object s_p_pmp_id = new S_Object();
+			s_p_pmp_id.ParameterName = "p_pmp_id";
+			s_p_pmp_id.DbType = CustomDBType.VarChar;
+			s_p_pmp_id.Direction = ParameterDirection.Input;			
+			s_p_pmp_id.Index = 5;
+			s_p_pmp_id.Value = txtspmp_id.Text;
+			s_p_pmp_id.Size=16;
+
+			S_Controls.Collections.S_Object s_p_ac_id = new S_Object();
+			s_p_ac_id.ParameterName = "p_ac_id";
+			s_p_ac_id.DbType=CustomDBType.VarChar ;			
+			s_p_ac_id.Direction = ParameterDirection.Input;
+			s_p_ac_id.Index =6;
+			s_p_ac_id.Value =(ChekDismesso.Checked==true)?"1":"0";
 			
 			int i_RowsAffected = 0;
 			S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
-			_SCollection.AddItems(this.PanelEdit.Controls);
-	
+			_SCollection.Add(s_p_descrizione);
+			_SCollection.Add(s_p_unitshour);
+			_SCollection.Add(s_p_eq_std_id);
+			_SCollection.Add(s_p_pmp);
+			_SCollection.Add(s_p_id_tr);
+			_SCollection.Add(s_p_pmp_id);
+			_SCollection.Add(s_p_ac_id);
+
+			//_SCollection.AddItems(this.PanelEdit.Controls);
+			
 			try
 			{
 				if (itemId == 0)
@@ -351,7 +473,7 @@ namespace TheSite.Gestione
 			}
 		}
 			
-	    private void BindServizio()
+		private void BindServizio()
 		{
 			
 			this.cmbsServ .Items.Clear();
@@ -367,8 +489,8 @@ namespace TheSite.Gestione
 				this.cmbsServ.DataTextField = "serv";
 				this.cmbsServ.DataValueField = "id";
 				this.cmbsServ.DataBind();
-//				BindEqstd();
-//				BindSpecServizi();
+				//				BindEqstd();
+				//				BindSpecServizi();
 
 			}			
 		}
@@ -406,24 +528,24 @@ namespace TheSite.Gestione
 			}
 		}
 
-//		private void BindTr()
-//		{
-//			
-//			this.cmbstr.Items.Clear();
-//		
-//			Classi.ClassiAnagrafiche.Addetti _Addetti = new TheSite.Classi.ClassiAnagrafiche.Addetti();
-//				
-//			DataSet _MyDs = _Addetti.GetDataTR().Copy();
-//			  
-//			if (_MyDs.Tables[0].Rows.Count > 0)
-//			{				
-//				this.cmbstr.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
-//					_MyDs.Tables[0], "descrizione","id", "- Selezionare una Specializzazione -", "0");
-//				this.cmbstr.DataTextField = "descrizione";
-//				this.cmbstr.DataValueField = "id";
-//				this.cmbstr.DataBind();
-//			}			
-//		}
+		//		private void BindTr()
+		//		{
+		//			
+		//			this.cmbstr.Items.Clear();
+		//		
+		//			Classi.ClassiAnagrafiche.Addetti _Addetti = new TheSite.Classi.ClassiAnagrafiche.Addetti();
+		//				
+		//			DataSet _MyDs = _Addetti.GetDataTR().Copy();
+		//			  
+		//			if (_MyDs.Tables[0].Rows.Count > 0)
+		//			{				
+		//				this.cmbstr.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+		//					_MyDs.Tables[0], "descrizione","id", "- Selezionare una Specializzazione -", "0");
+		//				this.cmbstr.DataTextField = "descrizione";
+		//				this.cmbstr.DataValueField = "id";
+		//				this.cmbstr.DataBind();
+		//			}			
+		//		}
 
 		private void BindPmPFrequenza()
 		{
@@ -461,9 +583,9 @@ namespace TheSite.Gestione
 			}		
 			
 			if (cmbseq_std.SelectedValue!="0")
-			txtspmp_id.Text=generacodice(Int32.Parse(cmbseq_std.SelectedValue),Int32.Parse(cmbspmp.SelectedValue));
-//			s_Pmp_id = cmbseq_std.SelectedItem.Text.Substring(0,8) + "_" + cmbspmp.SelectedItem.Text.Split(Convert.ToChar("-"))[0];
-//			txtspmp_id.Text=s_Pmp_id;
+				txtspmp_id.Text=generacodice(Int32.Parse(cmbseq_std.SelectedValue),Int32.Parse(cmbspmp.SelectedValue));
+			//			s_Pmp_id = cmbseq_std.SelectedItem.Text.Substring(0,8) + "_" + cmbspmp.SelectedItem.Text.Split(Convert.ToChar("-"))[0];
+			//			txtspmp_id.Text=s_Pmp_id;
 		}
 
 		private void cmbspmp_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -471,18 +593,18 @@ namespace TheSite.Gestione
 			
 			txtspmp_id.Text=generacodice(Int32.Parse(cmbseq_std.SelectedValue),Int32.Parse(cmbspmp.SelectedValue));
 			//s_Pmp_id1 = cmbseq_std.SelectedItem.Text.Substring(0,8)+ "_" + cmbspmp.SelectedItem.Text.Split(Convert.ToChar("-"))[0];
-//			txtspmp_id.Text=s_Pmp_id1;		
+			//			txtspmp_id.Text=s_Pmp_id1;		
 		}
 
 		private void cmbsServ_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
-				BindEqstd(int.Parse(cmbsServ.SelectedValue));
-				BindSpecStd(int.Parse(cmbsServ.SelectedValue));
+			BindEqstd(int.Parse(cmbsServ.SelectedValue));
+			BindSpecStd(int.Parse(cmbsServ.SelectedValue));
 		}
 
 		private string generacodice(int id_eqstd, int id_freq)
 		{
-		S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
+			S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
 			
 			S_Controls.Collections.S_Object s_p_id_eqstd = new S_Object();
 			s_p_id_eqstd.ParameterName = "p_id_eqstd";
@@ -507,6 +629,8 @@ namespace TheSite.Gestione
 			return _Pmp.GetCodicepmp(_SCollection);
 		
 		}
+
+	
 
 	
 	}

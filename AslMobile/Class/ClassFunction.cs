@@ -5,12 +5,12 @@ using System.Web.UI.WebControls;
 
 namespace TheSite.AslMobile.Class
 {
-	//public enum TipoManutenzioneType
-	//{
-	//	ManutenzionesuRichiesta=1,
-	//	ManutenzioneProgrammata=2,
-	//	ManutenzioneStraordinaria=3
-	//}
+	public enum TipoManutenzioneType
+	{
+		ManutenzionesuRichiesta=1,
+		ManutenzioneProgrammata=2,
+		ManutenzioneStraordinaria=3
+	}
 	public enum StateType
 	{
 		RichiestaInAttesaDiEmissione=1,
@@ -28,7 +28,7 @@ namespace TheSite.AslMobile.Class
 		EmessaMaSospesaPerInterventoSpecialistico=13,
 		EmessaMaSospesaDalCommittente=14,
 		RichiestaSospesa=15,
-		//Archiviata=16
+		Archiviata=16
 	}
 
 	/// <summary>

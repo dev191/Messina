@@ -9,16 +9,17 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
+using MyCollection;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per RepAddetti.
 	/// </summary>
-	public class RepAddetti : System.Web.UI.Page    // System.Web.UI.Page
+	public class RepAddetti : System.Web.UI.Page
 	{	
 		protected Csy.WebControls.DataPanel PanelRicerca;		
 		protected S_Controls.S_Button btnsRicerca;		
@@ -32,12 +33,12 @@ namespace TheSite.Gestione
 		protected S_Controls.S_TextBox txtsditta;
 		protected S_Controls.S_ComboBox cmbsGiorno;
 		protected S_Controls.S_Button BtnReset;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 	
 		private void Page_Load(object sender, System.EventArgs e)
 		{
 			Classi.SiteModule _SiteModule = (Classi.SiteModule) HttpContext.Current.Items["SiteModule"];
-			this.GridTitle1.hplsNuovo.NavigateUrl = "../Gestione/EditRepAddetti.aspx?ItemID=0&FunId=" + _SiteModule.ModuleId;
+			this.GridTitle1.hplsNuovo.NavigateUrl = "../Gestione/EditRepAddetti1.aspx?ItemID=0&FunId=" + _SiteModule.ModuleId;
 			this.GridTitle1.hplsNuovo.Visible = _SiteModule.IsEditable;
 			this.DataGridRicerca.Columns[1].Visible = _SiteModule.IsEditable;				
 			if (!Page.IsPostBack)
@@ -61,7 +62,7 @@ namespace TheSite.Gestione
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;
 		}
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{

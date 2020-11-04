@@ -19,13 +19,15 @@ using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using TheSite.SchemiXSD;
 using TheSite.Classi.ManCorrettiva;
+using System.IO;
+using System.Configuration;
 
 namespace TheSite.ManutenzioneCorrettiva
 {
 	/// <summary>
 	/// Descrizione di riepilogo per RapportoTecnicoInterventoPdf.
 	/// </summary>
-	public class RapportoTecnicoInterventoPdf : System.Web.UI.Page    // System.Web.UI.Page
+	public class RapportoTecnicoInterventoPdf : System.Web.UI.Page
 	{
 		private string pathRptSource;
 		private ReportDocument crReportDocument;
@@ -46,8 +48,8 @@ namespace TheSite.ManutenzioneCorrettiva
 		/// </summary>
 		private void IpostaRpt()
 		{
-			try
-			{
+//			try
+//			{
 				Classi.ManOrdinaria.RichiestaIntervento  _RichiestaIntervento= new Classi.ManOrdinaria.RichiestaIntervento(Context.User.Identity.Name);
 				DataSet Ds=_RichiestaIntervento.GetSingleData(int.Parse(Request.QueryString["wo_id"]));
 				
@@ -73,11 +75,11 @@ namespace TheSite.ManutenzioneCorrettiva
 				Ds.Tables.Add(Dt2);
 				int rg = Dt2.Rows.Count;
 				Execute(Ds);
-			}
-			catch(Exception ex)
-			{
-				Response.Redirect("../ErrorPage.aspx?msgErr="+ex.Message + " *FEDERICO: Durante ilrecupero del dataset dal datalayer");
-			}
+//			}
+//			catch(Exception ex)
+//			{
+//				//Response.Redirect("../ErrorPage.aspx?msgErr="+ex.Message + " *FEDERICO: Durante ilrecupero del dataset dal datalayer");
+//			}
 		}
 	
 		/// <summary>
@@ -86,8 +88,8 @@ namespace TheSite.ManutenzioneCorrettiva
 		/// </summary>
 		private void Execute(DataSet _dsRpt)
 		{
-			try
-			{
+//			try
+//			{
 				bool ciSonoCosti = false;
 				dsRapportino dsP = new  dsRapportino();
 				int i = 0;
@@ -98,6 +100,23 @@ namespace TheSite.ManutenzioneCorrettiva
 				if(i==0)
 				{
 					throw new Exception("* DATI PER IL DOCUMENTO NON PRESENTI");
+				}
+
+				//Immagine logo
+				string Logo= String.Empty;
+				foreach(DataRow dr in dsP.Tables["rapportoTecnicoIntervento"].Rows)
+				{
+					if(Convert.ToInt32(dr["ID_PROGETTO"]) == 1)
+					{
+						 Logo =Server.MapPath("../" + System.Configuration.ConfigurationSettings.AppSettings["LogoME"]);
+						dr["IMMAGINE_LOGO"] = GetPhoto(Logo);
+					}
+					else 
+					{
+						Logo = Server.MapPath("../" +System.Configuration.ConfigurationSettings.AppSettings["LogoPapardo"]);
+						dr["IMMAGINE_LOGO"] = DBNull.Value;//GetPhoto(Logo);
+					}
+				
 				}
 
 				i = 0;
@@ -171,17 +190,33 @@ namespace TheSite.ManutenzioneCorrettiva
 					dsP.Tables["TOTALI"].Rows.Add(o_Dr);
 
 				}
+//				//LOGO
+//				DataRow drLogo = dsP.Tables["TblLogo"].NewRow() ;
+//				drLogo["Immagine"] = GetPhoto(Server.MapPath("../Report/" + @"Images/cofatheclogo.jpg"));
+//				drLogo["ID_PROGETTO"]=1;
+//				dsP.Tables["TblLogo"].ImportRow(drLogo);
 
 				pathRptSource=Server.MapPath("../Report/RptTecnicoIntervento2.rpt");
 				crReportDocument.Load(pathRptSource);
 				crReportDocument.SetDataSource(dsP);
-				string Fname = pathRptSource  + Session.SessionID.ToString() + ".pdf" ;
-				crDiskFileDestinationOptions = new DiskFileDestinationOptions();
-				crDiskFileDestinationOptions.DiskFileName = Fname;
-				crExportOptions = crReportDocument.ExportOptions;
-				crExportOptions.DestinationOptions = crDiskFileDestinationOptions;
-				crExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
-				crExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+				string Fname = Server.MapPath("../Report/" +  Session.SessionID.ToString() + ".pdf");//pathRptSource  + Session.SessionID.ToString() + ".pdf" ;
+//				crDiskFileDestinationOptions = new DiskFileDestinationOptions();
+//				crDiskFileDestinationOptions.DiskFileName = Fname;
+//				crExportOptions = crReportDocument.ExportOptions;
+//				crExportOptions.DestinationOptions = crDiskFileDestinationOptions;
+//				crExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+//				crExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+
+				ExportOptions optExp;
+				DiskFileDestinationOptions optDsk  = new DiskFileDestinationOptions();
+				PdfRtfWordFormatOptions optPdfRtf = new PdfRtfWordFormatOptions();
+				optExp = crReportDocument.ExportOptions;
+				optExp.ExportFormatType = ExportFormatType.PortableDocFormat;
+				optExp.FormatOptions = optPdfRtf;
+				optExp.ExportDestinationType = ExportDestinationType.DiskFile;
+				optDsk.DiskFileName = Fname;
+				optExp.DestinationOptions = optDsk;
+
 				crReportDocument.Export();
 				Response.ClearContent();
 				Response.ClearHeaders();
@@ -190,11 +225,33 @@ namespace TheSite.ManutenzioneCorrettiva
 				Response.Flush();
 				Response.Close();
 				System.IO.File.Delete(Fname);
+
 				//CrystalReportViewer1.ReportSource=Server.MapPath("../Report/RptTecnicoIntervento.rpt");
-			}
-			catch(Exception ex)
+//			}
+//			catch(Exception ex)
+//			{
+//				Server.Transfer("../ErrorPage.aspx?msgErr="+ex.Message + " *FEDERICO: Errore nel riempimento del DataSet");
+//			}
+		}
+		private  byte[] GetPhoto(string fileName)
+		{
+			//string filePath = Server.MapPath(Request.ApplicationPath + ConfigurationSettings.AppSettings["ImmaginiEq"] + fileName );
+			string filePath = fileName;
+			if(File.Exists(filePath))//filePath))
 			{
-				Server.Transfer("../ErrorPage.aspx?msgErr="+ex.Message + " *FEDERICO: Errore nel riempimento del DataSet");
+				
+				
+
+				FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+				BinaryReader br = new BinaryReader(fs);
+				byte[] photo = br.ReadBytes((int)br.BaseStream.Length);
+				br.Close();
+				fs.Close();
+				return photo;
+			}
+			else
+			{
+				return null;
 			}
 		}
 

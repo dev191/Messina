@@ -14,14 +14,13 @@ using ApplicationDataLayer.Collections;
 using S_Controls.Collections;
 using System.Reflection;  
 using System.IO;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per DescrizioneDoc_Dwf.
 	/// </summary>
-	public class DescrizioneDoc_Dwf : System.Web.UI.Page    // System.Web.UI.Page
+	public class DescrizioneDoc_Dwf : System.Web.UI.Page
 	{
 		protected S_Controls.S_Label S_Lblcodedificio;
 		protected S_Controls.S_ComboBox cmbsCategoriaGenerale;
@@ -41,7 +40,6 @@ namespace TheSite.Gestione
 		protected WebControls.CalendarPicker CalendarPicker1VVF;
         protected WebControls.CalendarPicker CalendarPicker2VVF;
 		protected WebControls.CalendarPicker CalendarPicker3VVF;
-
 		protected S_Controls.S_Label S_Lblerror;
 		protected System.Web.UI.HtmlControls.HtmlInputFile Uploader;
 		protected System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
@@ -51,8 +49,6 @@ namespace TheSite.Gestione
 		protected System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
 		protected System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
 		protected WebControls.CalendarPicker CalendarPicker4ISPESL;
-		protected WebControls.CalendarPicker CalendarPicker5ISPESL;
-		protected WebControls.CalendarPicker CalendarPicker6ISPESL;
 		protected S_Controls.S_Label S_LblFileName;
 		protected S_Controls.S_Label lblFirstAndLast;
 		protected S_Controls.S_CheckBox CheckRinomina;
@@ -63,20 +59,17 @@ namespace TheSite.Gestione
 		protected S_Controls.S_TextBox txtsdescrizione;
 		protected S_Controls.S_ComboBox  cmbsServizio;
 		protected S_Controls.S_ComboBox cmbsPiano;
-		protected S_Controls.S_TextBox s_txtDescPrimaVer;
-		protected S_Controls.S_TextBox s_txtDescSuccVer;
-		protected S_Controls.S_TextBox s_txtDescScadenza;
 		public static string HelpLink = string.Empty;
 
 		#region proprieta collection
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 		#endregion
@@ -279,21 +272,6 @@ namespace TheSite.Gestione
 				
 				if(Dr["pagine_documento"]!=DBNull.Value) 
 					this.MAX=Dr["pagine_documento"].ToString();
-				
-				if(Dr["DESCRIZIONE_PRIMA_VERIFICA"]!=DBNull.Value)
-					s_txtDescPrimaVer.Text=Dr["DESCRIZIONE_PRIMA_VERIFICA"].ToString();
-
-				if(Dr["DATA_SUCCESSIVA_VERIFICA"]!=DBNull.Value)
-					CalendarPicker5ISPESL.Datazione.Text=System.DateTime.Parse(Dr["DATA_SUCCESSIVA_VERIFICA"].ToString()).ToShortDateString(); 
-
-				if(Dr["DESCRIZIONE_SUCC_VERIFICA"]!=DBNull.Value)
-					s_txtDescSuccVer.Text=Dr["DESCRIZIONE_SUCC_VERIFICA"].ToString();
-
-				if(Dr["DATA_SCADENZA"]!=DBNull.Value)
-					CalendarPicker6ISPESL.Datazione.Text=System.DateTime.Parse(Dr["DATA_SCADENZA"].ToString()).ToShortDateString(); 
-
-				if(Dr["DESCRIZIONE_DATA_SCADENZA"]!=DBNull.Value)
-					s_txtDescScadenza.Text=Dr["DESCRIZIONE_DATA_SCADENZA"].ToString();
                 
 				lblFirstAndLast.Text = _AnagrafeDocDWF.GetFirstAndLastUser(Dr);
 				
@@ -829,60 +807,6 @@ namespace TheSite.Gestione
 			s_p_dimensionefile.Value =this.Dimension;  
 			_SColl.Add(s_p_dimensionefile);
 			
-			//Marianna 22/08/2005 modifiche ISPEL//
-
-			//Descrizione prima verifica
-			S_Controls.Collections.S_Object s_p_descrizione_prima_verifica = new S_Object();
-			s_p_descrizione_prima_verifica.ParameterName = "p_descrizione_prima_verifica";
-			s_p_descrizione_prima_verifica.DbType = CustomDBType.VarChar;
-			s_p_descrizione_prima_verifica.Direction = ParameterDirection.Input;
-			s_p_descrizione_prima_verifica.Index =21;
-			s_p_descrizione_prima_verifica.Size =255;
-			s_p_descrizione_prima_verifica.Value = s_txtDescPrimaVer.Text;
-			_SColl.Add(s_p_descrizione_prima_verifica);
-
-			//Data successiva verifica
-			S_Controls.Collections.S_Object s_p_data_successiva_verifica = new S_Object();
-			s_p_data_successiva_verifica.ParameterName = "p_data_successiva_verifica";
-			s_p_data_successiva_verifica.DbType = CustomDBType.VarChar;
-			s_p_data_successiva_verifica.Direction = ParameterDirection.Input;
-			s_p_data_successiva_verifica.Index =22;
-			s_p_data_successiva_verifica.Size =50;
-			s_p_data_successiva_verifica.Value = CalendarPicker5ISPESL.Datazione.Text;
-			_SColl.Add(s_p_data_successiva_verifica);
-
-			//Descrizione successiva verifica
-			S_Controls.Collections.S_Object s_p_descrizione_succ_verifica = new S_Object();
-			s_p_descrizione_succ_verifica.ParameterName = "p_descrizione_succ_verifica";
-			s_p_descrizione_succ_verifica.DbType = CustomDBType.VarChar;
-			s_p_descrizione_succ_verifica.Direction = ParameterDirection.Input;
-			s_p_descrizione_succ_verifica.Index =23;
-			s_p_descrizione_succ_verifica.Size =255;
-			s_p_descrizione_succ_verifica.Value = s_txtDescSuccVer.Text;
-			_SColl.Add(s_p_descrizione_succ_verifica);
-
-			//Data scadenza
-			S_Controls.Collections.S_Object s_p_data_scadenza= new S_Object();
-			s_p_data_scadenza.ParameterName = "p_data_scadenza";
-			s_p_data_scadenza.DbType = CustomDBType.VarChar;
-			s_p_data_scadenza.Direction = ParameterDirection.Input;
-			s_p_data_scadenza.Index =24;
-			s_p_data_scadenza.Size =50;
-			s_p_data_scadenza.Value = CalendarPicker6ISPESL.Datazione.Text;
-			_SColl.Add(s_p_data_scadenza);
-
-			//Descrizione Data scadenza
-			S_Controls.Collections.S_Object s_p_descrizione_data_scadenza= new S_Object();
-			s_p_descrizione_data_scadenza.ParameterName = "p_descrizione_data_scadenza";
-			s_p_descrizione_data_scadenza.DbType = CustomDBType.VarChar;
-			s_p_descrizione_data_scadenza.Direction = ParameterDirection.Input;
-			s_p_descrizione_data_scadenza.Index =26;
-			s_p_descrizione_data_scadenza.Size =255;
-			s_p_descrizione_data_scadenza.Value = s_txtDescScadenza.Text;
-			_SColl.Add(s_p_descrizione_data_scadenza);
-
-			//fine//
-
 			try
 			{
 				

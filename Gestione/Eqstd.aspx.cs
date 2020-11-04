@@ -9,14 +9,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Eqstd
 	/// </summary>
-	public class Eqstd : System.Web.UI.Page    // System.Web.UI.Page
+	public class Eqstd : System.Web.UI.Page
 	{	
 		protected Csy.WebControls.DataPanel PanelRicerca;		
 		protected S_Controls.S_Button btnsRicerca;		
@@ -31,7 +31,7 @@ namespace TheSite.Gestione
 		protected S_Controls.S_TextBox txtsdescrizione;
 		protected S_Controls.S_ComboBox cmbservizio;
 		protected S_Controls.S_Button BtnReset;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		private void Ricerca()
 		{
 			Classi.ClassiAnagrafiche.Eqstd _Eqstd= new Classi.ClassiAnagrafiche.Eqstd();
@@ -130,7 +130,7 @@ namespace TheSite.Gestione
 		}
 		#endregion
 	
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{

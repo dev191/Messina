@@ -17,7 +17,7 @@ namespace TheSite.ManutenzioneCorretiva
 	/// <summary>
 	/// Descrizione di riepilogo per RapportoRichiestaRdl.
 	/// </summary>
-	public class RapportoRichiestaRdl : System.Web.UI.Page    // System.Web.UI.Page
+	public class RapportoRichiestaRdl : System.Web.UI.Page
 	{
 		protected WebControls.PageTitle PageTitle1;
 		protected S_Controls.S_Label lblRdl;
@@ -121,7 +121,7 @@ namespace TheSite.ManutenzioneCorretiva
 		{
 			if(ViewState["FunId"]!=null)
 			 this.FunId =Convert.ToInt32(ViewState ["FunId"]);
-			Response.Redirect("CreazioneRdl.aspx?FunId=" + FunId.ToString());
+			Response.Redirect("CreazioneSGA.aspx?FunId=" + FunId.ToString());
 		}
 	}
 }

@@ -10,15 +10,15 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Reflection;
-using StampaRapportiPdf.Classi;
-
+ 
 namespace TheSite.ManutenzioneProgrammata
 {
 	/// <summary>
 	/// Descrizione di riepilogo per CompletamentoMP.
 	/// </summary>
-	public class CompletamentoMP : System.Web.UI.Page    // System.Web.UI.Page
+	public class CompletamentoMP : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsRichiesta;
 		protected S_Controls.S_ComboBox cmbsServizio;
@@ -44,27 +44,26 @@ namespace TheSite.ManutenzioneProgrammata
 		protected S_Controls.S_ComboBox cmbsAddettoMod;		
 		public static string HelpLink = string.Empty;
 
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		protected S_Controls.S_Button btnSChiudi;
-		protected System.Web.UI.WebControls.Button cmdReset;
-		protected System.Web.UI.WebControls.Button Button1;		
+		protected System.Web.UI.WebControls.Button cmdReset;		
 		Completamento_MP_WRList _fp;
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				return _myColl;
 			}
 		}
-		public clMyCollection _ContenitoreSfoglia
+		public MyCollection.clMyCollection _ContenitoreSfoglia
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 
@@ -482,7 +481,6 @@ namespace TheSite.ManutenzioneProgrammata
 			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
 			this.DataGridRicerca.DataBind();			
 			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();
-			
 			if (_MyDs.Tables[0].Rows.Count>0)
 			{
 				DatapanelCompleta.Visible=true;
@@ -494,7 +492,7 @@ namespace TheSite.ManutenzioneProgrammata
 			else
 				DatapanelCompleta.Visible=false;
 		}
-
+ 
 		private void Ricerca(int wo_id)
 		{	
 			//PanelRicerca.Collapsed=true;
@@ -519,7 +517,7 @@ namespace TheSite.ManutenzioneProgrammata
 				//Imposta la Ditta
 				if(_DR["idditta"]!=null)
 					cmbsDitta.SelectedValue = _DR["idditta"].ToString();				
-				BindAddettiDitta("",Int32.Parse(cmbsDitta.SelectedValue));
+				BindAddettiDitta(RicercaModulo1.BlId,Int32.Parse(cmbsDitta.SelectedValue));
 				//Imposto il Codice Edificio
 				RicercaModulo1.TxtCodice.Text=_DR["Edificio"].ToString();
 				RicercaModulo1.Ricarica();
@@ -585,7 +583,6 @@ namespace TheSite.ManutenzioneProgrammata
 			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
 			this.btnsCompletaOdl.Click += new System.EventHandler(this.btnsCompletaOdl_Click);
 			this.btnsModificaODL.Click += new System.EventHandler(this.btnsModificaODL_Click);
-			this.Button1.Click += new System.EventHandler(this.Button1_Click);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}
@@ -600,7 +597,7 @@ namespace TheSite.ManutenzioneProgrammata
 		{
 			Session.Remove("CheckedListMP");
 			DataGridRicerca.CurrentPageIndex=0;			
-			BindAddettiDitta("",Int32.Parse(cmbsDitta.SelectedValue));
+			BindAddettiDitta(RicercaModulo1.BlId,Int32.Parse(cmbsDitta.SelectedValue));
 			Ricerca();
 		}
 
@@ -623,7 +620,7 @@ namespace TheSite.ManutenzioneProgrammata
 				}
 				//Visualizzo il tooltip delle WR legate alla WO
 				Classi.Function _Fun = new TheSite.Classi.Function();
-				int wo_id = Int32.Parse(e.Item.Cells[0].Text);
+				int wo_id = Int16.Parse(e.Item.Cells[0].Text);
 				DataSet _MyDsWr = _Fun.GetWRfromWO(wo_id);
 				int tot_record = _MyDsWr.Tables[0].Rows.Count;
 				if (tot_record>0)
@@ -734,11 +731,6 @@ namespace TheSite.ManutenzioneProgrammata
 		private void cmdReset_Click(object sender, System.EventArgs e)
 		{
 			Response.Redirect("CompletamentoMP.aspx?FunID=" + ViewState["FunId"]);
-		}
-
-		private void Button1_Click(object sender, System.EventArgs e)
-		{
-			Server.Transfer("SfogliaOdlRdl.aspx?FunID="+FunId); 
 		}
 
 	}

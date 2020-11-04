@@ -1,13 +1,13 @@
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="RicercaRDL" Src="../WebControls/RicercaRDL.ascx" %>
-<%@ Page language="c#" Codebehind="SfogliaFatture.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Contabilita.SfogliaFatture" %>
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Page language="c#" Codebehind="SfogliaFatture.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Contabilita.SfogliaFatture" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaRDL" Src="../WebControls/RicercaRDL.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
-  <HEAD>
+	<HEAD>
 		<title>Servizi</title>
 		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
 		<meta content="C#" name="CODE_LANGUAGE">
@@ -172,7 +172,7 @@
 					document.Form1.cmbDaMese.Enabled = true;
 			}
 		</script>
-</HEAD>
+	</HEAD>
 	<body MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; POSITION: absolute; TOP: 0px" cellSpacing="0"
@@ -298,56 +298,76 @@
 												</tr>
 											</table></TD>
 					</TD>
-				</TR></COLLAPSE:DATAPANEL></TD></TR>
-			<TR>
-				<TD style="HEIGHT: 3%" align="center"></TD>
+				</TR>
+				</COLLAPSE:DATAPANEL></TD></TR>
+				<TR>
+					<TD style="HEIGHT: 3%" align="center"></TD>
 				<TR>
 					<TD style="HEIGHT: 95%" vAlign="top" align="center">
-					<uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" AllowPaging="True" AutoGenerateColumns="False"
-						GridLines="Vertical" BorderWidth="1px" BorderColor="Gray">
-						<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
-						<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
-						<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
-						<Columns>
-							<asp:BoundColumn Visible="False" DataField="FATTURA_ID" HeaderText="ID"></asp:BoundColumn>
-							<asp:TemplateColumn>
-								<HeaderStyle Width="3%"></HeaderStyle>
-								<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
-								<ItemTemplate>
-									<asp:ImageButton id=Imagebutton3 CommandArgument='<%# "InserimentoFattura.aspx?ItemID=" + DataBinder.Eval(Container.DataItem,"FATTURA_ID") + "&amp;FunId=" + FunId + "&amp;TipoOper=read"%>' ImageUrl="~/images/Search16x16_bianca.jpg" CommandName="Dettaglio" Runat="server">
-									</asp:ImageButton>
-								</ItemTemplate>
-							</asp:TemplateColumn>
-							<asp:TemplateColumn>
-								<HeaderStyle Width="3%"></HeaderStyle>
-								<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
-								<ItemTemplate>
-									<asp:ImageButton id=Imagebutton2 CommandArgument='<%# "InserimentoFattura.aspx?ItemID=" + DataBinder.Eval(Container.DataItem,"FATTURA_ID") + "&amp;FunId=" + FunId + "&amp;TipoOper=write"%>' ImageUrl="~/images/edit.gif" CommandName="Dettaglio" Runat="server">
-									</asp:ImageButton>
-								</ItemTemplate>
-							</asp:TemplateColumn>
-							<asp:BoundColumn DataField="DATA_FATTURA" HeaderText="Data Fattura" DataFormatString="{0:d}">
-								<HeaderStyle Width="25%"></HeaderStyle>
-							</asp:BoundColumn>
-							<asp:BoundColumn DataField="NUMERO_FATTURA" HeaderText="Numero Fattura">
-								<HeaderStyle Width="22%"></HeaderStyle>
-							</asp:BoundColumn>
-							<asp:BoundColumn DataField="DATA_SCADENZA_PAGAMENTO" HeaderText="Scadenza Pagamento" DataFormatString="{0:d}">
-								<HeaderStyle Width="20%"></HeaderStyle>
-							</asp:BoundColumn>
-							<asp:BoundColumn DataField="descrizione" HeaderText="Tipo Servizio"></asp:BoundColumn>
-							<asp:BoundColumn DataField="periodo_inizio_fattura" HeaderText="Periodo Fattura"></asp:BoundColumn>
-							<asp:BoundColumn Visible="False" DataField="periodo_fine_fattura" HeaderText="fine periodo"></asp:BoundColumn>
-							<asp:BoundColumn HeaderText="RdL Fatturate"></asp:BoundColumn>
-							<asp:BoundColumn DataField="IMPONIBILE" HeaderText="Imponibile" DataFormatString="{0:F2}"></asp:BoundColumn>
-							<asp:BoundColumn DataField="DESCRIZIONE_FATTURA" HeaderText="Descrizione"></asp:BoundColumn>
-							<asp:BoundColumn DataField="DATA_APPROVAZIONE" HeaderText="Data Approvazione" DataFormatString="{0:d}"></asp:BoundColumn>
-							<asp:BoundColumn DataField="DATA_PAGAMENTO" HeaderText="Data Pagamento" DataFormatString="{0:d}"></asp:BoundColumn>
-							<asp:BoundColumn Visible="False" DataField="tipomanutenzione_id" HeaderText="IDSERVIZIO"></asp:BoundColumn>
-						</Columns>
-						<PagerStyle Mode="NumericPages"></PagerStyle>
-					</asp:datagrid></TD>
-					
-			</TR></TABLE></TD></TR></TBODY></TABLE></form>
+						<uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" AllowPaging="True" AutoGenerateColumns="False"
+							GridLines="Vertical" BorderWidth="1px" BorderColor="Gray">
+							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
+							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
+							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
+							<Columns>
+								<asp:BoundColumn Visible="False" DataField="FATTURA_ID" HeaderText="ID"></asp:BoundColumn>
+								<asp:TemplateColumn>
+									<HeaderStyle Width="3%"></HeaderStyle>
+									<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
+									<ItemTemplate>
+										<asp:ImageButton id=Imagebutton3 CommandArgument='<%# "InserimentoFattura.aspx?ItemID=" + DataBinder.Eval(Container.DataItem,"FATTURA_ID") + "&amp;FunId=" + FunId + "&amp;TipoOper=read"%>' ImageUrl="~/images/Search16x16_bianca.jpg" CommandName="Dettaglio" Runat="server">
+										</asp:ImageButton>
+									</ItemTemplate>
+								</asp:TemplateColumn>
+								<asp:TemplateColumn>
+									<HeaderStyle Width="3%"></HeaderStyle>
+									<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
+									<ItemTemplate>
+										<asp:ImageButton id=Imagebutton2 CommandArgument='<%# "InserimentoFattura.aspx?ItemID=" + DataBinder.Eval(Container.DataItem,"FATTURA_ID") + "&amp;FunId=" + FunId + "&amp;TipoOper=write"%>' ImageUrl="~/images/edit.gif" CommandName="Dettaglio" Runat="server">
+										</asp:ImageButton>
+									</ItemTemplate>
+								</asp:TemplateColumn>
+								<asp:BoundColumn DataField="DATA_FATTURA" HeaderText="Data Fattura" DataFormatString="{0:d}">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="NUMERO_FATTURA" HeaderText="Numero Fattura">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="DATA_SCADENZA_PAGAMENTO" HeaderText="Scad. Pag." DataFormatString="{0:d}">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="descrizione" HeaderText="Servizio">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="periodo_inizio_fattura" HeaderText="Periodo">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn Visible="False" DataField="periodo_fine_fattura" HeaderText="fine periodo">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn HeaderText="RdL Fatturate">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="IMPONIBILE" HeaderText="Imponibile €" DataFormatString="{0:##,###.00}">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="DESCRIZIONE_FATTURA" HeaderText="Descrizione">
+									<HeaderStyle Width="20%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="DATA_APPROVAZIONE" HeaderText="Data App" DataFormatString="{0:d}">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="DATA_PAGAMENTO" HeaderText="Data Pag" DataFormatString="{0:d}">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn Visible="False" DataField="tipomanutenzione_id" HeaderText="IDSERVIZIO">
+									<HeaderStyle Width="15%"></HeaderStyle>
+								</asp:BoundColumn>
+							</Columns>
+							<PagerStyle Mode="NumericPages"></PagerStyle>
+						</asp:datagrid></TD>
+				</TR>
+			</TABLE>
+			</TD></TR></TBODY></TABLE></form>
 	</body>
 </HTML>

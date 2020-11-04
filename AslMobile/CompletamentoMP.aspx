@@ -1,6 +1,6 @@
-<%@ Page language="c#" Codebehind="CompletamentoMP.aspx.cs" Inherits="TheSite.AslMobile.CompletamentoMP" AutoEventWireup="false" %>
-<%@ Register TagPrefix="uc1" TagName="Completamento" Src="./CompletamentoUserControl.ascx" %>
 <%@ Register TagPrefix="mobile" Namespace="System.Web.UI.MobileControls" Assembly="System.Web.Mobile" %>
+<%@ Register TagPrefix="uc1" TagName="Completamento" Src="./CompletamentoUserControl.ascx" %>
+<%@ Page language="c#" Codebehind="CompletamentoMP.aspx.cs" Inherits="TheSite.AslMobile.CompletamentoMP" AutoEventWireup="false" %>
 <HEAD>
 	<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
 	<meta content="C#" name="CODE_LANGUAGE">
@@ -258,64 +258,59 @@
 											</HeaderTemplate>
 											<ItemTemplate>
 												<TR>
-													<TD bgcolor=#00ccff nowrap><b>Inserimento ordine di lavoro N.<%# DataBinder.Eval(Container.DataItem,"Key") %></b></TD>
+													<TD bgcolor="#00ccff" nowrap><b>Inserimento ordine di lavoro N.<%# DataBinder.Eval(Container.DataItem,"Key") %></b></TD>
 												</TR>
 												<TR>
 													<TD nowrap>
-														<asp:Repeater id="RepeaterDettail" runat="server">											
+														<asp:Repeater id="RepeaterDettail" runat="server">
 															<HeaderTemplate>
 																<table cellSpacing="1" cellPadding="1" border="0">
 																	<tr>
-																		<td nowrap bgcolor=DarkGray>Richiesta di lavoro associata</td>
-																		<td nowrap bgcolor=DarkGray>Data Richiesta</td>
-																		<td nowrap bgcolor=DarkGray>Data Pianificata</td>
-																		<td nowrap bgcolor=DarkGray>Attività</td>
-																		<td nowrap bgcolor=DarkGray>Descrizione</td>
-																		<td nowrap bgcolor=DarkGray>Stato</td>
+																		<td nowrap bgcolor="DarkGray">Richiesta di lavoro associata</td>
+																		<td nowrap bgcolor="DarkGray">Data Richiesta</td>
+																		<td nowrap bgcolor="DarkGray">Data Pianificata</td>
+																		<td nowrap bgcolor="DarkGray">Attività</td>
+																		<td nowrap bgcolor="DarkGray">Descrizione</td>
+																		<td nowrap bgcolor="DarkGray">Stato</td>
 																	</tr>
 															</HeaderTemplate>
 															<ItemTemplate>
 																<tr>
-																	<td nowrap width="100%" bgcolor=PowderBlue><%# DataBinder.Eval(Container.DataItem,"wr_id") %>
+																	<td nowrap width="100%" bgcolor="PowderBlue"><%# DataBinder.Eval(Container.DataItem,"wr_id") %>
 																	</td>
-																	<td nowrap width="100%" bgcolor=PowderBlue><%# DataBinder.Eval(Container.DataItem,"Data_Richiesta", "{0:d}") %>
+																	<td nowrap width="100%" bgcolor="PowderBlue"><%# DataBinder.Eval(Container.DataItem,"Data_Richiesta", "{0:d}") %>
 																	</td>
-																	<td nowrap width="100%" bgcolor=PowderBlue><%# DataBinder.Eval(Container.DataItem,"Data_Pianificata", "{0:d}") %>
+																	<td nowrap width="100%" bgcolor="PowderBlue"><%# DataBinder.Eval(Container.DataItem,"Data_Pianificata", "{0:d}") %>
 																	</td>
-																	<td nowrap width="100%" bgcolor=PowderBlue><%# DataBinder.Eval(Container.DataItem,"Attivita") %>
+																	<td nowrap width="100%" bgcolor="PowderBlue"><%# DataBinder.Eval(Container.DataItem,"Attivita") %>
 																	</td>
-																	<td nowrap width="100%" bgcolor=PowderBlue><%# DataBinder.Eval(Container.DataItem,"Descrizione") %>
+																	<td nowrap width="100%" bgcolor="PowderBlue"><%# DataBinder.Eval(Container.DataItem,"Descrizione") %>
 																	</td>
-																	<td nowrap width="100%" bgcolor=PowderBlue><%# DataBinder.Eval(Container.DataItem,"Stato") %>
+																	<td nowrap width="100%" bgcolor="PowderBlue"><%# DataBinder.Eval(Container.DataItem,"Stato") %>
 																	</td>
 																</tr>
 															</ItemTemplate>
 															<AlternatingItemTemplate>
 																<tr>
-																	<td bgcolor=LightSteelBlue nowrap><%# DataBinder.Eval(Container.DataItem,"wr_id") %></td>
-																	<td bgcolor=LightSteelBlue nowrap><%# DataBinder.Eval(Container.DataItem,"Data_Richiesta", "{0:d}") %></td>
-																	<td bgcolor=LightSteelBlue nowrap><%# DataBinder.Eval(Container.DataItem,"Data_Pianificata", "{0:d}") %></td>
-																	<td bgcolor=LightSteelBlue nowrap><%# DataBinder.Eval(Container.DataItem,"Attivita") %></td>
-																	<td bgcolor=LightSteelBlue nowrap><%# DataBinder.Eval(Container.DataItem,"Descrizione") %></td>
-																	<td bgcolor=LightSteelBlue nowrap><%# DataBinder.Eval(Container.DataItem,"Stato") %></td>
+																	<td bgcolor="LightSteelBlue" nowrap><%# DataBinder.Eval(Container.DataItem,"wr_id") %></td>
+																	<td bgcolor="LightSteelBlue" nowrap><%# DataBinder.Eval(Container.DataItem,"Data_Richiesta", "{0:d}") %></td>
+																	<td bgcolor="LightSteelBlue" nowrap><%# DataBinder.Eval(Container.DataItem,"Data_Pianificata", "{0:d}") %></td>
+																	<td bgcolor="LightSteelBlue" nowrap><%# DataBinder.Eval(Container.DataItem,"Attivita") %></td>
+																	<td bgcolor="LightSteelBlue" nowrap><%# DataBinder.Eval(Container.DataItem,"Descrizione") %></td>
+																	<td bgcolor="LightSteelBlue" nowrap><%# DataBinder.Eval(Container.DataItem,"Stato") %></td>
 																</tr>
 															</AlternatingItemTemplate>
 															<FooterTemplate>
-																</TABLE>
-															</FooterTemplate> 
-														</asp:Repeater> 													
-													</TD>
-												</TR>
-											</ItemTemplate>
-											<FooterTemplate>
+							</TABLE>
+							</FooterTemplate> </asp:Repeater> </TD> </TR> </ItemTemplate>
+							<FooterTemplate>
 												</TABLE>
 											</FooterTemplate>
-										</asp:Repeater>
-									</TD>
-								</TR>
-								<TR>
-									<TD><mobile:Link id="Link5" runat="server" Font-Size="Large" NavigateUrl="#Form1">Indietro</mobile:Link></TD>
-								</TR>
+							</asp:Repeater> </TD> </TR>
+							<TR>
+								<TD>
+									<mobile:Link id="Link5" runat="server" Font-Size="Large" NavigateUrl="#Form1">Indietro</mobile:Link></TD>
+							</TR>
 							</TABLE>
 						</ContentTemplate>
 					</Choice>

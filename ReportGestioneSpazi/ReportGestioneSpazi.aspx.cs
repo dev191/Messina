@@ -12,16 +12,13 @@ using System.Web.UI.HtmlControls;
 using TheSite.AnalisiStatistiche;
 using TheSite.Classi.AnalisiStatistiche;
 using S_Controls.Collections;
-//  set di migrazione
-using TreeNodeCollection = Microsoft.Web.UI.WebControls.TreeNodeCollection;
-using TreeNode = Microsoft.Web.UI.WebControls.TreeNode;
 
 namespace TheSite.ReportGestioneSpazi
 {
 	/// <summary>
 	/// Descrizione di riepilogo per ReportGestioneSpazi.
 	/// </summary>
-	public class ReportGestioneSpazi : System.Web.UI.Page    // System.Web.UI.Page
+	public class ReportGestioneSpazi : System.Web.UI.Page
 	{
 		protected S_Controls.S_Button S_BtnSubmit;
 		protected System.Web.UI.WebControls.Button btnReportPdf;
@@ -161,8 +158,11 @@ namespace TheSite.ReportGestioneSpazi
 			_obj_QueryStr.Add(s_txtReparto.Text,"stringaReparto");
 			_obj_QueryStr.Add(s_txtDestinazione.Text,"stringaDestinazione");
 			_obj_QueryStr.Add(cmbsCategoria.SelectedValue,"idCategoria");
+			_obj_QueryStr.Add(cmbsCategoria.SelectedItem.Text,"stringaCategoria");
 			_obj_QueryStr.Add(UserStanze1.DescStanza,"stringaStanza");
+			_obj_QueryStr.Add(UserStanze1.IdStanza,"stanza");
 			_obj_QueryStr.Add(cmbsPiano.SelectedValue,"piano");
+			_obj_QueryStr.Add(cmbsPiano.SelectedItem.Text,"lblpiano");
 
 			_obj_QueryStr.Add(cmbsConfronto.SelectedValue,"operatoreMq");
 			_obj_QueryStr.Add(s_txtMq.Text,"ValoreMq");

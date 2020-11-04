@@ -9,14 +9,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Ditte.
 	/// </summary>
-	public class Buildings : System.Web.UI.Page    // System.Web.UI.Page
+	public class Buildings : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
 		protected WebControls.GridTitle GridTitle1;
@@ -24,7 +24,7 @@ namespace TheSite.Gestione
 		public static string HelpLink = string.Empty;
 		protected WebControls.PageTitle PageTitle1;
 
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		protected S_Controls.S_TextBox txtsBL_ID;
 		protected S_Controls.S_TextBox txtsName;
 		protected S_Controls.S_TextBox txtsIndirizzo;
@@ -34,9 +34,12 @@ namespace TheSite.Gestione
 		protected Csy.WebControls.DataPanel PanelRicerca;
 		protected S_Controls.S_Button BtnReset;
 		protected System.Web.UI.WebControls.Button btnEsporta;
+		protected System.Web.UI.WebControls.Button Button1;
+		protected System.Web.UI.WebControls.Label lbMessage;
+		protected S_Controls.S_ComboBox CmbProgetto;
 		EditBuilding _fp;
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
@@ -62,8 +65,7 @@ namespace TheSite.Gestione
 
 			if (!Page.IsPostBack)
 			{	
-//				if (Request.Params["Ricarica"] == "yes")
-//					Ricerca();
+				BindProgetti();
 
 				if(Context.Handler is TheSite.Gestione.EditBuilding) 
 				{									
@@ -77,7 +79,30 @@ namespace TheSite.Gestione
 				}	
 			}
 		}
-
+		private void BindProgetti()
+		{
+			
+			this.CmbProgetto.Items.Clear();
+		
+			TheSite.Classi.Progetti _Prog = new TheSite.Classi.Progetti();
+						
+			DataSet _MyDs = _Prog.GetData();			
+			
+			if (_MyDs.Tables[0].Rows.Count > 0)
+			{
+				CmbProgetto.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					_MyDs.Tables[0], "descrizione", "id_progetto", "- Selezionare un Progetto -", "0");				
+				this.CmbProgetto.DataTextField ="descrizione";
+				this.CmbProgetto.DataValueField  ="id_progetto";
+				this.CmbProgetto.DataBind();
+			}
+			else
+			{
+				string s_Messagggio = "- Nessun Progetto  -";
+				this.CmbProgetto.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+						
+			}			
+		}
 		#region Codice generato da Progettazione Web Form
 		override protected void OnInit(EventArgs e)
 		{
@@ -94,6 +119,7 @@ namespace TheSite.Gestione
 		/// </summary>
 		private void InitializeComponent()
 		{    
+			this.Button1.Click += new System.EventHandler(this.Button1_Click);
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
 			this.btnEsporta.Click += new System.EventHandler(this.btnEsporta_Click);
 			this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
@@ -107,6 +133,7 @@ namespace TheSite.Gestione
 
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{
+			DataGridRicerca.CurrentPageIndex=0;
 			Ricerca();
 		}
 
@@ -173,7 +200,7 @@ namespace TheSite.Gestione
 				{
 					Pagina ++;
 				}
-				if (DataGridRicerca.PageCount != Convert.ToInt16((_MyDs.Tables[0].Rows.Count / DataGridRicerca.PageSize) + Pagina))
+				if (DataGridRicerca.PageCount != Convert.ToInt32((_MyDs.Tables[0].Rows.Count / DataGridRicerca.PageSize) + Pagina))
 				{					
 					DataGridRicerca.CurrentPageIndex=0;					
 				}
@@ -238,6 +265,21 @@ namespace TheSite.Gestione
 
 				if(!this.IsClientScriptBlockRegistered("clientScriptexp"))
 					this.RegisterStartupScript ("clientScriptexp", scriptString);
+			}
+		}
+
+		private void Button1_Click(object sender, System.EventArgs e)
+		{
+			Classi.ClassiAnagrafiche.Buildings clBl =new TheSite.Classi.ClassiAnagrafiche.Buildings();
+			int cc = clBl.UpdateAllFl();
+			if (cc==0)
+			{
+				lbMessage.Text="ERRORE nel calcolo delle superfici.";
+				lbMessage.ForeColor=Color.Red;
+			} 
+			else 
+			{
+				lbMessage.Text="Calcolo delle superfici eseguito con SUCCESSO.";
 			}
 		}
 

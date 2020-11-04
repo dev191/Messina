@@ -18,7 +18,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per NavigazioneDocumenti.
 	/// </summary>
-	public class NavigazioneServizi : System.Web.UI.Page    // System.Web.UI.Page
+	public class NavigazioneServizi : System.Web.UI.Page
 	{
 		protected S_Controls.S_ComboBox cmbsApparecchiatura;
 		protected System.Web.UI.HtmlControls.HtmlForm Form1;
@@ -54,7 +54,8 @@ namespace TheSite.AnagrafeImpianti
 
 		private void Page_Load(object sender, System.EventArgs e)
 		{
-	
+//			RicercaModulo1.DelegateCodiceEdificio1 +=new  WebControls.DelegateCodiceEdificio(this.BindServizio);
+
 			System.Text.StringBuilder sbValid = new System.Text.StringBuilder();
 			sbValid.Append("document.getElementById('" + this.cmbsApparecchiatura.ClientID + "').disabled = true;");
 			this.cmbsServizio.Attributes.Add("onchange", sbValid.ToString());
@@ -69,7 +70,7 @@ namespace TheSite.AnagrafeImpianti
 
 				
 				Panel1.Visible=false;
-				BindServizio("");
+				BindServizio("0");
 				BindApparecchiatura();
 				if (Request.QueryString["idcomune"]!=null)
 					IdComune=int.Parse(Request.QueryString["idcomune"]);
@@ -288,7 +289,7 @@ namespace TheSite.AnagrafeImpianti
 				string servizio=string.Empty;
 				string apparecchiatura=string.Empty;
 				TreeNodeCollection nodePadre=null;
-				TreeNodeCollection nodeFiglio=null;
+			
 
 				foreach (DataRow DrDettagli in DrCollection)
 				{
@@ -451,78 +452,94 @@ namespace TheSite.AnagrafeImpianti
 		}
 		private void BindServizio(string CodEdificio)
 		{
-			
-			this.cmbsServizio.Items.Clear();		
-			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
+			int idprog = 0;
+			if(Request.QueryString["VarApp"]!=null)
+				idprog = Convert.ToInt32(Request.QueryString["VarApp"].ToString());
+//			if (CodEdificio!="0" && CodEdificio!="" )
+//			{
+				this.cmbsServizio.Items.Clear();		
+				S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
 
-			Classi.ClassiDettaglio.Servizi  _Servizio = new TheSite.Classi.ClassiDettaglio.Servizi(Context.User.Identity.Name);
+				Classi.ClassiDettaglio.Servizi  _Servizio = new TheSite.Classi.ClassiDettaglio.Servizi(Context.User.Identity.Name);
 
-			DataSet _MyDs = _Servizio.GetData();
+				DataSet _MyDs = _Servizio.GetServiziPerProg(idprog,0);
 		
 
-			if (_MyDs.Tables[0].Rows.Count > 0)
-			{
-				this.cmbsServizio.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
-					_MyDs.Tables[0], "DESCRIZIONE", "IDSERVIZIO", "- Selezionare un Servizio -", "");
-				this.cmbsServizio.DataTextField = "DESCRIZIONE";
-				this.cmbsServizio.DataValueField = "IDSERVIZIO";
-				this.cmbsServizio.DataBind();
-			}
-			else
-			{
-				string s_Messagggio = "- Nessun Servizio -";
-				this.cmbsServizio.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
-			}
-		
+				if (_MyDs.Tables[0].Rows.Count > 0)
+				{
+					this.cmbsServizio.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+						_MyDs.Tables[0], "DESCRIZIONE", "IDSERVIZIO", "- Selezionare un Servizio -", "");
+					this.cmbsServizio.DataTextField = "DESCRIZIONE";
+					this.cmbsServizio.DataValueField = "IDSERVIZIO";
+					this.cmbsServizio.DataBind();
+				}
+				else
+				{
+					string s_Messagggio = "- Nessun Servizio -";
+					this.cmbsServizio.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
+				}
+//			}
+//			else
+//			{
+//				string s_Messagggio = "- Nessun Servizio -";
+//				this.cmbsServizio.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
+//			}
 		}
 
 
 		
 		private void BindApparecchiatura()
 		{
-			
-			this.cmbsApparecchiatura.Items.Clear();
+			if (cmbsServizio.SelectedValue!="")
+			{
+				this.cmbsApparecchiatura.Items.Clear();
 		
-			Classi.AnagrafeImpianti.Apparecchiature  _Apparecchiature = new TheSite.Classi.AnagrafeImpianti.Apparecchiature(Context.User.Identity.Name);
+				Classi.AnagrafeImpianti.Apparecchiature  _Apparecchiature = new TheSite.Classi.AnagrafeImpianti.Apparecchiature(Context.User.Identity.Name);
 			
-			DataSet _MyDs;
+				DataSet _MyDs;
 
-			if (!IsPostBack)
-			{
-				_MyDs = _Apparecchiature.GetData();
-			}
-			else
-			{
-				S_ControlsCollection _SColl = new S_ControlsCollection();
+				if (!IsPostBack)
+				{
+					_MyDs = _Apparecchiature.GetData();
+				}
+				else
+				{
+					S_ControlsCollection _SColl = new S_ControlsCollection();
 
-				S_Controls.Collections.S_Object s_BlId = new S_Object();
-				s_BlId.ParameterName = "p_Bl_Id";
-				s_BlId.DbType = CustomDBType.VarChar;
-				s_BlId.Direction = ParameterDirection.Input;
-				s_BlId.Size =50;
-				s_BlId.Index = 0;
-				s_BlId.Value = "";
-				_SColl.Add(s_BlId);
+					S_Controls.Collections.S_Object s_BlId = new S_Object();
+					s_BlId.ParameterName = "p_Bl_Id";
+					s_BlId.DbType = CustomDBType.VarChar;
+					s_BlId.Direction = ParameterDirection.Input;
+					s_BlId.Size =50;
+					s_BlId.Index = 0;
+					s_BlId.Value = "";
+					_SColl.Add(s_BlId);
 			
-				S_Controls.Collections.S_Object s_Servizio = new S_Object();
-				s_Servizio.ParameterName = "p_Servizio";
-				s_Servizio.DbType = CustomDBType.Integer;
-				s_Servizio.Direction = ParameterDirection.Input;
-				s_Servizio.Index = 1;
-				s_Servizio.Value = (cmbsServizio.SelectedValue=="")? 0:Int32.Parse(cmbsServizio.SelectedValue);
-				_SColl.Add(s_Servizio);
+					S_Controls.Collections.S_Object s_Servizio = new S_Object();
+					s_Servizio.ParameterName = "p_Servizio";
+					s_Servizio.DbType = CustomDBType.Integer;
+					s_Servizio.Direction = ParameterDirection.Input;
+					s_Servizio.Index = 1;
+					s_Servizio.Value = (cmbsServizio.SelectedValue=="")? 0:Int32.Parse(cmbsServizio.SelectedValue);
+					_SColl.Add(s_Servizio);
 
-				_MyDs = _Apparecchiature.GetData(_SColl).Copy();
+					_MyDs = _Apparecchiature.GetData(_SColl).Copy();
                  
-			}
+				}
   
-			if (_MyDs.Tables[0].Rows.Count > 0)
-			{
-				this.cmbsApparecchiatura.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
-					_MyDs.Tables[0], "DESCRIZIONE", "ID", "- Selezionare uno Standard -", "");
-				this.cmbsApparecchiatura.DataTextField = "DESCRIZIONE";
-				this.cmbsApparecchiatura.DataValueField = "ID";
-				this.cmbsApparecchiatura.DataBind();
+				if (_MyDs.Tables[0].Rows.Count > 0)
+				{
+					this.cmbsApparecchiatura.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+						_MyDs.Tables[0], "DESCRIZIONE", "ID", "- Selezionare uno Standard -", "");
+					this.cmbsApparecchiatura.DataTextField = "DESCRIZIONE";
+					this.cmbsApparecchiatura.DataValueField = "ID";
+					this.cmbsApparecchiatura.DataBind();
+				}
+				else
+				{
+					string s_Messagggio = "- Nessuno Standard -";
+					this.cmbsApparecchiatura.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
+				}
 			}
 			else
 			{
@@ -535,7 +552,7 @@ namespace TheSite.AnagrafeImpianti
 		{
 			
 			LoadList();
-			// BindApparecchiatura();
+			BindApparecchiatura();
 		}
 
 		private void btReset_Click(object sender, System.EventArgs e)

@@ -1,79 +1,119 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ManStraordinaria.AggiornamentoRdl
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.ManStraordinaria
 {
-  public class AggiornamentoRdl : AbstractBase
-  {
-    private string username = string.Empty;
+	/// <summary>
+	/// Descrizione di riepilogo per AggiornamentoRdl.
+	/// </summary>
+	public class AggiornamentoRdl :AbstractBase
+	{
+		private string username=string.Empty;
+		public AggiornamentoRdl(string Username)
+		{
+			username=Username;
+		}
+		#region Metodi Pubblici
 
-    public AggiornamentoRdl(string Username) => this.username = Username;
+		public override DataSet GetData()
+		{
+		 return null;	
+		}
+	
+		/// <summary>
+		/// Recupero i Livelli di Urgenza
+		/// </summary>
+		/// <returns></returns>
+		public  DataSet GetStatoLavoro()
+		{
+			
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
 
-    public override DataSet GetData() => (DataSet) null;
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
 
-    public DataSet GetStatoLavoro()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_MAN_STRA.SP_GETSTATOLAVORO";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+			CollezioneControlli.Add(s_Cursor);
 
-    public DataSet GetDateTime(int itemId)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_wr_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_MAN_STRA.SP_GETCOMPORDINEORARIO";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MAN_STRA.SP_GETSTATOLAVORO";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli) => (DataSet) null;
+			return _Ds;	
+		}
+		public  DataSet GetDateTime(int itemId)
+		{
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+			S_Controls.Collections.S_Object s_p_wr_id = new S_Object();
+			s_p_wr_id.ParameterName = "p_wr_id";
+			s_p_wr_id.DbType = CustomDBType.Integer;
+			s_p_wr_id.Direction = ParameterDirection.Input;
+			s_p_wr_id.Value =itemId;
+			s_p_wr_id.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_p_wr_id);
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      if (Operazione != ExecuteType.Update)
-        return 0;
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      return new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) CollezioneControlli, "PACK_MAN_STRA.SP_UPDATECOMPLETAMENTO");
-    }
-  }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MAN_STRA.SP_GETCOMPORDINEORARIO";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+		public  override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+		 return null;	
+		}
+
+		public override DataSet GetSingleData(int itemId)
+		{
+			return null;
+		}
+
+		#endregion
+
+		
+		#region Metodi Private
+
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			
+			if (Operazione!=ExecuteType.Update)
+                 return 0;
+
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_IdOut);
+			//_____________________________________________________________________________________
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+			int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_MAN_STRA.SP_UPDATECOMPLETAMENTO");
+				
+			return i_Result;
+			//_____________________________________________________________________________________
+			
+		}
+
+		#endregion
+	}
 }

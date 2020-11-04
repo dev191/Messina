@@ -54,7 +54,7 @@
 	</HEAD>
 	<body onbeforeunload="parent.left.valorizza()" MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
-			<TABLE id="Table1" style="Z-INDEX: 101; LEFT: 8px; POSITION: absolute; TOP: 8px" cellSpacing="1"
+			<TABLE id="Table1" style="Z-INDEX: 101; POSITION: absolute; TOP: 8px; LEFT: 8px" cellSpacing="1"
 				cellPadding="1" width="100%" border="0">
 				<TR>
 					<TD align="center"><uc1:pagetitle id="PageTitle1" runat="server"></uc1:pagetitle></TD>
@@ -63,7 +63,7 @@
 					<TD><cc2:datapanel id="DataPanel1" runat="server" TitleStyle-CssClass="TitleSearch" Collapsed="False"
 							TitleText="Ricerca" ExpandText="Espandi" ExpandImageUrl="../Images/down.gif" CollapseText="Espandi/Riduci"
 							CssClass="DataPanel75" CollapseImageUrl="../Images/up.gif" AllowTitleExpandCollapse="True">
-							<TABLE id="Table3" cellSpacing="1" cellPadding="1" width="100%" border="0">
+							<TABLE id="Table3" border="0" cellSpacing="1" cellPadding="1" width="100%">
 								<TR>
 									<TD colSpan="5">
 										<uc1:RicercaModulo id="RicercaModulo1" runat="server"></uc1:RicercaModulo></TD>
@@ -83,7 +83,8 @@
 									<TD style="HEIGHT: 25px">Data A:</TD>
 									<TD style="HEIGHT: 25px">
 										<uc1:CalendarPicker id="CalendarPicker2" runat="server"></uc1:CalendarPicker>
-										<asp:CompareValidator id="CompareValidator1" runat="server" Type="Date" Operator="GreaterThanEqual" ErrorMessage="Data non valida!"></asp:CompareValidator></TD>
+										<asp:CompareValidator id="CompareValidator1" runat="server" ErrorMessage="Data non valida!" Operator="GreaterThanEqual"
+											Type="Date"></asp:CompareValidator></TD>
 									<TD style="HEIGHT: 25px"></TD>
 								</TR>
 								<TR>
@@ -117,7 +118,7 @@
 									<TD>Descrizione:</TD>
 									<TD>
 										<cc1:S_TextBox id="S_Txtdescrizione" runat="server" Width="252px"></cc1:S_TextBox></TD>
-									<TD>Urgenza:</TD>
+									<TD>Priorità:</TD>
 									<TD>
 										<cc1:S_ComboBox id="S_Cburgenza" runat="server" Width="252px"></cc1:S_ComboBox></TD>
 									<TD style="HEIGHT: 18px"></TD>
@@ -136,13 +137,14 @@
 									<TD style="HEIGHT: 14px"></TD>
 								</TR>
 							</TABLE>
-							<TABLE id="Table2" cellSpacing="0" cellPadding="0" width="100%" border="0">
+							<TABLE id="Table2" border="0" cellSpacing="0" cellPadding="0" width="100%">
 								<TR>
 									<TD align="left">
-										<cc1:S_Button id="S_btMostra" runat="server" Width="134px" Text="Mostra Dettagli" ToolTip="Avvia la ricerca"></cc1:S_Button>&nbsp;
-										<cc1:S_Button id="S_Btreset" runat="server" Text="Reset" ToolTip="Svuota i campi di ricercca"
+										<cc1:S_Button style="Z-INDEX: 0" id="S_btMostra" runat="server" Width="72px" ToolTip="Avvia la ricerca"
+											Text="Ricerca"></cc1:S_Button>&nbsp;
+										<cc1:S_Button id="S_Btreset" runat="server" ToolTip="Svuota i campi di ricercca" Text="Reset"
 											Height="19px"></cc1:S_Button>&nbsp;
-										<cc1:s_button id="cmdExcel" tabIndex="2" runat="server" Text="Esporta"></cc1:s_button></TD>
+										<cc1:s_button id="cmdExcel" tabIndex="2" runat="server" Text="Esporta" Visible="False"></cc1:s_button></TD>
 									<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
             target=_blank>Guida</A></TD>
 								</TR>
@@ -151,17 +153,17 @@
 				</TR>
 				<TR>
 					<TD width="100%"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGrid1" runat="server" CssClass="DataGrid" Width="100%" BorderColor="Gray"
-							BorderStyle="None" BorderWidth="1px" BackColor="White" CellPadding="4" AutoGenerateColumns="False" AllowPaging="True" GridLines="Vertical">
+							BorderStyle="None" BorderWidth="1px" BackColor="White" CellPadding="4" AutoGenerateColumns="False" AllowPaging="True" GridLines="Vertical" AllowCustomPaging="True">
 							<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
 							<Columns>
 								<asp:TemplateColumn>
-									<HeaderStyle Width="20px"></HeaderStyle>
-									<ItemStyle HorizontalAlign="Center"></ItemStyle>
+									<HeaderStyle Width="3%"></HeaderStyle>
+									<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 									<ItemTemplate>
-										<asp:ImageButton ImageUrl="../Images/edit.gif" Runat=server OnCommand="imageButton_Click" CommandArgument='<%# "EditCompletamento.aspx?wr_id=" + DataBinder.Eval(Container.DataItem,"var_wr_wr_id") + "&c=true" %>' ID="Imagebutton1">
+										<asp:ImageButton id="lnkDett" Runat=server CommandName="Dettaglio" ImageUrl="../images/edit.gif" CommandArgument='<%# "CompletaRdl.aspx?wr_id=" + DataBinder.Eval(Container.DataItem,"var_wr_wr_id")%>'>
 										</asp:ImageButton>
 									</ItemTemplate>
 								</asp:TemplateColumn>

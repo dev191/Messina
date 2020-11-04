@@ -18,7 +18,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per RicercaMateriali.
 	/// </summary>
-	public class RicercaMateriali : System.Web.UI.Page    // System.Web.UI.Page
+	public class RicercaMateriali : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.DataGrid DataGrid1;

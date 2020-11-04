@@ -9,14 +9,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.Gestione
 {	
 	/// <summary>
 	/// Descrizione di riepilogo per Richiedenti_tipo 
 	/// </summary>
-	public class Richiedenti_tipo : System.Web.UI.Page    // System.Web.UI.Page
+	public class Richiedenti_tipo : System.Web.UI.Page
 	{		
 		
 		public static int FunId=0;
@@ -30,7 +30,7 @@ namespace TheSite.Gestione
 		protected S_Controls.S_TextBox txtsnote;
 		TheSite.Gestione.EditRichiedenti_tipo _fp;
 		protected S_Controls.S_Button BtnReset;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		
 	
 	
@@ -87,7 +87,7 @@ namespace TheSite.Gestione
 
 		}
 		#endregion
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{

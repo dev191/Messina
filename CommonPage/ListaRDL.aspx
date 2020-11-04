@@ -1,5 +1,5 @@
-<%@ Page language="c#" Codebehind="ListaRDL.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ListaRDL" %>
 <%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Page language="c#" Codebehind="ListaRDL.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ListaRDL" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 	<HEAD>
@@ -84,12 +84,12 @@
 		<form id="Form1" method="post" runat="server">
 			<table width="100%" border="0">
 				<tr>
-					<td class="TDCommon"><asp:hyperlink id="HyperLink1" runat="server" NavigateUrl="javascript:Chiudi()" Height="16px" Width="56px"><img border="0" src="../Images/chiudi.gif" />
+					<td class="TDCommon"><asp:hyperlink id="HyperLink1" runat="server" Width="56px" Height="16px" NavigateUrl="javascript:Chiudi()"><img border="0" src="../Images/chiudi.gif" />
 						</asp:hyperlink></td>
 				</tr>
 				<tr>
-					<td width="100%"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="MyDataGrid1" runat="server" Width="100%" BorderColor="Gray" BorderStyle="None"
-							BorderWidth="1px" BackColor="White" CellPadding="4" AutoGenerateColumns="False" CssClass="DataGrid" AllowPaging="True" GridLines="Vertical">
+					<td width="100%"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="MyDataGrid1" runat="server" Width="100%" GridLines="Vertical" AllowCustomPaging="True"
+							AllowPaging="True" CssClass="DataGrid" AutoGenerateColumns="False" CellPadding="4" BackColor="White" BorderWidth="1px" BorderStyle="None" BorderColor="Gray">
 							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
@@ -105,13 +105,14 @@
 								</asp:TemplateColumn>
 								<asp:BoundColumn DataField="wr_id" HeaderText="RDL"></asp:BoundColumn>
 								<asp:BoundColumn Visible="False" DataField="totrdl"></asp:BoundColumn>
+								<asp:HyperLinkColumn DataNavigateUrlField="wr_id" DataNavigateUrlFormatString="javascript:var w =window.open('../ManutenzioneCorrettiva/VisualizzaRdl.aspx?ItemId={0}&amp;FunId={0}&amp;chiamante=Materiali','_blank','width=800,height=600,location=no,scrollbars=yes')"
+									DataTextField="wr_id" HeaderText="Rdl"></asp:HyperLinkColumn>
 							</Columns>
 							<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 						</asp:datagrid></td>
 				</tr>
 				<tr>
-					<td class="TDCommon"><asp:hyperlink id="HyperLinkChiudi2" runat="server" NavigateUrl="javascript:Chiudi()" Height="16px"
-							Width="56px"><img border="0" src="../Images/chiudi.gif" /></asp:hyperlink></td>
+					<td class="TDCommon"><asp:hyperlink id="HyperLinkChiudi2" runat="server" Width="56px" Height="16px" NavigateUrl="javascript:Chiudi()"><img border="0" src="../Images/chiudi.gif" /></asp:hyperlink></td>
 				</tr>
 			</table>
 			&nbsp;

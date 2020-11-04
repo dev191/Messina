@@ -14,7 +14,7 @@ namespace WebCad
 	/// <summary>
 	/// Descrizione di riepilogo per ErrorPage.
 	/// </summary>
-	public class ErrorPage : System.Web.UI.Page    // System.Web.UI.Page
+	public class ErrorPage : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Panel Panel1;
 	

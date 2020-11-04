@@ -1,8 +1,5 @@
 namespace TheSite.WebControls
 {
-
-
-
 	using System;
 	using System.Data;
 	using System.Drawing;
@@ -138,6 +135,10 @@ namespace TheSite.WebControls
 		protected System.Web.UI.HtmlControls.HtmlTableRow preventivo3;
 		protected TheSite.WebControls.AggiungiSollecito AggiungiSollecito1;
 		protected S_Controls.S_Button btnfoglioprestazioniPdf;
+		protected System.Web.UI.HtmlControls.HtmlTableRow Tr1;
+		protected S_Controls.S_TextBox txt_BLavoroEsterno;
+		protected S_Controls.S_Button BtnModifica;
+		protected System.Web.UI.HtmlControls.HtmlInputHidden HPageBack;
 		Type myType;
 		
 
@@ -218,6 +219,8 @@ namespace TheSite.WebControls
 			// Inserire qui il codice utente necessario per inizializzare la pagina.
 			if(!IsPostBack)
 			{
+				string pagebak=((System.Web.HttpRequest)(((System.Web.UI.Page)((this.Page))).Request)).FilePath;
+				HPageBack.Value= pagebak.Substring(pagebak.LastIndexOf("/")+1);
 
 				//Imposto alcune proprietà ai controlli
 				SetProperty();
@@ -229,11 +232,37 @@ namespace TheSite.WebControls
 				SetVisiblePanel();
 				//Valorizzazione dei dati inseriti nei controlli
 				LoadDatiCreazione();
+				
 			}
 			if(this.IsCompleta)
 			{
 				string script="<script language='javascript'>SetWorkType('" + this.cmbsstatolavoro.SelectedValue + "');</script>";
 				Page.RegisterStartupScript("settacombo",script);
+//Verifico se l'utente è amministratore in modo che possa cambiare lo stato
+//della richiesta e la priorità
+				if(Context.User.IsInRole("amministratori")&& cmbsstatolavoro.SelectedValue =="4" && (btnApprova.Enabled==false))
+				{
+					//abilito il pulsante modifica
+					BtnModifica.Visible=true;
+					//disabilito l'addetto e la ditta
+					cmbsAddetto.Enabled=false;
+					cmbsDitta.Enabled=false;
+					//disabilito lo stato dei lavori
+					cmbsstatolavoro.Enabled=false;
+					//disabilito tutto il pannello del DL
+					cmbsTipoManutenzione.Enabled=false;
+					checkQuantifica.Enabled=false;
+					txtNumeroPreventivo.Enabled=false;
+					txtSpesa1.Enabled=false;
+					txtSpesa2.Enabled=false;
+					UploadFilePreventivo.Disabled=true;
+					btsApprovaDL.Enabled=false;
+					btsRifiutaDL.Enabled=false;
+					
+				}
+				else
+					BtnModifica.Visible=false;
+				
 			}
 		}
 
@@ -325,52 +354,10 @@ namespace TheSite.WebControls
 			{
 				return;
 			}
-			else if(Context.User.IsInRole("collaboratore"))
+			if (Context.User.IsInRole("callcenter")&&Request.QueryString["avvisi"]=="true")
 			{
-				btsApprovaDL.Enabled=false;
-				btsRifiutaDL.Enabled=false;
-				TableEmetti.Visible =false;//Bottoni per l'emissione della richiesta di lavoro
-				TableCompleta.Visible=false;//Bottoni per il completamento della richiesta di lavoro
-				DisableControl(PanelDL,true);
-				// MODIFICA PER DOPPIO RUOLO CON COFATHEC
-				if(Context.User.IsInRole("cofathec"))
-				{	
-					//DA VEDERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				}
-				else
-				{
-					DisableControl(PanelCofatec,true);
-				}
-
+				PanelCompleta.Visible=false;
 			}
-			else if(Context.User.IsInRole("dl"))
-			{
-				btsApprovaDCSIT.Enabled=false;
-				btsRifiutaDCSIT.Enabled=false;
-				TableEmetti.Visible =false;//Bottoni per l'emissione della richiesta di lavoro
-				TableCompleta.Visible=false;//Bottoni per il completamento della richiesta di lavoro
-			//	DisableControl(PanelDCSIT,true);				
-				// MODIFICA PER DOPPIO RUOLO CON COFATHEC
-				if(Context.User.IsInRole("cofathec"))
-				{	
-					//DA VEDERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				}
-				else
-				{
-					DisableControl(PanelCofatec,true);
-				}
-
-			}			
-			else
-			{
-				btsApprovaDCSIT.Enabled=false;
-				btsRifiutaDCSIT.Enabled=false;
-				btsApprovaDL.Enabled=false;
-				btsRifiutaDL.Enabled=false;
-				//DisableControl(PanelDCSIT,true);
-				DisableControl(PanelDL,true);
-			}
-			
 			
 		}
 		/// <summary>
@@ -401,7 +388,7 @@ namespace TheSite.WebControls
 				cmbsServizio.Attributes.Add("disabled","");
 				cmdsStdApparecchiatura.Attributes.Add("disabled","");
 				cmbEQ.Attributes.Add("disabled","");
-				cmbsTipoManutenzione.Enabled =false;
+			//	cmbsTipoManutenzione.Enabled =false;
 				CalendarPicker2.CreateValidator("Inserire la Data di Inizio Comletamento",ValidatorDisplay.None);
 				CalendarPicker3.CreateValidator("Inserire la Data di Fine Comletamento",ValidatorDisplay.None);
 				lblOperazione.Text="Gestione e Completamento Ordini di Lavoro"; 
@@ -409,10 +396,10 @@ namespace TheSite.WebControls
 
 //				btsApprovaDL.Visible=false;
 //				btsRifiutaDL.Visible=false;
-				btsApprovaDCSIT.Visible=false;
-				btsRifiutaDCSIT.Visible=false;
+			//	btsApprovaDCSIT.Visible=false;
+			//	btsRifiutaDCSIT.Visible=false;
 			//	DisableControl(PanelDCSIT,false);
-				DisableControl(PanelDL,false);
+			//	DisableControl(PanelDL,false);
 				TableEmetti.Visible =false;//Bottoni per l'emissione della richiesta di lavoro
 
 
@@ -630,8 +617,19 @@ namespace TheSite.WebControls
 
 			
 					if (_Dr["stato_dl"] != DBNull.Value)
+					{
 						this.lblStatoDL.Text=_Dr["stato_dl"].ToString();
-
+						if (_Dr["stato_dl"].ToString()=="Rifiutato DL")
+						{
+							lblStatoDL.Attributes.Add("style","color:red;");
+							lblUtenteDL.Attributes.Add("style","color:red;");
+						}
+						else if (_Dr["stato_dl"].ToString()=="Approvato DL")
+						{
+							lblStatoDL.Attributes.Add("style","color:green;");
+							lblUtenteDL.Attributes.Add("style","color:green;");
+						}
+					}
 					if (_Dr["stato_dl_id"] != DBNull.Value)//se entra collaboratore e la richiesta è validata dal dl disabilito i tasti del collaboratore
 						if (_Dr["stato_dl_id"].ToString() =="3" || _Dr["stato_dl_id"].ToString() =="4")
 							if(Context.User.IsInRole("collaboratore"))
@@ -693,86 +691,93 @@ namespace TheSite.WebControls
 						lblOraValidDCSIT.Text=dtvalidazionedcsit.Hour.ToString().PadLeft(2,'0') + ":" + dtvalidazionedcsit.Minute.ToString().PadLeft(2,'0');
 					}
 					if (_Dr["stato_dcsit"] != DBNull.Value)
-						this.lblStatoDCSIT.Text=_Dr["stato_dcsit"].ToString();
-
-					//Se è la fase di completamento carico il resto dei dati
-					if(this.IsCompleta)
-					{
+						{
+							this.lblStatoDCSIT.Text=_Dr["stato_dcsit"].ToString();
 						
-						if(_Dr["tipointervento"].ToString()=="1")//Manutenzione su Richiesta
-						{
-							trsoddisfazione.Style.Add("display","none");
-							trannotazione.Style.Add("display","none");
 						}
+							//Se è la fase di completamento carico il resto dei dati
+							if(this.IsCompleta)
+							{
+						
+								if(_Dr["tipointervento"].ToString()=="1")//Manutenzione su Richiesta
+								{
+									trsoddisfazione.Style.Add("display","none");
+									trannotazione.Style.Add("display","none");
+								}
 
-						//in base allo status visualizzo la riga html
-						if (_Dr["idstatus"] != DBNull.Value)
-						{
-							if  (int.Parse( _Dr["idstatus"].ToString())==8 || int.Parse( _Dr["idstatus"].ToString())==11 || int.Parse( _Dr["idstatus"].ToString())==12
-								|| int.Parse( _Dr["idstatus"].ToString())==13 || int.Parse( _Dr["idstatus"].ToString())==14)
-								this.trnote.Attributes.Add("style","display:block");
-							else
-								this.trnote.Attributes.Add("style","display:none");
-							//Carico la combo
-							LoadStatoLavoro(_Dr["idstatus"].ToString());
-						}
-						else
-						{
-							//Carico la combo 
-							LoadStatoLavoro("");
-							this.trnote.Attributes.Add("style","display:none");
-						}
+								//in base allo status visualizzo la riga html
+								if (_Dr["idstatus"] != DBNull.Value)
+								{
+									if  (int.Parse( _Dr["idstatus"].ToString())==8 || int.Parse( _Dr["idstatus"].ToString())==11 || int.Parse( _Dr["idstatus"].ToString())==12
+										|| int.Parse( _Dr["idstatus"].ToString())==13 || int.Parse( _Dr["idstatus"].ToString())==14)
+										this.trnote.Attributes.Add("style","display:block");
+									else
+										this.trnote.Attributes.Add("style","display:none");
+									//Carico la combo
+									LoadStatoLavoro(_Dr["idstatus"].ToString());
+								}
+								else
+								{
+									//Carico la combo 
+									LoadStatoLavoro("");
+									this.trnote.Attributes.Add("style","display:none");
+								}
 
-						//nota Sospesa
-						if (_Dr["notesospesa"] != DBNull.Value)
-							txtsSospesa.Text = _Dr["notesospesa"].ToString();
+								//nota Sospesa
+								if (_Dr["notesospesa"] != DBNull.Value)
+									txtsSospesa.Text = _Dr["notesospesa"].ToString();
 
 
-						if (_Dr["date_start"]!=DBNull.Value)
-							CalendarPicker2.Datazione.Text= System.DateTime.Parse(_Dr["date_start"].ToString()).ToShortDateString();
+								if (_Dr["date_start"]!=DBNull.Value)
+									CalendarPicker2.Datazione.Text= System.DateTime.Parse(_Dr["date_start"].ToString()).ToShortDateString();
 
-						if (_Dr["date_end"]!=DBNull.Value)
-							CalendarPicker3.Datazione.Text= System.DateTime.Parse(_Dr["date_end"].ToString()).ToShortDateString();
+								if (_Dr["date_end"]!=DBNull.Value)
+									CalendarPicker3.Datazione.Text= System.DateTime.Parse(_Dr["date_end"].ToString()).ToShortDateString();
 
-						if (_Dr["date_start"]!=DBNull.Value)
-						{
-							System.DateTime OraIni= System.DateTime.Parse(_Dr["date_start"].ToString());
-							cmbsOraInizio.SelectedValue =OraIni.Hour.ToString().PadLeft(2,Convert.ToChar("0"))  ;
-							cmbsMinutiInizio.SelectedValue =OraIni.Minute.ToString().PadLeft(2,Convert.ToChar("0")) ;
-						}
-						if (_Dr["date_end"]!=DBNull.Value)
-						{
-							System.DateTime OraFine= System.DateTime.Parse(_Dr["date_end"].ToString());      
-							cmbsOraFine.SelectedValue =OraFine.Hour.ToString().PadLeft(2,Convert.ToChar("0")) ;
-							cmbsMinutiFine.SelectedValue =OraFine.Minute.ToString().PadLeft(2,Convert.ToChar("0"));
-						}
+								if (_Dr["date_start"]!=DBNull.Value)
+								{
+									System.DateTime OraIni= System.DateTime.Parse(_Dr["date_start"].ToString());
+									cmbsOraInizio.SelectedValue =OraIni.Hour.ToString().PadLeft(2,Convert.ToChar("0"))  ;
+									cmbsMinutiInizio.SelectedValue =OraIni.Minute.ToString().PadLeft(2,Convert.ToChar("0")) ;
+								}
+								if (_Dr["date_end"]!=DBNull.Value)
+								{
+									System.DateTime OraFine= System.DateTime.Parse(_Dr["date_end"].ToString());      
+									cmbsOraFine.SelectedValue =OraFine.Hour.ToString().PadLeft(2,Convert.ToChar("0")) ;
+									cmbsMinutiFine.SelectedValue =OraFine.Minute.ToString().PadLeft(2,Convert.ToChar("0"));
+								}
 
-						if (_Dr["comments"] != DBNull.Value)
-							txtsAnnotazioni.Text = _Dr["comments"].ToString();
+								if (_Dr["comments"] != DBNull.Value)
+									txtsAnnotazioni.Text = _Dr["comments"].ToString();
 
-						if (_Dr["satisfaction_id"] != DBNull.Value)
-							RadioButtonList1.SelectedValue = _Dr["satisfaction_id"].ToString();
+								if (_Dr["AC_ID"]!= DBNull.Value)
+									txt_BLavoroEsterno.Text = _Dr["AC_ID"].ToString();
+
+								if (_Dr["satisfaction_id"] != DBNull.Value)
+									RadioButtonList1.SelectedValue = _Dr["satisfaction_id"].ToString();
 
 	
-						if (_Dr["pdfconsuntivo"] != DBNull.Value)
-						{
-							lblconsuntivo.Text="File Consuntivo: "; 
-							LinkConsuntivo.Visible =true;
-							LinkConsuntivo.Text=_Dr["pdfconsuntivo"].ToString();
-							LinkConsuntivo.NavigateUrl ="javascript:openpdf('" +  this.wr_id.ToString() + "','Consuntivo','" + _Dr["pdfconsuntivo"].ToString().Replace("'","`")  + "');"; 
-						}
-						else
-							lblconsuntivo.Text="Importa Consuntivo(PDF): "; 
+								if (_Dr["pdfconsuntivo"] != DBNull.Value)
+								{
+									lblconsuntivo.Text="File Consuntivo: "; 
+									LinkConsuntivo.Visible =true;
+									LinkConsuntivo.Text=_Dr["pdfconsuntivo"].ToString();
+									LinkConsuntivo.NavigateUrl ="javascript:openpdf('" +  this.wr_id.ToString() + "','Consuntivo','" + _Dr["pdfconsuntivo"].ToString().Replace("'","`")  + "');"; 
+								}
+								else
+									lblconsuntivo.Text="Importa Consuntivo(PDF): "; 
 
-						if (_Dr["contabilizzazione"] != DBNull.Value)
-							cmbContabilizzazione.SelectedValue = _Dr["contabilizzazione"].ToString();
+								if (_Dr["contabilizzazione"] != DBNull.Value)
+									cmbContabilizzazione.SelectedValue = _Dr["contabilizzazione"].ToString();
 
-						if (_Dr["idstatus"] != DBNull.Value)
-							if (_Dr["idstatus"].ToString()=="4")//Attività completata.
-								btnCompleta.Enabled=false;//Disabilito il bottone del completamento
-						
- 
-					}
+								if (_Dr["idstatus"] != DBNull.Value)
+									if (_Dr["idstatus"].ToString()=="4")//Attività completata.
+									{
+										btnCompleta.Enabled=false;//Disabilito il bottone del completamento
+										if(Context.User.IsInRole("amministratori"))
+											BtnModifica.Visible=true;
+									}
+							}
 				}
 			
 		}
@@ -827,6 +832,9 @@ namespace TheSite.WebControls
 							UploadFileCosto.Visible=false;
 							this.btnApprova.Enabled =false;
 							cmbsstatolavoro.Enabled =false;
+							//se è amministratore deve poter modificare lo stato
+							if(Context.User.IsInRole("amministratori")&& stato_id=="4")
+								cmbsstatolavoro.Enabled =true;
 						}
 						else
 							lblconsuntivo.Text="";
@@ -843,7 +851,7 @@ namespace TheSite.WebControls
 			}
 
 			if (cmbsstatolavoro.SelectedValue=="4")
-				BtnCostiOpera.Visible=false;
+				BtnCostiOpera.Visible=true;
 
 		}
 		/// <summary>
@@ -950,28 +958,8 @@ namespace TheSite.WebControls
 				p_dismesso.Value = 1;
 				_SCollection.Add(p_dismesso);
 
-				//Piano
-				S_Controls.Collections.S_Object s_p_idpiano = new S_Controls.Collections.S_Object();
-				s_p_idpiano.ParameterName = "p_idpiano";
-				s_p_idpiano.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
-				s_p_idpiano.Direction = ParameterDirection.Input;
-				s_p_idpiano.Size =8;
-				s_p_idpiano.Index = 5;
-				s_p_idpiano.Value = 0;
-				_SCollection.Add(s_p_idpiano);
-
-				//stanza
-				S_Controls.Collections.S_Object s_p_idstanza = new S_Controls.Collections.S_Object();
-				s_p_idstanza.ParameterName = "p_idstanza";
-				s_p_idstanza.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
-				s_p_idstanza.Direction = ParameterDirection.Input;
-				s_p_idstanza.Size =8;
-				s_p_idstanza.Index = 6;
-				s_p_idstanza.Value = 0;
-				_SCollection.Add(s_p_idstanza);
-				///Aggiungo i parametri alla collection
 				
-				DataSet _MyDs=_ClManCorrettiva.GetApparecchiatura(_SCollection);
+				DataSet _MyDs=_ClManCorrettiva.GetListaApparrati(_SCollection);
 
 				if (_MyDs.Tables[0].Rows.Count > 0)
 				{
@@ -1246,6 +1234,7 @@ namespace TheSite.WebControls
 			this.btnfoglioprestazioniPdf.Click += new System.EventHandler(this.btnfoglioprestazioniPdf_Click);
 			this.BtnCostiOpera.Click += new System.EventHandler(this.BtnCostiOpera_Click);
 			this.btnChiudicompleta.Click += new System.EventHandler(this.btnChiudicompleta_Click);
+			this.BtnModifica.Click += new System.EventHandler(this.BtnModifica_Click);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}
@@ -1473,15 +1462,17 @@ namespace TheSite.WebControls
 
 		private void Chiudi()
 		{
-			if(this.Page is TheSite.ManutenzioneCorrettiva.EditApprovaEmetti)
-				Server.Transfer("ApprovaRdl.aspx?FunID=" + ViewState["FunId"]);
-			else if(this.Page is TheSite.ManutenzioneCorrettiva.EditCompletamento)
-				Server.Transfer("GestioneCompleta.aspx?FunId=" + ViewState["FunId"]);
-			else if(this.Page is TheSite.ManutenzioneCorrettiva.EditCreazione)
-				Server.Transfer("CreazioneRdl.aspx?FunId=" + ViewState["FunId"]);
-			else if(this.Page is TheSite.ManutenzioneCorrettiva.EditSfoglia)
-				Server.Transfer("SfogliaRdl.aspx?FunId=" + ViewState["FunId"]);
+//			if(this.Page is TheSite.ManutenzioneCorrettiva.EditApprovaEmetti)
+//				Server.Transfer("ApprovaRdl.aspx?FunID=" + ViewState["FunId"]);
+//			else if(this.Page is TheSite.ManutenzioneCorrettiva.EditCompletamento)
+//				Server.Transfer("GestioneCompleta.aspx?FunId=" + ViewState["FunId"]);
+//			else if(this.Page is TheSite.ManutenzioneCorrettiva.EditCreazione)
+//				Server.Transfer("CreazioneSGA.aspx?FunId=" + ViewState["FunId"]);
+//			else if(this.Page is TheSite.ManutenzioneCorrettiva.EditSfoglia)
+//				Server.Transfer("SfogliaRdlPaging.aspx?FunId=" + ViewState["FunId"]);
+			Server.Transfer(HPageBack.Value +"?FunId=" + ViewState["FunId"]);
 		}
+
 		/// <summary>
 		/// Aggiorna lo stato della richiesta da parte del DL o del DCSIT
 		/// False indica Direttore dei lavori. True indica che si tratta del DCSIT
@@ -1778,7 +1769,7 @@ namespace TheSite.WebControls
 
 		private void cmbsDitta_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
-			if (cmbsDitta.SelectedIndex>0)
+			if (Int32.Parse(cmbsDitta.SelectedValue.ToString())>0)
 			{
 				LoadAddettiDitta("",Int32.Parse(cmbsDitta.SelectedValue.ToString()));
 			}
@@ -1874,9 +1865,11 @@ namespace TheSite.WebControls
 		private void btnCompleta_Click(object sender, System.EventArgs e)
 		{
 		 Completa();
-//			if (cmbsstatolavoro.SelectedValue=="4")
-//				BtnCostiOpera.Visible=true;
-         btnCompleta.Enabled=false;
+			if (cmbsstatolavoro.SelectedValue=="4")
+				BtnCostiOpera.Visible=true;
+				btnCompleta.Enabled=false;
+			if(Context.User.IsInRole("amministratori"))
+				BtnModifica.Visible=true;
 		}
 
 		#region Gestione della Richiesta Completamento della Richiesta
@@ -2020,11 +2013,20 @@ namespace TheSite.WebControls
 			CollezioneControlli.Add(s_p_comments);
 
 
+			S_Controls.Collections.S_Object s_p_ac_id = new S_Object();
+			s_p_ac_id.ParameterName = "p_ac_id";
+			s_p_ac_id.DbType = CustomDBType.VarChar;
+			s_p_ac_id.Direction = ParameterDirection.Input;
+			s_p_ac_id.Index = 11;
+			s_p_ac_id.Size =10;
+			s_p_ac_id.Value =txt_BLavoroEsterno.Text;
+			CollezioneControlli.Add(s_p_ac_id);
+
 			S_Controls.Collections.S_Object p_satisfaction_id = new S_Object();
 			p_satisfaction_id.ParameterName = "p_satisfaction_id";
 			p_satisfaction_id.DbType = CustomDBType.Integer;
 			p_satisfaction_id.Direction = ParameterDirection.Input;
-			p_satisfaction_id.Index = 11;
+			p_satisfaction_id.Index = 12;
 			p_satisfaction_id.Size =10;
 			p_satisfaction_id.Value =RadioButtonList1.SelectedValue;
 			CollezioneControlli.Add(p_satisfaction_id);
@@ -2034,7 +2036,7 @@ namespace TheSite.WebControls
 			s_p_sospesa.ParameterName = "p_sospesa";
 			s_p_sospesa.DbType = CustomDBType.VarChar;
 			s_p_sospesa.Direction = ParameterDirection.Input;
-			s_p_sospesa.Index = 12;
+			s_p_sospesa.Index = 13;
 			s_p_sospesa.Size =2000;
 			s_p_sospesa.Value =txtsSospesa.Text;
 			CollezioneControlli.Add(s_p_sospesa);
@@ -2043,7 +2045,7 @@ namespace TheSite.WebControls
 			p_tipointerventoater.ParameterName = "p_tipointerventoater";
 			p_tipointerventoater.DbType = CustomDBType.Integer;
 			p_tipointerventoater.Direction = ParameterDirection.Input;
-			p_tipointerventoater.Index = 13;
+			p_tipointerventoater.Index = 14;
 			if(cmbsTipoIntrevento.SelectedValue=="" || cmbsTipoIntrevento.SelectedValue=="0")
 			  p_tipointerventoater.Value =DBNull.Value;
 			else
@@ -2054,7 +2056,7 @@ namespace TheSite.WebControls
 			p_importoconsuntivo.ParameterName = "p_importoconsuntivo";
 			p_importoconsuntivo.DbType = CustomDBType.Double;
 			p_importoconsuntivo.Direction = ParameterDirection.Input;
-			p_importoconsuntivo.Index = 14;
+			p_importoconsuntivo.Index = 15;
 			p_importoconsuntivo.Value =double.Parse(txtSpesa1.Text + "," + txtSpesa2.Text);
 			CollezioneControlli.Add(p_importoconsuntivo);
 			//ok
@@ -2062,7 +2064,7 @@ namespace TheSite.WebControls
 			p_contabilizzazione.ParameterName = "p_contabilizzazione";
 			p_contabilizzazione.DbType = CustomDBType.Integer;
 			p_contabilizzazione.Direction = ParameterDirection.Input;
-			p_contabilizzazione.Index = 15;
+			p_contabilizzazione.Index = 16;
 			p_contabilizzazione.Value =1; // SAL1 di default
 			CollezioneControlli.Add(p_contabilizzazione);
 			//ok
@@ -2070,7 +2072,7 @@ namespace TheSite.WebControls
 			p_pdfconsuntivo.ParameterName = "p_pdfconsuntivo";
 			p_pdfconsuntivo.DbType = CustomDBType.VarChar;
 			p_pdfconsuntivo.Direction = ParameterDirection.Input;
-			p_pdfconsuntivo.Index = 16;
+			p_pdfconsuntivo.Index = 17;
 			p_pdfconsuntivo.Value ="";
 			p_pdfconsuntivo.Size=250; 
 			CollezioneControlli.Add(p_pdfconsuntivo);
@@ -2079,7 +2081,7 @@ namespace TheSite.WebControls
 			p_annocontabilizzazione.ParameterName = "p_annocontabilizzazione";
 			p_annocontabilizzazione.DbType = CustomDBType.Integer;
 			p_annocontabilizzazione.Direction = ParameterDirection.Input;
-			p_annocontabilizzazione.Index = 17;
+			p_annocontabilizzazione.Index = 18;
 			string anno= DateTime.Now.Year.ToString();
 			p_annocontabilizzazione.Value =Int16.Parse(anno);			
 			CollezioneControlli.Add(p_annocontabilizzazione);
@@ -2128,7 +2130,206 @@ namespace TheSite.WebControls
 			
 		}
 
+		private void BtnModifica_Click(object sender, System.EventArgs e)
+		{
+			UpdCompletamento();
+			if (cmbsstatolavoro.SelectedValue=="4")
+				BtnCostiOpera.Visible=true;
+				btnCompleta.Enabled=false;
+				BtnModifica.Visible=true;
+		}
+
 		
+		#region Aggiorna il completamento
+
+		private void UpdCompletamento()
+		{
+			
+			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
+			//ok
+			S_Controls.Collections.S_Object s_p_wr_id = new S_Object();
+			s_p_wr_id.ParameterName = "p_wr_id";
+			s_p_wr_id.DbType = CustomDBType.Integer;
+			s_p_wr_id.Direction = ParameterDirection.Input;
+			s_p_wr_id.Index = CollezioneControlli.Count;
+			s_p_wr_id.Value =this.wr_id;
+			CollezioneControlli.Add(s_p_wr_id);
+           
+			//ok
+			S_Controls.Collections.S_Object s_p_urgenza = new S_Object();
+			s_p_urgenza.ParameterName = "p_urgenza";
+			s_p_urgenza.DbType = CustomDBType.Integer;
+			s_p_urgenza.Direction = ParameterDirection.Input;
+			s_p_urgenza.Index = CollezioneControlli.Count;
+			s_p_urgenza.Value =cmbsUrgenza.SelectedValue.Split(Convert.ToChar(","))[0];
+			CollezioneControlli.Add(s_p_urgenza);
+
+			//ok
+			S_Controls.Collections.S_Object s_p_descrizione = new S_Object();
+			s_p_descrizione.ParameterName = "p_descrizione";
+			s_p_descrizione.DbType = CustomDBType.VarChar;
+			s_p_descrizione.Direction = ParameterDirection.Input;
+			s_p_descrizione.Size=4000; 
+			s_p_descrizione.Index = CollezioneControlli.Count;
+			s_p_descrizione.Value =txtsDescrizione.Text;
+			CollezioneControlli.Add(s_p_descrizione);
+						
+			//ok
+			S_Controls.Collections.S_Object s_p_datapianificata = new S_Object();
+			s_p_datapianificata.ParameterName = "p_datapianificata";
+			s_p_datapianificata.DbType = CustomDBType.VarChar;
+			s_p_datapianificata.Direction = ParameterDirection.Input;
+			s_p_datapianificata.Index = CollezioneControlli.Count;
+			s_p_datapianificata.Size =30;
+			//Data Pianificata	
+			string data_pianificata=string.Empty; 
+			string data_p=CalendarPicker1.Datazione.Text;
+			if(data_p!="")
+			{ 
+				string ora_p=((cmbsOre.SelectedValue=="")?"00":cmbsOre.SelectedValue) + ":" + ((cmbsMinuti.SelectedValue=="")?"00":cmbsMinuti.SelectedValue) + ":00";
+				data_pianificata = data_p + " " + ora_p;  
+			}
+
+			s_p_datapianificata.Value =data_pianificata;
+			CollezioneControlli.Add(s_p_datapianificata);
+
+			//ok
+			S_Controls.Collections.S_Object s_p_id_status = new S_Object();
+			s_p_id_status.ParameterName = "p_id_status";
+			s_p_id_status.DbType = CustomDBType.Integer;
+			s_p_id_status.Direction = ParameterDirection.Input;
+			s_p_id_status.Index = CollezioneControlli.Count;
+			s_p_id_status.Value =cmbsstatolavoro.SelectedValue;
+			CollezioneControlli.Add(s_p_id_status);
+
+			//ok
+			S_Controls.Collections.S_Object s_p_date_start = new S_Object();
+			s_p_date_start.ParameterName = "p_date_start";
+			s_p_date_start.DbType = CustomDBType.VarChar;
+			s_p_date_start.Direction = ParameterDirection.Input;
+			s_p_date_start.Index = CollezioneControlli.Count;
+			s_p_date_start.Size =30;
+			//Data Inizio	
+			string data_inizio=string.Empty; 
+			string date_start=CalendarPicker2.Datazione.Text;
+			if(date_start!="")
+			{ 
+				string ora_Inizio=((cmbsOraInizio.SelectedValue=="")?"00":cmbsOraInizio.SelectedValue) + ":" + ((cmbsMinutiInizio.SelectedValue=="")?"00":cmbsMinutiInizio.SelectedValue) + ":00";
+				data_inizio = date_start + " " + ora_Inizio;  
+			}
+
+			s_p_date_start.Value =data_inizio;
+			CollezioneControlli.Add(s_p_date_start);
+
+
+			//ok
+			S_Controls.Collections.S_Object s_p_date_end = new S_Object();
+			s_p_date_end.ParameterName = "p_date_end";
+			s_p_date_end.DbType = CustomDBType.VarChar;
+			s_p_date_end.Direction = ParameterDirection.Input;
+			s_p_date_end.Index = CollezioneControlli.Count;
+			s_p_date_end.Size =30;
+			//Data Inizio	
+			string data_fine=string.Empty; 
+			string date_end=CalendarPicker3.Datazione.Text;
+			if(date_end!="")
+			{ 
+				string ora_fine=((cmbsOraFine.SelectedValue=="")?"00":cmbsOraFine.SelectedValue) + ":" + ((cmbsMinutiFine.SelectedValue=="")?"00":cmbsMinutiFine.SelectedValue) + ":00";
+				data_fine = date_end + " " + ora_fine;  
+			}
+
+			s_p_date_end.Value =data_fine;
+			CollezioneControlli.Add(s_p_date_end);
+
+
+			//Annotazioni Materiale Utilizzato
+			S_Controls.Collections.S_Object s_p_comments = new S_Object();
+			s_p_comments.ParameterName = "p_comments";
+			s_p_comments.DbType = CustomDBType.VarChar;
+			s_p_comments.Direction = ParameterDirection.Input;
+			s_p_comments.Index = CollezioneControlli.Count;
+			s_p_comments.Size =4000;
+			s_p_comments.Value =txtsAnnotazioni.Text;
+			CollezioneControlli.Add(s_p_comments);
+
+
+			S_Controls.Collections.S_Object s_p_ac_id = new S_Object();
+			s_p_ac_id.ParameterName = "p_ac_id";
+			s_p_ac_id.DbType = CustomDBType.VarChar;
+			s_p_ac_id.Direction = ParameterDirection.Input;
+			s_p_ac_id.Index = CollezioneControlli.Count;
+			s_p_ac_id.Size =10;
+			s_p_ac_id.Value =txt_BLavoroEsterno.Text;
+			CollezioneControlli.Add(s_p_ac_id);
+
+			S_Controls.Collections.S_Object p_satisfaction_id = new S_Object();
+			p_satisfaction_id.ParameterName = "p_satisfaction_id";
+			p_satisfaction_id.DbType = CustomDBType.Integer;
+			p_satisfaction_id.Direction = ParameterDirection.Input;
+			p_satisfaction_id.Index = CollezioneControlli.Count;
+			p_satisfaction_id.Size =10;
+			p_satisfaction_id.Value =RadioButtonList1.SelectedValue;
+			CollezioneControlli.Add(p_satisfaction_id);
+		
+
+			S_Controls.Collections.S_Object s_p_sospesa = new S_Object();
+			s_p_sospesa.ParameterName = "p_sospesa";
+			s_p_sospesa.DbType = CustomDBType.VarChar;
+			s_p_sospesa.Direction = ParameterDirection.Input;
+			s_p_sospesa.Index = CollezioneControlli.Count;
+			s_p_sospesa.Size =2000;
+			s_p_sospesa.Value =txtsSospesa.Text;
+			CollezioneControlli.Add(s_p_sospesa);
+			//TODO:Nuovi campi
+			S_Controls.Collections.S_Object p_tipointerventoater = new S_Object();
+			p_tipointerventoater.ParameterName = "p_tipointerventoater";
+			p_tipointerventoater.DbType = CustomDBType.Integer;
+			p_tipointerventoater.Direction = ParameterDirection.Input;
+			p_tipointerventoater.Index = CollezioneControlli.Count;
+			if(cmbsTipoIntrevento.SelectedValue=="" || cmbsTipoIntrevento.SelectedValue=="0")
+				p_tipointerventoater.Value =DBNull.Value;
+			else
+				p_tipointerventoater.Value =int.Parse(cmbsTipoIntrevento.SelectedValue);
+			CollezioneControlli.Add(p_tipointerventoater);
+			
+			//ok
+			S_Controls.Collections.S_Object p_contabilizzazione = new S_Object();
+			p_contabilizzazione.ParameterName = "p_contabilizzazione";
+			p_contabilizzazione.DbType = CustomDBType.Integer;
+			p_contabilizzazione.Direction = ParameterDirection.Input;
+			p_contabilizzazione.Index = CollezioneControlli.Count;
+			p_contabilizzazione.Value =1; // SAL1 di default
+			CollezioneControlli.Add(p_contabilizzazione);
+			//ok
+			S_Controls.Collections.S_Object p_pdfconsuntivo = new S_Object();
+			p_pdfconsuntivo.ParameterName = "p_pdfconsuntivo";
+			p_pdfconsuntivo.DbType = CustomDBType.VarChar;
+			p_pdfconsuntivo.Direction = ParameterDirection.Input;
+			p_pdfconsuntivo.Index = CollezioneControlli.Count;
+			p_pdfconsuntivo.Value ="";
+			p_pdfconsuntivo.Size=250; 
+			CollezioneControlli.Add(p_pdfconsuntivo);
+			//ok
+			S_Controls.Collections.S_Object p_annocontabilizzazione = new S_Object();
+			p_annocontabilizzazione.ParameterName = "p_annocontabilizzazione";
+			p_annocontabilizzazione.DbType = CustomDBType.Integer;
+			p_annocontabilizzazione.Direction = ParameterDirection.Input;
+			p_annocontabilizzazione.Index = CollezioneControlli.Count;
+			string anno= DateTime.Now.Year.ToString();
+			p_annocontabilizzazione.Value =Int16.Parse(anno);			
+			CollezioneControlli.Add(p_annocontabilizzazione);
+			try
+			{										
+				Int32 result =_ClManCorrettiva.ExecuteUpdCompletamento(CollezioneControlli,this.wr_id);
+			//	string Result= UploadFile(UploadFileCosto,TipoPostFile.Consuntivo);
+			}
+			catch (Exception ex)
+			{				
+				string s_Err =  ex.Message.ToString().ToUpper();
+				PanelMess.ShowError(s_Err, true);				
+			}
+		}
+		#endregion
 
 		
 	}

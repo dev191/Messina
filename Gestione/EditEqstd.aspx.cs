@@ -12,14 +12,16 @@ using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using S_Controls.Collections;
 using S_Controls;
-using StampaRapportiPdf.Classi;
+
+
+
 
 namespace TheSite.Gestione
 {	
 	/// <summary>
 	/// Descrizione di riepilogo per EditAddetti
 	/// </summary>
-	public class EditEqstd : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditEqstd : System.Web.UI.Page
 	{
 		protected Csy.WebControls.MessagePanel PanelMess;
 		protected System.Web.UI.WebControls.Panel PanelEdit;
@@ -103,14 +105,14 @@ namespace TheSite.Gestione
 			}
 			}
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 	

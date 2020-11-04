@@ -35,6 +35,8 @@ namespace TheSite.WebControls
 			_StrBld.Append("</script>");
 			Page.RegisterStartupScript("loc",_StrBld.ToString());
 
+	
+
 			if (!Page.IsPostBack )
 			{
 				DataTable TbDati;
@@ -44,17 +46,18 @@ namespace TheSite.WebControls
 				DataGridEsegui.DataSource =TbDati; 
 				DataGridEsegui.DataBind();
 				lblRecord.Text = DsMateriali.Tables[0].Rows.Count.ToString(); 	
-				ViewState["UrlReferrer"] = Request.UrlReferrer.ToString();
 
-				//Faccio i conti
-				Classi.ManCorrettiva.ClManCorrettiva _Totale = new TheSite.Classi.ManCorrettiva.ClManCorrettiva();
-				DataSet DsManodoperaCosti = _Totale.TotManodopera(Convert.ToInt32(_wrId));			
-				if(DsManodoperaCosti.Tables[0].Rows.Count>0)
-					tot=Convert.ToDouble(DsManodoperaCosti.Tables[0].Rows[0]["totmateriale"]);
-				lblTot.Text=Convert.ToString(tot);
-				//
+				ValorizzaTot();
 			
 			}
+		}
+		private void ValorizzaTot()
+		{
+			Classi.ManCorrettiva.ClManCorrettiva _Totale = new TheSite.Classi.ManCorrettiva.ClManCorrettiva();
+			DataSet DsManodoperaCosti = _Totale.TotManodopera(Convert.ToInt32(_wrId));			
+			if(DsManodoperaCosti.Tables[0].Rows.Count>0)
+				tot=Convert.ToDouble(DsManodoperaCosti.Tables[0].Rows[0]["totmateriale"]);
+			lblTot.Text=Convert.ToString(tot);
 		}
 		private DataTable AggiungiColonnaTotProgressivo(DataTable tb)
 		{
@@ -70,7 +73,7 @@ namespace TheSite.WebControls
 					valoreColonna = Convert.ToDecimal(tb.Rows[i-1][7]) + Convert.ToDecimal(tb.Rows[i][5]);
 					tb.Rows[i][7] = FormattaDecimali(valoreColonna,2);
                    }
-				lblTot.Text=Convert.ToString(valoreColonna);
+//				lblTot.Text=Convert.ToString(valoreColonna);
 				}
 			tbRet = tb;
 			
@@ -160,18 +163,22 @@ namespace TheSite.WebControls
 					int i_Result = EseguiDataBaseMateriale(0, Classi.ExecuteType.Insert,
 						idMateriale, prezzoUnitario, quantita, prezzoTotale);	
 					DataGridEsegui.EditItemIndex = -1;
+//					lblTot.Text=prezzoTotale.ToString();
+					
 					BindGrid();
 					break;
 				case "Delete":
 					int id = int.Parse(DataGridEsegui.DataKeys[(int)e.Item.ItemIndex].ToString());	
 					int i_ResultDel = EseguiDataBaseMateriale(id, Classi.ExecuteType.Delete,0, 0, 0, 0);
 					DataGridEsegui.EditItemIndex = -1;
+		
 					BindGrid();
 					break;
 				default:
 					// Do nothing.
 					break;
 			}
+			
 		}
 		private void lkbNuovo_Click(object sender, System.EventArgs e)
 		{
@@ -189,6 +196,8 @@ namespace TheSite.WebControls
 			DataGridEsegui.DataBind();
 			lblRecord.Text =  DsMateriali.Tables[0].Rows.Count.ToString();
 			DataGridEsegui.ShowFooter = false;
+
+			ValorizzaTot();
 		}
 		protected DataTable GetMateriali()
 		{
@@ -278,11 +287,11 @@ namespace TheSite.WebControls
 			i_Result = ioDati.ExecuteMateriali(_SCollection, Operazione);			
 	
 			//Faccio i conti
-			Classi.ManCorrettiva.ClManCorrettiva _Totale = new TheSite.Classi.ManCorrettiva.ClManCorrettiva();
-			DataSet DsManodoperaCosti = _Totale.TotManodopera(Convert.ToInt32(_wrId));			
-			if(DsManodoperaCosti.Tables[0].Rows.Count>0)
-				tot=Convert.ToDouble(DsManodoperaCosti.Tables[0].Rows[0]["totmateriale"]);
-			lblTot.Text=Convert.ToString(tot);
+//			Classi.ManCorrettiva.ClManCorrettiva _Totale = new TheSite.Classi.ManCorrettiva.ClManCorrettiva();
+//			DataSet DsManodoperaCosti = _Totale.TotManodopera(Convert.ToInt32(_wrId));			
+//			if(DsManodoperaCosti.Tables[0].Rows.Count>0)
+//				tot=Convert.ToDouble(DsManodoperaCosti.Tables[0].Rows[0]["totmateriale"]);
+//			lblTot.Text=Convert.ToString(tot);
 			//
 
 			return i_Result;
@@ -299,7 +308,7 @@ namespace TheSite.WebControls
 			
 			if(e.Item.ItemType== ListItemType.Footer)
 			{
-
+				
 				TextBox txtCalcolaTotale;
 				txtPrezzoUnitario = (TextBox) e.Item.FindControl("txtprezzoInsert");
 				txtUnitaMisura = (TextBox) e.Item.FindControl("txtunitaInsert");
@@ -362,7 +371,7 @@ namespace TheSite.WebControls
 				UserMateriali1.Totale=DsMateriali.Tables[0].Rows[0]["totale"].ToString();
 				UserMateriali1.Materiale =DsMateriali.Tables[0].Rows[0]["materiale"].ToString();
 			
-			
+
 
 //				string funzioneJsCmbValue = "cmbSelezione('" 
 //					+  cmbMateriali.ClientID + "','" 

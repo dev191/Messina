@@ -383,6 +383,10 @@ namespace TheSite.StampaRapportiPdf.Schemixsd {
             
             private global::System.Data.DataColumn columnDITTA;
             
+            private global::System.Data.DataColumn columnSTANZA;
+            
+            private global::System.Data.DataColumn columndestuso;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public MP_REPORT_LONGDataTable() {
@@ -554,6 +558,22 @@ namespace TheSite.StampaRapportiPdf.Schemixsd {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn STANZAColumn {
+                get {
+                    return this.columnSTANZA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn destusoColumn {
+                get {
+                    return this.columndestuso;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -606,7 +626,9 @@ namespace TheSite.StampaRapportiPdf.Schemixsd {
                         string PASSO, 
                         string NOMECOGNOME, 
                         string DATACOMPLETAMENTO, 
-                        string DITTA) {
+                        string DITTA, 
+                        string STANZA, 
+                        string destuso) {
                 MP_REPORT_LONGRow rowMP_REPORT_LONGRow = ((MP_REPORT_LONGRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         WO_ID,
@@ -625,7 +647,9 @@ namespace TheSite.StampaRapportiPdf.Schemixsd {
                         PASSO,
                         NOMECOGNOME,
                         DATACOMPLETAMENTO,
-                        DITTA};
+                        DITTA,
+                        STANZA,
+                        destuso};
                 rowMP_REPORT_LONGRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMP_REPORT_LONGRow);
                 return rowMP_REPORT_LONGRow;
@@ -665,6 +689,8 @@ namespace TheSite.StampaRapportiPdf.Schemixsd {
                 this.columnNOMECOGNOME = base.Columns["NOMECOGNOME"];
                 this.columnDATACOMPLETAMENTO = base.Columns["DATACOMPLETAMENTO"];
                 this.columnDITTA = base.Columns["DITTA"];
+                this.columnSTANZA = base.Columns["STANZA"];
+                this.columndestuso = base.Columns["destuso"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -704,6 +730,10 @@ namespace TheSite.StampaRapportiPdf.Schemixsd {
                 base.Columns.Add(this.columnDATACOMPLETAMENTO);
                 this.columnDITTA = new global::System.Data.DataColumn("DITTA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDITTA);
+                this.columnSTANZA = new global::System.Data.DataColumn("STANZA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSTANZA);
+                this.columndestuso = new global::System.Data.DataColumn("destuso", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndestuso);
                 this.columnWR_ID.AllowDBNull = false;
                 this.columnSTATUS.AllowDBNull = false;
                 this.columnINTERVAL_TYPE.AllowDBNull = false;
@@ -2123,6 +2153,38 @@ namespace TheSite.StampaRapportiPdf.Schemixsd {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string STANZA {
+                get {
+                    try {
+                        return ((string)(this[this.tableMP_REPORT_LONG.STANZAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'STANZA\' in table \'MP_REPORT_LONG\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMP_REPORT_LONG.STANZAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string destuso {
+                get {
+                    try {
+                        return ((string)(this[this.tableMP_REPORT_LONG.destusoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'destuso\' in table \'MP_REPORT_LONG\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMP_REPORT_LONG.destusoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsWO_IDNull() {
                 return this.IsNull(this.tableMP_REPORT_LONG.WO_IDColumn);
             }
@@ -2287,6 +2349,30 @@ namespace TheSite.StampaRapportiPdf.Schemixsd {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetDITTANull() {
                 this[this.tableMP_REPORT_LONG.DITTAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSTANZANull() {
+                return this.IsNull(this.tableMP_REPORT_LONG.STANZAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSTANZANull() {
+                this[this.tableMP_REPORT_LONG.STANZAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsdestusoNull() {
+                return this.IsNull(this.tableMP_REPORT_LONG.destusoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetdestusoNull() {
+                this[this.tableMP_REPORT_LONG.destusoColumn] = global::System.Convert.DBNull;
             }
         }
         

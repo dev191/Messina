@@ -9,14 +9,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.Gestione
 {	
 	/// <summary>
 	/// Descrizione di riepilogo per Richiedenti_tipo 
 	/// </summary>
-	public class Richiedenti : System.Web.UI.Page    // System.Web.UI.Page
+	public class Richiedenti : System.Web.UI.Page
 	{		
 		
 		public static int FunId=0;
@@ -33,7 +33,9 @@ namespace TheSite.Gestione
 		protected S_Controls.S_TextBox txtsNome;
 		protected S_Controls.S_TextBox txtsCognome;
 		protected S_Controls.S_Button BtnReset;
-		clMyCollection _myColl = new clMyCollection();
+		protected S_Controls.S_ComboBox CmbProgetto;
+		protected S_Controls.S_ComboBox cmbTipRich;
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		
 	
 	
@@ -51,6 +53,8 @@ namespace TheSite.Gestione
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;
 			if (!Page.IsPostBack)
 			{
+				BindProgetti();
+				BindGruppo();
 				if(Context.Handler is TheSite.Gestione.EditRichiedenti) 
 				{	
 				_fp = (TheSite.Gestione.EditRichiedenti) Context.Handler;
@@ -84,15 +88,13 @@ namespace TheSite.Gestione
 		private void InitializeComponent()
 		{
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
-			this.DataGridRicerca.ItemCommand += new System.Web.UI.WebControls.DataGridCommandEventHandler(this.DataGridRicerca_ItemCommand);
-			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
-			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
 			this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
+			this.DataGridRicerca.ItemCommand += new System.Web.UI.WebControls.DataGridCommandEventHandler(this.DataGridRicerca_ItemCommand);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}
 		#endregion
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
@@ -100,6 +102,54 @@ namespace TheSite.Gestione
 			}
 		}
 		
+		private void BindProgetti()
+		{
+			
+			this.CmbProgetto.Items.Clear();
+		
+			TheSite.Classi.Progetti _Prog = new TheSite.Classi.Progetti();
+						
+			DataSet _MyDs = _Prog.GetData();			
+			
+			if (_MyDs.Tables[0].Rows.Count > 0)
+			{
+				CmbProgetto.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					_MyDs.Tables[0], "descrizione", "id_progetto", "- Selezionare un Progetto -", "0");				
+				this.CmbProgetto.DataTextField ="descrizione";
+				this.CmbProgetto.DataValueField  ="id_progetto";
+				this.CmbProgetto.DataBind();
+			}
+			else
+			{
+				string s_Messagggio = "- Nessun Progetto  -";
+				this.CmbProgetto.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+						
+			}			
+		}
+		private void BindGruppo()
+		{
+			
+			this.cmbTipRich.Items.Clear();
+		
+			TheSite.Classi.ClassiAnagrafiche.Richiedenti_tipo _RIcTip = new TheSite.Classi.ClassiAnagrafiche.Richiedenti_tipo();
+						
+			DataSet _MyDs1 = _RIcTip.GetAllData();			
+			
+			if (_MyDs1.Tables[0].Rows.Count > 0)
+			{
+				cmbTipRich.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					_MyDs1.Tables[0], "descrizione", "id", "- Selezionare un Gruppo -", "0");				
+				this.cmbTipRich.DataTextField ="descrizione";
+				this.cmbTipRich.DataValueField  ="id";
+				this.cmbTipRich.DataBind();
+			}
+			else
+			{
+				string s_Messagggio = "- Nessun Gruppo  -";
+				this.cmbTipRich.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+						
+			}			
+		}
 		
 		private void btnAnnulla_Click(object sender, System.EventArgs e)
 		{
@@ -112,15 +162,7 @@ namespace TheSite.Gestione
 		
 		}
 
-		private void DataGridRicerca_ItemCommand(object source, System.Web.UI.WebControls.DataGridCommandEventArgs e)
-		{
-			if (e.CommandName=="Dettaglio")
-			{	
-				_myColl.AddControl(this.Page.Controls, ParentType.Page);
-				string s_url = e.CommandArgument.ToString();							
-				Server.Transfer(s_url);		
-			}
-		}
+		
 		private void Ricerca()
 		{
 			Classi.ClassiAnagrafiche.Richiedenti _Richiedenti= new Classi.ClassiAnagrafiche.Richiedenti();
@@ -142,7 +184,7 @@ namespace TheSite.Gestione
 				{
 					Pagina ++;
 				}
-				if (DataGridRicerca.PageCount != Convert.ToInt16((_MyDs.Tables[0].Rows.Count / DataGridRicerca.PageSize) + Pagina))
+				if (DataGridRicerca.PageCount != Convert.ToInt32((_MyDs.Tables[0].Rows.Count / DataGridRicerca.PageSize) + Pagina))
 				{					
 					DataGridRicerca.CurrentPageIndex=0;					
 				}
@@ -176,10 +218,22 @@ namespace TheSite.Gestione
 			Ricerca();
 		}
 
+		private void DataGridRicerca_ItemCommand(object source, System.Web.UI.WebControls.DataGridCommandEventArgs e)
+		{
+			if (e.CommandName=="Dettaglio")
+			{	
+				_myColl.AddControl(this.Page.Controls, ParentType.Page);
+				string s_url = e.CommandArgument.ToString();							
+				Server.Transfer(s_url);	
+			}
+		}
+
 		private void BtnReset_Click(object sender, System.EventArgs e)
 		{
 				Response.Redirect("Richiedenti.aspx?FunId=" + FunId);
 		}
+
+	
 	}
 	
 

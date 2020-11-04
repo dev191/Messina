@@ -38,7 +38,7 @@ namespace WebCad
 	/// <summary>
 	/// Descrizione di riepilogo per LeftFrame.
 	/// </summary>
-	public class LeftFrame2 : System.Web.UI.Page    // System.Web.UI.Page
+	public class LeftFrame2 : System.Web.UI.Page
 	{
 
 		

@@ -12,7 +12,7 @@ using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using S_Controls.Collections;
 using S_Controls;
-using StampaRapportiPdf.Classi;
+
 
 namespace TheSite.Gestione
 {
@@ -20,7 +20,7 @@ namespace TheSite.Gestione
 	/// Descrizione di riepilogo per EditMateriale.
 	/// </summary>
 
-		public class EditMateriale : System.Web.UI.Page    // System.Web.UI.Page
+		public class EditMateriale : System.Web.UI.Page
 		{
 			protected Csy.WebControls.MessagePanel PanelMess;
 			protected System.Web.UI.WebControls.Panel PanelEdit;
@@ -116,14 +116,14 @@ namespace TheSite.Gestione
 				}
 			}
 
-			public clMyCollection _Contenitore
+			public MyCollection.clMyCollection _Contenitore
 			{ 
 				get 
 				{
 					if(this.ViewState["mioContenitore"]!=null)
-						return (clMyCollection)this.ViewState["mioContenitore"];
+						return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 					else
-						return new clMyCollection();
+						return new MyCollection.clMyCollection();
 				}
 			}
 	

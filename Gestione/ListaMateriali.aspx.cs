@@ -9,15 +9,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
+using MyCollection;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Eqstd
 	/// </summary>
-	public class ListaMateriali : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaMateriali : System.Web.UI.Page
 	{	
 		protected Csy.WebControls.DataPanel PanelRicerca;		
 		protected S_Controls.S_Button btnsRicerca;		
@@ -36,7 +36,7 @@ namespace TheSite.Gestione
 
 
 
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		private void Ricerca()
 		{
 			Classi.ClassiAnagrafiche.ListaMateriali _ListaMateriali = new Classi.ClassiAnagrafiche.ListaMateriali();
@@ -77,7 +77,11 @@ namespace TheSite.Gestione
 			this.DataGridRicerca.Columns[1].Visible = true;
 			this.DataGridRicerca.Columns[2].Visible = _SiteModule.IsEditable;	
 
-			FunId = _SiteModule.ModuleId;
+			
+			if(Request.QueryString["FunId"]!=null)
+				FunId=Convert.ToInt32(Request.QueryString["FunId"]);
+			else
+				FunId = _SiteModule.ModuleId;
 			HelpLink = _SiteModule.HelpLink;
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;
 						
@@ -132,7 +136,7 @@ namespace TheSite.Gestione
 		}
 		#endregion
 	
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{

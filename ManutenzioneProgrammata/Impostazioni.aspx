@@ -1,5 +1,4 @@
 <%@ Register TagPrefix="uc1" TagName="BottomMenu2" Src="../WebControls/BottomMenu2.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="DataPicker" Src="../WebControls/DataPicker.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
@@ -12,7 +11,7 @@
 <%@ Page language="c#" Codebehind="Impostazioni.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.Impostazioni" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
-	<HEAD>
+  <HEAD>
 		<title>ApprovaRdl</title>
 		<META http-equiv="Content-Type" content="text/html; charset=windows-1252">
 		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
@@ -110,71 +109,64 @@
 		}
 	}						
 		</script>
-	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0" rightMargin="0" MS_POSITIONING="GridLayout">
+</HEAD>
+	<body bottomMargin="0" onbeforeunload="parent.left.valorizza()" leftMargin="5" topMargin="0"
+		rightMargin="0" MS_POSITIONING="GridLayout">
 		<form id="Form1" onsubmit="return ControllaEdifici()" method="post" runat="server">
-			<TABLE id="TableMain" cellSpacing="0" cellPadding="0" width="100%" align="center" border="0"
-				height="100%">
+			<TABLE id="TableMain" height="100%" cellSpacing="0" cellPadding="0" width="100%" align="center"
+				border="0">
 				<TBODY>
 					<TR>
 						<TD style="HEIGHT: 50px" align="center"><uc1:pagetitle id="PageTitle1" runat="server"></uc1:pagetitle></TD>
 					</TR>
 					<TR>
 						<TD vAlign="top" align="center">
-							<TABLE cellSpacing="1" cellPadding="1" align="center" width="98%">
+							<TABLE cellSpacing="1" cellPadding="1" width="98%" align="center">
 								<TBODY>
 									<TR>
-										<TD vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" TitleStyle-CssClass="TitleSearch" CssClass="DataPanel75"
-												TitleText="Ricerca" AllowTitleExpandCollapse="True" Collapsed="False" ExpandText="Espandi" CollapseText="Riduci" CollapseImageUrl="../Images/up.gif"
-												ExpandImageUrl="../Images/down.gif">
-												<TABLE id="tblSearch100" cellSpacing="1" cellPadding="2" border="0">
-													<TR>
-														<TD align="left" colSpan="4">
-															<uc1:RicercaModulo id="RicercaModulo1" runat="server"></uc1:RicercaModulo></TD>
-													</TR>
-													<TR>
-														<TD align="left">Servizio</TD>
-														<TD align="left">
-															<cc1:S_ComboBox id="cmbsServizio" runat="server" DBDataType="Integer" DBIndex="6" DBParameterName="p_Servizio"
-																DBDirection="Input" DBSize="5"></cc1:S_ComboBox></TD>
-														<TD align="left">Ditta</TD>
-														<TD align="left">
-															<cc1:S_ComboBox id="cmbsDitta" runat="server" DBDataType="Integer" DBIndex="5" DBParameterName="p_Ditta"
-																DBDirection="Input" DBSize="5"></cc1:S_ComboBox></TD>
-													</TR>
-													<TR>
-														<TD align="left">Tipologia</TD>
-														<TD align="left" colSpan="3">
-															<cc1:S_ComboBox id="cmbsTutti" runat="server" AutoPostBack="False" DBDataType="Integer" DBIndex="6"
-																DBParameterName="p_Tipologia" DBDirection="Input" DBSize="5">
+										<TD vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" ExpandImageUrl="../Images/down.gif" CollapseImageUrl="../Images/up.gif"
+												CollapseText="Riduci" ExpandText="Espandi" Collapsed="False" AllowTitleExpandCollapse="True" TitleText="Ricerca" CssClass="DataPanel75"
+												TitleStyle-CssClass="TitleSearch">
+            <TABLE id=tblSearch100 cellSpacing=1 cellPadding=2 border=0>
+              <TR>
+                <TD align=left colSpan=4>
+<uc1:RicercaModulo id=RicercaModulo1 runat="server"></uc1:RicercaModulo></TD></TR>
+              <TR>
+                <TD align=left>Servizio</TD>
+                <TD align=left>
+<cc1:S_ComboBox id=cmbsServizio runat="server" DBDataType="Integer" DBIndex="6" DBParameterName="p_Servizio" DBDirection="Input" DBSize="5"></cc1:S_ComboBox></TD>
+                <TD align=left>Ditta</TD>
+                <TD align=left>
+<cc1:S_ComboBox id=cmbsDitta runat="server" DBDataType="Integer" DBIndex="5" DBParameterName="p_Ditta" DBDirection="Input" DBSize="5"></cc1:S_ComboBox></TD></TR>
+              <TR>
+                <TD align=left>Tipologia</TD>
+                <TD align=left colSpan=3>
+<cc1:S_ComboBox id=cmbsTutti runat="server" DBDataType="Integer" DBIndex="6" DBParameterName="p_Tipologia" DBDirection="Input" DBSize="5" AutoPostBack="False">
 																<asp:ListItem Value="1">Da Inserire nel Piano di Manutenzione</asp:ListItem>
 																<asp:ListItem Value="2">Inseriti nel Piano di Manutenzione</asp:ListItem>
 															</cc1:S_ComboBox>
-															<asp:TextBox id="txtTotSelezionati" runat="server" Width="0px" Height="0px">0</asp:TextBox><INPUT id="txtHidden" style="WIDTH: 3px; HEIGHT: 18px" type="hidden" size="1" value="0"
-																name="txtHidden"></TD>
-													</TR>
-													<TR>
-														<TD align="left" colSpan="3">
-															<cc1:s_button id="btnsRicerca" tabIndex="2" runat="server" CssClass="btn" Text="Ricerca"></cc1:s_button>&nbsp;
-															<asp:Button id="cmdReset" CssClass="btn" Text="Reset" Runat="server"></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;
-														</TD>
-														<TD align="right"><A class=GuidaLink href="<%//= HelpLink %>" 
-                  target=_blank>Guida</A></TD>
-													</TR>
-												</TABLE>
-											</COLLAPSE:DATAPANEL>
-										</TD>
+<asp:TextBox id=txtTotSelezionati runat="server" Width="0px" Height="0px">0</asp:TextBox><INPUT 
+                  id=txtHidden style="WIDTH: 3px; HEIGHT: 18px" type=hidden 
+                  size=1 value=0 name=txtHidden></TD></TR>
+              <TR>
+                <TD align=left colSpan=3>
+<cc1:s_button id=btnsRicerca tabIndex=2 runat="server" CssClass="btn" Text="Ricerca"></cc1:s_button>&nbsp; 
+<asp:Button id=cmdReset CssClass="btn" Text="Reset" Runat="server"></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp; 
+                </TD>
+                <TD align=right><A class=GuidaLink href="<%//= HelpLink %>" 
+                  target=_blank>Guida</A></TD></TR></TABLE>
+											</COLLAPSE:DATAPANEL></TD>
 									</TR>
 									<TR>
-										<TD vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" AllowPaging="True" BorderColor="Gray"
-												BorderWidth="1px" GridLines="Vertical" AutoGenerateColumns="False">
+										<TD vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" AutoGenerateColumns="False"
+												GridLines="Vertical" BorderWidth="1px" BorderColor="Gray" AllowPaging="True" AllowCustomPaging="True">
+												<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 												<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 												<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 												<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
-												<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 												<Columns>
-													<asp:TemplateColumn HeaderStyle-HorizontalAlign="Center" HeaderText="&lt;input id='ChkSelTutti' type='Checkbox' onclick='SelCheckbox()'&gt;">
-														<HeaderStyle Width="3%"></HeaderStyle>
+													<asp:TemplateColumn HeaderText="&lt;input id='ChkSelTutti' type='Checkbox' onclick='SelCheckbox()'&gt;">
+														<HeaderStyle HorizontalAlign="Center" Width="3%"></HeaderStyle>
 														<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 														<ItemTemplate>
 															<asp:CheckBox ID="ChkSel" Runat="server"></asp:CheckBox>
@@ -211,55 +203,47 @@
 															<uc1:UserMeseGiorno id="UserMeseGiorno1" runat="server"></uc1:UserMeseGiorno>
 														</ItemTemplate>
 													</asp:TemplateColumn>
-													<asp:BoundColumn DataField="Addetto" HeaderText="Addetto" Visible="False">
+													<asp:BoundColumn Visible="False" DataField="Addetto" HeaderText="Addetto">
 														<HeaderStyle Width="20%"></HeaderStyle>
 													</asp:BoundColumn>
 												</Columns>
-												<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
-											</asp:datagrid>
-										</TD>
+												<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
+											</asp:datagrid></TD>
 									</TR>
 									<asp:panel id="PanelAddetto" runat="server" Visible="False">
-										<TR>
-											<TD colSpan="2">
-												<TABLE width="100%" border="1">
-													<TR>
-														<TD width="10%">Addetto</TD>
-														<TD width="44%">
-															<cc1:s_combobox id="cmbsAddettoMod" runat="server"></cc1:s_combobox></TD>
-														<TD width="10%">
-															<asp:checkbox id="chkAbilitaData" runat="server"></asp:checkbox></TD>
-														<TD width="20%">
-															<uc1:usermesegiorno id="UserMeseGiorno2" runat="server"></uc1:usermesegiorno></TD>
-														<TD width="6%">
-															<cc1:s_button id="btnsConfermaSelezioni" runat="server" CssClass="btn" Text="Conferma Selezioni"></cc1:s_button></TD>
-													<TR>
-													</TR>
-												</TABLE>
-												<TABLE width="100%" align="center" border="1">
-													<TR>
-														<TD style="WIDTH: 138px" width="10%">
-															<cc1:s_button id="btnsSalva" runat="server" CssClass="btn" Width="120px" Text="SALVA"></cc1:s_button></TD>
-														<TD width="20%">
-															<cc1:s_button id="btnsSelezionaTutti" runat="server" CssClass="btn" Text="Seleziona Tutti"></cc1:s_button></TD>
-														<TD width="50%">
-															<asp:label id="LblElementiSelezionati" runat="server">0</asp:label></TD>
-														<TD align="right" width="20%">
-															<cc1:s_button id="btnsDeSelezionaTutti" runat="server" CssClass="btn" Text="Deseleziona Tutti"></cc1:s_button></TD>
-													</TR>
-												</TABLE>
-											</TD>
-										</TR>
-									</asp:panel>
-								</TBODY>
-							</TABLE>
+        <TR>
+          <TD colSpan=2>
+            <TABLE width="100%" border=1>
+              <TR>
+                <TD width="10%">Addetto</TD>
+                <TD width="44%">
+<cc1:s_combobox id=cmbsAddettoMod runat="server"></cc1:s_combobox></TD>
+                <TD width="10%">
+<asp:checkbox id=chkAbilitaData runat="server"></asp:checkbox></TD>
+                <TD width="20%">
+<uc1:usermesegiorno id=UserMeseGiorno2 runat="server"></uc1:usermesegiorno></TD>
+                <TD width="6%">
+<cc1:s_button id=btnsConfermaSelezioni runat="server" CssClass="btn" Text="Conferma Selezioni"></cc1:s_button></TD>
+              <TR></TR></TABLE>
+            <TABLE width="100%" align=center border=1>
+              <TR>
+                <TD style="WIDTH: 138px" width="10%">
+<cc1:s_button id=btnsSalva runat="server" CssClass="btn" Width="120px" Text="SALVA"></cc1:s_button></TD>
+                <TD width="20%">
+<cc1:s_button id=btnsSelezionaTutti runat="server" CssClass="btn" Text="Seleziona Tutti"></cc1:s_button></TD>
+                <TD width="50%">
+<asp:label id=LblElementiSelezionati runat="server">0</asp:label></TD>
+                <TD align=right width="20%">
+<cc1:s_button id=btnsDeSelezionaTutti runat="server" CssClass="btn" Text="Deseleziona Tutti"></cc1:s_button></TD></TR></TABLE></TD></TR>
+									</asp:panel></TBODY></TABLE>
 						</TD>
 					</TR>
 					<tr>
-						<td valign="bottom"><uc1:bottommenu2 id="BottomMenu1" runat="server"></uc1:bottommenu2></td>
+						<td vAlign="bottom"><uc1:bottommenu2 id="BottomMenu1" runat="server"></uc1:bottommenu2></td>
 					</tr>
 				</TBODY>
 			</TABLE>
 		</form>
-	</body><script language="javascript">parent.left.calcola();</script>
+		<script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

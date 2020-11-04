@@ -17,7 +17,7 @@ namespace TheSite.ManutenzioneProgrammata
 	/// <summary>
 	/// Descrizione di riepilogo per ProcedurePassi.
 	/// </summary>
-	public class ProcedurePassi : System.Web.UI.Page    // System.Web.UI.Page
+	public class ProcedurePassi : System.Web.UI.Page
 	{
 		protected Csy.WebControls.DataPanel PanelRicerca;
 		protected S_Controls.S_Button btnsRicerca;
@@ -74,7 +74,7 @@ namespace TheSite.ManutenzioneProgrammata
 
 				Classi.ClassiDettaglio.Servizi  _Servizio = new TheSite.Classi.ClassiDettaglio.Servizi(Context.User.Identity.Name);		
 
-				DataSet _MyDs = _Servizio.GetData();
+				DataSet _MyDs = _Servizio.GetData1();
 
 				if (_MyDs.Tables[0].Rows.Count > 0)
 				{
@@ -134,16 +134,15 @@ namespace TheSite.ManutenzioneProgrammata
 			Classi.ClassiAnagrafiche.Addetti _Addetti = new TheSite.Classi.ClassiAnagrafiche.Addetti();
 			DataSet _MyDs;
 			
-//			if(pmp_id==0)
-//			{
-//				_MyDs = _Addetti.GetAllSpecializzazioni().Copy(); 
-//			}
-//			else
-//			{
-//				_MyDs = _Addetti.GetSpecializzazionePMP(pmp_id,eqstd_id,servizio_id);
-//			}
-			_MyDs = _Addetti.GetSpecializzazionePMP(pmp_id,eqstd_id,servizio_id);
-			  
+			if(pmp_id==0)
+			{
+				_MyDs = _Addetti.GetAllSpecializzazioni().Copy(); 
+			}
+			else
+			{
+				_MyDs = _Addetti.GetSpecializzazionePMP(pmp_id,eqstd_id,servizio_id);
+			}
+						  
 			if (_MyDs.Tables[0].Rows.Count > 0)
 			{
 				this.cmbsSpecializzazione.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
@@ -228,6 +227,7 @@ namespace TheSite.ManutenzioneProgrammata
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
 			this.cmdReset.Click += new System.EventHandler(this.cmdReset_Click);
 			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
+			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}
@@ -236,10 +236,10 @@ namespace TheSite.ManutenzioneProgrammata
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex=0;
-			Ricerca();
+			Ricerca(true);
 		}
 
-		private void Ricerca()
+		private void Ricerca(bool reset)
 		{
 
 			Classi.ManProgrammata.ProcAndSteps _ProcAndSteps = new TheSite.Classi.ManProgrammata.ProcAndSteps(Context.User.Identity.Name);						
@@ -293,6 +293,22 @@ namespace TheSite.ManutenzioneProgrammata
 			s_PMP_id.Size = 50;
 			CollezioneControlli.Add(s_PMP_id);
 			
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+			CollezioneControlli.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca.PageSize;			
+			CollezioneControlli.Add(s_p_pagesize);
+
 			S_Controls.Collections.S_Object s_UserName = new S_Object();
 			s_UserName.ParameterName = "p_UserName";
 			s_UserName.DbType = CustomDBType.VarChar;
@@ -311,10 +327,19 @@ namespace TheSite.ManutenzioneProgrammata
 
 			DataSet _MyDs = _ProcAndSteps.GetData(CollezioneControlli).Copy();
 
+			if (reset==true)
+			{
+
+				CollezioneControlli.RemoveAt(CollezioneControlli.Count -4); 
+				CollezioneControlli.RemoveAt(CollezioneControlli.Count -3);
+				int _totalRecords = _ProcAndSteps.GetDataCount(CollezioneControlli);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+			}
+
+
 			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
-			this.DataGridRicerca.DataBind();
-			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();			
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.DataGridRicerca.DataBind();		
 		}
 
 		private void cmbsServizio_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -338,12 +363,41 @@ namespace TheSite.ManutenzioneProgrammata
 		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;	
-			Ricerca();			
+			Ricerca(false);			
 		}
 
 		private void cmdReset_Click(object sender, System.EventArgs e)
 		{
 			Response.Redirect("ProcedurePassi.aspx?FunID=" + ViewState["FunId"]);
+		}
+
+		private void DataGridRicerca_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
+		{
+			if((e.Item.ItemType == ListItemType.Item) ||
+				(e.Item.ItemType == ListItemType.AlternatingItem))
+			{	
+				//aggiunta per tooltip
+				string descrizione="";
+				string tooltip = "";
+				string [] appo;
+				int lunghezza;
+				System.Collections.ArrayList itmTooltip = new ArrayList();
+				itmTooltip.Add(tooltip);
+				itmTooltip.Add(descrizione);
+				//tronco la descrizione dopo il settimo spazio
+				appo= e.Item.Cells[5].Text.Split(' ');
+				if (appo.Length >=7)
+					lunghezza= appo[0].Length +appo[1].Length+appo[2].Length+appo[3].Length+appo[4].Length+appo[5].Length+appo[6].Length+6;
+				else
+					lunghezza=e.Item.Cells[5].Text.Length;
+
+				if (e.Item.Cells[5].Text.Trim().Length > 0) 
+				{
+					Classi.Function.Tronca(e.Item.Cells[5].Text,lunghezza,itmTooltip,e.Item.Cells[5].Text.Trim().Length);
+					e.Item.Cells[5].ToolTip=itmTooltip[0].ToString();
+					e.Item.Cells[5].Text=itmTooltip[1].ToString();		
+				} 
+			}
 		}
 
 		

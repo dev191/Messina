@@ -14,7 +14,7 @@ namespace TheSite.ManutenzioneProgrammata
 	/// <summary>
 	/// Descrizione di riepilogo per Schedulazione.
 	/// </summary>
-	public class Schedulazione : System.Web.UI.Page    // System.Web.UI.Page
+	public class Schedulazione : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Panel PanelEdit;
 		public static string HelpLink = string.Empty;

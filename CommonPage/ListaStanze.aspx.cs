@@ -9,13 +9,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using TheSite.Classi.ClassiDettaglio;
+using S_Controls.Collections;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.CommonPage
 {
 	/// <summary>
 	/// Descrizione di riepilogo per ListaStanze.
 	/// </summary>
-	public class ListaStanze : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaStanze : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.DataGrid MyDataGrid1;
@@ -50,10 +52,10 @@ namespace TheSite.CommonPage
 						this.piano =Request.QueryString["piano"]; 
 					else
 						this.piano=Request.QueryString["piano"].Split(Convert.ToChar(" "))[0];
-					}
-						else
+				}
+				else
 					this.piano =string.Empty;
-				Execute();
+				Execute(true);
 			}
 
 			String scriptString = "<script language=JavaScript> var idUsercontrol1='" + this.idUsercontrol1 +"'";
@@ -63,15 +65,95 @@ namespace TheSite.CommonPage
 
 			if(!this.IsClientScriptBlockRegistered("clientScriptst"))
 				this.RegisterClientScriptBlock("clientScriptst", scriptString);
+			GridTitle1.DescriptionTitle="Lista Stanza/Reparto";
+			
+			
 	
 		}
 
-		private void Execute()
+		private void Execute(bool reset)
 		{
 			///Istanzio un nuovo oggetto Collection per aggiungere i parametri
 			S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
 			///creo i parametri
 		
+//			S_Controls.Collections.S_Object s_p_Bl_Id = new S_Controls.Collections.S_Object();
+//			s_p_Bl_Id.ParameterName = "p_Id_bl";
+//			s_p_Bl_Id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+//			s_p_Bl_Id.Direction = ParameterDirection.Input;
+//			s_p_Bl_Id.Size =50;
+//			s_p_Bl_Id.Index = _SCollection.Count;
+//			s_p_Bl_Id.Value =this.blid;
+//			_SCollection.Add(s_p_Bl_Id);
+//
+//			S_Controls.Collections.S_Object s_p_piano = new S_Controls.Collections.S_Object();
+//			s_p_piano.ParameterName = "p_piani";
+//			s_p_piano.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+//			s_p_piano.Direction = ParameterDirection.Input;			
+//			s_p_piano.Index = _SCollection.Count;
+//			s_p_piano.Value = (this.piano=="")?0:int.Parse(this.piano);
+//			_SCollection.Add(s_p_piano);
+//
+//			S_Controls.Collections.S_Object s_p_stanza = new S_Controls.Collections.S_Object();
+//			s_p_stanza.ParameterName = "p_stanza";
+//			s_p_stanza.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+//			s_p_stanza.Direction = ParameterDirection.Input;
+//			s_p_stanza.Size =50;
+//			s_p_stanza.Index = _SCollection.Count;
+//			s_p_stanza.Value = this.codstanza;
+//			_SCollection.Add(s_p_stanza);
+
+
+			_SCollection = getParam();
+
+			// nuovi parametri paginazione
+
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=MyDataGrid1.CurrentPageIndex +1;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= MyDataGrid1.PageSize;			
+			_SCollection.Add(s_p_pagesize);
+
+			///Istanzio la Classe per eseguire la Strore Procedure
+			Classi.AnagrafeImpianti.Apparecchiature  _Apparecchiature =new Classi.AnagrafeImpianti.Apparecchiature(Context.User.Identity.Name);
+			
+			///Eseguo il Binding sulla Griglia.
+			DataSet Ds=_Apparecchiature.RicercaStanze(_SCollection);
+
+			// GridTitle1.NumeroRecords=(Ds.Tables[0].Rows.Count)==0? "0":Ds.Tables[0].Rows.Count.ToString();
+			MyDataGrid1.DataSource= Ds;
+
+			if (reset)
+			{
+				_SCollection.Clear();
+				_SCollection=getParam();
+				int _totalRecords = _Apparecchiature.RicercaStanzeCount(_SCollection);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+			}
+
+			this.MyDataGrid1.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+
+			MyDataGrid1.DataBind(); 
+
+
+
+		}
+
+
+		public S_ControlsCollection getParam(){
+
+			S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
+
 			S_Controls.Collections.S_Object s_p_Bl_Id = new S_Controls.Collections.S_Object();
 			s_p_Bl_Id.ParameterName = "p_Id_bl";
 			s_p_Bl_Id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
@@ -98,19 +180,7 @@ namespace TheSite.CommonPage
 			s_p_stanza.Value = this.codstanza;
 			_SCollection.Add(s_p_stanza);
 
-
-			///Istanzio la Classe per eseguire la Strore Procedure
-			Classi.AnagrafeImpianti.Apparecchiature  _Apparecchiature =new Classi.AnagrafeImpianti.Apparecchiature(Context.User.Identity.Name);
-			
-			///Eseguo il Binding sulla Griglia.
-			DataSet Ds=_Apparecchiature.RicercaStanze(_SCollection);
-
-			GridTitle1.NumeroRecords=(Ds.Tables[0].Rows.Count)==0? "0":Ds.Tables[0].Rows.Count.ToString();
-			MyDataGrid1.DataSource= Ds;
-			MyDataGrid1.DataBind(); 
-
-
-
+			return _SCollection;
 		}
 
 		#region Proprietà
@@ -147,7 +217,7 @@ namespace TheSite.CommonPage
 		{
 			///Imposto la Nuova Pagina
 			MyDataGrid1.CurrentPageIndex=e.NewPageIndex;
-			Execute();
+			Execute(false);
 		}
 
 		private void MyDataGrid1_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)

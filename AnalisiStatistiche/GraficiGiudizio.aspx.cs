@@ -16,7 +16,7 @@ namespace TheSite.AnalisiStatistiche
 	/// <summary>
 	/// Descrizione di riepilogo per GraficiMop.
 	/// </summary>
-	public class GraficiGiudizio : System.Web.UI.Page    // System.Web.UI.Page	
+	public class GraficiGiudizio : System.Web.UI.Page	
 	{
 		protected TheSite.WebControls.PageTitle PageTitleReport;
 		protected Csy.WebControls.DataPanel DataPanelRicerca;

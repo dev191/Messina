@@ -18,7 +18,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per NavigazioneApparechiature.
 	/// </summary>
-	public class RiepilogoSolleciti : System.Web.UI.Page    // System.Web.UI.Page
+	public class RiepilogoSolleciti : System.Web.UI.Page
 	{
 		protected  System.Web.UI.WebControls.DataGrid MyDataGrid1;
 

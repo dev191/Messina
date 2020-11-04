@@ -16,7 +16,7 @@ namespace TheSite.AnalisiStatistiche
 	/// <summary>
 	/// Descrizione di riepilogo per GraficiMop.
 	/// </summary>
-	public class GraficiMor : System.Web.UI.Page    // System.Web.UI.Page	
+	public class GraficiMor : System.Web.UI.Page	
 	{
 		protected WebControls.CalendarPicker  DataPkEnd;
 		protected TheSite.WebControls.PageTitle PageTitleReport;
@@ -96,8 +96,8 @@ namespace TheSite.AnalisiStatistiche
 		private void caricaComboTipoServizio()
 		{
 			
-			ListItem itmManCorrettiva = new ListItem("Sotto Soglia",Convert.ToString((int)TipoM.Richiesta));
-			ListItem itmManStraordinaria = new ListItem("Sopra Soglia",Convert.ToString((int)TipoM.Straordinaria));
+			ListItem itmManCorrettiva = new ListItem("Manutenzione a Canone",Convert.ToString((int)TipoM.Richiesta));
+			ListItem itmManStraordinaria = new ListItem("Manutenzione Straordinaria",Convert.ToString((int)TipoM.Straordinaria));
 			ListItem itmEntrabe= new ListItem("Entrambe le Tipologie",Convert.ToString((int)TipoM.Entrambe));
 			cmbTipologiaIntervento.Items.Add(itmManCorrettiva);
 			cmbTipologiaIntervento.Items.Add(itmManStraordinaria);
@@ -110,7 +110,7 @@ namespace TheSite.AnalisiStatistiche
 				DisplayReport();
 		}
 		private string queryString()
-		{
+		{	
 			GenetoreQryStr _obj_QueryStr = new GenetoreQryStr();
 			_obj_QueryStr.Add(DataPkInit.Datazione.Text,"DataPkInit");
 			_obj_QueryStr.Add(DataPkEnd.Datazione.Text,"DataPkEnd");
@@ -124,18 +124,25 @@ namespace TheSite.AnalisiStatistiche
 			_obj_QueryStr.Add(S_OptBtnRdlServizioMesi.Checked,"S_OptBtnRdlServizioMesi");
 			_obj_QueryStr.Add(S_OptBtnRdlStato.Checked,"S_OptBtnRdlStato");
 			_obj_QueryStr.Add(cmbTipologiaIntervento.SelectedItem.Value,"tipologia");
+			
 			return _obj_QueryStr.TotQueryString().ToString();
 		}
 		private void DisplayReport()
 		{	
 			DataPanelRicerca.Collapsed=true;
-			urlRpt = "DisplayReport.aspx" + queryString() + "tipoDocumento=HTML";	
+			string Progetto="";
+			if(Request["VarApp"]!=null)
+				Progetto = "&VarApp=" + Request["VarApp"];
+			urlRpt = "DisplayReport.aspx" + queryString() + "tipoDocumento=HTML" + Progetto;	
 		}
 
 		private void btnReportPdf_Click(object sender, System.EventArgs e)
 		{
 			string qryStr = queryString();
-			Server.Transfer( "DisplayReport.aspx" + qryStr + "tipoDocumento=PDF");
+			string Progetto="";
+			if(Request["VarApp"]!=null)
+				Progetto = "&VarApp=" + Request["VarApp"];
+			Server.Transfer( "DisplayReport.aspx" + qryStr + "tipoDocumento=PDF" + Progetto);
 		}
 	}
 

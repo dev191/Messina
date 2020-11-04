@@ -20,7 +20,7 @@ namespace TheSite.ShedeEq
 	/// <summary>
 	/// Descrizione di riepilogo per VisulizzaSchedaEqPdf.
 	/// </summary>
-	public class VisulizzaSchedaEqPdf : System.Web.UI.Page    // System.Web.UI.Page
+	public class VisulizzaSchedaEqPdf : System.Web.UI.Page
 	{
 		protected ReportDocument  crReportDocument;
 		private ExportOptions crExportOptions;

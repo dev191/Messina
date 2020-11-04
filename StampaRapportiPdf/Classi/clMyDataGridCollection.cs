@@ -195,40 +195,40 @@ namespace StampaRapportiPdf.Classi
 		}
 
 
-		//public class clMyControl
-		//{
+		public class clMyControl
+		{
 				
-		//	string _valore;
-		//	string _NomeControllo;		
+			string _valore;
+			string _NomeControllo;		
 
-		//	public string Valore
-		//	{
-		//		get
-		//		{
-		//			return _valore;
-		//		}
+			public string Valore
+			{
+				get
+				{
+					return _valore;
+				}
 
-		//		set
-		//		{
-		//			_valore = value;
-		//		}
+				set
+				{
+					_valore = value;
+				}
 		
-		//	}
+			}
 
-		//	public string NomeControllo
-		//	{
-		//		get
-		//		{
-		//			return _NomeControllo;
-		//		}
+			public string NomeControllo
+			{
+				get
+				{
+					return _NomeControllo;
+				}
 
-		//		set
-		//		{
-		//			_NomeControllo = value;
-		//		}
+				set
+				{
+					_NomeControllo = value;
+				}
 				
-		//	}
-		//}
+			}
+		}
 
 	}
 }

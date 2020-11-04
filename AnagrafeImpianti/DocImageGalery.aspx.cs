@@ -15,7 +15,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per DocImageGalery.
 	/// </summary>
-	public class DocImageGalery : System.Web.UI.Page    // System.Web.UI.Page
+	public class DocImageGalery : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataList DataListImage;
 		protected WebControls.PageTitle PageTitle1;

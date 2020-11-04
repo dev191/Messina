@@ -15,9 +15,10 @@ namespace TheSite.WebControls
 	using S_Controls.Collections;
 	using System.Reflection;
 	using System.IO;
-    using global::StampaRapportiPdf.Classi;
+	using MyCollection;
 
-    public class UserRdlInailLabel : System.Web.UI.UserControl
+
+	public class UserRdlInailLabel : System.Web.UI.UserControl
 	{
 		protected System.Web.UI.WebControls.Label lblNote;
 		protected System.Web.UI.WebControls.Label lblTelefono;
@@ -136,8 +137,8 @@ namespace TheSite.WebControls
 		public static string HelpLink = string.Empty;		
 			
 			
-		public static int FunId = 0;
-		clMyCollection _myColl = new clMyCollection();
+		public static int FunId = 0;	
+		MyCollection.clMyCollection _myColl = new MyCollection.clMyCollection();
 		#endregion
 			
 		private int bl_id
@@ -194,7 +195,7 @@ namespace TheSite.WebControls
 		private void Page_Load(object sender, System.EventArgs e)
 		{
 			
-			string domanda=null;
+			;
 			string confirmMessaggio = "return confirm('Sei sicuro di voler eliminare la RdL n° " + Request["wr_id"].ToString().Trim() + " ?');";
 			//domanda = "Sei sicuro di voler eliminare la RdL n°" + Request["wr_id"].ToString() + " ?";
 			this.BtnElimina.Attributes.Add("onclick",confirmMessaggio);
@@ -202,7 +203,7 @@ namespace TheSite.WebControls
 			myType=Page.GetType();       
 			FieldInfo myFiledInfo = myType.GetField("_SiteModule");
 
-			string _mypage="./ManutenzioneCorrettiva/SfogliaRdl.aspx";			
+			string _mypage="./ManutenzioneCorrettiva/SfogliaRdlPaging.aspx";			
 			_SiteModule = new TheSite.Classi.SiteModule(_mypage);
 			FunId = _SiteModule.ModuleId;
 

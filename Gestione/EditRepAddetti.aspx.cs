@@ -11,15 +11,16 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Text;
-using StampaRapportiPdf.Classi;
+
 
 namespace TheSite.Gestione
 {	
 	/// <summary>
 	/// Descrizione di riepilogo per EditRepAddetti
 	/// </summary>
-	public class EditRepAddetti : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditRepAddetti : System.Web.UI.Page
 	{
 		protected Csy.WebControls.MessagePanel PanelMess;
 		protected System.Web.UI.WebControls.Panel PanelEdit;
@@ -154,14 +155,14 @@ namespace TheSite.Gestione
 			}
 	
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 

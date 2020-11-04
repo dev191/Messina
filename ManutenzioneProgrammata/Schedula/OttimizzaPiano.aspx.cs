@@ -10,15 +10,15 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Reflection;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.ManutenzioneProgrammata.Schedula
 {
 	/// <summary>
 	/// Descrizione di riepilogo per OttimizzaPiano.
 	/// </summary>
-	public class OttimizzaPiano : System.Web.UI.Page    // System.Web.UI.Page
+	public class OttimizzaPiano : System.Web.UI.Page
 	{
 		protected Csy.WebControls.DataPanel PanelRicerca;
 		protected S_Controls.S_ComboBox cmbsAnno;
@@ -30,12 +30,12 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 		protected WebControls.GridTitle GridTitle1;	
 		public static string HelpLink = string.Empty;
 
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		protected System.Web.UI.WebControls.Button cmdReset;
 		protected S_Controls.S_ComboBox cmbsServizio;
 		OttimizzaPianoEQ _fp;
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
@@ -83,7 +83,7 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 					{
 						_myColl=_fp._Contenitore;
 						_myColl.SetValues(this.Page.Controls);								
-						Ricerca();
+						Ricerca(true);
 					}
 				}			
 			
@@ -177,11 +177,8 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 			}
 
 		}
-
-		private void Ricerca()
-		{	
-			
-
+		private S_Controls.Collections.S_ControlsCollection GetControl()
+		{
 			S_Controls.Collections.S_ControlsCollection CollezioneControlli = new S_Controls.Collections.S_ControlsCollection();
 			
 			cmbsComune.DBDefaultValue="0";
@@ -242,26 +239,60 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 			s_Servizio.Size=10;
 			s_Servizio.Value=id_servizio;
 			CollezioneControlli.Add(s_Servizio);
+
+			return CollezioneControlli;
+		}
+
+		private void Ricerca(bool reset)
+		{	
+			
+
+			S_Controls.Collections.S_ControlsCollection CollezioneControlli =GetControl();
 			 
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+			CollezioneControlli.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca.PageSize;			
+			CollezioneControlli.Add(s_p_pagesize);
+
 			Classi.ManProgrammata.CreaOttimizzaRDL_MP  _creaRDL = new TheSite.Classi.ManProgrammata.CreaOttimizzaRDL_MP();
 
-			DataSet _MyDs = _creaRDL.GetData(CollezioneControlli).Copy();
+			DataSet _MyDs = _creaRDL.GetDataPaging(CollezioneControlli).Copy();
 
+			if (reset==true)
+			{
+
+				CollezioneControlli =GetControl();	
+				int _totalRecords = _creaRDL.GetDataCount(CollezioneControlli);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+			}
+
+			DataGridRicerca.Visible =true;
 			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
-			this.DataGridRicerca.DataBind();			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.DataGridRicerca.DataBind();
 			
 		}
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex=0;						
-			Ricerca();
+			Ricerca(true);
 		}
 
 		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;	
-			Ricerca();		
+			Ricerca(false);		
 		}
 		private void DataGridRicerca_ItemCommand(object source, System.Web.UI.WebControls.DataGridCommandEventArgs e)
 		{
@@ -319,6 +350,7 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 		{
 			Response.Redirect("OttimizzaPiano.aspx");
 		}
-        	
+
+	
 	}
 }

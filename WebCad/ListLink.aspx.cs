@@ -14,7 +14,7 @@ namespace WebCad
 	/// <summary>
 	/// Descrizione di riepilogo per ListLink.
 	/// </summary>
-	public class ListLink : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListLink : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Repeater RepeaterLink;
 		private string idLink=string.Empty;

@@ -1,10 +1,10 @@
-<%@ Page language="c#" Codebehind="ReportGestioneSpazi.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ReportGestioneSpazi.ReportGestioneSpazi" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="iewc" Namespace="Microsoft.Web.UI.WebControls" Assembly="Microsoft.Web.UI.WebControls" %>
 <%@ Register TagPrefix="uc1" TagName="UserStanze" Src="../WebControls/UserStanze.ascx" %>
+<%@ Register TagPrefix="iewc" Namespace="Microsoft.Web.UI.WebControls" Assembly="Microsoft.Web.UI.WebControls" %>
+<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Page language="c#" Codebehind="ReportGestioneSpazi.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ReportGestioneSpazi.ReportGestioneSpazi" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -118,9 +118,9 @@
 					</TR>
 					<TR>
 						<TD vAlign="top" align="center">
-							<CC2:DATAPANEL id="DataPanel1" runat="server" AllowTitleExpandCollapse="True" CollapseImageUrl="../Images/up.gif"
-								CollapseText="Espandi/Riduci" ExpandImageUrl="../Images/down.gif" ExpandText="Espandi " TitleText="Filtri dei Dati"
-								Collapsed="False" TitleStyle-CssClass="TitleSearch" CssClass="DataPanel75">
+							<CC2:DATAPANEL id="DataPanel1" runat="server" CssClass="DataPanel75" TitleStyle-CssClass="TitleSearch"
+								Collapsed="False" TitleText="Filtri dei Dati" ExpandText="Espandi " ExpandImageUrl="../Images/down.gif"
+								CollapseText="Espandi/Riduci" CollapseImageUrl="../Images/up.gif" AllowTitleExpandCollapse="True">
 								<TABLE id="tblForm" cellSpacing="1" cellPadding="1" align="center">
 									<TR>
 										<TD vAlign="top" align="left">&nbsp;
@@ -152,7 +152,7 @@
 														<cc1:S_ComboBox id="cmbsCategoria" runat="server" Width="392px"></cc1:S_ComboBox></TD>
 												</TR>
 												<TR>
-													<TD style="WIDTH: 158px; HEIGHT: 20px">Destinazione d'uso:</TD>
+													<TD style="WIDTH: 158px; HEIGHT: 20px">Destinazione d'Uso:</TD>
 													<TD style="HEIGHT: 20px">
 														<cc1:S_TextBox id="s_txtDestinazione" runat="server" Width="344px"></cc1:S_TextBox>&nbsp;<INPUT class=btn id=bt_destinazione style="WIDTH: 32px; HEIGHT: 25px" onclick="apri_ricerca_uso('ADMIN','<%= descUso1 %>','<%= Usoid1 %>');" type=button value=... name=bt_destinazione></TD>
 												</TR>
@@ -162,7 +162,7 @@
 														<cc1:S_TextBox id="s_txtReparto" runat="server" Width="344px"></cc1:S_TextBox>&nbsp;<INPUT class=btn id=bt_reparto style="WIDTH: 32px; HEIGHT: 25px" onclick="apri_ricerca_reparto('ADMIN','<%= descRep%>','<%= id%>');" type=button value=... name=bt_reparto></TD>
 												</TR>
 												<TR>
-													<TD style="WIDTH: 158px; HEIGHT: 27px">Mq2:</TD>
+													<TD style="WIDTH: 158px; HEIGHT: 27px">mq stanza:</TD>
 													<TD style="HEIGHT: 27px">
 														<cc1:S_ComboBox id="cmbsConfronto" runat="server" Width="40px">
 															<asp:ListItem Value="=" Selected="True">=</asp:ListItem>
@@ -178,7 +178,7 @@
 												</TR>
 												<TR>
 													<TD align="center" colSpan="2">
-														<cc1:S_ListBox id="S_ListEdifici" runat="server" Width="100%" DBSize="100" DBDirection="Input"></cc1:S_ListBox>&nbsp;
+														<cc1:S_ListBox id="S_ListEdifici" runat="server" Width="100%" DBDirection="Input" DBSize="100"></cc1:S_ListBox>&nbsp;
 														<INPUT id="edifici" type="hidden" name="edifici" runat="server"> <INPUT id="edificidescription" type="hidden" name="edificidescription" runat="server">
 													</TD>
 												</TR>
@@ -208,19 +208,22 @@
 					<TR>
 						<TD align="right" width="10%"><IMG src="../Images/Pie.png">&nbsp;</TD>
 						<TD align="left" width="20%">
-							<CC1:S_OPTIONBUTTON id="S_Misure" tabIndex="6" runat="server" groupname="Grkind" text="Grafico della Superficie Totale"
-								checked="True"></CC1:S_OPTIONBUTTON></TD>
+							<CC1:S_OPTIONBUTTON id="S_Misure" tabIndex="6" runat="server" checked="True" text="Grafico della Superficie Totale"
+								groupname="Grkind"></CC1:S_OPTIONBUTTON></TD>
 						<TD align="center" width="7%">&nbsp;<IMG src="../Images/Pie.png"></TD>
 						<TD align="left" width="26%">
-							<CC1:S_OPTIONBUTTON id="S_Categorie" tabIndex="5" runat="server" groupname="Grkind" text="Grafico della Superficie Utile per Categoria"></CC1:S_OPTIONBUTTON></TD>
+							<CC1:S_OPTIONBUTTON id="S_Categorie" tabIndex="5" runat="server" text="Grafico della Superficie Utile per Categoria"
+								groupname="Grkind"></CC1:S_OPTIONBUTTON></TD>
 					</TR>
 					<TR>
 						<TD align="right" width="10%"><IMG src="../Images/GraficiIstogramma.png">&nbsp;</TD>
 						<TD align="left" width="20%">
-							<CC1:S_OPTIONBUTTON id="S_Reparti" tabIndex="3" runat="server" groupname="Grkind" text="Grafico della Superficie Utile per Reparto"></CC1:S_OPTIONBUTTON></TD>
+							<CC1:S_OPTIONBUTTON id="S_Reparti" tabIndex="3" runat="server" text="Grafico della Superficie Utile per Reparto"
+								groupname="Grkind"></CC1:S_OPTIONBUTTON></TD>
 						<TD align="center" width="7%"><IMG src="../Images/GraficiIstogramma.png">&nbsp;</TD>
 						<TD align="left" width="26%">
-							<CC1:S_OPTIONBUTTON id="S_Destinazione" tabIndex="4" runat="server" groupname="Grkind" text="Grafico della Superficie Utile per Destinazione d'Uso"></CC1:S_OPTIONBUTTON></TD>
+							<CC1:S_OPTIONBUTTON id="S_Destinazione" tabIndex="4" runat="server" text="Grafico della Superficie Utile per Destinazione d'Uso"
+								groupname="Grkind"></CC1:S_OPTIONBUTTON></TD>
 					</TR>
 					<TR>
 						<TD align="right" width="10%">&nbsp;</TD>
@@ -233,10 +236,10 @@
 							<TABLE id="tblSubmit" cellSpacing="1" cellPadding="1" width="20%" align="center" border="0">
 								<TR>
 									<TD noWrap align="left">
-										<CC1:S_BUTTON id="S_BtnSubmit" tabIndex="9" runat="server" text="Genera il Report in Html" cssclass="btn"
-											width="150px"></CC1:S_BUTTON></TD>
+										<CC1:S_BUTTON id="S_BtnSubmit" tabIndex="9" runat="server" text="Genera il Report in Html" width="150px"
+											cssclass="btn"></CC1:S_BUTTON></TD>
 									<TD>
-										<ASP:BUTTON id="btnReportPdf" runat="server" text="Genera il Report In Pdf" cssclass="btn" width="150px"></ASP:BUTTON></TD>
+										<ASP:BUTTON id="btnReportPdf" runat="server" text="Genera il Report In Pdf" width="150px" cssclass="btn"></ASP:BUTTON></TD>
 									<TD noWrap align="left"><INPUT class="btn" id="Reset1" style="WIDTH: 150px" tabIndex="10" type="reset" value="Reset"
 											name="Reset1" runat="server">
 									</TD>

@@ -1,9 +1,9 @@
-<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Page language="c#" Codebehind="NavigazioneDocumenti.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnagrafeImpianti.NavigazioneDocumenti" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Page language="c#" Codebehind="NavigazioneDocumenti.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnagrafeImpianti.NavigazioneDocumenti" %>
+<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -29,7 +29,8 @@
 								<TABLE id="tblSearch100" cellSpacing="0" cellPadding="0" width="100%" border="0">
 									<TR>
 										<TD align="center" colSpan="2" rowSpan="1">
-											<uc1:RicercaModulo id="RicercaModulo1" runat="server"></uc1:RicercaModulo></TD>
+											<uc1:RicercaModulo id="RicercaModulo1" runat="server"></uc1:RicercaModulo>
+											<asp:requiredfieldvalidator id="rfvEdificio" runat="server" ErrorMessage="Selezionare un Edificio per eseguire la ricerca">*</asp:requiredfieldvalidator></TD>
 									</TR>
 									<TR>
 										<TD style="WIDTH: 139px; HEIGHT: 27px">Piano:</TD>
@@ -58,8 +59,8 @@
 												DBParameterName="p_categoria" DBIndex="5" DBSize="0"></cc1:S_ComboBox></TD>
 									</TR>
 									<TR>
-										<TD style="WIDTH: 139px; HEIGHT: 16px">Tipologia File:</TD>
-										<TD style="HEIGHT: 16px">
+										<TD style="WIDTH: 139px; HEIGHT: 27px">Tipologia File:</TD>
+										<TD style="HEIGHT: 27px">
 											<cc1:S_ComboBox id="S_CmbTipologia" runat="server" DBDataType="Integer" Width="392px" DBDirection="Input"
 												DBParameterName="p_tipo" DBIndex="6" DBSize="0"></cc1:S_ComboBox></TD>
 									</TR>
@@ -73,7 +74,7 @@
 													<TD style="WIDTH: 268px" align="right">
 														<cc1:S_Button id="S_btRicerca" runat="server" CssClass="btn" Width="130px" Text="Mostra Dettagli"></cc1:S_Button></TD>
 													<TD align="left">&nbsp;&nbsp;
-														<cc1:S_Button id="S_btReset" runat="server" CssClass="btn" Width="130px" Text="Reset"></cc1:S_Button></TD>
+														<cc1:S_Button id="S_btReset" runat="server" CssClass="btn" Width="130px" Text="Reset" CausesValidation="False"></cc1:S_Button></TD>
 													<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
                   target=_blank>Guida</A></TD>
 												</TR>
@@ -84,8 +85,8 @@
 							</cc2:datapanel></TD>
 					</TR>
 					<tr>
-						<td><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGrid1" runat="server" CssClass="DataGrid" Width="100%" GridLines="Vertical"
-								AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" BackColor="White" BorderWidth="1px" BorderStyle="None" BorderColor="Gray">
+						<td><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGrid1" AllowCustomPaging="True" runat="server" CssClass="DataGrid" Width="100%"
+								GridLines="Vertical" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" BackColor="White" BorderWidth="1px" BorderStyle="None" BorderColor="Gray">
 								<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 								<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 								<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
@@ -110,6 +111,8 @@
 					</tr>
 				</TBODY>
 			</TABLE>
+			<asp:validationsummary id="vlsEdit" style="Z-INDEX: 102; LEFT: 16px; POSITION: absolute; TOP: 632px" runat="server"
+				ShowSummary="False" DisplayMode="List" ShowMessageBox="True"></asp:validationsummary>
 		</form>
 		</TR></TBODY></TABLE></TR></TBODY></TABLE></TR></TBODY></TABLE></FORM><script language="javascript">parent.left.calcola();</script>
 	</body>

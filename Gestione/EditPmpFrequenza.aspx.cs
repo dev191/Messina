@@ -8,14 +8,15 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using StampaRapportiPdf.Classi;
+using MyCollection;
+
 
 namespace TheSite.Gestione
 {	
 	/// <summary>
 	/// Descrizione di riepilogo per EditPmpFrequenza
 	/// </summary>
-	public class EditPmpFrequenza : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditPmpFrequenza : System.Web.UI.Page
 	{
 		protected Csy.WebControls.MessagePanel PanelMess;
 		protected System.Web.UI.WebControls.Panel PanelEdit;
@@ -36,64 +37,76 @@ namespace TheSite.Gestione
 		protected S_Controls.S_ComboBox cmbsMesi;
 		protected S_Controls.S_ComboBox cmbsAnni;
 		protected S_Controls.S_ComboBox cmbsCalcola;
-		protected S_Controls.S_ComboBox S_combobox1;
+		protected System.Web.UI.WebControls.Repeater rpserv;
+		protected System.Web.UI.HtmlControls.HtmlTableRow r1;
+		protected System.Web.UI.HtmlControls.HtmlTableRow r2;
+		protected System.Web.UI.HtmlControls.HtmlTableRow r3;
+		protected System.Web.UI.HtmlControls.HtmlTableCell r4;
 		PmpFrequenza _fp;
 	
 		
 		private void Page_Load(object sender, System.EventArgs e)
 		{
 			FunId = Int32.Parse(Request["FunId"]);						
-
-			cmbsTipoCadenza.Attributes.Add("onChange", "fissaPeriodica('" + this.cmbsTipoCadenza.ClientID + "');" );
 			
 			if (Request["ItemId"] != null) 
 			{
 				itemId = Int32.Parse(Request["ItemId"]);				
 			}
 			if (!Page.IsPostBack )
-			{					
-					if (itemId != 0) 
-					{
-						DataSet _MyDs = new DataSet();
-						Classi.ClassiAnagrafiche.PmpFrequenza _PmpFrequenza = new TheSite.Classi.ClassiAnagrafiche.PmpFrequenza();
-						_MyDs = _PmpFrequenza.GetSingleData(itemId); 
+			{			
+				
+
+				if (itemId != 0) 
+				{
+					DataSet _MyDs = new DataSet();
+					Classi.ClassiAnagrafiche.PmpFrequenza _PmpFrequenza = new TheSite.Classi.ClassiAnagrafiche.PmpFrequenza();
+					_MyDs = _PmpFrequenza.GetSingleData(itemId); 
 						
-								if (_MyDs.Tables[0].Rows.Count == 1)
-								{					
-									DataRow _Dr = _MyDs.Tables[0].Rows[0];
-									this.txtsfrequenza.Text= (string) _Dr["FREQUENZA"];
+					if (_MyDs.Tables[0].Rows.Count == 1)
+					{					
+						DataRow _Dr = _MyDs.Tables[0].Rows[0];
+						this.txtsfrequenza.Text= (string) _Dr["FREQUENZA"];
 
-									if (_Dr["FREQUENZA_DES"] != DBNull.Value)
-										this.txtsfrequenza_des.Text = (string) _Dr["FREQUENZA_DES"];
+						if (_Dr["FREQUENZA_DES"] != DBNull.Value)
+							this.txtsfrequenza_des.Text = (string) _Dr["FREQUENZA_DES"];
 									
-									if (_Dr["mese_std"] != DBNull.Value)
-										this.cmbsTipoCadenza.SelectedValue = _Dr["mese_std"].ToString();						
+						if (_Dr["mese_std"] != DBNull.Value)
+							this.cmbsTipoCadenza.SelectedValue = _Dr["mese_std"].ToString();						
 															
-									if (_Dr["N_GIORNI"] != DBNull.Value)
-										this.cmbsGiorni.SelectedValue =  _Dr["N_GIORNI"].ToString();
+						if (_Dr["N_GIORNI"] != DBNull.Value)
+							this.cmbsGiorni.SelectedValue =  _Dr["N_GIORNI"].ToString();
 
-									if (_Dr["N_MESI"] != DBNull.Value)
-										this.cmbsMesi.SelectedValue = (string) _Dr["N_MESI"].ToString();
+						if (_Dr["N_MESI"] != DBNull.Value)
+							this.cmbsMesi.SelectedValue = (string) _Dr["N_MESI"].ToString();
 									
-									if (_Dr["N_ANNI"] != DBNull.Value)
-										this.cmbsAnni.SelectedValue = (string) _Dr["N_ANNI"].ToString();
+						if (_Dr["N_ANNI"] != DBNull.Value)
+							this.cmbsAnni.SelectedValue = (string) _Dr["N_ANNI"].ToString();
 
-									if (_Dr["CALCOLA"] != DBNull.Value)
-										this.cmbsCalcola.SelectedValue = (string) _Dr["CALCOLA"].ToString();
+						if (_Dr["CALCOLA"] != DBNull.Value)
+							this.cmbsCalcola.SelectedValue = (string) _Dr["CALCOLA"].ToString();
 															
-									this.lblOperazione.Text = "Modifica Frequenza: " + this.txtsfrequenza.Text;
-									this.lblFirstAndLast.Visible = true;						
-									this.btnsElimina.Attributes.Add("onclick", "return confirm('Si vuole effettuare la cancellazione?')");				
-			//						Classi.ClassiAnagrafiche.TipoManutenzione  _TipoManutenzione = new TheSite.Classi.ClassiAnagrafiche.TipoManutenzione();
-									lblFirstAndLast.Text = _PmpFrequenza.GetFirstAndLastUser(_Dr);
-								}
+						this.lblOperazione.Text = "Modifica Frequenza: " + this.txtsfrequenza.Text;
+						this.lblFirstAndLast.Visible = true;						
+						this.btnsElimina.Attributes.Add("onclick", "return confirm('Si vuole effettuare la cancellazione?')");				
+						//						Classi.ClassiAnagrafiche.TipoManutenzione  _TipoManutenzione = new TheSite.Classi.ClassiAnagrafiche.TipoManutenzione();
+						lblFirstAndLast.Text = _PmpFrequenza.GetFirstAndLastUser(_Dr);
+
+						LoadServizi(_Dr["mese_std"].ToString(),_Dr["FREQUENZA"].ToString());
+
+						
+
 					}
-					else
-					{
-						this.lblOperazione.Text = "Inserimento Frequenza";
-						this.lblFirstAndLast.Visible = false;
-						this.btnsElimina.Visible = false;					
-					}				
+				}
+				else
+				{
+					
+					LoadServizi("0","0");
+
+					this.lblOperazione.Text = "Inserimento Frequenza";
+					this.lblFirstAndLast.Visible = false;
+					this.btnsElimina.Visible = false;					
+				}				
 				if (Request["TipoOper"] == "read")
 				{
 					AbilitaControlli(false);
@@ -109,14 +122,14 @@ namespace TheSite.Gestione
 
 		}	
 		
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
         
@@ -168,12 +181,19 @@ namespace TheSite.Gestione
 				if (itemId == 0)
 				{			
 					Classi.ClassiAnagrafiche.PmpFrequenza _PmpFrequenza = new TheSite.Classi.ClassiAnagrafiche.PmpFrequenza();
-					i_RowsAffected = _PmpFrequenza .Add(_SCollection);
+					i_RowsAffected = _PmpFrequenza.Add(_SCollection);
+					_PmpFrequenza.DeleteFreqStag(i_RowsAffected);
+					if(cmbsTipoCadenza.SelectedValue=="1")
+						SaveStag(i_RowsAffected);
+					
 				}
 				else
 				{
 					Classi.ClassiAnagrafiche.PmpFrequenza _PmpFrequenza = new TheSite.Classi.ClassiAnagrafiche.PmpFrequenza();
-				    i_RowsAffected = _PmpFrequenza.Update(_SCollection,itemId);
+					i_RowsAffected = _PmpFrequenza.Update(_SCollection,itemId);
+					_PmpFrequenza.DeleteFreqStag(i_RowsAffected);
+					if(cmbsTipoCadenza.SelectedValue =="1")
+						SaveStag(i_RowsAffected);
 				}
 
 				if ( i_RowsAffected == -11)
@@ -193,6 +213,20 @@ namespace TheSite.Gestione
 			}			
 		}
 
+		private void SaveStag(int Freq)
+		{
+			
+			
+			foreach (RepeaterItem item in rpserv.Items)
+			{
+				string id_servizio=((HtmlInputHidden)item.FindControl("idser")).Value;
+				string Mese=((DropDownList)item.FindControl("drmese")).SelectedValue;
+				if(Mese=="0")	continue;
+				Classi.ClassiAnagrafiche.PmpFrequenza _PmpFrequenza = new TheSite.Classi.ClassiAnagrafiche.PmpFrequenza();
+				 _PmpFrequenza.InsertFreqStag(Freq,txtsfrequenza.Text,int.Parse(Mese),int.Parse(id_servizio));  
+			}
+		}
+
 		private void btnsElimina_Click(object sender, System.EventArgs e)
 		{
 			try
@@ -201,6 +235,7 @@ namespace TheSite.Gestione
 				S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
 				_SCollection.AddItems(this.PanelEdit.Controls);			
 				Classi.ClassiAnagrafiche.PmpFrequenza _PmpFrequenza = new TheSite.Classi.ClassiAnagrafiche.PmpFrequenza();
+				_PmpFrequenza.DeleteFreqStag(itemId);
 				i_RowsAffected = _PmpFrequenza.Delete(_SCollection,itemId);
 				if ( i_RowsAffected == -1 )
 					//Response.Redirect((String) ViewState["UrlReferrer"]);	
@@ -218,9 +253,42 @@ namespace TheSite.Gestione
 			//Response.Redirect((String) ViewState["UrlReferrer"]);
 			Server.Transfer("PmpFrequenza.aspx");	
 		}
+
+		private void LoadServizi(string cadenza,string frequenza)
+		{
+		    TheSite.Classi.ClassiDettaglio.Servizi s =new TheSite.Classi.ClassiDettaglio.Servizi();
+			DataSet ds=s.GetServizi();
+ 			rpserv.DataSource=ds.Tables[0];
+			rpserv.DataBind(); 
+
+			cmbsTipoCadenza.Attributes.Add("onclick","SetVisible();");
+			Page.RegisterStartupScript("visib","<script language='javascript'>SetVisible();</script>"); 
+						
+				Classi.ClassiAnagrafiche.PmpFrequenza _PmpFrequenza= new Classi.ClassiAnagrafiche.PmpFrequenza();
+				ds=_PmpFrequenza.GetDataStag(frequenza); 
+				//rpserv.Visible =true;
+				foreach (RepeaterItem item in rpserv.Items)
+				{
+					HtmlInputHidden ids=(HtmlInputHidden)item.FindControl("idser");
+					
+					foreach(DataRow riga in ds.Tables[0].Rows)
+					{
+						if(riga["servizi_id"].ToString()==ids.Value)
+						{
+							DropDownList cmb=(DropDownList)item.FindControl("drmese");
+							cmb.SelectedValue =riga["idmese"].ToString();
+							break;
+						}
+					}
+				}
+
+						
+		
+
+		}
+		
 	}
 	
-
 }
 	
 	

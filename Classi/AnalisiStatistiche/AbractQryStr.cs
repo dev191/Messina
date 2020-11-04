@@ -1,23 +1,72 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.AnalisiStatistiche.AbractQryStr
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
+using System;
+using System.Collections;
 
 namespace TheSite.Classi.AnalisiStatistiche
 {
-  public abstract class AbractQryStr
-  {
-    public abstract void AddCntr(object Control, string key);
+	
+	/// <summary>
+	/// Classe Astratta Per la generazione 
+	/// della Query String.
+	/// </summary>
+	public abstract class AbractQryStr
+	{
+		
+		public AbractQryStr()
+		{
+			//
+			// TODO: Costruttore non implementato
+			//
+		}
 
-    public abstract void RemCntr(string Key);
+		/// <summary>
+		/// Aggiunge un controllo all'oggeto
+		/// Generatore di query string
+		/// </summary>
+		/// <param name="Control"></param>
+		/// <param name="key"></param>
+		/// 
+		public abstract void AddCntr(object Control, string key);
+		/// <summary>
+		/// Rimuove il controllo che e'
+		/// stato agginto con la key
+		/// inserita
+		/// </summary>
+		/// <param name="Control"></param>
+		/// <param name="Key"></param>
+		public abstract void RemCntr(string Key);
+		/// <summary>
+		/// Restituisce il nome del controllo con la key 
+		/// inserita
+		/// </summary>
+		/// <param name="n"></param>
+		/// <returns></returns>
+		/// 
+		public abstract string Name(string key );
+		/// <summary>
+		/// Restituisce in formato stringa lo
+		/// stato del controllo con la key
+		/// inserita
+		/// </summary>
+		/// <param name="n"></param>
+		/// <returns type="string"></returns>
+		public abstract string Stato(string key);
+		/// <summary>
+		/// Restituisce il nome del controllo
+		///  il suo valore
+		/// Name=Stato con la
+		/// key iserita
+		/// </summary>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public abstract string QryStr(string key);
+		/// <summary>
+		/// Restituisce la query string di tuetti 
+		/// gli oggetti della collezione
+		/// Name1=Stato1&Nome2&Stato2& ....  &NomeN=StatoN
+		/// </summary>
+		/// <returns></returns>
+		public abstract string TotQueryString();
 
-    public abstract string Name(string key);
+	}
 
-    public abstract string Stato(string key);
-
-    public abstract string QryStr(string key);
-
-    public abstract string TotQueryString();
-  }
 }

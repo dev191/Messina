@@ -80,13 +80,16 @@
 												<HeaderStyle Width="20%"></HeaderStyle>
 											</asp:BoundColumn>
 											<asp:BoundColumn DataField="COGNOME" HeaderText="Cognome">
-												<HeaderStyle Width="25%"></HeaderStyle>
+												<HeaderStyle Width="20%"></HeaderStyle>
+											</asp:BoundColumn>
+											<asp:BoundColumn DataField="nome" HeaderText="Nome">
+												<HeaderStyle Width="20px"></HeaderStyle>
 											</asp:BoundColumn>
 											<asp:BoundColumn DataField="Ruolo" HeaderText="Ruolo">
-												<HeaderStyle Width="25%"></HeaderStyle>
+												<HeaderStyle Width="20%"></HeaderStyle>
 											</asp:BoundColumn>
 											<asp:BoundColumn DataField="Progetto" HeaderText="Progetto">
-												<HeaderStyle Width="22%"></HeaderStyle>
+												<HeaderStyle Width="20%"></HeaderStyle>
 											</asp:BoundColumn>
 										</Columns>
 									</asp:datagrid></TD>

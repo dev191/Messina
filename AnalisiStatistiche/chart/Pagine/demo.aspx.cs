@@ -122,6 +122,11 @@ namespace chart
 		}
 		private DsAnalisiStatistiche DsDati(DsAnalisiStatistiche ds,int tipologia)
 		{
+			int progetto;
+			if (Session["VarApp"] != null)
+				 progetto = Convert.ToInt32(Session["VarApp"]);
+			else
+				progetto = 0;
 			try
 			{
 				TheSite.Classi.AnalisiStatistiche.wrapDb _IODB = new TheSite.Classi.AnalisiStatistiche.wrapDb();
@@ -133,7 +138,7 @@ namespace chart
 				s_anno.DbType = CustomDBType.Integer;
 				s_anno.Direction = ParameterDirection.Input;
 				s_anno.Size =3;
-				s_anno.Index = 0;
+				s_anno.Index = _Scollection.Count +1;
 				s_anno.Value = Anno;
 				_Scollection.Add(s_anno);;
 
@@ -142,9 +147,19 @@ namespace chart
 				i_tip.DbType = CustomDBType.Integer;
 				i_tip.Direction = ParameterDirection.Input;
 				i_tip.Size =3;
-				i_tip.Index = 1;
+				i_tip.Index =_Scollection.Count +1;
 				i_tip.Value = tipologia;
 				_Scollection.Add(i_tip);
+
+				// nuovo parametro per il progetto
+
+				S_Controls.Collections.S_Object i_progetto  = new S_Controls.Collections.S_Object();
+				i_progetto.ParameterName = "S_PROGETTO";
+				i_progetto.DbType = CustomDBType.Integer;
+				i_progetto.Direction = ParameterDirection.Input;
+				i_progetto.Index = _Scollection .Count +1;
+				i_progetto.Value = progetto;
+				_Scollection.Add(i_progetto);
 
 				S_Controls.Collections.S_Object s_Cursor =  new S_Controls.Collections.S_Object();
 				s_Cursor.ParameterName = "IO_CORSUR";

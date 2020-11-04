@@ -99,31 +99,6 @@
 			</TABLE>
 			</FooterTemplate> </asp:repeater></cc2:datapanel>
 			<br>
-							<cc2:datapanel id="DataPanelPrestazioniEnergetiche" runat="server" TitleStyle-CssClass="TitleSearch" Collapsed="False"
-								TitleText="Prestazioni Energetiche " ExpandText="Espandi" ExpandImageUrl="../Images/down.gif"
-								CollapseText="Riduci" CssClass="DataPanel75" CollapseImageUrl="../Images/up.gif"
-								AllowTitleExpandCollapse="True">
-								<asp:repeater id="RepeaterPrestazioni" runat="server" EnableViewState=False>
-									<HeaderTemplate>
-										<table width="100%" border="0" cellpadding="0" cellspacing="0">
-									</HeaderTemplate>
-									<ItemTemplate>
-										<tr>
-											<td align="left"><b>Tipo Prestazione: </b>
-											</td>
-											<td align="Left"><%# DataBinder.Eval(Container, "DataItem.desctipo") %>
-											
-											</td>
-											<td align="left"><b>Descrizione: </b>
-											</td>
-											<td align="Left"><%# DataBinder.Eval(Container, "DataItem.Descrizione") %></td>
-										</tr>
-										</ItemTemplate>
-								
-									<FooterTemplate>
-			</TABLE>
-			</FooterTemplate> </asp:repeater></cc2:datapanel>
-			<br>
 			<hr>
 			<b>Documentazione e Immagini allegate:</b>
 			<hr>
@@ -175,12 +150,12 @@
 				<ItemTemplate>
 				<tr>
 					<td align=left><%# DataBinder.Eval(Container, "DataItem.var_servizio") %></td>
-					<td align=center>
+					<td align=center>Rassegna Fotografica
 					<a href="javascript:opendoc1('bl_id=<%# bl_id.ToString() + "&doc_id_servizio="+ DataBinder.Eval(Container, "DataItem.var_id_servizio") + "&categoria=" + DataBinder.Eval(Container, "DataItem.var_categoria")
 					+ "&idtip=" + DataBinder.Eval(Container, "DataItem.var_tipologiaid")%>');" title="Visualizza Documento">
 					 <img src="../Images/ico_info.gif"  border="0"></a>
 					</td>
-					<td align=left>Cartella Fotografica <%# DataBinder.Eval(Container, "DataItem.var_tipologia") %></td>
+					<td align=left><!--Cartella Fotografica--> <%# DataBinder.Eval(Container, "DataItem.var_tipologia") %></td>
 					<td align=left><%# DataBinder.Eval(Container, "DataItem.var_descrizione") %></td>
 				</tr>
 				</ItemTemplate>
@@ -197,8 +172,8 @@
 				<asp:Repeater id="RepeaterElaboratiTecnici" runat="server" EnableViewState=False >
 				<HeaderTemplate>
 				  <table width="100%" border="0" cellpadding="0" cellspacing="0">
-				  <tr >
-						<td align=left class="tdtop" ><b>Servizio</nobr></FONT></b></td>
+				  <tr>
+						<td style="display:none"  align=left class="tdtop" ><b>Servizio</nobr></FONT></b></td>
 						<td align=left class="tdcenter" ><b>Nome File</b></td>
 						<td align=left class="tdcenter"><b>Tipo</b></td>
 						<td align=left class="tdbottom" ><b>Descrizione</b></td>
@@ -206,11 +181,11 @@
 				</HeaderTemplate>
 				<ItemTemplate>
 				<tr>
-					<td align=left width="50px"><%# DataBinder.Eval(Container, "DataItem.var_afm_dwgs_servizio")%></td>
+					<td align=left€ style="display:none" ><%# DataBinder.Eval(Container, "DataItem.var_afm_dwgs_servizio")%></td>
 					<td align=left>
 					 <asp:PlaceHolder ID="placercontrols" Runat="server"></asp:PlaceHolder>   
 					</td>
-					<td align=left><%# DataBinder.Eval(Container, "DataItem.var_afm_dwgs_tipo")%></td>
+					<td align=left><%#TipoFile(DataBinder.Eval(Container, "DataItem.var_file_pdf"),DataBinder.Eval(Container, "DataItem.var_file_dwf"),DataBinder.Eval(Container, "DataItem.var_file_jpg"))%></td>
 					<td align=left> <%# DataBinder.Eval(Container, "DataItem.var_afm_dwgs_title")%></td>
 				</tr>
 				</ItemTemplate>

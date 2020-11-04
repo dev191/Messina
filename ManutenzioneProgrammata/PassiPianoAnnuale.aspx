@@ -54,7 +54,7 @@
 			}					
 		</script>
 	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0" rightMargin="0" MS_POSITIONING="GridLayout">
+	<body bottomMargin="0" leftMargin="5" topMargin="0" rightMargin="0" MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" cellSpacing="0" cellPadding="0" width="100%" align="center" border="0">
 				<TBODY>
@@ -87,11 +87,13 @@
 													<asp:BoundColumn DataField="DESCRIZIONE" HeaderText="DESCRIZIONE">
 														<ItemStyle VerticalAlign="Top"></ItemStyle>
 													</asp:BoundColumn>
-													<asp:TemplateColumn HeaderText="DATA">
+													<asp:TemplateColumn HeaderText="DATA" >
 														<ItemTemplate>
-															<uc1:UserMeseGiorno id="UserMeseGiorno1" runat="server"></uc1:UserMeseGiorno>
+															<uc1:UserMeseGiorno id="UserMeseGiorno1" runat="server" ></uc1:UserMeseGiorno>
+															
 														</ItemTemplate>
 													</asp:TemplateColumn>
+							
 													<asp:BoundColumn HeaderText="ISTRUZIONI">
 														<ItemStyle VerticalAlign="Top"></ItemStyle>
 													</asp:BoundColumn>
@@ -124,5 +126,5 @@
 				</TBODY>
 			</TABLE>
 			</TD></TR></TBODY></TABLE></form>
-	</body><script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

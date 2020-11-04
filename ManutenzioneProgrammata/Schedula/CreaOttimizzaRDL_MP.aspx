@@ -1,11 +1,10 @@
-<%@ Page language="c#" Codebehind="CreaOttimizzaRDL_MP.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.CreaOttimizzaRDL_MP" %>
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../../WebControls/CalendarPicker.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="BottomMenu" Src="../../WebControls/BottomMenu.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="DataPicker" Src="../../WebControls/DataPicker.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../../WebControls/CalendarPicker.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Page language="c#" Codebehind="CreaOttimizzaRDL_MP.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.CreaOttimizzaRDL_MP" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -67,7 +66,8 @@
 			
 		</script>
 	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0" rightMargin="0" MS_POSITIONING="GridLayout">
+	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0"
+		rightMargin="0" MS_POSITIONING="GridLayout">
 		<form onsubmit="return ControllaEdifici()" id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" cellSpacing="0" cellPadding="0" width="100%" align="center" border="0"
 				height="100%">
@@ -80,9 +80,9 @@
 							<TABLE cellSpacing="1" cellPadding="1" align="center" width="98%">
 								<TBODY>
 									<TR>
-										<TD vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" ExpandImageUrl="../../Images/down.gif"
-												CollapseImageUrl="../../Images/up.gif" CollapseText="Riduci" ExpandText="Espandi" Collapsed="False" AllowTitleExpandCollapse="True"
-												TitleText="Ricerca" CssClass="DataPanel75" TitleStyle-CssClass="TitleSearch">
+										<TD vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" ExpandImageUrl="../../Images/down.gif" CollapseImageUrl="../../Images/up.gif"
+												CollapseText="Riduci" ExpandText="Espandi" Collapsed="False" AllowTitleExpandCollapse="True" TitleText="Ricerca" CssClass="DataPanel75"
+												TitleStyle-CssClass="TitleSearch">
 												<TABLE id="tblSearch100" cellSpacing="1" cellPadding="2" border="0">
 													<TR>
 														<TD align="left">Anno:
@@ -153,14 +153,14 @@
 									<TR>
 										<TD vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle>
 											<asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" AllowPaging="True" BorderColor="Gray"
-												BorderWidth="1px" GridLines="Vertical" AutoGenerateColumns="False">
+												BorderWidth="1px" GridLines="Vertical" AutoGenerateColumns="False" AllowCustomPaging="True">
 												<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 												<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 												<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
 												<Columns>
 													<asp:BoundColumn Visible="False" DataField="INDICE" HeaderText="INDICE"></asp:BoundColumn>
-													<asp:TemplateColumn HeaderStyle-HorizontalAlign="Center" HeaderText="&lt;input id='ChkSelTutti' type='Checkbox' onclick='SelCheckbox()'&gt;">
-														<HeaderStyle Width="3%"></HeaderStyle>
+													<asp:TemplateColumn HeaderText="&lt;input id='ChkSelTutti' type='Checkbox' onclick='SelCheckbox()'&gt;">
+														<HeaderStyle HorizontalAlign="Center" Width="3%"></HeaderStyle>
 														<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 														<ItemTemplate>
 															<asp:CheckBox ID="ChkSel" Runat="server"></asp:CheckBox>
@@ -260,5 +260,6 @@
 				</TBODY>
 			</TABLE>
 		</form>
-	</body><script language="javascript">parent.left.calcola();</script>
+		<script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

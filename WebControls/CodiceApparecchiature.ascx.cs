@@ -20,17 +20,22 @@ namespace TheSite.WebControls
 		
 		private void Page_Load(object sender, System.EventArgs e)
 		{
-			// Inserire qui il codice utente necessario per inizializzare la pagina.
+			if (NameComboApparecchiature!="")
+			{
+				// Inserire qui il codice utente necessario per inizializzare la pagina.
+				DropDownList cba1=(DropDownList)this.Page.FindControl(NameComboApparecchiature);
 
-//			String scriptString = "<script language=JavaScript> var idthis='" + this.ClientID +"'";
-//			scriptString += "<";
-//			scriptString += "/";
-//			scriptString += "script>";
-//			if(!this.Page.IsClientScriptBlockRegistered("clientScript2"))
-//				this.Page.RegisterClientScriptBlock("clientScript2", scriptString);
-            if (this.S_txtcodapparecchiatura.Text=="")
-				this.hidCodEq.Value="";
-			ShowFrame2(1);
+				String scriptString = "<script language=JavaScript> var idthis='" + this.ClientID +"'\n";
+				scriptString += "var std='"+cba1.ClientID +"'";
+				scriptString += "<";
+				scriptString += "/";
+				scriptString += "script>";
+				if(!this.Page.IsClientScriptBlockRegistered("clientScript2"))
+					this.Page.RegisterClientScriptBlock("clientScript2", scriptString);
+				if (this.S_txtcodapparecchiatura.Text=="")
+					this.hidCodEq.Value="";
+				ShowFrame2(1);
+			}
 		}
 		private void ShowFrame2(int NumDirectory)
 		{
@@ -66,7 +71,7 @@ namespace TheSite.WebControls
 			//Verivico se è presente la combo servizio e presente e la aggiungo come parametro
 			if (NameComboServizio!="")
 			{
-				S_ComboBox cbs=(S_ComboBox)this.Page.FindControl(NameComboServizio);
+				DropDownList cbs=(DropDownList)this.Page.FindControl(NameComboServizio);
 				if (cbs!=null )
 				{
 					_StrBld.Append("var val1=\"&servizioid=\";\n");
@@ -80,7 +85,7 @@ namespace TheSite.WebControls
 			//Verivico se è presente la combo apparecchiature e presente e la aggiungo come parametro
 			if (NameComboApparecchiature!="")
 			{
-				S_ComboBox cba=(S_ComboBox)this.Page.FindControl(NameComboApparecchiature);
+				DropDownList cba=(DropDownList)this.Page.FindControl(NameComboApparecchiature);
 				if (cba!=null )
 				{
 					_StrBld.Append("var val2=\"&appaid=\";\n");
@@ -95,7 +100,7 @@ namespace TheSite.WebControls
 			//Verivico se è presente la combo Piano e presente e la aggiungo come parametro
 			if (NameComboPiano!="")
 			{
-				S_ComboBox cbp=(S_ComboBox)this.Page.FindControl(NameComboPiano);
+				DropDownList cbp=(DropDownList)this.Page.FindControl(NameComboPiano);
 				if (cbp!=null )
 				{
 					_StrBld.Append("var val3=\"&piano=\";\n");
@@ -109,7 +114,7 @@ namespace TheSite.WebControls
 			//Verivico se è presente la combo Stanza e presente e la aggiungo come parametro
 			if (NameComboStanza!="")
 			{
-				S_ComboBox cbst=(S_ComboBox)this.Page.FindControl(NameComboStanza);
+				DropDownList cbst=(DropDownList)this.Page.FindControl(NameComboStanza);
 				if (cbst!=null )
 				{
 					_StrBld.Append("var val4=\"&stanza=\";\n");

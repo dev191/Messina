@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Reflection;
 
 namespace TheSite.ManutenzioneProgrammata
@@ -17,7 +18,7 @@ namespace TheSite.ManutenzioneProgrammata
 	/// <summary>
 	/// Descrizione di riepilogo per Associazione_EQ_PMS.
 	/// </summary>
-	public class Associazione_EQ_PMS : System.Web.UI.Page    // System.Web.UI.Page
+	public class Associazione_EQ_PMS : System.Web.UI.Page
 	{
 		protected S_Controls.S_Button cmdAssocia;
 		public string TotEQ = "";

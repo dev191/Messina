@@ -10,20 +10,21 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using System.Reflection;
-using StampaRapportiPdf.Classi;
+using MyCollection;
+
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per TipologiaDitta.
 	/// </summary>
-	public class TipologiaDitta : System.Web.UI.Page    // System.Web.UI.Page
+	public class TipologiaDitta : System.Web.UI.Page
 	{
 		protected TheSite.Gestione.RicercaAnagrafica1 RicercaAnagrafica1;				
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		TheSite.Gestione.EditAnagrafica  _fp=null;
 		
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{

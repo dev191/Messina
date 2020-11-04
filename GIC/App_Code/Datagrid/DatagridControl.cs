@@ -1,56 +1,47 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: GIC.App_Code.Datagrid.DatagridControl
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using GIC.App_Code.Businnes;
 using System;
 using System.Web.UI.WebControls;
 
 namespace GIC.App_Code.Datagrid
 {
-  public interface DatagridControl
-  {
-    DataGrid Dt { get; set; }
+	/// <summary>
+	/// Descrizione di riepilogo per DatagridControl.
+	/// </summary>
+	public interface DatagridControl
+	{
+		DataGrid Dt
+		{
+			get;
+			set;
+		}
 
-    int numeroPagina { get; }
+		int numeroPagina
+		{
+			get;
+		}
 
-    string campoDiOrdinamento { get; }
+		string campoDiOrdinamento
+		{
+			get;
+		}
 
-    int recordPerPagina { get; }
+		int recordPerPagina
+		{
+			get;
+		}
 
-    void InitDataGrid();
+		void InitDataGrid();
+		void SetColums ();
+		void EditCommand(object source, DataGridCommandEventArgs e);
+		void UpdateCommand(object source, DataGridCommandEventArgs e, string[] ControlParamNamel, string COntrolForIdName, string StoredProcedure,  App_Code.Businnes.DataManager dataManager);
+		void CancelCommand(object source, System.Web.UI.WebControls.DataGridCommandEventArgs e);
+		void ItemCommand(object source, System.Web.UI.WebControls.DataGridCommandEventArgs e, string[] ControlParamName, string ControlForIdName, string StoredProcedure, string command,  App_Code.Businnes.DataManager dataManager);
+		void DataBound();
 
-    void SetColums();
+		#region controllo datagrid
+		void CambiaPaginaDataGrid(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e);
+		void OrdinaDataGrid(object source, System.Web.UI.WebControls.DataGridSortCommandEventArgs e);
+		void DropDownList1_SelectedIndexChanged(object sender, System.EventArgs e, string valore);
+		#endregion
 
-    void EditCommand(object source, DataGridCommandEventArgs e);
-
-    void UpdateCommand(
-      object source,
-      DataGridCommandEventArgs e,
-      string[] ControlParamNamel,
-      string COntrolForIdName,
-      string StoredProcedure,
-      DataManager dataManager);
-
-    void CancelCommand(object source, DataGridCommandEventArgs e);
-
-    void ItemCommand(
-      object source,
-      DataGridCommandEventArgs e,
-      string[] ControlParamName,
-      string ControlForIdName,
-      string StoredProcedure,
-      string command,
-      DataManager dataManager);
-
-    void DataBound();
-
-    void CambiaPaginaDataGrid(object source, DataGridPageChangedEventArgs e);
-
-    void OrdinaDataGrid(object source, DataGridSortCommandEventArgs e);
-
-    void DropDownList1_SelectedIndexChanged(object sender, EventArgs e, string valore);
-  }
+	}
 }

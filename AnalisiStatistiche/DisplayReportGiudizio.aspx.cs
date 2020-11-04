@@ -23,10 +23,10 @@ namespace TheSite.AnalisiStatistiche
 {
 	
 	/// <summary>
-	/// Descrizione di riepilogo per DysplayReport.
+	/// Descrizione di riepilogo per DysplayReportGiudizio.
 	/// </summary>
 	/// 		
-	public class DysplayReportGiudizio : System.Web.UI.Page    // System.Web.UI.Page
+	public class DysplayReportGiudizio : System.Web.UI.Page
 	{			
 		protected CrystalReportViewer rptEngineOra;
 		private ReportDocument crReportDocument;

@@ -1,7 +1,7 @@
-<%@ Page language="c#" Codebehind="DisplayReport.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnalisiStatistiche.DysplayReport" %>
-<%@ Register TagPrefix="cr1" Namespace="CrystalDecisions.Web" Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
 <%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Register TagPrefix="cr1" Namespace="CrystalDecisions.Web" Assembly="CrystalDecisions.Web, Version=9.1.5000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" %>
+<%@ Page language="c#" Codebehind="DisplayReport.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnalisiStatistiche.DysplayReport" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -15,11 +15,11 @@
 		{ 
 			if (navigator.appName == "Microsoft Internet Explorer") 
 			{ 
-Â Â Â Â 			var PrintCommand = '<O B J E C T ID="PrintCommandObject" WIDTH=0 HEIGHT=0 ';
+    			var PrintCommand = '<O B J E C T ID="PrintCommandObject" WIDTH=0 HEIGHT=0 ';
 				PrintCommand += 'CLASSID="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2">';
-Â Â Â Â 			document.body.insertAdjacentHTML('beforeEnd', PrintCommand); 
-Â Â Â Â 			PrintCommandObject.ExecWB(6, -1); PrintCommandObject.outerHTML = ""; 
-Â Â Â Â 		} 
+    			document.body.insertAdjacentHTML('beforeEnd', PrintCommand); 
+    			PrintCommandObject.ExecWB(6, -1); PrintCommandObject.outerHTML = ""; 
+    		} 
 			else 
 			{ 
 			window.print();

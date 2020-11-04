@@ -7,11 +7,11 @@ namespace StampaRapportiPdf.Classi
 {
 
 
-	//public enum ParentType
-	//{
-	//	Page = 0,
-	//	WebControl = 1		
-	//}
+	public enum ParentType
+	{
+		Page = 0,
+		WebControl = 1		
+	}
 	/// <summary>
 	/// Descrizione di riepilogo per clMyCollection.
 	/// </summary>
@@ -127,46 +127,46 @@ namespace StampaRapportiPdf.Classi
 		}
 
 	}
-	//[Serializable()]
-	//public class clMyControl
-	//		{
+	[Serializable()]
+	public class clMyControl
+			{
 				
-	//			string _valore;
-	//			string _NomeControllo;
-	//			public ParentType _parent = ParentType.Page;
+				string _valore;
+				string _NomeControllo;
+				public ParentType _parent = ParentType.Page;
 
-	//			public clMyControl(ParentType myParent)	
-	//			{
-	//				this._parent = myParent;
-	//			}
+				public clMyControl(ParentType myParent)	
+				{
+					this._parent = myParent;
+				}
 			
 
-	//			public string Valore
-	//			{
-	//				get
-	//				{
-	//					return _valore;
-	//				}
+				public string Valore
+				{
+					get
+					{
+						return _valore;
+					}
 
-	//				set
-	//				{
-	//					_valore = value;
-	//				}
+					set
+					{
+						_valore = value;
+					}
 		
-	//			}
+				}
 
-	//			public string NomeControllo
-	//			{
-	//				get
-	//				{
-	//					return _NomeControllo;
-	//				}
+				public string NomeControllo
+				{
+					get
+					{
+						return _NomeControllo;
+					}
 
-	//				set
-	//				{
-	//					_NomeControllo = value;
-	//				}
+					set
+					{
+						_NomeControllo = value;
+					}
 				
-	//			}
-	//		}
+				}
+			}
 }

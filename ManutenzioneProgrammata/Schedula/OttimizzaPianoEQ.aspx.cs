@@ -10,16 +10,16 @@ using System.Web.UI.WebControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Web.UI.HtmlControls;
-using System.Reflection;
-using StampaRapportiPdf.Classi;
+using System.Reflection; 
 
 namespace TheSite.ManutenzioneProgrammata.Schedula
 {
 	/// <summary>
 	/// Descrizione di riepilogo per OttimizzaPianoEQ.
 	/// </summary>
-	public class OttimizzaPianoEQ : System.Web.UI.Page    // System.Web.UI.Page
+	public class OttimizzaPianoEQ : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Label lblpmp;
 		protected System.Web.UI.WebControls.TextBox txtAnno;
@@ -34,16 +34,16 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 		protected WebControls.GridTitle GridTitle1;
 		protected WebControls.PageTitle PageTitle1; 
 	
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		OttimizzaPiano _fp;	
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 

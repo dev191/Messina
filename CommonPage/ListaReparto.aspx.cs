@@ -18,7 +18,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per ListaReparto.
 	/// </summary>
-	public class ListaReparto : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaReparto : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.DataGrid DataGrid1;
@@ -26,6 +26,7 @@ namespace TheSite.CommonPage
 		string Desc="";
 		public string NomeTxtDesc="";
 		public string NomeTxtIdMat="";
+		public string chiamante="";
 
 		Classi.ClassiAnagrafiche.Stanze ioDati = new TheSite.Classi.ClassiAnagrafiche.Stanze();
 	
@@ -43,25 +44,28 @@ namespace TheSite.CommonPage
 			if(!Page.IsClientScriptBlockRegistered("arrayRep"))
 				Page.RegisterClientScriptBlock("arrayRep", scriptarray);
 
-			if (!Page.IsPostBack)
-			{		
-
-				if(Request.QueryString["IdTxt"]!=null)
-					this.NomeTxtDesc =	Request.QueryString["IdTxt"]; 
-				else
-					this.NomeTxtDesc =string.Empty;
+			if(Request.QueryString["IdTxt"]!=null)
+				this.NomeTxtDesc =	Request.QueryString["IdTxt"]; 
+			else
+				this.NomeTxtDesc =string.Empty;
 				
-				if(Request.QueryString["IdMat"]!=null)
-					this.NomeTxtIdMat =Request.QueryString["IdMat"]; 
-				else
-					this.NomeTxtIdMat =string.Empty;				
+			if(Request.QueryString["IdMat"]!=null)
+				this.NomeTxtIdMat =Request.QueryString["IdMat"]; 
+			else
+				this.NomeTxtIdMat =string.Empty;				
 
-				if(Request.QueryString["desc"]!=null)
-					this.Desc =	Request.QueryString["desc"]; 
-				else
-					this.Desc =string.Empty;
-						
-					
+			if(Request.QueryString["desc"]!=null)
+				this.Desc =	Request.QueryString["desc"]; 
+			else
+				this.Desc =string.Empty;
+
+			if(Request.QueryString["chiamante"]!=null)
+				this.chiamante =	Request.QueryString["chiamante"]; 
+			else
+				this.chiamante =string.Empty;
+
+			if (!Page.IsPostBack)
+			{	
 				Cerca(Desc);
 			}
 
@@ -88,7 +92,16 @@ namespace TheSite.CommonPage
 		private void Cerca(string Descr)
 		{
 			
-			DataSet DsMateriali = ioDati.GetAllReparto(Descr).Copy();
+			DataSet DsMateriali;
+			if (chiamante == "Spazi")
+			{
+				DsMateriali = ioDati.GetRepartoMura(Descr).Copy();	
+			}
+			else
+			{
+				DsMateriali = ioDati.GetAllReparto(Descr).Copy();
+			}
+			
 			DataGrid1.DataSource=DsMateriali;
 			DataGrid1.DataBind();
 		}

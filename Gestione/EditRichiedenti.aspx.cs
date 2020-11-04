@@ -11,14 +11,13 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per PmpFrequenza.
 	/// </summary>
-	public class EditRichiedenti : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditRichiedenti : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsFrequenza_des;
 		protected S_Controls.S_TextBox txtsFrequenza;	
@@ -48,6 +47,7 @@ namespace TheSite.Gestione
 		protected System.Web.UI.WebControls.RegularExpressionValidator REVtxtsemail;
 		protected System.Web.UI.WebControls.RequiredFieldValidator rvfnome;
 		protected System.Web.UI.WebControls.RequiredFieldValidator rfvcognome;
+		protected S_Controls.S_ComboBox CmbProgetto;
 		TheSite.Gestione.Richiedenti _fp;
 
 
@@ -62,7 +62,8 @@ namespace TheSite.Gestione
 				itemId = Int32.Parse(Request["ItemId"]);				
 			}
 			if (!Page.IsPostBack )
-			{					
+			{				
+				BindProgetti();	
 				if (itemId != 0) 
 				{
 
@@ -89,6 +90,9 @@ namespace TheSite.Gestione
 	
 						if (_Dr["stanza"] != DBNull.Value)
 							this.txtsstanza.Text = _Dr["stanza"].ToString();	
+
+						if (_Dr["progetto"] != DBNull.Value)
+							this.CmbProgetto.SelectedValue= _Dr["progetto"].ToString();	
 
 						this.lblOperazione.Text = "Modifica Richiedente";
 						this.btnsElimina.Attributes.Add("onclick", "return confirm('Si vuole effettuare la cancellazione?');");				
@@ -140,19 +144,45 @@ namespace TheSite.Gestione
 
 
 		}
+
+		private void BindProgetti()
+		{
+			
+			this.CmbProgetto.Items.Clear();
 		
-		public clMyCollection _Contenitore
+			TheSite.Classi.Progetti _Prog = new TheSite.Classi.Progetti();
+						
+			DataSet _MyDs = _Prog.GetData();			
+			
+			if (_MyDs.Tables[0].Rows.Count > 0)
+			{
+				CmbProgetto.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					_MyDs.Tables[0], "descrizione", "id_progetto", "- Selezionare un Progetto -", "0");				
+				this.CmbProgetto.DataTextField ="descrizione";
+				this.CmbProgetto.DataValueField  ="id_progetto";
+				this.CmbProgetto.DataBind();
+			}
+			else
+			{
+				string s_Messagggio = "- Nessun Progetto  -";
+				this.CmbProgetto.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+						
+			}			
+		}
+		
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 		private void AbilitaControlli(bool enabled)
 		{
+			CmbProgetto.Enabled= enabled;
 			this.txtsCognome.Enabled = enabled;
 			this.txtsNome.Enabled = enabled;			
 			this.btnsSalva.Enabled=enabled;
@@ -193,6 +223,7 @@ namespace TheSite.Gestione
 			Classi.ClassiAnagrafiche.Richiedenti _Richiedenti_0= new Classi.ClassiAnagrafiche.Richiedenti();
 			this.txtsNome.DBDefaultValue ="%";
 			this.txtsCognome.DBDefaultValue="%";
+			this.CmbProgetto.DBDefaultValue=DBNull.Value;
 			S_ControlsCollection _SCollection_0 = new S_ControlsCollection();
 		
 			S_Controls.Collections.S_Object s_p_nome= new S_Object();
@@ -222,6 +253,15 @@ namespace TheSite.Gestione
 			
 			_SCollection_0.Add(s_p_idGruppo);
 
+			S_Controls.Collections.S_Object s_p_idProgetto= new S_Object();
+			s_p_idProgetto.ParameterName = "p_progetto";
+			s_p_idProgetto.DbType=CustomDBType.Integer;
+			s_p_idProgetto.Direction = ParameterDirection.Input;
+			s_p_idProgetto.Index = 3;
+			s_p_idProgetto.Value = CmbProgetto.SelectedValue;						
+			
+			_SCollection_0.Add(s_p_idProgetto);
+
 
 			DataSet _MyDs = _Richiedenti_0.CheckData(_SCollection_0).Copy();
 
@@ -229,7 +269,7 @@ namespace TheSite.Gestione
 			{
 				this.txtsCognome.DBDefaultValue = DBNull.Value;
 				this.txtsNome.DBDefaultValue = DBNull.Value;
-			
+				if (CmbProgetto.SelectedValue == "0")
 				//this.txtsCognome.Text=this.txtsCognome.Text.Trim();
 				//this.txtsNome.Text= this.txtsNome.Text.Trim();			
 				this.cmbsGruppo.DBDefaultValue=DBNull.Value;
@@ -240,6 +280,19 @@ namespace TheSite.Gestione
 				int i_RowsAffected = 0;
 				S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
 				_SCollection.AddItems(this.PanelEdit.Controls);
+
+			S_Controls.Collections.S_Object s_p_idProgetto1= new S_Object();
+			s_p_idProgetto1.ParameterName = "p_progetto";
+			s_p_idProgetto1.DbType=CustomDBType.Integer;
+			s_p_idProgetto1.Direction = ParameterDirection.Input;
+			s_p_idProgetto1.Index = 3;
+			if (CmbProgetto.SelectedValue == "0")
+				s_p_idProgetto1.Value=DBNull.Value;
+			else
+				s_p_idProgetto1.Value = CmbProgetto.SelectedValue;						
+			
+			_SCollection.Add(s_p_idProgetto1);
+
 
 				try
 				{
@@ -283,7 +336,19 @@ namespace TheSite.Gestione
 				this.cmbsGruppo.DBDefaultValue=DBNull.Value;
 				int i_RowsAffected = 0;
 				S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
-				_SCollection.AddItems(this.PanelEdit.Controls);			
+				_SCollection.AddItems(this.PanelEdit.Controls);		
+				S_Controls.Collections.S_Object s_p_idProgetto1= new S_Object();
+				s_p_idProgetto1.ParameterName = "p_progetto";
+				s_p_idProgetto1.DbType=CustomDBType.Integer;
+				s_p_idProgetto1.Direction = ParameterDirection.Input;
+				s_p_idProgetto1.Index = 3;
+				if (CmbProgetto.SelectedValue == "0")
+					s_p_idProgetto1.Value=DBNull.Value;
+				else
+					s_p_idProgetto1.Value = CmbProgetto.SelectedValue;						
+			
+				_SCollection.Add(s_p_idProgetto1);
+
 				Classi.ClassiAnagrafiche.Richiedenti _Richiedenti = new TheSite.Classi.ClassiAnagrafiche.Richiedenti();
 				i_RowsAffected = _Richiedenti.Delete(_SCollection,itemId);
 				if ( i_RowsAffected == -1 )

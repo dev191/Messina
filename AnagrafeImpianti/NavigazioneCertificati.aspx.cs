@@ -8,19 +8,17 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using ApplicationDataLayer.Collections;
 using S_Controls.Collections;
-using System.Reflection;  
-using System.IO;
+using TheSite.AnagrafeImpianti; 
+using System.Reflection;
 
 namespace TheSite.AnagrafeImpianti
 {
 	/// <summary>
 	/// Descrizione di riepilogo per SelezioneCertificati.
 	/// </summary>
-	public class NavigazioneCertificati : System.Web.UI.Page    // System.Web.UI.Page
+	public class NavigazioneCertificati : System.Web.UI.Page
 	{
 		protected Csy.WebControls.DataPanel DataPanel1;
 		protected S_Controls.S_Button S_btReset;
@@ -40,29 +38,24 @@ namespace TheSite.AnagrafeImpianti
 	    protected WebControls.Matricole Matricole1;
 		protected WebControls.Fascicolo Fascicolo1; 
 		protected WebControls.CalendarPicker CalendarPicker1;
-		
 		protected WebControls.CalendarPicker CalendarPicker2;
-		protected WebControls.CalendarPicker CalendarPicker5ISPESL;
-		protected WebControls.CalendarPicker CalendarPicker6ISPESL;
-		
 
 		public static int FunId = 0;
 		protected System.Web.UI.WebControls.CheckBox chscollaudo;
 		protected S_Controls.Collections.S_Object S_Checkcollaudo = new S_Controls.Collections.S_Object();
-		protected S_Controls.S_TextBox s_txtDescPrimaVer;
-		protected S_Controls.S_TextBox s_txtDescSuccVer;
-		protected S_Controls.S_TextBox s_txtDescScadenza;
 
 
 		public static string HelpLink = string.Empty;
 
 		private void Page_Load(object sender, System.EventArgs e)
 		{
+
+
 			Classi.SiteModule _SiteModule = (Classi.SiteModule) HttpContext.Current.Items["SiteModule"];
 			FunId = _SiteModule.ModuleId;
 			HelpLink = _SiteModule.HelpLink;
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;
-	        CriteriDiRicercaOpzionali();
+	    
 			// Inserire qui il codice utente necessario per inizializzare la pagina.
 			if (!IsPostBack)
 			{   
@@ -72,7 +65,6 @@ namespace TheSite.AnagrafeImpianti
 				BindingComboAnno();
 				setvisible(false);
 				GridTitle1.Visible=false;
-			
 			}
 			
 			//Creazione dei primi Parametri
@@ -118,14 +110,7 @@ namespace TheSite.AnagrafeImpianti
 			S_Checkcollaudo.Direction = ParameterDirection.Input;
 			S_Checkcollaudo.Size=10; 
 			S_Checkcollaudo.Index = 10;
-			if (chscollaudo.Checked==true)
-			{
-					S_Checkcollaudo.Value =1;			
-			}
-			else			
-			{
-				S_Checkcollaudo.Value =0;	
-			}
+			S_Checkcollaudo.Value =DBNull.Value;
 			
 			Fascicolo1.TxtFascicolo.DBParameterName="P_fascicolo";
 			Fascicolo1.TxtFascicolo.DBIndex =8;
@@ -133,20 +118,6 @@ namespace TheSite.AnagrafeImpianti
 			Fascicolo1.TxtFascicolo.DBDataType=CustomDBType.VarChar; 
 			Fascicolo1.TxtFascicolo.DBSize=20; 
 			Fascicolo1.TxtFascicolo.DBDefaultValue=""; 
-
-			CalendarPicker5ISPESL.Datazione.DBParameterName="p_data_successiva_verifica";
-			CalendarPicker5ISPESL.Datazione.DBIndex =12;
-			CalendarPicker5ISPESL.Datazione.DBDirection= ParameterDirection.Input;
-			CalendarPicker5ISPESL.Datazione.DBDataType=CustomDBType.VarChar; 
-			CalendarPicker5ISPESL.Datazione.DBSize=20; 
-			CalendarPicker5ISPESL.Datazione.DBDefaultValue="";
-
-			CalendarPicker6ISPESL.Datazione.DBParameterName="p_data_scadenza";
-			CalendarPicker6ISPESL.Datazione.DBIndex =14;
-			CalendarPicker6ISPESL.Datazione.DBDirection= ParameterDirection.Input;
-			CalendarPicker6ISPESL.Datazione.DBDataType=CustomDBType.VarChar; 
-			CalendarPicker6ISPESL.Datazione.DBSize=20; 
-			CalendarPicker6ISPESL.Datazione.DBDefaultValue="";
 
 			GridTitle1.hplsNuovo.Visible=false; 
 
@@ -194,7 +165,6 @@ namespace TheSite.AnagrafeImpianti
 		/// </summary>
 		private void InitializeComponent()
 		{    
-			
 			this.S_btRicerca.Click += new System.EventHandler(this.S_btRicerca_Click);
 			this.S_btReset.Click += new System.EventHandler(this.S_btReset_Click);
 			this.DataGrid1.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGrid1_PageIndexChanged);
@@ -206,114 +176,16 @@ namespace TheSite.AnagrafeImpianti
 
 		private void S_btRicerca_Click(object sender, System.EventArgs e)
 		{
-          Execute();   
+          Execute(true);   
 		}
 
-		private void Execute()
+		private void Execute(bool reset )
 		{
 			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
 			Classi.AnagrafeImpianti.Certificati   _Certificati = new Classi.AnagrafeImpianti.Certificati(Context.User.Identity.Name);
 		
-		    SetDefaultValueControl(DataPanel1);
-			CollezioneControlli.AddItems(DataPanel1.Controls);
-			CollezioneControlli.Add(S_Checkcollaudo);
-
-			DataSet _MyDs = _Certificati.GetData(CollezioneControlli);
-			DataGrid1.DataSource =_MyDs;
-					
-			DataGrid1.DataBind();
-
-			if (_MyDs.Tables[0].Rows.Count >0)
-			{
-				int Pagina = 0;
-				if ((_MyDs.Tables[0].Rows.Count % DataGrid1.PageSize) >0)
-				{
-					Pagina ++;
-				}
-				if (DataGrid1.PageCount != Convert.ToInt16((_MyDs.Tables[0].Rows.Count / DataGrid1.PageSize) + Pagina))
-				{					
-					DataGrid1.CurrentPageIndex=0;					
-				}
-				setvisible(true);
-				GridTitle1.Visible=true;
-				GridTitle1.DescriptionTitle="";
-				GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();
-				
-			}
-			else
-			{	DataGrid1.CurrentPageIndex=0;
-				GridTitle1.Visible=true;
-				GridTitle1.DescriptionTitle="Nessun dato trovato.";
-				setvisible(false);
-			}
-		
-			chscollaudo.Visible=true;
-		}
-		private void SetDefaultValueControl(Control Ctrls)
-		{
-			foreach (Control Ctrl in Ctrls.Controls)
-			{
-				if (Ctrl.Controls.Count >0) SetDefaultValueControl(Ctrl);
-				if((Ctrl is S_Controls.S_CheckBox) || (Ctrl is S_Controls.S_ComboBox) 
-					|| (Ctrl is S_Controls.S_HyperLink) || (Ctrl is S_Controls.S_Label) || (Ctrl is S_Controls.S_ListBox) 
-					|| (Ctrl is S_Controls.S_OptionButton) || (Ctrl is S_Controls.S_TextBox)) 
-				{
-					Type MyType = Ctrl.GetType();
-					PropertyInfo Mypropertyinfo = MyType.GetProperty("DBDefaultValue");
-					Mypropertyinfo.SetValue(Ctrl, "", null);
-					Console.WriteLine(MyType.Name);  
-				}
-			}
-		}
-
-		private void setvisible(bool visible)
-		{
-			GridTitle1.VisibleRecord=visible;
-			GridTitle1.hplsNuovo.Visible =false;
-			DataGrid1.Visible =visible;
-			//modifica
-			//chscollaudo.Visible=false;
-		}
-		private void S_btReset_Click(object sender, System.EventArgs e)
-		{
-			Response.Redirect("NavigazioneCertificati.aspx?FunId=" + ViewState["FunId"]);
-		}
-
-		private void DataGrid1_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
-		{
-			///Imposto la Nuova Pagina
-			DataGrid1.CurrentPageIndex=e.NewPageIndex;
-			Execute();
-		}
-
-		private void DataGrid1_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
-		{
-			if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem) 
-			{
-				ImageButton _img1 = (ImageButton) e.Item.Cells[1].FindControl("Imagebutton1");
-				_img1.Attributes.Add("title","Visualizza Certificato");	
-
-				if (e.Item.Cells[8].Text=="0" || e.Item.Cells[8].Text=="")//Collaudo
-					e.Item.Cells[8].Text ="No";
-				else
-				    e.Item.Cells[8].Text="Si";
-			}
-		}
-
-//		private void DataGrid1_SelectedIndexChanged(object sender, System.EventArgs e)
-//		{
-//			Context.Items.Add("var_afm_dwgs_dwg_name",DataGrid1.SelectedItem.Cells[2].Text);
-//			Server.Transfer("VisualDWF.aspx"); 
-//		}
-		public void imageButton_Click(Object sender , CommandEventArgs e)
-		{
-			Context.Items.Add("var_afm_dwgs_dwg_name",(string)e.CommandArgument);
-			Server.Transfer("VisualDWF.aspx");
-		}
-
-		private void CriteriDiRicercaOpzionali()
-		{
-			SetDefaultValueControl(DataPanel1);		
+			SetDefaultValueControl(DataPanel1);
+			
 			
 			if (S_CbTipo.SelectedValue!="6")
 			{
@@ -357,11 +229,11 @@ namespace TheSite.AnagrafeImpianti
 				{
 					if (chscollaudo.Checked==true)
 					{
-						S_Checkcollaudo.Value =1;
+					S_Checkcollaudo.Value =1;
 					}
 					else
 					{
-						S_Checkcollaudo.Value =0;
+					S_Checkcollaudo.Value =0;
 					}
 				
 				}
@@ -395,10 +267,127 @@ namespace TheSite.AnagrafeImpianti
 				DataGrid1.Columns[10].Visible =false;
 				DataGrid1.Columns[11].Visible =false;
 			}
+  
+			CollezioneControlli.AddItems(DataPanel1.Controls);
+			CollezioneControlli.Add(S_Checkcollaudo);
+
+
+
+				   // nuovi parametri paginazione
+
+					S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+					s_p_pageindex.ParameterName = "pageindex";
+					s_p_pageindex.DbType = CustomDBType.Integer;
+					s_p_pageindex.Direction = ParameterDirection.Input;
+					s_p_pageindex.Index = 16;
+					s_p_pageindex.Value=DataGrid1.CurrentPageIndex +1;	
+		
+					CollezioneControlli.Add(s_p_pageindex);
+
+					S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+					s_p_pagesize.ParameterName = "pagesize";
+					s_p_pagesize.DbType = CustomDBType.Integer;
+					s_p_pagesize.Direction = ParameterDirection.Input;
+					s_p_pagesize.Index = 17;
+					s_p_pagesize.Value= DataGrid1.PageSize;	
+		
+					CollezioneControlli.Add(s_p_pagesize);
+
+					DataSet _MyDs = _Certificati.GetData(CollezioneControlli);
+
+			if (reset){
+				// elimino i due parametri per la paginazione
+				CollezioneControlli.RemoveAt(CollezioneControlli.Count  -3) ;
+				CollezioneControlli.RemoveAt(CollezioneControlli.Count  -3) ;
+
+				int _totalRecords = _Certificati.GetDataCount(CollezioneControlli);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+			}
+
+			this.DataGrid1.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+
+			DataGrid1.DataSource =_MyDs.Tables[0] ;
+			DataGrid1.DataBind();
+
+		
+				
+			if (int.Parse (this.GridTitle1.NumeroRecords) >0)
+			{
+
+				setvisible(true);
+				GridTitle1.Visible=true;
+				GridTitle1.DescriptionTitle="";
+			}
+			else
+			{	
+				GridTitle1.Visible=true;
+				GridTitle1.DescriptionTitle="Nessun dato trovato.";
+				setvisible(false);
+			}
+		
+			chscollaudo.Visible=true;
+		}
+		private void SetDefaultValueControl(Control Ctrls)
+		{
+			foreach (Control Ctrl in Ctrls.Controls)
+			{
+				if (Ctrl.Controls.Count >0) SetDefaultValueControl(Ctrl);
+				if((Ctrl is S_Controls.S_CheckBox) || (Ctrl is S_Controls.S_ComboBox) 
+					|| (Ctrl is S_Controls.S_HyperLink) || (Ctrl is S_Controls.S_Label) || (Ctrl is S_Controls.S_ListBox) 
+					|| (Ctrl is S_Controls.S_OptionButton) || (Ctrl is S_Controls.S_TextBox)) 
+				{
+					Type MyType = Ctrl.GetType();
+					PropertyInfo Mypropertyinfo = MyType.GetProperty("DBDefaultValue");
+					Mypropertyinfo.SetValue(Ctrl, "", null);
+					Console.WriteLine(MyType.Name);  
+				}
+			}
 		}
 
-	
-		
+		private void setvisible(bool visible)
+		{
+			GridTitle1.VisibleRecord=visible;
+			GridTitle1.hplsNuovo.Visible =false;
+			DataGrid1.Visible =visible;
+			//modifica
+			chscollaudo.Visible=false;
+		}
+		private void S_btReset_Click(object sender, System.EventArgs e)
+		{
+			Response.Redirect("NavigazioneCertificati.aspx?FunId=" + ViewState["FunId"]);
+		}
+
+		private void DataGrid1_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
+		{
+			///Imposto la Nuova Pagina
+			DataGrid1.CurrentPageIndex=e.NewPageIndex;
+			Execute(false);
+		}
+
+		private void DataGrid1_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
+		{
+			if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem) 
+			{
+				ImageButton _img1 = (ImageButton) e.Item.Cells[1].FindControl("Imagebutton1");
+				_img1.Attributes.Add("title","Visualizza Certificato");	
+
+				if (e.Item.Cells[8].Text=="0" || e.Item.Cells[8].Text=="")//Collaudo
+					e.Item.Cells[8].Text ="No";
+				else
+				    e.Item.Cells[8].Text="Si";
+			}
+		}
+
+//		private void DataGrid1_SelectedIndexChanged(object sender, System.EventArgs e)
+//		{
+//			Context.Items.Add("var_afm_dwgs_dwg_name",DataGrid1.SelectedItem.Cells[2].Text);
+//			Server.Transfer("VisualDWF.aspx"); 
+//		}
+		public void imageButton_Click(Object sender , CommandEventArgs e)
+		{
+			Context.Items.Add("var_afm_dwgs_dwg_name",(string)e.CommandArgument);
+			Server.Transfer("VisualDWF.aspx");
+		}
 
 
 	

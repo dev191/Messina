@@ -11,14 +11,15 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
+
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per EditTipoIntervento.
 	/// </summary>
-	public class EditContab : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditContab : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Label lblOperazione;
 		protected Csy.WebControls.MessagePanel PanelMess;		
@@ -168,6 +169,7 @@ namespace TheSite.Gestione
 
 		private bool ControllaDup()
 		{
+			
 			Classi.Function _Function = new TheSite.Classi.Function();
 			// Nome della tabella 
 			string tabella = "Contabilizzazione";
@@ -216,14 +218,14 @@ namespace TheSite.Gestione
 			
 		}
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 	}

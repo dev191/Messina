@@ -45,9 +45,9 @@
 																	<TD style="HEIGHT: 15px" align="left" width="10%">
 																		<ASP:LABEL id="lblTipologiaLavori" runat="server">Tipologia Intervento:</ASP:LABEL></TD>
 																	<TD style="HEIGHT: 15px" align="left" width="40%">
-																		<ASP:DROPDOWNLIST id="cmbTipologiaInitervento" runat="server" width="130px">
-																			<ASP:LISTITEM value="1" selected="True">Sotto Soglia</ASP:LISTITEM>
-																			<ASP:LISTITEM value="3">Sopra Soglia</ASP:LISTITEM>
+																		<ASP:DROPDOWNLIST id="cmbTipologiaInitervento" runat="server" >
+																			<ASP:LISTITEM value="1" selected="True">Manutenzione a Canone</ASP:LISTITEM>
+																			<ASP:LISTITEM value="3">Manutenzione Straordinaria</ASP:LISTITEM>
 																			<ASP:LISTITEM value="4">Entrambe le Tipologie</ASP:LISTITEM>
 																		</ASP:DROPDOWNLIST></TD>
 																</TR>

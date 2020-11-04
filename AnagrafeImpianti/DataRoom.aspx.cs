@@ -19,7 +19,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per DataRoom.
 	/// </summary>
-	public class DataRoom : System.Web.UI.Page    // System.Web.UI.Page
+	public class DataRoom : System.Web.UI.Page
 	{
 
 		#region Dichiarazioni Oggetti
@@ -34,7 +34,7 @@ namespace TheSite.AnagrafeImpianti
 		protected WebControls.CodiceStdApparecchiatura CodiceStdApparecchiatura1;
 		protected WebControls.CodiceApparecchiature CodiceApparecchiature1;
 		protected WebControls.RicercaModulo RicercaModulo1;
-		protected WebControls.UserStanze UserStanze1;
+		protected WebControls.UserStanzeRic UserStanze1;
 		protected System.Web.UI.HtmlControls.HtmlInputHidden hiddenblid;
 		
 
@@ -69,9 +69,9 @@ namespace TheSite.AnagrafeImpianti
 			HelpLink = _SiteModule.HelpLink;
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;				
 			 
-//			RicercaModulo1.DelegateCodiceEdificio1 +=new  WebControls.DelegateCodiceEdificio(this.BindPiano);
-//			RicercaModulo1.DelegateCodiceEdificio1 +=new  WebControls.DelegateCodiceEdificio(this.BindServizio);
-//			RicercaModulo1.DelegateCodiceServizio1 +=new  WebControls.DelegateCodiceServizio(this.BindStanza);
+			RicercaModulo1.DelegateCodiceEdificio1 +=new  WebControls.DelegateCodiceEdificio(this.BindPiano);
+			RicercaModulo1.DelegateCodiceEdificio1 +=new  WebControls.DelegateCodiceEdificio(this.BindServizio);
+			//RicercaModulo1.DelegateCodiceServizio1 +=new  WebControls.DelegateCodiceServizio(this.BindStanza);
 		   
 			UserStanze1.NameUserControlRicercaModulo = "RicercaModulo1";
 			UserStanze1.NameComboPiano="cmbsPiano";
@@ -81,8 +81,23 @@ namespace TheSite.AnagrafeImpianti
 			CodiceApparecchiature1.NameComboServizio ="cmbsServizio";
 			CodiceStdApparecchiatura1.NameUserControlRicercaModulo  ="RicercaModulo1";
 			CodiceApparecchiature1.NameUserControlRicercaModulo = "RicercaModulo1";
+			
+			System.Text.StringBuilder sbValid = new System.Text.StringBuilder();
 
-           
+			sbValid.Append("if (typeof(selezionedata) == 'function') { ");
+
+			sbValid.Append("if (selezionedata('" + S_btMostra.ClientID  + "') == false) { return false; }} ");
+			sbValid.Append("this.value = 'Attendere ...';");
+
+			sbValid.Append("this.disabled = true;");
+
+			sbValid.Append("document.getElementById('" + S_btMostra.ClientID + "').disabled = true;");
+
+			sbValid.Append(this.Page.GetPostBackEventReference(this.S_btMostra));
+			sbValid.Append(";");
+			this.S_btMostra.Attributes.Add("onclick", sbValid.ToString());
+
+
 			if (!IsPostBack) 
 			{
 				if(Request.QueryString["FunId"]!=null)
@@ -104,27 +119,27 @@ namespace TheSite.AnagrafeImpianti
 					
 					}
 					
-					_fp = (TheSite.AnagrafeImpianti.NavigazioneAppDEMO)Context.Handler;
-						PageTitle1.VisibleLogut = true;
-						BindTuttiPiani();
-						//BindStanza();
-						BindServizio("");
-						BindApparecchiatura();
-					
-						if (_fp!=null) 
-						{						
-							_myColl=_fp._Contenitore;
-							_myColl.SetValues(this.Page.Controls);		
-
-							Execute();
-						}
+//						_fp = (TheSite.AnagrafeImpianti.NavigazioneAppDEMO)Context.Handler;
+//						PageTitle1.VisibleLogut = true;
+//						BindTuttiPiani();
+//						//BindStanza();
+//						BindServizio("0");
+//						BindApparecchiatura();
+//					
+//						if (_fp!=null) 
+//						{						
+//							_myColl=_fp._Contenitore;
+//							_myColl.SetValues(this.Page.Controls);		
+//
+//							Execute(true);
+//						}
 							
 				}
 				else
 				{
 					BindTuttiPiani();
 			//		BindStanza();
-					BindServizio("");
+					BindServizio("0");
 					BindApparecchiatura();
 					
 						
@@ -136,7 +151,7 @@ namespace TheSite.AnagrafeImpianti
 					RicercaModulo1.TxtCodice.Text=GetCodiceEdificio(Convert.ToInt32(Request.QueryString["id_edificio_cad"]));
 					//PanelRicerca.Collapsed=true;
 					//S_btMostra_Click(this, new EventArgs());
-					Execute();
+					Execute(true);
 					PageTitle1.VisibleLogut = false;
 					WebCadIndietro="true";
 
@@ -194,7 +209,7 @@ namespace TheSite.AnagrafeImpianti
 		private void S_btMostra_Click(object sender, System.EventArgs e)
 		{
 			MyDataGrid1.CurrentPageIndex = 0;
-			Execute();
+			Execute(true);
 		}
 
 
@@ -307,7 +322,7 @@ namespace TheSite.AnagrafeImpianti
 
 		#region Sezione dedicata al riempimento del DataGrid
 
-		private void Execute()
+		private void Execute(bool reset)
 		{		
 			S_Controls.Collections.S_Object s_p_bl_id = new S_Controls.Collections.S_Object();
 			s_p_bl_id.ParameterName = "p_Bl_Id";
@@ -383,7 +398,24 @@ namespace TheSite.AnagrafeImpianti
 			                    else
 				                    s_eqstd.Value = Int32.Parse(cmbsApparecchiatura.SelectedValue);
 								_SCollection.Add(s_eqstd);
-								Ds=_DataRoom.RicercaDataRoomSTD(_SCollection);
+
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = _SCollection.Count +1;
+			s_p_pageindex.Value=MyDataGrid1.CurrentPageIndex +1;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = _SCollection.Count +1;
+			s_p_pagesize.Value= MyDataGrid1.PageSize;			
+			_SCollection.Add(s_p_pagesize);
+
+			Ds=_DataRoom.RicercaDataRoomSTD(_SCollection);
 			//				}
 //			if (CodiceStdApparecchiatura1.CodiceStd==""||CodiceStdApparecchiatura1.CodiceStd==string.Empty)			
 //				Ds=_DataRoom.RicercaDataRoom(_SCollection);
@@ -399,20 +431,28 @@ namespace TheSite.AnagrafeImpianti
 //				_SCollection.Add(s_eqstd);
 //				Ds=_DataRoom.RicercaDataRoomSTD(_SCollection);
 //			}
+			if (reset==true)
+			{
+				_SCollection.RemoveAt(_SCollection.Count -1); 
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				int _totalRecords = _DataRoom.RicercaDataRoomSTDCount(_SCollection);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+			}
+            MyDataGrid1.DataSource= Ds;
 			GridTitle1.Visible = true;
-			if (Ds.Tables[0].Rows.Count > 0) 
+			if (int.Parse(GridTitle1.NumeroRecords) > 0) 
 			{
 				setvisiblecontrol(true);
 				GridTitle1.DescriptionTitle="";
-				GridTitle1.NumeroRecords =Ds.Tables[0].Rows.Count.ToString();
-				MyDataGrid1.DataSource= Ds;
-				MyDataGrid1.DataBind();
 			}
 			else
 			{
 				GridTitle1.DescriptionTitle="Nessun dato trovato.";
 				setvisiblecontrol(false);
 			}
+			this.MyDataGrid1.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.MyDataGrid1.DataBind();
 		}
 
 		#endregion
@@ -426,7 +466,7 @@ namespace TheSite.AnagrafeImpianti
 		private void MyDataGrid1_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			MyDataGrid1.CurrentPageIndex=e.NewPageIndex;
-			Execute();
+			Execute(false);
 		}
 		private void BindServizio(string CodEdificio)
 		{
@@ -474,6 +514,7 @@ namespace TheSite.AnagrafeImpianti
 				this.cmbsServizio.DataTextField = "DESCRIZIONE";
 				this.cmbsServizio.DataValueField = "IDSERVIZIO";
 				this.cmbsServizio.DataBind();
+				BindApparecchiatura();
 			}
 			else
 			{
@@ -484,60 +525,69 @@ namespace TheSite.AnagrafeImpianti
 		}
 		private void BindApparecchiatura()
 		{
-			
-			this.cmbsApparecchiatura.Items.Clear();
+			if (cmbsServizio.SelectedValue!="" || RicercaModulo1.TxtCodice.Text!="")
+			{
+				this.cmbsApparecchiatura.Items.Clear();
 		
-			Classi.AnagrafeImpianti.Apparecchiature  _Apparecchiature = new TheSite.Classi.AnagrafeImpianti.Apparecchiature(Context.User.Identity.Name);
+				Classi.AnagrafeImpianti.Apparecchiature  _Apparecchiature = new TheSite.Classi.AnagrafeImpianti.Apparecchiature(Context.User.Identity.Name);
 			
-			DataSet _MyDs;
+				DataSet _MyDs;
 
-			if (!IsPostBack)
-			{
-				_MyDs = _Apparecchiature.GetData().Copy();
-			}
-			else
-			{
-				S_ControlsCollection _SColl = new S_ControlsCollection();
+				if (!IsPostBack)
+				{
+					_MyDs = _Apparecchiature.GetData().Copy();
+				}
+				else
+				{
+					S_ControlsCollection _SColl = new S_ControlsCollection();
 
-				S_Controls.Collections.S_Object s_BlId = new S_Object();
-				s_BlId.ParameterName = "p_Bl_Id";
-				s_BlId.DbType = CustomDBType.VarChar;
-				s_BlId.Direction = ParameterDirection.Input;
-				s_BlId.Size =50;
-				s_BlId.Index = 0;
-				s_BlId.Value = RicercaModulo1.TxtCodice.Text;
-				_SColl.Add(s_BlId);
+					S_Controls.Collections.S_Object s_BlId = new S_Object();
+					s_BlId.ParameterName = "p_Bl_Id";
+					s_BlId.DbType = CustomDBType.VarChar;
+					s_BlId.Direction = ParameterDirection.Input;
+					s_BlId.Size =50;
+					s_BlId.Index = 0;
+					s_BlId.Value = RicercaModulo1.TxtCodice.Text;
+					_SColl.Add(s_BlId);
 			
-				S_Controls.Collections.S_Object s_Servizio = new S_Object();
-				s_Servizio.ParameterName = "p_Servizio";
-				s_Servizio.DbType = CustomDBType.Integer;
-				s_Servizio.Direction = ParameterDirection.Input;
-				s_Servizio.Index = 1;
-				s_Servizio.Value = (cmbsServizio.SelectedValue=="")? 0:Int32.Parse(cmbsServizio.SelectedValue);
-				_SColl.Add(s_Servizio);
+					S_Controls.Collections.S_Object s_Servizio = new S_Object();
+					s_Servizio.ParameterName = "p_Servizio";
+					s_Servizio.DbType = CustomDBType.Integer;
+					s_Servizio.Direction = ParameterDirection.Input;
+					s_Servizio.Index = 1;
+					s_Servizio.Value = (cmbsServizio.SelectedValue=="")? 0:Int32.Parse(cmbsServizio.SelectedValue);
+					_SColl.Add(s_Servizio);
 
-				_MyDs = _Apparecchiature.GetData(_SColl).Copy();
+					_MyDs = _Apparecchiature.GetData(_SColl).Copy();
                  
-			}
+				}
   
-			if (_MyDs.Tables[0].Rows.Count > 0)
-			{
-				this.cmbsApparecchiatura.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
-					_MyDs.Tables[0], "DESCRIZIONE", "ID", "- Selezionare uno Standard -", "");
-				this.cmbsApparecchiatura.DataTextField = "DESCRIZIONE";
-				this.cmbsApparecchiatura.DataValueField = "ID";
-				this.cmbsApparecchiatura.DataBind();
+				if (_MyDs.Tables[0].Rows.Count > 0)
+				{
+					this.cmbsApparecchiatura.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+						_MyDs.Tables[0], "DESCRIZIONE", "ID", "- Selezionare uno Standard -", "");
+					this.cmbsApparecchiatura.DataTextField = "DESCRIZIONE";
+					this.cmbsApparecchiatura.DataValueField = "ID";
+					this.cmbsApparecchiatura.DataBind();
+				}
+				else
+				{
+					string s_Messagggio = "- Nessun Standard -";
+					this.cmbsApparecchiatura.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
+				}
+
 			}
 			else
 			{
 				string s_Messagggio = "- Nessun Standard -";
 				this.cmbsApparecchiatura.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
 			}
+
 		}
 
 		private void cmbsServizio_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
-			//BindApparecchiatura();
+			BindApparecchiatura();
 		}
 		private string IDBL
 		{

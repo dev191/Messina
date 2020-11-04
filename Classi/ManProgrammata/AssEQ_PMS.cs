@@ -1,108 +1,152 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ManProgrammata.AssEQ_PMS
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
+using System;
+using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
-using System.Data.OracleClient;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.ManProgrammata
 {
-  public class AssEQ_PMS : AbstractBase
-  {
-    public override DataSet GetData() => (DataSet) null;
+	/// <summary>
+	/// Descrizione di riepilogo per AssEQ_PMS.
+	/// </summary>
+	public class AssEQ_PMS:AbstractBase
+	{
+		public AssEQ_PMS()
+		{			
+		}
+		
+		/// <summary>
+		/// DataSet con tutti i record
+		/// </summary>
+		/// <returns></returns>
+		public override DataSet GetData()
+		{
+			return null;
+		}
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli) => (DataSet) null;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+			return null;
+		}
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+		public override DataSet GetSingleData(int itemId)
+		{
+			return null;
+		}
 
-    public string[] GetValueParametri()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_totEQ");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Size(50);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_totEQSTDinEQ");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      ((ParameterObject) sObject2).set_Size(50);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_totEQinPMS");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject3).set_Index(2);
-      ((ParameterObject) sObject3).set_Size(50);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("p_totEQnoPMS");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject4).set_Index(3);
-      ((ParameterObject) sObject4).set_Size(50);
-      S_Object sObject5 = new S_Object();
-      ((ParameterObject) sObject5).set_ParameterName("p_totEQSTDinPMP");
-      ((ParameterObject) sObject5).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject5).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject5).set_Index(4);
-      ((ParameterObject) sObject5).set_Size(50);
-      S_Object sObject6 = new S_Object();
-      ((ParameterObject) sObject6).set_ParameterName("p_totEQSTDEQinPMP");
-      ((ParameterObject) sObject6).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject6).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject6).set_Index(5);
-      ((ParameterObject) sObject6).set_Size(50);
-      S_Object sObject7 = new S_Object();
-      ((ParameterObject) sObject7).set_ParameterName("p_totEQSTD");
-      ((ParameterObject) sObject7).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject7).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject7).set_Index(6);
-      ((ParameterObject) sObject7).set_Size(50);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      controlsCollection.Add(sObject3);
-      controlsCollection.Add(sObject4);
-      controlsCollection.Add(sObject5);
-      controlsCollection.Add(sObject6);
-      controlsCollection.Add(sObject7);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_SCHEDULA.getConta_EQ_PMP";
-      OracleParameterCollection parameterCollection = oracleDataLayer.ParametersArray((object) controlsCollection, str);
-      string[] strArray = new string[parameterCollection.Count];
-      for (int index = 0; index < parameterCollection.Count; ++index)
-        strArray[index] = parameterCollection[index].Value.ToString();
-      return strArray;
-    }
+		public string[] GetValueParametri()
+		{
+						
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();			
+			
+			S_Controls.Collections.S_Object s_totEQ = new S_Object();
+			s_totEQ.ParameterName = "p_totEQ";
+			s_totEQ.DbType = CustomDBType.Integer;
+			s_totEQ.Direction = ParameterDirection.Output;
+			s_totEQ.Index = 0;				
+			s_totEQ.Size = 50;
+			
+			S_Controls.Collections.S_Object s_totEQSTDinEQ = new S_Object();
+			s_totEQSTDinEQ.ParameterName = "p_totEQSTDinEQ";
+			s_totEQSTDinEQ.DbType = CustomDBType.Integer;
+			s_totEQSTDinEQ.Direction = ParameterDirection.Output;
+			s_totEQSTDinEQ.Index = 1;				
+			s_totEQSTDinEQ.Size = 50;
 
-    public int Associa()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("p_numPMS");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(0);
-      ((ParameterObject) sObject).set_Size(50);
-      controlsCollection.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_SCHEDULA.getAssociazione_EQ_PMS";
-      return oracleDataLayer.GetRowsAffected((object) controlsCollection, str);
-    }
+			S_Controls.Collections.S_Object s_totEQinPMS = new S_Object();
+			s_totEQinPMS.ParameterName = "p_totEQinPMS";
+			s_totEQinPMS.DbType = CustomDBType.Integer;
+			s_totEQinPMS.Direction = ParameterDirection.Output;
+			s_totEQinPMS.Index = 2;				
+			s_totEQinPMS.Size = 50;			
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      return 0;
-    }
-  }
+			S_Controls.Collections.S_Object s_totEQnoPMS = new S_Object();
+			s_totEQnoPMS.ParameterName = "p_totEQnoPMS";
+			s_totEQnoPMS.DbType = CustomDBType.Integer;
+			s_totEQnoPMS.Direction = ParameterDirection.Output;
+			s_totEQnoPMS.Index = 3;				
+			s_totEQnoPMS.Size = 50;
+
+			S_Controls.Collections.S_Object s_totEQSTDinPMP = new S_Object();
+			s_totEQSTDinPMP.ParameterName = "p_totEQSTDinPMP";
+			s_totEQSTDinPMP.DbType = CustomDBType.Integer;
+			s_totEQSTDinPMP.Direction = ParameterDirection.Output;
+			s_totEQSTDinPMP.Index = 4;				
+			s_totEQSTDinPMP.Size = 50;
+
+			S_Controls.Collections.S_Object s_totEQSTDEQinPMP = new S_Object();
+			s_totEQSTDEQinPMP.ParameterName = "p_totEQSTDEQinPMP";
+			s_totEQSTDEQinPMP.DbType = CustomDBType.Integer;
+			s_totEQSTDEQinPMP.Direction = ParameterDirection.Output;
+			s_totEQSTDEQinPMP.Index = 5;				
+			s_totEQSTDEQinPMP.Size = 50;
+
+			S_Controls.Collections.S_Object s_totEQSTD = new S_Object();
+			s_totEQSTD.ParameterName = "p_totEQSTD";
+			s_totEQSTD.DbType = CustomDBType.Integer;
+			s_totEQSTD.Direction = ParameterDirection.Output;
+			s_totEQSTD.Index = 6;				
+			s_totEQSTD.Size = 50;
+
+			CollezioneControlli.Add(s_totEQ);
+			CollezioneControlli.Add(s_totEQSTDinEQ);
+			CollezioneControlli.Add(s_totEQinPMS);
+			CollezioneControlli.Add(s_totEQnoPMS);
+			CollezioneControlli.Add(s_totEQSTDinPMP);
+			CollezioneControlli.Add(s_totEQSTDEQinPMP);
+			CollezioneControlli.Add(s_totEQSTD);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_SCHEDULA.getConta_EQ_PMP";	
+			System.Data.OracleClient.OracleParameterCollection Parametri = _OraDl.ParametersArray(CollezioneControlli, s_StrSql);			
+ 			
+			string[] ParValues = new string[Parametri.Count];
+			for(int Par = 0;Par<Parametri.Count;Par++)
+			{
+				//ParValues.SetValue(Parametri[Par].Value,Par);
+				ParValues[Par] = Parametri[Par].Value.ToString();
+			}
+			return ParValues;		
+		}
+
+		public int Associa()
+		{
+					
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();			
+			
+			S_Controls.Collections.S_Object s_numPMS = new S_Object();
+			s_numPMS.ParameterName = "p_numPMS";
+			s_numPMS.DbType = CustomDBType.Integer;
+			s_numPMS.Direction = ParameterDirection.Output;
+			s_numPMS.Index = 0;				
+			s_numPMS.Size = 50;
+					
+			CollezioneControlli.Add(s_numPMS);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_SCHEDULA.getAssociazione_EQ_PMS";	
+			int Associate = _OraDl.GetRowsAffected(CollezioneControlli, s_StrSql);			
+ 						
+			return Associate;		
+		}
+	
+
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			return 0;
+		}
+
+
+	}
 }

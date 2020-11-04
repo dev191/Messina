@@ -8,7 +8,6 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.ManutenzioneCorrettiva
 {
@@ -16,7 +15,7 @@ namespace TheSite.ManutenzioneCorrettiva
 	/// Descrizione di riepilogo per VisualizzaRdlEliminare.
 	/// </summary>
 	
-	public class VisualizzaRdlEliminare : System.Web.UI.Page    // System.Web.UI.Page
+	public class VisualizzaRdlEliminare : System.Web.UI.Page
 	{
 		public TheSite.ManutenzioneCorrettiva.SfogliaRdLEliminare _fp;
 		//TheSite.WebControls.UserRdlInailLabel UserRdlInailLabel;
@@ -29,14 +28,14 @@ namespace TheSite.ManutenzioneCorrettiva
 				this.ViewState.Add("mioContenitore",_fp._Contenitore); 
 			}	
 		}
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 		

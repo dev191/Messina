@@ -11,14 +11,14 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.ManutenzioneCorrettiva
 {
 	/// <summary>
 	/// Descrizione di riepilogo per SfogliaRdLEliminare.
 	/// </summary>
-	public class SfogliaRdLEliminare : System.Web.UI.Page    // System.Web.UI.Page
+	public class SfogliaRdLEliminare : System.Web.UI.Page
 	{
 		public Classi.SiteModule _SiteModule;
 		protected S_Controls.S_TextBox txtsRichiesta;
@@ -52,11 +52,11 @@ namespace TheSite.ManutenzioneCorrettiva
 		public static string HelpLink = string.Empty;		
 		
 		public static int FunId = 0;	
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new MyCollection.clMyCollection();
 		#endregion
 
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get {return _myColl;}
 		}
@@ -103,7 +103,7 @@ namespace TheSite.ManutenzioneCorrettiva
 					
 						_myColl=_fp._Contenitore;
 						_myColl.SetValues(this.Page.Controls);		
-						Ricerca();	
+						Ricerca(true);	
 					}
 				}
 	
@@ -312,44 +312,35 @@ namespace TheSite.ManutenzioneCorrettiva
 		}
 		#endregion
 
-		private void Ricerca()
+		private void Ricerca(bool reset)
 		{
 			
 			
 			DataGridRicerca2.Visible=true;
 			Gridtitle2.Visible=true;
-			
-						
+		
 			DataSet _MyDs=GetRdlDaEliminare();
-			this.DataGridRicerca2.DataSource = _MyDs.Tables[0];
-			DataGridRicerca2.Visible = true;
-			Gridtitle2.Visible =true;
-			Gridtitle2.hplsNuovo.Visible=false;
-			if (_MyDs.Tables[0].Rows.Count == 0 )
-			{
-				DataGridRicerca2.CurrentPageIndex=0;
-				Gridtitle2.DescriptionTitle="Nessun dato trovato.";
 
+			this.DataGridRicerca2.DataSource = _MyDs.Tables[0];
+
+			Double _totalPages = 1;
+			if (reset==true)
+			{
+				int _totalRecords = GetRdlDaEliminareCount();
+				this.Gridtitle2.NumeroRecords=_totalRecords.ToString();
+				if ((_totalRecords % DataGridRicerca2.PageSize) == 0)
+					_totalPages = _totalRecords / DataGridRicerca2.PageSize;
+				else
+					_totalPages = (_totalRecords / DataGridRicerca2.PageSize)+1;
 			}
 			else
 			{
-				//CalcolaTotali(_MyDs.Tables[0]);
-
-				Gridtitle2.DescriptionTitle=""; 
-				int Pagina = 0;
-				if ((_MyDs.Tables[0].Rows.Count % DataGridRicerca2.PageSize) >0)
-				{
-					Pagina ++;
-				}
-				if (DataGridRicerca2.PageCount != Convert.ToInt16((_MyDs.Tables[0].Rows.Count / DataGridRicerca2.PageSize) + Pagina))
-				{					
-					DataGridRicerca2.CurrentPageIndex=0;					
-				}
+				_totalPages = Double.Parse (this.Gridtitle2.NumeroRecords);
 			}
 			
+			this.DataGridRicerca2.VirtualItemCount =int.Parse(this.Gridtitle2.NumeroRecords);
 			this.DataGridRicerca2.DataBind();
 			
-			this.Gridtitle2.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();	
 		}
 		
 		private void cmdReset_Click(object sender, System.EventArgs e)
@@ -501,13 +492,186 @@ namespace TheSite.ManutenzioneCorrettiva
 			p_datafine.Value = (CalendarPicker4.Datazione.Text =="")? "":CalendarPicker4.Datazione.Text;  			
 			_SCollection.Add(p_datafine);
 
-			DataSet _MyDs = _Richiesta.GetSfogliaRDLDaEliminare(_SCollection).Copy();	
+				// Paolo: nuovi campi per la paginazione (03/09/07)
+
+				S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+				s_p_pageindex.ParameterName = "pageindex";
+				s_p_pageindex.DbType = CustomDBType.Integer;
+				s_p_pageindex.Direction = ParameterDirection.Input;
+				s_p_pageindex.Index =  _SCollection.Count + 1;  
+				s_p_pageindex.Value=DataGridRicerca2.CurrentPageIndex +1;			
+				_SCollection.Add(s_p_pageindex);
+
+				S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+				s_p_pagesize.ParameterName = "pagesize";
+				s_p_pagesize.DbType = CustomDBType.Integer;
+				s_p_pagesize.Direction = ParameterDirection.Input;
+				s_p_pagesize.Index = _SCollection.Count + 1; 
+				s_p_pagesize.Value= DataGridRicerca2.PageSize;			
+				_SCollection.Add(s_p_pagesize);
+
+				DataSet _MyDs = _Richiesta.GetSfogliaRDLDaEliminare(_SCollection).Copy();	
+
 			return _MyDs;
+		}
+
+		// Nuova
+
+		private int GetRdlDaEliminareCount()
+		{
+			Classi.ManStraordinaria.Richiesta  _Richiesta = new TheSite.Classi.ManStraordinaria.Richiesta();						
+			S_ControlsCollection _SCollection = new S_ControlsCollection();			
+		
+			S_Controls.Collections.S_Object s_p_Bl_Id = new S_Controls.Collections.S_Object();
+			s_p_Bl_Id.ParameterName = "p_Bl_Id";
+			s_p_Bl_Id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_Bl_Id.Direction = ParameterDirection.Input;
+			s_p_Bl_Id.Size =50;
+			s_p_Bl_Id.Index = 0;
+			s_p_Bl_Id.Value = RicercaModulo1.TxtCodice.Text;
+			_SCollection.Add(s_p_Bl_Id);
+
+			S_Controls.Collections.S_Object s_p_campus = new S_Controls.Collections.S_Object();
+			s_p_campus.ParameterName = "p_campus";
+			s_p_campus.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_campus.Direction = ParameterDirection.Input;
+			s_p_campus.Index = 1;
+			s_p_campus.Size=50;
+			s_p_campus.Value = RicercaModulo1.TxtRicerca.Text;			
+			_SCollection.Add(s_p_campus);
+
+			S_Controls.Collections.S_Object s_p_Wr_Id = new S_Controls.Collections.S_Object();
+			s_p_Wr_Id.ParameterName = "p_Wr_Id";
+			s_p_Wr_Id.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_p_Wr_Id.Direction = ParameterDirection.Input;
+			s_p_Wr_Id.Index = 2;
+			s_p_Wr_Id.Size=50;
+			s_p_Wr_Id.Value = (this.txtsRichiesta.Text=="")?0:Int32.Parse(this.txtsRichiesta.Text);		
+			_SCollection.Add(s_p_Wr_Id);
+
+			S_Controls.Collections.S_Object s_p_Addetto = new S_Controls.Collections.S_Object();
+			s_p_Addetto.ParameterName = "p_Addetto";
+			s_p_Addetto.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_Addetto.Direction = ParameterDirection.Input;
+			s_p_Addetto.Index = 3;
+			s_p_Addetto.Size=50;
+			s_p_Addetto.Value = this.Addetti1.NomeCompleto;			
+			_SCollection.Add(s_p_Addetto);
+
+			S_Controls.Collections.S_Object s_p_DataDa = new S_Controls.Collections.S_Object();
+			s_p_DataDa.ParameterName = "p_DataDa";
+			s_p_DataDa.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_DataDa.Direction = ParameterDirection.Input;
+			s_p_DataDa.Index = 4;
+			s_p_DataDa.Size= 10;
+			s_p_DataDa.Value = (CalendarPicker1.Datazione.Text =="")? "":CalendarPicker1.Datazione.Text;  			
+			_SCollection.Add(s_p_DataDa);
+
+			S_Controls.Collections.S_Object s_p_DataA = new S_Controls.Collections.S_Object();
+			s_p_DataA.ParameterName = "p_DataA";
+			s_p_DataA.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_DataA.Direction = ParameterDirection.Input;
+			s_p_DataA.Index = 5;
+			s_p_DataA.Size= 10;
+			s_p_DataA.Value = (CalendarPicker2.Datazione.Text =="")? "":CalendarPicker2.Datazione.Text;  			
+			_SCollection.Add(s_p_DataA);
+
+			S_Controls.Collections.S_Object s_p_Wo_Id = new S_Controls.Collections.S_Object();
+			s_p_Wo_Id.ParameterName = "p_Wo_Id";
+			s_p_Wo_Id.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_p_Wo_Id.Direction = ParameterDirection.Input;
+			s_p_Wo_Id.Index = 6;
+			s_p_Wo_Id.Size=50;
+			s_p_Wo_Id.Value = (this.txtsOrdine.Text=="")?0:Int32.Parse(this.txtsOrdine.Text);		
+			_SCollection.Add(s_p_Wo_Id);
+			
+			S_Controls.Collections.S_Object s_p_Servizio = new S_Controls.Collections.S_Object();
+			s_p_Servizio.ParameterName = "p_ID_Servizio";
+			s_p_Servizio.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_p_Servizio.Direction = ParameterDirection.Input;
+			s_p_Servizio.Index = 7;
+			s_p_Servizio.Value = (cmbsServizio.SelectedValue ==string.Empty)? 0:Int32.Parse(cmbsServizio.SelectedValue);			
+			_SCollection.Add(s_p_Servizio);
+
+			S_Controls.Collections.S_Object s_p_Status = new S_Controls.Collections.S_Object();
+			s_p_Status.ParameterName = "p_Status";
+			s_p_Status.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_p_Status.Direction = ParameterDirection.Input;
+			s_p_Status.Index = 8;
+			s_p_Status.Value = (cmbsStatus.SelectedValue ==string.Empty)? 0:Int32.Parse(cmbsStatus.SelectedValue);			
+			_SCollection.Add(s_p_Status);
+
+			S_Controls.Collections.S_Object s_p_Richiedente = new S_Controls.Collections.S_Object();
+			s_p_Richiedente.ParameterName = "p_Richiedente";
+			s_p_Richiedente.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_Richiedente.Direction = ParameterDirection.Input;
+			s_p_Richiedente.Index = 9;
+			s_p_Richiedente.Size=50;
+			s_p_Richiedente.Value = this.Richiedenti1.NomeCompleto;			
+			_SCollection.Add(s_p_Richiedente);
+
+			S_Controls.Collections.S_Object s_p_Priority = new S_Controls.Collections.S_Object();
+			s_p_Priority.ParameterName = "p_Priority";
+			s_p_Priority.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_p_Priority.Direction = ParameterDirection.Input;
+			s_p_Priority.Index = 10;
+			s_p_Priority.Value = (cmbsUrgenza.SelectedValue ==string.Empty)? 0:Int32.Parse(cmbsUrgenza.SelectedValue);			
+			_SCollection.Add(s_p_Priority);
+
+			S_Controls.Collections.S_Object s_p_Descrizione = new S_Controls.Collections.S_Object();
+			s_p_Descrizione.ParameterName = "p_Descrizione";
+			s_p_Descrizione.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_Descrizione.Direction = ParameterDirection.Input;
+			s_p_Descrizione.Index = 11;
+			s_p_Descrizione.Size= 255;
+			s_p_Descrizione.Value = txtDescrizione.Text;			
+			_SCollection.Add(s_p_Descrizione);
+
+			S_Controls.Collections.S_Object s_p_Gruppo = new S_Controls.Collections.S_Object();
+			s_p_Gruppo.ParameterName = "p_Gruppo";
+			s_p_Gruppo.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_p_Gruppo.Direction = ParameterDirection.Input;
+			s_p_Gruppo.Index = 12;
+			s_p_Gruppo.Value = (cmbsGruppo.SelectedValue ==string.Empty)? 0:Int32.Parse(cmbsGruppo.SelectedValue);			
+			_SCollection.Add(s_p_Gruppo);
+		
+			S_Controls.Collections.S_Object p_tipointerventoater = new S_Controls.Collections.S_Object();
+			p_tipointerventoater.ParameterName = "p_tipointerventoater";
+			p_tipointerventoater.DbType = CustomDBType.Integer;
+			p_tipointerventoater.Direction = ParameterDirection.Input;
+			p_tipointerventoater.Index = 13;
+			p_tipointerventoater.Value = (cmbsTipoIntervento.SelectedValue ==string.Empty)? 0:Int32.Parse(cmbsTipoIntervento.SelectedValue);			
+			_SCollection.Add(p_tipointerventoater);
+
+			S_Controls.Collections.S_Object p_datainizio = new S_Controls.Collections.S_Object();
+			p_datainizio.ParameterName = "p_datainizio";
+			p_datainizio.DbType = CustomDBType.VarChar;
+			p_datainizio.Direction = ParameterDirection.Input;
+			p_datainizio.Index = 14;
+			p_datainizio.Size= 10;
+			p_datainizio.Value = (CalendarPicker3.Datazione.Text =="")? "":CalendarPicker3.Datazione.Text;  			
+			_SCollection.Add(p_datainizio);
+
+			S_Controls.Collections.S_Object p_datafine = new S_Controls.Collections.S_Object();
+			p_datafine.ParameterName = "p_datafine";
+			p_datafine.DbType =CustomDBType.VarChar;
+			p_datafine.Direction = ParameterDirection.Input;
+			p_datafine.Index = 15;
+			p_datafine.Size= 10;
+			p_datafine.Value = (CalendarPicker4.Datazione.Text =="")? "":CalendarPicker4.Datazione.Text;  			
+			_SCollection.Add(p_datafine);
+
+
+			DataSet _MyDs = _Richiesta.GetSfogliaRDLDaEliminareCount(_SCollection).Copy();	
+
+			return int.Parse(_MyDs.Tables[0].Rows[0][0].ToString());
 		}
 
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{
-			Ricerca();
+		//	DataGridRicerca.CurrentPageIndex =0;
+			DataGridRicerca2.CurrentPageIndex =0;
+			Ricerca(true);
 		}
 
 		
@@ -515,7 +679,7 @@ namespace TheSite.ManutenzioneCorrettiva
 		private void DataGridRicerca2_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca2.CurrentPageIndex = e.NewPageIndex;			
-			Ricerca();
+			Ricerca(false);
 		}
 		//		private void DataGridRicerca2_ItemCreated(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
 		//		{
@@ -586,7 +750,10 @@ namespace TheSite.ManutenzioneCorrettiva
 			{
 				TheSite.Classi.ManStraordinaria.Richiesta _RichiestaElimina= new TheSite.Classi.ManStraordinaria.Richiesta();
 				_RichiestaElimina.DeleteRdL(_SColl);
-				Ricerca();
+
+	//			DataGridRicerca.CurrentPageIndex =0;
+				DataGridRicerca2.CurrentPageIndex =0;
+				Ricerca(true);
 				//				TheSite.Classi.AnagrafeImpianti.DatiApparecchiatura  _DatiApparecchiatura = new TheSite.Classi.AnagrafeImpianti.DatiApparecchiatura(Context.User.Identity.Name);
 				//				DataSet Ds=_DatiApparecchiatura.GetApparecchiatura(int.Parse(id));
 				//				if (Ds.Tables[0].Rows.Count>0)

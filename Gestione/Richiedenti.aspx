@@ -16,7 +16,7 @@
 	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0"
 		rightMargin="0" MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
-			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px"
+			<TABLE id="TableMain" style="Z-INDEX: 101; POSITION: absolute; WIDTH: 100%; TOP: 0px; LEFT: 0px"
 				cellSpacing="0" cellPadding="0" width="100%" align="center" border="0">
 				<TR>
 					<TD align="center">
@@ -31,29 +31,36 @@
 										<Collapse:DataPanel id="PanelRicerca" runat="server" ExpandImageUrl="../Images/down.gif" CollapseImageUrl="../Images/up.gif"
 											CollapseText="Riduci" ExpandText="Espandi" Collapsed="False" AllowTitleExpandCollapse="True" TitleText="Ricerca"
 											CssClass="DataPanel75" TitleStyle-CssClass="TitleSearch">
-											<TABLE id="tblSearch100" cellSpacing="1" cellPadding="2" border="0">
+											<TABLE id="tblSearch100" border="0" cellSpacing="1" cellPadding="2">
 												<TR>
 													<TD style="WIDTH: 8%" align="left"><B>Nome</B></TD>
 													<TD>
-														<cc1:S_TextBox id="txtsNome" runat="server" DBSize="128" width="100%" DBDirection="Input" DBParameterName="p_nomecompleto"
-															DBIndex="0"></cc1:S_TextBox></TD>
-													<TD colSpan="2"></TD>
+														<cc1:S_TextBox id="txtsNome" runat="server" DBIndex="0" DBParameterName="p_nomecompleto" DBDirection="Input"
+															width="100%" DBSize="128"></cc1:S_TextBox></TD>
+													<TD align="right"><B>Progetto</B></TD>
+													<TD colSpan="2">
+														<CC1:S_COMBOBOX id="CmbProgetto" tabIndex="8" runat="server" dbdatatype="Integer" dbparametername="p_progetto"
+															dbdirection="Input" dbsize="1" dbindex="5"></CC1:S_COMBOBOX></TD>
 												</TR>
 												<TR>
 													<TD style="WIDTH: 8%" align="left"><B>Cognome</B></TD>
 													<TD>
-														<cc1:S_TextBox id="txtsCognome" runat="server" DBSize="255" width="100%" DBDirection="Input" DBParameterName="p_cognomecompleto"
-															DBIndex="1"></cc1:S_TextBox></TD>
-													<TD colSpan="2"></TD>
+														<cc1:S_TextBox id="txtsCognome" runat="server" DBIndex="1" DBParameterName="p_cognomecompleto"
+															DBDirection="Input" width="100%" DBSize="255"></cc1:S_TextBox></TD>
+													<TD align="right"><B>Gruppo</B></TD>
+													<TD colSpan="2">
+														<CC1:S_COMBOBOX style="Z-INDEX: 0" id="cmbTipRich" tabIndex="8" runat="server" dbdatatype="Integer"
+															dbparametername="p_tipo_rich" dbdirection="Input" dbsize="1" dbindex="6"></CC1:S_COMBOBOX></TD>
 												</TR>
 												<TR>
 													<TD style="WIDTH: 4px" align="right"></TD>
 													<TD></TD>
+													<TD style="WIDTH: 8px" align="right"></TD>
 													<TD style="WIDTH: 101px" align="right"></TD>
 													<TD></TD>
 												</TR>
 												<TR>
-													<TD style="WIDTH: 535px" align="left" colSpan="3">&nbsp;
+													<TD style="WIDTH: 339px" colSpan="3" align="left">&nbsp;
 														<TABLE>
 															<TR>
 																<TD>
@@ -63,6 +70,7 @@
 															</TR>
 														</TABLE>
 													</TD>
+													<TD align="right"></TD>
 													<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
                   target=_blank>Guida</A></TD>
 												</TR>
@@ -102,6 +110,9 @@
 													<HeaderStyle Width="25%"></HeaderStyle>
 												</asp:BoundColumn>
 												<asp:BoundColumn DataField="tipo_richiedente" HeaderText="Gruppo">
+													<HeaderStyle Width="25%"></HeaderStyle>
+												</asp:BoundColumn>
+												<asp:BoundColumn DataField="Progetto" HeaderText="Progetto">
 													<HeaderStyle Width="25%"></HeaderStyle>
 												</asp:BoundColumn>
 											</Columns>

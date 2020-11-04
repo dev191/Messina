@@ -1,7 +1,7 @@
-<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Page language="c#" Codebehind="Report.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneCorretiva.Report" %>
 <%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Page language="c#" Codebehind="Report.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneCorretiva.Report" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -65,7 +65,7 @@
 				cellPadding="1" width="100%" border="0">
 				<TR>
 					<TD align="center">
-						<uc1:PageTitle id="PageTitle1"  title="Report MS" runat="server"></uc1:PageTitle></TD>
+						<uc1:PageTitle id="PageTitle1" runat="server"></uc1:PageTitle></TD>
 				</TR>
 				<TR>
 					<TD>

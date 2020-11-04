@@ -16,7 +16,7 @@ namespace TheSite.AnalisiStatistiche
 	/// <summary>
 	/// Descrizione di riepilogo per GraficiMop.
 	/// </summary>
-	public class GraficiMop : System.Web.UI.Page    // System.Web.UI.Page	
+	public class GraficiMop : System.Web.UI.Page	
 	{
 		protected TheSite.WebControls.PageTitle PageTitleReport;
 		protected Csy.WebControls.DataPanel DataPanelRicerca;
@@ -112,14 +112,19 @@ namespace TheSite.AnalisiStatistiche
 		private void DisplayReport()
 		{	
 			DataPanelRicerca.Collapsed=true;
-			
-			urlRpt = "DisplayReport.aspx" + queryString()+ "tipoDocumento=HTML" ;
+			string Progetto="";
+			if(Request["VarApp"]!=null)
+				Progetto = "&VarApp=" + Request["VarApp"];
+			urlRpt = "DisplayReport.aspx" + queryString()+ "tipoDocumento=HTML" +Progetto ;
 		}
 
 		private void btnReportPdf_Click(object sender, System.EventArgs e)
 		{
 			string qryStr = queryString();
-			Server.Transfer( "DisplayReport.aspx" + qryStr + "tipoDocumento=PDF");
+			string Progetto="";
+			if(Request["VarApp"]!=null)
+				Progetto = "&VarApp=" + Request["VarApp"];
+			Server.Transfer( "DisplayReport.aspx" + qryStr + "tipoDocumento=PDF" + Progetto);
 		}
 	}
 }

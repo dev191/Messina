@@ -1,9 +1,9 @@
-<%@ Page language="c#" Codebehind="Completa_WO.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.Completa_WO" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Page language="c#" Codebehind="Completa_WO.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.Completa_WO" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
-		<title>Aggiornamento OdL </title>
+		<title>Aggiornamento Ordine di Lavoro</title>
 		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
 		<meta content="C#" name="CODE_LANGUAGE">
 		<meta content="JavaScript" name="vs_defaultClientScript">
@@ -27,25 +27,28 @@
 								<ItemTemplate>
 									<tr>
 										<td>
-											<b>Aggiornamento OdL nr <%# DataBinder.Eval(Container.DataItem,"Key") %></b>
+											<b>Aggiornamento ordine di lavoro N.<%# DataBinder.Eval(Container.DataItem,"Key") %></b>
 											<asp:Repeater id="RepeaterDettail" runat="server">
 												<HeaderTemplate>
-													<table id="tablelladettail" border="1" width="100%" cellSpacing="0" cellPadding="0" style="TABLE-LAYOUT: auto; BORDER-COLLAPSE: collapse">
-														<tr bgcolor="Gray" style="FONT-WEIGHT: bold; COLOR: white">
-															<td width="15%">
-																RdL nr
+													<table  id="tablelladettail" border="1" width="100%" cellSpacing="0" cellPadding="0" style="TABLE-LAYOUT: auto; BORDER-COLLAPSE: collapse" >
+														<tr bgcolor=Gray style="FONT-WEIGHT: bold; COLOR: white">
+															<td width=15%>
+																Richiesta di lavoro associata
 															</td>
-															<td width="15%">
-																Data Pianificata RdL
+															<td width=15%>
+																Data Richiesta
 															</td>
-															<td width="15%">
-																Data Completamento RdL
+															<td width=15%>
+																Data Pianificata
 															</td>
-															<td width="25%">
+															<td width=15%>
+																Descrizione
+															</td>
+															<td width=25%>
 																Attività MP
 															</td>
-															<td width="15%">
-																Stato RdL
+															<td width=15%>
+																Stato
 															</td>
 														</tr>
 												</HeaderTemplate>
@@ -53,9 +56,11 @@
 													<tr>
 														<td><%# DataBinder.Eval(Container.DataItem,"wr_id") %>
 														</td>
+														<td><%# DataBinder.Eval(Container.DataItem,"Data_Richiesta", "{0:d}") %>
+														</td>
 														<td><%# DataBinder.Eval(Container.DataItem,"Data_Pianificata", "{0:d}") %>
 														</td>
-														<td><%# DataBinder.Eval(Container.DataItem,"Data_Completamento", "{0:d}") %>
+														<td><%# DataBinder.Eval(Container.DataItem,"Descrizione") %>
 														</td>
 														<td><%# DataBinder.Eval(Container.DataItem,"Attivita") %>
 														</td>
@@ -67,9 +72,11 @@
 													<tr>
 														<td bgcolor="whitesmoke"><%# DataBinder.Eval(Container.DataItem,"wr_id") %>
 														</td>
+														<td bgcolor="whitesmoke"><%# DataBinder.Eval(Container.DataItem,"Data_Richiesta", "{0:d}") %>
+														</td>
 														<td bgcolor="whitesmoke"><%# DataBinder.Eval(Container.DataItem,"Data_Pianificata", "{0:d}") %>
 														</td>
-														<td bgcolor="whitesmoke"><%# DataBinder.Eval(Container.DataItem,"Data_Completamento", "{0:d}") %>
+														<td bgcolor="whitesmoke"><%# DataBinder.Eval(Container.DataItem,"Descrizione") %>
 														</td>
 														<td bgcolor="whitesmoke"><%# DataBinder.Eval(Container.DataItem,"Attivita") %>
 														</td>

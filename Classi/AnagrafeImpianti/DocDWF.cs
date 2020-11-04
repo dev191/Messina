@@ -1,56 +1,82 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.AnagrafeImpianti.DocDWF
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.AnagrafeImpianti
 {
-  public class DocDWF : AbstractBase
-  {
-    public override DataSet GetData() => (DataSet) null;
+	/// <summary>
+	/// Descrizione di riepilogo per DocDWF usata dalla Pagina VisualDWF.aspx.
+	/// e dalla pagina DocImageGalery.aspx
+	/// </summary>
+	public class DocDWF : AbstractBase
+	{
+		public DocDWF()
+		{
+			//
+			// TODO: aggiungere qui la logica del costruttore
+			//
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override DataSet GetData()
+		{
+			return null;	
+		}
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_DOCUMENTI.SP_GETDOCUMENTO";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		public override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+			CollezioneControlli.Add(s_Cursor);
 
-    public DataSet GetDocImage(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_DOCUMENTI.SP_GETDOCUMENTOIMAGE";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_DOCUMENTI.SP_GETDOCUMENTO";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+													
+			return _Ds;	
+		}
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      return 0;
-    }
-  }
+		public override DataSet GetSingleData(int itemId)
+		{
+			return null;
+		}
+
+		public DataSet GetDocImage(S_ControlsCollection CollezioneControlli)
+		{
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_DOCUMENTI.SP_GETDOCUMENTOIMAGE";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+													
+			return _Ds;	
+		}
+		#region Metodi Private
+
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			return 0;
+		}
+
+		#endregion
+	}
 }

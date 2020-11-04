@@ -11,14 +11,13 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Summary description for EditBuilding.
 	/// </summary>
-	public class EditBuilding : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditBuilding : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox S_TextBox1;
 		protected S_Controls.S_TextBox S_TEXTBOX2;
@@ -89,18 +88,21 @@ namespace TheSite.Gestione
 		public string Usoid1="";
 		protected System.Web.UI.WebControls.Button ButtonRefreshMq;
 		protected System.Web.UI.WebControls.ListBox ListBoxLeftP;
-		protected System.Web.UI.WebControls.ListBox ListBoxRightP;		
+		protected System.Web.UI.WebControls.ListBox ListBoxRightP;
+		protected S_Controls.S_ComboBox CmbProgetto;
+		protected System.Web.UI.WebControls.RangeValidator RANGProg;
+		protected S_Controls.S_ComboBox cmbsLocalizzazione;		
 		
 		Classi.ClassiAnagrafiche.Stanze _RM = new TheSite.Classi.ClassiAnagrafiche.Stanze();
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 
@@ -146,9 +148,11 @@ namespace TheSite.Gestione
 
 
 				BindProvince();							
-				ImpostaProvinciaDefault("BA","BARI");//Carica Anche i Comuni				
+				ImpostaProvinciaDefault("CT","CATANIA");//Carica Anche i Comuni				
 				BindUsi();
 				BindDitte();
+				BindLocalizzazione();
+
 				if (itemId != 0) 
 				{					
 					Classi.ClassiAnagrafiche.Buildings  _Buildings = new TheSite.Classi.ClassiAnagrafiche.Buildings();
@@ -177,6 +181,9 @@ namespace TheSite.Gestione
 						if (_Dr["COMUNE_ID"] != DBNull.Value)
 							this.cmbsComune.SelectedValue= _Dr["COMUNE_ID"].ToString();
 
+						if (_Dr["id_bl_localizzazione"] != DBNull.Value)
+							this.cmbsLocalizzazione.SelectedValue= _Dr["id_bl_localizzazione"].ToString();
+
 						if (_Dr["ZIP"] != DBNull.Value)
 							this.TxtsCAP.Text = (string) _Dr["ZIP"];						
 
@@ -188,7 +195,12 @@ namespace TheSite.Gestione
 
 						if (_Dr["COMMENTS"] != DBNull.Value)
 							this.txtsCommenti.Text = (string) _Dr["COMMENTS"];
-						
+
+						if (_Dr["id_progetto"] != DBNull.Value)
+							BindProgetti( int.Parse(_Dr["id_progetto"].ToString()));
+						else
+							BindProgetti(0);
+
 						ListboxRightE.Items.Clear();
 						if (_Dr["OPTION2"] != DBNull.Value)
 						{
@@ -215,6 +227,7 @@ namespace TheSite.Gestione
 					this.lblOperazione.Text = "Inserimento Edificio";
 					this.lblFirstAndLast.Visible = false;
 					this.btnsElimina.Visible = false;
+					BindProgetti(0);
 				}
 
 				AggiornaListBox();
@@ -599,6 +612,7 @@ namespace TheSite.Gestione
 			this.cmbsProvincia.Enabled=enabled;
 			this.cmbsComune.Enabled=enabled;
 			this.cmbsUso.Enabled=enabled;
+			CmbProgetto.Enabled=enabled;
 			this.cmbsDitta.Enabled=enabled;
 			this.TxtsCAP.Enabled = enabled;
 			this.txtsCommenti.Enabled = enabled;
@@ -627,7 +641,59 @@ namespace TheSite.Gestione
 			this.DataGridEsegui.Enabled=enabled;
 
 		}
+		private void BindProgetti(int progetto)
+		{
+			
+			this.CmbProgetto.Items.Clear();
+		
+			TheSite.Classi.Progetti _Prog = new TheSite.Classi.Progetti();
+						
+			DataSet _MyDs = _Prog.GetData();			
+			
+			if (_MyDs.Tables[0].Rows.Count > 0)
+			{
+				this.CmbProgetto.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					_MyDs.Tables[0], "descrizione", "id_progetto", "- Selezionare un Progetto -", "0");				
+				this.CmbProgetto.DataTextField ="descrizione";
+				this.CmbProgetto.DataValueField  ="id_progetto";
+				this.CmbProgetto.DataBind();
 
+				CmbProgetto.SelectedValue =progetto.ToString();
+			}
+			else
+			{
+				string s_Messagggio = "- Nessun Progetto  -";
+				this.CmbProgetto.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+						
+			}			
+		}
+
+	private void BindLocalizzazione()
+	{
+			
+		this.cmbsLocalizzazione.Items.Clear();
+		
+		Classi.ProvinceComuni _ProvCom = new TheSite.Classi.ProvinceComuni();
+			
+		S_ControlsCollection _SColl = new S_ControlsCollection();
+						
+		DataSet _MyDs = _ProvCom.GetLocalizzazione(_SColl).Copy();			
+			
+		if (_MyDs.Tables[0].Rows.Count > 0)
+		{			
+			this.cmbsLocalizzazione.DataSource=_MyDs;
+			this.cmbsLocalizzazione.DataTextField = "descrizione";
+			this.cmbsLocalizzazione.DataValueField = "id";
+				
+			this.cmbsLocalizzazione.DataBind();
+		}
+		else
+		{
+			string s_Messagggio = "- Nessun Comune  -";
+			this.cmbsLocalizzazione.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+						
+		}			
+	}
 		private void BindComuni()
 		{
 			
@@ -758,14 +824,14 @@ namespace TheSite.Gestione
 //				_SCollection.Add(s_ArrServizi);
 
 				//Aggiungo un parametro che contiene tutti i Piani
-//				S_Controls.Collections.S_Object s_ArrPiani = new S_Object();
-//				s_ArrPiani.ParameterName = "p_Arr_Piani";
-//				s_ArrPiani.DbType = CustomDBType.VarChar;
-//				s_ArrPiani.Direction = ParameterDirection.Input;
-//				s_ArrPiani.Index = _SCollection.Count + 1;
-//				s_ArrPiani.Value = DBNull.Value;
-//				
-//				_SCollection.Add(s_ArrPiani);
+				S_Controls.Collections.S_Object s_ArrPiani = new S_Object();
+				s_ArrPiani.ParameterName = "p_Arr_Piani";
+				s_ArrPiani.DbType = CustomDBType.VarChar;
+				s_ArrPiani.Direction = ParameterDirection.Input;
+				s_ArrPiani.Index = _SCollection.Count + 1;
+				s_ArrPiani.Value = DBNull.Value;
+				
+				_SCollection.Add(s_ArrPiani);
 
 				//Aggiungo un parametro che contiene le e-mail
 				S_Controls.Collections.S_Object s_Mail = new S_Object();
@@ -903,6 +969,7 @@ namespace TheSite.Gestione
 				this.txtsIndirizzo2.DBDefaultValue = DBNull.Value;
 				this.cmbsProvincia.DBDefaultValue=0;
 				this.cmbsComune.DBDefaultValue=0;
+				this.CmbProgetto.DBDefaultValue=0;
 				this.TxtsCAP.DBDefaultValue = DBNull.Value;
 				this.cmbsUso.DBDefaultValue=0;
 				this.cmbsDitta.DBDefaultValue=0;
@@ -921,22 +988,6 @@ namespace TheSite.Gestione
 
 				_SCollection.AddItems(this.PanelEditAnag.Controls);
 				
-				//Aggiungo un parametro che contiene tutti i Piani
-//				if (this.ListBoxRightP.Items.Count >= 0)
-//				{
-//					foreach(ListItem o_Litem in this.ListBoxRightP.Items)
-//					{
-//						strArrPiani = strArrPiani + o_Litem.Value.ToString() + ";";
-//					}
-//				}	
-//				S_Controls.Collections.S_Object s_ArrPiani = new S_Object();
-//				s_ArrPiani.ParameterName = "p_Arr_Piani";
-//				s_ArrPiani.DbType = CustomDBType.VarChar;
-//				s_ArrPiani.Direction = ParameterDirection.Input;
-//				s_ArrPiani.Index = _SCollection.Count + 1;
-//				s_ArrPiani.Value = DBNull.Value;
-					
-//				_SCollection.Add(s_ArrPiani);
 
 				//Aggiungo un parametro che contiene le e-mail
 				if (this.ListboxRightE.Items.Count >= 0)
@@ -952,7 +1003,7 @@ namespace TheSite.Gestione
 				s_Mail.ParameterName = "p_MAIL";
 				s_Mail.DbType = CustomDBType.VarChar;
 				s_Mail.Direction = ParameterDirection.Input;
-				s_Mail.Index = _SCollection.Count + 1;
+				s_Mail.Index = 11;
 				s_Mail.Size = 255;
 				s_Mail.Value = strMail;
 					
@@ -1682,6 +1733,7 @@ namespace TheSite.Gestione
 				DataRowView Dr =(DataRowView)e.Item.DataItem;
 
 				string id1=Dr["DESCRIZIONE"].ToString();
+
 				if (HiddenPianiStanze.Value=="")
 					HiddenPianiStanze.Value=id1;
 				else
@@ -1689,14 +1741,17 @@ namespace TheSite.Gestione
 
 				//				//Verifico che il piano non abbia stanze associate.
 				Classi.ClassiAnagrafiche.Buildings _Buildings = new Classi.ClassiAnagrafiche.Buildings();
-				int Result = _Buildings.GetNumeroStanzeBuilding(itemId);
+				//int Result = _Buildings.GetNumeroStanzeBuilding(itemId);
+				int idPiano = int.Parse(Dr["ID"].ToString());
+				int Result = _Buildings.PianiStanze(idPiano,itemId);
+				
 				ImageButton bt=(ImageButton)e.Item.Controls[1].Controls[3];
 				bt.CausesValidation =false;
 				if (Result==0)//non ha stanze collegate solo messaggio con il confirm
 					bt.Attributes.Add("onclick","return confirm(\"Eliminare il Piano: " + Dr["DESCRIZIONE"].ToString() + "?\")");
 				else//Ha stanze collegate non deve fare il Post
 				{
-					bt.Attributes.Add("onclick","alert(\"Il piano: " + Dr["DESCRIZIONE"].ToString() + " non può essere eliminato perchè associato a uno o più piani.\");return false;");
+					bt.Attributes.Add("onclick","alert(\"Il piano: " + Dr["DESCRIZIONE"].ToString() + " non può essere eliminato perchè associato a uno o più stanze.\");return false;");
 					if(e.Item.Controls[4].Controls[1] is S_Controls.S_ComboBox)
 						((S_Controls.S_ComboBox) e.Item.Controls[4].Controls[1]).Enabled =false;
 				}

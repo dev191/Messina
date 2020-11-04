@@ -47,7 +47,7 @@ namespace TheSite.WebControls
 
 		public string NumeroRecords
 		{
-			get {return s_NumRecords;}
+			get {return lblRecord.Text;}
 			set 
 			{
 				s_NumRecords = value;

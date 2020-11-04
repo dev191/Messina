@@ -17,7 +17,7 @@ namespace TheSite.AnalisiStatistiche.chart
 	/// <summary>
 	/// Descrizione di riepilogo per GraficiMop.
 	/// </summary>
-	public class GraficiLV : System.Web.UI.Page    // System.Web.UI.Page	
+	public class GraficiLV : System.Web.UI.Page	
 	{
 		protected TheSite.WebControls.PageTitle PageTitleReport;
 		protected Csy.WebControls.DataPanel DataPanelRicerca;
@@ -76,7 +76,15 @@ namespace TheSite.AnalisiStatistiche.chart
 			_obj_QueryStr.Add(S_optBtnRdlDispersioneRA.Checked,"S_optBtnRdlDispersioneRA");
 			_obj_QueryStr.Add(S_optBtnRdlDispersioneRC.Checked,"S_optBtnRdlDispersioneRC");
 			_obj_QueryStr.Add(cmbTipologiaInitervento.SelectedValue,"tipologia");
-			urlRpt = "./Chart.aspx" + _obj_QueryStr.TotQueryString();
+
+			string Progetto="";
+			if(Request["VarApp"]!=null)
+			{
+				Progetto = Request["VarApp"];
+				Session["VarApp"] = Progetto ;
+			}
+				//Progetto = "&VarApp=" + Request["VarApp"];
+			urlRpt = "./Chart.aspx" + _obj_QueryStr.TotQueryString() ;
 
 		}
 

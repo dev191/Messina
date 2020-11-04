@@ -32,7 +32,8 @@
 					<td align="left" width="100%" colSpan="4"><FONT face="Arial" size="3"><strong></strong></FONT></td>
 				</tr>
 				<tr>
-					<td><IMG src="../Images/LogoUsl3Catania.jpg" >
+					<td>
+						<IMG src="<%=image%>" >
 					</td>
 				</tr>
 				<TR>
@@ -136,7 +137,7 @@
 												<tr bordercolor="#ffffff">
 													<td>
 														<Font face="Arial" size="1"><b><nobr>DENOMINAZIONE CLIENTE </nobr></b></Font><strong>
-															<Font face="Arial" size="-1">UNIBA</Font></strong>
+															<Font face="Arial" size="-1"><%=descprog%></Font></strong>
 													</td>
 													<td align="left">
 														<Font face="Arial" size="1"><nobr>LOCALITÀ</nobr>: </Font><strong><Font face="Arial" size="-1">
@@ -147,7 +148,7 @@
 												<tr bordercolor="#ffffff">
 													<td>
 														<Font face="Arial" size="1"><nobr>NOME EDIFICIO</nobr>: </Font><strong><Font face="Arial" size="-1">
-																<%#EvalField(DataBinder.Eval(Container.DataItem, "var_wr_bl_id_name"),0)%>
+																<%#EvalField(DataBinder.Eval(Container.DataItem, "var_wr_bl_id"),0)%>
 															</Font></strong>
 													</td>
 												</tr>

@@ -1,13 +1,13 @@
-<%@ Register TagPrefix="iewc" Namespace="Microsoft.Web.UI.WebControls" Assembly="Microsoft.Web.UI.WebControls" %>
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="Richiedenti" Src="../WebControls/Richiedenti.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="Addetti" Src="../WebControls/Addetti.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
 <%@ Page language="c#" Codebehind="RichiesteApparecchiatura.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnagrafeImpianti.RichiesteApparecchiatura" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="Addetti" Src="../WebControls/Addetti.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="Richiedenti" Src="../WebControls/Richiedenti.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="iewc" Namespace="Microsoft.Web.UI.WebControls" Assembly="Microsoft.Web.UI.WebControls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -79,8 +79,8 @@
 		
 		</SCRIPT>
 	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" onkeypress="if (valutaenter(event) == false) { return false; }" bottommargin="0"
-		leftmargin="5" topmargin="0" rightmargin="0" ms_positioning="GridLayout">
+	<body onbeforeunload="parent.left.valorizza()" onkeypress="if (valutaenter(event) == false) { return false; }"
+		bottommargin="0" leftmargin="5" topmargin="0" rightmargin="0" ms_positioning="GridLayout">
 		<FORM id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; POSITION: absolute; TOP: 0px" cellspacing="0"
 				cellpadding="0" width="100%" align="center" border="0">
@@ -113,12 +113,12 @@
 										<TD style="HEIGHT: 25%" valign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" titlestyle-cssclass="TitleSearch" cssclass="DataPanel75"
 												titletext="Ricerca" allowtitleexpandcollapse="True" collapsed="False" expandtext="Espandi" collapsetext="Riduci" collapseimageurl="../Images/up.gif"
 												expandimageurl="../Images/down.gif">
-												<TABLE id="tblSearch100" cellspacing="1" cellpadding="2" border="0">
+												<TABLE id="tblSearch100" cellSpacing="1" cellPadding="2" border="0">
 													<TR>
 														<TD style="HEIGHT: 25px" align="left" width="13%">Richiesta di Lavoro:</TD>
 														<TD style="WIDTH: 259px; HEIGHT: 25px" width="259">
-															<CC1:S_TEXTBOX id="txtsRichiesta" runat="server" dbparametername="p_Wr_Id" dbdirection="Input"
-																width="100px" dbsize="255" maxlength="10" dbdatatype="Integer" dbindex="2"></CC1:S_TEXTBOX></TD>
+															<CC1:S_TEXTBOX id="txtsRichiesta" runat="server" dbindex="2" dbdatatype="Integer" maxlength="10"
+																dbsize="255" width="100px" dbdirection="Input" dbparametername="p_Wr_Id"></CC1:S_TEXTBOX></TD>
 														<TD style="HEIGHT: 25px" align="left" width="15%">Addetto:</TD>
 														<TD style="HEIGHT: 25px" width="30%">
 															<UC1:ADDETTI id="Addetti1" runat="server"></UC1:ADDETTI></TD>
@@ -130,27 +130,28 @@
 														<TD style="HEIGHT: 29px" align="left">A:</TD>
 														<TD style="HEIGHT: 29px">
 															<UC1:CALENDARPICKER id="CalendarPicker2" runat="server"></UC1:CALENDARPICKER>
-															<ASP:COMPAREVALIDATOR id="CompareValidator1" runat="server" type="Date" operator="GreaterThanEqual" errormessage="Data non valida!"></ASP:COMPAREVALIDATOR></TD>
+															<ASP:COMPAREVALIDATOR id="CompareValidator1" runat="server" errormessage="Data non valida!" operator="GreaterThanEqual"
+																type="Date"></ASP:COMPAREVALIDATOR></TD>
 													</TR>
 													<TR>
 														<TD align="left">Ordine di Lavoro:</TD>
 														<TD style="WIDTH: 259px">
-															<CC1:S_TEXTBOX id="txtsOrdine" runat="server" dbparametername="p_Wr_Id" dbdirection="Input" width="100px"
-																dbsize="255" maxlength="10"></CC1:S_TEXTBOX></TD>
+															<CC1:S_TEXTBOX id="txtsOrdine" runat="server" maxlength="10" dbsize="255" width="100px" dbdirection="Input"
+																dbparametername="p_Wr_Id"></CC1:S_TEXTBOX></TD>
 														<TD align="left">Stato Richiesta:</TD>
 														<TD>
 															<CC1:S_COMBOBOX id="cmbsStatus" runat="server" width="99%"></CC1:S_COMBOBOX></TD>
 													</TR>
 													<TR>
-														<TD style="HEIGHT: 16px" align="left" colspan="4"></TD>
+														<TD style="HEIGHT: 16px" align="left" colSpan="4"></TD>
 													</TR>
 													<TR>
-														<TD align="left" colspan="3">
+														<TD align="left" colSpan="3">
 															<CC1:S_BUTTON id="btnsRicerca" runat="server" cssclass="btn" text="Ricerca"></CC1:S_BUTTON>&nbsp;<INPUT class="btn" type="reset" value="Reset">&nbsp;&nbsp;
-															<CC1:S_BUTTON id="cmdExcel" tabindex="2" runat="server" cssclass="btn" text="Esporta"></CC1:S_BUTTON>
-															<ASP:BUTTON id="cmdReset" cssclass="btn" text="Indietro" runat="server"></ASP:BUTTON></TD>
-														<TD align="right"><A CLASS="GuidaLink" HREF="<%= HelpLink %>" 
-                  TARGET="_blank">Guida</A></TD>
+															<CC1:S_BUTTON id="cmdExcel" tabIndex="2" runat="server" cssclass="btn" text="Esporta"></CC1:S_BUTTON>
+															<ASP:BUTTON id="cmdReset" runat="server" cssclass="btn" text="Indietro"></ASP:BUTTON></TD>
+														<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
+                  target=_blank>Guida</A></TD>
 													</TR>
 												</TABLE>
 											</COLLAPSE:DATAPANEL></TD>
@@ -191,6 +192,6 @@
 				</TBODY>
 			</TABLE>
 			</TD></TR></TBODY></TABLE></FORM>
-		</TD></TR></TBODY></TABLE></TR></TBODY></TABLE></TR></TBODY></TABLE></FORM>
-	</body><script language="javascript">parent.left.calcola();</script>
+		</TD></TR></TBODY></TABLE></TR></TBODY></TABLE></TR></TBODY></TABLE></FORM><script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

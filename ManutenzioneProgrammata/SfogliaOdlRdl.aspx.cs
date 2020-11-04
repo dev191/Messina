@@ -10,14 +10,14 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.ManutenzioneProgrammata
 {
 	/// <summary>
 	/// Descrizione di riepilogo per SfogliaOdlRdl.
 	/// </summary>
-	public class SfogliaOdlRdl : System.Web.UI.Page    // System.Web.UI.Page
+	public class SfogliaOdlRdl : System.Web.UI.Page
 	{
 		protected S_Controls.S_ComboBox cmbsAnnoDa;
 		protected S_Controls.S_ComboBox cmbsAnnoA;
@@ -43,14 +43,15 @@ namespace TheSite.ManutenzioneProgrammata
 		protected S_Controls.S_ComboBox cmbsstatolavoro;
 		public static string HelpLink = string.Empty;			
 	
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new MyCollection.clMyCollection();
 		SfogliaRdlOdl_MP  _fp=null;
+		protected S_Controls.S_ComboBox cmbsstatolavoro_odl;
 		CompletamentoMP  _fp2=null;
 
 		//public delegate void xx(object sender, CommandEventArgs e);
 		//public event xx xx2;
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get {return _myColl;}
 		}
@@ -109,7 +110,7 @@ namespace TheSite.ManutenzioneProgrammata
 					{						
 						_myColl=_fp._Contenitore;
 						_myColl.SetValues(this.Page.Controls);		
-						Ricerca();
+						Ricerca(true);
 					}
 				}
 				if(Context.Handler is TheSite.ManutenzioneProgrammata.CompletamentoMP)
@@ -119,7 +120,7 @@ namespace TheSite.ManutenzioneProgrammata
 					{						
 						_myColl=_fp2._ContenitoreSfoglia;
 						_myColl.SetValues(this.Page.Controls);		
-						Ricerca();
+						Ricerca(true);
 					}
 				}
 			}
@@ -135,7 +136,7 @@ namespace TheSite.ManutenzioneProgrammata
 		private void CaricaCombiAnni()
 		{
 			string anno_corrente = DateTime.Now.Year.ToString();
-			for (int i = 2011; i <= 2040; i++)
+			for (int i = 2000; i <= Int16.Parse(anno_corrente) +5; i++)
 			{ 
 				cmbsAnnoA.Items.Add(i.ToString());
 				cmbsAnnoDa.Items.Add(i.ToString());
@@ -220,6 +221,7 @@ namespace TheSite.ManutenzioneProgrammata
 
 			if (_MyDs.Tables[0].Rows.Count > 0)
 			{
+
 				this.cmbsServizio.DataSource =_MyDs.Tables[0];
 				this.cmbsServizio.DataTextField = "DESCRIZIONE";
 				this.cmbsServizio.DataValueField = "IDSERVIZIO";
@@ -228,7 +230,7 @@ namespace TheSite.ManutenzioneProgrammata
 			else
 			{
 				string s_Messagggio = "- Nessun Servizio -";
-				this.cmbsServizio.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
+				this.cmbsServizio.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "0"));
 			}
 		
 		}
@@ -266,7 +268,7 @@ namespace TheSite.ManutenzioneProgrammata
 			else
 			{
 				string s_Messagggio = "- Nessuna Ditta  -";
-				this.cmbsDitta.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
+				this.cmbsDitta.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "0"));
 			}
 		}
 		private void BindStatoLavoro(string idstato)
@@ -281,7 +283,7 @@ namespace TheSite.ManutenzioneProgrammata
 			{
 
 				this.cmbsstatolavoro.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
-					_MyDs.Tables[0], "descrizione", "id", "- Selezionare lo Stato di Lavoro  -", "");
+					_MyDs.Tables[0], "descrizione", "id", "- Tutti gli Stati -", "");
 				this.cmbsstatolavoro.DataTextField = "descrizione";
 				this.cmbsstatolavoro.DataValueField = "id";
 				this.cmbsstatolavoro.DataBind();
@@ -396,7 +398,7 @@ namespace TheSite.ManutenzioneProgrammata
 		{
 			BindAddetti(RicercaModulo1.TxtCodice.Text);	
 		}
-		private void Ricerca()
+		private void Ricerca(bool reset)
 		{
 			S_Controls.Collections.S_ControlsCollection CollezioneControlli = new S_Controls.Collections.S_ControlsCollection();
 			
@@ -540,15 +542,52 @@ namespace TheSite.ManutenzioneProgrammata
 			s_p_TipoManutenzione.Value=Classi.TipoManutenzioneType.ManutenzioneProgrammata;			
 			CollezioneControlli.Add(s_p_TipoManutenzione);
 
+			// Stato della OdL				
+			S_Controls.Collections.S_Object s_P_statoOdl = new S_Object();
+			s_P_statoOdl.ParameterName = "P_statoOdl";
+			s_P_statoOdl.DbType = CustomDBType.Integer;
+			s_P_statoOdl.Direction = ParameterDirection.Input;
+			s_P_statoOdl.Index = CollezioneControlli.Count +1;
+			s_P_statoOdl.Value=cmbsstatolavoro_odl.SelectedValue;			
+			CollezioneControlli.Add(s_P_statoOdl);
+
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = CollezioneControlli.Count +1;
+			s_p_pageindex.Value=DataGrid1.CurrentPageIndex+1;			
+			CollezioneControlli.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = CollezioneControlli.Count +1;
+			s_p_pagesize.Value= DataGrid1.PageSize;			
+			CollezioneControlli.Add(s_p_pagesize);
+
 		   TheSite.Classi.ManProgrammata.SfogliaRdlOdl _SfogliaRdlOdl=new TheSite.Classi.ManProgrammata.SfogliaRdlOdl(Context.User.Identity.Name);
            DataSet _Ds= _SfogliaRdlOdl.GetData(CollezioneControlli);
-			if (_Ds.Tables[0].Rows.Count >0) 
+
+		
+			if (reset==true)
+			{
+				CollezioneControlli.RemoveAt(CollezioneControlli.Count -1); 
+				CollezioneControlli.RemoveAt(CollezioneControlli.Count -1); 
+				CollezioneControlli.RemoveAt(CollezioneControlli.Count -1); 
+				int _totalRecords = _SfogliaRdlOdl.GetDataCount(CollezioneControlli);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();		
+			}
+
+			DataGrid1.DataSource =_Ds.Tables[0];
+			this.DataGrid1.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.DataGrid1.DataBind();
+
+			if (int.Parse(GridTitle1.NumeroRecords)>0) 
 			{
 			 this.GridTitle1.Visible= true;
 			 DataGrid1.Visible =true;
-		     this.GridTitle1.NumeroRecords=_Ds.Tables[0].Rows.Count.ToString();
-             DataGrid1.DataSource =_Ds.Tables[0];
-             DataGrid1.DataBind(); 
 			}
 			else
 			{
@@ -594,7 +633,8 @@ namespace TheSite.ManutenzioneProgrammata
 	
 		private void btRicerca_Click(object sender, System.EventArgs e)
 		{
-			Ricerca();
+			DataGrid1.CurrentPageIndex =0;
+			Ricerca(true);
 		}
 
 		public void LinkButton1_Click(Object sender, CommandEventArgs e) 
@@ -608,7 +648,7 @@ namespace TheSite.ManutenzioneProgrammata
 		{
 		 ///Imposto la Nuova Pagina
 		 DataGrid1.CurrentPageIndex=e.NewPageIndex;
-		 Ricerca();
+		 Ricerca(false);
 		}
 
 	
@@ -626,7 +666,7 @@ namespace TheSite.ManutenzioneProgrammata
 			cmbsAnnoDa.SelectedValue=System.DateTime.Now.Year.ToString();
 			cmbsMeseA.SelectedValue=System.DateTime.Now.Month.ToString().PadLeft(2,Convert.ToChar("0"));			
 			cmbsAnnoA.SelectedValue=System.DateTime.Now.Year.ToString();
-		    Ricerca();
+		    Ricerca(true);
 		}
 	}
 }

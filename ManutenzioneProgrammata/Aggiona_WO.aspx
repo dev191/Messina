@@ -10,7 +10,7 @@
 		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
 		<LINK href="../Css/MainSheet.css" type="text/css" rel="stylesheet">
 	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" MS_POSITIONING="GridLayout">
+	<body MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
 			<TABLE id="Table1" cellSpacing="0" cellPadding="0" width="100%" border="0">
 				<TBODY>
@@ -99,5 +99,5 @@
 			</FooterTemplate>
 			</asp:Repeater></TD></TR></TBODY></TABLE>
 		</form>
-	</body><script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

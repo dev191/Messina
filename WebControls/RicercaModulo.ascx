@@ -1,12 +1,12 @@
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="RicercaModulo.ascx.cs" Inherits="TheSite.WebControls.RicercaModulo" TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
 <%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Control Language="c#" AutoEventWireup="false" Codebehind="RicercaModulo.ascx.cs" Inherits="TheSite.WebControls.RicercaModulo" TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
 <!---<LINK href="../Css/IACPSheet.css" type="text/css" rel="stylesheet">-->
 <script language="javascript">
-/*function Verifica(sender)
+var prj=<%=varprj%>;
+function setprj(e)
 {
-	if(sender.length != 6) return true;
+	prj=e.value;
 }
-*/
 </script>
 <TABLE runat="server" id="tblModulo" cellSpacing="1" cellPadding="1" width="100%" border="0"
 	class="tblSearch100Dettaglio">
@@ -19,7 +19,17 @@
 		<TD align="center"><INPUT id="btnsRicerca" title="Fare Click per effettuare la Ricerca Edificio" type="button"
 				value="Ricerca Edificio"  onclick="ShowFrame('<%=idTextRic%>','idric',event,'<%=idModulo%>','<%=multisele%>');"class=btn></TD>
 		<TD>
-			<cc1:S_TextBox id="txtRicerca" runat="server" Width="420px"></cc1:S_TextBox></TD>
+			<cc1:S_TextBox id="txtRicerca" runat="server" Width="420px"></cc1:S_TextBox>
+			<INPUT type="hidden" runat="server" id="idProg" style="WIDTH: 5px; HEIGHT: 22px" size="1">
+		</TD>
+	</TR>
+	<TR>
+		<TD style="WIDTH: 15%">
+			<asp:Label id="lblProgetto" runat="server" Font-Bold="True">Progetto:</asp:Label></TD>
+		<TD noWrap>
+			<asp:DropDownList id="CmbProgetto" runat="server"></asp:DropDownList></TD>
+		<TD align="center"></TD>
+		<TD></TD>
 	</TR>
 	<TR>
 		<TD style="WIDTH: 15%" colSpan="4">
@@ -37,11 +47,11 @@
 						<TD>Comune</TD>
 						<TD>
 							<asp:Label id="lblComune" runat="server" CssClass="LabelReadOnly"></asp:Label></TD>
-						<TD style="DISPALY:NONE">Telefono</TD>
-						<TD style="DISPALY:NONE">
+						<TD>Telefono</TD>
+						<TD>
 							<asp:Label id="lblTelefono" runat="server" CssClass="LabelReadOnly"></asp:Label></TD>
 					</TR>
-					<TR style="DISPALY:NONE">
+					<TR>
 						<TD>Ditta</TD>
 						<TD>
 							<asp:Label id="lblDitta" runat="server" CssClass="LabelReadOnly"></asp:Label></TD>
@@ -51,8 +61,11 @@
 					</TR>
 					<TR>
 						<TD><INPUT id="lblEmail" style="WIDTH: 16px; HEIGHT: 25px" type="hidden" size="1" name="Hidden1"
-								runat="server"></TD>
-						<TD colSpan="3"></TD>
+								runat="server">
+							<asp:Label id="presidio" runat="server" Width="0px" Height="0px"></asp:Label></TD>
+						<TD>Presidio:</TD>
+						<TD colSpan="2">
+							<asp:Label id="LbLPresidio" runat="server" Width="0px" Height="0px"></asp:Label></TD>
 					</TR>
 				</TABLE>
 			</asp:Panel></TD>

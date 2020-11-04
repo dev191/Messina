@@ -20,7 +20,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per SchedaApparecchiatura.
 	/// </summary>
-	public class SchedaApparecchiatura : System.Web.UI.Page    // System.Web.UI.Page
+	public class SchedaApparecchiatura : System.Web.UI.Page
 	{
 		protected S_Controls.S_Label S_lblcodicecomponente;
 		protected S_Controls.S_Label S_lblstdapparecchiature;
@@ -37,7 +37,7 @@ namespace TheSite.CommonPage
 		protected System.Web.UI.WebControls.DataList DataList1;
 		protected Csy.WebControls.DataPanel DataPanelPassi;
 		protected System.Web.UI.WebControls.DataList Datalist2;
-		protected Csy.WebControls.DataPanel DataPanelDoc;
+		protected Csy.WebControls.DataPanel DataPanel1;
 		protected Csy.WebControls.DataPanel DataPanelCaratteristiche;
 		protected WebControls.PageTitle PageTitle1;
 
@@ -48,17 +48,8 @@ namespace TheSite.CommonPage
 		protected S_Controls.S_Label S_lblstanza;
 		protected S_Controls.S_Label S_lblqta;		
 		public static string HelpLink = string.Empty;
-		protected S_Controls.S_Label S_label1;
-		protected S_Controls.S_Label S_label2;
-		protected S_Controls.S_Label S_Lblservizio;
-		protected S_Controls.S_Label S_label3;
-		protected S_Controls.S_Label S_label4;
-		protected S_Controls.S_Label S_label5;
-		protected S_Controls.S_Label S_label6;
-		protected System.Web.UI.WebControls.DataGrid MyDataGrid1;
+		protected S_Controls.S_Label S_LblStato;
 		int IDEQ=0;
-		
-		protected int id_eq=0;
 
 		private void Page_Load(object sender, System.EventArgs e)
 		{
@@ -70,7 +61,6 @@ namespace TheSite.CommonPage
 			// Inserire qui il codice utente necessario per inizializzare la pagina.
 			if(!IsPostBack)
 			{
-					
 				if (Context.Items["eq_id"]!=null)
 					this.eq_id =(string)Context.Items["eq_id"];
 
@@ -78,7 +68,6 @@ namespace TheSite.CommonPage
 				{
 					this.eq_id =(string)Request.QueryString["eq_id"];
 					this.PageTitle1.Visible =false;
-					
 				}
 				Execute();
 			}
@@ -118,30 +107,7 @@ namespace TheSite.CommonPage
 		}
 
 		#endregion
-		private void BindGrid()
-		{
-			
-			Classi.ClassiAnagrafiche.AllegatiEQ _AllegatiEQ = new TheSite.Classi.ClassiAnagrafiche.AllegatiEQ ();
-			DataSet _MyDs;
-			S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
 
-			S_Controls.Collections.S_Object s_Apparecchiatura = new S_Object();
-			s_Apparecchiatura.ParameterName = "p_eq";
-			s_Apparecchiatura.DbType = CustomDBType.Integer;
-			s_Apparecchiatura.Direction = ParameterDirection.Input;
-			s_Apparecchiatura.Size = 10; 
-			s_Apparecchiatura.Index = 0;
-			s_Apparecchiatura.Value = id_eq;		
-			_SCollection.Add(s_Apparecchiatura);
-		
-			_MyDs= _AllegatiEQ.GetData(_SCollection).Copy();
-
-			this.MyDataGrid1.DataSource = _MyDs.Tables[0];
-			this.MyDataGrid1.DataBind();
-
-			//			this.lblRecord.Text = _MyDs.Tables[0].Rows.Count.ToString();	
-			this.MyDataGrid1.ShowFooter = false;
-		}
 		private void Execute()
 		{
 			S_Controls.Collections.S_ControlsCollection CollezioneControlli = new  S_Controls.Collections.S_ControlsCollection();
@@ -169,6 +135,7 @@ namespace TheSite.CommonPage
 				{
 					S_lblstanza.Text=Ds.Tables[0].Rows[0]["stanza"].ToString();
 					S_lblqta.Text=Ds.Tables[0].Rows[0]["quantita"].ToString();
+				S_LblStato.Text=Ds.Tables[0].Rows[0]["var_eq_condition"].ToString();
 				}
 				catch(Exception ex)
 				{Response.Write(ex.Message);}
@@ -181,9 +148,6 @@ namespace TheSite.CommonPage
 				Imagename+=Ds.Tables[0].Rows[0]["var_eq_image_eq_assy"].ToString();
 				BindAttivita(Ds.Tables[0].Rows[0]["var_eqstd_id"].ToString());
 
-//documenti allegati marianna
-				id_eq=Convert.ToInt32(Ds.Tables[0].Rows[0]["ID_EQ"]);
-				BindGrid();
 
 				//Dati tecnici
 				Classi.ClassiDettaglio.DatiTecniciApparecchiatura  _DatiTecniciApparecchiatura=new Classi.ClassiDettaglio.DatiTecniciApparecchiatura(Context.User.Identity.Name);
@@ -273,6 +237,7 @@ namespace TheSite.CommonPage
 		/// </summary>
 		private void InitializeComponent()
 		{    
+			this.Datalist2.ItemDataBound += new System.Web.UI.WebControls.DataListItemEventHandler(this.Datalist2_ItemDataBound);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}

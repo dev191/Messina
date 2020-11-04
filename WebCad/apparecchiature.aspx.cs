@@ -18,7 +18,7 @@ namespace WebCad
 	/// <summary>
 	/// Descrizione di riepilogo per apparecchiature.
 	/// </summary>
-	public class apparecchiature : System.Web.UI.Page    // System.Web.UI.Page
+	public class apparecchiature : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid MyDataGrid1;
 		private string descrizione="";

@@ -1,210 +1,322 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ManProgrammata.CreaOttimizzaRDL_MP
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
+using System;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
-using System.Web;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
+
 
 namespace TheSite.Classi.ManProgrammata
 {
-  public class CreaOttimizzaRDL_MP : AbstractBase
-  {
-    private string s_Descrizione = string.Empty;
-    private OracleDataLayer _OraDl;
-    public string UserName;
+	/// <summary>
+	/// Descrizione di riepilogo per ProcAndSteps.
+	/// </summary>
+	public class CreaOttimizzaRDL_MP : AbstractBase
+	{
+		#region Dichiarazioni
 
-    public CreaOttimizzaRDL_MP() => this._OraDl = new OracleDataLayer(this.s_ConnStr);
+		private string s_Descrizione = string.Empty;
+		private ApplicationDataLayer.OracleDataLayer _OraDl;
+		#endregion
+		
+		public string UserName;
+	
+				
+		public CreaOttimizzaRDL_MP()
+		{
+			_OraDl = new OracleDataLayer(s_ConnStr);
+		}
+	
 
-    public void beginTransaction() => this._OraDl.BeginTransaction();
+		#region Metodi Pubblici
 
-    public void commitTransaction() => this._OraDl.CommitTransaction();
+		/// <summary>
+		/// DataSet con tutti i record
+		/// </summary>
+		/// <returns></returns>
+		
 
-    public void rollbackTransaction() => this._OraDl.RollbackTransaction();
+		/// <summary>
+		/// 
+		/// </summary>		
+		/// 
 
-    public override DataSet GetData() => (DataSet) null;
+		public void beginTransaction()
+		{
+			_OraDl.BeginTransaction();
+		}
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+		public void commitTransaction()
+		{
+			_OraDl.CommitTransaction();			
+		}
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_SCHEDULA.Crea_WR_Ricerca";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		public void rollbackTransaction()
+		{
+			_OraDl.RollbackTransaction();
+		}
 
-    public DataSet GetDataPaging(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_SCHEDULA.Crea_WR_RicercaPaging";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		public override DataSet GetData()
+		{
+			return null;
+		}
+		public override DataSet GetSingleData(int itemId)
+		{
+			return null;
+		}
 
-    public int GetDataCount(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_SCHEDULA.Crea_WR_RicercaCount";
-      return int.Parse(oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy().Tables[0].Rows[0][0].ToString());
-    }
 
-    public DataSet GetComuni(int anno)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Anno");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(1);
-      ((ParameterObject) sObject1).set_Size(50);
-      ((ParameterObject) sObject1).set_Value((object) anno);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(2);
-      controlsCollection.Add(sObject2);
-      string str = "PACK_SCHEDULA.Crea_WR_GetComuni";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
 
-    public DataSet GetEdifici(int anno, int id_comune)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_anno");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject1).set_Size(50);
-      ((ParameterObject) sObject1).set_Value((object) anno);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_comune");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject2).set_Size(50);
-      ((ParameterObject) sObject2).set_Value((object) id_comune);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_username");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject3).set_Size(50);
-      ((ParameterObject) sObject3).set_Value((object) HttpContext.Current.User.Identity.Name);
-      controlsCollection.Add(sObject3);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject4).set_Index(((CollectionBase) controlsCollection).Count);
-      controlsCollection.Add(sObject4);
-      string str = "PACK_SCHEDULA.Crea_WR_GetEdifici";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count+1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_SCHEDULA.Crea_WR_Ricerca";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public DataSet GetServizi(int anno, int id_comune, int id_edificio)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Anno");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(1);
-      ((ParameterObject) sObject1).set_Size(50);
-      ((ParameterObject) sObject1).set_Value((object) anno);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_comune");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(2);
-      ((ParameterObject) sObject2).set_Size(50);
-      ((ParameterObject) sObject2).set_Value((object) id_comune);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_edificio");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(3);
-      ((ParameterObject) sObject3).set_Size(50);
-      ((ParameterObject) sObject3).set_Value((object) id_edificio);
-      controlsCollection.Add(sObject3);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("p_username");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject4).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject4).set_Size(50);
-      ((ParameterObject) sObject4).set_Value((object) HttpContext.Current.User.Identity.Name);
-      controlsCollection.Add(sObject4);
-      S_Object sObject5 = new S_Object();
-      ((ParameterObject) sObject5).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject5).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject5).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject5).set_Index(4);
-      controlsCollection.Add(sObject5);
-      string str = "PACK_SCHEDULA.Crea_WR_GetServizi";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			return _Ds;		
+		}		
+		public  DataSet GetDataPaging(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      if (Operazione == ExecuteType.Insert)
-      {
-        S_Object sObject1 = new S_Object();
-        ((ParameterObject) sObject1).set_ParameterName("f_MsgDB");
-        ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-        ((ParameterObject) sObject1).set_Direction(ParameterDirection.Output);
-        ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-        ((ParameterObject) sObject1).set_Size(500);
-        CollezioneControlli.Add(sObject1);
-        S_Object sObject2 = new S_Object();
-        ((ParameterObject) sObject2).set_ParameterName("f_tot_RdL");
-        ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-        ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-        ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-        CollezioneControlli.Add(sObject2);
-        return new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) CollezioneControlli, "PACK_SCHEDULA.Crea_WR");
-      }
-      if (Operazione != ExecuteType.Update)
-        return 0;
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("p_esito");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      return new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) CollezioneControlli, "PACK_SCHEDULA.Ottimizza");
-    }
-  }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count+1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_SCHEDULA.Crea_WR_RicercaPaging";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}		
+		 public int  GetDataCount(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count+1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_SCHEDULA.Crea_WR_RicercaCount";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return int.Parse(_Ds.Tables[0].Rows[0][0].ToString());		
+		}		
+
+		public DataSet GetComuni(int anno)
+		{
+
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			DataSet _Ds;
+
+			S_Controls.Collections.S_Object s_Anno = new S_Object();
+			s_Anno.ParameterName = "p_Anno";
+			s_Anno.DbType = CustomDBType.Integer;
+			s_Anno.Direction = ParameterDirection.Input;
+			s_Anno.Index = 1;
+			s_Anno.Size=50;
+			s_Anno.Value = anno;
+			CollezioneControlli.Add(s_Anno);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 2;
+			CollezioneControlli.Add(s_Cursor);
+			
+			string s_StrSql = "PACK_SCHEDULA.Crea_WR_GetComuni";
+	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}		
+
+		public DataSet GetEdifici(int anno, int id_comune)
+		{
+
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			DataSet _Ds;
+
+			S_Controls.Collections.S_Object s_Anno = new S_Object();
+			s_Anno.ParameterName = "p_anno";
+			s_Anno.DbType = CustomDBType.Integer;
+			s_Anno.Direction = ParameterDirection.Input;
+			s_Anno.Index = CollezioneControlli.Count;
+			s_Anno.Size=50;
+			s_Anno.Value = anno;
+			CollezioneControlli.Add(s_Anno);
+
+			S_Controls.Collections.S_Object s_idcomune = new S_Object();
+			s_idcomune.ParameterName = "p_comune";
+			s_idcomune.DbType = CustomDBType.Integer;
+			s_idcomune.Direction = ParameterDirection.Input;
+			s_idcomune.Index = CollezioneControlli.Count;
+			s_idcomune.Size=50;
+			s_idcomune.Value = id_comune;
+			CollezioneControlli.Add(s_idcomune);
+
+			S_Controls.Collections.S_Object s_p_username = new S_Object();
+			s_p_username.ParameterName = "p_username";
+			s_p_username.DbType = CustomDBType.VarChar;
+			s_p_username.Direction = ParameterDirection.Input;
+			s_p_username.Index =CollezioneControlli.Count;
+			s_p_username.Size=50;
+			s_p_username.Value = System.Web.HttpContext.Current.User.Identity.Name;
+			CollezioneControlli.Add(s_p_username);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index =CollezioneControlli.Count;
+			CollezioneControlli.Add(s_Cursor);
+			
+			string s_StrSql = "PACK_SCHEDULA.Crea_WR_GetEdifici";
+	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}		
+
+		public DataSet GetServizi(int anno, int id_comune, int id_edificio)
+		{
+
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			DataSet _Ds;
+
+			S_Controls.Collections.S_Object s_Anno = new S_Object();
+			s_Anno.ParameterName = "p_Anno";
+			s_Anno.DbType = CustomDBType.Integer;
+			s_Anno.Direction = ParameterDirection.Input;
+			s_Anno.Index = 1;
+			s_Anno.Size=50;
+			s_Anno.Value = anno;
+			CollezioneControlli.Add(s_Anno);
+
+			S_Controls.Collections.S_Object s_idcomune = new S_Object();
+			s_idcomune.ParameterName = "p_comune";
+			s_idcomune.DbType = CustomDBType.Integer;
+			s_idcomune.Direction = ParameterDirection.Input;
+			s_idcomune.Index = 2;
+			s_idcomune.Size=50;
+			s_idcomune.Value = id_comune;
+			CollezioneControlli.Add(s_idcomune);
+
+			S_Controls.Collections.S_Object s_idedif = new S_Object();
+			s_idedif.ParameterName = "p_edificio";
+			s_idedif.DbType = CustomDBType.Integer;
+			s_idedif.Direction = ParameterDirection.Input;
+			s_idedif.Index = 3;
+			s_idedif.Size=50;
+			s_idedif.Value = id_edificio;
+			CollezioneControlli.Add(s_idedif);
+
+			S_Controls.Collections.S_Object s_p_username = new S_Object();
+			s_p_username.ParameterName = "p_username";
+			s_p_username.DbType = CustomDBType.VarChar;
+			s_p_username.Direction = ParameterDirection.Input;
+			s_p_username.Index =CollezioneControlli.Count;
+			s_p_username.Size=50;
+			s_p_username.Value = System.Web.HttpContext.Current.User.Identity.Name;
+			CollezioneControlli.Add(s_p_username);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 4;
+			CollezioneControlli.Add(s_Cursor);
+			
+			string s_StrSql = "PACK_SCHEDULA.Crea_WR_GetServizi";
+	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}		
+
+
+		#endregion
+
+		#region Metodi Private
+
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			if (Operazione==ExecuteType.Insert) 
+			{
+
+				S_Controls.Collections.S_Object s_MsgDB = new S_Object();
+				s_MsgDB.ParameterName = "f_MsgDB";
+				s_MsgDB.DbType = CustomDBType.VarChar;
+				s_MsgDB.Direction = ParameterDirection.Output;
+				s_MsgDB.Index = CollezioneControlli.Count + 1;												
+				s_MsgDB.Size = 500;									
+				CollezioneControlli.Add(s_MsgDB);	
+
+				S_Controls.Collections.S_Object s_tot_RdL = new S_Object();
+				s_tot_RdL.ParameterName = "f_tot_RdL";
+				s_tot_RdL.DbType = CustomDBType.Integer;
+				s_tot_RdL.Direction = ParameterDirection.Output;
+				s_tot_RdL.Index = CollezioneControlli.Count + 1;																										
+				CollezioneControlli.Add(s_tot_RdL);		
+
+				ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+				int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_SCHEDULA.Crea_WR");
+				
+				return i_Result;
+			}
+
+			else if (Operazione==ExecuteType.Update) 
+			{				
+
+				S_Controls.Collections.S_Object s_esito = new S_Object();
+				s_esito.ParameterName = "p_esito";
+				s_esito.DbType = CustomDBType.Integer;
+				s_esito.Direction = ParameterDirection.Output;
+				s_esito.Index = CollezioneControlli.Count + 1;																										
+				CollezioneControlli.Add(s_esito);		
+
+				ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+				int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_SCHEDULA.Ottimizza");
+				
+				return i_Result;
+			}
+
+			else
+				return 0;
+
+		}
+
+		#endregion
+	}
 }

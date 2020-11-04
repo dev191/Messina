@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Reflection;
 
 namespace TheSite.ManutenzioneProgrammata
@@ -17,7 +18,7 @@ namespace TheSite.ManutenzioneProgrammata
 	/// <summary>
 	/// Descrizione di riepilogo per CreazioneODL_MP.
 	/// </summary>
-	public class CreazioneODL_MP : System.Web.UI.Page    // System.Web.UI.Page
+	public class CreazioneODL_MP : System.Web.UI.Page
 	{
 		protected S_Controls.S_ComboBox cmbsAnno;
 		protected S_Controls.S_ComboBox cmbsEdificio;
@@ -123,11 +124,10 @@ namespace TheSite.ManutenzioneProgrammata
 				Session.Remove("DataSet");			
 			}		
 		}
-
-
 		private void CaricaCombiAnni()
 		{
-	
+
+			
 			string anno_corrente = DateTime.Now.Year.ToString();
 			cmbsAnno.SelectedValue=anno_corrente;
 		}
@@ -290,11 +290,8 @@ namespace TheSite.ManutenzioneProgrammata
 
 		}
 
-		private void Ricerca()
-		{	
-			
-			Session.Remove("DataSet");
-
+		private S_Controls.Collections.S_ControlsCollection GetControl()
+		{
 			S_Controls.Collections.S_ControlsCollection CollezioneControlli = new S_Controls.Collections.S_ControlsCollection();
 			
 			cmbsComune.DBDefaultValue="0";
@@ -388,19 +385,52 @@ namespace TheSite.ManutenzioneProgrammata
 			s_Mese2.Value=cmbMeseA.SelectedValue;
 			CollezioneControlli.Add(s_Mese2);
 
-			Classi.ManProgrammata.CreaRDL  _creaRDL = new TheSite.Classi.ManProgrammata.CreaRDL();
+			return CollezioneControlli;
+		
+		}
 
-			DataSet _MyDs = _creaRDL.GetData(CollezioneControlli).Copy();
 
-			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
-			this.DataGridRicerca.DataBind();			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();
+		private void Ricerca(bool reset)
+		{	
 			
-			if (_MyDs.Tables[0].Rows.Count>0)
-			{				
-				PanelCrea.Visible=true;											
-				Session.Add("DataSet",_MyDs.Tables[0]);
+//			Session.Remove("DataSet");
+
+			S_Controls.Collections.S_ControlsCollection CollezioneControlli =GetControl(); 	
+			
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+			CollezioneControlli.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca.PageSize;			
+			CollezioneControlli.Add(s_p_pagesize);
+
+			Classi.ManProgrammata.CreaRDL  _creaRDL = new TheSite.Classi.ManProgrammata.CreaRDL();
+			DataSet _MyDs = _creaRDL.GetDataPaging(CollezioneControlli).Copy();
+
+			if (reset==true)
+			{
+
+				CollezioneControlli =GetControl();	
+				int _totalRecords = _creaRDL.GetDataCount(CollezioneControlli);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
 			}
+
+			DataGridRicerca.Visible =true;
+			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.DataGridRicerca.DataBind();
+			
+			if (int.Parse(this.GridTitle1.NumeroRecords)>0)		
+				PanelCrea.Visible=true;											
 			else
 				PanelCrea.Visible=false;
 		}
@@ -515,11 +545,15 @@ namespace TheSite.ManutenzioneProgrammata
 			{				
 				SetControlli();										
 			}
-			
+
+			S_Controls.Collections.S_ControlsCollection CollezioneControlli =GetControl(); 	
+			Classi.ManProgrammata.CreaRDL  _creaRDL = new TheSite.Classi.ManProgrammata.CreaRDL();
+			DataSet _MyDs = _creaRDL.GetData(CollezioneControlli).Copy();
+
 			for(int Pagine = 0;Pagine<=DataGridRicerca.PageCount;Pagine++)
 			{
 	
-				DataGridRicerca.DataSource=Session["DataSet"];
+				DataGridRicerca.DataSource=_MyDs.Tables[0];
 				DataGridRicerca.DataBind();
 				DataGridRicerca.CurrentPageIndex=Pagine;									
 							
@@ -532,8 +566,7 @@ namespace TheSite.ManutenzioneProgrammata
 			}
 
 			DataGridRicerca.CurrentPageIndex=0;
-			DataGridRicerca.DataSource=Session["DataSet"];
-			DataGridRicerca.DataBind();			
+			Ricerca(true);		
 			GetControlli();						
 		}
 
@@ -584,12 +617,12 @@ namespace TheSite.ManutenzioneProgrammata
 		{
 			DataGridRicerca.CurrentPageIndex=0;						
 			Resetta();
-			Ricerca();
+			Ricerca(true);
 		}
 		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;	
-			Ricerca();
+			Ricerca(false);
 			GetControlli();			
 		}
 
@@ -700,7 +733,7 @@ namespace TheSite.ManutenzioneProgrammata
                     //Rifaccio la ricerca
 					DataGridRicerca.CurrentPageIndex=0;						
 					Resetta();
-					Ricerca();
+					Ricerca(true);
 
 					Classi.SiteJavaScript.msgBox(this.Page,string.Format("SONO STATI INSERITI N. {0} Ordini di Lavoro.",TotUpdate));
 				}
@@ -745,6 +778,7 @@ namespace TheSite.ManutenzioneProgrammata
 
 		private void cmbsAnno_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
+			// Paolo
 			CaricaComboMesi();
 			BindControls();
 		}

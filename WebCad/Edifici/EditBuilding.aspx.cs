@@ -20,7 +20,7 @@ namespace WebCad.Edifici
 	/// <summary>
 	/// Summary description for EditBuilding.
 	/// </summary>
-	public class EditBuilding : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditBuilding : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox S_TextBox1;
 		protected S_Controls.S_TextBox S_TEXTBOX2;

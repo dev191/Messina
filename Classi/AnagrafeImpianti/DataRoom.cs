@@ -1,73 +1,100 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.AnagrafeImpianti.DataRoom
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Text;
 using System.Data;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.AnagrafeImpianti
 {
-  public class DataRoom
-  {
-    protected string s_ConnStr = ConfigurationSettings.AppSettings["ConnectionString"];
+	/// <summary>
+	/// Descrizione di riepilogo per DataRoom.
+	/// </summary>
+	public class DataRoom
+	{
+		public DataRoom(){}
 
-    public DataSet RicercaDataRoom(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_APPARECCHIATURE.SP_DATAROOM";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		protected string s_ConnStr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];						
+		/// <summary>
+		/// Metodo Utilizzato nella funzione Data Room
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		
+		public DataSet RicercaDataRoom(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;		
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count;
+			CollezioneControlli.Add(s_Cursor);
 
-    public DataSet RicercaDataRoomSTD(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_APPARECCHIATURE.SP_DATAROOMSTD";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_APPARECCHIATURE.SP_DATAROOM";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public int RicercaDataRoomSTDCount(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_APPARECCHIATURE.SP_DATAROOMSTDCount";
-      return int.Parse(oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy().Tables[0].Rows[0][0].ToString());
-    }
+			return _Ds;	
+		}
+		public DataSet RicercaDataRoomSTD(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;		
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count+1;
+			CollezioneControlli.Add(s_Cursor);
 
-    public DataSet RicercaApparecchiaturaPerStanza(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_APPARECCHIATURE.SP_GETAPPARECCHIATUREPERSTANZA";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
-  }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_APPARECCHIATURE.SP_DATAROOMSTD";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+
+		public int RicercaDataRoomSTDCount(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;		
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count;
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_APPARECCHIATURE.SP_DATAROOMSTDCount";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return int.Parse(_Ds.Tables[0].Rows[0][0].ToString());	;	
+		}
+
+		public DataSet RicercaApparecchiaturaPerStanza(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;		
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count;
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_APPARECCHIATURE.SP_GETAPPARECCHIATUREPERSTANZA";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+		
+	}
 }

@@ -16,7 +16,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per VisualDWF.
 	/// </summary>
-	public class VisualDWF : System.Web.UI.Page    // System.Web.UI.Page
+	public class VisualDWF : System.Web.UI.Page
 	{
 		protected Csy.WebControls.DataPanel DataPanel1;
 		protected System.Web.UI.WebControls.Repeater Repeater1;

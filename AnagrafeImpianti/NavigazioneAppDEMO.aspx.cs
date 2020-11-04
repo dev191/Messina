@@ -18,7 +18,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per NavigazioneAppDEMO.
 	/// </summary>
-	public class NavigazioneAppDEMO : System.Web.UI.Page    // System.Web.UI.Page
+	public class NavigazioneAppDEMO : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid MyDataGrid1;
 		protected WebControls.GridTitle GridTitle1; 
@@ -91,9 +91,9 @@ namespace TheSite.AnagrafeImpianti
 			///DataRoom.aspx?id_edificio_cad=201&id_piano_cad=1&FromWebCad=true
 			if (Request.QueryString["FromWebCad"]!=null || Request.QueryString["FromWebCad"].ToString()!=String.Empty)
 			{
-				if(Request.QueryString["WebCadIndietro"]==null)
+				if(Request.QueryString["WebCadIndietro"]!=null)
 				{
-					BntIndietro.Visible=false;
+					BntIndietro.Visible=true;
 				}
 				PageTitle1.VisibleLogut = false;
 			}

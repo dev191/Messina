@@ -9,14 +9,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
+using MyCollection;
+
 
 namespace TheSite.Contabilita
 {
 	/// <summary>
 	/// Descrizione di riepilogo per SfogliaFatture.
 	/// </summary>
-	public class SfogliaFatture : System.Web.UI.Page    // System.Web.UI.Page
+	public class SfogliaFatture : System.Web.UI.Page
 	{
 		protected Csy.WebControls.DataPanel PanelRicerca;
 		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
@@ -32,7 +33,7 @@ namespace TheSite.Contabilita
 		InserimentoFattura _fp;
 		public static int FunId = 0;
 		public static string HelpLink = string.Empty;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		protected WebControls.GridTitle GridTitle1;
 		protected S_Controls.S_ComboBox cmbsServizio;
 		protected System.Web.UI.WebControls.DropDownList cmbAnnoDa;
@@ -76,7 +77,7 @@ namespace TheSite.Contabilita
 
 		}
 		#endregion
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
@@ -361,6 +362,21 @@ namespace TheSite.Contabilita
 				(e.Item.ItemType == ListItemType.AlternatingItem))
 			{	
 				
+				//aggiunta per tooltip
+				string descrizione="";
+				string tooltip = "";
+				System.Collections.ArrayList itmTooltip = new ArrayList();
+				itmTooltip.Add(tooltip);
+				itmTooltip.Add(descrizione);
+
+				if (e.Item.Cells[11].Text.Trim().Length > 0) 
+				{
+					Classi.Function.Tronca(e.Item.Cells[11].Text,10,itmTooltip,e.Item.Cells[11].Text.Trim().Length);
+					e.Item.Cells[11].ToolTip=itmTooltip[0].ToString();
+					e.Item.Cells[11].Text=itmTooltip[1].ToString();		
+				} 
+
+
 				ImageButton _img1 = (ImageButton) e.Item.Cells[1].FindControl("Imagebutton3");
 				_img1.Attributes.Add("title","Visualizza");
 

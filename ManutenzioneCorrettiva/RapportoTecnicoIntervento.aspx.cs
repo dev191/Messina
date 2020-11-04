@@ -14,7 +14,7 @@ namespace TheSite.ManutenzioneCorretiva
 	/// <summary>
 	/// Descrizione di riepilogo per RapportoTecnicoIntervento.
 	/// </summary>
-	public class RapportoTecnicoIntervento : System.Web.UI.Page    // System.Web.UI.Page
+	public class RapportoTecnicoIntervento : System.Web.UI.Page
 	{
 		protected S_Controls.S_Label S_lblbuonolavoro;
 		protected System.Web.UI.WebControls.Repeater repeater1;
@@ -23,7 +23,8 @@ namespace TheSite.ManutenzioneCorretiva
 		protected System.Web.UI.HtmlControls.HtmlTableRow TRAnnotazioniVal;
 		protected System.Web.UI.HtmlControls.HtmlTableRow TRAnnotazioniNoVal;
 		public string WO_Id=string.Empty;
-
+		public string image="../Images/3.jpg";
+		public string descprog="";
 		private void Page_Load(object sender, System.EventArgs e)
 		{
 			// Inserire qui il codice utente necessario per inizializzare la pagina.
@@ -46,8 +47,17 @@ namespace TheSite.ManutenzioneCorretiva
 		  
 			Classi.ManOrdinaria.RichiestaIntervento  _RichiestaIntervento= new Classi.ManOrdinaria.RichiestaIntervento(Context.User.Identity.Name);
 			DataSet Ds=_RichiestaIntervento.GetSingleData(int.Parse(this.WO_Id));
+			if(Ds.Tables[0].Rows[0]["id_progetto"].ToString()=="1")
+			{
+				image="../Images/Martino_logo.gif";
+				descprog="Martino";
+			}
+			else
+			{
+				image="../Images/papardo_logo.gif";
+				descprog="Papardo";
+			}
 			repeater1.DataSource= Ds;
-			
 			repeater1.DataBind(); 
 		//	S_lblbuonolavoro.Text=this.WO_Id;
 			

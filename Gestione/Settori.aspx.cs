@@ -9,14 +9,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Settori.
 	/// </summary>
-	public class Settori : System.Web.UI.Page    // System.Web.UI.Page
+	public class Settori : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsCodice;
 		protected S_Controls.S_TextBox txtsDescrizione;
@@ -28,7 +28,7 @@ namespace TheSite.Gestione
 		EditSettori _fp;
 		public static int FunId = 0;
 		public static string HelpLink = string.Empty;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		protected WebControls.GridTitle GridTitle1;
 		protected WebControls.PageTitle PageTitle1;
 	
@@ -62,7 +62,7 @@ namespace TheSite.Gestione
 			}
 		}
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{

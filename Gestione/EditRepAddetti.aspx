@@ -1,9 +1,9 @@
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="VisualizzaReperibilita" Src="../WebControls/VisualizzaReperibilita.ascx" %>
-<%@ Page language="c#" Codebehind="EditRepAddetti.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.EditRepAddetti" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Page language="c#" Codebehind="EditRepAddetti.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.EditRepAddetti" %>
+<%@ Register TagPrefix="uc1" TagName="VisualizzaReperibilita" Src="../WebControls/VisualizzaReperibilita.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -91,7 +91,7 @@
 		}
 		</script>
 		<form id="Form1" onsubmit="return Controlla();" method="post" runat="server">
-			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%"
+			<TABLE id="TableMain" style="Z-INDEX: 101; POSITION: absolute; WIDTH: 100%; HEIGHT: 100%; TOP: 0px; LEFT: 0px"
 				cellSpacing="0" cellPadding="0" width="100%" align="center" border="0">
 				<TR>
 					<TD style="HEIGHT: 50px" align="center"><uc1:pagetitle id="PageTitle1" runat="server"></uc1:pagetitle></TD>
@@ -114,35 +114,35 @@
 								<TR>
 									<TD vAlign="top" align="center"></TD>
 									<TD vAlign="top" align="left" width="100%"><asp:panel id="PanelEdit" runat="server" Width="100%">
-											<TABLE id="tblSearch100" cellSpacing="1" cellPadding="2" width="100%" border="0">
+											<TABLE id="tblSearch100" border="0" cellSpacing="1" cellPadding="2" width="100%">
 												<TR>
 													<TD style="WIDTH: 181px; HEIGHT: 32px" align="left">Addetto
-														<asp:RangeValidator id="RVraddetto" runat="server" ErrorMessage="Selezionare Addetto" MinimumValue="1"
-															MaximumValue="999999999999999999" ControlToValidate="cmbsadd">*</asp:RangeValidator></TD>
+														<asp:RangeValidator id="RVraddetto" runat="server" ControlToValidate="cmbsadd" MaximumValue="999999999999999999"
+															MinimumValue="1" ErrorMessage="Selezionare Addetto">*</asp:RangeValidator></TD>
 													<TD style="HEIGHT: 32px">
-														<cc1:S_ComboBox id="cmbsadd" tabIndex="4" runat="server" Width="60%" DBDirection="Input" DBSize="10"
-															DBParameterName="p_addetto_id" DBIndex="0" DBDataType="Integer"></cc1:S_ComboBox></TD>
+														<cc1:S_ComboBox id="cmbsadd" tabIndex="4" runat="server" Width="60%" DBDataType="Integer" DBIndex="0"
+															DBParameterName="p_addetto_id" DBSize="10" DBDirection="Input"></cc1:S_ComboBox></TD>
 												</TR>
 												<TR>
 													<TD style="WIDTH: 181px; HEIGHT: 15px" align="left">Giorno
-														<asp:RangeValidator id="RVrgiorno" runat="server" ErrorMessage="Selezionare il Giorno" MinimumValue="1"
-															MaximumValue="999999999999999999" ControlToValidate="cmbsgiorno">*</asp:RangeValidator></TD>
+														<asp:RangeValidator id="RVrgiorno" runat="server" ControlToValidate="cmbsgiorno" MaximumValue="999999999999999999"
+															MinimumValue="1" ErrorMessage="Selezionare il Giorno">*</asp:RangeValidator></TD>
 													<TD style="HEIGHT: 15px">
-														<cc1:S_ComboBox id="cmbsgiorno" tabIndex="5" runat="server" Width="60%" DBDirection="Input" DBSize="10"
-															DBParameterName="p_giorno_id" DBIndex="1" DBDataType="Integer"></cc1:S_ComboBox></TD>
+														<cc1:S_ComboBox id="cmbsgiorno" tabIndex="5" runat="server" Width="60%" DBDataType="Integer" DBIndex="1"
+															DBParameterName="p_giorno_id" DBSize="10" DBDirection="Input"></cc1:S_ComboBox></TD>
 												</TR>
 												<TR>
 													<TD style="WIDTH: 181px; HEIGHT: 24px" align="left">Data Inizio Turno</TD>
 													<TD style="HEIGHT: 24px">
 														<asp:TextBox id="txtsorain" runat="server" Width="30px"></asp:TextBox>
-														<DIV style="DISPLAY: inline; WIDTH: 24px; HEIGHT: 15px" ms_positioning="FlowLayout">&nbsp;&nbsp;:</DIV>
+														<DIV style="WIDTH: 24px; DISPLAY: inline; HEIGHT: 15px" ms_positioning="FlowLayout">&nbsp;&nbsp;:</DIV>
 														<asp:TextBox id="txtsorainmin" runat="server" Width="30px"></asp:TextBox></TD>
 												</TR>
 												<TR>
 													<TD style="WIDTH: 181px; HEIGHT: 18px" align="left">Data Fine Turno</TD>
 													<TD>
 														<asp:TextBox id="txtsoraout" runat="server" Width="30px"></asp:TextBox>
-														<DIV style="DISPLAY: inline; WIDTH: 24px; HEIGHT: 15px" ms_positioning="FlowLayout">&nbsp;&nbsp;:</DIV>
+														<DIV style="WIDTH: 24px; DISPLAY: inline; HEIGHT: 15px" ms_positioning="FlowLayout">&nbsp;&nbsp;:</DIV>
 														<asp:TextBox id="txtsoraoutmin" runat="server" Width="30px"></asp:TextBox></TD>
 												</TR>
 											</TABLE>
@@ -169,5 +169,6 @@
 				</TR>
 			</TABLE>
 			<asp:validationsummary id="vlsEdit" runat="server" ShowSummary="False" ShowMessageBox="True"></asp:validationsummary></TD></TR></TBODY></TABLE></form>
-	</body><script language="javascript">parent.left.calcola();</script>
+		<script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

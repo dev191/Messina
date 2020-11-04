@@ -29,6 +29,7 @@
 		 Chiudi();
 		}
 	*/
+	
 			function ControllaRichiedente(nome, cognome)
 			{
 				if (document.getElementById(nome).value == "" || document.getElementById(cognome).value == "")				

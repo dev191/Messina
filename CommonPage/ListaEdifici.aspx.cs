@@ -9,13 +9,17 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using TheSite.Classi;
- 
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
+using MyCollection;
+
 namespace TheSite
 {
 	/// <summary>
 	/// Descrizione di riepilogo per ListaEdifici.
 	/// </summary>
-	public class ListaEdifici : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaEdifici : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.HyperLink HyperLinkChiudi2;
@@ -38,6 +42,7 @@ namespace TheSite
 			scriptarray+="var h = new Array(" + MyDataGrid1.PageSize + ");\n";
 			scriptarray+="var i = new Array(" + MyDataGrid1.PageSize + ");\n";
 			scriptarray+="var l = new Array(" + MyDataGrid1.PageSize + ");\n";
+			scriptarray+="var m = new Array(" + MyDataGrid1.PageSize + ");\n";
 			scriptarray += "<";
 			scriptarray += "/";
 			scriptarray += "script>";
@@ -59,6 +64,12 @@ namespace TheSite
 					this.idric =	Request.QueryString["idric"]; 
 				else
 					this.idric =string.Empty; 
+
+				if(Request.QueryString["VarApp"]!=null)
+					this.prj =	Request.QueryString["VarApp"]; 
+				else
+					this.prj =string.Empty;
+				
 				///Eseguo il Binding sulla Griglia
 				///
 				if(Request.QueryString["idmodulo"]!=null)
@@ -81,7 +92,7 @@ namespace TheSite
 				else
 					this.id_frazione =string.Empty;
 
-				Execute();
+				Execute(true);
 			} 
 
 			String scriptString = "<script language=JavaScript> var idmodulo='" + this.idmodulo +"'";
@@ -91,6 +102,7 @@ namespace TheSite
 
 			if(!this.IsClientScriptBlockRegistered("clientScript"))
 				this.RegisterClientScriptBlock("clientScript", scriptString);
+			GridTitle1.DescriptionTitle="Lista Edifici";
     
 		}
 
@@ -113,6 +125,12 @@ namespace TheSite
 			get {return (String) ViewState["s_Idric"];}
 			set {ViewState["s_Idric"] = value;}
 		}
+//		id del  Progetto
+		private string prj
+		{
+			get {return (String) ViewState["VarApp"];}
+			set {ViewState["VarApp"] = value;}
+		}
 		private string multiselect
 		{
 			get {return (String) ViewState["s_multiselect"];}
@@ -134,7 +152,7 @@ namespace TheSite
 		/// Esegue la store procedure ed effettua il binding sul datagrid
 		/// </summary>
 		/// <returns></returns>
-		private void Execute()
+		private void Execute(bool reset)
 		{
 			///Istanzio un nuovo oggetto Collection per aggiungere i parametri
 			S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
@@ -145,51 +163,100 @@ namespace TheSite
 			s_bl_id.ParameterName = "p_Bl_Id";
 			s_bl_id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
 			s_bl_id.Direction = ParameterDirection.Input;
-			s_bl_id.Size =8;
+			s_bl_id.Size =_SCollection.Count;
 			s_bl_id.Index = 0;
+			s_bl_id.Size=10;
 			s_bl_id.Value = this.idcod;
-
+			_SCollection.Add(s_bl_id);
+	
 			S_Controls.Collections.S_Object s_p_id_comune = new S_Controls.Collections.S_Object();
 			s_p_id_comune.ParameterName = "p_id_comune";
 			s_p_id_comune.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
 			s_p_id_comune.Direction = ParameterDirection.Input;
-			s_p_id_comune.Index = 1;
+			s_p_id_comune.Index = _SCollection.Count;
 			s_p_id_comune.Value = (this.id_comune=="")?0:int.Parse(this.id_comune);
-
+			
+			_SCollection.Add(s_p_id_comune);
+	
 			S_Controls.Collections.S_Object s_p_id_frazione = new S_Controls.Collections.S_Object();
 			s_p_id_frazione.ParameterName = "p_id_frazione";
 			s_p_id_frazione.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
 			s_p_id_frazione.Direction = ParameterDirection.Input;
-			s_p_id_frazione.Index = 2;
+			s_p_id_frazione.Index = _SCollection.Count;
 			s_p_id_frazione.Value = (this.id_frazione=="")?0:int.Parse(this.id_frazione);
+			
+			_SCollection.Add(s_p_id_frazione);
+		
 
 			S_Controls.Collections.S_Object s_User = new S_Controls.Collections.S_Object();
 			s_User.ParameterName = "p_Username";
 			s_User.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
 			s_User.Direction = ParameterDirection.Input;
 			s_User.Size=50; 
-			s_User.Index = 3;
+			s_User.Index = _SCollection.Count;
 			s_User.Value = Context.User.Identity.Name;
-
+			_SCollection.Add(s_User);
+			
 			S_Controls.Collections.S_Object s_campus = new S_Controls.Collections.S_Object();
 			s_campus.ParameterName = "p_campus";
 			s_campus.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
 			s_campus.Direction = ParameterDirection.Input;
 			s_campus.Size=128;
-			s_campus.Index = 4;
+			s_campus.Index = _SCollection.Count;
 			s_campus.Value = this.idric;
-			///Aggiungo i parametri alla collection
-			_SCollection.Add(s_User);
-			_SCollection.Add(s_bl_id);
-			_SCollection.Add(s_p_id_comune);
-			_SCollection.Add(s_p_id_frazione);
 			_SCollection.Add(s_campus);
+			///Aggiungo i parametri alla collection
+			
+
+			S_Controls.Collections.S_Object s_pr = new S_Controls.Collections.S_Object();
+			s_pr.ParameterName = "p_progetto";
+			s_pr.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_pr.Direction = ParameterDirection.Input;
+			s_pr.Index = _SCollection.Count;
+			s_pr.Value = (this.prj=="")?0:int.Parse(this.prj);
+			_SCollection.Add(s_pr);
+
 			///Istanzio la Classe per eseguire la Strore Procedure
 			Navigazione _Navigazione =new Navigazione();
 			///Eseguo il Binding sulla Griglia.
-			DataSet Ds = _Navigazione.GetData(_SCollection);
+			Double _totalPages = 1;
+		
+			if (reset)
+			{
+				
+				int _totalRecords = _Navigazione.GetCount(_SCollection);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+				if ((_totalRecords % MyDataGrid1.PageSize) == 0)
+					_totalPages = _totalRecords / MyDataGrid1.PageSize;
+				else
+					_totalPages = (_totalRecords / MyDataGrid1.PageSize)+1;
+				_SCollection.RemoveAt(_SCollection.Count-1); 
+			}
+			else
+			{
+				_totalPages = Double.Parse (this.GridTitle1.NumeroRecords);
+			}
+
+			
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = _SCollection.Count;
+			s_p_pageindex.Value=MyDataGrid1.CurrentPageIndex +1;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = _SCollection.Count;
+			s_p_pagesize.Value= MyDataGrid1.PageSize;			
+			_SCollection.Add(s_p_pagesize);
+
+            DataSet Ds = _Navigazione.GetData(_SCollection);
 			MyDataGrid1.DataSource= Ds;
-			GridTitle1.NumeroRecords=(Ds.Tables[0].Rows.Count)==0? "0":Ds.Tables[0].Rows.Count.ToString();
+			this.MyDataGrid1.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
 			MyDataGrid1.DataBind(); 
 
 			GridTitle1.DescriptionTitle="Lista degli Edifici";
@@ -235,6 +302,7 @@ namespace TheSite
 				arrayvariable+="h[" + j.ToString() + "] =\"" + HttpUtility.HtmlDecode(e.Item.Cells[8].Text.Replace("&nsp;"," ")) +"\";\n";
 				arrayvariable+="i[" + j.ToString() + "] =\"" +  HttpUtility.HtmlDecode(e.Item.Cells[9].Text).Replace("\"","\\\"") +"\";\n";
 				arrayvariable+="l[" + j.ToString() + "] =\"" +  HttpUtility.HtmlDecode(e.Item.Cells[10].Text).Replace("\"","\\\"") +"\";\n";
+				arrayvariable+="m[" + j.ToString() + "] =\"" +  HttpUtility.HtmlDecode(e.Item.Cells[11].Text).Replace("\"","\\\"") +"\";\n";
 				arrayvariable +="<";
 				arrayvariable += "/";
 				arrayvariable += "script>";
@@ -253,7 +321,7 @@ namespace TheSite
 		{
 			///Imposto la Nuova Pagina
 			MyDataGrid1.CurrentPageIndex=e.NewPageIndex;
-			Execute();
+			Execute(false);
 		}	
 	}
 		

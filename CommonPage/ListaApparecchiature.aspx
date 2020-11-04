@@ -1,5 +1,5 @@
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <%@ Page language="c#" Codebehind="ListaApparecchiature.aspx.cs" AutoEventWireup="false" Inherits="TheSite.CommonPage.ListaApparecchiature" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -39,11 +39,11 @@
 						<uc1:GridTitle id="GridTitle1" runat="server"></uc1:GridTitle>
 						<asp:DataGrid id="MyDataGrid1" runat="server" Width="100%" BorderColor="Gray" BorderStyle="None"
 							BorderWidth="1px" BackColor="White" CellPadding="4" AutoGenerateColumns="False" CssClass="DataGrid"
-							AllowPaging="True" GridLines="Vertical" PageSize="5">
+							AllowPaging="True" GridLines="Vertical" PageSize="5" AllowCustomPaging="True">
+							<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
-							<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 							<Columns>
 								<asp:TemplateColumn>
 									<HeaderStyle Width="30px"></HeaderStyle>
@@ -57,7 +57,7 @@
 								<asp:BoundColumn Visible="False" DataField="id_eq"></asp:BoundColumn>
 								<asp:BoundColumn Visible="False" DataField="id_eq"></asp:BoundColumn>
 							</Columns>
-							<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
+							<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 						</asp:DataGrid>
 					</TD>
 				</TR>

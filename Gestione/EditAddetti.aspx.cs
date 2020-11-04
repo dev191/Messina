@@ -11,14 +11,15 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
+
 
 namespace TheSite.Gestione
 {	
 	/// <summary>
 	/// Descrizione di riepilogo per EditAddetti
 	/// </summary>
-	public class EditAddetti : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditAddetti : System.Web.UI.Page
 	{
 		protected Csy.WebControls.MessagePanel PanelMess;
 		protected System.Web.UI.WebControls.Panel PanelEdit;
@@ -53,6 +54,7 @@ namespace TheSite.Gestione
 		protected S_Controls.S_TextBox txtszona;
 		protected System.Web.UI.WebControls.RangeValidator RVcmbsditta;
 		protected S_Controls.S_ComboBox cmbsLivello;
+		protected S_Controls.S_ComboBox CmbProgetto;
 		TheSite.Gestione.Addetti _fp;
 	
 	
@@ -76,6 +78,7 @@ namespace TheSite.Gestione
 			}
 			if (!Page.IsPostBack )
 			{
+				BindProgetti();
 				BindPriorita();
 				BindProvince();
 				BindProvince1();
@@ -135,6 +138,9 @@ namespace TheSite.Gestione
 						if(_Dr["livello"] != DBNull.Value)
 							this.cmbsLivello.SelectedValue=  _Dr["livello"].ToString();
 
+						if(_Dr["progetto"] != DBNull.Value)
+							this.CmbProgetto.SelectedValue =  _Dr["progetto"].ToString();
+
 						this.lblOperazione.Text = "Modifica Addetto: " + this.txtscognome.Text + " " + this.txtsnome.Text;
 						this.lblFirstAndLast.Visible = true;						
 						this.btnsElimina.Attributes.Add("onclick", "return confirm('Si vuole effettuare la cancellazione?')");	
@@ -167,15 +173,40 @@ namespace TheSite.Gestione
 			}
 		}
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
+		}
+
+		private void BindProgetti()
+		{
+			
+			this.CmbProgetto.Items.Clear();
+		
+			TheSite.Classi.Progetti _Prog = new TheSite.Classi.Progetti();
+						
+			DataSet _MyDs = _Prog.GetData();			
+			
+			if (_MyDs.Tables[0].Rows.Count > 0)
+			{
+				CmbProgetto.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					_MyDs.Tables[0], "descrizione", "id_progetto", "- Selezionare un Progetto -", "");				
+				this.CmbProgetto.DataTextField ="descrizione";
+				this.CmbProgetto.DataValueField  ="id_progetto";
+				this.CmbProgetto.DataBind();
+			}
+			else
+			{
+				string s_Messagggio = "- Nessun Progetto  -";
+				this.CmbProgetto.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+						
+			}			
 		}
 
 		private void check_caselle_testo()
@@ -319,6 +350,7 @@ namespace TheSite.Gestione
 
 		private void AbilitaControlli(bool enabled)
 		{
+			CmbProgetto.Enabled=enabled;
 			this.txtscognome.Enabled = enabled;
 			this.txtsnome.Enabled = enabled;
 			this.CalendarPicker1.Datazione.Enabled =enabled;
@@ -545,6 +577,7 @@ namespace TheSite.Gestione
 
 		private void btnsSalva_Click(object sender, System.EventArgs e)
 		{	
+			this.CmbProgetto.DBDefaultValue = DBNull.Value;
 			this.txtscognome.DBDefaultValue = DBNull.Value;
 			this.txtsnome.DBDefaultValue = DBNull.Value;
 			this.txtsindirizzo.DBDefaultValue = DBNull.Value;

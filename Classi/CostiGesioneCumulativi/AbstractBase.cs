@@ -1,69 +1,144 @@
-ï»¿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.CostiGesioneCumulativi.AbstractBase
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using S_Controls.Collections;
 using System;
-using System.Configuration;
 using System.Data;
+using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
 using System.Text;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.CostiGesioneCumulativi
 {
-  public abstract class AbstractBase
-  {
-    protected int i_Id = 0;
-    protected string s_ConnStr = ConfigurationSettings.AppSettings["ConnectionString"];
+	/// <summary>
+	/// Descrizione di riepilogo per _AbstractBase.
+	/// </summary>
+	public abstract class AbstractBase
+	{
+		#region Dichiarazioni
 
-    public abstract DataSet GetData();
+		protected int i_Id = 0;
+		protected string s_ConnStr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];						
 
-    public abstract DataSet GetData(S_ControlsCollection CollezioneControlli);
+		#endregion
 
-    public abstract DataSet GetSingleData(int itemId);
+		public AbstractBase()
+		{
+			
+		}
 
-    public virtual int Add(S_ControlsCollection CollezioneControlli) => this.ExecuteUpdate(CollezioneControlli, ExecuteType.Insert, 0);
+		#region Metodi Pubblici
 
-    public virtual int Update(S_ControlsCollection CollezioneControlli, int itemId) => this.ExecuteUpdate(CollezioneControlli, ExecuteType.Update, itemId);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public abstract DataSet GetData();	
 
-    public virtual int Delete(S_ControlsCollection CollezioneControlli, int itemId) => this.ExecuteUpdate(CollezioneControlli, ExecuteType.Delete, itemId);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public abstract DataSet GetData(S_ControlsCollection CollezioneControlli);		
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="itemId"></param>
+		/// <returns></returns>
+		public abstract DataSet GetSingleData(int itemId);	
+	
+		/// <summary>
+		/// Aggiunge un record e restituisce l'id
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public virtual int Add(S_ControlsCollection CollezioneControlli)
+		{
+			return this.ExecuteUpdate(CollezioneControlli, ExecuteType.Insert, 0);
+		}
 
-    public virtual string GetFirstAndLastUser(DataRow Data)
-    {
-      StringBuilder stringBuilder = new StringBuilder();
-      try
-      {
-        stringBuilder.Append("Creato da ");
-        if (Data["FIRST"] != DBNull.Value)
-          stringBuilder.Append(Data["FIRST"].ToString());
-        stringBuilder.Append(" il ");
-        if (Data["FIRSTMODIFIED"] != DBNull.Value)
-          stringBuilder.Append(Data["FIRSTMODIFIED"].ToString());
-        stringBuilder.Append(" ");
-        stringBuilder.Append("Modificato da ");
-        if (Data["LAST"] != DBNull.Value)
-          stringBuilder.Append(Data["LAST"].ToString());
-        stringBuilder.Append(" il ");
-        if (Data["LASTMODIFIED"] != DBNull.Value)
-          stringBuilder.Append(Data["LASTMODIFIED"].ToString());
-      }
-      catch
-      {
-        stringBuilder.Append("");
-      }
-      return stringBuilder.ToString();
-    }
+		/// <summary>
+		/// Modifica un record e restituisce l'id
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <param name="itemId"></param>
+		/// <returns></returns>
+		public virtual int Update(S_ControlsCollection CollezioneControlli, int itemId)
+		{
+			return this.ExecuteUpdate(CollezioneControlli, ExecuteType.Update, itemId);
+		}
 
-    protected abstract int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId);
+		/// <summary>
+		/// Elimina un record e restituisce -1 se ok
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <param name="itemId"></param>
+		/// <returns></returns>
+		public virtual int Delete(S_ControlsCollection CollezioneControlli, int itemId)
+		{
+			return this.ExecuteUpdate(CollezioneControlli, ExecuteType.Delete, itemId);
+		}
 
-    public int Id
-    {
-      get => this.i_Id;
-      set => this.i_Id = value;
-    }
-  }
+		/// <summary>
+		/// Restituisce gli utenti e le date di inserimento e modifica record
+		/// </summary>
+		/// <param name="Data"></param>
+		/// <returns></returns>
+		public virtual string GetFirstAndLastUser(DataRow Data)
+		{
+			System.Text.StringBuilder _StrBldFirst = new System.Text.StringBuilder();
+			
+			try
+			{
+				_StrBldFirst.Append("Creato da ");
+				if (Data["FIRST"] != DBNull.Value)
+					_StrBldFirst.Append(Data["FIRST"].ToString());
+
+				_StrBldFirst.Append(" il ");
+				if (Data["FIRSTMODIFIED"] != DBNull.Value)
+					_StrBldFirst.Append(Data["FIRSTMODIFIED"].ToString());		
+	
+				_StrBldFirst.Append(" ");
+
+				_StrBldFirst.Append("Modificato da ");
+				if (Data["LAST"] != DBNull.Value)
+					_StrBldFirst.Append(Data["LAST"].ToString());
+
+				_StrBldFirst.Append(" il ");
+				if (Data["LASTMODIFIED"] != DBNull.Value)
+					_StrBldFirst.Append(Data["LASTMODIFIED"].ToString());
+			}
+			catch
+			{
+				_StrBldFirst.Append("");	
+			}
+			return _StrBldFirst.ToString();
+
+		}
+
+		#endregion
+
+		#region Metodi Protetti
+
+		protected abstract int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId);		
+
+		#endregion
+
+		#region Proprietà Pubbliche
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int Id
+		{
+			get {return i_Id;}
+			set {i_Id = value;}
+		}		
+
+		#endregion
+	}
 }

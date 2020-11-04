@@ -9,13 +9,17 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
+using TheSite.Classi.ClassiDettaglio;
+using MyCollection; 
 
 namespace TheSite.Admin
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Funzioni.
 	/// </summary>
-	public class Funzioni : System.Web.UI.Page    // System.Web.UI.Page
+	public class Funzioni : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsDescrizione;
 		protected S_Controls.S_TextBox txtsCodice;
@@ -26,8 +30,16 @@ namespace TheSite.Admin
 		protected WebControls.PageTitle PageTitle1;
 
 		public static int FunId = 0;
-		public static string HelpLink = string.Empty;		
+		public static string HelpLink = string.Empty;	
 	
+		TheSite.Admin.EditFunzioni _fp;
+		MyCollection.clMyCollection _myColl = new MyCollection.clMyCollection();
+		
+		public MyCollection.clMyCollection _Contenitore
+		{
+			get {return _myColl;}
+		}
+
 		private void Page_Load(object sender, System.EventArgs e)
 		{
 			Classi.SiteModule _SiteModule = (Classi.SiteModule) HttpContext.Current.Items["SiteModule"];
@@ -39,6 +51,24 @@ namespace TheSite.Admin
 			FunId = _SiteModule.ModuleId;
 			HelpLink = _SiteModule.HelpLink;
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;
+			
+			
+			
+			if (!IsPostBack) 
+			{
+				if(Context.Handler is TheSite.Admin.EditFunzioni)
+				{
+					_fp = (TheSite.Admin.EditFunzioni)Context.Handler;
+
+					if (_fp!=null) 
+					{						
+						_myColl=_fp._Contenitore;
+						_myColl.SetValues(this.Page.Controls);		
+
+						Ricerca();
+					}
+				}
+			}
 
 		}
 
@@ -66,6 +96,11 @@ namespace TheSite.Admin
 
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{
+			Ricerca();
+		}
+
+		private void Ricerca()
+		{
 			Classi.Funzione _Funzione = new TheSite.Classi.Funzione();
 
 			this.txtsDescrizione.DBDefaultValue = "%";
@@ -81,6 +116,7 @@ namespace TheSite.Admin
 			this.DataGridRicerca.DataBind();
 			
 			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();		
+		
 		}
 	}
 }

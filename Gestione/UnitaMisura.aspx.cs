@@ -9,15 +9,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
+using MyCollection;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per UnitaMisura.
 	/// </summary>
-	public class UnitaMisura : System.Web.UI.Page    // System.Web.UI.Page
+	public class UnitaMisura : System.Web.UI.Page
 		{	
 			protected Csy.WebControls.DataPanel PanelRicerca;		
 			protected S_Controls.S_Button btnsRicerca;		
@@ -36,7 +36,7 @@ namespace TheSite.Gestione
 
 
 
-			clMyCollection _myColl = new clMyCollection();
+			MyCollection.clMyCollection _myColl = new clMyCollection();
 			private void Ricerca()
 			{
 				Classi.ClassiAnagrafiche.UnitaMisura _UnitaMisura = new Classi.ClassiAnagrafiche.UnitaMisura();
@@ -131,7 +131,7 @@ namespace TheSite.Gestione
 			}
 			#endregion
 	
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{

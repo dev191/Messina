@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MyCollection;
 using System.Web.UI.HtmlControls;
 using System.Reflection;
 using TheSite.WebControls;
@@ -15,14 +16,14 @@ using ApplicationDataLayer.DBType;
 using TheSite.Classi.ClassiDettaglio;
 using S_Controls.Collections;
 using System.Globalization;
-using StampaRapportiPdf.Classi;
+
 
 namespace TheSite.ManutenzioneCorrettiva
 {
 	/// <summary>
 	/// Descrizione di riepilogo per AnalisiMaterialiImpiegati.
 	/// </summary>
-	public class AnalisiCostiOperativiDiGestioneDettaglio : System.Web.UI.Page    // System.Web.UI.Page
+	public class AnalisiCostiOperativiDiGestioneDettaglio : System.Web.UI.Page
 	{
 		private string wrId;
 		protected materiali mtImpegnati;
@@ -54,8 +55,8 @@ namespace TheSite.ManutenzioneCorrettiva
 		protected System.Web.UI.WebControls.Label LblUrgenza;
 		bool IsEditable = false;
 		EditCompletamento _fp;
-		protected System.Web.UI.WebControls.Label LblTotale;
 		string chiamante="";
+		protected System.Web.UI.WebControls.Literal LblTotale;
 		Double tot;
 
 		private void Page_Load(object sender, System.EventArgs e)
@@ -78,6 +79,7 @@ namespace TheSite.ManutenzioneCorrettiva
 					tot=Convert.ToDouble(DsManodopera.Tables[0].Rows[0]["totaddetto"])+Convert.ToDouble(DsManodopera.Tables[0].Rows[0]["totmateriale"]);
 		
 				LblTotale.Text= FormattaDecimali(tot,2);
+				
 		
 			}
 
@@ -244,14 +246,14 @@ namespace TheSite.ManutenzioneCorrettiva
 				Server.Transfer(url);
 			}
 		}
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 

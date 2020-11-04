@@ -1,45 +1,63 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: GIC.App_Code.Util
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
+using System;
 using System.Text.RegularExpressions;
-using System.Web;
 
 namespace GIC.App_Code
 {
-  public class Util
-  {
-    private Util()
-    {
-    }
+	/// <summary>
+	/// Descrizione di riepilogo per Util.
+	/// </summary>
+	public class Util
+	{
+		private Util()
+		{
+			//
+			// TODO: aggiungere qui la logica del costruttore
+			//
+		}
+		/// <summary>
+		/// Rimuove i Tag Html e restituisce il testo contenuto in esso
+		/// </summary>
+		/// <param name="text">Testo con Html</param>
+		/// <returns>Testo Privo di HTML</returns>
+		public static string RemoveHTML(string text)
+		{
+			text=System.Web.HttpUtility.HtmlDecode(text); 
+			return Regex.Replace(text, @"<(.|\n)*?>", string.Empty);
+			//return Regex.Replace(text, "&nbsp;", string.Empty);
+		}
+		/// <summary>
+		/// Tronca il Testo in base ad un numero di caratteri.
+		/// Se viene Passato 0 la funzione restituisce l'intera stringa passata
+		/// </summary>
+		/// <param name="input">Testo da Troncare</param>
+		/// <param name="characterLimit">Limite di caratteri da visualizzare</param>
+		/// <returns>Testo troncato</returns>
+		public static string Truncate(string input, int characterLimit) 
+		{
+			string output = input;
+			if (output.Length > characterLimit && characterLimit > 0) 
+			{
+				output = output.Substring(0,characterLimit);
+				if (input.Substring(output.Length,1) != " ") 
+				{
+					int LastSpace = output.LastIndexOf(" ");
+					if (LastSpace != -1) 
+						output = output.Substring(0,LastSpace);  
+				}
+				output += "...";    
+			}
+			return output;
+		}
+		public static string Truncate(object input, int characterLimit) 
+		{
+			return Truncate(input.ToString(),characterLimit);
+		}
 
-    public static string RemoveHTML(string text)
-    {
-      text = HttpUtility.HtmlDecode(text);
-      return Regex.Replace(text, "<(.|\\n)*?>", string.Empty);
-    }
 
-    public static string Truncate(string input, int characterLimit)
-    {
-      string str1 = input;
-      if (str1.Length > characterLimit && characterLimit > 0)
-      {
-        string str2 = str1.Substring(0, characterLimit);
-        if (input.Substring(str2.Length, 1) != " ")
-        {
-          int length = str2.LastIndexOf(" ");
-          if (length != -1)
-            str2 = str2.Substring(0, length);
-        }
-        str1 = str2 + "...";
-      }
-      return str1;
-    }
+		public static bool CheckString(string stringa, string delimitatore)
+		{
+			return stringa.StartsWith(delimitatore) && stringa.EndsWith(delimitatore);
+		}
 
-    public static string Truncate(object input, int characterLimit) => Util.Truncate(input.ToString(), characterLimit);
-
-    public static bool CheckString(string stringa, string delimitatore) => stringa.StartsWith(delimitatore) && stringa.EndsWith(delimitatore);
-  }
+	}
 }

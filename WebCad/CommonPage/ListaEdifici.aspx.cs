@@ -15,7 +15,7 @@ namespace WebCad.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per ListaEdifici.
 	/// </summary>
-	public class ListaEdifici : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaEdifici : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.HyperLink HyperLinkChiudi2;

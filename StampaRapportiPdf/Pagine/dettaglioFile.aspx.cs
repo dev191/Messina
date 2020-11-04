@@ -14,7 +14,7 @@ namespace StampaRapportiPdf.Pagine
 	/// <summary>
 	/// Descrizione di riepilogo per dettaglioFile.
 	/// </summary>
-	public class dettaglioFile : System.Web.UI.Page    // System.Web.UI.Page
+	public class dettaglioFile : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Label lbId;
 	

@@ -20,7 +20,7 @@ namespace TheSite.RichiesteDati
 	/// <summary>
 	/// Descrizione di riepilogo per Autentica.
 	/// </summary>
-	public class Autentica : System.Web.UI.Page    // System.Web.UI.Page
+	public class Autentica : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Label user;
 		protected System.Web.UI.WebControls.Label lblH;
@@ -35,9 +35,14 @@ namespace TheSite.RichiesteDati
 				user.Text=Request.Params["user"];
 				password.Text=Request.Params["password"];
 
+				//user.Text="callcenter";
+				//password.Text="callcenter01";
+
 				usr=Request.Params["user"];
+				//usr="callcenter";
 				Sicurezza sic = new Sicurezza();
 				pwd=sic.EncryptMD5(Request.Params["password"]);
+				//pwd=sic.EncryptMD5("callcenter01");
 
 
 				/*PROCEDURE SP_AUTENTICA_UTENTI (p_UserName in varchar2, 

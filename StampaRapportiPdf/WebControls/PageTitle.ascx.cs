@@ -18,7 +18,7 @@ namespace StampaRapportiPdf.WebControls
 		protected System.Web.UI.WebControls.Label lblOperatore;
 		protected System.Web.UI.HtmlControls.HtmlAnchor logoutlinnk;
 		protected System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
-		private string _MainTitle = System.Configuration.ConfigurationSettings.AppSettings["ApplicationName"];
+		private string _MainTitle = TheSite.Classi.Helper.GetApplicationName();
 		
 		private void Page_Load(object sender, System.EventArgs e)
 		{

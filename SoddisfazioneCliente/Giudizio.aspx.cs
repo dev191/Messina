@@ -10,15 +10,16 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls;
 using S_Controls.Collections;
+using MyCollection;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+
 
 namespace TheSite.SoddisfazioneCliente
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Giudizio.
 	/// </summary>
-	public class Giudizio : System.Web.UI.Page    // System.Web.UI.Page
+	public class Giudizio : System.Web.UI.Page
 		{
 		protected WebControls.GridTitle GridTitle1;
 		protected WebControls.CodiceApparecchiature CodiceApparecchiature1;
@@ -43,7 +44,7 @@ namespace TheSite.SoddisfazioneCliente
 		protected S_Controls.S_ComboBox cmbsServizio;
 		protected S_Controls.S_ComboBox cmbsGiudizio;
 		protected System.Web.UI.WebControls.Panel PanelRichiedente;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 			private void Page_Load(object sender, System.EventArgs e)
 			{
 				// ***********************  MODIFICA PER I PERMESSI SULLA PAGINA CORRENTE **********************
@@ -234,7 +235,9 @@ namespace TheSite.SoddisfazioneCliente
 		s_p_id_stanza.Direction = ParameterDirection.Input;
 		s_p_id_stanza.Index = 3;
 		s_p_id_stanza.Size=25;
-		s_p_id_stanza.Value =UserStanze1.DescStanza; //  (this.cmbsStanza.SelectedValue.ToString()=="")?0:Int32.Parse(this.cmbsStanza.SelectedValue.ToString());					
+		if(UserStanze1.DescStanza =="")
+			UserStanze1.IdStanza="";
+		s_p_id_stanza.Value =UserStanze1.IdStanza; //  (this.cmbsStanza.SelectedValue.ToString()=="")?0:Int32.Parse(this.cmbsStanza.SelectedValue.ToString());					
 		_SCollection.Add(s_p_id_stanza);
 
 		S_Controls.Collections.S_Object s_p_id_servizio = new S_Controls.Collections.S_Object();
@@ -369,7 +372,7 @@ namespace TheSite.SoddisfazioneCliente
 
 
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{

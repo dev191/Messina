@@ -26,10 +26,6 @@ namespace TheSite.WebControls
 		{
 			get {return txtfascicolo;}
 		}
-		public string getClientID()
-		{
-			return txtfascicolo.ClientID;
-		}
 		#region Codice generato da Progettazione Web Form
 		override protected void OnInit(EventArgs e)
 		{

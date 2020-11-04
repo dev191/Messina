@@ -16,7 +16,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per PageImage.
 	/// </summary>
-	public class PageImage : System.Web.UI.Page    // System.Web.UI.Page
+	public class PageImage : System.Web.UI.Page
 	{
 		/// <summary>
 		/// Variabili locale 

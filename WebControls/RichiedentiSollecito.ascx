@@ -134,19 +134,23 @@ Richiedente:&nbsp;
 			
 				<TD>Telefono</TD>
 			<TD>
-				<cc1:s_textbox id="txtstelefono" Width="150px" DBParameterName="p_telefono" Runat="server"
+				<cc1:s_textbox id="txtstelefono" Width="100px" DBParameterName="p_telefono" Runat="server"
 					MaxLength="50" DBIndex="2" DBSize="50"></cc1:s_textbox></TD>
 			<TD>Email
 			</TD>
 			<TD >
-				<cc1:s_textbox id="txtsemail" Width="250px" DBParameterName="p_email" Runat="server"
-					MaxLength="50" DBIndex="2" DBSize="50"></cc1:s_textbox></TD>						
+				<cc1:s_textbox id="txtsemail" Width="150px" DBParameterName="p_email" Runat="server"
+					MaxLength="50" DBIndex="2" DBSize="50"></cc1:s_textbox>
+				<asp:RegularExpressionValidator ID="vemal" Runat="server" ControlToValidate="txtsemail" Display="Dynamic"  Text="*" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+				 ErrorMessage="Email del richiedente non valida!" ></asp:RegularExpressionValidator>
+				<asp:CheckBox ID="CkSendMail" Runat="server" Text="Invia Mail" TextAlign="Left" ></asp:CheckBox>					
 				
 			</TD>	
 			<TD>Stanza</TD>
 			<TD colspan=2>				
 				<cc1:s_textbox id="txtstanza" Width="150px" DBParameterName="p_stanza" Runat="server" MaxLength="50"
-					DBIndex="1" DBSize="50"></cc1:s_textbox></TD>
+					DBIndex="1" DBSize="50"></cc1:s_textbox><INPUT type="hidden" runat="server" id="idProg"/>
+					</TD>
 			
 		</TR>
 		<TR>

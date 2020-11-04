@@ -1,50 +1,107 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.Sicurezza
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
 using System;
+using System.Collections;
+using System.Configuration;
+using System.Web;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 
 namespace TheSite.Classi
 {
-  public class Sicurezza
-  {
-    public string EncryptMD5(string cleanString)
-    {
-      byte[] bytes = new UnicodeEncoding().GetBytes(cleanString);
-      return BitConverter.ToString(((HashAlgorithm) CryptoConfig.CreateFromName("MD5")).ComputeHash(bytes));
-    }
+	/// <summary>
+	/// Gestione Sicurezza Sito
+	/// </summary>
+	public class Sicurezza
+	{
 
-    public string EncryptSHA1(string cleanString) => this.ToString(new SHA1CryptoServiceProvider().ComputeHash(Encoding.ASCII.GetBytes(cleanString)));
+		public Sicurezza(){}
 
-    public bool IsInRole(string role) => HttpContext.Current.User.IsInRole(role);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="cleanString"></param>
+		/// <returns></returns>
+		public string EncryptMD5(string cleanString) 
+		{
 
-    public bool IsInRoles(string roles)
-    {
-      HttpContext current = HttpContext.Current;
-      string str = roles;
-      char[] chArray = new char[1]{ ';' };
-      foreach (string role in str.Split(chArray))
-      {
-        if (role != "" && role != null && current.User.IsInRole(role))
-          return true;
-      }
-      return false;
-    }
+			Byte[] clearBytes = new UnicodeEncoding().GetBytes(cleanString);
+			Byte[] hashedBytes = ((HashAlgorithm) CryptoConfig.CreateFromName("MD5")).ComputeHash(clearBytes);
 
-    private string ToString(byte[] bytes)
-    {
-      char[] chArray = new char[bytes.Length];
-      for (int index = 0; index < bytes.Length; ++index)
-      {
-        int num = (int) bytes[index];
-        chArray[index] = Convert.ToChar(num);
-      }
-      return new string(chArray);
-    }
-  }
+			return BitConverter.ToString(hashedBytes);
+
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="cleanString"></param>
+		/// <returns></returns>
+		public string EncryptSHA1(string cleanString) 
+		{
+
+			Encoding endcod = Encoding.ASCII;
+			Byte[] clearBytes = endcod.GetBytes(cleanString);
+			byte[] result; 
+ 
+			SHA1 sha = new SHA1CryptoServiceProvider(); 
+			// This is one implementation of the abstract class SHA1.
+			result = sha.ComputeHash(clearBytes);
+			
+			return ToString(result);
+
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="role"></param>
+		/// <returns></returns>
+		public bool IsInRole(String role) 
+		{
+
+			return HttpContext.Current.User.IsInRole(role);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="roles"></param>
+		/// <returns></returns>
+		public bool IsInRoles(String roles) 
+		{
+
+			HttpContext context = HttpContext.Current;
+
+			foreach (String role in roles.Split( new char[] {';'} )) 
+			{
+            
+				if (role != "" && role != null && (context.User.IsInRole(role))) 
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		#region Metodi Privati
+
+		/// <summary>
+		/// Conversione in stringa di un array di byte
+		/// </summary>
+		/// <param name="bytes"></param>
+		/// <returns></returns>
+		private string ToString(byte[] bytes) 
+		{
+			char[] chars = new char[bytes.Length];
+			for (int i = 0; i < bytes.Length; i++) 
+			{
+				int b = bytes[i];
+				chars[i] = Convert.ToChar(b);				
+			}
+			return new string(chars);
+		}
+
+		#endregion
+
+	}
 }

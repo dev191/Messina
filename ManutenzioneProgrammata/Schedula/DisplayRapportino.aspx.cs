@@ -11,20 +11,30 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Web;
+using CrystalDecisions.Shared;
+using System.Configuration;
+using TheSite.Classi.ManProgrammata;
 
 namespace TheSite.ManutenzioneProgrammata.Schedula
 {
 	/// <summary>
 	/// Descrizione di riepilogo per DisplayRapportino.
 	/// </summary>
-	public class DisplayRapportino : System.Web.UI.Page    // System.Web.UI.Page
+	public class DisplayRapportino : System.Web.UI.Page
 	{
 		protected CrystalDecisions.Web.CrystalReportViewer CRView;
 		protected string s_ConnStr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
 		protected System.Web.UI.WebControls.TextBox txtHid;
 		protected System.Web.UI.WebControls.TextBox txtTipo;
+		private ReportDocument crReportDocument;
+		protected System.Web.UI.WebControls.DataGrid DataGrid1;
+		protected System.Web.UI.WebControls.DataGrid DataGrid2;
+		protected System.Web.UI.WebControls.DataGrid DataGrid3;
+		protected System.Web.UI.WebControls.DataGrid DataGrid4;
+		protected System.Web.UI.WebControls.DataGrid DataGrid5;
 		protected string Ordini;
-	
 		private void Page_Load(object sender, System.EventArgs e)
 		{		
 			if(!Page.IsPostBack)
@@ -32,14 +42,25 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 				txtHid.Text= Request.QueryString["ODL"];
 				txtTipo.Text = Request.QueryString["Display"];
 			}
-			Visualizza();
+			DisplayReport();
+			
 		}
 
+		private void DisplayReport()
+		{
+			if(txtTipo.Text == "DL" || txtTipo.Text == "DC" || txtTipo.Text=="DL2P")
+			{
+				GeneraReport(txtHid.Text,txtTipo.Text);
+			}
+			else
+			{
+				Visualizza();
+			}
+		}
 		private void Visualizza()
 		{
 			Ordini = txtHid.Text;
-			CRView.DisplayGroupTree = false;
-			CRView.DisplayToolbar = true;
+			
 			string sql = "select * from mp_report_long where WO_ID in (" + Ordini + ")";
 			S_ControlsCollection _SCollection = new S_ControlsCollection();			
 		
@@ -73,17 +94,50 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 				MyReport.SetDataSource(_Ds);
 				CRView.ReportSource = MyReport;
 			}
-			else
+			else 
 			{
 				Report.Report_Long MyReport = new Report.Report_Long();
 				MyReport.SetDataSource(_Ds);
 				CRView.ReportSource = MyReport;
 			}
 			
-			
+		}
+		private void GeneraReport(string StringaOdl, string TipoReport)
+		{ 
+			RptMpDataDinamic DtRpt = new RptMpDataDinamic();
+			TheSite.SchemiXSD.DsRptMpLocali ds = new TheSite.SchemiXSD.DsRptMpLocali();
+			ds = DtRpt.GetDataRpt(StringaOdl);
+
+			string pathRptSource = Server.MapPath(Request.ApplicationPath + ConfigurationSettings.AppSettings["SourceReports"]);
+
+			switch(TipoReport)
+			{
+				case "DL":
+				{
+					crReportDocument.Load(pathRptSource + "RptMpDettagliLocaliLungoDinamico.rpt");
+					break;
+				}
+				case "DC":
+				{
+					crReportDocument.Load(pathRptSource + "RptMpDettagliLocaliCortoDinamico.rpt");
+					break;
+
+				}
+				case "DL2P":
+				{
+					crReportDocument.Load(pathRptSource + "RptMpDettagliLocaliLungo2P.rpt");
+					break;
+				}
+				default:
+					throw new Exception();
+					
+			}
+			crReportDocument.SetDataSource(ds);
+			CRView.ReportSource = crReportDocument;
+			CRView.DataBind();
+		
 
 		}
-
 		#region Codice generato da Progettazione Web Form
 		override protected void OnInit(EventArgs e)
 		{
@@ -91,6 +145,7 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 			// CODEGEN: questa chiamata è richiesta da Progettazione Web Form ASP.NET.
 			//
 			InitializeComponent();
+			crReportDocument = new ReportDocument();
 			base.OnInit(e);
 		}
 		
@@ -104,5 +159,11 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 
 		}
 		#endregion
+
+		private void DataGrid3_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
+		
+		}
+
 	}
 }

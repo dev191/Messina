@@ -61,17 +61,17 @@
 					<TD align="center"><uc1:pagetitle id="PageTitle1" runat="server"></uc1:pagetitle></TD>
 				</TR>
 				<TR>
-					<TD><cc2:datapanel id="DataPanel1" runat="server" TitleStyle-CssClass="TitleSearch" Collapsed="False"
-							TitleText="Ricerca" ExpandText="Espandi" ExpandImageUrl="../Images/down.gif" CollapseText="Riduci"
-							CssClass="DataPanel75" CollapseImageUrl="../Images/up.gif" AllowTitleExpandCollapse="True">
+					<TD><cc2:datapanel id="DataPanel1" runat="server" AllowTitleExpandCollapse="True" CollapseImageUrl="../Images/up.gif"
+							CssClass="DataPanel75" CollapseText="Riduci" ExpandImageUrl="../Images/down.gif" ExpandText="Espandi"
+							TitleText="Ricerca" Collapsed="False" TitleStyle-CssClass="TitleSearch">
 							<TABLE id="tblSearch100" cellSpacing="1" cellPadding="1" width="100%" border="0">
 								<TR>
 									<TD colSpan="4">
 										<uc1:ricercamodulo id="RicercaModulo1" runat="server"></uc1:ricercamodulo></TD>
 								</TR>
 								<TR>
-									<TD style="WIDTH: 15%; HEIGHT: 16px">Scadenza Da:</TD>
-									<TD style="WIDTH: 305px; HEIGHT: 16px">
+									<TD style="WIDTH: 15%; HEIGHT: 21px">Scadenza Da:</TD>
+									<TD style="WIDTH: 305px; HEIGHT: 21px">
 										<cc1:s_combobox id="cmbsMeseDa" runat="server" DBDataType="Integer" DBIndex="1" DBParameterName="p_MeseDa"
 											DBDirection="Input" DBSize="2">
 											<asp:ListItem Value="01">Gennaio</asp:ListItem>
@@ -89,8 +89,8 @@
 										</cc1:s_combobox>
 										<cc1:s_combobox id="cmbsAnnoDa" runat="server" DBDataType="Integer" DBIndex="2" DBParameterName="p_AnnoDa"
 											DBDirection="Input" DBSize="4"></cc1:s_combobox></TD>
-									<TD style="WIDTH: 75px; HEIGHT: 16px">Scadenza A:</TD>
-									<TD style="HEIGHT: 16px">
+									<TD style="WIDTH: 75px; HEIGHT: 21px">Scadenza A:</TD>
+									<TD style="HEIGHT: 21px">
 										<cc1:s_combobox id="cmbsMeseA" runat="server" DBDataType="Integer" DBIndex="3" DBParameterName="p_MeseA"
 											DBDirection="Input" DBSize="2">
 											<asp:ListItem Value="01">Gennaio</asp:ListItem>
@@ -113,41 +113,47 @@
 									<TD style="WIDTH: 15%">Ordine di lavoro:</TD>
 									<TD style="WIDTH: 305px">
 										<cc1:s_textbox id="txtOrdineLavoro" runat="server" Width="260px"></cc1:s_textbox></TD>
-									<TD style="WIDTH: 75px"></TD>
-									<TD></TD>
+									<TD style="WIDTH: 75px">Stato OdL:</TD>
+									<TD>
+										<cc1:s_combobox id="cmbsstatolavoro_odl" runat="server" DBDataType="Integer" DBIndex="5" DBParameterName="p_Ditta"
+											DBDirection="Input" DBSize="5" Width="224px">
+											<asp:ListItem Value="0" Selected="True">- Tutti gli Stati -</asp:ListItem>
+											<asp:ListItem Value="1">Completate</asp:ListItem>
+											<asp:ListItem Value="2">Da Completare</asp:ListItem>
+										</cc1:s_combobox></TD>
 								</TR>
 								<TR>
-									<TD style="WIDTH: 15%">Richiesta di lavoro:</TD>
-									<TD style="WIDTH: 305px">
+									<TD style="WIDTH: 15%; HEIGHT: 8px">Richiesta di lavoro:</TD>
+									<TD style="WIDTH: 305px; HEIGHT: 8px">
 										<cc1:s_textbox id="txtRichiestaLavoro" runat="server" Width="260px"></cc1:s_textbox></TD>
-									<TD style="WIDTH: 75px">Stato Rdl:</TD>
-									<TD>
+									<TD style="WIDTH: 75px; HEIGHT: 8px">Stato RdL:</TD>
+									<TD style="HEIGHT: 8px">
 										<cc1:s_combobox id="cmbsstatolavoro" runat="server" DBDataType="Integer" DBIndex="5" DBParameterName="p_Ditta"
 											DBDirection="Input" DBSize="5" Width="224px"></cc1:s_combobox></TD>
 								</TR>
 								<TR>
-									<TD style="WIDTH: 15%">Descrizione:</TD>
-									<TD style="WIDTH: 305px">
+									<TD style="WIDTH: 15%; HEIGHT: 17px">Descrizione:</TD>
+									<TD style="WIDTH: 305px; HEIGHT: 17px">
 										<cc1:s_textbox id="txtDescrizione" runat="server" Width="260px"></cc1:s_textbox></TD>
-									<TD style="WIDTH: 75px"></TD>
-									<TD></TD>
+									<TD style="WIDTH: 75px; HEIGHT: 17px"></TD>
+									<TD style="HEIGHT: 17px"></TD>
 								</TR>
 								<TR>
 									<TD style="WIDTH: 15%">Ditta:</TD>
 									<TD style="WIDTH: 305px">
 										<cc1:s_combobox id="cmbsDitta" runat="server" DBDataType="Integer" DBIndex="5" DBParameterName="p_Ditta"
-											DBDirection="Input" DBSize="5" Width="320px" AutoPostBack="True"></cc1:s_combobox></TD>
+											DBDirection="Input" DBSize="5" Width="320px"></cc1:s_combobox></TD>
 									<TD style="WIDTH: 75px">Addetto:</TD>
 									<TD>
 										<uc1:addetti id="Addetti1" runat="server"></uc1:addetti></TD>
 								</TR>
 								<TR>
-									<TD style="WIDTH: 15%">Servizio:</TD>
-									<TD style="WIDTH: 305px">
+									<TD style="WIDTH: 15%; HEIGHT: 22px">Servizio:</TD>
+									<TD style="WIDTH: 305px; HEIGHT: 22px">
 										<cc1:s_combobox id="cmbsServizio" runat="server" DBDataType="Integer" DBIndex="6" DBParameterName="p_Servizio"
-											DBDirection="Input" DBSize="5" Width="320px" AutoPostBack="True"></cc1:s_combobox></TD>
-									<TD style="WIDTH: 75px"></TD>
-									<TD></TD>
+											DBDirection="Input" DBSize="5" Width="320px"></cc1:s_combobox></TD>
+									<TD style="WIDTH: 75px; HEIGHT: 22px"></TD>
+									<TD style="HEIGHT: 22px"></TD>
 								</TR>
 								<TR>
 									<TD style="WIDTH: 15%">Standard Apparecchiature:</TD>
@@ -163,15 +169,17 @@
 								</TR>
 								<TR>
 									<TD style="WIDTH: 15%" colSpan="4">
-										<TABLE id="Table2" cellSpacing="1" cellPadding="1" width="300" border="0">
+										<TABLE id="Table2" style="WIDTH: 392px; HEIGHT: 39px" cellSpacing="1" cellPadding="1" width="392"
+											border="0">
 											<TR>
-												<TD style="WIDTH: 143px">
+												<TD style="WIDTH: 104px">
 													<cc1:S_Button id="btRicerca" runat="server" CssClass="btn" Width="96px" Text="Ricerca"></cc1:S_Button></TD>
 												<TD>
 													<cc1:S_Button id="btUltimo" runat="server" CssClass="btn" Width="96px" Text="Ultimo Mese"></cc1:S_Button></TD>
 												<TD>
-													<cc1:S_Button id="btReset" runat="server" CssClass="btn" Width="96px" Text="Reset"></cc1:S_Button></TD>
-												<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" target=_blank>Guida</A></TD>	
+													<cc1:S_Button id="btReset" runat="server" CssClass="btn" Width="96px" Text="Reset"></cc1:S_Button>&nbsp;<A 
+                  class=GuidaLink href="<%= HelpLink %>" 
+                target=_blank>Guida</A></TD>
 											</TR>
 										</TABLE>
 									</TD>
@@ -180,8 +188,8 @@
 						</cc2:datapanel></TD>
 				</TR>
 				<TR>
-					<TD><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGrid1" runat="server" CssClass="DataGrid" Width="100%" BorderColor="Gray"
-							BorderStyle="None" BorderWidth="1px" BackColor="White" CellPadding="4" AutoGenerateColumns="False" AllowPaging="True" GridLines="Vertical">
+					<TD><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGrid1" runat="server" CssClass="DataGrid" Width="100%" AllowCustomPaging="True"
+							GridLines="Vertical" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" BackColor="White" BorderWidth="1px" BorderStyle="None" BorderColor="Gray">
 							<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
@@ -229,16 +237,16 @@
 									<HeaderStyle Width="5%"></HeaderStyle>
 									<ItemStyle HorizontalAlign="Center"></ItemStyle>
 									<ItemTemplate>
-										<asp:LinkButton id="Linkbutton2" runat="server" Text="Completa" OnCommand="LinkButton2_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"wo_id") %>'>
-										</asp:LinkButton>
+										<asp:LinkButton id=Linkbutton2 runat="server" Text="Completa" OnCommand="LinkButton2_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"wo_id") %>'>Da completare</asp:LinkButton>
 										<asp:Label id="lblComp" Runat="server">Completato</asp:Label>
 									</ItemTemplate>
 								</asp:TemplateColumn>
 							</Columns>
-							<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
+							<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 						</asp:datagrid></TD>
 				</TR>
 			</TABLE>
 		</form>
-	</body><script language="javascript">parent.left.calcola();</script>
+		<script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

@@ -79,7 +79,7 @@
 						<TABLE id="Table11" style="BORDER-RIGHT: darkgray 1px solid; BORDER-TOP: darkgray 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #666666 1px solid; WIDTH: 75%; COLOR: #000077; BORDER-BOTTOM: darkgray 1px solid; FONT-FAMILY: Verdana, Arial; BACKGROUND-COLOR: whitesmoke"
 							cellSpacing="1" cellPadding="1" width="100%" border="0">
 							<CAPTION>
-								<FONT size="4">UNIBA</FONT>
+								<FONT size="4">COFATHEC</FONT>
 							</CAPTION>
 							<TR>
 								<TD></TD>

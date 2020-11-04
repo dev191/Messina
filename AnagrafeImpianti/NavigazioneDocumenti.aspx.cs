@@ -18,7 +18,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per NavigazioneDocumenti.
 	/// </summary>
-	public class NavigazioneDocumenti : System.Web.UI.Page    // System.Web.UI.Page
+	public class NavigazioneDocumenti : System.Web.UI.Page
 	{
 		protected Csy.WebControls.DataPanel DataPanel1;
 		protected System.Web.UI.WebControls.DataGrid DataGrid1;
@@ -33,6 +33,8 @@ namespace TheSite.AnagrafeImpianti
 		protected S_Controls.S_Button S_btRicerca;
 		protected S_Controls.S_Button S_btReset;
 		protected WebControls.RicercaModulo RicercaModulo1;
+		protected System.Web.UI.WebControls.RequiredFieldValidator rfvEdificio;
+		protected System.Web.UI.WebControls.ValidationSummary vlsEdit;
 		public static string HelpLink = string.Empty;
 
 		private void Page_Load(object sender, System.EventArgs e)
@@ -47,6 +49,7 @@ namespace TheSite.AnagrafeImpianti
 			RicercaModulo1.DelegateIDBLEdificio1 +=new  WebControls.DelegateIDBLEdificio(this.BindPiano);
 			if(!IsPostBack)
 			{
+				rfvEdificio.ControlToValidate= RicercaModulo1.ID + ":" + RicercaModulo1.TxtCodice.ID;
 				if(Request.QueryString["FunId"]!=null)
 					ViewState["FunId"]=Request.QueryString["FunId"];
 
@@ -71,18 +74,18 @@ namespace TheSite.AnagrafeImpianti
 			RicercaModulo1.TxtRicerca.DBSize=128; 
 			RicercaModulo1.TxtRicerca.DBDefaultValue=""; 
 
-
-			System.Text.StringBuilder sbValid = new System.Text.StringBuilder();
-
-			sbValid.Append("this.value = 'Attendere ...';");
-
-			sbValid.Append("this.disabled = true;");
-
-			sbValid.Append("document.getElementById('" + S_btRicerca.ClientID + "').disabled = true;");
-
-			sbValid.Append(this.Page.GetPostBackEventReference(this.S_btRicerca));
-			sbValid.Append(";");
-			this.S_btRicerca.Attributes.Add("onclick", sbValid.ToString());
+//
+//			System.Text.StringBuilder sbValid = new System.Text.StringBuilder();
+//
+//			sbValid.Append("this.value = 'Attendere ...';");
+//
+//			sbValid.Append("this.disabled = true;");
+//
+//			sbValid.Append("document.getElementById('" + S_btRicerca.ClientID + "').disabled = true;");
+//
+//			sbValid.Append(this.Page.GetPostBackEventReference(this.S_btRicerca));
+//			sbValid.Append(";");
+//			this.S_btRicerca.Attributes.Add("onclick", sbValid.ToString());
 
 		}
 	
@@ -182,7 +185,6 @@ namespace TheSite.AnagrafeImpianti
 		private void InitializeComponent()
 		{    
 			this.S_btRicerca.Click += new System.EventHandler(this.S_btRicerca_Click);
-			this.S_btReset.Click += new System.EventHandler(this.S_btReset_Click);
 			this.DataGrid1.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGrid1_PageIndexChanged);
 			this.DataGrid1.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGrid1_ItemDataBound);
 			this.Load += new System.EventHandler(this.Page_Load);
@@ -198,16 +200,157 @@ namespace TheSite.AnagrafeImpianti
 		private void S_btRicerca_Click(object sender, System.EventArgs e)
 		{
 		 DataGrid1.CurrentPageIndex = 0;
-		 Execute();
+		 Execute(true);
 		}
 		/// <summary>
 		/// Esegue la queri di ricerca
 		/// </summary>
-		private void Execute()
+		/// 
+
+
+		
+
+		private void Execute(bool reset)
 		{	
+
 			S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
 
 			//*****************************************
+//			S_Controls.Collections.S_Object s_p_Bl_Id = new S_Controls.Collections.S_Object();
+//			s_p_Bl_Id.ParameterName = "p_Bl_Id";
+//			s_p_Bl_Id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+//			s_p_Bl_Id.Direction = ParameterDirection.Input;
+//			s_p_Bl_Id.Size =8;
+//			s_p_Bl_Id.Index = 0;
+//			s_p_Bl_Id.Value = RicercaModulo1.TxtCodice.Text;
+//			_SCollection.Add(s_p_Bl_Id);
+//
+//			S_Controls.Collections.S_Object s_p_campus = new S_Controls.Collections.S_Object();
+//			s_p_campus.ParameterName = "p_campus";
+//			s_p_campus.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+//			s_p_campus.Direction = ParameterDirection.Input;
+//			s_p_campus.Index = 1;
+//			s_p_campus.Size=50;
+//			s_p_campus.Value = RicercaModulo1.TxtRicerca.Text;
+//			_SCollection.Add(s_p_campus);
+//			
+//			S_Controls.Collections.S_Object s_p_piano_id  = new S_Controls.Collections.S_Object();
+//			s_p_piano_id.ParameterName = "p_piano_id";
+//			s_p_piano_id.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+//			s_p_piano_id.Direction = ParameterDirection.Input;
+//			s_p_piano_id.Size =8;
+//			s_p_piano_id.Index = 2;
+//			s_p_piano_id.Value = (cmbsPiano.SelectedValue==string.Empty)? 0:Int32.Parse(cmbsPiano.SelectedValue);
+//			_SCollection.Add(s_p_piano_id);
+//
+//
+//			S_Controls.Collections.S_Object s_p_nomefile = new S_Controls.Collections.S_Object();
+//			s_p_nomefile.ParameterName = "p_nomefile";
+//			s_p_nomefile.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+//			s_p_nomefile.Direction = ParameterDirection.Input;
+//			s_p_nomefile.Index = 3;
+//			s_p_nomefile.Size = 50;
+//			s_p_nomefile.Value = S_txtnomefile.Text;
+//			_SCollection.Add(s_p_nomefile);
+//
+//			S_Controls.Collections.S_Object s_p_desc_file = new S_Controls.Collections.S_Object();
+//			s_p_desc_file.ParameterName = "p_desc_file";
+//			s_p_desc_file.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+//			s_p_desc_file.Direction = ParameterDirection.Input;
+//			s_p_desc_file.Size = 255;
+//			s_p_desc_file.Index = 4;
+//			s_p_desc_file.Value = S_txtdescrizione.Text;
+//			_SCollection.Add(s_p_desc_file);
+//
+//			S_Controls.Collections.S_Object s_p_categoria  = new S_Controls.Collections.S_Object();
+//			s_p_categoria.ParameterName = "p_categoria";
+//			s_p_categoria.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+//			s_p_categoria.Direction = ParameterDirection.Input;
+//			s_p_categoria.Size =8;
+//			s_p_categoria.Index = 5;
+//			s_p_categoria.Value = (S_CbCategoria.SelectedValue==string.Empty)? 0:Int32.Parse(S_CbCategoria.SelectedValue);
+//			_SCollection.Add(s_p_categoria);
+//			
+//			S_Controls.Collections.S_Object s_p_tipo  = new S_Controls.Collections.S_Object();
+//			s_p_tipo.ParameterName = "p_tipo";
+//			s_p_tipo.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+//			s_p_tipo.Direction = ParameterDirection.Input;
+//			s_p_tipo.Size =8;
+//			s_p_tipo.Index = 6;
+//			s_p_tipo.Value = (S_CmbTipologia.SelectedValue==string.Empty)? 0:Int32.Parse(S_CmbTipologia.SelectedValue);
+//			_SCollection.Add(s_p_tipo);		
+			
+			//********************************************
+
+			_SCollection = creaParam();
+
+			// nuovi parametri paginazione
+
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGrid1.CurrentPageIndex +1;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGrid1.PageSize;			
+			_SCollection.Add(s_p_pagesize);
+
+			Classi.AnagrafeImpianti.AnagrafeServizi  _AnagrafeServizi = new Classi.AnagrafeImpianti.AnagrafeServizi(Context.User.Identity.Name);
+
+			DataSet _MyDs = _AnagrafeServizi.GetData(_SCollection);
+
+            GridTitle1.Visible=true;  
+			DataGrid1.DataSource =_MyDs;
+
+			if (reset)
+			{
+				_SCollection.Clear();
+				_SCollection=creaParam();
+				int _totalRecords = _AnagrafeServizi.GetDataCount(_SCollection);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+			}
+			
+//			if (_MyDs.Tables[0].Rows.Count >0)
+//			{
+//				int Pagina = 0;
+//				if ((_MyDs.Tables[0].Rows.Count % DataGrid1.PageSize) >0)
+//				{
+//					Pagina ++;
+//				}
+//				if (DataGrid1.PageCount != Convert.ToInt16((_MyDs.Tables[0].Rows.Count / DataGrid1.PageSize) + Pagina))
+//				{					
+//					DataGrid1.CurrentPageIndex=0;					
+//				}
+//			}
+//			else
+//			{
+//				
+//				DataGrid1.CurrentPageIndex=0;
+//				GridTitle1.DescriptionTitle="Nessun dato trovato.";
+//				setvisible(false);
+//			}
+
+			this.DataGrid1.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+
+			DataGrid1.DataBind();
+			setvisible(true);
+			GridTitle1.DescriptionTitle="Lista documenti";
+//			GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();   ??
+		}
+
+		// Paolo
+	
+		public S_ControlsCollection creaParam (){
+
+			S_ControlsCollection _SCollection = new S_ControlsCollection();	
+
 			S_Controls.Collections.S_Object s_p_Bl_Id = new S_Controls.Collections.S_Object();
 			s_p_Bl_Id.ParameterName = "p_Bl_Id";
 			s_p_Bl_Id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
@@ -270,43 +413,13 @@ namespace TheSite.AnagrafeImpianti
 			s_p_tipo.Size =8;
 			s_p_tipo.Index = 6;
 			s_p_tipo.Value = (S_CmbTipologia.SelectedValue==string.Empty)? 0:Int32.Parse(S_CmbTipologia.SelectedValue);
-			_SCollection.Add(s_p_tipo);		
-			
-			//********************************************
+			_SCollection.Add(s_p_tipo);	
 
 
-			Classi.AnagrafeImpianti.AnagrafeServizi  _AnagrafeServizi = new Classi.AnagrafeImpianti.AnagrafeServizi(Context.User.Identity.Name);
-
-			DataSet _MyDs = _AnagrafeServizi.GetData(_SCollection);
-
-            GridTitle1.Visible=true;  
-			DataGrid1.DataSource =_MyDs;
-			
-			if (_MyDs.Tables[0].Rows.Count >0)
-			{
-				int Pagina = 0;
-				if ((_MyDs.Tables[0].Rows.Count % DataGrid1.PageSize) >0)
-				{
-					Pagina ++;
-				}
-				if (DataGrid1.PageCount != Convert.ToInt16((_MyDs.Tables[0].Rows.Count / DataGrid1.PageSize) + Pagina))
-				{					
-					DataGrid1.CurrentPageIndex=0;					
-				}
-			}
-			else
-			{
-				
-				DataGrid1.CurrentPageIndex=0;
-				GridTitle1.DescriptionTitle="Nessun dato trovato.";
-				setvisible(false);
-			}
-
-			DataGrid1.DataBind();
-			setvisible(true);
-			GridTitle1.DescriptionTitle="";
-			GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();
+			return _SCollection;
 		}
+
+		// End Paolo
 
 		private void setvisible(bool visible)
 		{
@@ -346,7 +459,7 @@ namespace TheSite.AnagrafeImpianti
 		{
 			///Imposto la Nuova Pagina
 			DataGrid1.CurrentPageIndex=e.NewPageIndex;
-			Execute();
+			Execute(false);
 		}
 
 		private void DataGrid1_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)

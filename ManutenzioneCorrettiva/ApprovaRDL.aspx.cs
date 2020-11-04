@@ -10,14 +10,14 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.ManutenzioneCorrettiva
 {
 	/// <summary>
 	/// Descrizione di riepilogo per ApprovaRDL.
 	/// </summary>
-	public class ApprovaRDL : System.Web.UI.Page    // System.Web.UI.Page
+	public class ApprovaRDL : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsRichiesta;
 		protected S_Controls.S_TextBox txtsOperatore;
@@ -41,12 +41,12 @@ namespace TheSite.ManutenzioneCorrettiva
 	    public string HelpLink =string.Empty;
         public int FunId=0;
     
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 	    EditApprovaEmetti _fp = null;
 
         public Classi.SiteModule _SiteModule;
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get {return _myColl;}
 		}
@@ -69,10 +69,14 @@ namespace TheSite.ManutenzioneCorrettiva
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;
 			this.GridTitle1.hplsNuovo.Visible = false;
 			
-			RicercaModulo1.DelegateCodiceEdificio1 = new TheSite.WebControls.DelegateCodiceEdificio(this.LoadServizi);
+			this.RicercaModulo1.DelegatePresidio1 +=new  WebControls.DelegatePresidio(this.BindUrgenza);
+			RicercaModulo1.DelegateIDBLEdificio1 = new TheSite.WebControls.DelegateIDBLEdificio(this.LoadServizi);
 			// Inserire qui il codice utente necessario per inizializzare la pagina.
 			if(!IsPostBack)
 			{
+				if(Request.QueryString["FunId"]!=null)
+					ViewState["FunId"]=Request.QueryString["FunId"]; 
+
 				CompareValidator1.ControlToValidate = CalendarPicker2.ID + ":" + CalendarPicker2.Datazione.ID;
 				CompareValidator1.ControlToCompare =  CalendarPicker1.ID + ":" + CalendarPicker1.Datazione.ID;
 				BindControls();
@@ -84,82 +88,147 @@ namespace TheSite.ManutenzioneCorrettiva
 					{						
 						_myColl=_fp._Contenitore;
 						_myColl.SetValues(this.Page.Controls);		
-						Ricerca();
+						Ricerca(true);
 					}
 				}
 			}
 		}
 		private void LoadServizi(string CodEdificio)
 		{
+//			this.cmbsServizio.Items.Clear();		
+//			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
+//
+//			Classi.ClassiDettaglio.Servizi  _Servizio = new TheSite.Classi.ClassiDettaglio.Servizi(Context.User.Identity.Name);
+
+
+			int idprog = 0;
+			if(Request.QueryString["VarApp"]!=null)
+				idprog = Convert.ToInt32(Request.QueryString["VarApp"].ToString());
+	
 			this.cmbsServizio.Items.Clear();		
 			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
 
 			Classi.ClassiDettaglio.Servizi  _Servizio = new TheSite.Classi.ClassiDettaglio.Servizi(Context.User.Identity.Name);
-
-			DataSet _MyDs;
-
+            DataSet _MyDs;
 			if (CodEdificio!="")
-			{
-				S_Controls.Collections.S_Object s_Bl_Id = new S_Object();
-				s_Bl_Id.ParameterName = "p_Bl_Id";
-				s_Bl_Id.DbType = CustomDBType.VarChar;
-				s_Bl_Id.Direction = ParameterDirection.Input;
-				s_Bl_Id.Index = 0;
-				s_Bl_Id.Value =	CodEdificio;
-				s_Bl_Id.Size = 8;
-
-				
-				S_Controls.Collections.S_Object s_ID_Servizio = new S_Object();
-				s_ID_Servizio.ParameterName = "p_ID_Servizio";
-				s_ID_Servizio.DbType = CustomDBType.Integer;
-				s_ID_Servizio.Direction = ParameterDirection.Input;
-				s_ID_Servizio.Index = 1;
-				s_ID_Servizio.Value = 0;
-
-				CollezioneControlli.Add(s_Bl_Id);				
-				CollezioneControlli.Add(s_ID_Servizio);
-
-				_MyDs = _Servizio.GetData(CollezioneControlli);
-			}
+				_MyDs = _Servizio.GetServiziPerProg(idprog,int.Parse(CodEdificio));
 			else
-			{
-				_MyDs = _Servizio.GetData();
-			}
+			  _MyDs = _Servizio.GetServiziPerProg(idprog,0);
+		
 
 			if (_MyDs.Tables[0].Rows.Count > 0)
 			{
 				this.cmbsServizio.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
-					_MyDs.Tables[0], "DESCRIZIONE", "IDSERVIZIO", "- Selezionare un Servizio -", "0");
-				
+					_MyDs.Tables[0], "DESCRIZIONE", "IDSERVIZIO", "- Selezionare un Servizio -", "");
 				this.cmbsServizio.DataTextField = "DESCRIZIONE";
 				this.cmbsServizio.DataValueField = "IDSERVIZIO";
 				this.cmbsServizio.DataBind();
-				this.cmbsServizio.Items.Add(Classi.GestoreDropDownList.ItemMessaggio("Non Definito", "-1"));
 			}
 			else
 			{
-				string s_Messagggio = "Non Definito";
-				this.cmbsServizio.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+				string s_Messagggio = "- Nessun Servizio -";
+				this.cmbsServizio.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
 			}
+
+
+
+//			DataSet _MyDs;
+//
+//			if (CodEdificio!="")
+//			{
+//				S_Controls.Collections.S_Object s_Bl_Id = new S_Object();
+//				s_Bl_Id.ParameterName = "p_Bl_Id";
+//				s_Bl_Id.DbType = CustomDBType.VarChar;
+//				s_Bl_Id.Direction = ParameterDirection.Input;
+//				s_Bl_Id.Index = CollezioneControlli.Count;
+//				s_Bl_Id.Value =	CodEdificio;
+//				s_Bl_Id.Size = 8;
+//                CollezioneControlli.Add(s_Bl_Id);		
+//				
+//				S_Controls.Collections.S_Object s_ID_Servizio = new S_Object();
+//				s_ID_Servizio.ParameterName = "p_ID_Servizio";
+//				s_ID_Servizio.DbType = CustomDBType.Integer;
+//				s_ID_Servizio.Direction = ParameterDirection.Input;
+//				s_ID_Servizio.Index = CollezioneControlli.Count;
+//				s_ID_Servizio.Value = 0;
+//				CollezioneControlli.Add(s_ID_Servizio);
+//
+//				_MyDs = _Servizio.GetData(CollezioneControlli);
+//			}
+//			else
+//			{
+//				_MyDs = _Servizio.GetData();
+//			}
+//
+//			if (_MyDs.Tables[0].Rows.Count > 0)
+//			{
+//				this.cmbsServizio.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+//					_MyDs.Tables[0], "DESCRIZIONE", "IDSERVIZIO", "- Selezionare un Servizio -", "0");
+//				
+//				this.cmbsServizio.DataTextField = "DESCRIZIONE";
+//				this.cmbsServizio.DataValueField = "IDSERVIZIO";
+//				this.cmbsServizio.DataBind();
+//				this.cmbsServizio.Items.Add(Classi.GestoreDropDownList.ItemMessaggio("Non Definito", "-1"));
+//			}
+//			else
+//			{
+//				string s_Messagggio = "Non Definito";
+//				this.cmbsServizio.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+//			}
+		}
+		private void BindUrgenza(string Codice)
+		{
+			string Progetto="";
+			if(Request.QueryString["VarApp"]!=null)
+				Progetto=Request.QueryString["VarApp"];
+			DataSet ds;
+			if(Codice!="")
+			{
+				int cod= Convert.ToInt32(Codice);
+				Classi.ClassiDettaglio.Urgenza _Urgenza = new TheSite.Classi.ClassiDettaglio.Urgenza();
+
+				ds=_Urgenza.GetPriorita(cod,Progetto);
+				this.cmbsUrgenza.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					ds.Tables[0], "DESCRIPTION", "ID", "Selezionare una Priorità", "0");
+
+				this.cmbsUrgenza.DataTextField = "DESCRIPTION";
+				this.cmbsUrgenza.DataValueField = "ID";
+				this.cmbsUrgenza.DataBind();
+
+			}
+			else
+			{
+				Classi.ClassiDettaglio.Urgenza _Urgenza = new TheSite.Classi.ClassiDettaglio.Urgenza();
+				 ds=_Urgenza.GetPriorita(0,Progetto);
+				this.cmbsUrgenza.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					ds.Tables[0], "DESCRIPTION", "ID", "Selezionare una Priorità", "0");
+				this.cmbsUrgenza.DataTextField = "DESCRIPTION";
+				this.cmbsUrgenza.DataValueField = "ID";
+				this.cmbsUrgenza.DataBind();
+			}
+			
 		}
 		private void BindControls()
-		{
-			Classi.ClassiDettaglio.Urgenza _Urgenza = new TheSite.Classi.ClassiDettaglio.Urgenza();
-			Classi.ClassiDettaglio.RichiedentiTipo _RichiedentiTipo = new TheSite.Classi.ClassiDettaglio.RichiedentiTipo();
+		{//urgenza
+		
+
+			BindUrgenza("");
+
+
+			string Progetto="";
+			if(Request.QueryString["VarApp"]!=null)
+				Progetto=Request.QueryString["VarApp"];
+			Classi.ClassiAnagrafiche.Richiedenti_tipo _Richiedenti = new TheSite.Classi.ClassiAnagrafiche.Richiedenti_tipo();	
+			DataSet Ds = _Richiedenti.GetAllAddProg(Progetto).Copy();
+
 
 			//Carico il combo del Gruppo
 			this.cmbsGruppo.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
-				_RichiedentiTipo.GetData().Tables[0], "DESCRIZIONE", "ID", "Selezionare un Gruppo", "0");
-			this.cmbsGruppo.DataTextField = "DESCRIZIONE";
-			this.cmbsGruppo.DataValueField = "ID";
+				Ds.Tables[0], "descrizione", "id", "Selezionare un Gruppo", "0");
+			this.cmbsGruppo.DataTextField = "descrizione";
+			this.cmbsGruppo.DataValueField = "id";
 			this.cmbsGruppo.DataBind();
 			
-			//Carico il combo delle Urgenze			
-			this.cmbsUrgenza.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource( _Urgenza.GetData().Tables[0], "PRIORITY","ID","Selezionare una Urgenza","0");
-			this.cmbsUrgenza.DataTextField = "PRIORITY";
-			this.cmbsUrgenza.DataValueField = "ID";
-			this.cmbsUrgenza.DataBind();		
-
 			LoadServizi("");
 		}
 		#region Codice generato da Progettazione Web Form
@@ -179,6 +248,7 @@ namespace TheSite.ManutenzioneCorrettiva
 		private void InitializeComponent()
 		{    
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
+			this.cmdReset.Click += new System.EventHandler(this.cmdReset_Click);
 			this.DataGridRicerca.ItemCommand += new System.Web.UI.WebControls.DataGridCommandEventHandler(this.DataGridRicerca_ItemCommand);
 			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
 			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
@@ -190,9 +260,9 @@ namespace TheSite.ManutenzioneCorrettiva
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{
 		 DataGridRicerca.CurrentPageIndex=0;
-		 Ricerca();
+		 Ricerca(true);
 		}
-		private void Ricerca()
+		private void Ricerca(bool reset)
 		{
 			Classi.ManCorrettiva.ClManCorrettiva _ClManCorrettiva =new TheSite.Classi.ManCorrettiva.ClManCorrettiva(Context.User.Identity.Name);
 			S_ControlsCollection _SCollection = new S_ControlsCollection();
@@ -302,26 +372,58 @@ namespace TheSite.ManutenzioneCorrettiva
 			s_p_validazione.Value = int.Parse( cmbsvalidazione.SelectedValue);			
 			_SCollection.Add(s_p_validazione);
 			
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = _SCollection.Count +1;
+			s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = _SCollection.Count +1;
+			s_p_pagesize.Value= DataGridRicerca.PageSize;			
+			_SCollection.Add(s_p_pagesize);
+
 			DataSet _MyDs = _ClManCorrettiva.GetData(_SCollection);
 			
 			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
 
 			DataGridRicerca.Visible = true;
 
+			Double _totalPages = 1;
+			if (reset==true)
+			{
+				_SCollection.RemoveAt(_SCollection.Count-1);
+				_SCollection.RemoveAt(_SCollection.Count-1);
+				_SCollection.RemoveAt(_SCollection.Count-1);
+				_SCollection.RemoveAt(_SCollection.Count-1);
+				int _totalRecords = _ClManCorrettiva.GetDataCount(_SCollection);;
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+				if ((_totalRecords % DataGridRicerca.PageSize) == 0)
+					_totalPages = _totalRecords / DataGridRicerca.PageSize;
+				else
+					_totalPages = (_totalRecords / DataGridRicerca.PageSize)+1;
+			}
+			else
+			{
+				_totalPages = Double.Parse (this.GridTitle1.NumeroRecords);
+			}
+
+
 			GridTitle1.Visible = true;
-			GridTitle1.DescriptionTitle = "";
-			if (_MyDs.Tables[0].Rows.Count == 0 )		
-				GridTitle1.DescriptionTitle = "Nessun elemento trovato";
 			
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
 			this.DataGridRicerca.DataBind();
-			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();	
 		}
 
 		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex=e.NewPageIndex;
-			Ricerca();
+			Ricerca(false);
 		}
 
 		private void DataGridRicerca_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
@@ -337,12 +439,24 @@ namespace TheSite.ManutenzioneCorrettiva
 
 		private void DataGridRicerca_ItemCommand(object source, System.Web.UI.WebControls.DataGridCommandEventArgs e)
 		{
+			string varapp="";
+			if(Request["VarApp"]!=null)
+				varapp="&VarApp=" + Request["VarApp"];
 			if (e.CommandName=="Dettaglio")
 			{	
 				_myColl.AddControl(this.Page.Controls, ParentType.Page);
-				string s_url = e.CommandArgument.ToString();							
+				string s_url = e.CommandArgument.ToString() + varapp;							
 				Server.Transfer(s_url);				
 			}
+		}
+
+		private void cmdReset_Click(object sender, System.EventArgs e)
+		{
+			string varapp="";
+			if(Request["VarApp"]!=null)
+				varapp="&VarApp=" + Request["VarApp"];
+			Response.Redirect("ApprovaRDL.aspx?Fun=" + ViewState["FunId"] + varapp);
+
 		}
 
 	

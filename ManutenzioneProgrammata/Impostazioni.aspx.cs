@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Reflection;
 
 namespace TheSite.ManutenzioneProgrammata
@@ -20,7 +21,7 @@ namespace TheSite.ManutenzioneProgrammata
 	/// 
 	
 
-	public class Impostazioni : System.Web.UI.Page    // System.Web.UI.Page
+	public class Impostazioni : System.Web.UI.Page
 	{
 		protected S_Controls.S_ComboBox cmbsMeseA;
 		protected S_Controls.S_ComboBox cmbsAnnoA;
@@ -253,15 +254,8 @@ namespace TheSite.ManutenzioneProgrammata
 				BindDitte(id_bl);
 			}
 		}
-
-		private void Ricerca()
-		{	
-			Session.Remove("DataSet");
-			
-			//DataGridRicerca
-			cmbsDitta.DBDefaultValue="0";
-			cmbsServizio.DBDefaultValue="0";
-			
+		private S_Controls.Collections.S_ControlsCollection GetControl()
+		{
 			S_Controls.Collections.S_ControlsCollection CollezioneControlli = new S_Controls.Collections.S_ControlsCollection();
 			
 			// Ditta						
@@ -316,26 +310,58 @@ namespace TheSite.ManutenzioneProgrammata
 			s_Tipologia.Index = 3;
 			s_Tipologia.Size=20;
 			s_Tipologia.Value=cmbsTutti.SelectedValue;
-			CollezioneControlli.Add(s_Tipologia);						
+			CollezioneControlli.Add(s_Tipologia);
+	
+			return CollezioneControlli;
+		}
+		private void Ricerca(bool reset)
+		{	
+			//Session.Remove("DataSet");
+			
+			//DataGridRicerca
+			cmbsDitta.DBDefaultValue="0";
+			cmbsServizio.DBDefaultValue="0";
+			
+			S_Controls.Collections.S_ControlsCollection CollezioneControlli =GetControl();				
+
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+			CollezioneControlli.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca.PageSize;			
+			CollezioneControlli.Add(s_p_pagesize);
 
 			Classi.ManProgrammata.Impostazioni _Imp = new TheSite.Classi.ManProgrammata.Impostazioni();
 				
 			
-			DataSet _MyDs = _Imp.GetImpostazioniDefault(CollezioneControlli).Copy();
+			DataSet _MyDs = _Imp.GetImpostazioniDefaultPaging(CollezioneControlli).Copy();
 
-			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
-			this.DataGridRicerca.DataBind();			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();
-			
-			if (_MyDs.Tables[0].Rows.Count>0)
-			{	
-				PanelAddetto.Visible=true;											
-				Session.Add("DataSet",_MyDs.Tables[0]);
-			}	
-			else
+			if (reset==true)
 			{
-				PanelAddetto.Visible=false;					
+
+				CollezioneControlli =GetControl();	
+				int _totalRecords = _Imp.GetImpostazioniDefaultCount(CollezioneControlli);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
 			}
+
+			DataGridRicerca.Visible =true;
+			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.DataGridRicerca.DataBind();	
+			
+			if (int.Parse(this.GridTitle1.NumeroRecords)>0)
+				PanelAddetto.Visible=true;											
+			else
+				PanelAddetto.Visible=false;					
 		}
 
 		private void BindDitte(int idbl)
@@ -547,11 +573,15 @@ namespace TheSite.ManutenzioneProgrammata
 			{				
 				SetControlli();										
 			}
-			
+	
+			Classi.ManProgrammata.Impostazioni _Imp = new TheSite.Classi.ManProgrammata.Impostazioni();
+			S_Controls.Collections.S_ControlsCollection CollezioneControlli =GetControl();
+			DataSet _MyDs = _Imp.GetImpostazioniDefault(CollezioneControlli).Copy();
+
 			for(int Pagine = 0;Pagine<=DataGridRicerca.PageCount;Pagine++)
 			{
 	
-				DataGridRicerca.DataSource=Session["DataSet"];
+				DataGridRicerca.DataSource=_MyDs.Tables[0];
 				DataGridRicerca.DataBind();
 				DataGridRicerca.CurrentPageIndex=Pagine;									
 							
@@ -564,8 +594,7 @@ namespace TheSite.ManutenzioneProgrammata
 			}
 
 			DataGridRicerca.CurrentPageIndex=0;
-			DataGridRicerca.DataSource=Session["DataSet"];
-			DataGridRicerca.DataBind();			
+			Ricerca(true);		
 			GetControlli();						
 
 		}
@@ -604,14 +633,15 @@ namespace TheSite.ManutenzioneProgrammata
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{			
 			BindAddettiDitta("",Int32.Parse(cmbsDitta.SelectedValue));
+			DataGridRicerca.CurrentPageIndex =0;
 			Resetta();
-			Ricerca();
+			Ricerca(true);
 		}
 
 		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{	
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;	
-			Ricerca();
+			Ricerca(false);
 			GetControlli();		
 		}
 
@@ -737,7 +767,7 @@ namespace TheSite.ManutenzioneProgrammata
 						mes="Sono stati inseriti " + tot + " Edifici nel Piano di Manutenzione";	
 					
 					Resetta();					
-					Ricerca();										
+					Ricerca(true);										
 					
 					//Visualizzo il messaggio
 					Classi.SiteJavaScript.msgBox(this.Page,mes);
@@ -799,18 +829,5 @@ namespace TheSite.ManutenzioneProgrammata
 		public int idservizio;
 		public int idaddetto;
 		public string mesegiorno;
-	}
-	// contenitore dati per il file "ManCorrettiva/SfogliaRdlComplete"
-	public class DGridRdlComplete
-	{
-		public int WrId;
-		public int OdlId;
-		public string impianto;
-		public string addetto;
-		public string stato;
-		public string tipoInt;
-		public string impStimato;
-		public string impConsuntivo;
-
 	}
 }

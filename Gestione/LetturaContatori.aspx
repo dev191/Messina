@@ -1,12 +1,12 @@
-<%@ Page language="c#" Codebehind="LetturaContatori.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.LetturaContatori" %>
-<%@ Register TagPrefix="uc1" TagName="UserStanze" Src="../WebControls/UserStanze.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CodiceApparecchiature" Src="../WebControls/CodiceApparecchiature.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
 <%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CodiceApparecchiature" Src="../WebControls/CodiceApparecchiature.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="UserStanze" Src="../WebControls/UserStanze.ascx" %>
+<%@ Page language="c#" Codebehind="LetturaContatori.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.LetturaContatori" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -61,15 +61,15 @@
 	</HEAD>
 	<body onbeforeunload="parent.left.valorizza()" ms_positioning="GridLayout">
 		<FORM id="Form1" method="post" runat="server">
-			<TABLE cellSpacing="0" cellPadding="0" width="100%" align="center" border="0">
+			<TABLE cellSpacing="0" cellPadding="0" width="90%" align="center" border="0">
 				<TR>
 					<TD align="center"><UC1:PAGETITLE id="PageTitle1" runat="server"></UC1:PAGETITLE></TD>
 				</TR>
 				<TR>
 					<TD vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" allowtitleexpandcollapse="True" collapseimageurl="../Images/up.gif"
 							cssclass="DataPanel75" collapsetext="Espandi/Riduci" expandimageurl="../Images/down.gif" expandtext="Espandi" titletext="Ricerca"
-							collapsed="False" titlestyle-cssclass="TitleSearch">
-							<TABLE id="tblSearch100" cellSpacing="1" cellPadding="1" border="0">
+							collapsed="False" titlestyle-cssclass="TitleSearch" Width="90%">
+							<TABLE id="tblSearch100" cellSpacing="1" cellPadding="1" Width="90%" border="0">
 								<TR>
 									<TD vAlign="top" align="center" colSpan="4">
 										<P>
@@ -110,10 +110,11 @@
 								<TR>
 									<TD colSpan="4">&nbsp;
 										<P></P>
-										<TABLE id="Table1" cellSpacing="0" cellPadding="0" width="100%" align="left" border="0">
+										<TABLE id="Table1" cellSpacing="0" cellPadding="0" Width="90%" align="left" border="0">
 											<TR>
 												<TD align="left">
-													<CC1:S_BUTTON id="S_btMostra" runat="server" cssclass="btn" width="130px" text="Ricerca" tooltip="Avvia la ricerca"></CC1:S_BUTTON>&nbsp;
+													<CC1:S_BUTTON id="S_btMostra" runat="server" cssclass="btn" width="130px" tooltip="Avvia la ricerca"
+														text="Ricerca"></CC1:S_BUTTON>&nbsp;
 													<ASP:BUTTON id="btnReset" runat="server" cssclass="btn" width="130px" text="Reset"></ASP:BUTTON></TD>
 												<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
                   target=_blank>Guida</A></TD>
@@ -126,7 +127,7 @@
 				</TR>
 				<TR vAlign="top">
 					<TD vAlign="top"><UC1:GRIDTITLE id="GridTitle1" runat="server"></UC1:GRIDTITLE><asp:datagrid id="DataGridLettura" runat="server" BorderColor="Gray" BorderStyle="None" BorderWidth="1px"
-							BackColor="White" CellPadding="4" AutoGenerateColumns="False" AllowPaging="True" GridLines="Vertical" Width="100%" CssClass="DataGrid">
+							BackColor="White" CellPadding="4" AutoGenerateColumns="False" AllowPaging="True" GridLines="Vertical" Width="90%" CssClass="DataGrid">
 							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
@@ -159,12 +160,12 @@
 								<asp:BoundColumn DataField="lettura" HeaderText="Energia/Valore Lettura"></asp:BoundColumn>
 								<asp:BoundColumn DataField="datalettura" HeaderText="Data Lettura" DataFormatString="{0:d}"></asp:BoundColumn>
 							</Columns>
-							<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
+							<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 						</asp:datagrid></TD>
 				</TR>
 				<TR>
 					<TD>
-						<TABLE id="TblBtn">
+						<TABLE id="TblBtn" Width="90%">
 						</TABLE>
 					</TD>
 				</TR>

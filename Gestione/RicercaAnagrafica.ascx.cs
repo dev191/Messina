@@ -9,12 +9,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
+
+
+
+using MyCollection; 
 //using ApplicationDataLayer;
 //using ApplicationDataLayer.DBType;
 //using ApplicationDataLayer.Collections;
 
 using System.IO;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.Gestione
 {
@@ -38,7 +41,7 @@ namespace TheSite.Gestione
 		public static string s_pagdir;
 		public static string Codice= string.Empty;
 		protected S_Controls.S_Button btnReset;
-		clMyCollection _myColl;
+		MyCollection.clMyCollection _myColl;
 		private void Page_Load(object sender, System.EventArgs e)
 		{
 			Classi.SiteModule _SiteModule = (Classi.SiteModule) HttpContext.Current.Items["SiteModule"];			
@@ -96,7 +99,7 @@ namespace TheSite.Gestione
 			}
 		}
 		
-		public clMyCollection Coll
+		public MyCollection.clMyCollection Coll
 		{
 			get
 			{

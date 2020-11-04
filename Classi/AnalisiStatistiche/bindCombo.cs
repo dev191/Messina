@@ -1,138 +1,144 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.AnalisiStatistiche.bindCombo
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System;
-using System.Collections;
-using System.Data;
-using System.Web;
 using System.Web.UI.WebControls;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
+using ApplicationDataLayer.Collections;
+using S_Controls;
+using S_Controls.Collections;
+using System.Data;
 
 namespace TheSite.Classi.AnalisiStatistiche
 {
-  public class bindCombo : AbstractBase
-  {
-    private string _nomeSoredProcedure;
-    private string _tipoValue;
-    private string _testoItemZero;
-    private DropDownList _cmb;
+	/// <summary>
+	/// Descrizione di riepilogo per bindCombo.
+	/// </summary>
+	public class bindCombo : AbstractBase
+	{
+		private string _nomeSoredProcedure, _tipoValue,_testoItemZero;
+		private DropDownList _cmb;
+		public bindCombo(string nomeSoredProcedure,DropDownList cmb,string tipoValue)
+		{
+			_cmb = cmb;
+			_tipoValue = tipoValue;
+			_nomeSoredProcedure = nomeSoredProcedure;
+			_testoItemZero = "";
+		}
+		
+		public override DataSet GetData()
+		{
+			return null;
+		}
 
-    public bindCombo(string nomeSoredProcedure, DropDownList cmb, string tipoValue)
-    {
-      this._cmb = cmb;
-      this._tipoValue = tipoValue;
-      this._nomeSoredProcedure = nomeSoredProcedure;
-      this._testoItemZero = "";
-    }
+		public override System.Data.DataSet GetData(S_Controls.Collections.S_ControlsCollection CollezioneControlli)
+		{
+			System.Data.DataSet _DSet;
+			ApplicationDataLayer.OracleDataLayer _OraDl = new ApplicationDataLayer.OracleDataLayer(s_ConnStr);	
+			_DSet =  _OraDl.GetRows(CollezioneControlli, _nomeSoredProcedure).Copy();
+			return _DSet;	
+		}
+		public override System.Data.DataSet GetSingleData(int itemId)
+		{
+			return null;
+		}
+		protected override int ExecuteUpdate(S_Controls.Collections.S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			return 0;
+		}
 
-    public override DataSet GetData() => (DataSet) null;
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli) => new OracleDataLayer(this.s_ConnStr).GetRows((object) CollezioneControlli, this._nomeSoredProcedure).Copy();
+		public void getComboBox()
+		{
+			DataSet ds;
+			ds = BindCmb(_nomeSoredProcedure);
+			//ds = BindCmb("RapportiPdf.bind_edifici");
+			DataTable dt = new DataTable();
+			
+			DataColumn dcTesto = colonna("testo","System.String");
+			DataColumn dcValore = colonna("valore", _tipoValue);
+			dt.Columns.Add(dcValore);
+			dt.Columns.Add(dcTesto);
+			
+			DataRow drFirst = dt.NewRow();
+			drFirst[1]=_testoItemZero;
+			switch(_tipoValue)
+			{
+				case "System.String":
+					drFirst[0]="";
+					break;
+				case "System.Int32":
+					drFirst[0] = 0;
+					break;
+				default:
+					drFirst[0]="";
+					break;
+			}
+			dt.Rows.Add(drFirst);
+			for(int i = 0; i <= ds.Tables[0].Rows.Count -1; i++)
+			{
+				DataRow dr = dt.NewRow();
+				dr[0]=  ds.Tables[0].Rows[i][0];
+				dr[1] = ds.Tables[0].Rows[i][1];
+				dt.Rows.Add(dr);
+			}
+			DataView dv = new DataView(dt);
+			_cmb.DataTextField = "Testo";
+			_cmb.DataValueField = "Valore";
+			_cmb.DataSource = dv;
+			_cmb.DataBind();
+		}
+		private DataSet BindCmb(string StoredProcedure)
+		{
+			
+			S_ControlsCollection clDatiRicerca = new S_ControlsCollection();
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+			if (StoredProcedure== "PACK_RPT_PIANO_MAN_PROG.GetEdifici")
+			{
+				S_Controls.Collections.S_Object s_p_username= new S_Object();
+				s_p_username.ParameterName = "p_username";
+				s_p_username.DbType =  CustomDBType.VarChar;
+				s_p_username.Size=50;
+				s_p_username.Value= System.Web.HttpContext.Current.User.Identity.Name;
+				s_p_username.Direction = ParameterDirection.Input;
+				s_p_username.Index = clDatiRicerca.Count;
+				clDatiRicerca.Add(s_p_username);
+			}
+			S_Controls.Collections.S_Object Cursor = new S_Object();
+			Cursor.ParameterName = "IO_CURSOR";
+			Cursor.DbType =  CustomDBType.Cursor;
+			Cursor.Direction = ParameterDirection.Output;
+			Cursor.Index = clDatiRicerca.Count;
+			clDatiRicerca.Add(Cursor);
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      return 0;
-    }
+			DataSet dsDatiRicerca = new DataSet();
+			dsDatiRicerca = GetData(clDatiRicerca).Copy();
+			return dsDatiRicerca;
+		}
+		private DataColumn colonna(string nome,string tipo)
+		{
+			DataColumn dc = new DataColumn(nome);
+			dc.DataType = System.Type.GetType(tipo);
+			return dc;
+		}
 
-    public void getComboBox()
-    {
-      DataSet dataSet = this.BindCmb(this._nomeSoredProcedure);
-      DataTable table = new DataTable();
-      DataColumn column1 = this.colonna("testo", "System.String");
-      DataColumn column2 = this.colonna("valore", this._tipoValue);
-      table.Columns.Add(column2);
-      table.Columns.Add(column1);
-      DataRow row1 = table.NewRow();
-      row1[1] = (object) this._testoItemZero;
-      switch (this._tipoValue)
-      {
-        case "System.String":
-          row1[0] = (object) "";
-          break;
-        case "System.Int32":
-          row1[0] = (object) 0;
-          break;
-        default:
-          row1[0] = (object) "";
-          break;
-      }
-      table.Rows.Add(row1);
-      for (int index = 0; index <= dataSet.Tables[0].Rows.Count - 1; ++index)
-      {
-        DataRow row2 = table.NewRow();
-        row2[0] = dataSet.Tables[0].Rows[index][0];
-        row2[1] = dataSet.Tables[0].Rows[index][1];
-        table.Rows.Add(row2);
-      }
-      DataView dataView = new DataView(table);
-      this._cmb.DataTextField = "Testo";
-      this._cmb.DataValueField = "Valore";
-      this._cmb.DataSource = (object) dataView;
-      this._cmb.DataBind();
-    }
-
-    private DataSet BindCmb(string StoredProcedure)
-    {
-      S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
-      if (StoredProcedure == "PACK_RPT_PIANO_MAN_PROG.GetEdifici")
-      {
-        S_Object sObject = new S_Object();
-        ((ParameterObject) sObject).set_ParameterName("p_username");
-        ((ParameterObject) sObject).set_DbType((CustomDBType) 2);
-        ((ParameterObject) sObject).set_Size(50);
-        ((ParameterObject) sObject).set_Value((object) HttpContext.Current.User.Identity.Name);
-        ((ParameterObject) sObject).set_Direction(ParameterDirection.Input);
-        ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-        CollezioneControlli.Add(sObject);
-      }
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject1);
-      DataSet dataSet = new DataSet();
-      return this.GetData(CollezioneControlli).Copy();
-    }
-
-    private DataColumn colonna(string nome, string tipo) => new DataColumn(nome)
-    {
-      DataType = Type.GetType(tipo)
-    };
-
-    public string testoItemZero
-    {
-      get => this._testoItemZero;
-      set => this._testoItemZero = value;
-    }
-
-    public string nomeSoredProcedure
-    {
-      get => this._nomeSoredProcedure;
-      set => this._nomeSoredProcedure = value;
-    }
-
-    public string tipoValue
-    {
-      get => this._tipoValue;
-      set => this._tipoValue = value;
-    }
-
-    public DropDownList cmb
-    {
-      get => this._cmb;
-      set => this._cmb = value;
-    }
-  }
+		public string testoItemZero
+		{
+			get {return _testoItemZero;}
+			set {_testoItemZero = value;}
+		}
+		public string nomeSoredProcedure
+		{
+			get {return _nomeSoredProcedure;}
+			set {_nomeSoredProcedure = value;}
+		}
+		public string tipoValue
+		{
+			get {return _tipoValue;}
+			set {_tipoValue = value;}
+		}
+		public DropDownList cmb
+		{
+			get {return _cmb;}
+			set {_cmb = value;}
+		}
+	}
 }

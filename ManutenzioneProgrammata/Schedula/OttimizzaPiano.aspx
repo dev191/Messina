@@ -1,11 +1,10 @@
-<%@ Page language="c#" Codebehind="OttimizzaPiano.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.Schedula.OttimizzaPiano" %>
-<%@ Register TagPrefix="uc1" TagName="BottomMenu" Src="../../WebControls/BottomMenu.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="DataPicker" Src="../../WebControls/DataPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../../WebControls/CalendarPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../../WebControls/GridTitle.ascx" %>
 <%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../../WebControls/CalendarPicker.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="BottomMenu" Src="../../WebControls/BottomMenu.ascx" %>
+<%@ Page language="c#" Codebehind="OttimizzaPiano.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.Schedula.OttimizzaPiano" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -26,7 +25,7 @@
 						<TD style="HEIGHT: 50px" align="center"><uc1:pagetitle id="PageTitle1" runat="server"></uc1:pagetitle></TD>
 					</TR>
 					<TR valign="top">
-						<TD vAlign="top" align="left">
+						<TD vAlign="top" align="center">
 							<TABLE cellSpacing="1" cellPadding="1" align="center" width="98%">
 								<TBODY>
 									<TR valign="top">
@@ -92,8 +91,8 @@
 														<TD align="left" colSpan="3">
 															<CC1:S_BUTTON id="btnsRicerca" tabIndex="2" runat="server" CssClass="btn" Text="Ricerca"></CC1:S_BUTTON>&nbsp;
 															<asp:Button id="cmdReset" CssClass="btn" Text="Reset" Runat="server"></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-														<TD align="right"><A class="GuidaLink" href="<%= HelpLink %>" 
-                  target="_blank">Guida</A></TD>
+														<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
+                  target=_blank>Guida</A></TD>
 													</TR>
 												</TABLE>
 											</COLLAPSE:DATAPANEL>
@@ -102,7 +101,7 @@
 									<TR valign="top">
 										<TD vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle>
 											<asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" AllowPaging="True" BorderColor="Gray"
-												BorderWidth="1px" GridLines="Vertical" AutoGenerateColumns="False">
+												BorderWidth="1px" GridLines="Vertical" AutoGenerateColumns="False" AllowCustomPaging="True">
 												<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 												<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 												<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
@@ -112,7 +111,7 @@
 														<HeaderStyle Width="20px"></HeaderStyle>
 														<ItemStyle HorizontalAlign="Center"></ItemStyle>
 														<ItemTemplate>
-															<asp:ImageButton id="lnkDett" Runat="server" CommandName="Dettaglio" ImageUrl="../../images/edit.gif" CommandArgument='<%# "OttimizzaPianoEQ.aspx?ID_BL=" + DataBinder.Eval(Container.DataItem,"BL_ID") + "&anno=" + cmbsAnno.SelectedValue + "&servizio=" + DataBinder.Eval(Container.DataItem,"IDSERVIZIO") +"&p=ottimizza"%>'>
+															<asp:ImageButton id="lnkDett" Runat=server CommandName="Dettaglio" ImageUrl="../../images/edit.gif" CommandArgument='<%# "OttimizzaPianoEQ.aspx?ID_BL=" + DataBinder.Eval(Container.DataItem,"BL_ID") + "&anno=" + cmbsAnno.SelectedValue + "&servizio=" + DataBinder.Eval(Container.DataItem,"IDSERVIZIO") +"&p=ottimizza"%>'>
 															</asp:ImageButton>
 														</ItemTemplate>
 													</asp:TemplateColumn>
@@ -174,7 +173,7 @@
 														<ItemStyle HorizontalAlign="Center"></ItemStyle>
 													</asp:BoundColumn>
 												</Columns>
-												<PagerStyle HorizontalAlign="Left" ForeColor="Black" BackColor="#d9e3fd" Mode="NumericPages"></PagerStyle>
+												<PagerStyle HorizontalAlign="Left" ForeColor="Black" BackColor="#D9E3FD" Mode="NumericPages"></PagerStyle>
 											</asp:datagrid></TD>
 									</TR>
 								</TBODY>

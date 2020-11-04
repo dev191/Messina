@@ -14,7 +14,7 @@ namespace WebCad.RedirectPages
 	/// <summary>
 	/// Summary description for Redirect_Eq_DocumentiAllegati.
 	/// </summary>
-	public class Redirect_Eq_DocumentiAllegati : System.Web.UI.Page    // System.Web.UI.Page
+	public class Redirect_Eq_DocumentiAllegati : System.Web.UI.Page
 	{
 		private void Page_Load(object sender, System.EventArgs e)
 		{

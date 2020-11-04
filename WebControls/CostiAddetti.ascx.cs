@@ -25,8 +25,9 @@ namespace TheSite.WebControls
 		int wr_id =0;
 		protected System.Web.UI.WebControls.LinkButton lkbNuovo;
 		protected System.Web.UI.WebControls.Label lblRecord;
+		protected System.Web.UI.WebControls.Label lblTot1;
 		int addetto_id =0;
-		int totale=0;
+		
 
 
 		private void Page_Load(object sender, System.EventArgs e)

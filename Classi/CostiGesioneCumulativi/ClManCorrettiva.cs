@@ -1,774 +1,1106 @@
-ï»¿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.CostiGesioneCumulativi.ClManCorrettiva
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
-using System.Web;
-
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 namespace TheSite.Classi.CostiGesioneCumulativi
 {
-  public class ClManCorrettiva : AbstractBase
-  {
-    private OracleDataLayer _OraDl;
-    private string username = string.Empty;
 
-    public ClManCorrettiva() => this._OraDl = new OracleDataLayer(this.s_ConnStr);
+	/// <summary>
+	/// Descrizione di riepilogo per ClManCorrettiva.
+	/// </summary>
+	public class ClManCorrettiva:AbstractBase
+	{
+		ApplicationDataLayer.OracleDataLayer _OraDl;
+		string username=string.Empty;
+		public ClManCorrettiva()
+		{
+		 _OraDl = new OracleDataLayer(s_ConnStr);
+		}
+		public ClManCorrettiva(string UserName):this()
+		{
+			username=UserName;
+		}
+		public override DataSet GetData()
+		{
+		 return null;
+		}
+		public  DataSet GetDatiEdificio(int wr_id)
+		{
+			
+			DataSet _Ds;	
 
-    public ClManCorrettiva(string UserName)
-      : this()
-      => this.username = UserName;
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			s_IdIn.ParameterName = "p_Wr_Id";
+			s_IdIn.DbType = CustomDBType.Integer;
+			s_IdIn.Direction = ParameterDirection.Input;
+			s_IdIn.Index = CollezioneControlli.Count + 1;
+			s_IdIn.Value = wr_id;
 
-    public override DataSet GetData() => (DataSet) null;
+			CollezioneControlli.Add(s_IdIn);
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);			
 
-    public DataSet GetDatiEdificio(int wr_id)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Wr_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) wr_id);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject2);
-      string str = "PACK_MANCORRETIVA.SP_GETDATIBL";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			string s_StrSql = "PACK_MANCORRETIVA.SP_GETDATIBL";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public DataSet GetListaMateriali(int wrId)
-    {
-      int num1 = 0;
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_wrid");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject1).set_Value((object) wrId);
-      controlsCollection.Add(sObject1);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      S_Object sObject4 = sObject3;
-      int num4 = num3;
-      int num5 = num4 + 1;
-      ((ParameterObject) sObject4).set_Index(num4);
-      controlsCollection.Add(sObject3);
-      string str = "Pack_CostiOperativiGestione.getMaterialiWr";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			return _Ds;	
+		}
+		/// <summary>
+		/// ottiene il dataset con la lista dei materiali impiegati
+		/// </summary>
+		/// <param name="wrId"></param>
+		/// <returns>dataset</returns>
+		public DataSet GetListaMateriali(int wrId)
+		{
+			DataSet _Ds;	
+			int cntParametri = 0;
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			S_Object pWrId = new S_Object();
+			pWrId.ParameterName = "p_wrid";
+			pWrId.DbType = CustomDBType.Integer;
+			pWrId.Direction = ParameterDirection.Input;
+			pWrId.Index = cntParametri++;
+			pWrId.Value = wrId;
+			CollezioneControlli.Add(pWrId);
+			
+			S_Object pCursor = new S_Object();
+			pCursor.ParameterName = "IO_CURSOR";
+			pCursor.DbType = CustomDBType.Cursor;
+			pCursor.Direction = ParameterDirection.Output;
+			pCursor.Index = cntParametri++;
+			CollezioneControlli.Add(pCursor);			
 
-    public int ExecuteMateriali(S_ControlsCollection CollezioneControlli, ExecuteType Operazione)
-    {
-      int num1 = ((CollectionBase) CollezioneControlli).Count + 1;
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_operazione");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject1).set_Value((object) Operazione.ToString());
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      S_Object sObject4 = sObject3;
-      int num4 = num3;
-      int num5 = num4 + 1;
-      ((ParameterObject) sObject4).set_Index(num4);
-      CollezioneControlli.Add(sObject1);
-      CollezioneControlli.Add(sObject3);
-      return new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) CollezioneControlli, "Pack_CostiOperativiGestione.ExecuteMateriale");
-    }
+			string s_StrSql = "Pack_CostiOperativiGestione.getMaterialiWr";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+			return _Ds;
+		}
+		/// <summary>
+		/// Esegue l'aggiornamento e l'insert nella tabella wr_materiali
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <param name="Operazione"></param>
+		/// <returns></returns>
+		public int ExecuteMateriali(S_ControlsCollection CollezioneControlli, ExecuteType Operazione)
+		{
+			int i_MaxParametri = CollezioneControlli.Count + 1;			
+			
+			S_Controls.Collections.S_Object s_Operazione = new S_Object();
+			s_Operazione.ParameterName = "p_operazione";
+			s_Operazione.DbType = CustomDBType.VarChar;
+			s_Operazione.Direction = ParameterDirection.Input;
+			s_Operazione.Index = i_MaxParametri++;
+			s_Operazione.Value = Operazione.ToString();
 
-    public DataSet getBindComboMateriali()
-    {
-      int num1 = 0;
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Output);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      controlsCollection.Add(sObject1);
-      string str = "Pack_CostiOperativiGestione.BindMateriali";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = i_MaxParametri++;
 
-    public DataSet getMateriali(string desc)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_descmat");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject1).set_Size(24);
-      ((ParameterObject) sObject1).set_Value((object) desc);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count);
-      controlsCollection.Add(sObject2);
-      string str = "Pack_CostiOperativiGestione.GetMateriali";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+	
+			CollezioneControlli.Add(s_Operazione);
+			CollezioneControlli.Add(s_IdOut);
 
-    public DataSet getMaterialiId(int id)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_idmat");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject1).set_Size(24);
-      ((ParameterObject) sObject1).set_Value((object) id);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count);
-      controlsCollection.Add(sObject2);
-      string str = "Pack_CostiOperativiGestione.GetMaterialiId";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
 
-    public DataSet GetListaManodopera(int wrId)
-    {
-      int num1 = 0;
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_wrid");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject1).set_Value((object) wrId);
-      controlsCollection.Add(sObject1);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      S_Object sObject4 = sObject3;
-      int num4 = num3;
-      int num5 = num4 + 1;
-      ((ParameterObject) sObject4).set_Index(num4);
-      controlsCollection.Add(sObject3);
-      string str = "Pack_CostiOperativiGestione.getAddettiWr";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "Pack_CostiOperativiGestione.ExecuteMateriale");
+			return i_Result;
+		}
+	/// <summary>
+	///  ottien la lista dell'anagrafica materiali per riempire le combo
+	/// </summary>
+	/// <returns>dataset</returns>
+		public DataSet getBindComboMateriali()
+		{
+			DataSet _Ds;	
+			int cntParametri = 0;
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			S_Object pCursor = new S_Object();
+			pCursor.ParameterName = "IO_CURSOR";
+			pCursor.DbType = CustomDBType.Cursor;
+			pCursor.Direction = ParameterDirection.Output;
+			pCursor.Index = cntParametri++;
+			CollezioneControlli.Add(pCursor);			
 
-    public DataSet TotManodopera(int wrId)
-    {
-      int num1 = 0;
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_wrid");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject1).set_Value((object) wrId);
-      controlsCollection.Add(sObject1);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      S_Object sObject4 = sObject3;
-      int num4 = num3;
-      int num5 = num4 + 1;
-      ((ParameterObject) sObject4).set_Index(num4);
-      controlsCollection.Add(sObject3);
-      string str = "Pack_CostiOperativiGestione.TotCostiOperativi";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			string s_StrSql = "Pack_CostiOperativiGestione.BindMateriali";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+			return _Ds;
+		}
+		public DataSet getMateriali(string desc)
+		{
+			DataSet _Ds;	
+			
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+		
+			S_Object pDesc = new S_Object();
+			pDesc.ParameterName = "p_descmat";
+			pDesc.DbType = CustomDBType.VarChar;
+			pDesc.Direction = ParameterDirection.Input;
+			pDesc.Index = CollezioneControlli.Count;
+			pDesc.Size=24;
+			pDesc.Value=desc;
+			CollezioneControlli.Add(pDesc);
 
-    public int ExecuteManodopera(S_ControlsCollection CollezioneControlli, ExecuteType Operazione)
-    {
-      int num1 = ((CollectionBase) CollezioneControlli).Count + 1;
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_operazione");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject1).set_Value((object) Operazione.ToString());
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      S_Object sObject4 = sObject3;
-      int num4 = num3;
-      int num5 = num4 + 1;
-      ((ParameterObject) sObject4).set_Index(num4);
-      CollezioneControlli.Add(sObject1);
-      CollezioneControlli.Add(sObject3);
-      return new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) CollezioneControlli, "Pack_CostiOperativiGestione.ExecuteAddetti");
-    }
+			S_Object pCursor = new S_Object();
+			pCursor.ParameterName = "IO_CURSOR";
+			pCursor.DbType = CustomDBType.Cursor;
+			pCursor.Direction = ParameterDirection.Output;
+			pCursor.Index = CollezioneControlli.Count;
+			CollezioneControlli.Add(pCursor);			
 
-    public DataSet getBindComboManodopera()
-    {
-      int num1 = 0;
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Output);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      controlsCollection.Add(sObject1);
-      string str = "Pack_CostiOperativiGestione.BindAddetti";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			string s_StrSql = "Pack_CostiOperativiGestione.GetMateriali";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+			return _Ds;
+		}
+		public DataSet getMaterialiId(int id)
+		{
+			DataSet _Ds;	
+			
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+		
+			S_Object pidmat = new S_Object();
+			pidmat.ParameterName = "p_idmat";
+			pidmat.DbType = CustomDBType.Integer;
+			pidmat.Direction = ParameterDirection.Input;
+			pidmat.Index = CollezioneControlli.Count;
+			pidmat.Size=24;
+			pidmat.Value=id;
+			CollezioneControlli.Add(pidmat);
 
-    public DataSet GetContabilizzazione()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject);
-      string str = "PACK_MAN_STRA.SP_GETCONTABILIZZAZIONE";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			S_Object pCursor = new S_Object();
+			pCursor.ParameterName = "IO_CURSOR";
+			pCursor.DbType = CustomDBType.Cursor;
+			pCursor.Direction = ParameterDirection.Output;
+			pCursor.Index = CollezioneControlli.Count;
+			CollezioneControlli.Add(pCursor);			
 
-    public DataSet GetStatusRdl(int wr_id)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Wr_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) wr_id);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject2);
-      string str = "PACK_MAN_STRA.SP_GETSTATUSRDL";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			string s_StrSql = "Pack_CostiOperativiGestione.GetMaterialiId";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+			return _Ds;
+		}
+		public DataSet GetListaManodopera(int wrId)
+		{
+			DataSet _Ds;	
+			int cntParametri = 0;
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			S_Object pWrId = new S_Object();
+			pWrId.ParameterName = "p_wrid";
+			pWrId.DbType = CustomDBType.Integer;
+			pWrId.Direction = ParameterDirection.Input;
+			pWrId.Index = cntParametri++;
+			pWrId.Value = wrId;
+			CollezioneControlli.Add(pWrId);
+			
+			S_Object pCursor = new S_Object();
+			pCursor.ParameterName = "IO_CURSOR";
+			pCursor.DbType = CustomDBType.Cursor;
+			pCursor.Direction = ParameterDirection.Output;
+			pCursor.Index = cntParametri++;
+			CollezioneControlli.Add(pCursor);			
 
-    public DataSet GetStatoLavoro()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject);
-      string str = "PACK_MAN_ORD.SP_GETSTATOLAVORO";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			string s_StrSql = "Pack_CostiOperativiGestione.getAddettiWr";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();		
+	 
 
-    public DataSet GetAddetti(string NomeCompleto, string BL_ID, int ditta_id)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_NomeCompleto");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Size(50);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) NomeCompleto);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_bl_id");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Size(50);
-      ((ParameterObject) sObject2).set_Index(1);
-      ((ParameterObject) sObject2).set_Value((object) BL_ID);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_ditta_id");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Size(50);
-      ((ParameterObject) sObject3).set_Index(2);
-      ((ParameterObject) sObject3).set_Value((object) ditta_id);
-      controlsCollection.Add(sObject3);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("p_UserName");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject4).set_Size(50);
-      ((ParameterObject) sObject4).set_Index(3);
-      ((ParameterObject) sObject4).set_Value((object) HttpContext.Current.User.Identity.Name);
-      controlsCollection.Add(sObject4);
-      S_Object sObject5 = new S_Object();
-      ((ParameterObject) sObject5).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject5).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject5).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject5).set_Index(4);
-      controlsCollection.Add(sObject5);
-      string str = "PACK_ADDETTI.SP_GETADDETTORUOLO";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
 
-    public DataSet GetApparecchiatura(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_UserName");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      ((ParameterObject) sObject1).set_Size(50);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      string str = "PACK_APPARECCHIATURE.SP_RICERCAAPPARECCHIATURA";
-      return this._OraDl.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			return _Ds;
+		}
+		public DataSet TotManodopera(int wrId)
+		{
+			DataSet _Ds;	
+			int cntParametri = 0;
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			S_Object pWrId = new S_Object();
+			pWrId.ParameterName = "p_wrid";
+			pWrId.DbType = CustomDBType.Integer;
+			pWrId.Direction = ParameterDirection.Input;
+			pWrId.Index = cntParametri++;
+			pWrId.Value = wrId;
+			CollezioneControlli.Add(pWrId);
+			
+			S_Object pCursor = new S_Object();
+			pCursor.ParameterName = "IO_CURSOR";
+			pCursor.DbType = CustomDBType.Cursor;
+			pCursor.Direction = ParameterDirection.Output;
+			pCursor.Index = cntParametri++;
+			CollezioneControlli.Add(pCursor);			
 
-    public DataSet GetSingleRdL(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(1);
-      CollezioneControlli.Add(sObject);
-      string str = "PACK_GEST_RDL.SP_GETSINGLERDL";
-      return this._OraDl.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			string s_StrSql = "Pack_CostiOperativiGestione.TotCostiOperativi";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();		
+	 
 
-    public DataSet GetStandardApparechiature(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_UserName");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      ((ParameterObject) sObject1).set_Size(50);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      string str = "PACK_APPARECCHIATURE.SP_GETSTDSERVIZIO";
-      return this._OraDl.GetRows((object) CollezioneControlli, str).Copy();
-    }
 
-    public DataSet GetDittaMasterBl(int bl_id)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Bl_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) bl_id);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      string str = "PACK_DITTE.SP_GETDITTABL";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			return _Ds;
+		}
+		/// <summary>
+		/// Esegue l'aggiornamento e l'insert nella tabella wr_materiali
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <param name="Operazione"></param>
+		/// <returns></returns>
+		public int ExecuteManodopera(S_ControlsCollection CollezioneControlli, ExecuteType Operazione)
+		{
+			int i_MaxParametri = CollezioneControlli.Count + 1;			
+			
+			S_Controls.Collections.S_Object s_Operazione = new S_Object();
+			s_Operazione.ParameterName = "p_operazione";
+			s_Operazione.DbType = CustomDBType.VarChar;
+			s_Operazione.Direction = ParameterDirection.Input;
+			s_Operazione.Index = i_MaxParametri++;
+			s_Operazione.Value = Operazione.ToString();
 
-    public DataSet GetDitteFornitoriRuoli(int idditta)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Ditta_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) idditta);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_CurrentUser");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(1);
-      ((ParameterObject) sObject2).set_Value((object) HttpContext.Current.User.Identity.Name);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject3).set_Index(2);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      controlsCollection.Add(sObject3);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_DITTE.SP_GETGESTORI_FORNITORI_RUOLO";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = i_MaxParametri++;
 
-    public DataSet GetSingleRdl(int itemId)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Wr_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      string str = "PACK_MANCORRETIVA.SP_GETSINGLERDL";
-      DataSet dataSet = this._OraDl.GetRows((object) controlsCollection, str).Copy();
-      this.Id = itemId;
-      return dataSet;
-    }
+	
+			CollezioneControlli.Add(s_Operazione);
+			CollezioneControlli.Add(s_IdOut);
 
-    public DataSet GetPriority()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(0);
-      controlsCollection.Add(sObject);
-      string str = "PACK_PRIORITY.SP_GETALLPRIORITY";
-      return this._OraDl.GetRows((object) controlsCollection, str);
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
 
-    public DataSet GetAllTipoTrasmissione()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(1);
-      controlsCollection.Add(sObject);
-      string str = "PACK_COMMON.SP_GETALLTIPOTRASMISSIONE";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "Pack_CostiOperativiGestione.ExecuteAddetti");
+			return i_Result;
+		}
+		/// <summary>
+		///  ottien la lista dell'anagrafica materiali per riempire le combo
+		/// </summary>
+		/// <returns>dataset</returns>
+		public DataSet getBindComboManodopera()
+		{
+			DataSet _Ds;	
+			int cntParametri = 0;
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			S_Object pCursor = new S_Object();
+			pCursor.ParameterName = "IO_CURSOR";
+			pCursor.DbType = CustomDBType.Cursor;
+			pCursor.Direction = ParameterDirection.Output;
+			pCursor.Index = cntParametri++;
+			CollezioneControlli.Add(pCursor);			
 
-    public DataSet GetTipointervento()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_MS.SP_GETALLTIPOINTERVENTO";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+			string s_StrSql = "Pack_CostiOperativiGestione.BindAddetti";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+			return _Ds;
+		}
+		/// <summary>
+		/// Ottine la lista delle contabilizzazioni
+		/// </summary>
+		/// <returns></returns>
+		public  DataSet GetContabilizzazione()
+		{
+			
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
 
-    public DataSet GetTipoManutenzione()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(1);
-      controlsCollection.Add(sObject);
-      string str = "PACK_MANCORRETIVA.SP_GETALLMANUTENZIONE";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
 
-    public DataSet GetServiceBulding(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_UserName");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      ((ParameterObject) sObject1).set_Size(50);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 2);
-      CollezioneControlli.Add(sObject1);
-      CollezioneControlli.Add(sObject2);
-      string str = "PACK_SERVIZI.SP_GETSERVIZI";
-      return this._OraDl.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			CollezioneControlli.Add(s_Cursor);
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_utente");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      string str = "PACK_MANCORRETIVA.SP_RICERCARDL";
-      return this._OraDl.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			string s_StrSql = "PACK_MAN_STRA.SP_GETCONTABILIZZAZIONE";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public DataSet GetDataCompletamento(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_username");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      ((ParameterObject) sObject1).set_Size(50);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_MANCORRETIVA.SP_GETCOMPLETAMENTO";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			return _Ds;	
+		}
+		/// <summary>
+		/// Descrive lo stato della richiesta
+		/// </summary>
+		/// <param name="wr_id"></param>
+		/// <returns></returns>
+		public  DataSet GetStatusRdl(int wr_id)
+		{	
+			DataSet _Ds;	
 
-    public int EmettiRdl(S_ControlsCollection CollezioneControlli, TheSite.Classi.StateType status_id)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_CurrentUser");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject2);
-      int num = 0;
-      switch (status_id)
-      {
-        case TheSite.Classi.StateType.EmessaInLavorazione:
-          num = this._OraDl.GetRowsAffected((object) CollezioneControlli, "PACK_MANCORRETIVA.SP_EMETTI");
-          break;
-        case TheSite.Classi.StateType.RichiestaRifiutata:
-          num = this._OraDl.GetRowsAffected((object) CollezioneControlli, "PACK_MANCORRETIVA.SP_RIFIUTA");
-          break;
-        case TheSite.Classi.StateType.RichiestaSospesa:
-          num = this._OraDl.GetRowsAffected((object) CollezioneControlli, "PACK_MANCORRETIVA.SP_SOSPENDI");
-          break;
-      }
-      return num;
-    }
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			s_IdIn.ParameterName = "p_Wr_Id";
+			s_IdIn.DbType = CustomDBType.Integer;
+			s_IdIn.Direction = ParameterDirection.Input;
+			s_IdIn.Index = CollezioneControlli.Count + 1;
+			s_IdIn.Value = wr_id;
 
-    public override DataSet GetSingleData(int ItemID) => (DataSet) null;
+			CollezioneControlli.Add(s_IdIn);
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);			
 
-    public DataSet GetAnalisiRDL(S_ControlsCollection CollezioneControlli, string utente)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_CurrentUser");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) utente);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_MANCORRETIVA.SP_GETANALISIRDL";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			string s_StrSql = "PACK_MAN_STRA.SP_GETSTATUSRDL";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public DataSet GetRDLNonEmesse(string bl_id)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Bl_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) bl_id);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(0);
-      controlsCollection.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_MANCORRETIVA.SP_GetRDLNonEmesse";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+			return _Ds;	
 
-    public DataSet GetRDLApprovate(string bl_id)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Bl_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) bl_id);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(0);
-      controlsCollection.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_MANCORRETIVA.SP_GetRDLApprovate";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+		}
+		/// <summary>
+		/// Restituisce l'elenco degli stati della richiesta
+		/// </summary>
+		/// <returns></returns>
+		public  DataSet GetStatoLavoro()
+		{
+			
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      int num1 = ((CollectionBase) CollezioneControlli).Count + 1;
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(num1);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      int num2 = num1 + 1;
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_CurrentUser");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject2).set_Value((object) HttpContext.Current.User.Identity.Name);
-      int num3 = num2 + 1;
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_Operazione");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(num3);
-      ((ParameterObject) sObject3).set_Value((object) Operazione.ToString());
-      int num4 = num3 + 1;
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject4).set_Index(num4);
-      CollezioneControlli.Add(sObject1);
-      CollezioneControlli.Add(sObject2);
-      CollezioneControlli.Add(sObject3);
-      CollezioneControlli.Add(sObject4);
-      return this._OraDl.GetRowsAffected((object) CollezioneControlli, "FUNZIONI.SP_EXECUTEFUNZIONI");
-    }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
 
-    public int AddDCSTI_DL(S_ControlsCollection CollezioneControlli, bool DCSTIT) => this.ExecuteUpdateDCSIT_DL(CollezioneControlli, ExecuteType.Insert, 0, DCSTIT);
+			CollezioneControlli.Add(s_Cursor);
 
-    public int UpdateDCSTI_DL(S_ControlsCollection CollezioneControlli, int itemId, bool DCSTIT) => this.ExecuteUpdateDCSIT_DL(CollezioneControlli, ExecuteType.Update, itemId, DCSTIT);
+			string s_StrSql = "PACK_MAN_ORD.SP_GETSTATOLAVORO";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public int DeleteDCSTI_DL(S_ControlsCollection CollezioneControlli, int itemId, bool DCSTIT) => this.ExecuteUpdateDCSIT_DL(CollezioneControlli, ExecuteType.Delete, itemId, DCSTIT);
+			return _Ds;	
+		}
+		/// <summary>
+		/// Restituisce l'elenco o il singolo addetto in base una ditta ed ad un edificio
+		/// </summary>
+		/// <param name="NomeCompleto"></param>
+		/// <param name="BL_ID"></param>
+		/// <returns></returns>
+		public DataSet GetAddetti(string NomeCompleto, string BL_ID,int ditta_id)
+		{
+			S_ControlsCollection _SCollection = new S_ControlsCollection();			
+		
+			S_Controls.Collections.S_Object s_p_NomeCompleto = new S_Controls.Collections.S_Object();
+			s_p_NomeCompleto.ParameterName = "p_NomeCompleto";
+			s_p_NomeCompleto.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_NomeCompleto.Direction = ParameterDirection.Input;
+			s_p_NomeCompleto.Size =50;	
+			s_p_NomeCompleto.Index = 0;
+			s_p_NomeCompleto.Value = NomeCompleto;	
+			_SCollection.Add(s_p_NomeCompleto);			
 
-    protected int ExecuteUpdateDCSIT_DL(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId,
-      bool DCSTIT)
-    {
-      int num1 = ((CollectionBase) CollezioneControlli).Count + 1;
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(num1);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      int num2 = num1 + 1;
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_CurrentUser");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject2).set_Value((object) HttpContext.Current.User.Identity.Name);
-      int num3 = num2 + 1;
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_Operazione");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(num3);
-      ((ParameterObject) sObject3).set_Value((object) Operazione.ToString());
-      int num4 = num3 + 1;
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject4).set_Index(num4);
-      CollezioneControlli.Add(sObject1);
-      CollezioneControlli.Add(sObject2);
-      CollezioneControlli.Add(sObject3);
-      CollezioneControlli.Add(sObject4);
-      return this._OraDl.GetRowsAffected((object) CollezioneControlli, "PACK_MANCORRETIVA.SP_VALIDA");
-    }
+			S_Controls.Collections.S_Object s_p_BL_ID = new S_Controls.Collections.S_Object();
+			s_p_BL_ID.ParameterName = "p_bl_id";
+			s_p_BL_ID.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_BL_ID.Direction = ParameterDirection.Input;
+			s_p_BL_ID.Size =50;
+			s_p_BL_ID.Index = 1;
+			s_p_BL_ID.Value = BL_ID;
+			_SCollection.Add(s_p_BL_ID);			
 
-    public int ExecuteUpdateCompletamento(S_ControlsCollection CollezioneControlli, int itemId)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      return this._OraDl.GetRowsAffected((object) CollezioneControlli, "PACK_MANCORRETIVA.SP_UPDATECOMPLETAMENTO");
-    }
-  }
+			S_Controls.Collections.S_Object s_p_DITTA_ID = new S_Controls.Collections.S_Object();
+			s_p_DITTA_ID.ParameterName = "p_ditta_id";
+			s_p_DITTA_ID.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_DITTA_ID.Direction = ParameterDirection.Input;
+			s_p_DITTA_ID.Size =50;
+			s_p_DITTA_ID.Index = 2;
+			s_p_DITTA_ID.Value = ditta_id;
+			_SCollection.Add(s_p_DITTA_ID);			
+
+			S_Controls.Collections.S_Object s_p_UserName = new S_Controls.Collections.S_Object();
+			s_p_UserName.ParameterName = "p_UserName";
+			s_p_UserName.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_UserName.Direction = ParameterDirection.Input;
+			s_p_UserName.Size =50;
+			s_p_UserName.Index = 3;
+			s_p_UserName.Value = System.Web.HttpContext.Current.User.Identity.Name;
+			_SCollection.Add(s_p_UserName);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 4;
+
+			_SCollection.Add(s_Cursor);
+			
+			DataSet _Ds;											
+
+			string s_StrSql = "PACK_ADDETTI.SP_GETADDETTORUOLO";	
+			_Ds = _OraDl.GetRows(_SCollection, s_StrSql).Copy();			
+
+			return _Ds;		
+		}
+		
+		/// <summary>
+		/// Restituisce una determinata apparecchiatura o più
+		/// </summary>
+		/// <param name="CollezioneControlli">I parametri che devono essere passati sono:
+		/// p_Bl_Id di tipo varchar2,
+		///p_campus di tipo  varchar2,
+		///p_Servizio di tipo number,
+		///p_eqstd di tipo varchar2,
+		///p_eqid di tipo Varchar2
+		/// </param>
+		/// <returns></returns>
+		public DataSet GetApparecchiatura(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;		
+			
+			S_Controls.Collections.S_Object s_UserName = new S_Object();
+			s_UserName.ParameterName = "p_UserName";
+			s_UserName.DbType = CustomDBType.VarChar;
+			s_UserName.Direction = ParameterDirection.Input;
+			s_UserName.Index = CollezioneControlli.Count + 1;
+			s_UserName.Value = this.username;			
+			s_UserName.Size = 50;
+			CollezioneControlli.Add(s_UserName);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
+
+			string s_StrSql = "PACK_APPARECCHIATURE.SP_RICERCAAPPARECCHIATURA";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+
+
+		public DataSet GetSingleRdL(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;		
+			
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+			CollezioneControlli.Add(s_Cursor);
+
+			string s_StrSql = "PACK_GEST_RDL.SP_GETSINGLERDL";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+
+		/// <summary>
+		/// Ritorna l'elenco delle standard apparechiature associate ad un servizio e legate ad un edificio
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public  DataSet GetStandardApparechiature(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;		
+			
+			S_Controls.Collections.S_Object s_UserName = new S_Object();
+			s_UserName.ParameterName = "p_UserName";
+			s_UserName.DbType = CustomDBType.VarChar;
+			s_UserName.Direction = ParameterDirection.Input;
+			s_UserName.Index = CollezioneControlli.Count + 1;
+			s_UserName.Value = this.username;			
+			s_UserName.Size = 50;
+			CollezioneControlli.Add(s_UserName);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			string s_StrSql = "PACK_APPARECCHIATURE.SP_GETSTDSERVIZIO";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+													
+			return _Ds;		
+		}
+        /// <summary>
+        /// Ritorna la Ditta Master per un determinato edificio
+        /// </summary>
+        /// <param name="idbl"></param>
+        /// <returns></returns>
+		public DataSet GetDittaMasterBl(int bl_id)
+		{
+			DataSet _Ds;
+			
+			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
+			
+			S_Controls.Collections.S_Object s_id = new S_Object();
+			s_id.ParameterName = "p_Bl_Id";
+			s_id.DbType = CustomDBType.Integer;
+			s_id.Direction = ParameterDirection.Input;
+			s_id.Index = 0;
+			s_id.Value = bl_id;						
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+
+			CollezioneControlli.Add(s_id);
+			CollezioneControlli.Add(s_Cursor);
+
+			string s_StrSql = "PACK_DITTE.SP_GETDITTABL";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}
+		/// <summary>
+		/// Ritorna l'elenco delle ditte legate alla ditta master
+		/// </summary>
+		/// <param name="idditta"></param>
+		/// <returns></returns>
+		public DataSet GetDitteFornitoriRuoli(int idditta)
+		{
+			DataSet _Ds;
+			
+			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
+			
+			S_Controls.Collections.S_Object s_id = new S_Object();
+			s_id.ParameterName = "p_Ditta_id";
+			s_id.DbType = CustomDBType.Integer;
+			s_id.Direction = ParameterDirection.Input;
+			s_id.Index = 0;
+			s_id.Value = idditta;
+				
+			S_Controls.Collections.S_Object s_CurrentUser = new S_Object();
+			s_CurrentUser.ParameterName = "p_CurrentUser";
+			s_CurrentUser.DbType = CustomDBType.VarChar;
+			s_CurrentUser.Direction = ParameterDirection.Input;
+			s_CurrentUser.Index = 1;
+			s_CurrentUser.Value = System.Web.HttpContext.Current.User.Identity.Name;
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 2;
+
+			CollezioneControlli.Add(s_id);
+			CollezioneControlli.Add(s_CurrentUser);
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_DITTE.SP_GETGESTORI_FORNITORI_RUOLO";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}
+		/// <summary>
+		/// Ritornano i Dati di una singola Richiesta
+		/// </summary>
+		/// <param name="itemId"></param>
+		/// <returns></returns>
+		public DataSet GetSingleRdl(int itemId)
+		{
+			DataSet _Ds;
+
+			S_ControlsCollection _SColl = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_Id = new S_Object();
+			s_Id.ParameterName = "p_Wr_Id";
+			s_Id.DbType = CustomDBType.Integer;
+			s_Id.Direction = ParameterDirection.Input;
+			s_Id.Index = 0;
+			s_Id.Value = itemId;
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+
+			_SColl.Add(s_Id);
+			_SColl.Add(s_Cursor);
+
+			
+			string s_StrSql = "PACK_MANCORRETIVA.SP_GETSINGLERDL";	
+			_Ds = _OraDl.GetRows(_SColl, s_StrSql).Copy();			
+
+			this.Id = itemId;
+			return _Ds;				
+		}
+		/// <summary>
+		/// Ritorna la Lista delle Urgenze
+		/// </summary>
+		/// <returns></returns>
+		public DataSet GetPriority()
+		{
+			DataSet _Ds;
+			
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 0;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			string s_StrSql = "PACK_PRIORITY.SP_GETALLPRIORITY";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql);			
+
+			return _Ds;
+		}
+		/// <summary>
+		/// Ritorna l'elenco del Tipo di trasmissione
+		/// </summary>
+		/// <returns></returns>
+		public DataSet GetAllTipoTrasmissione()
+		{
+			DataSet _Ds;
+			
+			S_Controls.Collections.S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			string s_StrSql = "PACK_COMMON.SP_GETALLTIPOTRASMISSIONE";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();
+			return _Ds;		
+		}
+
+		public  DataSet GetTipointervento()
+		{			
+			DataSet _Ds;
+			
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MS.SP_GETALLTIPOINTERVENTO";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;				
+		}
+
+        /// <summary>
+        /// Ritorna la Lista del Tipo di Manutenzione
+        /// </summary>
+        /// <returns></returns>
+		public  DataSet GetTipoManutenzione()
+		{			
+			DataSet _Ds;		
+			
+			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+			
+			CollezioneControlli.Add(s_Cursor);
+
+			string s_StrSql = "PACK_MANCORRETIVA.SP_GETALLMANUTENZIONE";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}
+		/// <summary>
+		/// Ritorna la Lista dei servizi dedicati a un edificio
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public  DataSet GetServiceBulding(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;		
+			
+			S_Controls.Collections.S_Object s_UserName = new S_Object();
+			s_UserName.ParameterName = "p_UserName";
+			s_UserName.DbType = CustomDBType.VarChar;
+			s_UserName.Direction = ParameterDirection.Input;
+			s_UserName.Index = CollezioneControlli.Count + 1;
+			s_UserName.Value = this.username ;			
+			s_UserName.Size = 50;
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 2;
+
+			CollezioneControlli.Add(s_UserName);
+			CollezioneControlli.Add(s_Cursor);
+
+			string s_StrSql = "PACK_SERVIZI.SP_GETSERVIZI";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}
+		/// <summary>
+		/// Ricerca le Richieste della Manutenzione Correttiva
+		/// Usata nella Pagian ApprovaRDL Manutenzione Correttiva
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public override DataSet GetData(S_Controls.Collections.S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;	
+
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			s_IdIn.ParameterName = "p_utente";
+			s_IdIn.DbType = CustomDBType.VarChar;
+			s_IdIn.Direction = ParameterDirection.Input;
+			s_IdIn.Index = CollezioneControlli.Count + 1;
+			s_IdIn.Value = this.username;
+
+			CollezioneControlli.Add(s_IdIn);
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			string s_StrSql = "PACK_MANCORRETIVA.SP_RICERCARDL";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+		/// <summary>
+		/// Ricerca le Richieste della Manutenzione Correttiva
+		/// Usata nella Pagina Completamento Manutenzione Correttiva
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public  DataSet GetDataCompletamento(S_Controls.Collections.S_ControlsCollection CollezioneControlli)
+		{
+			
+			S_Controls.Collections.S_Object s_p_username = new S_Object();
+			s_p_username.ParameterName = "p_username";
+			s_p_username.DbType = CustomDBType.VarChar;
+			s_p_username.Direction = ParameterDirection.Input;
+			s_p_username.Index = CollezioneControlli.Count + 1;
+			s_p_username.Value =this.username;
+			s_p_username.Size=50; 
+			CollezioneControlli.Add(s_p_username);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MANCORRETIVA.SP_GETCOMPLETAMENTO";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+
+		public int EmettiRdl(S_Controls.Collections.S_ControlsCollection CollezioneControlli,TheSite.Classi.StateType status_id)
+		{	
+			
+			// UTENTE
+
+			S_Controls.Collections.S_Object s_CurrentUser = new S_Object();
+			s_CurrentUser.ParameterName = "p_CurrentUser";
+			s_CurrentUser.DbType = CustomDBType.VarChar;
+			s_CurrentUser.Direction = ParameterDirection.Input;
+			s_CurrentUser.Index = CollezioneControlli.Count;
+			s_CurrentUser.Value = this.username;
+            CollezioneControlli.Add(s_CurrentUser);	
+			// OUT
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = CollezioneControlli.Count;		
+			CollezioneControlli.Add(s_IdOut);			
+
+			
+			int i_Result=0;
+			
+			switch(status_id)
+			{
+				case TheSite.Classi.StateType.EmessaInLavorazione:										
+					i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_MANCORRETIVA.SP_EMETTI");
+					break;
+				case TheSite.Classi.StateType.RichiestaRifiutata:	
+					i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_MANCORRETIVA.SP_RIFIUTA");
+					break;
+				case TheSite.Classi.StateType.RichiestaSospesa:
+					i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_MANCORRETIVA.SP_SOSPENDI");
+					break;	
+			}
+				
+			return i_Result;
+		}
+		public override DataSet GetSingleData(int ItemID)
+		{
+			return null;
+		}
+
+		public  DataSet GetAnalisiRDL(S_ControlsCollection CollezioneControlli,string utente)
+		{
+			DataSet _Ds;	
+
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			s_IdIn.ParameterName = "p_CurrentUser";
+			s_IdIn.DbType = CustomDBType.VarChar;
+			s_IdIn.Direction = ParameterDirection.Input;
+			s_IdIn.Index = CollezioneControlli.Count + 1;
+			s_IdIn.Value = utente;
+
+			CollezioneControlli.Add(s_IdIn);
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
+			
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MANCORRETIVA.SP_GETANALISIRDL";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+
+		}
+		public  DataSet GetRDLNonEmesse(string bl_id)
+		{
+			DataSet _Ds;	
+
+			S_Controls.Collections.S_ControlsCollection _SColl = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_bl_id = new S_Object();
+			s_bl_id.ParameterName = "p_Bl_id";
+			s_bl_id.DbType = CustomDBType.VarChar;
+			s_bl_id.Direction = ParameterDirection.Input;
+			s_bl_id.Index = 0;
+			s_bl_id.Value = bl_id;
+
+			_SColl.Add(s_bl_id);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 0;
+			_SColl.Add(s_Cursor);
+			
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MANCORRETIVA.SP_GetRDLNonEmesse";
+			_Ds = _OraDl.GetRows(_SColl, s_StrSql).Copy();			
+
+			return _Ds;	
+
+		}
+		public  DataSet GetRDLApprovate(string bl_id)
+		{
+			DataSet _Ds;	
+
+			S_Controls.Collections.S_ControlsCollection _SColl = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_bl_id = new S_Object();
+			s_bl_id.ParameterName = "p_Bl_id";
+			s_bl_id.DbType = CustomDBType.VarChar;
+			s_bl_id.Direction = ParameterDirection.Input;
+			s_bl_id.Index = 0;
+			s_bl_id.Value = bl_id;
+
+			_SColl.Add(s_bl_id);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 0;
+			_SColl.Add(s_Cursor);
+			
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MANCORRETIVA.SP_GetRDLApprovate";
+			_Ds = _OraDl.GetRows(_SColl, s_StrSql).Copy();			
+
+			return _Ds;	
+
+		}
+
+
+		#region Proprietà Private
+
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			int i_MaxParametri = CollezioneControlli.Count + 1;			
+
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			s_IdIn.ParameterName = "p_Id";
+			s_IdIn.DbType = CustomDBType.Integer;
+			s_IdIn.Direction = ParameterDirection.Input;
+			s_IdIn.Index = i_MaxParametri;
+			s_IdIn.Value = itemId;		
+			
+			i_MaxParametri ++;
+			
+			S_Controls.Collections.S_Object s_CurrentUser = new S_Object();
+			s_CurrentUser.ParameterName = "p_CurrentUser";
+			s_CurrentUser.DbType = CustomDBType.VarChar;
+			s_CurrentUser.Direction = ParameterDirection.Input;
+			s_CurrentUser.Index = i_MaxParametri;
+			s_CurrentUser.Value = System.Web.HttpContext.Current.User.Identity.Name;
+
+			i_MaxParametri ++;
+			
+			S_Controls.Collections.S_Object s_Operazione = new S_Object();
+			s_Operazione.ParameterName = "p_Operazione";
+			s_Operazione.DbType = CustomDBType.VarChar;
+			s_Operazione.Direction = ParameterDirection.Input;
+			s_Operazione.Index = i_MaxParametri;
+			s_Operazione.Value = Operazione.ToString();
+
+			i_MaxParametri ++;
+
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = i_MaxParametri;
+
+			CollezioneControlli.Add(s_IdIn);	
+			CollezioneControlli.Add(s_CurrentUser);	
+			CollezioneControlli.Add(s_Operazione);
+			CollezioneControlli.Add(s_IdOut);
+
+			int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "FUNZIONI.SP_EXECUTEFUNZIONI");
+
+			return i_Result;
+		}
+		/// <summary>
+		/// Aggiunge un Record a DCSIT se l'ultimo parametro e True, Altrimenti aggiunge un record a DL
+		/// se l'ultimo parametro e False.
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <param name="DCSTIT"></param>
+		/// <returns></returns>
+		public int AddDCSTI_DL(S_ControlsCollection CollezioneControlli,bool DCSTIT)
+		{
+		  return ExecuteUpdateDCSIT_DL(CollezioneControlli,ExecuteType.Insert,0,DCSTIT);
+		}
+		/// <summary>
+		/// Aggiorna il Record a DCSIT se l'ultimo parametro e True, Altrimenti aggiorna il record a DL
+		/// se l'ultimo parametro e False.
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <param name="DCSTIT"></param>
+		/// <returns></returns>
+		public int UpdateDCSTI_DL(S_ControlsCollection CollezioneControlli, int itemId, bool DCSTIT)
+		{
+			return ExecuteUpdateDCSIT_DL(CollezioneControlli,ExecuteType.Update,itemId,DCSTIT);
+		}
+		/// <summary>
+		/// Elimina il Record a DCSIT se l'ultimo parametro e True, Altrimenti elimina il record a DL
+		/// se l'ultimo parametro e False.
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <param name="DCSTIT"></param>
+		/// <returns></returns>
+		public int DeleteDCSTI_DL(S_ControlsCollection CollezioneControlli, int itemId, bool DCSTIT)
+		{
+			return ExecuteUpdateDCSIT_DL(CollezioneControlli,ExecuteType.Delete,itemId,DCSTIT);
+		}
+		protected  int ExecuteUpdateDCSIT_DL(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId,bool DCSTIT)
+		{
+			int i_Result=0;
+			int i_MaxParametri = CollezioneControlli.Count + 1;			
+
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			s_IdIn.ParameterName = "p_Id";
+			s_IdIn.DbType = CustomDBType.Integer;
+			s_IdIn.Direction = ParameterDirection.Input;
+			s_IdIn.Index = i_MaxParametri;
+			s_IdIn.Value = itemId;		
+			
+			i_MaxParametri ++;
+			
+			S_Controls.Collections.S_Object s_CurrentUser = new S_Object();
+			s_CurrentUser.ParameterName = "p_CurrentUser";
+			s_CurrentUser.DbType = CustomDBType.VarChar;
+			s_CurrentUser.Direction = ParameterDirection.Input;
+			s_CurrentUser.Index = i_MaxParametri;
+			s_CurrentUser.Value = System.Web.HttpContext.Current.User.Identity.Name;
+
+			i_MaxParametri ++;
+			
+			S_Controls.Collections.S_Object s_Operazione = new S_Object();
+			s_Operazione.ParameterName = "p_Operazione";
+			s_Operazione.DbType = CustomDBType.VarChar;
+			s_Operazione.Direction = ParameterDirection.Input;
+			s_Operazione.Index = i_MaxParametri;
+			s_Operazione.Value = Operazione.ToString();
+
+			i_MaxParametri ++;
+
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = i_MaxParametri;
+
+			CollezioneControlli.Add(s_IdIn);	
+			CollezioneControlli.Add(s_CurrentUser);	
+			CollezioneControlli.Add(s_Operazione);
+			CollezioneControlli.Add(s_IdOut);
+    
+			 i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_MANCORRETIVA.SP_VALIDA");
+
+			return i_Result;
+			
+		}
+	
+		public int ExecuteUpdateCompletamento(S_ControlsCollection CollezioneControlli, int itemId)
+		{
+			
+
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_IdOut);
+			//_____________________________________________________________________________________
+			
+			int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_MANCORRETIVA.SP_UPDATECOMPLETAMENTO");
+				
+			return i_Result;
+			//_____________________________________________________________________________________
+			
+		}
+		#endregion
+	}
 }

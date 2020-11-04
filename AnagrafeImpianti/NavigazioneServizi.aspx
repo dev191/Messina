@@ -1,9 +1,9 @@
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="iewc" Namespace="Microsoft.Web.UI.WebControls" Assembly="Microsoft.Web.UI.WebControls" %>
 <%@ Page language="c#" Codebehind="NavigazioneServizi.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnagrafeImpianti.NavigazioneServizi" %>
+<%@ Register TagPrefix="iewc" Namespace="Microsoft.Web.UI.WebControls" Assembly="Microsoft.Web.UI.WebControls" %>
+<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -89,7 +89,7 @@
 												<TD style="WIDTH: 14.88%"><SPAN>Servizio: </SPAN>
 												</TD>
 												<TD style="HEIGHT: 28px">
-													<cc1:S_ComboBox id="cmbsServizio" runat="server" Width="392px" AutoPostBack="True"></cc1:S_ComboBox></TD>
+													<cc1:S_ComboBox id="cmbsServizio" runat="server" AutoPostBack="True" Width="392px"></cc1:S_ComboBox></TD>
 											</TR>
 											<TR>
 												<TD style="WIDTH: 131px; HEIGHT: 26px"><SPAN>Std. Apparecchiatura:</SPAN>
@@ -103,7 +103,7 @@
 											</TR>
 											<TR>
 												<TD align="center" colSpan="2">
-													<cc1:S_ListBox id="S_ListEdifici" runat="server" Width="100%" DBDirection="Input" DBSize="100"></cc1:S_ListBox>&nbsp;
+													<cc1:S_ListBox id="S_ListEdifici" runat="server" Width="100%" DBSize="100" DBDirection="Input"></cc1:S_ListBox>&nbsp;
 													<INPUT id="edifici" type="hidden" name="edifici" runat="server"> <INPUT id="edificidescription" type="hidden" name="edificidescription" runat="server">
 												</TD>
 											</TR>
@@ -112,11 +112,11 @@
 													<TABLE id="Table1" cellSpacing="0" cellPadding="0" width="100%" border="0">
 														<TR>
 															<TD style="WIDTH: 239px" align="right">
-																<cc1:S_Button id="S_btMostra" runat="server" CssClass="btn" Width="134px" ToolTip="Avvia la ricerca"
-																	Text="Mostra Dettagli"></cc1:S_Button>&nbsp;</TD>
+																<cc1:S_Button id="S_btMostra" runat="server" CssClass="btn" Width="134px" Text="Mostra Dettagli"
+																	ToolTip="Avvia la ricerca"></cc1:S_Button>&nbsp;</TD>
 															<TD style="WIDTH: 398px">&nbsp;
-																<cc1:S_Button id="btReset" runat="server" CssClass="btn" Width="134px" ToolTip="Rimposta i criteri di ricerca"
-																	Text="Reset"></cc1:S_Button>&nbsp;</TD>
+																<cc1:S_Button id="btReset" runat="server" CssClass="btn" Width="134px" Text="Reset" ToolTip="Rimposta i criteri di ricerca"
+																	CausesValidation="False"></cc1:S_Button>&nbsp;</TD>
 															<TD align="right">&nbsp;<A class=GuidaLink 
                         href="<%= HelpLink %>" target=_blank>Guida</A>
 															</TD>

@@ -15,7 +15,7 @@ namespace TheSite.Admin
 	/// <summary>
 	/// Descrizione di riepilogo per Menu.
 	/// </summary>
-	public class Menu : System.Web.UI.Page    // System.Web.UI.Page
+	public class Menu : System.Web.UI.Page
 	{
 		
 		protected S_Controls.S_TextBox txtsDescrizione;

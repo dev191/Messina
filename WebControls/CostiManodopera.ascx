@@ -1,8 +1,8 @@
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="CostiManodopera.ascx.cs" Inherits="TheSite.WebControls.CostiManodopera" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>
-<%@ Register TagPrefix="MessPanel" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
 <%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="MessPanel" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Control Language="c#" AutoEventWireup="false" Codebehind="CostiManodopera.ascx.cs" Inherits="TheSite.WebControls.CostiManodopera" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>
 <SCRIPT language="javascript"> 
 
 	function cmbSelezione(cmbNomeCognome,txtPrezzoUnitario,txtLivello,txtOreLavorate,txtTotale)
@@ -195,16 +195,16 @@ function ControllaCaratteri(){
 									<HeaderStyle HorizontalAlign="Center" Width="18%"></HeaderStyle>
 									<ItemStyle HorizontalAlign="Left" Height="20px"></ItemStyle>
 									<ItemTemplate>
-										<ASP:LABEL id="lblAddetto" runat="server" text='<%# DataBinder.Eval(Container.DataItem, "CognomeNome") %>' width="100%" height="20px">
+										<ASP:LABEL id=lblAddetto runat="server" text='<%# DataBinder.Eval(Container.DataItem, "CognomeNome") %>' width="100%" height="20px">
 										</ASP:LABEL>
 									</ItemTemplate>
 									<FooterStyle HorizontalAlign="Left" Width="18%"></FooterStyle>
 									<FooterTemplate>
-										<ASP:DROPDOWNLIST id="cmbAddettoInsert" runat="server" datavaluefield="cmbvalore" datatextfield="CognomeNome" datasource='<%#GetManodopera()%>' width="100%" >
+										<ASP:DROPDOWNLIST id=cmbAddettoInsert runat="server" width="100%" datasource="<%#GetManodopera()%>" datatextfield="CognomeNome" datavaluefield="cmbvalore">
 										</ASP:DROPDOWNLIST>
 									</FooterTemplate>
 									<EditItemTemplate>
-										<ASP:DROPDOWNLIST id="cmbAddettoEdit" runat="server" datavaluefield="cmbvalore" Enabled='<%# GetStato(DataBinder.Eval(Container.DataItem, "IdAddetto").ToString(),DataBinder.Eval(Container.DataItem, "IdAddettoWR").ToString())%>' datatextfield="CognomeNome" selectedindex='<%# GetIndex(DataBinder.Eval(Container.DataItem, "CognomeNome").ToString()) %>' datasource='<%#GetManodopera()%>' width="100%">
+										<ASP:DROPDOWNLIST id=cmbAddettoEdit runat="server" width="100%" datasource="<%#GetManodopera()%>" selectedindex='<%# GetIndex(DataBinder.Eval(Container.DataItem, "CognomeNome").ToString()) %>' datatextfield="CognomeNome" Enabled='<%# GetStato(DataBinder.Eval(Container.DataItem, "IdAddetto").ToString(),DataBinder.Eval(Container.DataItem, "IdAddettoWR").ToString())%>' datavaluefield="cmbvalore">
 										</ASP:DROPDOWNLIST>
 									</EditItemTemplate>
 								</asp:TemplateColumn>
@@ -228,7 +228,7 @@ function ControllaCaratteri(){
 									<HeaderStyle HorizontalAlign="Center" Width="18%"></HeaderStyle>
 									<ItemStyle HorizontalAlign="Right"></ItemStyle>
 									<ItemTemplate>
-										<ASP:LABEL id="lblPrezzoUnitario" style="TEXT-ALIGN: right" runat="server" width="100%" text='<%# FormattaDecimali(DataBinder.Eval(Container.DataItem, "PrezzoUnitario"),2) %>'>
+										<ASP:LABEL id=lblPrezzoUnitario style="TEXT-ALIGN: right" runat="server" width="100%" text='<%# FormattaDecimali(DataBinder.Eval(Container.DataItem, "PrezzoUnitario"),2) %>'>
 										</ASP:LABEL>
 									</ItemTemplate>
 									<FooterStyle HorizontalAlign="Right" Width="18%"></FooterStyle>
@@ -237,7 +237,7 @@ function ControllaCaratteri(){
 											ReadOnly="True" BorderWidth="0"></ASP:TEXTBOX>
 									</FooterTemplate>
 									<EditItemTemplate>
-										<ASP:TEXTBOX id="txtPrezzoUnitarioEdit" style="TEXT-ALIGN: right" runat="server" width="100%" text='<%# FormattaDecimali(DataBinder.Eval(Container.DataItem, "PrezzoUnitario"),2) %>' ReadOnly=True BorderWidth=0>
+										<ASP:TEXTBOX id=txtPrezzoUnitarioEdit style="TEXT-ALIGN: right" runat="server" width="100%" text='<%# FormattaDecimali(DataBinder.Eval(Container.DataItem, "PrezzoUnitario"),2) %>' ReadOnly="True" BorderWidth="0">
 										</ASP:TEXTBOX>
 									</EditItemTemplate>
 								</asp:TemplateColumn>
@@ -245,7 +245,7 @@ function ControllaCaratteri(){
 									<HeaderStyle HorizontalAlign="Center" Width="13%"></HeaderStyle>
 									<ItemStyle HorizontalAlign="Right"></ItemStyle>
 									<ItemTemplate>
-										<ASP:LABEL id="lblOreLavorate" style="TEXT-ALIGN: right" runat="server" width="100%" text='<%# FormattaDecimali(DataBinder.Eval(Container.DataItem, "OreLavorate"),0) %>'>
+										<ASP:LABEL id=lblOreLavorate style="TEXT-ALIGN: right" runat="server" width="100%" text='<%# FormattaDecimali(DataBinder.Eval(Container.DataItem, "OreLavorate"),0) %>'>
 										</ASP:LABEL>
 									</ItemTemplate>
 									<FooterStyle HorizontalAlign="Right" Width="13%"></FooterStyle>
@@ -253,7 +253,7 @@ function ControllaCaratteri(){
 										<ASP:TEXTBOX id="txtOreLavorateInsert" style="TEXT-ALIGN: right" runat="server" width="100%">0</ASP:TEXTBOX>
 									</FooterTemplate>
 									<EditItemTemplate>
-										<ASP:TEXTBOX id="txtOreLavorateEdit" style="TEXT-ALIGN: right" runat="server" width="95%" text='<%# DataBinder.Eval(Container.DataItem, "OreLavorate") %>' enabled="true" readonly=False visible="True">
+										<ASP:TEXTBOX id=txtOreLavorateEdit style="TEXT-ALIGN: right" runat="server" width="95%" text='<%# DataBinder.Eval(Container.DataItem, "OreLavorate") %>' enabled="true" readonly="False">
 										</ASP:TEXTBOX>
 									</EditItemTemplate>
 								</asp:TemplateColumn>
@@ -261,16 +261,16 @@ function ControllaCaratteri(){
 									<HeaderStyle HorizontalAlign="Center" Width="10%"></HeaderStyle>
 									<ItemStyle HorizontalAlign="Right"></ItemStyle>
 									<ItemTemplate>
-										<ASP:LABEL id=lblTotale style="TEXT-ALIGN: right" runat="server" text='<%# FormattaDecimali(DataBinder.Eval(Container.DataItem, "Totale"),2) %>' width="100%">
+										<ASP:LABEL id=lblTotale style="TEXT-ALIGN: right" runat="server" width="100%" text='<%# FormattaDecimali(DataBinder.Eval(Container.DataItem, "Totale"),2) %>'>
 										</ASP:LABEL>
 									</ItemTemplate>
 									<FooterStyle HorizontalAlign="Right" Width="10%"></FooterStyle>
 									<FooterTemplate>
-										<ASP:TEXTBOX id="TexTotaleInsert" style="TEXT-ALIGN: right" runat="server" width="95%" visible="True"
-											enabled="true" readonly="True">0</ASP:TEXTBOX>
+										<ASP:TEXTBOX id="TexTotaleInsert" style="TEXT-ALIGN: right" runat="server" width="95%" enabled="true"
+											readonly="True">0</ASP:TEXTBOX>
 									</FooterTemplate>
 									<EditItemTemplate>
-										<ASP:TEXTBOX id=TexTotaleEdit style="TEXT-ALIGN: right" runat="server" text='<%# DataBinder.Eval(Container.DataItem, "Totale") %>' width="95%" visible="True" enabled="true" readonly="True">
+										<ASP:TEXTBOX id=TexTotaleEdit style="TEXT-ALIGN: right" runat="server" width="95%" text='<%# DataBinder.Eval(Container.DataItem, "Totale") %>' enabled="true" readonly="True">
 										</ASP:TEXTBOX>
 									</EditItemTemplate>
 								</asp:TemplateColumn>
@@ -278,15 +278,15 @@ function ControllaCaratteri(){
 									<HeaderStyle HorizontalAlign="Center" Width="22%"></HeaderStyle>
 									<ItemStyle HorizontalAlign="Left"></ItemStyle>
 									<ItemTemplate>
-										<ASP:LABEL id="lblDescIntervento" runat="server" text='<%# DataBinder.Eval(Container.DataItem, "DescrizioneIntervento") %>' width="100%">
+										<ASP:LABEL id=lblDescIntervento runat="server" width="100%" text='<%# DataBinder.Eval(Container.DataItem, "DescrizioneIntervento") %>'>
 										</ASP:LABEL>
 									</ItemTemplate>
 									<FooterStyle HorizontalAlign="Right" Width="22%"></FooterStyle>
 									<FooterTemplate>
-										<ASP:TEXTBOX id="txtDescInterventoInsert" runat="server" visible="True" enabled="true" width="100%"></ASP:TEXTBOX>
+										<ASP:TEXTBOX id="txtDescInterventoInsert" runat="server" width="100%" enabled="true"></ASP:TEXTBOX>
 									</FooterTemplate>
 									<EditItemTemplate>
-										<ASP:TEXTBOX id="txtDescInterventoEdit" runat="server" text='<%# DataBinder.Eval(Container.DataItem, "DescrizioneIntervento") %>' visible="True" enabled="true" width="95%">
+										<ASP:TEXTBOX id=txtDescInterventoEdit runat="server" width="95%" text='<%# DataBinder.Eval(Container.DataItem, "DescrizioneIntervento") %>' enabled="true">
 										</ASP:TEXTBOX>
 									</EditItemTemplate>
 								</asp:TemplateColumn>

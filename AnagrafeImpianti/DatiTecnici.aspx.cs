@@ -16,7 +16,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per DatiTecnici.
 	/// </summary>
-	public class DatiTecnici : System.Web.UI.Page    // System.Web.UI.Page
+	public class DatiTecnici : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Panel PanelNuovoDatoTecnico;
 		protected System.Web.UI.WebControls.DataGrid DataGrid1;

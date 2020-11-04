@@ -2,8 +2,6 @@
 <%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../../WebControls/GridTitle.ascx" %>
 <%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../../WebControls/CalendarPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="DataPicker" Src="../../WebControls/DataPicker.ascx" %>
 <%@ Page language="c#" Codebehind="CreazioneODL_MP.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.CreazioneODL_MP" %>
 <%@ Register TagPrefix="uc1" TagName="Addetti" Src="../../WebControls/Addetti.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="BottomMenu" Src="../../WebControls/BottomMenu.ascx" %>
@@ -68,7 +66,7 @@
 			
 		</script>
 	</HEAD>
-	<body bottomMargin="0" onbeforeunload="parent.left.valorizza()" leftMargin="5" topMargin="0"
+	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0"
 		rightMargin="0" MS_POSITIONING="GridLayout">
 		<form id="Form1" onsubmit="return ControllaEdifici()" method="post" runat="server">
 			<TABLE id="TableMain" height="100%" cellSpacing="0" cellPadding="0" width="100%" align="center"
@@ -82,16 +80,16 @@
 							<TABLE cellSpacing="1" cellPadding="1" width="98%" align="center">
 								<TBODY>
 									<TR>
-										<TD vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" TitleStyle-CssClass="TitleSearch" CssClass="DataPanel75"
-												TitleText="Ricerca" AllowTitleExpandCollapse="True" Collapsed="False" ExpandText="Espandi" CollapseText="Riduci" CollapseImageUrl="../../Images/up.gif"
-												ExpandImageUrl="../../Images/down.gif">
+										<TD vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" ExpandImageUrl="../../Images/down.gif" CollapseImageUrl="../../Images/up.gif"
+												CollapseText="Riduci" ExpandText="Espandi" Collapsed="False" AllowTitleExpandCollapse="True" TitleText="Ricerca" CssClass="DataPanel75"
+												TitleStyle-CssClass="TitleSearch">
 												<TABLE id="tblSearch100" cellSpacing="1" cellPadding="2" border="0">
 													<TR>
-														<TD style="WIDTH: 46px; HEIGHT: 5px" align="left">Anno:
+														<TD style="WIDTH: 46px" align="left">Anno:
 														</TD>
-														<TD style="HEIGHT: 5px">
-															<cc1:S_ComboBox id="cmbsAnno" runat="server" AutoPostBack="True" DBDataType="Integer" DBIndex="5"
-																DBDirection="Input" DBSize="5" Width="288px">
+														<TD>
+															<cc1:S_ComboBox id="cmbsAnno" runat="server" Width="288px" DBSize="5" DBDirection="Input" DBIndex="5"
+																DBDataType="Integer" AutoPostBack="True">
 																<asp:ListItem Value="1990">1990</asp:ListItem>
 																<asp:ListItem Value="1991">1991</asp:ListItem>
 																<asp:ListItem Value="1992">1992</asp:ListItem>
@@ -119,32 +117,32 @@
 																<asp:ListItem Value="2014">2014</asp:ListItem>
 																<asp:ListItem Value="2015">2015</asp:ListItem>
 															</cc1:S_ComboBox></TD>
-														<TD style="HEIGHT: 5px">Mesi:</TD>
-														<TD style="HEIGHT: 5px">Da:
+														<TD>Mesi:</TD>
+														<TD>Da:
 															<cc1:S_ComboBox id="cmbMeseDa" runat="server"></cc1:S_ComboBox>&nbsp;A:
 															<cc1:S_ComboBox id="cmbMeseA" runat="server"></cc1:S_ComboBox></TD>
 													</TR>
 													<TR>
 														<TD style="WIDTH: 46px; HEIGHT: 14px">Comune:</TD>
 														<TD style="HEIGHT: 14px">
-															<cc1:S_ComboBox id="cmbsComune" runat="server" AutoPostBack="True" DBDataType="Integer" DBIndex="5"
-																DBDirection="Input" DBSize="5" Width="288px" DBParameterName="p_Ditta"></cc1:S_ComboBox></TD>
+															<cc1:S_ComboBox id="cmbsComune" runat="server" Width="288px" DBSize="5" DBDirection="Input" DBIndex="5"
+																DBDataType="Integer" AutoPostBack="True" DBParameterName="p_Ditta"></cc1:S_ComboBox></TD>
 														<TD style="HEIGHT: 14px">Edificio:
 														</TD>
 														<TD style="HEIGHT: 14px">
-															<cc1:S_ComboBox id="cmbsEdificio" runat="server" AutoPostBack="True" DBDataType="Integer" DBIndex="5"
-																DBDirection="Input" DBSize="5" Width="288px" DBParameterName="p_Ditta"></cc1:S_ComboBox></TD>
+															<cc1:S_ComboBox id="cmbsEdificio" runat="server" Width="288px" DBSize="5" DBDirection="Input" DBIndex="5"
+																DBDataType="Integer" AutoPostBack="True" DBParameterName="p_Ditta"></cc1:S_ComboBox></TD>
 													</TR>
 													<TR>
 														<TD style="WIDTH: 46px" align="left">Servizio:</TD>
 														<TD>
-															<cc1:S_ComboBox id="cmbsServizio" runat="server" AutoPostBack="False" DBDataType="Integer" DBIndex="5"
-																DBDirection="Input" DBSize="5" Width="288px" DBParameterName="p_Ditta"></cc1:S_ComboBox></TD>
+															<cc1:S_ComboBox id="cmbsServizio" runat="server" Width="288px" DBSize="5" DBDirection="Input" DBIndex="5"
+																DBDataType="Integer" AutoPostBack="False" DBParameterName="p_Ditta"></cc1:S_ComboBox></TD>
 														<TD align="left">Addetto:&nbsp;
 														</TD>
 														<TD>
-															<cc1:S_ComboBox id="cmbsAddetti" runat="server" DBDataType="Integer" DBIndex="5" DBDirection="Input"
-																DBSize="5" Width="288px" DBParameterName="p_Ditta"></cc1:S_ComboBox></TD>
+															<cc1:S_ComboBox id="cmbsAddetti" runat="server" Width="288px" DBSize="5" DBDirection="Input" DBIndex="5"
+																DBDataType="Integer" DBParameterName="p_Ditta"></cc1:S_ComboBox></TD>
 													</TR>
 													<TR>
 														<TD style="WIDTH: 46px"></TD>
@@ -156,28 +154,28 @@
 															<asp:Button id="cmdReset" CssClass="btn" Text="Reset" Runat="server"></asp:Button>&nbsp;&nbsp;&nbsp;&nbsp;
 															<INPUT id="txtHidden" type="hidden" value="0">
 															<asp:TextBox id="txtTotSelezionati" runat="server" Width="0px">0</asp:TextBox></TD>
-														<TD align="right"><A class="GuidaLink" href="<%= HelpLink %>" 
-                  target="_blank">Guida</A></TD>
+														<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
+                  target=_blank>Guida</A></TD>
 													</TR>
 												</TABLE>
 											</COLLAPSE:DATAPANEL></TD>
 									</TR>
 									<TR>
-										<TD style="HEIGHT: 72%" vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" AutoGenerateColumns="False"
-												GridLines="Vertical" BorderWidth="1px" BorderColor="Gray" AllowPaging="True">
+										<TD style="HEIGHT: 72%" vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" AllowPaging="True" BorderColor="Gray"
+												BorderWidth="1px" GridLines="Vertical" AutoGenerateColumns="False" AllowCustomPaging="True">
 												<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 												<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 												<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
 												<Columns>
 													<asp:BoundColumn Visible="False" DataField="INDICE" HeaderText="INDICE"></asp:BoundColumn>
 													<asp:TemplateColumn HeaderText="&lt;input id='ChkSelTutti' type='Checkbox' onclick='SelCheckbox()'&gt;">
-														<HeaderStyle Width="3%" HorizontalAlign="Center" VerticalAlign="Middle"></HeaderStyle>
+														<HeaderStyle HorizontalAlign="Center" Width="3%" VerticalAlign="Middle"></HeaderStyle>
 														<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 														<ItemTemplate>
 															<asp:CheckBox ID="ChkSel" Runat="server"></asp:CheckBox>
 														</ItemTemplate>
 													</asp:TemplateColumn>
-													<asp:BoundColumn DataField="BL_ID" HeaderText="BL_ID" Visible="False">
+													<asp:BoundColumn Visible="False" DataField="BL_ID" HeaderText="BL_ID">
 														<ItemStyle Font-Size="9px"></ItemStyle>
 													</asp:BoundColumn>
 													<asp:BoundColumn DataField="CAMPUS" HeaderText="EDIFICIO">
@@ -186,14 +184,14 @@
 													<asp:BoundColumn DataField="SERVIZIO" HeaderText="SERVIZIO">
 														<ItemStyle Font-Size="9px"></ItemStyle>
 													</asp:BoundColumn>
-													<asp:BoundColumn DataField="IDSERVIZIO" HeaderText="IDSERVIZIO" Visible="False"></asp:BoundColumn>
+													<asp:BoundColumn Visible="False" DataField="IDSERVIZIO" HeaderText="IDSERVIZIO"></asp:BoundColumn>
 													<asp:BoundColumn DataField="ADDETTO" HeaderText="ADDETTO"></asp:BoundColumn>
-													<asp:BoundColumn DataField="IDADDETTO" HeaderText="IDADDETTO" Visible="False"></asp:BoundColumn>
+													<asp:BoundColumn Visible="False" DataField="IDADDETTO" HeaderText="IDADDETTO"></asp:BoundColumn>
 													<asp:BoundColumn DataField="WR_COUNT" HeaderText="RDL">
 														<ItemStyle Font-Size="9px"></ItemStyle>
 													</asp:BoundColumn>
 												</Columns>
-												<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
+												<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 											</asp:datagrid></TD>
 									</TR>
 									<tr>

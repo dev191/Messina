@@ -1,119 +1,209 @@
-ï»¿// Decompiled with JetBrains decompiler
-// Type: GIC.App_Code.Datagrid.StandardDTControl
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using GIC.App_Code.Businnes;
 using System;
-using System.Web.UI;
+using System.Data;
+using System.Data.SqlClient;
 using System.Web.UI.WebControls;
+using System.Web.UI;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace GIC.App_Code.Datagrid
 {
-  public class StandardDTControl : DatagridControl
-  {
-    private DataGrid CurrDt;
-    private StateBag ViewState;
+	/// <summary>
+	/// 
+	/// </summary>
+	public class StandardDTControl : GIC.App_Code.Datagrid.DatagridControl
+	{
 
-    public StateBag ViewStatePar
-    {
-      set => this.ViewState = value;
-    }
+		private DataGrid CurrDt;
+		private System.Web.UI.StateBag ViewState;
 
-    public StandardDTControl(DataGrid Dt) => this.Dt = Dt;
 
-    public int numeroPagina => Convert.ToInt32(this.ViewState[nameof (numeroPagina)]);
+		public System.Web.UI.StateBag ViewStatePar
+		{
+			set{ViewState=value;}
+		}
 
-    public string campoDiOrdinamento => Convert.ToString(this.ViewState[nameof (campoDiOrdinamento)]);
+		public StandardDTControl(DataGrid Dt)
+		{
+			this.Dt=Dt;
+		}
 
-    public int recordPerPagina => Convert.ToInt32(this.ViewState[nameof (recordPerPagina)]);
+		public int numeroPagina
+		{
+			get{return Convert.ToInt32(ViewState["numeroPagina"]);}
+		}
 
-    public DataGrid Dt
-    {
-      get => this.CurrDt;
-      set => this.CurrDt = value;
-    }
+		public string campoDiOrdinamento
+		{
+			get{return Convert.ToString(ViewState["campoDiOrdinamento"]);}
+		}
 
-    public void InitDataGrid()
-    {
-      this.Dt.Columns[2].Visible = false;
-      this.Dt.Columns[3].Visible = false;
-    }
+		public int recordPerPagina
+		{
+			get{return Convert.ToInt32(ViewState["recordPerPagina"]);}
+		}
 
-    public void SetColums()
-    {
-      if (this.Dt.Columns[0].Visible)
-      {
-        this.Dt.Columns[0].Visible = false;
-        this.Dt.Columns[1].Visible = false;
-        this.Dt.Columns[2].Visible = true;
-        this.Dt.Columns[3].Visible = true;
-      }
-      else
-      {
-        this.Dt.Columns[0].Visible = true;
-        this.Dt.Columns[1].Visible = true;
-        this.Dt.Columns[2].Visible = false;
-        this.Dt.Columns[3].Visible = false;
-      }
-    }
+		#region Medodi di DataGridControl
+		public DataGrid Dt
+		{
+			get{return CurrDt;}
+			set{CurrDt = value;}
+		}
 
-    public void EditCommand(object source, DataGridCommandEventArgs e)
-    {
-      this.Dt.EditItemIndex = e.Item.ItemIndex;
-      this.SetColums();
-    }
+		public void InitDataGrid()
+		{
+			Dt.Columns[2].Visible = false;
+			Dt.Columns[3].Visible = false;
+		}
 
-    public void UpdateCommand(
-      object source,
-      DataGridCommandEventArgs e,
-      string[] ControlParamName,
-      string ControlForIdName,
-      string StoredProcedure,
-      DataManager dataManager)
-    {
-    }
+		public void SetColums()
+		{
+			if(Dt.Columns[0].Visible == true)
+			{
+				Dt.Columns[0].Visible = false;
+				Dt.Columns[1].Visible = false;
+				Dt.Columns[2].Visible = true;
+				Dt.Columns[3].Visible = true;
+			} 
+			else 
+			{
+				Dt.Columns[0].Visible = true;
+				Dt.Columns[1].Visible = true;
+				Dt.Columns[2].Visible = false;
+				Dt.Columns[3].Visible = false;
+			}
+		}
 
-    public void CancelCommand(object source, DataGridCommandEventArgs e)
-    {
-      this.Dt.EditItemIndex = -1;
-      this.SetColums();
-    }
+		public void EditCommand(object source, DataGridCommandEventArgs e)
+		{
+			this.Dt.EditItemIndex = (int) e.Item.ItemIndex;
+			this.SetColums();
+		}
 
-    public void DataBound()
-    {
-    }
+		public void UpdateCommand(object source, DataGridCommandEventArgs e, string[] ControlParamName, string ControlForIdName, string StoredProcedure,  App_Code.Businnes.DataManager dataManager)
+		{
+//			int id = int.Parse(Dt.DataKeys[(int)e.Item.ItemIndex].ToString());
+//			int Result =0;
+//			Object controllo;
+//
+//
+//			S_ControlsCollection param=new S_ControlsCollection();
+//
+//			try
+//			{
+//				if (e.CommandName=="Update")
+//				{
+//					foreach (string par in ControlParamName)
+//					{
+//						controllo = ((Object) e.Item.FindControl(par)); 
+//						if (controllo is S_Controls.S_TextBox)
+//							param.Add((S_TextBox)controllo);
+//						else if (controllo is S_Controls.S_ListBox)
+//							param.Add((S_ListBox)controllo);
+//						else if (controllo is S_Controls.S_ComboBox)
+//							param.Add((S_ComboBox)controllo);
+//					}
+//
+//					SqlParameter para;
+//
+//					para=new SqlParameter(ControlForIdName,SqlDbType.Int);
+//					para.Direction=ParameterDirection.Input;
+//					para.Value=id;
+//					param.Add (para);
+//
+//					
+//					Result = dataManager.UpdateData(param);
+//				
+//				
+//					if (Result > 0)
+//					{
+//						this.Dt.EditItemIndex = -1;
+//						this.SetColums();
+//					}
+//					else
+//					{
+//						throw new ApplicationException("la stored procedure ha restituito valore 0");
+//					}
+//				}
+//			}
+//			catch(SqlException ex)
+//			{
+//					throw (ex);//Scateno nuovamente l'errore perchè è sconosciuto
+//			}
+//
+//			finally
+//			{
+//				;
+//			}
+		}
 
-    public void ItemCommand(
-      object source,
-      DataGridCommandEventArgs e,
-      string[] ControlParamName,
-      string ControlForIdName,
-      string StoredProcedure,
-      string command,
-      DataManager dataManager)
-    {
-    }
+		public void CancelCommand(object source, System.Web.UI.WebControls.DataGridCommandEventArgs e)
+		{
+			this.Dt.EditItemIndex = -1;
+			this.SetColums();
+			
+		}
 
-    public void CambiaPaginaDataGrid(object source, DataGridPageChangedEventArgs e) => this.ViewState["numeroPagina"] = (object) e.NewPageIndex;
+		public void DataBound()
+		{
+		}
 
-    public void OrdinaDataGrid(object source, DataGridSortCommandEventArgs e)
-    {
-      string str = "";
-      if (Convert.ToString(this.ViewState["verso"]) == "" || Convert.ToString(this.ViewState["verso"]) == "DESC")
-      {
-        str = "ASC";
-        this.ViewState["verso"] = (object) str;
-      }
-      else if (Convert.ToString(this.ViewState["verso"]) == "ASC")
-      {
-        str = "DESC";
-        this.ViewState["verso"] = (object) str;
-      }
-      this.ViewState["campoDiOrdinamento"] = (object) (e.SortExpression + " " + str);
-    }
+		public void ItemCommand(object source, System.Web.UI.WebControls.DataGridCommandEventArgs e, string[] ControlParamName, string ControlForIdName, string StoredProcedure, string command, App_Code.Businnes.DataManager dataManager)
+		{
+//			switch(e.CommandName)
+//			{
+//				case "Delete":
+//					int id = int.Parse(Dt.DataKeys[(int)e.Item.ItemIndex].ToString());
+//
+//					SqlDalCollectionParameter param=new SqlDalCollectionParameter();
+//
+//					SqlParameter para;
+//					para=new SqlParameter(ControlForIdName,SqlDbType.Int);
+//					para.Direction=ParameterDirection.Input;
+//					para.Value=id;
+//					param.Add (para);
+//
+//					dataManager.DeleteData(param);
+//					break;
+//
+//				default:
+//					// Do nothing.
+//					break;
+//			}
+		}
+		#endregion
 
-    public void DropDownList1_SelectedIndexChanged(object sender, EventArgs e, string valore) => this.ViewState["recordPerPagina"] = (object) Convert.ToInt32(valore);
-  }
+		#region controllo datagrid
+
+		public void CambiaPaginaDataGrid(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
+		{
+			ViewState["numeroPagina"]=e.NewPageIndex;
+		}
+
+		public void OrdinaDataGrid(object source, System.Web.UI.WebControls.DataGridSortCommandEventArgs e)
+		{
+			string verso="";
+			if (Convert.ToString(ViewState["verso"])=="" || Convert.ToString(ViewState["verso"])=="DESC")
+			{
+				verso="ASC";
+				ViewState["verso"]=verso;
+			} 
+			else 
+				if (Convert.ToString(ViewState["verso"])=="ASC")
+			{
+				verso="DESC";
+				ViewState["verso"]=verso;
+			}
+			ViewState["campoDiOrdinamento"]=e.SortExpression + " " + verso;
+		}
+
+		public void DropDownList1_SelectedIndexChanged(object sender, System.EventArgs e, string valore)
+		{
+			ViewState["recordPerPagina"]=Convert.ToInt32(valore);
+		}
+		#endregion
+
+	}
 }

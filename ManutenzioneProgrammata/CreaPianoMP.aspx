@@ -1,13 +1,12 @@
-<%@ Register TagPrefix="uc1" TagName="BottomMenu2" Src="../WebControls/BottomMenu2.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="DataPicker" Src="../WebControls/DataPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="Addetti" Src="../WebControls/Addetti.ascx" %>
 <%@ Page language="c#" Codebehind="CreaPianoMp.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.CreaPianoMP" %>
+<%@ Register TagPrefix="uc1" TagName="Addetti" Src="../WebControls/Addetti.ascx" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="BottomMenu2" Src="../WebControls/BottomMenu2.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -126,12 +125,12 @@
 									</TR>
 									<TR>
 										<TD vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" AllowPaging="True" BorderColor="Gray"
-												BorderWidth="1px" GridLines="Vertical" AutoGenerateColumns="False">
+												BorderWidth="1px" GridLines="Vertical" AutoGenerateColumns="False" AllowCustomPaging="True">
 												<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 												<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 												<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
 												<Columns>
-													<asp:BoundColumn Visible="false" DataField="id_bl" HeaderText="id_bl"></asp:BoundColumn>
+													<asp:BoundColumn Visible="False" DataField="id_bl" HeaderText="id_bl"></asp:BoundColumn>
 													<asp:TemplateColumn>
 														<HeaderStyle HorizontalAlign="Center" Width="3%"></HeaderStyle>
 														<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
@@ -142,13 +141,13 @@
 															<asp:CheckBox id="ChkSel" Runat="server"></asp:CheckBox>
 														</ItemTemplate>
 													</asp:TemplateColumn>
-													<asp:BoundColumn Visible="false" DataField="id_ditta" HeaderText="IdDitta">
+													<asp:BoundColumn Visible="False" DataField="id_ditta" HeaderText="IdDitta">
 														<HeaderStyle Width="15%"></HeaderStyle>
 													</asp:BoundColumn>
-													<asp:BoundColumn Visible="false" DataField="id_servizio" HeaderText="id_servizio">
+													<asp:BoundColumn Visible="False" DataField="id_servizio" HeaderText="id_servizio">
 														<HeaderStyle Width="20%"></HeaderStyle>
 													</asp:BoundColumn>
-													<asp:BoundColumn Visible="false" DataField="id_addetto" HeaderText="id_addetto">
+													<asp:BoundColumn Visible="False" DataField="id_addetto" HeaderText="id_addetto">
 														<HeaderStyle Width="20%"></HeaderStyle>
 													</asp:BoundColumn>
 													<asp:BoundColumn DataField="codice_edificio" HeaderText="Edificio"></asp:BoundColumn>
@@ -157,7 +156,7 @@
 													<asp:BoundColumn DataField="Addetto" HeaderText="Addetto"></asp:BoundColumn>
 													<asp:BoundColumn DataField="Anno" HeaderText="Ultima Schedulazione"></asp:BoundColumn>
 													<asp:BoundColumn DataField="dataini" HeaderText="Data Inizio"></asp:BoundColumn>
-													<asp:BoundColumn Visible="true" DataField="date_start" HeaderText="Data Start"></asp:BoundColumn>
+													<asp:BoundColumn DataField="date_start" HeaderText="Data Start"></asp:BoundColumn>
 												</Columns>
 												<PagerStyle Mode="NumericPages"></PagerStyle>
 											</asp:datagrid></TD>

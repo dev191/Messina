@@ -1,12 +1,11 @@
-<%@ Register TagPrefix="uc1" TagName="BottomMenu" Src="../../WebControls/BottomMenu.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="Addetti" Src="../../WebControls/Addetti.ascx" %>
-<%@ Page language="c#" Codebehind="Rapportino.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.Rapportino" %>
-<%@ Register TagPrefix="uc1" TagName="DataPicker" Src="../../WebControls/DataPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../../WebControls/CalendarPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../../WebControls/GridTitle.ascx" %>
 <%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../../WebControls/CalendarPicker.ascx" %>
+<%@ Page language="c#" Codebehind="Rapportino.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.Rapportino" %>
+<%@ Register TagPrefix="uc1" TagName="Addetti" Src="../../WebControls/Addetti.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="BottomMenu" Src="../../WebControls/BottomMenu.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -126,21 +125,21 @@
 			
 		</SCRIPT>
 	</HEAD>
-	<BODY onbeforeunload="parent.left.valorizza()" bottommargin="0" leftmargin="5" topmargin="0"
-		rightmargin="0" ms_positioning="GridLayout">
+	<BODY bottomMargin="0" onbeforeunload="parent.left.valorizza()" leftMargin="5" topMargin="0"
+		rightMargin="0" ms_positioning="GridLayout">
 		<FORM id="Form1" onsubmit="return ControllaEdifici()" method="post" runat="server">
-			<TABLE id="TableMain" cellspacing="0" cellpadding="0" width="100%" align="center" border="0"
-				height="100%">
+			<TABLE id="TableMain" height="100%" cellSpacing="0" cellPadding="0" width="100%" align="center"
+				border="0">
 				<TBODY>
 					<TR>
 						<TD style="HEIGHT: 50px" align="center"><UC1:PAGETITLE id="PageTitle1" runat="server"></UC1:PAGETITLE></TD>
 					</TR>
 					<TR>
-						<TD valign="top" align="center">
-							<TABLE cellspacing="1" cellpadding="1" align="center" width="98%">
+						<TD vAlign="top" align="center">
+							<TABLE cellSpacing="1" cellPadding="1" width="98%" align="center">
 								<TBODY>
 									<TR>
-										<TD valign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" titlestyle-cssclass="TitleSearch" cssclass="DataPanel75"
+										<TD vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" titlestyle-cssclass="TitleSearch" cssclass="DataPanel75"
 												titletext="Ricerca" allowtitleexpandcollapse="True" collapsed="False" expandtext="Espandi" collapsetext="Riduci" collapseimageurl="../../Images/up.gif"
 												expandimageurl="../../Images/down.gif">
 												<TABLE id="tblSearch100" cellSpacing="1" cellPadding="2" border="0">
@@ -148,15 +147,15 @@
 														<TD align="left">Ordine di Lavoro:
 														</TD>
 														<TD colSpan="3">
-															<CC1:S_TEXTBOX id="txtsOrdine" runat="server" width="100px" maxlength="10" dbparametername="p_Wr_Id"
-																dbsize="255" dbdirection="Input"></CC1:S_TEXTBOX></TD>
+															<CC1:S_TEXTBOX id="txtsOrdine" runat="server" dbdirection="Input" dbsize="255" dbparametername="p_Wr_Id"
+																maxlength="10" width="100px"></CC1:S_TEXTBOX></TD>
 													</TR>
 													<TR>
-														<TD style="HEIGHT: 23px" align="left">Anno:
+														<TD style="HEIGHT: 14px" align="left">Anno:
 														</TD>
-														<TD style="HEIGHT: 23px">
-															<CC1:S_COMBOBOX id="cmbsAnno" runat="server" width="288px" dbsize="5" dbdirection="Input" dbindex="5"
-																dbdatatype="Integer" autopostback="True">
+														<TD style="HEIGHT: 14px">
+															<CC1:S_COMBOBOX id="cmbsAnno" runat="server" dbdirection="Input" dbsize="5" width="288px" autopostback="True"
+																dbdatatype="Integer" dbindex="5">
 																<ASP:LISTITEM value="1990">1990</ASP:LISTITEM>
 																<ASP:LISTITEM value="1991">1991</ASP:LISTITEM>
 																<ASP:LISTITEM value="1992">1992</ASP:LISTITEM>
@@ -184,32 +183,32 @@
 																<ASP:LISTITEM value="2014">2014</ASP:LISTITEM>
 																<ASP:LISTITEM value="2015">2015</ASP:LISTITEM>
 															</CC1:S_COMBOBOX></TD>
-														<TD style="HEIGHT: 23px">Mesi:</TD>
-														<TD style="HEIGHT: 23px">Da:
+														<TD style="HEIGHT: 14px">Mesi:</TD>
+														<TD style="HEIGHT: 14px">Da:
 															<CC1:S_COMBOBOX id="cmbMeseDa" runat="server"></CC1:S_COMBOBOX>&nbsp;A:
 															<CC1:S_COMBOBOX id="cmbMeseA" runat="server"></CC1:S_COMBOBOX></TD>
 													</TR>
 													<TR>
 														<TD>Comune:</TD>
 														<TD>
-															<CC1:S_COMBOBOX id="cmbsComune" runat="server" width="288px" dbparametername="p_Ditta" dbsize="5"
-																dbdirection="Input" dbindex="5" dbdatatype="Integer" autopostback="True"></CC1:S_COMBOBOX></TD>
+															<CC1:S_COMBOBOX id="cmbsComune" runat="server" dbdirection="Input" dbsize="5" dbparametername="p_Ditta"
+																width="288px" autopostback="True" dbdatatype="Integer" dbindex="5"></CC1:S_COMBOBOX></TD>
 														<TD>Edificio:
 														</TD>
 														<TD>
-															<CC1:S_COMBOBOX id="cmbsEdificio" runat="server" width="288px" dbparametername="p_Ditta" dbsize="5"
-																dbdirection="Input" dbindex="5" dbdatatype="Integer" autopostback="True"></CC1:S_COMBOBOX></TD>
+															<CC1:S_COMBOBOX id="cmbsEdificio" runat="server" dbdirection="Input" dbsize="5" dbparametername="p_Ditta"
+																width="288px" autopostback="True" dbdatatype="Integer" dbindex="5"></CC1:S_COMBOBOX></TD>
 													</TR>
 													<TR>
 														<TD align="left">Servizio:</TD>
 														<TD>
-															<CC1:S_COMBOBOX id="cmbsServizio" runat="server" width="288px" dbparametername="p_Ditta" dbsize="5"
-																dbdirection="Input" dbindex="5" dbdatatype="Integer" autopostback="False"></CC1:S_COMBOBOX></TD>
+															<CC1:S_COMBOBOX id="cmbsServizio" runat="server" dbdirection="Input" dbsize="5" dbparametername="p_Ditta"
+																width="288px" autopostback="False" dbdatatype="Integer" dbindex="5"></CC1:S_COMBOBOX></TD>
 														<TD align="left">Addetto:&nbsp;
 														</TD>
 														<TD>
-															<CC1:S_COMBOBOX id="cmbsAddetti" runat="server" width="288px" dbparametername="p_Ditta" dbsize="5"
-																dbdirection="Input" dbindex="5" dbdatatype="Integer"></CC1:S_COMBOBOX></TD>
+															<CC1:S_COMBOBOX id="cmbsAddetti" runat="server" dbdirection="Input" dbsize="5" dbparametername="p_Ditta"
+																width="288px" dbdatatype="Integer" dbindex="5"></CC1:S_COMBOBOX></TD>
 													</TR>
 													<TR>
 														<TD></TD>
@@ -228,13 +227,13 @@
 											</COLLAPSE:DATAPANEL></TD>
 									</TR>
 									<TR>
-										<TD style="HEIGHT: 72%" valign="top" align="center"><UC1:GRIDTITLE id="GridTitle1" runat="server"></UC1:GRIDTITLE><ASP:DATAGRID id="DataGridRicerca" runat="server" cssclass="DataGrid" autogeneratecolumns="False"
-												gridlines="Vertical" borderwidth="1px" bordercolor="Gray" allowpaging="True">
+										<TD style="HEIGHT: 72%" vAlign="top" align="center"><UC1:GRIDTITLE id="GridTitle1" runat="server"></UC1:GRIDTITLE><ASP:DATAGRID id="DataGridRicerca" runat="server" cssclass="DataGrid" AllowCustomPaging="True"
+												autogeneratecolumns="False" gridlines="Vertical" borderwidth="1px" bordercolor="Gray" allowpaging="True">
 												<ALTERNATINGITEMSTYLE cssclass="DataGridAlternatingItemStyle"></ALTERNATINGITEMSTYLE>
 												<ITEMSTYLE cssclass="DataGridItemStyle"></ITEMSTYLE>
 												<HEADERSTYLE cssclass="DataGridHeaderStyle"></HEADERSTYLE>
 												<COLUMNS>
-													<ASP:BOUNDCOLUMN visible="False" datafield="WO_ID" headertext="WO_ID"></ASP:BOUNDCOLUMN>
+													<ASP:BOUNDCOLUMN visible="false" datafield="WO_ID" headertext="WO_ID"></ASP:BOUNDCOLUMN>
 													<ASP:TEMPLATECOLUMN headertext="&lt;input id='ChkSelTutti' type='Checkbox' onclick='SelCheckbox()'&gt;">
 														<HEADERSTYLE width="3%" horizontalalign="Center" verticalalign="Middle"></HEADERSTYLE>
 														<ITEMSTYLE horizontalalign="Center" verticalalign="Middle"></ITEMSTYLE>
@@ -261,10 +260,18 @@
 											</ASP:DATAGRID></TD>
 									</TR>
 									<TR>
-										<TD><ASP:PANEL id="PanelCrea" runat="server" visible="False">
+										<TD><ASP:PANEL id="PanelCrea" runat="server" visible="True">
 												<P>
-													<ASP:RADIOBUTTON id="StampaCorta" runat="server" text="Stampa Corta" groupname="optionstampa" checked="True"></ASP:RADIOBUTTON><BR>
-													<ASP:RADIOBUTTON id="StampaLunga" runat="server" text="Stampa Lunga" groupname="optionstampa"></ASP:RADIOBUTTON></P>
+													<ASP:RADIOBUTTON id="StampaCorta" runat="server" text="Stampa Corta" visible="True" checked="True"
+														groupname="optionstampa"></ASP:RADIOBUTTON><BR>
+													<ASP:RADIOBUTTON id="StampaLunga" runat="server" text="Stampa Lunga" visible="True" groupname="optionstampa"></ASP:RADIOBUTTON><BR>
+													<ASP:RADIOBUTTON id="StampaDettaglioLocaliCorta" runat="server" text="Stampa dettaglio locali Corta"
+														visible="True" groupname="optionstampa"></ASP:RADIOBUTTON><BR>
+													<ASP:RADIOBUTTON id="StampaDetaglioLocali" runat="server" text="Stampa dettaglio locali Lunga" visible="True"
+														groupname="optionstampa"></ASP:RADIOBUTTON><BR>
+													<ASP:RADIOBUTTON id="StampaDetaglioLocaliLung2Pa" runat="server" text="Stampa dettaglio locali Lunga passi 2 c "
+														visible="True" groupname="optionstampa"></ASP:RADIOBUTTON><BR>
+												</P>
 												<TABLE align="center">
 													<TR>
 														<TD>
@@ -290,7 +297,7 @@
 						</TD>
 					</TR>
 					<TR>
-						<TD valign="bottom"><UC1:BOTTOMMENU id="BottomMenu1" runat="server"></UC1:BOTTOMMENU></TD>
+						<TD vAlign="bottom"><UC1:BOTTOMMENU id="BottomMenu1" runat="server"></UC1:BOTTOMMENU></TD>
 					</TR>
 				</TBODY>
 			</TABLE>

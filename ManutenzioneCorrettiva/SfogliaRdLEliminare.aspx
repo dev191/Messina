@@ -9,7 +9,7 @@
 <%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
-	<HEAD>
+  <HEAD>
 		<TITLE>SfogliaRdl</TITLE>
 		<META content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
 		<META content="C#" name="CODE_LANGUAGE">
@@ -124,9 +124,9 @@
 		      finestra.close();
  }
 		</SCRIPT>
-	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" onkeypress="if (valutaenter(event) == false) { return false; }" bottommargin="0"
-		onbeforeunload="chiudi();" leftmargin="5" topmargin="0" rightmargin="0" ms_positioning="GridLayout">
+</HEAD>
+	<body onbeforeunload="parent.left.valorizza()" onkeypress="if (valutaenter(event) == false) { return false; }"
+		bottommargin="0" leftmargin="5" topmargin="0" rightmargin="0" ms_positioning="GridLayout">
 		<FORM id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; POSITION: absolute; TOP: 0px" cellspacing="0"
 				cellpadding="0" width="100%" align="center" border="0">
@@ -142,90 +142,76 @@
 										<TD style="HEIGHT: 25%" valign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" expandimageurl="../Images/downarrows_trans.gif"
 												collapseimageurl="../Images/uparrows_trans.gif" collapsetext="Riduci" expandtext="Espandi" collapsed="False" allowtitleexpandcollapse="True" titletext="Ricerca"
 												cssclass="DataPanel75" titlestyle-cssclass="TitleSearch">
-												<TABLE id="tblSearch100" cellSpacing="1" cellPadding="2" border="0">
-													<TR>
-														<TD align="left" colSpan="4">
-															<UC1:RICERCAMODULO id="RicercaModulo1" runat="server"></UC1:RICERCAMODULO></TD>
-													</TR>
-													<TR>
-														<TD style="WIDTH: 83px" align="left" width="83">Richiesta di Lavoro:</TD>
-														<TD width="30%">
-															<CC1:S_TEXTBOX id="txtsRichiesta" runat="server" dbparametername="p_Wr_Id" dbdirection="Input"
-																dbsize="255" maxlength="10" dbdatatype="Integer" dbindex="2" width="100px"></CC1:S_TEXTBOX></TD>
-														<TD align="left" width="15%">Addetto:</TD>
-														<TD width="30%">
-															<UC1:ADDETTI id="Addetti1" runat="server"></UC1:ADDETTI></TD>
-													</TR>
-													<TR>
-														<TD style="WIDTH: 83px" align="left">Data Da:</TD>
-														<TD>
-															<UC1:CALENDARPICKER id="CalendarPicker1" runat="server"></UC1:CALENDARPICKER></TD>
-														<TD align="left">Data A:</TD>
-														<TD>
-															<UC1:CALENDARPICKER id="CalendarPicker2" runat="server"></UC1:CALENDARPICKER>
-															<ASP:COMPAREVALIDATOR id="CompareValidator1" runat="server" display="Dynamic" type="Date" operator="GreaterThanEqual"
-																errormessage="Data non valida!"></ASP:COMPAREVALIDATOR></TD>
-													</TR>
-													<TR>
-														<TD style="WIDTH: 83px" align="left">Ordine di Lavoro:</TD>
-														<TD>
-															<CC1:S_TEXTBOX id="txtsOrdine" runat="server" dbparametername="p_Wr_Id" dbdirection="Input" dbsize="255"
-																maxlength="10" width="100px"></CC1:S_TEXTBOX></TD>
-														<TD align="left">Stato Richiesta:</TD>
-														<TD>
-															<CC1:S_COMBOBOX id="cmbsStatus" runat="server" width="99%"></CC1:S_COMBOBOX></TD>
-													</TR>
-													<TR>
-														<TD style="WIDTH: 83px" align="left">Servizio:</TD>
-														<TD>
-															<CC1:S_COMBOBOX id="cmbsServizio" runat="server" width="99%"></CC1:S_COMBOBOX></TD>
-														<TD align="left">Gruppo:</TD>
-														<TD>
-															<CC1:S_COMBOBOX id="cmbsGruppo" runat="server" width="99%"></CC1:S_COMBOBOX></TD>
-													</TR>
-													<TR>
-														<TD style="WIDTH: 83px" align="left">Richiedente:</TD>
-														<TD>
-															<UC1:RICHIEDENTI id="Richiedenti1" runat="server"></UC1:RICHIEDENTI></TD>
-														<TD align="left">Urgenza:</TD>
-														<TD>
-															<CC1:S_COMBOBOX id="cmbsUrgenza" runat="server" width="99%"></CC1:S_COMBOBOX></TD>
-													</TR>
-													<TR>
-														<TD style="WIDTH: 83px" align="left" colSpan="1">Descrizione:</TD>
-														<TD colSpan="3">
-															<CC1:S_TEXTBOX id="txtDescrizione" runat="server" dbparametername="p_Wr_Id" dbdirection="Input"
-																dbsize="255" maxlength="255" width="99%"></CC1:S_TEXTBOX></TD>
-													</TR>
-													<TR>
-														<TD id="tblTipoManutenzione" style="DISPLAY: none; WIDTH: 83px" align="left">Tipo 
-															Manutenzione:</TD>
-														<TD id="tblTipoManutenzione1" style="DISPLAY: none">
-															<CC1:S_COMBOBOX id="cmbsTipoManutenzione" runat="server" width="99%"></CC1:S_COMBOBOX></TD>
-														<TD id="tabletipointervento" style="DISPLAY: none">Tipo Intervento:</TD>
-														<TD id="tabletipointervento2" style="DISPLAY: none">
-															<CC1:S_COMBOBOX id="cmbsTipoIntervento" runat="server" width="99%"></CC1:S_COMBOBOX></TD>
-													</TR>
-													<TR id="trdate" style="DISPLAY: none">
-														<TD style="WIDTH: 83px" align="left">Data Privista Inizio:</TD>
-														<TD>
-															<UC1:CALENDARPICKER id="CalendarPicker3" runat="server"></UC1:CALENDARPICKER></TD>
-														<TD align="left">Data Prevista Fine:</TD>
-														<TD>
-															<UC1:CALENDARPICKER id="CalendarPicker4" runat="server"></UC1:CALENDARPICKER></TD>
-													</TR>
-													<TR>
-														<TD style="HEIGHT: 16px" align="left" colSpan="4"></TD>
-													</TR>
-													<TR>
-														<TD align="left" colSpan="3">
-															<CC1:S_BUTTON id="btnsRicerca" runat="server" cssclass="btn" text="Ricerca"></CC1:S_BUTTON>&nbsp;
-															<ASP:BUTTON id="cmdReset" runat="server" cssclass="btn" text="Reset"></ASP:BUTTON>&nbsp;
-															<ASP:VALIDATIONSUMMARY id="ValidationSummary1" runat="server"></ASP:VALIDATIONSUMMARY></TD>
-														<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
-                  target=_blank>Guida</A></TD>
-													</TR>
-												</TABLE>
+            <TABLE id=tblSearch100 cellSpacing=1 cellPadding=2 border=0>
+              <TR>
+                <TD align=left colSpan=4>
+<UC1:RICERCAMODULO id=RicercaModulo1 runat="server"></UC1:RICERCAMODULO></TD></TR>
+              <TR>
+                <TD style="WIDTH: 83px" align=left width=83>Richiesta di 
+                  Lavoro:</TD>
+                <TD width="30%">
+<CC1:S_TEXTBOX id=txtsRichiesta runat="server" width="100px" dbindex="2" dbdatatype="Integer" maxlength="10" dbsize="255" dbdirection="Input" dbparametername="p_Wr_Id"></CC1:S_TEXTBOX></TD>
+                <TD align=left width="15%">Addetto:</TD>
+                <TD width="30%">
+<UC1:ADDETTI id=Addetti1 runat="server"></UC1:ADDETTI></TD></TR>
+              <TR>
+                <TD style="WIDTH: 83px" align=left>Data Da:</TD>
+                <TD>
+<UC1:CALENDARPICKER id=CalendarPicker1 runat="server"></UC1:CALENDARPICKER></TD>
+                <TD align=left>Data A:</TD>
+                <TD>
+<UC1:CALENDARPICKER id=CalendarPicker2 runat="server"></UC1:CALENDARPICKER>
+<ASP:COMPAREVALIDATOR id=CompareValidator1 runat="server" errormessage="Data non valida!" operator="GreaterThanEqual" type="Date" display="Dynamic"></ASP:COMPAREVALIDATOR></TD></TR>
+              <TR>
+                <TD style="WIDTH: 83px" align=left>Ordine di Lavoro:</TD>
+                <TD>
+<CC1:S_TEXTBOX id=txtsOrdine runat="server" width="100px" maxlength="10" dbsize="255" dbdirection="Input" dbparametername="p_Wr_Id"></CC1:S_TEXTBOX></TD>
+                <TD align=left>Stato Richiesta:</TD>
+                <TD>
+<CC1:S_COMBOBOX id=cmbsStatus runat="server" width="99%"></CC1:S_COMBOBOX></TD></TR>
+              <TR>
+                <TD style="WIDTH: 83px" align=left>Servizio:</TD>
+                <TD>
+<CC1:S_COMBOBOX id=cmbsServizio runat="server" width="99%"></CC1:S_COMBOBOX></TD>
+                <TD align=left>Gruppo:</TD>
+                <TD>
+<CC1:S_COMBOBOX id=cmbsGruppo runat="server" width="99%"></CC1:S_COMBOBOX></TD></TR>
+              <TR>
+                <TD style="WIDTH: 83px" align=left>Richiedente:</TD>
+                <TD>
+<UC1:RICHIEDENTI id=Richiedenti1 runat="server"></UC1:RICHIEDENTI></TD>
+                <TD align=left>Urgenza:</TD>
+                <TD>
+<CC1:S_COMBOBOX id=cmbsUrgenza runat="server" width="99%"></CC1:S_COMBOBOX></TD></TR>
+              <TR>
+                <TD style="WIDTH: 83px" align=left colSpan=1>Descrizione:</TD>
+                <TD colSpan=3>
+<CC1:S_TEXTBOX id=txtDescrizione runat="server" width="99%" maxlength="255" dbsize="255" dbdirection="Input" dbparametername="p_Wr_Id"></CC1:S_TEXTBOX></TD></TR>
+              <TR>
+                <TD id=tblTipoManutenzione style="DISPLAY: none; WIDTH: 83px" 
+                align=left>Tipo Manutenzione:</TD>
+                <TD id=tblTipoManutenzione1 style="DISPLAY: none">
+<CC1:S_COMBOBOX id=cmbsTipoManutenzione runat="server" width="99%"></CC1:S_COMBOBOX></TD>
+                <TD id=tabletipointervento style="DISPLAY: none">Tipo 
+                  Intervento:</TD>
+                <TD id=tabletipointervento2 style="DISPLAY: none">
+<CC1:S_COMBOBOX id=cmbsTipoIntervento runat="server" width="99%"></CC1:S_COMBOBOX></TD></TR>
+              <TR id=trdate style="DISPLAY: none">
+                <TD style="WIDTH: 83px" align=left>Data Privista Inizio:</TD>
+                <TD>
+<UC1:CALENDARPICKER id=CalendarPicker3 runat="server"></UC1:CALENDARPICKER></TD>
+                <TD align=left>Data Prevista Fine:</TD>
+                <TD>
+<UC1:CALENDARPICKER id=CalendarPicker4 runat="server"></UC1:CALENDARPICKER></TD></TR>
+              <TR>
+                <TD style="HEIGHT: 16px" align=left colSpan=4></TD></TR>
+              <TR>
+                <TD align=left colSpan=3>
+<CC1:S_BUTTON id=btnsRicerca runat="server" cssclass="btn" text="Ricerca"></CC1:S_BUTTON>&nbsp; 
+<ASP:BUTTON id=cmdReset runat="server" cssclass="btn" text="Reset"></ASP:BUTTON>&nbsp; 
+<ASP:VALIDATIONSUMMARY id=ValidationSummary1 runat="server"></ASP:VALIDATIONSUMMARY></TD>
+                <TD align=right><A class=GuidaLink href="<%= HelpLink %>" 
+                  target=_blank>Guida</A></TD></TR></TABLE>
 											</COLLAPSE:DATAPANEL></TD>
 									</TR>
 									<TR>
@@ -235,7 +221,7 @@
 										<TD valign="top" align="center" width="100%"></TD>
 									</TR>
 									<TR id="trrichiesta">
-										<TD valign="top" align="center" width="100%"><UC1:GRIDTITLE id="Gridtitle2" runat="server"></UC1:GRIDTITLE><ASP:DATAGRID id="DataGridRicerca2" runat="server" cssclass="DataGrid" autogeneratecolumns="False"
+										<TD valign="top" align="center" width="100%"><UC1:GRIDTITLE id="Gridtitle2" runat="server" ></UC1:GRIDTITLE><ASP:DATAGRID id="DataGridRicerca2" AllowCustomPaging="True" runat="server" cssclass="DataGrid" autogeneratecolumns="False"
 												gridlines="Vertical" borderwidth="1px" bordercolor="Gray" allowpaging="True">
 												<ALTERNATINGITEMSTYLE cssclass="DataGridAlternatingItemStyle"></ALTERNATINGITEMSTYLE>
 												<ITEMSTYLE cssclass="DataGridItemStyle"></ITEMSTYLE>
@@ -283,7 +269,7 @@
 													<ASP:BOUNDCOLUMN visible="False" datafield="tipomanutenzione_id" headertext="idstato"></ASP:BOUNDCOLUMN>
 													<ASP:BOUNDCOLUMN datafield="tipoman" headertext="Tipo Man."></ASP:BOUNDCOLUMN>
 												</COLUMNS>
-												<PAGERSTYLE horizontalalign="Left"  cssclass="DataGridPagerStyle" mode="NumericPages"></PAGERSTYLE>
+												<PAGERSTYLE horizontalalign="Left" cssclass="DataGridPagerStyle" mode="NumericPages"></PAGERSTYLE>
 											</ASP:DATAGRID></TD>
 									</TR>
 								</TBODY>
@@ -292,7 +278,6 @@
 					</TR>
 				</TBODY>
 			</TABLE>
-		</FORM>
-		</TR></TBODY></TABLE></TR></TBODY></TABLE></TR></TBODY></TABLE></FORM>
-	</body><script language="javascript">parent.left.calcola();</script>
+		</FORM></TR></TBODY></TABLE></TR></TBODY></TABLE></TR></TBODY></TABLE></FORM><script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

@@ -65,7 +65,7 @@ namespace TheSite.WebControls
 			//Verivico se è presente la combo Piano e presente e la aggiungo come parametro
 			if (NameComboPiano!="")
 			{
-				S_ComboBox cbp=(S_ComboBox)this.Page.FindControl(NameComboPiano);
+				DropDownList cbp=(DropDownList)this.Page.FindControl(NameComboPiano);
 				if (cbp!=null )
 				{
 					_StrBld.Append("var val3=\"&piano=\";\n");

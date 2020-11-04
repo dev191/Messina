@@ -30,7 +30,7 @@
 		
 		function PopolaDest(desc,id)
 			{ 
-				var appo=('<%=NomeTxtDesc %>');
+				var appo=('<%=NomeTxtDesc %>');/*s_txtDestinazione*/
 				var appo1=('<%=NomeTxtIdMat %>');
 				opener.document.getElementById('<%=NomeTxtDesc %>').value=desc;
 				if (appo1 != '') 

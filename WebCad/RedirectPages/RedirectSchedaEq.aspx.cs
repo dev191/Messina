@@ -14,7 +14,7 @@ namespace WebCad.RedirectPages
 	/// <summary>
 	/// Summary description for RedirectSchedaEq.
 	/// </summary>
-	public class RedirectSchedaEq : System.Web.UI.Page    // System.Web.UI.Page
+	public class RedirectSchedaEq : System.Web.UI.Page
 	{
 		private void Page_Load(object sender, System.EventArgs e)
 		{

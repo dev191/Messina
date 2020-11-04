@@ -1,5 +1,5 @@
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <%@ Page language="c#" Codebehind="ListaEdifici.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ListaEdifici" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 	<HEAD>
@@ -61,7 +61,7 @@
 			
 			
 			function Popola2(j)
-			{    
+			{ 
 				parent.document.getElementById(idmodulo + "_" + "txtsCodEdificio").value=a[j];
 				parent.document.getElementById(idmodulo + "_" + "lblDenominazione").innerText=b[j];
                 parent.document.getElementById(idmodulo + "_" + "txtRicerca").value=c[j];   
@@ -72,6 +72,7 @@
                 parent.document.getElementById(idmodulo + "_" + "lblTelefono").innerText=h[j];
 				parent.document.getElementById(idmodulo + "_" + "lblCdC").innerText=i[j];
 				parent.document.getElementById(idmodulo + "_" + "hiddenidbl").innerText=l[j];
+				parent.document.getElementById(idmodulo + "_" + "presidio").innerText=m[j];
 				Chiudi();
 				if (typeof(parent.__doPostBack) == 'function')
 				{
@@ -88,11 +89,11 @@
 				</tr>
 				<tr>
 					<td width="100%"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="MyDataGrid1" runat="server" Width="100%" GridLines="Vertical" AllowPaging="True"
-							CssClass="DataGrid" AutoGenerateColumns="False" CellPadding="4" BackColor="White" BorderWidth="1px" BorderStyle="None" BorderColor="Gray">
-							<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
+							AllowCustomPaging="True" CssClass="DataGrid" AutoGenerateColumns="False" CellPadding="4" BackColor="White" BorderWidth="1px" BorderStyle="None" BorderColor="Gray">
 							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
+							<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 							<Columns>
 								<asp:TemplateColumn>
 									<HeaderStyle Width="30px"></HeaderStyle>
@@ -110,9 +111,10 @@
 								<asp:BoundColumn Visible="False" DataField="referente"></asp:BoundColumn>
 								<asp:BoundColumn Visible="False" DataField="telefono_referente"></asp:BoundColumn>
 								<asp:BoundColumn Visible="False" DataField="centrodicosto"></asp:BoundColumn>
-								<asp:BoundColumn DataField="id" HeaderText="Id. Edificio" Visible="False"></asp:BoundColumn>
+								<asp:BoundColumn Visible="False" DataField="id" HeaderText="Id. Edificio"></asp:BoundColumn>
+								<asp:BoundColumn Visible="False" DataField="presidio" HeaderText="presidio"></asp:BoundColumn>
 							</Columns>
-							<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
+							<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 						</asp:datagrid></td>
 				</tr>
 				<tr>

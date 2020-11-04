@@ -1,101 +1,136 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ManCorrettiva.Traccia_doc
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
+using ApplicationDataLayer.Collections;
 
 namespace TheSite.Classi.ManCorrettiva
 {
-  public class Traccia_doc : AbstractBase
-  {
-    public int GetCount(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_TRACCIA_DOC.SP_GETCountLOG";
-      return int.Parse(oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy().Tables[0].Rows[0][0].ToString());
-    }
+	/// <summary>
+	/// Descrizione di riepilogo per Traccia_doc.
+	/// </summary>
+	public class Traccia_doc:AbstractBase
+	{
+		public Traccia_doc()
+		{
+			//
+			// TODO: aggiungere qui la logica del costruttore
+			//
+		}
 
-    public DataSet GetSfoglia(S_ControlsCollection CollezioneControlli)
-    {
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_TRACCIA_DOC.SP_GETLOG";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		public int GetCount(S_ControlsCollection CollezioneControlli)
+		{
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count;
+			CollezioneControlli.Add(s_Cursor);					
+		
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_TRACCIA_DOC.SP_GETCountLOG";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      return 0;
-    }
 
-    public override DataSet GetData() => (DataSet) null;
+			return	int.Parse(_Ds.Tables[0].Rows[0][0].ToString());
+		}
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli) => (DataSet) null;
+		public  DataSet GetSfoglia(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;	
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_TRACCIA_DOC.SP_GETLOG";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public override DataSet GetSingleData(int ItemID) => (DataSet) null;
+			return _Ds;	
 
-    public DataSet GetDestinatariInvio(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_TRACCIA_DOC.SP_Destinatari";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		}
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			int i=0;
+			return i;
+		}
+		public override DataSet GetData()
+		{
+			return null;
+		}
+		public override DataSet GetData(S_Controls.Collections.S_ControlsCollection CollezioneControlli)
+		{
+			return null;
+		}
+		public override DataSet GetSingleData(int ItemID)
+		{
+			return null;
+		}
+		public  DataSet GetDestinatariInvio(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;	
 
-    public DataSet GetDestinatari(int bl_id, int servizio_id, string TipoDoc)
-    {
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_bl_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject1).set_Value((object) bl_id);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_servizio_id");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject2).set_Value((object) servizio_id);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_tipo_doc");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject3).set_Value((object) TipoDoc.ToString());
-      ((ParameterObject) sObject3).set_Size(250);
-      controlsCollection.Add(sObject3);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject4).set_Index(((CollectionBase) controlsCollection).Count);
-      controlsCollection.Add(sObject4);
-      string str = "PACK_TRACCIA_DOC.SP_GETDESTINATARI";
-      return oracleDataLayer.GetRows((object) controlsCollection, str);
-    }
-  }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count;
+			CollezioneControlli.Add(s_Cursor);			
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_TRACCIA_DOC.SP_Destinatari";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+
+		}
+		public DataSet GetDestinatari(int bl_id,int servizio_id,string TipoDoc)
+		{
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+			S_ControlsCollection _SColl = new S_ControlsCollection();
+		
+			S_Controls.Collections.S_Object p = new S_Object();
+			p.ParameterName = "p_bl_id";
+			p.DbType = CustomDBType.Integer;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Value = bl_id;
+			_SColl.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_servizio_id";
+			p.DbType = CustomDBType.Integer;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Value = servizio_id;
+			_SColl.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_tipo_doc";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Value = TipoDoc.ToString();
+			p.Size=250;
+			_SColl.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "IO_CURSOR";
+			p.DbType = CustomDBType.Cursor;
+			p.Direction = ParameterDirection.Output;
+			p.Index = _SColl.Count;
+			_SColl.Add(p);
+
+			string s_StrSql = "PACK_TRACCIA_DOC.SP_GETDESTINATARI";
+			 
+			DataSet _Ds =  _OraDl.GetRows(_SColl, s_StrSql);
+
+			return _Ds;
+		}
+	
+	}
 }

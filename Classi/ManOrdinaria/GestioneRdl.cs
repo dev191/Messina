@@ -1,155 +1,254 @@
-ï»¿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ManOrdinaria.GestioneRdl
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.ManOrdinaria
 {
-  public class GestioneRdl : AbstractBase
-  {
-    private string username = string.Empty;
+	/// <summary>
+	/// Descrizione di riepilogo per GestioneRdl.
+	/// Usata dalla form GestioneRdl.aspx
+	/// </summary>
+	public class GestioneRdl : AbstractBase 
+	{
+		public GestioneRdl(string Username)
+		{
+			username=Username;
+		}
+		private string username=string.Empty;
+		
+		#region Metodi Pubblici
+		/// <summary>
+		/// Usata per caricare le ditte in base all'utente loggato.
+		/// Tornare le ditte
+		/// </summary>
+		/// <returns></returns>
+		public override DataSet GetData()
+		{
+			
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
 
-    public GestioneRdl(string Username) => this.username = Username;
+			S_Controls.Collections.S_Object s_p_username = new S_Object();
+			s_p_username.ParameterName = "p_username";
+			s_p_username.DbType = CustomDBType.VarChar;
+			s_p_username.Direction = ParameterDirection.Input;
+			s_p_username.Index = CollezioneControlli.Count + 1;
+			s_p_username.Value =this.username;
+			s_p_username.Size=50; 
+			CollezioneControlli.Add(s_p_username);
 
-    public override DataSet GetData()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_username");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      ((ParameterObject) sObject1).set_Size(50);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_GEST_RDL.SP_GETDITTA";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
 
-    public DataSet GetGuppo()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_GEST_RDL.SP_GETGRUPPO";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+			CollezioneControlli.Add(s_Cursor);
 
-    public DataSet GetUrgenza()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_GEST_RDL.SP_GETURGENZA";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_GEST_RDL.SP_GETDITTA";
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_username");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      ((ParameterObject) sObject1).set_Size(50);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_GEST_RDL.SP_GETCOMPLETAMENTO";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			return _Ds;	
+		}
+        /// <summary>
+        /// Recupero i Gruppi
+        /// </summary>
+        /// <returns></returns>
+		public  DataSet GetGuppo()
+		{
+			
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
 
-    public DataSet GetRDL1(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_COMMON.SP_GET_RDL";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			CollezioneControlli.Add(s_Cursor);
 
-    public int GetRDL1Count(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_COMMON.SP_GET_RDLCount";
-      return int.Parse(oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy().Tables[0].Rows[0][0].ToString());
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_GEST_RDL.SP_GETGRUPPO";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public int GetRDL2Count(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_COMMON.SP_GET_RDL_DATACount";
-      return int.Parse(oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy().Tables[0].Rows[0][0].ToString());
-    }
+			return _Ds;	
+		}
+        /// <summary>
+        /// Recupero i Livelli di Urgenza
+        /// </summary>
+        /// <returns></returns>
+		public  DataSet GetUrgenza()
+		{
+			
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
 
-    public DataSet GetRDL2(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_COMMON.SP_GET_RDL_DATA";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      return 0;
-    }
-  }
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_GEST_RDL.SP_GETURGENZA";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+        /// <summary>
+        /// Ricerca le ricchieste con status:
+        /// 6	I	Emessa in Lavorazione
+		/// 11	HA	Emessa ma Sospesa per Inaccessibilità	
+		/// 12	HP	Emessa ma Sospesa per Approvviggionamento 
+		/// 13	HL	Emessa ma Sospesa per Intervento Specialistico
+        /// </summary>
+        /// <param name="CollezioneControlli"></param>
+        /// <returns></returns>
+		public  override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+						
+
+			S_Controls.Collections.S_Object s_p_username = new S_Object();
+			s_p_username.ParameterName = "p_username";
+			s_p_username.DbType = CustomDBType.VarChar;
+			s_p_username.Direction = ParameterDirection.Input;
+			s_p_username.Index = CollezioneControlli.Count + 1;
+			s_p_username.Value =this.username;
+			s_p_username.Size=50; 
+			CollezioneControlli.Add(s_p_username);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_GEST_RDL.SP_GETCOMPLETAMENTO";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+
+		public override DataSet GetSingleData(int itemId)
+		{
+	      return null;
+		}
+
+		public  DataSet GetRDL1(S_ControlsCollection CollezioneControlli)
+		{
+			
+			//S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
+
+		
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count ;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_COMMON.SP_GET_RDL";
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+
+		// Paolo
+
+		public  int  GetRDL1Count(S_ControlsCollection CollezioneControlli)
+		{
+		
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count ;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_COMMON.SP_GET_RDLCount"; 
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();		
+
+
+			return	int.Parse(_Ds.Tables[0].Rows[0][0].ToString());
+		}
+
+
+		public  int GetRDL2Count(S_ControlsCollection CollezioneControlli)
+		{
+			
+			//S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
+
+		
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count ;
+
+			CollezioneControlli.Add(s_Cursor);
+			
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_COMMON.SP_GET_RDL_DATACount";
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return int.Parse(_Ds.Tables[0].Rows[0][0].ToString());	
+		}
+
+		// End Paolo
+
+		public  DataSet GetRDL2(S_ControlsCollection CollezioneControlli)
+		{
+			
+			//S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
+
+		
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count ;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_COMMON.SP_GET_RDL_DATA";
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+
+
+
+
+
+
+		#endregion
+
+		
+		#region Metodi Private
+
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			return 0;
+		}
+
+		#endregion
+	}
 }

@@ -1,12 +1,13 @@
-<%@ Register TagPrefix="uc1" TagName="CodiceStdApparecchiatura" Src="../WebControls/CodiceStdApparecchiatura.ascx" %>
-<%@ Page language="c#" Codebehind="DataRoom.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnagrafeImpianti.DataRoom" %>
-<%@ Register TagPrefix="uc1" TagName="UserStanze" Src="../WebControls/UserStanze.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CodiceApparecchiature" Src="../WebControls/CodiceApparecchiature.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CodiceApparecchiature" Src="../WebControls/CodiceApparecchiature.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="UserStanze" Src="../WebControls/UserStanze.ascx" %>
+<%@ Page language="c#" Codebehind="DataRoom.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnagrafeImpianti.DataRoom" %>
+<%@ Register TagPrefix="uc1" TagName="UserStanzeRic" Src="../WebControls/UserStanzeRic.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CodiceStdApparecchiatura" Src="../WebControls/CodiceStdApparecchiatura.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -27,7 +28,18 @@
 		  document.getElementById('<%=CodiceStdApparecchiatura1.CodiceHidden.ClientID%>').value="";
 		}
 	}
-	
+	 function selezionedata(sender)
+	 {
+	   var ctrTextCodice=document.getElementById('<%=RicercaModulo1.TxtCodice.ClientID%>');
+	   if(ctrTextCodice.value=="")
+	   {
+	     alert("Il Codice Edificio è obbligatorio");
+	     return false;
+	   }
+	 
+	    var ctrl=document.getElementById(sender);
+		
+	 }
 		</SCRIPT>
 	</HEAD>
 	<BODY ms_positioning="GridLayout">
@@ -42,9 +54,9 @@
 						<COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" titlestyle-cssclass="TitleSearch" collapsed="False"
 							titletext="Ricerca" expandtext="Espandi" expandimageurl="../Images/downarrows_trans.gif" collapsetext="Espandi/Riduci"
 							cssclass="DataPanel75" collapseimageurl="../Images/uparrows_trans.gif" allowtitleexpandcollapse="True">
-							<TABLE id="tblSearch100" cellspacing="1" cellpadding="1" border="0">
+							<TABLE id="tblSearch100" cellSpacing="1" cellPadding="1" border="0">
 								<TR>
-									<TD valign="top" align="center" colspan="2">
+									<TD vAlign="top" align="center" colSpan="2">
 										<UC1:RICERCAMODULO id="RicercaModulo1" runat="server"></UC1:RICERCAMODULO></TD>
 								</TR>
 								<TR>
@@ -55,13 +67,13 @@
 											width="392px"></CC1:S_COMBOBOX></TD>
 								</TR>
 								<TR>
-									<TD colspan="2"><SPAN>
-											<UC1:USERSTANZE id="UserStanze1" runat="server"></UC1:USERSTANZE></SPAN></TD>
+									<TD colSpan="2"><SPAN>
+											<uc1:UserStanzeRic id="UserStanze1" runat="server"></uc1:UserStanzeRic></SPAN></TD>
 								</TR>
 								<TR>
 									<TD><SPAN>Servizio:</SPAN></TD>
 									<TD>
-										<CC1:S_COMBOBOX id="cmbsServizio" runat="server" width="392px"></CC1:S_COMBOBOX></TD>
+										<CC1:S_COMBOBOX id="cmbsServizio" runat="server" width="392px" AutoPostBack="True"></CC1:S_COMBOBOX></TD>
 								</TR>
 								<TR>
 									<TD><SPAN>Std. Apparecchiatura:</SPAN></TD>
@@ -69,22 +81,22 @@
 										<CC1:S_COMBOBOX id="cmbsApparecchiatura" runat="server" width="392px"></CC1:S_COMBOBOX></TD>
 								</TR>
 								<TR>
-									<TD valign="top" align="center" colspan="2">
+									<TD vAlign="top" align="center" colSpan="2">
 										<UC1:CODICEAPPARECCHIATURE id="CodiceApparecchiature1" runat="server"></UC1:CODICEAPPARECCHIATURE></TD>
 								</TR>
 								<TR>
-									<TD colspan="2">&nbsp;
+									<TD colSpan="2">&nbsp;
 										<UC1:CODICESTDAPPARECCHIATURA id="CodiceStdApparecchiatura1" runat="server" visible="False"></UC1:CODICESTDAPPARECCHIATURA>
 										<P></P>
-										<TABLE id="Table1" cellspacing="0" cellpadding="0" width="100%" border="0">
+										<TABLE id="Table1" cellSpacing="0" cellPadding="0" width="100%" border="0">
 											<TR>
 												<TD style="WIDTH: 219px" align="right">
 													<CC1:S_BUTTON id="S_btMostra" runat="server" cssclass="btn" width="134px" text="Mostra Dettagli"
 														tooltip="Avvia la ricerca"></CC1:S_BUTTON>&nbsp;</TD>
 												<TD>&nbsp;
-													<CC1:S_BUTTON id="btReset" runat="server" cssclass="btn" width="134px" text="Reset"></CC1:S_BUTTON></TD>
-												<TD align="right"><A CLASS="GuidaLink" HREF="<%= HelpLink %>" 
-                  TARGET="_blank">Guida</A></TD>
+													<CC1:S_BUTTON id="btReset" runat="server" cssclass="btn" width="134px" text="Reset" CausesValidation="False"></CC1:S_BUTTON></TD>
+												<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
+                  target=_blank>Guida</A></TD>
 											</TR>
 										</TABLE>
 									</TD>
@@ -94,35 +106,35 @@
 				</TR>
 				<TR valign="top">
 					<TD valign="top"><UC1:GRIDTITLE id="GridTitle1" runat="server"></UC1:GRIDTITLE><ASP:DATAGRID id="MyDataGrid1" runat="server" cssclass="DataGrid" width="100%" gridlines="Vertical"
-							allowpaging="True" autogeneratecolumns="False" cellpadding="4" backcolor="White" borderwidth="1px" borderstyle="None" bordercolor="Gray">
-							<FOOTERSTYLE forecolor="#003399" backcolor="#99CCCC"></FOOTERSTYLE>
-							<ALTERNATINGITEMSTYLE cssclass="DataGridAlternatingItemStyle"></ALTERNATINGITEMSTYLE>
-							<ITEMSTYLE cssclass="DataGridItemStyle"></ITEMSTYLE>
-							<HEADERSTYLE cssclass="DataGridHeaderStyle"></HEADERSTYLE>
-							<COLUMNS>
-								<ASP:TEMPLATECOLUMN>
-									<HEADERSTYLE width="30px"></HEADERSTYLE>
-									<ITEMSTYLE horizontalalign="Center"></ITEMSTYLE>
-									<ITEMTEMPLATE>
+							allowpaging="True" autogeneratecolumns="False" cellpadding="4" backcolor="White" borderwidth="1px" borderstyle="None" bordercolor="Gray" AllowCustomPaging="True">
+							<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
+							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
+							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
+							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
+							<Columns>
+								<asp:TemplateColumn>
+									<HeaderStyle Width="30px"></HeaderStyle>
+									<ItemStyle HorizontalAlign="Center"></ItemStyle>
+									<ItemTemplate>
 										<asp:ImageButton id="Imagebutton1" title="Elenco Apparecchiature per Stanza" OnCommand="imagebutton1_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"id_rm")+"&amp;bl_id=" + DataBinder.Eval(Container.DataItem,"id_bl")+"&amp;piani=" + DataBinder.Eval(Container.DataItem,"idpiani")+ "&amp;TitoloStanza=" +DataBinder.Eval(Container.DataItem,"Stanza")  %>' Runat="server" ImageUrl="../Images/Stanza.gif">
-										</ASP:IMAGEBUTTON>
-									</ITEMTEMPLATE>
-								</ASP:TEMPLATECOLUMN>
-								<ASP:TEMPLATECOLUMN>
-									<HEADERSTYLE width="30px"></HEADERSTYLE>
-									<ITEMTEMPLATE>
+										</asp:ImageButton>
+									</ItemTemplate>
+								</asp:TemplateColumn>
+								<asp:TemplateColumn>
+									<HeaderStyle Width="30px"></HeaderStyle>
+									<ItemTemplate>
 										<asp:ImageButton id="Imagebutton2" title="Elenco Apparecchiature per Piano" OnCommand="imagebutton2_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"idpiani")+"&amp;bl_id=" + DataBinder.Eval(Container.DataItem,"id_bl") + "&amp;TitoloPiano=" +DataBinder.Eval(Container.DataItem,"piano") %>' Runat="server" ImageUrl="../Images/Piano.gif">
-										</ASP:IMAGEBUTTON>
-									</ITEMTEMPLATE>
-								</ASP:TEMPLATECOLUMN>
-								<ASP:BOUNDCOLUMN datafield="bl_id" headertext="Cod.Edificio"></ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="piano" headertext="Piano"></ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="stanza" headertext="Stanza"></ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN visible="False" datafield="id_bl"></ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN visible="False" datafield="id_rm"></ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN visible="False" datafield="idpiani"></ASP:BOUNDCOLUMN>
-							</COLUMNS>
-							<PAGERSTYLE horizontalalign="Left" forecolor="Black" backcolor="Silver" mode="NumericPages"></PAGERSTYLE>
+										</asp:ImageButton>
+									</ItemTemplate>
+								</asp:TemplateColumn>
+								<asp:BoundColumn DataField="bl_id" HeaderText="Cod.Edificio"></asp:BoundColumn>
+								<asp:BoundColumn DataField="piano" HeaderText="Piano"></asp:BoundColumn>
+								<asp:BoundColumn DataField="stanza" HeaderText="Stanza"></asp:BoundColumn>
+								<asp:BoundColumn Visible="False" DataField="id_bl"></asp:BoundColumn>
+								<asp:BoundColumn Visible="False" DataField="id_rm"></asp:BoundColumn>
+								<asp:BoundColumn Visible="False" DataField="idpiani"></asp:BoundColumn>
+							</Columns>
+							<PagerStyle HorizontalAlign="Left" ForeColor="Black" BackColor="Silver" Mode="NumericPages"></PagerStyle>
 						</ASP:DATAGRID></TD>
 				</TR>
 			</TABLE>

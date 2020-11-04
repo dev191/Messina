@@ -58,7 +58,7 @@
 													<TD>
 														<ASP:LABEL id="lblServizio" runat="server">Servizio</ASP:LABEL></TD>
 													<TD>
-														<ASP:DROPDOWNLIST id="cmbServizio" runat="server" width="136px"></ASP:DROPDOWNLIST></TD>
+														<ASP:DROPDOWNLIST id="cmbServizio" runat="server" ></ASP:DROPDOWNLIST></TD>
 													<TD></TD>
 													<TD></TD>
 												</TR>

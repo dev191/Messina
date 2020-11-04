@@ -10,14 +10,14 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.ManutenzioneProgrammata
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Completamento_MP_WRList.
 	/// </summary>
-	public class Completamento_MP_WRList : System.Web.UI.Page    // System.Web.UI.Page
+	public class Completamento_MP_WRList : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
 		protected S_Controls.S_Button btnsCompletaOdl;
@@ -50,14 +50,14 @@ namespace TheSite.ManutenzioneProgrammata
 		
 		CompletamentoMP _fp;
 	
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 

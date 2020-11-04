@@ -10,6 +10,8 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
+using MyCollection;
+
 using System.Reflection;
 
 namespace TheSite.ManutenzioneProgrammata
@@ -17,7 +19,7 @@ namespace TheSite.ManutenzioneProgrammata
 	/// <summary>
 	/// Descrizione di riepilogo per Rapportino.
 	/// </summary>
-	public class Rapportino : System.Web.UI.Page    // System.Web.UI.Page
+	public class Rapportino : System.Web.UI.Page
 	{
 		protected S_Controls.S_ComboBox cmbsAnno;
 		protected S_Controls.S_ComboBox cmbMeseDa;
@@ -44,6 +46,9 @@ namespace TheSite.ManutenzioneProgrammata
 		protected System.Web.UI.WebControls.RadioButton StampaLunga;
 		protected System.Web.UI.WebControls.Button cmdReset;		
 		protected WebControls.PageTitle PageTitle1;
+		protected System.Web.UI.WebControls.RadioButton StampaDettaglioLocaliCorta;
+		protected System.Web.UI.WebControls.RadioButton StampaDetaglioLocali;
+		protected System.Web.UI.WebControls.RadioButton StampaDetaglioLocaliLung2Pa;
 		protected WebControls.BottomMenu BottomMenu1;
 	
 		private void Page_Load(object sender, System.EventArgs e)
@@ -137,8 +142,6 @@ namespace TheSite.ManutenzioneProgrammata
 
 		private void CaricaCombiAnni()
 		{
-
-			
 			string anno_corrente = DateTime.Now.Year.ToString();
 			cmbsAnno.SelectedValue=anno_corrente;
 		}
@@ -218,7 +221,7 @@ namespace TheSite.ManutenzioneProgrammata
 
 			DataSet _MyDs;
 			_MyDs = _Rapportino.GetEdifici(Convert.ToInt32(cmbsAnno.SelectedValue),Convert.ToInt32(cmbsComune.SelectedValue),
-				cmbMeseDa.SelectedValue, cmbMeseA.SelectedValue);
+				cmbMeseDa.SelectedValue, cmbMeseA.SelectedValue,Context.User.Identity.Name);
 			
 			if (_MyDs.Tables[0].Rows.Count > 0)
 			{	
@@ -299,10 +302,10 @@ namespace TheSite.ManutenzioneProgrammata
 			}
 
 		}
-		private void Ricerca()
+		private void Ricerca(bool reset)
 		{	
 			
-			Session.Remove("DataSet");
+			//Session.Remove("DataSet");
 
 			S_Controls.Collections.S_ControlsCollection CollezioneControlli = new S_Controls.Collections.S_ControlsCollection();
 			
@@ -310,7 +313,53 @@ namespace TheSite.ManutenzioneProgrammata
 			cmbsEdificio.DBDefaultValue="0";
 			cmbsServizio.DBDefaultValue="0";
 			
-            //WO
+			CollezioneControlli = GetData();
+
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+			CollezioneControlli.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca.PageSize;			
+			CollezioneControlli.Add(s_p_pagesize);
+
+
+			Classi.ManProgrammata.Rapportino  _Rapportino = new TheSite.Classi.ManProgrammata.Rapportino();
+
+			DataSet _MyDs = _Rapportino.GetData(CollezioneControlli).Copy();
+
+			if (reset)
+			{
+				CollezioneControlli.Clear();
+				CollezioneControlli = GetData();
+
+				int _totalRecords = _Rapportino.getCount(CollezioneControlli);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString(); 
+			}
+
+			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
+					
+
+
+			// this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.DataGridRicerca.DataBind();	
+		}
+
+		// Paolo
+		private S_ControlsCollection GetData()
+		{
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();		
+
+			//WO
 			int WO=0;
 			if(txtsOrdine.Text!="")
 				WO = Int16.Parse(txtsOrdine.Text);	
@@ -393,7 +442,7 @@ namespace TheSite.ManutenzioneProgrammata
 			s_Mese1.Direction = ParameterDirection.Input;
 			s_Mese1.Index = 6;
 			s_Mese1.Size=10;
-			s_Mese1.Value=cmbMeseDa.SelectedValue;
+			s_Mese1.Value=Convert.ToInt32( cmbMeseDa.SelectedValue);
 			CollezioneControlli.Add(s_Mese1);
 
 			// Mese A										
@@ -403,26 +452,12 @@ namespace TheSite.ManutenzioneProgrammata
 			s_Mese2.Direction = ParameterDirection.Input;
 			s_Mese2.Index = 7;
 			s_Mese2.Size=10;
-			s_Mese2.Value=cmbMeseA.SelectedValue;
+			s_Mese2.Value=Convert.ToInt32( cmbMeseA.SelectedValue);
 			CollezioneControlli.Add(s_Mese2);
 
-			Classi.ManProgrammata.Rapportino  _Rapportino = new TheSite.Classi.ManProgrammata.Rapportino();
+			return CollezioneControlli;
 
-			DataSet _MyDs = _Rapportino.GetData(CollezioneControlli).Copy();
-
-			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
-			this.DataGridRicerca.DataBind();			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();
-			
-			if (_MyDs.Tables[0].Rows.Count>0)
-			{				
-				PanelCrea.Visible=true;											
-				Session.Add("DataSet",_MyDs.Tables[0]);
-			}
-			else
-				PanelCrea.Visible=false;
-		}
-
+		} 
 		private void GetControlli()
 		{	
 			Classi.clMyDataGridCollection _cl = new TheSite.Classi.clMyDataGridCollection();
@@ -535,24 +570,36 @@ namespace TheSite.ManutenzioneProgrammata
 				SetControlli();										
 			}
 			
+
+			S_Controls.Collections.S_ControlsCollection CollezioneControlli = new S_Controls.Collections.S_ControlsCollection();
+			cmbsComune.DBDefaultValue="0";
+			cmbsEdificio.DBDefaultValue="0";
+			cmbsServizio.DBDefaultValue="0";
+			CollezioneControlli = GetData();
+
+			Classi.ManProgrammata.Rapportino  _Rapportino = new TheSite.Classi.ManProgrammata.Rapportino();
+			DataSet ds = _Rapportino.GetDataSel(CollezioneControlli);
+			
+			DataGridRicerca.AllowCustomPaging =false;
+			DataGridRicerca.CurrentPageIndex=0;
+			
+		
 			for(int Pagine = 0;Pagine<=DataGridRicerca.PageCount;Pagine++)
 			{
-	
-				DataGridRicerca.DataSource=Session["DataSet"];
-				DataGridRicerca.DataBind();
-				DataGridRicerca.CurrentPageIndex=Pagine;									
-							
+									
+				this.DataGridRicerca.DataSource =ds.Tables[0];
+				this.DataGridRicerca.DataBind();	
+				DataGridRicerca.CurrentPageIndex=Pagine;	
 				SetDati(val);
-				
+												
 				if(val)
 				{	
 					SetControlli();				
 				}
 			}
-
+			DataGridRicerca.AllowCustomPaging =true;
 			DataGridRicerca.CurrentPageIndex=0;
-			DataGridRicerca.DataSource=Session["DataSet"];
-			DataGridRicerca.DataBind();			
+			Ricerca(true);	
 			GetControlli();						
 		}
 
@@ -602,12 +649,12 @@ namespace TheSite.ManutenzioneProgrammata
 		{
 			DataGridRicerca.CurrentPageIndex=0;						
 			Resetta();
-			Ricerca();
+			Ricerca(true);
 		}
 		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;	
-			Ricerca();
+			Ricerca(false);
 			GetControlli();			
 		}
 
@@ -643,10 +690,32 @@ namespace TheSite.ManutenzioneProgrammata
 					}
 					
 					value = value.Remove(value.Length-1,1);
+					
 					if(StampaCorta.Checked==true) 
+					{
 						Response.Redirect("DisplayRapportino.aspx?Display=S&ODL=" + value); 
-					else
+					}
+					else if(StampaLunga.Checked ==true)
+					{
 						Response.Redirect("DisplayRapportino.aspx?Display=L&ODL=" + value); 
+					}
+					else if(StampaDetaglioLocali.Checked == true)
+					{
+						Response.Redirect("DisplayRapportino.aspx?Display=DL&ODL=" + value); 
+					}
+					else if(StampaDettaglioLocaliCorta.Checked == true)
+					{
+						Response.Redirect("DisplayRapportino.aspx?Display=DC&ODL=" + value);
+					}
+					else if(StampaDetaglioLocaliLung2Pa.Checked == true)
+					{
+						Response.Redirect("DisplayRapportino.aspx?Display=DL2P&ODL=" + value);
+					}
+					else
+					{
+						Exception ex = new Exception();
+						throw  ex;
+					}
 
 				}
 				catch (Exception ex)
@@ -687,7 +756,6 @@ namespace TheSite.ManutenzioneProgrammata
 
 		private void cmbsAnno_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
-			CaricaComboMesi();
 			BindControls();
 		}
 
@@ -707,6 +775,10 @@ namespace TheSite.ManutenzioneProgrammata
 			btnsStampa.Enabled =enable;
 			StampaCorta.Enabled =enable;
 			StampaLunga.Enabled =enable;
+			StampaDetaglioLocali.Enabled = enable;
+			StampaDettaglioLocaliCorta.Enabled = enable;
+			StampaDetaglioLocaliLung2Pa.Enabled = enable;
+
 		}
 
 		private void cmdReset_Click(object sender, System.EventArgs e)
@@ -720,6 +792,8 @@ namespace TheSite.ManutenzioneProgrammata
 				Response.Redirect("Rapportino.aspx");
 			}
 		}
+
+	
 	}
 	
 }

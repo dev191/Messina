@@ -27,13 +27,14 @@ namespace TheSite.AnalisiStatistiche
 	/// Descrizione di riepilogo per DysplayReport.
 	/// </summary>
 	/// 		
-	public class DysplayReport : System.Web.UI.Page    // System.Web.UI.Page
+	public class DysplayReport : System.Web.UI.Page
 	{
 		private string sDataPkInit,sDataPkEnd;
 		private string s_OptBtnDataRichiesta, s_OptBtnDataAssegnazione, s_OptBtnDataChiusura;
 		private string s_OptBtnRdlDitta, s_OptBtnRdlDittaMesi,s_OptBtnRdlMese;
 		private string s_OptBtnRdlServizio, s_OptBtnRdlServizioMesi, s_OptBtnRdlStato;
 		private enum TipoM {Richiesta=1 ,Programmata,Straordinaria,Entrambe};
+		
 		private int  i_Tipologia;
 		protected  CrystalReportViewer rptEngineOra;
 		private StoredProdRpt _get_NPrcd_Rpt = new StoredProdRpt();
@@ -41,6 +42,7 @@ namespace TheSite.AnalisiStatistiche
 		private ReportDocument crReportDocument;
 		private ExportOptions crExportOptions;
 		private DiskFileDestinationOptions crDiskFileDestinationOptions;
+		
 
 		private void Page_Load(object sender, System.EventArgs e)
 		{
@@ -64,7 +66,7 @@ namespace TheSite.AnalisiStatistiche
 				}
 				else
 				{
-					throw new Exception("*Andrea: Pagina di dichiesta non riconosciuta");
+					throw new Exception("*Andrea: Pagina di richiesta non riconosciuta");
 				}
 		
 
@@ -93,8 +95,10 @@ namespace TheSite.AnalisiStatistiche
 			s_OptBtnRdlServizio		 = Request["S_OptBtnRdlServizio"];
 			s_OptBtnRdlServizioMesi  = Request["S_OptBtnRdlServizioMesi"];
 			s_OptBtnRdlStato		 = Request["S_OptBtnRdlStato"];
-			tipoDocumento                = Request["tipoDocumento"];
-			IpostaRpt();
+			tipoDocumento            = Request["tipoDocumento"];
+			
+		
+			ImpostaRpt();
 		}
 
 		#region Codice generato da Progettazione Web Form
@@ -118,13 +122,14 @@ namespace TheSite.AnalisiStatistiche
 
 		}
 		#endregion
-		private void IpostaRpt()
+		private void ImpostaRpt()
 		{
 			DsAnalisiStatistiche ds = new DsAnalisiStatistiche();
 			if(i_Tipologia == (int)TipoM.Entrambe)
 			{
-				ds = recuperaDataSet(ds,(int)TipoM.Richiesta);
-				ds = recuperaDataSet(ds,(int)TipoM.Straordinaria);
+//				ds = recuperaDataSet(ds,(int)TipoM.Richiesta);
+//				ds = recuperaDataSet(ds,(int)TipoM.Straordinaria);
+				ds = recuperaDataSet(ds,4);
 			}
 			else
 			{
@@ -179,7 +184,7 @@ namespace TheSite.AnalisiStatistiche
 				s_data_init.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
 				s_data_init.Direction = ParameterDirection.Input;
 				s_data_init.Size =10;
-				s_data_init.Index = 0;
+				s_data_init.Index = _Scollection.Count;
 				s_data_init.Value = sDataPkInit;
 				_Scollection.Add(s_data_init);
 
@@ -189,7 +194,7 @@ namespace TheSite.AnalisiStatistiche
 				s_data_end.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
 				s_data_end.Direction = ParameterDirection.Input;
 				s_data_end.Size =10;
-				s_data_end.Index = 2;
+				s_data_end.Index = _Scollection.Count;
 				s_data_end.Value = sDataPkEnd;
 				_Scollection.Add(s_data_end);
 
@@ -198,15 +203,46 @@ namespace TheSite.AnalisiStatistiche
 				i_tip.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
 				i_tip.Direction = ParameterDirection.Input;
 				i_tip.Size =10;
-				i_tip.Index = 3;
+				i_tip.Index = _Scollection.Count;
 				i_tip.Value =  tipologiaManutenzione;
+				
 				_Scollection.Add(i_tip);
+
+				S_Controls.Collections.S_Object p_prog  = new S_Controls.Collections.S_Object();
+				p_prog.ParameterName = "S_PROGETTO";
+				p_prog.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+				p_prog.Direction = ParameterDirection.Input;
+				p_prog.Index = _Scollection.Count;
+				string Progetto="";
+				if(Request["VarApp"]!=null)
+					Progetto = Request["VarApp"];
+				if (Progetto=="")
+					p_prog.Value=0;
+			else
+					p_prog.Value = int.Parse(Progetto);
+  			  _Scollection.Add(p_prog);
+				
+				
+				
+			
+//				//aggiunto da anovelli
+//				S_Controls.Collections.S_Object p_prog  = new S_Controls.Collections.S_Object();
+//				p_prog.ParameterName = "S_USER";
+//				p_prog.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+//				p_prog.Direction = ParameterDirection.Input;
+//				p_prog.Index = _Scollection.Count;
+//				p_prog.Value = HttpContext.Current.User.ToString();
+//				_Scollection.Add(p_prog);
+//				//aggiunto da anovelli
+
+
+
 
 				S_Controls.Collections.S_Object s_Cursor = new S_Object();
 				s_Cursor.ParameterName = "IO_CURSOR";
 				s_Cursor.DbType = CustomDBType.Cursor;
 				s_Cursor.Direction = ParameterDirection.Output;
-				s_Cursor.Index = _Scollection .Count + 2;
+				s_Cursor.Index = _Scollection.Count + 2;
 				_Scollection.Add(s_Cursor);
 
 	

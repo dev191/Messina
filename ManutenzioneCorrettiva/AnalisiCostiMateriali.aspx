@@ -1,10 +1,9 @@
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="DataPicker" Src="../WebControls/DataPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
 <%@ Page language="c#" Codebehind="AnalisiCostiMateriali.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneCorrettiva.AnalisiCostiMateriali" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -35,6 +34,11 @@
            window.open(param,"lin","width=800px, height=800px, toolbar=no,location=no,status=yes,menubar=no,scrollbars=yes,resizable=yes");
 			
 		 }
+   function apriAnagMat(funid)
+   {
+      var param1="../Gestione/ListaMateriali.aspx?FunId=649"; 
+      window.open(param1,"lin","width=800px, height=800px, toolbar=no,location=no,status=yes,menubar=no,scrollbars=yes,resizable=yes");
+	}
 	function cmbSelezione(cmbMateriali,txtPrezzoUnitario,txtQuantita,txtPrezzoTotale)
 	{
 		var valueCmb;
@@ -188,31 +192,31 @@ function validateRange()
 								<TR>
 									<TD>RDL</TD>
 									<TD>
-										<CC1:S_TEXTBOX id="txtRdl" runat="server" dbdatatype="Integer" width="216px" dbdirection="Input"
-											dbparametername="p_wrid"></CC1:S_TEXTBOX></TD>
-									<TD>Materiale</TD>
+										<CC1:S_TEXTBOX id="txtRdl" runat="server" dbparametername="p_wrid" dbdirection="Input" width="216px"
+											dbdatatype="Integer"></CC1:S_TEXTBOX></TD>
+									<TD style="WIDTH: 102px">Materiale</TD>
 									<TD>
-										<CC1:S_COMBOBOX id="cmbsMateriale" runat="server" dbdatatype="Integer" width="200px" dbdirection="Input"
-											dbparametername="p_id_materiale" dbindex="1"></CC1:S_COMBOBOX></TD>
+										<CC1:S_COMBOBOX id="cmbsMateriale" runat="server" dbparametername="p_id_materiale" dbdirection="Input"
+											width="200px" dbdatatype="Integer" dbindex="1"></CC1:S_COMBOBOX></TD>
 								</TR>
 								<TR>
 									<TD>Data Aggiornamento Dal</TD>
 									<TD>
 										<UC1:CALENDARPICKER id="CalendarPicker1" runat="server"></UC1:CALENDARPICKER></TD>
-									<TD>Data Aggiornamento Al</TD>
+									<TD style="WIDTH: 102px">Data Aggiornamento Al</TD>
 									<TD>
 										<UC1:CALENDARPICKER id="CalendarPicker2" runat="server"></UC1:CALENDARPICKER></TD>
 								</TR>
 								<TR>
 									<TD>Stato</TD>
 									<TD>
-										<CC1:S_COMBOBOX id="cmbsStato" runat="server" dbdatatype="Integer" width="200px" dbdirection="Input"
-											dbparametername="p_id_stato" dbindex="4">
+										<CC1:S_COMBOBOX id="cmbsStato" runat="server" dbparametername="p_id_stato" dbdirection="Input" width="200px"
+											dbdatatype="Integer" dbindex="4">
 											<ASP:LISTITEM value="-1">Nessuno stato</ASP:LISTITEM>
 											<ASP:LISTITEM value="1">Entrata</ASP:LISTITEM>
 											<ASP:LISTITEM value="2">Uscita</ASP:LISTITEM>
 										</CC1:S_COMBOBOX></TD>
-									<TD></TD>
+									<TD style="WIDTH: 102px"></TD>
 									<TD></TD>
 								</TR>
 								<TR>
@@ -221,9 +225,10 @@ function validateRange()
 										<CC1:S_BUTTON id="BtnReset" runat="server" cssclass="btn" text="Reset" causesvalidation="False"></CC1:S_BUTTON></TD>
 									<TD>
 										<CC1:S_BUTTON id="ExpPdf" runat="server" cssclass="btn" text="EsportaPdf" causesvalidation="False"></CC1:S_BUTTON><INPUT id="wr_id" type="hidden" runat="server"></TD>
-									<TD align="right"></TD>
-									<td align="right"><A class=GuidaLink href="<%= HelpLink %>" 
-            target=_blank>Guida</A></td>
+									<TD style="WIDTH: 102px" align="right">
+										<CC1:S_BUTTON id="s_cmdanagmat" runat="server" cssclass="btn" text="Anagrafica Materiali"></CC1:S_BUTTON></TD>
+									<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
+            target=_blank>Guida</A></TD>
 								</TR>
 							</TABLE>
 						</COLLAPSE:DATAPANEL></TD>

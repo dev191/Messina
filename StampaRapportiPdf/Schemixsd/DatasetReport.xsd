@@ -25,6 +25,8 @@
 							<xs:element name="NOMECOGNOME" type="xs:string" minOccurs="0" />
 							<xs:element name="DATACOMPLETAMENTO" type="xs:string" minOccurs="0" />
 							<xs:element name="DITTA" type="xs:string" minOccurs="0" />
+							<xs:element name="STANZA" type="xs:string" minOccurs="0" />
+							<xs:element name="destuso" type="xs:string" minOccurs="0" />
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>

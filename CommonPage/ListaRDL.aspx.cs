@@ -8,14 +8,16 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using S_Controls.Collections;
 using TheSite.Classi;
+using ApplicationDataLayer.DBType;
  
 namespace TheSite
 {
 	/// <summary>
 	/// Descrizione di riepilogo per ListaEdifici.
 	/// </summary>
-	public class ListaRDL: System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaRDL: System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.HyperLink HyperLinkChiudi2;
@@ -54,6 +56,11 @@ namespace TheSite
 //				if (Request.QueryString["idModi"]!=null)
 //					this.idModi = string.Empty;
 //				
+//				if(Request.QueryString["TipoMan"]!=null)
+//					this.TipoMan =	Request.QueryString["TipoMan"]; 
+//				else
+//					this.TipoMan =string.Empty; 
+
 				// Id RDL
 				if(Request.QueryString["idcod"]!=null)
 					this.idcod =	Request.QueryString["idcod"]; 
@@ -93,7 +100,7 @@ namespace TheSite
 				else
 					this.opera =string.Empty;
 
-				Execute();
+				Execute(true);
 			} 
 
 			String scriptString = "<script language=JavaScript> var idmodulo='" + this.idmodulo +"'"; 
@@ -164,13 +171,19 @@ namespace TheSite
 			get {return (String) ViewState["s_id_frazione"];}
 			set {ViewState["s_id_frazione"] = value;}
 		}
+
+		private string TipoMan
+		{
+			get {return (String) ViewState["TipoMan"];}
+			set {ViewState["TipoMan"] = value;}
+		}
 		# endregion
 		/// <summary>
 		/// Istanzia i parametri necessari per eseguire la strore procedure
 		/// Esegue la store procedure ed effettua il binding sul datagrid
 		/// </summary>
 		/// <returns></returns>
-		private void Execute()
+		private void Execute(bool reset)
 		{
 						///Istanzio la Classe per eseguire la Strore Procedure
 			Classi.ManOrdinaria.GestioneRdl _GestioneRdl = new Classi.ManOrdinaria.GestioneRdl(HttpContext.Current.User.Identity.Name);
@@ -180,55 +193,82 @@ namespace TheSite
 			///creo i parametri					
 			
 			DataSet Ds=null;
-			if (this.pulsante=="idric") // rICERCO PER data
+			if (this.pulsante=="idric") // RICERCO PER data
 			{
 				
-				S_Controls.Collections.S_Object s_p_wr_id = new S_Controls.Collections.S_Object();
-				s_p_wr_id.ParameterName = "p_wr_id";
-				s_p_wr_id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
-				s_p_wr_id.Direction = ParameterDirection.Input;
-				s_p_wr_id.Size =8;
-				s_p_wr_id.Index = 0;
-				s_p_wr_id.Value = this.idcod;	
-				_SCollection.Add(s_p_wr_id);
 
-				S_Controls.Collections.S_Object s_p_datain = new S_Controls.Collections.S_Object();
-				s_p_datain.ParameterName = "p_datain";
-				s_p_datain.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
-				s_p_datain.Direction = ParameterDirection.Input;
-				s_p_datain.Size =10;
-				s_p_datain.Index =1;
-				s_p_datain.Value = this.idric;	
-				_SCollection.Add(s_p_datain);
 
-				S_Controls.Collections.S_Object s_p_dataout = new S_Controls.Collections.S_Object();
-				s_p_dataout.ParameterName = "p_dataout";
-				s_p_dataout.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
-				s_p_dataout.Direction = ParameterDirection.Input;
-				s_p_dataout.Size =10;
-				s_p_dataout.Index =2;
-				s_p_dataout.Value = this.idricA;	
-				_SCollection.Add(s_p_dataout);
+				_SCollection=GetData1();	
+
+				S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+				s_p_pageindex.ParameterName = "pageindex";
+				s_p_pageindex.DbType = CustomDBType.Integer;
+				s_p_pageindex.Direction = ParameterDirection.Input;
+				s_p_pageindex.Index = 16;
+				s_p_pageindex.Value=MyDataGrid1.CurrentPageIndex +1;			
+				_SCollection.Add(s_p_pageindex);
+
+				S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+				s_p_pagesize.ParameterName = "pagesize";
+				s_p_pagesize.DbType = CustomDBType.Integer;
+				s_p_pagesize.Direction = ParameterDirection.Input;
+				s_p_pagesize.Index = 17;
+				s_p_pagesize.Value= MyDataGrid1.PageSize;			
+				_SCollection.Add(s_p_pagesize);
 
 
 		
 				Ds =_GestioneRdl.GetRDL2(_SCollection);
+				
+				if (reset==true)
+				{
+					_SCollection.Clear();
+					_SCollection=GetData1();
+
+					int _totalRecords = _GestioneRdl.GetRDL2Count(_SCollection);
+					this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+				}
+
 			}
 			else
-			{
-				S_Controls.Collections.S_Object s_p_wr_id = new S_Controls.Collections.S_Object();
-				s_p_wr_id.ParameterName = "p_wr_id";
-				s_p_wr_id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
-				s_p_wr_id.Direction = ParameterDirection.Input;
-				s_p_wr_id.Size =8;
-				s_p_wr_id.Index = 0;
-				s_p_wr_id.Value = this.idcod;	
-				_SCollection.Add(s_p_wr_id);
+			{														
+				
+				_SCollection=GetData();			
+
+				S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+				s_p_pageindex.ParameterName = "pageindex";
+				s_p_pageindex.DbType = CustomDBType.Integer;
+				s_p_pageindex.Direction = ParameterDirection.Input;
+				s_p_pageindex.Index = 16;
+				s_p_pageindex.Value=MyDataGrid1.CurrentPageIndex +1;			
+				_SCollection.Add(s_p_pageindex);
+
+				S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+				s_p_pagesize.ParameterName = "pagesize";
+				s_p_pagesize.DbType = CustomDBType.Integer;
+				s_p_pagesize.Direction = ParameterDirection.Input;
+				s_p_pagesize.Index = 17;
+				s_p_pagesize.Value= MyDataGrid1.PageSize;			
+				_SCollection.Add(s_p_pagesize);
+
 				Ds =_GestioneRdl.GetRDL1(_SCollection);
+
+				if (reset==true)
+				{
+					_SCollection.Clear();
+					_SCollection=GetData();
+					int _totalRecords = _GestioneRdl.GetRDL1Count(_SCollection);
+					this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+				}
 			}
 
 			MyDataGrid1.DataSource= Ds;
-			GridTitle1.NumeroRecords=(Ds.Tables[0].Rows.Count)==0? "0":Ds.Tables[0].Rows.Count.ToString();
+
+
+
+	//		GridTitle1.NumeroRecords=(Ds.Tables[0].Rows.Count)==0? "0":Ds.Tables[0].Rows.Count.ToString();
+    		this.MyDataGrid1.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+
 			MyDataGrid1.DataBind(); 
 
 			GridTitle1.DescriptionTitle="Lista delle RDL";
@@ -257,6 +297,62 @@ namespace TheSite
 		#endregion
 
 		public Int32 j=0;
+
+		// Paolo
+		private S_ControlsCollection GetData()
+		{
+			S_ControlsCollection _SCollection = new S_ControlsCollection();		
+
+			S_Controls.Collections.S_Object s_p_wr_id = new S_Controls.Collections.S_Object();
+			s_p_wr_id.ParameterName = "p_wr_id";
+			s_p_wr_id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_wr_id.Direction = ParameterDirection.Input;
+			s_p_wr_id.Size =8;
+			s_p_wr_id.Index = 0;
+			s_p_wr_id.Value = this.idcod;	
+			_SCollection.Add(s_p_wr_id);
+
+			return _SCollection;
+
+		}
+
+		private S_ControlsCollection GetData1()
+		{
+			S_ControlsCollection _SCollection = new S_ControlsCollection();		
+
+			S_Controls.Collections.S_Object s_p_wr_id = new S_Controls.Collections.S_Object();
+			s_p_wr_id.ParameterName = "p_wr_id";
+			s_p_wr_id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_wr_id.Direction = ParameterDirection.Input;
+			s_p_wr_id.Size =8;
+			s_p_wr_id.Index = 0;
+			s_p_wr_id.Value = this.idcod;	
+			_SCollection.Add(s_p_wr_id);
+
+			S_Controls.Collections.S_Object s_p_datain = new S_Controls.Collections.S_Object();
+			s_p_datain.ParameterName = "p_datain";
+			s_p_datain.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_datain.Direction = ParameterDirection.Input;
+			s_p_datain.Size =10;
+			s_p_datain.Index =1;
+			s_p_datain.Value = this.idric;	
+			_SCollection.Add(s_p_datain);
+
+			S_Controls.Collections.S_Object s_p_dataout = new S_Controls.Collections.S_Object();
+			s_p_dataout.ParameterName = "p_dataout";
+			s_p_dataout.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_p_dataout.Direction = ParameterDirection.Input;
+			s_p_dataout.Size =10;
+			s_p_dataout.Index =2;
+			s_p_dataout.Value = this.idricA;	
+			_SCollection.Add(s_p_dataout);
+
+			return _SCollection;
+
+		}
+
+
+		// Fine Paolo
 		private void MyDataGrid1_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
 		{
 		if((e.Item.ItemType == ListItemType.Item) || 
@@ -306,7 +402,7 @@ namespace TheSite
 		{
 			///Imposto la Nuova Pagina
 			MyDataGrid1.CurrentPageIndex=e.NewPageIndex;
-			Execute();
+			Execute(false);
 		}		
 	}
 		

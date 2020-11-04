@@ -8,23 +8,24 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using MyCollection; 
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using ApplicationDataLayer.Collections;
 using S_Controls.Collections;
 using System.IO;
-using StampaRapportiPdf.Classi;
 
+ 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per DescrizioneDoc_Dwf.
 	/// </summary>
-	public class ListaDoc_Dwf : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaDoc_Dwf : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGrid1;
 
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new MyCollection.clMyCollection();
 		protected System.Web.UI.HtmlControls.HtmlInputHidden hiddenblid;
 		protected Csy.WebControls.DataPanel DataPanel1;
 		protected WebControls.RicercaModulo RicercaModulo1;
@@ -34,7 +35,7 @@ namespace TheSite.Gestione
 		protected S_Controls.S_Label lblError;
 		protected WebControls.PageTitle PageTitle1;
 		DescrizioneDoc_Dwf  _fp=null;
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get {return _myColl;}
 		}

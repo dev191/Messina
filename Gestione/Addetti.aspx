@@ -13,7 +13,8 @@
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
 		<LINK href="../Css/MainSheet.css" type="text/css" rel="stylesheet">
 	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0" rightMargin="0" MS_POSITIONING="GridLayout">
+	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0"
+		rightMargin="0" MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px"
 				cellSpacing="0" cellPadding="0" width="100%" align="center" border="0">
@@ -33,20 +34,22 @@
 												<TR>
 													<TD align="left" width="20%">Cognome</TD>
 													<TD width="20%">
-														<cc1:S_TextBox id="txtscognome" tabIndex="1" runat="server" DBSize="50" width="100%" DBDirection="Input"
-															DBParameterName="p_cognome" DBIndex="0"></cc1:S_TextBox></TD>
+														<cc1:S_TextBox id="txtscognome" tabIndex="1" runat="server" DBIndex="0" DBParameterName="p_cognome"
+															DBDirection="Input" width="100%" DBSize="50"></cc1:S_TextBox></TD>
 													<TD align="left" width="20%">Nome</TD>
 													<TD width="40%">
-														<cc1:S_TextBox id="txtsnome" tabIndex="2" runat="server" DBSize="50" width="90%" DBDirection="Input"
-															DBParameterName="p_nome" DBIndex="1"></cc1:S_TextBox></TD>
+														<cc1:S_TextBox id="txtsnome" tabIndex="2" runat="server" DBIndex="1" DBParameterName="p_nome" DBDirection="Input"
+															width="90%" DBSize="50"></cc1:S_TextBox></TD>
 												</TR>
 												<TR>
-													<TD style="HEIGHT: 20px" align="left">Ditta</TD>
-													<TD style="HEIGHT: 20px">
-														<cc1:S_ComboBox id="cmbsditta" tabIndex="3" runat="server" DBSize="10" DBDirection="Input" DBParameterName="p_ditta"
-															DBIndex="2" DBDataType="Integer"></cc1:S_ComboBox></TD>
-													<TD style="HEIGHT: 20px" align="right"></TD>
-													<TD style="HEIGHT: 20px"></TD>
+													<TD style="HEIGHT: 22px" align="left">Ditta</TD>
+													<TD style="HEIGHT: 22px">
+														<cc1:S_ComboBox id="cmbsditta" tabIndex="3" runat="server" DBIndex="2" DBParameterName="p_ditta"
+															DBDirection="Input" DBSize="10" DBDataType="Integer"></cc1:S_ComboBox></TD>
+													<TD style="HEIGHT: 22px" align="left">Progetto</TD>
+													<TD style="HEIGHT: 22px">
+														<CC1:S_COMBOBOX id="CmbProgetto" tabIndex="8" runat="server" width="208px" dbdatatype="Integer"
+															dbdirection="Input" dbsize="1" dbparametername="p_progetto" dbindex="3"></CC1:S_COMBOBOX></TD>
 												</TR>
 												<TR>
 													<TD align="left" colSpan="3">&nbsp;
@@ -119,5 +122,6 @@
 				</TR>
 			</TABLE>
 		</form>
-	</body><script language="javascript">parent.left.calcola();</script>
+		<script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

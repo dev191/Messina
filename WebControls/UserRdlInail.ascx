@@ -2,7 +2,7 @@
 <%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
 <%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="CalendarPicker.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="VisualizzaSolleciti" Src="VisualizzaSolleciti.ascx" %>
-<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserRdlInail.ascx.cs" Inherits="TheSite.WebControls.UserRdlInail" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>
+<%@ Control Language="c#" AutoEventWireup="false" Codebehind="UserRdlInail.ascx.cs" Inherits="TheSite.WebControls.UserRdlInail" TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
 <%@ Register TagPrefix="uc1" TagName="AggiungiSollecito" Src="AggiungiSollecito.ascx" %>
 <SCRIPT language="javascript" src="../images/cal/popcalendar.js"></SCRIPT>
 <SCRIPT language="javascript">
@@ -136,7 +136,6 @@ function imposta_int(obj)
 					crtl.display="block";
 				if(combTipoMan.options[combTipoMan.selectedIndex].value=="3")
 			    {	
-					
 					crtl=document.getElementById('<%=trannocontab.ClientID%>').style; 
 					crtl.display="block";
 					crtl=document.getElementById('<%=trconsuntivo1.ClientID%>').style; 
@@ -171,7 +170,6 @@ function imposta_int(obj)
 				crtl.display="none";
 				break;
 			default:
-			 
 			    crtl=document.getElementById('<%=trnote.ClientID%>').style; 
 				crtl.display="none";
 				document.getElementById('<%=txtsSospesa.ClientID%>').value = "";
@@ -228,9 +226,9 @@ function imposta_int(obj)
 	}
 	function ApriPopUp(url)
 	{	
-		var windowW = 1024;  
-		var windowH = 768;	
-		W = window.open(url,'Rapporto','menubar=yes,toolbar=no,location=no,directories=no,status=no,scrollbars=yes,resizable=yes,copyhistory=no,width='+windowW+',height='+windowH+',align=center');			
+		var windowW = 900;  
+		var windowH = 700;	
+		W = window.open(url,'Rapporto','top=0,menubar=yes,toolbar=no,location=no,directories=no,status=no,scrollbars=yes,resizable=yes,copyhistory=no,width='+windowW+',height='+windowH+',align=center');			
 	}
 	
 	function validateDate()
@@ -306,15 +304,15 @@ function imposta_int(obj)
 			}	
 			else
 			{
-				if (dpianificata>dinizio)
-				{
-					alert("La Data Inizio Lavori  è minore della Data richiesta Lavoro!" ) ;	
-					return false;					
-				}	
-				else
-				{						
+				//if (dpianificata>dinizio)
+			//	{
+			//	alert("La Data Inizio Lavori  è minore della Data richiesta Lavoro!" ) ;	
+			//		return false;					
+			//	}	
+			//	else
+			//	{						
 					return true;
-				}			
+			//	}			
 			}	
 			return true;	
 	  }//end if di selur[1]
@@ -427,12 +425,12 @@ function imposta_int(obj)
 		Data2 = Data2 + oramin;
 						
 				
-		if (Data2>Data1)
-		{
-			alert("La data Pianificata non è corretta. Inserire una data successiva a quella della Richiesta.");
-			document.getElementById('<%=CalendarPicker1.Datazione.ClientID%>').focus();
-			return false;
-		}
+		//if (Data2>Data1)
+	//	{
+	//		alert("La data Pianificata non è corretta. Inserire una data successiva a quella della Richiesta.");
+		//	document.getElementById('<%=CalendarPicker1.Datazione.ClientID%>').focus();
+	//		return false;
+	//	}
 				
 		return true;						
 	}	
@@ -585,10 +583,11 @@ function imposta_int(obj)
   return true;
 }
 </SCRIPT>
-<TABLE id="Table1" cellspacing="1" cellpadding="1" width="100%" border="0">
+<TABLE id="Table1" cellSpacing="1" cellPadding="1" width="100%" border="0">
 	<TR>
 		<TD><ASP:LABEL id="lblOperazione" runat="server" cssclass="TitleOperazione"></ASP:LABEL><CC2:MESSAGEPANEL id="PanelMess" runat="server" width="136px" erroriconurl="~/Images/ico_critical.gif"
-				messageiconurl="~/Images/ico_info.gif"></CC2:MESSAGEPANEL></TD>
+				messageiconurl="~/Images/ico_info.gif"></CC2:MESSAGEPANEL><INPUT id="HPageBack" style="WIDTH: 16px; HEIGHT: 18px" type="hidden" size="1" name="HPageBack"
+				runat="server"></TD>
 	</TR>
 	<TR>
 		<TD style="HEIGHT: 513px"><CC2:DATAPANEL id="PanelGeneral" runat="server" cssclass="DataPanel75" titlestyle-cssclass="TitleSearch"
@@ -601,7 +600,7 @@ function imposta_int(obj)
 							<ASP:LABEL id="LblRdl" runat="server" width="174px"></ASP:LABEL></TD>
 						<TD style="HEIGHT: 12px"><B>Trasmissione:</B></TD>
 						<TD style="HEIGHT: 12px">
-							<CC1:S_COMBOBOX id="cmbsTrasmissione" runat="server" width="192px"></CC1:S_COMBOBOX></TD>
+							<CC1:S_COMBOBOX id="cmbsTrasmissione" runat="server" width="192px" BackColor="White"></CC1:S_COMBOBOX></TD>
 					</TR>
 					<TR>
 						<TD style="HEIGHT: 12px"><B>Nominativo Richiedente:</B></TD>
@@ -685,7 +684,7 @@ function imposta_int(obj)
 			</CC2:DATAPANEL></TD>
 	</TR>
 	<TR>
-		<TD><CC2:DATAPANEL id="PanelDCSIT" runat="server" cssclass="DataPanel75" titlestyle-cssclass="TitleSearch"
+		<TD style="HEIGHT: 80px"><CC2:DATAPANEL id="PanelDCSIT" runat="server" cssclass="DataPanel75" titlestyle-cssclass="TitleSearch"
 				collapsed="False" titletext="Validazione da parte del COLLABORATORE" expandtext="Espandi" expandimageurl="../Images/down.gif"
 				collapsetext="Riduci" collapseimageurl="../Images/up.gif" allowtitleexpandcollapse="True" visible="False">
 				<TABLE id="Table2" cellSpacing="1" cellPadding="1" width="100%" border="0">
@@ -695,20 +694,20 @@ function imposta_int(obj)
 							<CC1:S_BUTTON id="btsRifiutaDCSIT" runat="server" width="128px" text="Rifiuta" causesvalidation="False"></CC1:S_BUTTON></TD>
 					</TR>
 					<TR>
-						<TD style="WIDTH: 170px; HEIGHT: 12px"><B>Data di validazione:</B></TD>
-						<TD>
-							<CC1:S_LABEL id="lbldatavalidDCSIT" runat="server"></CC1:S_LABEL></TD>
-						<TD style="WIDTH: 143px; HEIGHT: 17px"><B>Ora validazione:</B></TD>
-						<TD>
-							<CC1:S_LABEL id="lblOraValidDCSIT" runat="server"></CC1:S_LABEL></TD>
-					</TR>
-					<TR>
 						<TD style="WIDTH: 172px; HEIGHT: 17px"><B>Utente:</B></TD>
 						<TD>
 							<CC1:S_LABEL id="lblUtenteDCSIT" runat="server"></CC1:S_LABEL></TD>
 						<TD style="WIDTH: 143px; HEIGHT: 17px"><B>Stato:</B></TD>
 						<TD>
 							<CC1:S_LABEL id="lblStatoDCSIT" runat="server"></CC1:S_LABEL></TD>
+					</TR>
+					<TR>
+						<TD style="WIDTH: 170px; HEIGHT: 12px"><B>Data di validazione:</B></TD>
+						<TD>
+							<CC1:S_LABEL id="lbldatavalidDCSIT" runat="server"></CC1:S_LABEL></TD>
+						<TD style="WIDTH: 143px; HEIGHT: 17px"><B>Ora validazione:</B></TD>
+						<TD>
+							<CC1:S_LABEL id="lblOraValidDCSIT" runat="server"></CC1:S_LABEL></TD>
 					</TR>
 				</TABLE>
 			</CC2:DATAPANEL></TD>
@@ -723,6 +722,16 @@ function imposta_int(obj)
 						<TD colSpan="4">&nbsp;
 							<CC1:S_BUTTON id="btsApprovaDL" runat="server" width="128px" text="Approva"></CC1:S_BUTTON>&nbsp;
 							<CC1:S_BUTTON id="btsRifiutaDL" runat="server" width="128px" text="Rifiuta" causesvalidation="False"></CC1:S_BUTTON></TD>
+						<TD></TD>
+						<TD></TD>
+					</TR>
+					<TR>
+						<TD style="WIDTH: 172px; HEIGHT: 17px"><STRONG>Utente:</STRONG></TD>
+						<TD>
+							<CC1:S_LABEL id="lblUtenteDL" runat="server"></CC1:S_LABEL></TD>
+						<TD style="WIDTH: 143px; HEIGHT: 17px"><B>Stato:</B></TD>
+						<TD>
+							<CC1:S_LABEL id="lblStatoDL" runat="server"></CC1:S_LABEL></TD>
 						<TD></TD>
 						<TD></TD>
 					</TR>
@@ -742,16 +751,6 @@ function imposta_int(obj)
 							<CC1:S_COMBOBOX id="cmbsTipoManutenzione" runat="server" width="196px"></CC1:S_COMBOBOX></TD>
 						<TD colSpan="2"><STRONG>Lavoro da quantificare successivamente&nbsp;:</STRONG>
 							<CC1:S_CHECKBOX id="checkQuantifica" runat="server" dbdirection="Input" dbdatatype="Integer" font-bold="True"></CC1:S_CHECKBOX></TD>
-						<TD></TD>
-						<TD></TD>
-					</TR>
-					<TR>
-						<TD style="WIDTH: 172px; HEIGHT: 17px"><STRONG>Utente:</STRONG></TD>
-						<TD>
-							<CC1:S_LABEL id="lblUtenteDL" runat="server"></CC1:S_LABEL></TD>
-						<TD style="WIDTH: 143px; HEIGHT: 17px"><B>Stato:</B></TD>
-						<TD>
-							<CC1:S_LABEL id="lblStatoDL" runat="server"></CC1:S_LABEL></TD>
 						<TD></TD>
 						<TD></TD>
 					</TR>
@@ -778,7 +777,7 @@ function imposta_int(obj)
 							<CC1:S_HYPERLINK id="LinkPreventivo" runat="server"></CC1:S_HYPERLINK></TD>
 					</TR>
 					<TR id="tipointervento0" runat="server">
-						<TD style="WIDTH: 172px; HEIGHT: 17px"><STRONG>Ordine di lavoro UNIBA:</STRONG></TD>
+						<TD style="WIDTH: 172px; HEIGHT: 17px"><STRONG>Ordine di lavoro USL3CT:</STRONG></TD>
 						<TD>
 							<CC1:S_TEXTBOX id="txtOrdineLavoro" runat="server"></CC1:S_TEXTBOX></TD>
 						<TD style="WIDTH: 143px; HEIGHT: 17px"></TD>
@@ -821,14 +820,14 @@ function imposta_int(obj)
 						<TD style="HEIGHT: 29px" width="20%"><B>Ditta Esecutrice:</B></TD>
 						<TD style="WIDTH: 169px; HEIGHT: 29px">
 							<CC1:S_COMBOBOX id="cmbsDitta" runat="server" width="196px" autopostback="True"></CC1:S_COMBOBOX></TD>
-						<TD style="HEIGHT: 29px"><B>Addetto:</B></TD>
+						<TD style="HEIGHT: 29px" align="right"><B>Addetto:</B></TD>
 						<TD style="HEIGHT: 29px">
-							<CC1:S_COMBOBOX id="cmbsAddetto" runat="server" width="184px"></CC1:S_COMBOBOX></TD>
+							<CC1:S_COMBOBOX id="cmbsAddetto" runat="server" width="273px"></CC1:S_COMBOBOX></TD>
 					</TR>
 					<TR>
 						<TD style="HEIGHT: 16px"><B><B>Urgenza:</B></B></TD>
 						<TD style="WIDTH: 169px; HEIGHT: 16px">
-							<CC1:S_COMBOBOX id="cmbsUrgenza" runat="server" width="196px"></CC1:S_COMBOBOX></TD>
+							<CC1:S_COMBOBOX id="cmbsUrgenza" runat="server" width="400px"></CC1:S_COMBOBOX></TD>
 						<TD style="HEIGHT: 16px"><B></B></TD>
 						<TD style="HEIGHT: 16px"></TD>
 					</TR>
@@ -836,7 +835,7 @@ function imposta_int(obj)
 						<TD style="HEIGHT: 32px"><B>Data Pianificata:</B></TD>
 						<TD style="WIDTH: 169px; HEIGHT: 32px">
 							<UC1:CALENDARPICKER id="CalendarPicker1" runat="server"></UC1:CALENDARPICKER></TD>
-						<TD style="HEIGHT: 32px"><B>Orario Pianificato:</B></TD>
+						<TD style="HEIGHT: 32px" align="right"><B>Orario Pianificato:</B></TD>
 						<TD style="HEIGHT: 32px">
 							<TABLE id="Table4" cellSpacing="0" cellPadding="0" border="0">
 								<TR>
@@ -1023,32 +1022,38 @@ function imposta_int(obj)
 						</TD>
 					</TR>
 					<TR id="trannotazione" runat="server">
-						<TD style="WIDTH: 171px"><B></B></TD>
+						<TD></TD>
 						<TD></TD>
 					</TR>
-					<TR>
-						<TD style="WIDTH: 171px"><B>Annotazioni Materiale Utilizzato:</B></TD>
+					<TR id="Tr1" runat="server">
+						<TD style="WIDTH: 171px"><B>Buono Lavoro Esterno:</B></TD>
 						<TD>
-							<CC1:S_TEXTBOX id="txtsAnnotazioni" runat="server" width="408px" textmode="MultiLine" height="70px"></CC1:S_TEXTBOX></TD>
+							<CC1:S_TEXTBOX id="txt_BLavoroEsterno" runat="server" MaxLength="25" Width="292px"></CC1:S_TEXTBOX></TD>
 					</TR>
 					<TR>
-					<TR id="trconsuntivo1" style="VISIBILITY: hidden" runat="server">
+						<TD style="WIDTH: 171px; HEIGHT: 126px"><B>Descrizione Intervento e Annotazioni 
+								Materiale Utilizzato:</B></TD>
+						<TD style="HEIGHT: 126px">
+							<CC1:S_TEXTBOX id="txtsAnnotazioni" runat="server" width="664px" textmode="MultiLine" height="114px"></CC1:S_TEXTBOX></TD>
+					</TR>
+					<TR>
+					<TR id="trconsuntivo1" style="DISPLAY: none" runat="server">
 						<TD><B>Importo a Consuntivo:</B></TD>
 						<TD>
 							<CC1:S_TEXTBOX id="txtSpesa3" style="TEXT-ALIGN: right" runat="server" width="154px" maxlength="8">0</CC1:S_TEXTBOX>,
 							<CC1:S_TEXTBOX id="txtSpesa4" runat="server" width="32px" maxlength="2">00</CC1:S_TEXTBOX></TD>
 					</TR>
-					<TR id="trconsuntivo2" style="VISIBILITY: hidden" runat="server">
+					<TR id="trconsuntivo2" style="DISPLAY: none" runat="server">
 						<TD><B>Contabilizzazione:</B></TD>
 						<TD>
 							<CC1:S_COMBOBOX id="cmbContabilizzazione" runat="server" width="255px"></CC1:S_COMBOBOX></TD>
 					</TR>
-					<TR id="trannocontab" style="VISIBILITY: hidden" runat="server">
-						<TD><B>Anno Contabilizzazione:</B></TD>
-						<TD>
+					<TR id="trannocontab" style="DISPLAY: none" runat="server">
+						<TD style="HEIGHT: 38px"><B>Anno Contabilizzazione:</B></TD>
+						<TD style="HEIGHT: 38px">
 							<CC1:S_COMBOBOX id="cmbsAnnoContab" runat="server" width="255px"></CC1:S_COMBOBOX></TD>
 					</TR>
-					<TR id="trconsuntivo3" style="VISIBILITY: hidden" runat="server">
+					<TR id="trconsuntivo3" style="DISPLAY: none" runat="server">
 						<TD colSpan="2"><B>
 								<ASP:LABEL id="lblconsuntivo" runat="server">Importa Consuntivo(PDF): </ASP:LABEL></B><INPUT id="UploadFileCosto" style="WIDTH: 352px; HEIGHT: 22px" type="file" size="55" name="UploadFileCosto"
 								runat="server">
@@ -1073,14 +1078,17 @@ function imposta_int(obj)
 				<TABLE id="TableCompleta" style="HEIGHT: 29px" cellSpacing="0" cellPadding="0" width="516"
 					align="center" border="0" runat="server">
 					<TR>
-						<TD>
+						<TD style="HEIGHT: 25px">
 							<CC1:S_BUTTON id="btnCompleta" runat="server" width="180px" text="Invia"></CC1:S_BUTTON></TD>
-						<TD>&nbsp;
+						<TD style="HEIGHT: 25px">&nbsp;
 							<CC1:S_BUTTON id="btnfoglioprestazioni" runat="server" width="180px" text="Foglio Prestazioni"
 								causesvalidation="False"></CC1:S_BUTTON></TD>
-						<TD>
+						<TD style="HEIGHT: 25px">&nbsp;
 							<CC1:S_BUTTON id="btnfoglioprestazioniPdf" runat="server" width="180px" text="Foglio Prestazioni in Pdf"
 								causesvalidation="False"></CC1:S_BUTTON></TD>
+						<TD style="HEIGHT: 25px">&nbsp;
+							<CC1:S_BUTTON id="BtnModifica" runat="server" width="180px" text="Modifica " causesvalidation="False"
+								Visible="False"></CC1:S_BUTTON></TD>
 					</TR>
 				</TABLE>
 			</CC2:DATAPANEL></TD>

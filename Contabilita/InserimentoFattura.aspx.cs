@@ -12,14 +12,13 @@ using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using S_Controls.Collections;
 using S_Controls;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.Contabilita
 {
 	/// <summary>
 	/// Descrizione di riepilogo per EditServizi.
 	/// </summary>
-	public class InserimentoFattura : System.Web.UI.Page    // System.Web.UI.Page
+	public class InserimentoFattura : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Label lblOperazione;
 		protected Csy.WebControls.MessagePanel PanelMess;
@@ -101,7 +100,10 @@ namespace TheSite.Contabilita
 			S_ListRDL.Attributes.Add("onkeydown","deleteitem(this,event);"); 
 			RicercaRDL1.multisele="y";
 			RicercaRDL1.operazione="Insert";
+			RicercaRDL1.NameComboMan="cmbsServizio";
+			RicercaRDL1.TipoMan=Convert.ToString(cmbsServizio.SelectedIndex);
 		
+
 					if (Request["ItemId"] != null) 
 					{		
 						itemId = Int32.Parse(Request["ItemId"]);
@@ -111,7 +113,7 @@ namespace TheSite.Contabilita
 			
 			if (!Page.IsPostBack )
 			{	
-				
+
 				CaricaIntestatario();
 				CaricaDestinatario();
 				CaricaTipoServizio();
@@ -123,7 +125,7 @@ namespace TheSite.Contabilita
 				// validazione numeri inserimento 0 blocco paste
 				S_TxtImponibile.Attributes.Add("onkeypress","if (valutanumeri(event) == false) { return false; }");
 				S_TxtImponibile.Attributes.Add("onpaste","return false;");
-				S_TxtImponibile.Attributes.Add("onblur","imposta_int(this.id);");
+				S_TxtImponibile.Attributes.Add("onblur","imposta_dec(this.id);");
 
 				S_TxtImponibileDec.Attributes.Add("onkeypress","if (valutanumeri(event) == false) { return false; }");
 				S_TxtImponibileDec.Attributes.Add("onpaste","return false;");
@@ -132,7 +134,7 @@ namespace TheSite.Contabilita
 
 				S_TxtTot.Attributes.Add("onkeypress","if (valutanumeri(event) == false) { return false; }");
 				S_TxtTot.Attributes.Add("onpaste","return false;");
-				S_TxtTot.Attributes.Add("onblur","imposta_int(this.id);");
+				S_TxtTot.Attributes.Add("onblur","imposta_dec(this.id);");
 
 				
 				S_TxtTotDec.Attributes.Add("onkeypress","if (valutanumeri(event) == false) { return false; }");
@@ -142,7 +144,7 @@ namespace TheSite.Contabilita
 
 				S_TxtPercentuale.Attributes.Add("onkeypress","if (valutanumeri(event) == false) { return false; }");
 				S_TxtPercentuale.Attributes.Add("onpaste","return false;");
-				S_TxtPercentuale.Attributes.Add("onblur","imposta_int(this.id);");
+				S_TxtPercentuale.Attributes.Add("onblur","imposta_dec(this.id);");
 
 				//Fine
 
@@ -311,14 +313,14 @@ namespace TheSite.Contabilita
 			}
 		
 		}
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 

@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -11,6 +12,7 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Globalization;
 
 namespace TheSite.ManutenzioneCorrettiva
@@ -18,7 +20,7 @@ namespace TheSite.ManutenzioneCorrettiva
 	/// <summary>
 	/// Descrizione di riepilogo per GestioneMateriali.
 	/// </summary>
-	public class AnalisiCostiMateriali : System.Web.UI.Page    // System.Web.UI.Page
+	public class AnalisiCostiMateriali : System.Web.UI.Page
 	{
 		protected Csy.WebControls.DataPanel PanelRicerca;
 		protected S_Controls.S_ComboBox cmbsMateriale;
@@ -40,17 +42,21 @@ namespace TheSite.ManutenzioneCorrettiva
 		public string dascmat="";
 		public string prezzo="";
 		public string id="";
+		protected S_Controls.S_Button s_cmdanagmat;
 	    public static string HelpLink = string.Empty;
 
 		private void Page_Load(object sender, System.EventArgs e)
 		{
 			Classi.SiteModule _SiteModule = (Classi.SiteModule) HttpContext.Current.Items["SiteModule"];
 			HelpLink = _SiteModule.HelpLink;
+			this.PageTitle1.Title = "ANALISI COSTI MATERIALI";
 			this.btnsRicerca.Attributes.Add("onclick", "return validateRange();");
 			ExpPdf.Attributes.Add("onclick","OpenPopUp();");
 			txtRdl.DBDefaultValue=-1;
 			DataGridRicerca.Visible=false;
-			this.PageTitle1.Title = "ANALISI COSTI MATERIALI";
+			FunId = _SiteModule.ModuleId;
+			s_cmdanagmat.Attributes.Add("onclick","apriAnagMat("+ FunId + ");");
+			
 			if(!IsPostBack)
 				BindMateriali();
 		}
@@ -139,6 +145,7 @@ namespace TheSite.ManutenzioneCorrettiva
 			this.DataGridRicerca.EditCommand += new System.Web.UI.WebControls.DataGridCommandEventHandler(this.DataGridRicerca_EditCommand);
 			this.DataGridRicerca.UpdateCommand += new System.Web.UI.WebControls.DataGridCommandEventHandler(this.DataGridRicerca_UpdateCommand);
 			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
+			this.s_cmdanagmat.Click += new System.EventHandler(this.s_cmdanagmat_Click);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}
@@ -554,6 +561,13 @@ namespace TheSite.ManutenzioneCorrettiva
 			}
 		}
 
+		private void s_cmdanagmat_Click(object sender, System.EventArgs e)
+		{
+		
+		}
+
+
+	
 
 		
 	}

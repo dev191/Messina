@@ -1,113 +1,151 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ManProgrammata.AccorpaRdl
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.ManProgrammata
 {
-  public class AccorpaRdl : AbstractBase
-  {
-    private string username = string.Empty;
-    private OracleDataLayer _OraDl;
+	/// <summary>
+	/// Descrizione di riepilogo per AccorpaRdl.
+	/// </summary>
+	public class AccorpaRdl: AbstractBase
+	{
+		private string username=string.Empty;
+		private ApplicationDataLayer.OracleDataLayer _OraDl;
 
-    public AccorpaRdl(string UserName)
-    {
-      this.username = UserName;
-      this._OraDl = new OracleDataLayer(this.s_ConnStr);
-    }
+		public AccorpaRdl(string UserName)
+		{
+			username=UserName;
+			_OraDl = new OracleDataLayer(s_ConnStr);
+		}
+		public override DataSet GetData()
+		{
+			return null;
+		}
+		public override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+			return null;
+		}
+		public override DataSet GetSingleData(int itemId)
+		{
+		 return null;
+		}
 
-    public override DataSet GetData() => (DataSet) null;
+		public void beginTransaction()
+		{
+			_OraDl.BeginTransaction();
+		}
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli) => (DataSet) null;
+		public void commitTransaction()
+		{
+			_OraDl.CommitTransaction();
+		}
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+		public void rollbackTransaction()
+		{
+			_OraDl.RollbackTransaction();
+		}
 
-    public void beginTransaction() => this._OraDl.BeginTransaction();
 
-    public void commitTransaction() => this._OraDl.CommitTransaction();
+		/// <summary>
+		/// Ricerca le richieste Accorpante
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public DataSet Accorpante(S_ControlsCollection CollezioneControlli)
+		{
+			
+			S_Controls.Collections.S_Object s_p_utente = new S_Object();
+			s_p_utente.ParameterName = "p_utente";
+			s_p_utente.DbType = CustomDBType.VarChar;
+			s_p_utente.Direction = ParameterDirection.Input;
+			s_p_utente.Index = CollezioneControlli.Count + 1;
+            s_p_utente.Value =this.username;
+			s_p_utente.Size =50;
+			CollezioneControlli.Add(s_p_utente);
 
-    public void rollbackTransaction() => this._OraDl.RollbackTransaction();
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
 
-    public DataSet Accorpante(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_utente");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      ((ParameterObject) sObject1).set_Size(50);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      string str = "PACK_MAN_ORD.SP_GetAccorpante";
-      return this._OraDl.GetRows((object) CollezioneControlli, str).Copy();
-    }
+//			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MAN_ORD.SP_GetAccorpante";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+			return _Ds;	
+		}
 
-    public DataSet Accorpate(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_utente");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      ((ParameterObject) sObject1).set_Size(50);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      string str = "PACK_MAN_ORD.SP_Get_Da_Accorpare";
-      return this._OraDl.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		public DataSet Accorpate(S_ControlsCollection CollezioneControlli)
+		{
+			S_Controls.Collections.S_Object s_p_utente = new S_Object();
+			s_p_utente.ParameterName = "p_utente";
+			s_p_utente.DbType = CustomDBType.VarChar;
+			s_p_utente.Direction = ParameterDirection.Input;
+			s_p_utente.Index = CollezioneControlli.Count + 1;
+			s_p_utente.Value =this.username;
+			s_p_utente.Size =50;
+			CollezioneControlli.Add(s_p_utente);
 
-    public DataSet VisualizzaAccorpate(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_utente");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.username);
-      ((ParameterObject) sObject1).set_Size(50);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      string str = "PACK_MAN_ORD.SP_GetAccorpate";
-      return this._OraDl.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count);
-      CollezioneControlli.Add(sObject);
-      return this._OraDl.GetRowsAffectedTransaction((object) CollezioneControlli, "PACK_MAN_ORD.SP_Accorpa");
-    }
-  }
+//			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MAN_ORD.SP_Get_Da_Accorpare";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+			return _Ds;	
+		}
+		public DataSet VisualizzaAccorpate(S_ControlsCollection CollezioneControlli)
+		{
+			S_Controls.Collections.S_Object s_p_utente = new S_Object();
+			s_p_utente.ParameterName = "p_utente";
+			s_p_utente.DbType = CustomDBType.VarChar;
+			s_p_utente.Direction = ParameterDirection.Input;
+			s_p_utente.Index = CollezioneControlli.Count + 1;
+			s_p_utente.Value =this.username;
+			s_p_utente.Size =50;
+			CollezioneControlli.Add(s_p_utente);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
+
+			//			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MAN_ORD.SP_GetAccorpate";	
+			DataSet _Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+			return _Ds;	
+		}
+		#region Metodi Private
+
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = CollezioneControlli.Count;
+			CollezioneControlli.Add(s_IdOut);
+
+			int i_Result = _OraDl.GetRowsAffectedTransaction(CollezioneControlli, "PACK_MAN_ORD.SP_Accorpa");
+
+			return i_Result;
+		}
+
+		#endregion
+	}
 }

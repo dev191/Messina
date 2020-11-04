@@ -16,7 +16,7 @@ namespace TheSite.Admin
 	/// <summary>
 	/// Descrizione di riepilogo per Utenti.
 	/// </summary>
-	public class Utenti : System.Web.UI.Page    // System.Web.UI.Page
+	public class Utenti : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsUserName;
 		protected S_Controls.S_TextBox txtsCognome;
@@ -31,6 +31,7 @@ namespace TheSite.Admin
 		protected WebControls.PageTitle PageTitle1;
 		
 		public static int FunId = 0;
+		protected S_Controls.S_ComboBox CmbProgetto;
 		public static string HelpLink = string.Empty;
 	
 		private void Page_Load(object sender, System.EventArgs e)
@@ -44,8 +45,35 @@ namespace TheSite.Admin
 			FunId = _SiteModule.ModuleId;
 			HelpLink = _SiteModule.HelpLink;
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;
+			if(!IsPostBack)
+			BindProgetti(0);
 		}
+		private void BindProgetti(int progetto)
+		{
+			
+			this.CmbProgetto.Items.Clear();
+		
+			TheSite.Classi.Progetti _Prog = new TheSite.Classi.Progetti();
+						
+			DataSet _MyDs = _Prog.GetData();			
+			
+			if (_MyDs.Tables[0].Rows.Count > 0)
+			{
+				this.CmbProgetto.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					_MyDs.Tables[0], "descrizione", "id_progetto", "- Selezionare un Progetto -", "0");				
+				this.CmbProgetto.DataTextField ="descrizione";
+				this.CmbProgetto.DataValueField  ="id_progetto";
+				this.CmbProgetto.DataBind();
 
+				CmbProgetto.SelectedValue =progetto.ToString();
+			}
+			else
+			{
+				string s_Messagggio = "- Nessun Progetto  -";
+				this.CmbProgetto.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+						
+			}			
+		}
 		#region Codice generato da Progettazione Web Form
 		override protected void OnInit(EventArgs e)
 		{

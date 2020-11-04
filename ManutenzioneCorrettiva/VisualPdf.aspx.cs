@@ -14,7 +14,7 @@ namespace TheSite.ManutenzioneCorretiva
 	/// <summary>
 	/// Descrizione di riepilogo per VisualPdf.
 	/// </summary>
-	public class VisualPdf : System.Web.UI.Page    // System.Web.UI.Page
+	public class VisualPdf : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Literal Literal1;
 	    protected WebControls.PageTitle PageTitle1; 

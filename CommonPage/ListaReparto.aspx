@@ -1,9 +1,9 @@
-<%@ Page language="c#" Codebehind="ListaReparto.aspx.cs" AutoEventWireup="false" Inherits="TheSite.CommonPage.ListaReparto" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Page language="c#" Codebehind="ListaReparto.aspx.cs" AutoEventWireup="false" Inherits="TheSite.CommonPage.ListaReparto" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
-  <HEAD>
+	<HEAD>
 		<title>ListaDReparto</title>
 		<META http-equiv="Content-Type" content="text/html; charset=windows-1252">
 		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
@@ -40,7 +40,7 @@
 				Chiudi();
 			}	
 		</script>
-</HEAD>
+	</HEAD>
 	<body MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
 			<TABLE id="Table1" style="Z-INDEX: 101; LEFT: 8px; POSITION: absolute; TOP: 8px" cellSpacing="0"

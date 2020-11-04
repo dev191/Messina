@@ -1,380 +1,565 @@
-ï»¿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ClassiDettaglio.Edificio
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
-using System.Web;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.ClassiDettaglio
 {
-  public class Edificio : AbstractBase
-  {
-    private string s_BL_ID = string.Empty;
-    private string s_Name = string.Empty;
-    private string s_Campus = string.Empty;
-    private string s_City_Id = string.Empty;
-    private string s_Address1 = string.Empty;
-    private string s_Option2 = string.Empty;
-    private string s_Contact_Name = string.Empty;
-    private string s_Contact_Phone = string.Empty;
-    private string s_Centro_Costo = string.Empty;
-    private string Username;
+	/// <summary>
+	/// Descrizione di riepilogo per Edificio.
+	/// </summary>
+	public class Edificio : AbstractBase
+	{
+		#region Dichiarazioni
 
-    public Edificio(string username) => this.Username = username;
+		private string s_BL_ID = string.Empty;
+		private string s_Name = string.Empty;
+		private string s_Campus = string.Empty;
+		private string s_City_Id = string.Empty;
+		private string s_Address1 = string.Empty;
+		private string s_Option2 = string.Empty;
+		private string s_Contact_Name = string.Empty;
+		private string s_Contact_Phone = string.Empty;
+		private string s_Centro_Costo = string.Empty;
 
-    public Edificio(int Id, string BlId, string username)
-    {
-      this.Id = Id;
-      this.BlId = BlId;
-      this.Username = username;
-    }
+		#endregion
 
-    public override DataSet GetData() => (DataSet) null;
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Username");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Size(50);
-      ((ParameterObject) sObject1).set_Index(1);
-      ((ParameterObject) sObject1).set_Value((object) this.Username);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_EDIFICI.SP_GETEDIFICI";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		private string Username;
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+		public Edificio(string username) 
+		{
+			this.Username=username;
+		}
+		public Edificio(int Id, string BlId, string username) 
+		{
+			this.Id = Id;
+			this.BlId = BlId;
+			this.Username=username;
+		}
 
-    public DataSet GetSingleData(string itemId)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Bl_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Size(8);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_Username");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Size(50);
-      ((ParameterObject) sObject2).set_Index(1);
-      ((ParameterObject) sObject2).set_Value((object) this.Username);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_Campus");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Size(50);
-      ((ParameterObject) sObject3).set_Index(2);
-      ((ParameterObject) sObject3).set_Value((object) "");
-      controlsCollection.Add(sObject3);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject4).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject4);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_EDIFICI.SP_GETEDIFICI";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+		#region Metodi Pubblici
 
-    public DataSet GetApparecchiature(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_UserName");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(2);
-      ((ParameterObject) sObject1).set_Value((object) this.Username);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_APPARECCHIATURE.SP_GETAPPARECCHIATURE";
-      DataSet dataSet = oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-      this.BlId = this.BlId;
-      return dataSet;
-    }
+		/// <summary>
+		/// DataSet con tutti i record
+		/// </summary>
+		/// <returns></returns>
+		public override DataSet GetData()
+		{
+			return null;		
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
 
-    public DataSet GetApparecchiature(string BlId, int Servizioid)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Bl_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) BlId);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_Servizio");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(1);
-      ((ParameterObject) sObject2).set_Value((object) Servizioid);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject3).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject3);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_APPARECCHIATURE.SP_GETAPPARECCHIATURE";
-      DataSet dataSet = oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-      this.BlId = BlId;
-      return dataSet;
-    }
+			DataSet _Ds;
 
-    public DataSet GetSingleApparecchiature(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_UserName");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) this.Username);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_APPARECCHIATURE.SP_GETSINGLEAPPARECCHIATURA";
-      DataSet dataSet = oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-      this.BlId = this.BlId;
-      return dataSet;
-    }
+			S_Controls.Collections.S_Object s_User = new S_Controls.Collections.S_Object();
+			s_User.ParameterName = "p_Username";
+			s_User.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_User.Direction = ParameterDirection.Input;
+			s_User.Size=50; 
+			s_User.Index = 1;
+			s_User.Value = this.Username;
+			CollezioneControlli.Add(s_User);
 
-    public DataSet GetListaEdifici(S_ControlsCollection CollezioneControlli, int itemId)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject1);
-      int num = ((CollectionBase) CollezioneControlli).Count + 1;
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_ruolo_id");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(num);
-      ((ParameterObject) sObject2).set_Value((object) itemId);
-      CollezioneControlli.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_EDIFICI.SP_GETLISTAEDIFICI";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
 
-    public DataSet GetRuoliEdifici(int idRuolo)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Ruolo_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) idRuolo);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_EDIFICI.SP_GETRUOLIEDIFICI";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_EDIFICI.SP_GETEDIFICI";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public DataSet GetRuoliEdifici(
-      S_ControlsCollection CollezioneControlli,
-      int itemId,
-      string tipo)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject1);
-      int num = ((CollectionBase) CollezioneControlli).Count + 1;
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_ruolo_id");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(num);
-      ((ParameterObject) sObject2).set_Value((object) itemId);
-      CollezioneControlli.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "";
-      if (tipo == "Tutti")
-        str = "PACK_EDIFICI.SP_GETRUOLIEDIFICIFILTRER";
-      if (tipo == "Associati")
-        str = "PACK_EDIFICI.SP_GETRUOLIBLSERVIZIASSOCIATI";
-      if (tipo == "NonAssociati")
-        str = "PACK_EDIFICI.SP_GETRUOLIBLSERVIZINASSOCIATI";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			return _Ds;	
+		}
 
-    public int UpdateRuoliEdifici(S_ControlsCollection CollezioneControlli) => new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) CollezioneControlli, "PACK_EDIFICI.SP_EXECUTERUOLIEDIFICI");
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="itemId"></param>
+		/// <returns></returns>
+		public override DataSet GetSingleData(int itemId)
+		{
+			return null;	
+		}
 
-    public int UpdateRuoliEdificiServizi(S_ControlsCollection CollezioneControlli) => new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) CollezioneControlli, "PACK_EDIFICI.SP_EXECUTERUOLIEDIFICISERVIZI");
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="itemId"></param>
+		/// <returns></returns>
+		public DataSet GetSingleData(string itemId)
+		{
+			DataSet _Ds;
+			///Istanzio un nuovo oggetto Collection per aggiungere i parametri
+			S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
 
-    public bool ControllaRuoloBlServizi(int ruolo_id, int bl_id, int servizio_id)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Ruolo_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) ruolo_id);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_Bl_Id");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(1);
-      ((ParameterObject) sObject2).set_Value((object) bl_id);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_Servizio_Id");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(2);
-      ((ParameterObject) sObject3).set_Value((object) servizio_id);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject4).set_Index(3);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      controlsCollection.Add(sObject3);
-      controlsCollection.Add(sObject4);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_EDIFICI.SP_CONTROLLARUOLOBLSERVIZIO";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy().Tables[0].Rows.Count > 0;
-    }
+			S_Controls.Collections.S_Object s_bl_id = new S_Controls.Collections.S_Object();
+			s_bl_id.ParameterName = "p_Bl_Id";
+			s_bl_id.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_bl_id.Direction = ParameterDirection.Input;
+			s_bl_id.Size =8;
+			s_bl_id.Index = 0;
+			s_bl_id.Value = itemId;
+			_SCollection.Add (s_bl_id);
 
-    public string BlId
-    {
-      get => this.s_BL_ID;
-      set => this.s_BL_ID = value;
-    }
+			S_Controls.Collections.S_Object s_User = new S_Controls.Collections.S_Object();
+			s_User.ParameterName = "p_Username";
+			s_User.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_User.Direction = ParameterDirection.Input;
+			s_User.Size=50; 
+			s_User.Index = 1;
+			s_User.Value = this.Username;
+			_SCollection.Add(s_User);
 
-    public string Name
-    {
-      get => this.s_Name;
-      set => this.s_Name = value;
-    }
+			S_Controls.Collections.S_Object s_Campus = new S_Controls.Collections.S_Object();
+			s_Campus.ParameterName = "p_Campus";
+			s_Campus.DbType = ApplicationDataLayer.DBType.CustomDBType.VarChar;
+			s_Campus.Direction = ParameterDirection.Input;
+			s_Campus.Size=50; 
+			s_Campus.Index = 2;
+			s_Campus.Value = "";
+			_SCollection.Add(s_Campus);
 
-    public string Campus
-    {
-      get => this.s_Campus;
-      set => this.s_Campus = value;
-    }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = _SCollection.Count + 1;
 
-    public string City_Id
-    {
-      get => this.s_City_Id;
-      set => this.s_City_Id = value;
-    }
+			_SCollection.Add(s_Cursor);
 
-    public string Address1
-    {
-      get => this.s_Address1;
-      set => this.s_Address1 = value;
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_EDIFICI.SP_GETEDIFICI";
+			_Ds = _OraDl.GetRows(_SCollection, s_StrSql).Copy();			
 
-    public string Option2
-    {
-      get => this.s_Option2;
-      set => this.s_Option2 = value;
-    }
+			return _Ds;	
+		}
 
-    public string Contact_Name
-    {
-      get => this.s_Contact_Name;
-      set => this.s_Contact_Name = value;
-    }
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="BlId"></param>
+		/// <returns></returns>
+		public DataSet GetApparecchiature(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
 
-    public string Contact_Phone
-    {
-      get => this.s_Contact_Phone;
-      set => this.s_Contact_Phone = value;
-    }
+			S_Controls.Collections.S_Object s_UserName = new S_Object();
+			s_UserName.ParameterName = "p_UserName";
+			s_UserName.DbType = CustomDBType.VarChar;
+			s_UserName.Direction = ParameterDirection.Input;
+			s_UserName.Index = 2;
+			s_UserName.Value = this.Username;
+			CollezioneControlli.Add(s_UserName);
 
-    public string Centro_Costo
-    {
-      get => this.s_Centro_Costo;
-      set => this.s_Centro_Costo = value;
-    }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      int num1 = ((CollectionBase) CollezioneControlli).Count + 1;
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(num1);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      int num2 = num1 + 1;
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_CurrentUser");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject2).set_Value((object) HttpContext.Current.User.Identity.Name);
-      int num3 = num2 + 1;
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_Operazione");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(num3);
-      ((ParameterObject) sObject3).set_Value((object) Operazione.ToString());
-      int num4 = num3 + 1;
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject4).set_Index(num4);
-      CollezioneControlli.Add(sObject1);
-      CollezioneControlli.Add(sObject2);
-      CollezioneControlli.Add(sObject3);
-      CollezioneControlli.Add(sObject4);
-      return new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) CollezioneControlli, "PACK_EDIFICI.SP_EXECUTEEDIFICI");
-    }
-  }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_APPARECCHIATURE.SP_GETAPPARECCHIATURE";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			this.BlId = BlId;
+			return _Ds;		
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="BlId"></param>
+		/// <returns></returns>
+		public DataSet GetApparecchiature(string BlId, int Servizioid)
+		{
+			DataSet _Ds;
+
+			S_ControlsCollection _SColl = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_BlId = new S_Object();
+			s_BlId.ParameterName = "p_Bl_Id";
+			s_BlId.DbType = CustomDBType.VarChar;
+			s_BlId.Direction = ParameterDirection.Input;
+			s_BlId.Index = 0;
+			s_BlId.Value = BlId;
+			_SColl.Add(s_BlId);
+
+			S_Controls.Collections.S_Object s_Servizio = new S_Object();
+			s_Servizio.ParameterName = "p_Servizio";
+			s_Servizio.DbType = CustomDBType.Integer;
+			s_Servizio.Direction = ParameterDirection.Input;
+			s_Servizio.Index = 1;
+			s_Servizio.Value = Servizioid;
+			_SColl.Add(s_Servizio);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = _SColl.Count +1;
+			_SColl.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_APPARECCHIATURE.SP_GETAPPARECCHIATURE";	
+			_Ds = _OraDl.GetRows(_SColl, s_StrSql).Copy();			
+
+			this.BlId = BlId;
+			return _Ds;		
+		}
+
+		/// <summary>
+		/// Ritornano le singole apparecchiature
+		/// </summary>
+		/// <param name="CollezioneControlli"> Viene passata la collezione dei parametri</param>
+		/// <returns>Ritorna un DataSet</returns>
+		public DataSet GetSingleApparecchiature(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
+
+			S_Controls.Collections.S_Object s_UserName = new S_Object();
+			s_UserName.ParameterName = "p_UserName";
+			s_UserName.DbType = CustomDBType.VarChar;
+			s_UserName.Direction = ParameterDirection.Input;
+			s_UserName.Index = CollezioneControlli.Count + 1;;
+			s_UserName.Value = this.Username;
+			CollezioneControlli.Add(s_UserName);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_APPARECCHIATURE.SP_GETSINGLEAPPARECCHIATURA";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			this.BlId = BlId;
+			return _Ds;		
+		}
+		#endregion
+		public  DataSet GetListaEdifici(S_ControlsCollection CollezioneControlli,int itemId)
+		{
+
+			DataSet _Ds;	
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
+
+			int i_MaxParametri = CollezioneControlli.Count + 1;			
+
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			s_IdIn.ParameterName = "p_ruolo_id";
+			s_IdIn.DbType = CustomDBType.Integer;
+			s_IdIn.Direction = ParameterDirection.Input;
+			s_IdIn.Index = i_MaxParametri;
+			s_IdIn.Value = itemId;
+
+			CollezioneControlli.Add(s_IdIn);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_EDIFICI.SP_GETLISTAEDIFICI";
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+
+		public DataSet GetRuoliEdifici(int idRuolo)
+		{
+			DataSet _Ds;
+			
+			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
+			
+			S_Controls.Collections.S_Object s_id = new S_Object();
+			s_id.ParameterName = "p_Ruolo_id";
+			s_id.DbType = CustomDBType.Integer;
+			s_id.Direction = ParameterDirection.Input;
+			s_id.Index = 0;
+			s_id.Value = idRuolo;						
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+
+			CollezioneControlli.Add(s_id);
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_EDIFICI.SP_GETRUOLIEDIFICI";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}
+
+		public DataSet GetRuoliEdifici(S_ControlsCollection CollezioneControlli,int itemId,string tipo)
+		{
+			DataSet _Ds=null;	
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_Cursor);
+
+			int i_MaxParametri = CollezioneControlli.Count + 1;			
+
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			s_IdIn.ParameterName = "p_ruolo_id";
+			s_IdIn.DbType = CustomDBType.Integer;
+			s_IdIn.Direction = ParameterDirection.Input;
+			s_IdIn.Index = i_MaxParametri;
+			s_IdIn.Value = itemId;
+
+			CollezioneControlli.Add(s_IdIn);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			
+			string s_StrSql="";
+			
+			if (tipo=="Tutti")
+			{
+				s_StrSql = "PACK_EDIFICI.SP_GETRUOLIEDIFICIFILTRER";
+			}
+			if (tipo=="Associati")
+			{
+				s_StrSql = "PACK_EDIFICI.SP_GETRUOLIBLSERVIZIASSOCIATI";
+			}
+			if (tipo=="NonAssociati")
+			{
+				s_StrSql = "PACK_EDIFICI.SP_GETRUOLIBLSERVIZINASSOCIATI";
+			}
+			
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	
+		}
+
+		public int UpdateRuoliEdifici(S_ControlsCollection CollezioneControlli)
+		{	
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+			int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_EDIFICI.SP_EXECUTERUOLIEDIFICI");
+
+			return i_Result;		
+		}
+		public int UpdateRuoliEdificiServizi(S_ControlsCollection CollezioneControlli)
+		{	
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+			int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_EDIFICI.SP_EXECUTERUOLIEDIFICISERVIZI");
+
+			return i_Result;		
+		}
+
+		public bool ControllaRuoloBlServizi(int ruolo_id,int bl_id,int servizio_id)
+		{
+			DataSet _Ds;
+			
+			S_Controls.Collections.S_ControlsCollection _SColl = new S_Controls.Collections.S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_Ruolo = new S_Controls.Collections.S_Object();
+			s_Ruolo.ParameterName = "p_Ruolo_Id";
+			s_Ruolo.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_Ruolo.Direction = ParameterDirection.Input;
+			s_Ruolo.Index = 0;
+			s_Ruolo.Value = ruolo_id;
+
+			S_Controls.Collections.S_Object s_Edificio_Id = new S_Controls.Collections.S_Object();
+			s_Edificio_Id.ParameterName = "p_Bl_Id";
+			s_Edificio_Id.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_Edificio_Id.Direction = ParameterDirection.Input;
+			s_Edificio_Id.Index = 1;
+			s_Edificio_Id.Value = bl_id;		
+				
+			S_Controls.Collections.S_Object s_Servizio_Id = new S_Controls.Collections.S_Object();
+			s_Servizio_Id.ParameterName = "p_Servizio_Id";
+			s_Servizio_Id.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_Servizio_Id.Direction = ParameterDirection.Input;
+			s_Servizio_Id.Index = 2;
+			s_Servizio_Id.Value = servizio_id;		
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 3;
+			
+
+			_SColl.Add(s_Ruolo);
+			_SColl.Add(s_Edificio_Id);
+			_SColl.Add(s_Servizio_Id);			
+			_SColl.Add(s_Cursor);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_EDIFICI.SP_CONTROLLARUOLOBLSERVIZIO";	
+			_Ds = _OraDl.GetRows(_SColl, s_StrSql).Copy();			
+			
+			if (_Ds.Tables[0].Rows.Count>0)			
+				return true;
+			else
+				return false;
+		}
+
+		#region Proprietà Pubbliche
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string BlId
+		{
+			get {return s_BL_ID;}
+			set {s_BL_ID = value;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Name
+		{
+			get {return s_Name;}
+			set {s_Name = value;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Campus
+		{
+			get {return s_Campus;}
+			set {s_Campus = value;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string City_Id
+		{
+			get {return s_City_Id;}
+			set {s_City_Id = value;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Address1
+		{
+			get {return s_Address1;}
+			set {s_Address1 = value;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Option2
+		{
+			get {return s_Option2;}
+			set {s_Option2 = value;}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Contact_Name
+		{
+			get {return s_Contact_Name;}
+			set {s_Contact_Name = value;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Contact_Phone
+		{
+			get {return s_Contact_Phone;}
+			set {s_Contact_Phone = value;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Centro_Costo
+		{
+			get {return s_Centro_Costo;}
+			set {s_Centro_Costo = value;}
+		}		
+
+		#endregion
+
+		#region Metodi Private
+
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			int i_MaxParametri = CollezioneControlli.Count + 1;			
+
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			s_IdIn.ParameterName = "p_Id";
+			s_IdIn.DbType = CustomDBType.Integer;
+			s_IdIn.Direction = ParameterDirection.Input;
+			s_IdIn.Index = i_MaxParametri;
+			s_IdIn.Value = itemId;		
+			
+			i_MaxParametri ++;
+			
+			S_Controls.Collections.S_Object s_CurrentUser = new S_Object();
+			s_CurrentUser.ParameterName = "p_CurrentUser";
+			s_CurrentUser.DbType = CustomDBType.VarChar;
+			s_CurrentUser.Direction = ParameterDirection.Input;
+			s_CurrentUser.Index = i_MaxParametri;
+			s_CurrentUser.Value = System.Web.HttpContext.Current.User.Identity.Name;
+
+			i_MaxParametri ++;
+			
+			S_Controls.Collections.S_Object s_Operazione = new S_Object();
+			s_Operazione.ParameterName = "p_Operazione";
+			s_Operazione.DbType = CustomDBType.VarChar;
+			s_Operazione.Direction = ParameterDirection.Input;
+			s_Operazione.Index = i_MaxParametri;
+			s_Operazione.Value = Operazione.ToString();
+
+			i_MaxParametri ++;
+
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = i_MaxParametri;
+
+			CollezioneControlli.Add(s_IdIn);	
+			CollezioneControlli.Add(s_CurrentUser);	
+			CollezioneControlli.Add(s_Operazione);
+			CollezioneControlli.Add(s_IdOut);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+			int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_EDIFICI.SP_EXECUTEEDIFICI");
+
+			return i_Result;
+		}
+
+		#endregion
+	}
 }

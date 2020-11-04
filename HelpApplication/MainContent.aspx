@@ -19,22 +19,13 @@
 				<table>
 					<tr>
 						<td align="center" colSpan="2">
-							<P>
-								<font size="16"><b>HELP ON-LINE</b></font>
-							</P>
-							<P>&nbsp;</P>
-						</td>
-					</tr>
-					<tr>
-						<td align="center" colSpan="2">
-							<IMG src="../Images/cofatheclogo.jpg" border="0" useMap="#Map" style="WIDTH: 619px; HEIGHT: 304px"
-								width="619" height="304">
+							<IMG src="Images/WFP_LOGOS.jpg" border="0" useMap="#Map" style="WIDTH: 801px; HEIGHT: 400px">
 						</td>
 					</tr>
 				</table>
 			</div>
 			<br>
-			<div style="FONT-FAMILY: Verdana, Arial; FONT-SIZE: 1px">
+			<div style="FONT-SIZE: 1px; FONT-FAMILY: Verdana, Arial">
 				<p align="center"><br>
 					<%= System.Configuration.ConfigurationSettings.AppSettings["ApplicationDeveloper"]%>
 				</p>

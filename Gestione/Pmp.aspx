@@ -13,9 +13,10 @@
 		<META content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
 		<LINK href="../Css/MainSheet.css" type="text/css" rel="stylesheet">
 	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" bottommargin="0" leftmargin="5" topmargin="0" rightmargin="0" ms_positioning="GridLayout">
+	<body onbeforeunload="parent.left.valorizza()" bottommargin="0" leftmargin="5" topmargin="0"
+		rightmargin="0" ms_positioning="GridLayout">
 		<FORM id="Form1" method="post" runat="server">
-			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px"
+			<TABLE id="TableMain" style="Z-INDEX: 101; POSITION: absolute; WIDTH: 100%; TOP: 0px; LEFT: 0px"
 				cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
 				<TR>
 					<TD align="center"><UC1:PAGETITLE id="PageTitle1" runat="server"></UC1:PAGETITLE></TD>
@@ -36,15 +37,15 @@
 																dbparametername="p_descrizione" dbindex="0"></CC1:S_TEXTBOX></TD>
 														<TD style="HEIGHT: 20px" align="left" width="20%">Servizio</TD>
 														<TD style="HEIGHT: 20px" width="40%"><CC1:S_COMBOBOX id="cmbsServizio" tabindex="2" runat="server" dbsize="10" dbdirection="Input" dbparametername="p_serv_id"
-																dbindex="1" autopostback="True" dbdatatype="Integer" width="200px"></CC1:S_COMBOBOX></TD>
+																dbindex="1" autopostback="True" dbdatatype="Integer"></CC1:S_COMBOBOX></TD>
 													</TR>
 													<TR>
 														<TD align="left" width="20%" style="HEIGHT: 4px">Standard Apparecchiatura</TD>
 														<TD width="40%" style="HEIGHT: 4px"><CC1:S_COMBOBOX id="cmbseq_std" tabindex="2" runat="server" dbsize="10" dbdirection="Input" dbparametername="p_eq_std_id"
-																dbindex="2" autopostback="True" dbdatatype="Integer" width="320px"></CC1:S_COMBOBOX></TD>
+																dbindex="2" autopostback="True" dbdatatype="Integer" width="400px"></CC1:S_COMBOBOX></TD>
 														<TD style="HEIGHT: 4px" align="left">Frequenza</TD>
 														<TD style="HEIGHT: 4px"><CC1:S_COMBOBOX id="cmbspmpfrequenza" tabindex="3" runat="server" dbsize="10" dbdirection="Input"
-																dbparametername="p_pmp" dbindex="3" dbdatatype="Integer" width="200px"></CC1:S_COMBOBOX></TD>
+																dbparametername="p_pmp" dbindex="3" dbdatatype="Integer"></CC1:S_COMBOBOX></TD>
 													</TR>
 													<TR>
 														<TD style="HEIGHT: 20px" align="left">Specializzazioni</TD>
@@ -70,57 +71,59 @@
 				<TR>
 					<TD align="center"><UC1:GRIDTITLE id="GridTitle1" runat="server"></UC1:GRIDTITLE><ASP:DATAGRID id="DataGridRicerca" runat="server" cssclass="DataGrid" allowpaging="True" autogeneratecolumns="False"
 							gridlines="Vertical" borderwidth="1px" bordercolor="Gray">
-							<ALTERNATINGITEMSTYLE cssclass="DataGridAlternatingItemStyle"></ALTERNATINGITEMSTYLE>
-							<ITEMSTYLE cssclass="DataGridItemStyle"></ITEMSTYLE>
-							<HEADERSTYLE cssclass="DataGridHeaderStyle"></HEADERSTYLE>
-							<COLUMNS>
-								<ASP:TEMPLATECOLUMN>
-									<HEADERSTYLE width="1%"></HEADERSTYLE>
-									<ITEMSTYLE horizontalalign="Center" verticalalign="Middle"></ITEMSTYLE>
-									<ITEMTEMPLATE>
+							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
+							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
+							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
+							<Columns>
+								<asp:TemplateColumn>
+									<HeaderStyle Width="1%"></HeaderStyle>
+									<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
+									<ItemTemplate>
 										<asp:ImageButton id="imgbtnVisualizza" CommandArgument='<%# "EditPmp.aspx?ItemID=" + DataBinder.Eval(Container.DataItem,"ID") + "&amp;FunId=" + FunId + "&amp;TipoOper=read"%>' ImageUrl="../Images/Search16x16_bianca.jpg" CommandName="Dettaglio" Runat="server" ToolTip="Visualizza Procedura di Manutenzione">
-										</ASP:IMAGEBUTTON>
-									</ITEMTEMPLATE>
-								</ASP:TEMPLATECOLUMN>
-								<ASP:TEMPLATECOLUMN>
-									<HEADERSTYLE width="1%"></HEADERSTYLE>
-									<ITEMSTYLE horizontalalign="Center" verticalalign="Middle"></ITEMSTYLE>
-									<ITEMTEMPLATE>
+										</asp:ImageButton>
+									</ItemTemplate>
+								</asp:TemplateColumn>
+								<asp:TemplateColumn>
+									<HeaderStyle Width="1%"></HeaderStyle>
+									<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
+									<ItemTemplate>
 										<asp:ImageButton id="imgbtnModifica" CommandArgument='<%# "EditPmp.aspx?ItemID="+ DataBinder.Eval(Container.DataItem,"ID") + "&amp;FunId=" + FunId + "&amp;TipoOper=write"%>' ImageUrl="../Images/edit.gif" CommandName="Dettaglio" Runat="server" ToolTip="Modifica Procedura di Manutenzione">
-										</ASP:IMAGEBUTTON>
-									</ITEMTEMPLATE>
-								</ASP:TEMPLATECOLUMN>
-								<ASP:TEMPLATECOLUMN>
-									<HEADERSTYLE width="1%"></HEADERSTYLE>
-									<ITEMSTYLE horizontalalign="Center" verticalalign="Middle"></ITEMSTYLE>
-									<ITEMTEMPLATE>
+										</asp:ImageButton>
+									</ItemTemplate>
+								</asp:TemplateColumn>
+								<asp:TemplateColumn>
+									<HeaderStyle Width="1%"></HeaderStyle>
+									<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
+									<ItemTemplate>
 										<asp:ImageButton id="imgbtnStep" CommandArgument='<%# "PmpS.aspx?ItemID="+ DataBinder.Eval(Container.DataItem,"ID") + "&amp;FunId=" + FunId %>' ImageUrl="../Images/step.jpg" CommandName="Dettaglio" Runat="server" ToolTip="Passi per Procedura di Manutenzione">
-										</ASP:IMAGEBUTTON>
-									</ITEMTEMPLATE>
-								</ASP:TEMPLATECOLUMN>
-								<ASP:BOUNDCOLUMN visible="False" datafield="pmp_id" headertext="PMP_ID">
-									<HEADERSTYLE width="14%"></HEADERSTYLE>
-								</ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="descrizione" headertext="Descrizione">
-									<HEADERSTYLE width="20%"></HEADERSTYLE>
-								</ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="servizio" headertext="Servizio">
-									<HEADERSTYLE width="10%"></HEADERSTYLE>
-								</ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="Standard" headertext="Standard Apparecchiatura">
-									<HEADERSTYLE width="24%"></HEADERSTYLE>
-								</ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="fqdes" headertext="Frequenza">
-									<HEADERSTYLE width="14%"></HEADERSTYLE>
-								</ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="trdescrizione" headertext="Specializzazione">
-									<HEADERSTYLE width="18%"></HEADERSTYLE>
-								</ASP:BOUNDCOLUMN>
-							</COLUMNS>
-							<PAGERSTYLE horizontalalign="Left" cssclass="DataGridPagerStyle" mode="NumericPages"></PAGERSTYLE>
+										</asp:ImageButton>
+									</ItemTemplate>
+								</asp:TemplateColumn>
+								<asp:BoundColumn DataField="pmp_id" HeaderText="COD PMP">
+									<HeaderStyle Width="14%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="descrizione" HeaderText="Descrizione">
+									<HeaderStyle Width="20%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="servizio" HeaderText="Servizio">
+									<HeaderStyle Width="10%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="Standard" HeaderText="Standard Apparecchiatura">
+									<HeaderStyle Width="24%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="fqdes" HeaderText="Frequenza">
+									<HeaderStyle Width="14%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn DataField="trdescrizione" HeaderText="Specializzazione">
+									<HeaderStyle Width="18%"></HeaderStyle>
+								</asp:BoundColumn>
+								<asp:BoundColumn Visible="False" DataField="ac_id" HeaderText="DISMESSA"></asp:BoundColumn>
+							</Columns>
+							<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 						</ASP:DATAGRID></TD>
 				</TR>
 			</TABLE>
 			</TD></TR></TBODY></TABLE></FORM>
-	</body><script language="javascript">parent.left.calcola();</script>
+		<script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

@@ -1,8 +1,8 @@
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
 <%@ Page language="c#" Codebehind="Pagina_Download_Cumulativi.aspx.cs" AutoEventWireup="false" Inherits="TheSite.CostiGesioneCumulativi.Pagina_Download_Cumulativi" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -34,7 +34,7 @@
 										<HeaderStyle Width="1%"></HeaderStyle>
 										<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 										<ItemTemplate>
-											<ASP:IMAGEBUTTON id="imgBtnVisualizza" runat="server" imageurl="../images/eye.gif" OnCommand="imgBtnVisualizza_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"nome_file")  %>'>
+											<ASP:IMAGEBUTTON id=imgBtnVisualizza runat="server" OnCommand="imgBtnVisualizza_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"nome_file")  %>' imageurl="../images/eye.gif">
 											</ASP:IMAGEBUTTON>
 										</ItemTemplate>
 									</asp:TemplateColumn>
@@ -88,7 +88,7 @@
 										<ItemStyle Wrap="False" HorizontalAlign="Right"></ItemStyle>
 									</asp:BoundColumn>
 								</Columns>
-								<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
+								<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 							</ASP:DATAGRID></TD>
 					</TR>
 					<TR>
@@ -120,7 +120,7 @@
 											<TABLE class="BordiTabella" id="tblFrequenze" cellSpacing="0" cellPadding="2" border="1">
 												<TR>
 													<TD colSpan="2">
-														<ASP:LABEL id="lblIntestazione" runat="server" forecolor="#000099" font-size="Larger">Scheda di dettaglio rapportino interventi MAnutenzione Programmata</ASP:LABEL></TD>
+														<ASP:LABEL id="lblIntestazione" runat="server" font-size="Larger" forecolor="#000099">Scheda di dettaglio rapportino interventi MAnutenzione Programmata</ASP:LABEL></TD>
 												</TR>
 												<TR>
 													<TD>

@@ -12,14 +12,13 @@ using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using S_Controls.Collections;
 using S_Controls;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per EditPercentualeStraordinari.
 	/// </summary>
-	public class EditPercentualeStraordinari : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditPercentualeStraordinari : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Label lblOperazione;
 		protected Csy.WebControls.MessagePanel PanelMess;
@@ -139,14 +138,14 @@ namespace TheSite.Gestione
 		}
 		#endregion
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 		private void AbilitaControlli(bool enabled)

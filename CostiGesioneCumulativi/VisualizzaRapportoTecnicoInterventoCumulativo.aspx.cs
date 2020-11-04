@@ -14,7 +14,7 @@ namespace TheSite.CostiGesioneCumulativi
 	/// <summary>
 	/// Descrizione di riepilogo per RapportoTecnicoInterventoCumulativo.
 	/// </summary>
-	public class RapportoTecnicoInterventoCumulativo : System.Web.UI.Page    // System.Web.UI.Page
+	public class RapportoTecnicoInterventoCumulativo : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Literal ltlVisualizza;
 

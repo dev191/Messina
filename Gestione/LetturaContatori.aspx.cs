@@ -12,15 +12,15 @@ using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using TheSite.Classi.ClassiDettaglio;
-using TheSite.Classi;
-using StampaRapportiPdf.Classi;
+using MyCollection;
+using TheSite.Classi; 
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per LetturaContatori.
 	/// </summary>
-	public class LetturaContatori : System.Web.UI.Page    // System.Web.UI.Page
+	public class LetturaContatori : System.Web.UI.Page
 	{
 		protected S_Controls.S_ComboBox cmbsServizio;
 		protected S_Controls.S_ComboBox cmbsApparecchiatura;
@@ -38,7 +38,7 @@ namespace TheSite.Gestione
 		protected Microsoft.Web.UI.WebControls.TabStrip TabStrip1;
 		protected S_Controls.S_ComboBox cmbsPiano;
 		protected System.Web.UI.WebControls.Button btnReset;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 
 		EditLetturaContatori _fp;	
 	
@@ -127,7 +127,7 @@ namespace TheSite.Gestione
 			}
 		}
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get {return _myColl;}
 		}

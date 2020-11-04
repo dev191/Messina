@@ -11,14 +11,14 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.ManutenzioneCorrettiva
 {
 	/// <summary>
 	/// Descrizione di riepilogo per SfogliaRdl.
 	/// </summary>
-	public class AnalisiCostiOperativiDiGestione : System.Web.UI.Page    // System.Web.UI.Page
+	public class AnalisiCostiOperativiDiGestione : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsRichiesta;
 		protected S_Controls.S_ComboBox cmbsUrgenza;
@@ -50,15 +50,15 @@ namespace TheSite.ManutenzioneCorrettiva
 		
 		#region variabili
 		public static string HelpLink = string.Empty;		
-		ManutenzioneCorretiva.ModificaRdl _fp1=null;
+		TheSite.ManutenzioneCorrettiva.CreazioneSGA _fp1=null;
 		EditSfoglia  _fp=null;
 		AnalisiCostiOperativiDiGestioneDettaglio _fp2 = null;
 		public static int FunId = 0;	
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new MyCollection.clMyCollection();
 		#endregion
 
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get {return _myColl;}
 		}
@@ -105,9 +105,9 @@ namespace TheSite.ManutenzioneCorrettiva
 
 				//Valorizzo i Parametri Immessi
 				
-				if(Context.Handler is TheSite.ManutenzioneCorretiva.ModificaRdl)
+				if(Context.Handler is TheSite.ManutenzioneCorrettiva.CreazioneSGA)
 				{
-					_fp1=(ManutenzioneCorretiva.ModificaRdl) Context.Handler;
+					_fp1=(TheSite.ManutenzioneCorrettiva.CreazioneSGA) Context.Handler;
 					if (_fp1!=null)
 					{
 						_myColl=_fp1._Contenitore;
@@ -116,11 +116,11 @@ namespace TheSite.ManutenzioneCorrettiva
 						if (cmbsTipoManutenzione.SelectedValue=="3")
 						{
 							// Manutenzione Straordinaria				
-							Ricerca();		
+							Ricerca(true);		
 						}
 						else			
 						{	// Manutenzione Richiesta				
-							RicercaManRichiesta();
+							RicercaManRichiesta(true);
 						}
 	
 					} 
@@ -138,11 +138,11 @@ namespace TheSite.ManutenzioneCorrettiva
 						if (cmbsTipoManutenzione.SelectedValue=="3")
 						{
 							// Manutenzione Straordinaria				
-							Ricerca();		
+							Ricerca(true);		
 						}
 						else			
 						{	// Manutenzione Richiesta				
-							RicercaManRichiesta();
+							RicercaManRichiesta(true);
 						}
 
 					}
@@ -159,11 +159,11 @@ namespace TheSite.ManutenzioneCorrettiva
 						if (cmbsTipoManutenzione.SelectedValue=="3")
 						{
 							// Manutenzione Straordinaria				
-							Ricerca();		
+							Ricerca(true);		
 						}
 						else			
 						{	// Manutenzione Richiesta				
-							RicercaManRichiesta();
+							RicercaManRichiesta(true);
 						}
 
 					}
@@ -387,18 +387,21 @@ namespace TheSite.ManutenzioneCorrettiva
 
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{
+			DataGridRicerca.CurrentPageIndex=0;
+			DataGridRicerca2.CurrentPageIndex=0;
+
 			if (cmbsTipoManutenzione.SelectedValue=="3")
 			{
 				// Manutenzione Straordinaria				
-				Ricerca();		
+				Ricerca(true);		
 			}
 			else			
 			{	// Manutenzione Richiesta				
-				RicercaManRichiesta();
+				RicercaManRichiesta(true);
 			}
 		}
 
-		private void Ricerca()
+		private void Ricerca(bool reset)
 		{
 			
 			// Manutenzione Straordinaria
@@ -407,14 +410,32 @@ namespace TheSite.ManutenzioneCorrettiva
 			DataGridRicerca2.Visible=false;
 			Gridtitle2.Visible=false;
 						
-			DataSet _MyDs=GetData();
+			DataSet _MyDs=GetData(false);
 
 			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
+
+
+			Double _totalPages = 1;
+			if (reset==true)
+			{
+
+				int _totalRecords =int.Parse(GetData(true).Tables[0].Rows[0][0].ToString());
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+				if ((_totalRecords % DataGridRicerca.PageSize) == 0)
+					_totalPages = _totalRecords / DataGridRicerca.PageSize;
+				else
+					_totalPages = (_totalRecords / DataGridRicerca.PageSize)+1;
+			}
+			else
+			{
+				_totalPages = Double.Parse (this.GridTitle1.NumeroRecords);
+			}
+
 
 			DataGridRicerca.Visible = true;
 			GridTitle1.Visible =true;
 			GridTitle1.hplsNuovo.Visible=false;
-			if (_MyDs.Tables[0].Rows.Count == 0 )
+			if (int.Parse(GridTitle1.NumeroRecords) == 0 )
 			{
 				DataGridRicerca.CurrentPageIndex=0;
 				GridTitle1.DescriptionTitle="Nessun dato trovato."; 
@@ -422,22 +443,11 @@ namespace TheSite.ManutenzioneCorrettiva
 			else
 			{
 				CalcolaTotali(_MyDs.Tables[0]);
-
 				GridTitle1.DescriptionTitle=""; 
-				int Pagina = 0;
-				if ((_MyDs.Tables[0].Rows.Count % DataGridRicerca.PageSize) >0)
-				{
-					Pagina ++;
-				}
-				if (DataGridRicerca.PageCount != Convert.ToInt16((_MyDs.Tables[0].Rows.Count / DataGridRicerca.PageSize) + Pagina))
-				{					
-					DataGridRicerca.CurrentPageIndex=0;					
-				}
 			}
 			
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
 			this.DataGridRicerca.DataBind();
-			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();	
 		}
 
 		/// <summary>
@@ -457,7 +467,7 @@ namespace TheSite.ManutenzioneCorrettiva
 		/// Recupera i data per la ricerca
 		/// </summary>
 		/// <returns></returns>
-		private DataSet GetData()
+		private DataSet GetData(bool Count)
 		{
 			Classi.ManStraordinaria.Richiesta  _Richiesta = new TheSite.Classi.ManStraordinaria.Richiesta();						
 			S_ControlsCollection _SCollection = new S_ControlsCollection();			
@@ -601,14 +611,37 @@ namespace TheSite.ManutenzioneCorrettiva
 			p_datafine.Value = (CalendarPicker4.Datazione.Text =="")? "":CalendarPicker4.Datazione.Text;  			
 			_SCollection.Add(p_datafine);
 
-			DataSet _MyDs = _Richiesta.GetSfogliaRDL(_SCollection).Copy();	
+			DataSet _MyDs;
+
+			if(Count==false)
+			{
+				S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+				s_p_pageindex.ParameterName = "pageindex";
+				s_p_pageindex.DbType = CustomDBType.Integer;
+				s_p_pageindex.Direction = ParameterDirection.Input;
+				s_p_pageindex.Index = 16;
+				s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+				_SCollection.Add(s_p_pageindex);
+
+				S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+				s_p_pagesize.ParameterName = "pagesize";
+				s_p_pagesize.DbType = CustomDBType.Integer;
+				s_p_pagesize.Direction = ParameterDirection.Input;
+				s_p_pagesize.Index = 17;
+				s_p_pagesize.Value= DataGridRicerca.PageSize;			
+				_SCollection.Add(s_p_pagesize);
+            
+				_MyDs = _Richiesta.GetSfogliaRDL(_SCollection).Copy();	
+			}else
+				_MyDs = _Richiesta.GetSfogliaRDLCount(_SCollection).Copy();	
+
 			return _MyDs;
 		}
 		
 		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;			
-			Ricerca();
+			Ricerca(false);
 		}
 		double totpreventivo=0;
 		double totconsuntivo=0;
@@ -684,12 +717,12 @@ namespace TheSite.ManutenzioneCorrettiva
 			{
 				e.Item.Cells[1].ColumnSpan=3; 
 				e.Item.Cells[1].Text ="<b>TOTALE GENERALE</b>";
-				e.Item.Cells[9].HorizontalAlign =HorizontalAlign.Right; 
-				e.Item.Cells[9].Text ="<b>" + totpreventivo.ToString("C") +"</b>";
 				e.Item.Cells[10].HorizontalAlign =HorizontalAlign.Right; 
-				e.Item.Cells[10].Text ="<b>" + totconsuntivo.ToString("C")+"</b>";
-				e.Item.Cells[11].Visible=false;
+				e.Item.Cells[10].Text ="<b>" + totpreventivo.ToString("C") +"</b>";
+				e.Item.Cells[11].HorizontalAlign =HorizontalAlign.Right; 
+				e.Item.Cells[11].Text ="<b>" + totconsuntivo.ToString("C")+"</b>";
 				e.Item.Cells[12].Visible=false;
+				e.Item.Cells[13].Visible=false;
 
 			}
 
@@ -721,7 +754,7 @@ namespace TheSite.ManutenzioneCorrettiva
 			DataTable _dt = new DataTable();			
 			
 			if (cmbsTipoManutenzione.SelectedValue=="3")
-				_dt = GetData().Tables[0].Copy();		// MS
+				_dt = GetData(false).Tables[0].Copy();		// MS
 			else
 				_dt = GetWordExcel().Tables[0].Copy();	// MOR	
 
@@ -782,11 +815,11 @@ namespace TheSite.ManutenzioneCorrettiva
 
 		private void cmdReset_Click(object sender, System.EventArgs e)
 		{
-			Response.Redirect("SfogliaRdl.aspx?FunID=" + ViewState["FunId"]);
+			Response.Redirect("SfogliaRdlPaging.aspx?FunID=" + ViewState["FunId"]);
 		}
 
 		#region ManRichiesta
-		private void RicercaManRichiesta()
+		private void RicercaManRichiesta(bool reset)
 		{
 			
 			// Manutenzione Richiesta
@@ -911,14 +944,49 @@ namespace TheSite.ManutenzioneCorrettiva
 			s_p_Gruppo.Value = (cmbsGruppo.SelectedValue ==string.Empty)? 0:Int32.Parse(cmbsGruppo.SelectedValue);			
 			_SCollection.Add(s_p_Gruppo);
 		
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGridRicerca2.CurrentPageIndex +1;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca2.PageSize;			
+			_SCollection.Add(s_p_pagesize);
+
 			DataSet _MyDs = _Richiesta.GetSfogliaRDL(_SCollection).Copy();		
 
 			this.DataGridRicerca2.DataSource = _MyDs.Tables[0];
 
+			Double _totalPages = 1;
+			if (reset==true)
+			{
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				int _totalRecords = _Richiesta.GetSfogliaRDLCount(_SCollection);
+				this.Gridtitle2.NumeroRecords=_totalRecords.ToString();
+				if ((_totalRecords % DataGridRicerca2.PageSize) == 0)
+					_totalPages = _totalRecords / DataGridRicerca2.PageSize;
+				else
+					_totalPages = (_totalRecords / DataGridRicerca2.PageSize)+1;
+			}
+			else
+			{
+				_totalPages = Double.Parse (this.Gridtitle2.NumeroRecords);
+			}
+
 			DataGridRicerca2.Visible = true;
 			Gridtitle2.Visible =true;
 			Gridtitle2.hplsNuovo.Visible=false;
-			if (_MyDs.Tables[0].Rows.Count == 0 )
+			if (int.Parse(Gridtitle2.NumeroRecords) == 0 )
 			{
 				DataGridRicerca2.CurrentPageIndex=0;
 				Gridtitle2.DescriptionTitle="Nessun dato trovato."; 
@@ -926,20 +994,11 @@ namespace TheSite.ManutenzioneCorrettiva
 			else
 			{
 				Gridtitle2.DescriptionTitle=""; 
-				int Pagina = 0;
-				if ((_MyDs.Tables[0].Rows.Count % DataGridRicerca2.PageSize) >0)
-				{
-					Pagina ++;
-				}
-				if (DataGridRicerca2.PageCount != Convert.ToInt16((_MyDs.Tables[0].Rows.Count / DataGridRicerca2.PageSize) + Pagina))
-				{					
-					DataGridRicerca2.CurrentPageIndex=0;					
-				}
+				
 			}
 			
+			this.DataGridRicerca2.VirtualItemCount =int.Parse(this.Gridtitle2.NumeroRecords);
 			this.DataGridRicerca2.DataBind();
-			
-			this.Gridtitle2.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();	
 		}
 
 		public DataSet GetWordExcel()
@@ -1059,7 +1118,28 @@ namespace TheSite.ManutenzioneCorrettiva
 			s_p_Gruppo.Index = 12;
 			s_p_Gruppo.Value = (cmbsGruppo.SelectedValue ==string.Empty)? 0:Int32.Parse(cmbsGruppo.SelectedValue);			
 			_SCollection.Add(s_p_Gruppo);
-		
+		    
+			int PageIndex=1;
+			if(DataGridRicerca2.Visible)
+				PageIndex=DataGridRicerca2.CurrentPageIndex +1;
+			else
+				PageIndex=DataGridRicerca.CurrentPageIndex +1;
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=PageIndex;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca2.PageSize;			
+			_SCollection.Add(s_p_pagesize);
+
 			return  _Richiesta.GetSfogliaRDL(_SCollection).Copy();		
 		}
 
@@ -1068,7 +1148,7 @@ namespace TheSite.ManutenzioneCorrettiva
 		private void DataGridRicerca2_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca2.CurrentPageIndex = e.NewPageIndex;			
-			RicercaManRichiesta();
+			RicercaManRichiesta(false);
 		
 		}
 
@@ -1150,11 +1230,6 @@ namespace TheSite.ManutenzioneCorrettiva
 									
 			}
 		}
-
-		
-
-		
-
 
 
 	}

@@ -14,7 +14,7 @@ namespace StampaRapportiPdf.Pagine
 	/// <summary>
 	/// Descrizione di riepilogo per VisualDWF.
 	/// </summary>
-	public class VisualDWF : System.Web.UI.Page    // System.Web.UI.Page
+	public class VisualDWF : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Literal ltlVisualizza;
 

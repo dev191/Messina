@@ -20,14 +20,15 @@ using System.IO;
 using System.Text;
 //using TheSite.Classi;
 using TheSite.Classi.CostiGesioneCumulativi;
-using StampaRapportiPdf.Classi;
+
+
 
 namespace TheSite.CostiGesioneCumulativi
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Pagina_Download_Cumulativi.
 	/// </summary>
-	public class Pagina_Download_Cumulativi : System.Web.UI.Page    // System.Web.UI.Page
+	public class Pagina_Download_Cumulativi : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
 		protected S_Controls.S_Button S_btnRicerca;

@@ -1,298 +1,320 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.XSLT.DIE
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
+using System;
+using System.IO;
+using System.Collections;
+using System.Web.Mail;
+using System.Data;
+using System.Data.OracleClient;
 using ApplicationDataLayer;
 using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using ICSharpCode.SharpZipLib.Zip;
-using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using S_Controls.Collections;
-using System;
-using System.Collections;
+using ApplicationDataLayer.DBType;
 using System.Configuration;
-using System.Data;
-using System.IO;
-using System.Text;
-using System.Web;
 using System.Xml;
-using System.Xml.XPath;
 using System.Xml.Xsl;
-
+using System.Xml.XPath;
+using System.Text;
+using ICSharpCode;
+using ICSharpCode.SharpZipLib;
+using ICSharpCode.SharpZipLib.Zip;
 namespace TheSite.XSLT
 {
-  public class DIE
-  {
-    private OracleDataLayer _OraDl;
-    private string s_ConnStr = ConfigurationSettings.AppSettings["ConnectionString"];
-    private int wr_id = 0;
-    private string DataCreate = "";
+	/// <summary>
+	/// Descrizione di riepilogo per DIE.
+	/// </summary>
+	public class DIE
+	{
+		ApplicationDataLayer.OracleDataLayer _OraDl;
+		string s_ConnStr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];
+		int wr_id=0;
+		string DataCreate="";
+		public DIE(int wr_id, string DataCreate)
+		{
+			this.wr_id=wr_id;
+			this.DataCreate=DataCreate;
+			_OraDl = new OracleDataLayer(s_ConnStr);
+		}
 
-    public DIE(int wr_id, string DataCreate)
-    {
-      this.wr_id = wr_id;
-      this.DataCreate = DataCreate;
-      this._OraDl = new OracleDataLayer(this.s_ConnStr);
-    }
+		
+		public string[] GenerateDIE()
+		{
+			DataTable DieTb=GetDataDIE();
+			DataRow Riga=DieTb.Rows[0];
+			string CodEdi=Riga["codedi"].ToString();
+			string CodiceSGA=Riga["sga"].ToString();
+			Stream stream = new MemoryStream();
+			//creo l'oggetto xml
+ 
+			XmlTextWriter writer=new XmlTextWriter(stream,null);
+			//writer.Formatting = Formatting.Indented;
+			writer.WriteStartElement("data");
+			
+//			writer.WriteElementString("CODICE",Riga["sga"].ToString().Trim());
+			string SGA=Riga["codedi"].ToString()+"_"+System.DateTime.Parse(Riga["dataRichiesta"].ToString()).ToString("yy") + "_"+ FormatNumber(Riga["sga_count"].ToString());
+			writer.WriteElementString("CODICE",SGA);
+			writer.WriteElementString("SEDE",Riga["codedi"].ToString());
+			writer.WriteElementString("PIANO",Riga["piano"].ToString().Replace("�","\\'b0"));
+			writer.WriteElementString("DATA",Riga["date_requested"].ToString());
+			writer.WriteElementString("NOMEEDIFICIO",Riga["edificio"].ToString());
+			writer.WriteElementString("AMBIENTE",Riga["ambiente"].ToString());
+		    writer.WriteElementString("SERVIZIO",Riga["servizio_id"].ToString());
 
-    public string[] GenerateDIE()
-    {
-      DataRow row = this.GetDataDIE().Rows[0];
-      string str1 = row["codedi"].ToString();
-      row["sga"].ToString();
-      XmlTextWriter xmlTextWriter1 = new XmlTextWriter((Stream) new MemoryStream(), (Encoding) null);
-      xmlTextWriter1.WriteStartElement("data");
-      string str2 = row["codedi"].ToString() + "_" + DateTime.Parse(row["dataRichiesta"].ToString()).ToString("yy") + "_" + this.FormatNumber(row["sga_count"].ToString());
-      xmlTextWriter1.WriteElementString("CODICE", str2);
-      xmlTextWriter1.WriteElementString("SEDE", row["codedi"].ToString());
-      xmlTextWriter1.WriteElementString("PIANO", row["piano"].ToString().Replace("°", "\\'b0"));
-      xmlTextWriter1.WriteElementString("DATA", row["date_requested"].ToString());
-      xmlTextWriter1.WriteElementString("NOMEEDIFICIO", row["edificio"].ToString());
-      xmlTextWriter1.WriteElementString("AMBIENTE", row["ambiente"].ToString());
-      xmlTextWriter1.WriteElementString("SERVIZIO", row["servizio_id"].ToString());
-      xmlTextWriter1.WriteElementString("DESCPROB", row["descrizioneprob"].ToString());
-      xmlTextWriter1.WriteElementString("ID_SEG", row["id_sga_seguito"].ToString());
-      switch (row["id_sga_seguito"].ToString())
-      {
-        case "3":
-          xmlTextWriter1.WriteElementString("ORDINEDEL", row["die_del"].ToString());
-          xmlTextWriter1.WriteElementString("ORDINENUM", row["die_numero"].ToString());
-          break;
-        case "4":
-          xmlTextWriter1.WriteElementString("MANDIFFDEL", row["die_del"].ToString());
-          break;
-        case "2":
-          xmlTextWriter1.WriteElementString("MANPROGDEL", row["die_del"].ToString());
-          break;
-      }
-      xmlTextWriter1.WriteElementString("DIETIPINT", row["die_tipo_intervento"].ToString());
-      xmlTextWriter1.WriteElementString("N_REG", row["die_registro"].ToString());
-      xmlTextWriter1.WriteElementString("MESE", this.GetMese(row["die_mese"].ToString()));
-      xmlTextWriter1.WriteElementString("GG_APERTURA", row["date_requested"].ToString());
-      xmlTextWriter1.WriteElementString("GG_INTMA", row["date_start"].ToString());
-      xmlTextWriter1.WriteElementString("GG_CHIUSURA", row["date_end"].ToString());
-      xmlTextWriter1.WriteElementString("NOMEDITTA", row["ditta"].ToString());
-      xmlTextWriter1.WriteElementString("TECNICOESECUTORE", row["addetto"].ToString());
-      xmlTextWriter1.WriteElementString("TELEFONO", row["telefono"].ToString());
-      xmlTextWriter1.WriteElementString("EMAIL", row["email"].ToString());
-      xmlTextWriter1.WriteElementString("VAL_ECONOMICA", "");
-      xmlTextWriter1.WriteElementString("TIP_MAN", row["tipomanutenzione_id"].ToString());
-      xmlTextWriter1.WriteElementString("COSTO_MAT", row["TM"].ToString());
-      xmlTextWriter1.WriteElementString("COSTO_PERS", row["TA"].ToString());
-      double num = double.Parse(row["TM"].ToString()) + double.Parse(row["TA"].ToString());
-      xmlTextWriter1.WriteElementString("COSTO_TOT", num.ToString());
-      xmlTextWriter1.WriteElementString("DICHIARA1", row["die_dichiara1"].ToString());
-      xmlTextWriter1.WriteElementString("DICHIARA2", row["die_dichiara2"].ToString());
-      int[] CarattariPerRiga1 = new int[2]{ 108, 108 };
-      string[] strArray1 = this.DividiParole(row["comments"].ToString(), CarattariPerRiga1);
-      xmlTextWriter1.WriteElementString("DICHIARA", strArray1[0]);
-      xmlTextWriter1.WriteElementString("DICHIARA_1", strArray1[1]);
-      int[] CarattariPerRiga2 = new int[2]{ 103, 78 };
-      string[] strArray2 = this.DividiParole(row["die_note"].ToString(), CarattariPerRiga2);
-      xmlTextWriter1.WriteElementString("DICHIARA_NOTE1", strArray2[0]);
-      xmlTextWriter1.WriteElementString("DICHIARA_NOTE2", strArray2[1]);
-      xmlTextWriter1.WriteElementString("NOME_MA", row["nomimativo"].ToString());
-      xmlTextWriter1.WriteElementString("TEL_MA", row["tel"].ToString());
-      xmlTextWriter1.WriteElementString("FAX_MA", row["fax"].ToString());
-      xmlTextWriter1.WriteElementString("MOBILE_MA", row["mobile"].ToString());
-      xmlTextWriter1.WriteElementString("MAIL_MA", row["email_ma"].ToString());
-      xmlTextWriter1.WriteElementString("NOME_SM", row["sm_nome"].ToString());
-      xmlTextWriter1.WriteElementString("FIRMA_SM", row["sm_firma"].ToString());
-      xmlTextWriter1.WriteElementString("DATA_SM", row["sm_data"].ToString());
-      xmlTextWriter1.WriteElementString("NOME_FM", row["fm_nome"].ToString());
-      xmlTextWriter1.WriteElementString("FIRMA_FM", row["fm_firma"].ToString());
-      xmlTextWriter1.WriteElementString("DATA_FM", row["fm_data"].ToString());
-      xmlTextWriter1.WriteEndElement();
-      xmlTextWriter1.Flush();
-      Stream baseStream = xmlTextWriter1.BaseStream;
-      baseStream.Position = 0L;
-      XPathDocument xpathDocument = new XPathDocument(baseStream);
-      string url = HttpContext.Current.Server.MapPath("..\\XSLT\\" + (!(row["id_progetto"].ToString() == "2") ? "XSLTDIE.xslt" : "XSLTDIEVod.xslt"));
-      XslTransform xslTransform = new XslTransform();
-      xslTransform.Load(url);
-      XsltArgumentList xsltArgumentList = new XsltArgumentList();
-      string str3 = Path.Combine(HttpContext.Current.Server.MapPath("..\\Doc_DB"), row["codedi"].ToString());
-      if (!Directory.Exists(str3))
-        Directory.CreateDirectory(str3);
-      string path1 = Path.Combine(str3, this.wr_id.ToString());
-      if (!Directory.Exists(path1))
-        Directory.CreateDirectory(path1);
-      string[] strArray3 = new string[10]
-      {
-        path1,
-        "\\DIE ",
-        str1,
-        " ",
-        this.FormatNumber(row["sga_count"].ToString()),
-        "-",
-        null,
-        null,
-        null,
-        null
-      };
-      string[] strArray4 = strArray3;
-      DateTime dateTime = DateTime.Parse(row["dataRichiesta"].ToString());
-      string str4 = dateTime.ToString("yy");
-      strArray4[6] = str4;
-      strArray3[7] = " ";
-      strArray3[8] = this.DataCreate;
-      strArray3[9] = ".rtf";
-      string str5 = string.Concat(strArray3);
-      XmlTextWriter xmlTextWriter2 = new XmlTextWriter(str5, (Encoding) null);
-      xslTransform.Transform((IXPathNavigable) xpathDocument, (XsltArgumentList) null, (XmlWriter) xmlTextWriter2, (XmlResolver) null);
-      xmlTextWriter2.Flush();
-      xmlTextWriter2.Close();
-      baseStream.Close();
-      string[] strArray5 = new string[8]
-      {
-        path1,
-        "\\DIE ",
-        str1,
-        " ",
-        this.FormatNumber(row["sga_count"].ToString()),
-        "-",
-        null,
-        null
-      };
-      string[] strArray6 = strArray5;
-      dateTime = DateTime.Parse(row["dataRichiesta"].ToString());
-      string str6 = dateTime.ToString("yy");
-      strArray6[6] = str6;
-      strArray5[7] = ".rtf";
-      string str7 = string.Concat(strArray5);
-      if (File.Exists(str7))
-        File.Delete(str7);
-      File.Copy(str5, str7, true);
-      string path2 = Path.GetDirectoryName(str7) + "\\" + Path.GetFileNameWithoutExtension(str7) + ".zip";
-      if (File.Exists(path2))
-        File.Delete(path2);
-      ZipOutputStream zipOutputStream = new ZipOutputStream((Stream) File.Create(path2));
-      zipOutputStream.SetLevel(5);
-      FileStream fileStream = File.OpenRead(str7);
-      byte[] buffer = new byte[fileStream.Length];
-      fileStream.Read(buffer, 0, buffer.Length);
-      ZipEntry zipEntry = new ZipEntry(Path.GetFileName(str7));
-      zipOutputStream.PutNextEntry(zipEntry);
-      ((Stream) zipOutputStream).Write(buffer, 0, buffer.Length);
-      ((DeflaterOutputStream) zipOutputStream).Finish();
-      ((Stream) zipOutputStream).Close();
-      return new string[2]{ path2, str5 };
-    }
+			writer.WriteElementString("DESCPROB",Riga["descrizioneprob"].ToString());
+			writer.WriteElementString("ID_SEG",Riga["id_sga_seguito"].ToString());
+			
+			switch(Riga["id_sga_seguito"].ToString())
+			{
+				case"3":
+					writer.WriteElementString("ORDINEDEL",Riga["die_del"].ToString());
+					writer.WriteElementString("ORDINENUM",Riga["die_numero"].ToString());
+				break;
+				case"4":
+					writer.WriteElementString("MANDIFFDEL",Riga["die_del"].ToString());
+					break;
+				case"2":
+					writer.WriteElementString("MANPROGDEL",Riga["die_del"].ToString());
+					break;
+			}
+			
+			
+			writer.WriteElementString("DIETIPINT",Riga["die_tipo_intervento"].ToString());
+			writer.WriteElementString("N_REG",Riga["die_registro"].ToString());
+			writer.WriteElementString("MESE",GetMese(Riga["die_mese"].ToString()));
+			writer.WriteElementString("GG_APERTURA",Riga["date_requested"].ToString());
+			writer.WriteElementString("GG_INTMA",Riga["date_start"].ToString());
+			writer.WriteElementString("GG_CHIUSURA",Riga["date_end"].ToString());
+			writer.WriteElementString("NOMEDITTA",Riga["ditta"].ToString());
+			writer.WriteElementString("TECNICOESECUTORE",Riga["addetto"].ToString());
+			writer.WriteElementString("TELEFONO",Riga["telefono"].ToString());
+			writer.WriteElementString("EMAIL",Riga["email"].ToString());
+			writer.WriteElementString("VAL_ECONOMICA","");
+			writer.WriteElementString("TIP_MAN",Riga["tipomanutenzione_id"].ToString());
+			writer.WriteElementString("COSTO_MAT",Riga["TM"].ToString());
+			writer.WriteElementString("COSTO_PERS",Riga["TA"].ToString());
+			double tot=double.Parse(Riga["TM"].ToString()) + double.Parse(Riga["TA"].ToString());
+			writer.WriteElementString("COSTO_TOT",tot.ToString());
+			writer.WriteElementString("DICHIARA1",Riga["die_dichiara1"].ToString());
+			writer.WriteElementString("DICHIARA2",Riga["die_dichiara2"].ToString());
 
-    private DataTable GetDataDIE()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_wr_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject1).set_Value((object) this.wr_id);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count);
-      controlsCollection.Add(sObject2);
-      string str = "PACK_MANCORRETIVA.SP_GETDATIDIE";
-      return this._OraDl.GetRows((object) controlsCollection, str).Tables[0];
-    }
+			int[] CaratteriPerDichiara = new int[] {108,108};
+//			string [] TmpRighe = DividiInRIghe(Riga["comments"].ToString(),CaratteriPerDichiara);
+			string [] TmpRighe = DividiParole(Riga["comments"].ToString(),CaratteriPerDichiara);
+			
+			writer.WriteElementString("DICHIARA",TmpRighe[0]);
+			writer.WriteElementString("DICHIARA_1",TmpRighe[1]);
 
-    private string FormatNumber(string numero)
-    {
-      if (numero.Length == 0)
-        return "";
-      if (numero.Length == 1)
-        return "000" + numero;
-      if (numero.Length == 2)
-        return "00" + numero;
-      if (numero.Length == 3)
-        return "0" + numero;
-      return numero.Length == 4 ? numero : "";
-    }
+			int[] CaratteriPerNote = new int[] {103,78};
+			string [] TmpRighe1 = DividiParole(Riga["die_note"].ToString(),CaratteriPerNote);
+			writer.WriteElementString("DICHIARA_NOTE1",TmpRighe1[0]);
+			writer.WriteElementString("DICHIARA_NOTE2",TmpRighe1[1]);
+			
+			writer.WriteElementString("NOME_MA",Riga["nomimativo"].ToString());
+			writer.WriteElementString("TEL_MA",Riga["tel"].ToString());
+			writer.WriteElementString("FAX_MA",Riga["fax"].ToString());
+			writer.WriteElementString("MOBILE_MA",Riga["mobile"].ToString());
+			writer.WriteElementString("MAIL_MA",Riga["email_ma"].ToString());
 
-    private string[] DividiParole(string Value, int[] CarattariPerRiga)
-    {
-      string[] strArray = new string[CarattariPerRiga.Length];
-      int startIndex = 0;
-      for (int index = 0; index < CarattariPerRiga.Length; ++index)
-      {
-        int num1 = CarattariPerRiga[index];
-        int num2 = Value.Length - 1 <= num1 ? Value.Length : CarattariPerRiga[index];
-        strArray[index] = Value.Substring(startIndex, num2);
-        Value = Value.Substring(num2);
-      }
-      return strArray;
-    }
+			writer.WriteElementString("NOME_SM",Riga["sm_nome"].ToString());
+			writer.WriteElementString("FIRMA_SM",Riga["sm_firma"].ToString());
+			writer.WriteElementString("DATA_SM",Riga["sm_data"].ToString());
+			writer.WriteElementString("NOME_FM",Riga["fm_nome"].ToString());
+			writer.WriteElementString("FIRMA_FM",Riga["fm_firma"].ToString());
+			writer.WriteElementString("DATA_FM",Riga["fm_data"].ToString());
 
-    private string[] DividiInRIghe(string RigaDaDividere, int[] CarattariPerRiga)
-    {
-      string[] strArray = new string[CarattariPerRiga.Length];
-      int num1 = 0;
-      int startIndex1 = 0;
-      int num2 = 0;
-      int num3 = 0;
-      int startIndex2 = 0;
-      if (RigaDaDividere != string.Empty)
-      {
-        for (int index = 0; index < strArray.Length; ++index)
-        {
-          num2 += CarattariPerRiga[index];
-          while (num1 < num2)
-          {
-            if (num1 != -1)
-            {
-              num1 = RigaDaDividere.IndexOf(" ", startIndex1);
-              ++startIndex1;
-            }
-            else
-            {
-              num1 = RigaDaDividere.Length;
-              break;
-            }
-          }
-          int length = num1 - startIndex2;
-          strArray[index] = RigaDaDividere.Substring(startIndex2, length);
-          startIndex2 = num1;
-          num3 += CarattariPerRiga[index];
-        }
-      }
-      else
-      {
-        for (int index = 0; index < strArray.Length; ++index)
-          strArray[index] = string.Empty;
-      }
-      return strArray;
-    }
+			writer.WriteEndElement();
 
-    private string GetMese(string mese)
-    {
-      if (mese == "1")
-        return "GENNAIO";
-      if (mese == "2")
-        return "FEBBRAIO";
-      if (mese == "3")
-        return "MARZO";
-      if (mese == "4")
-        return "APRILE";
-      if (mese == "5")
-        return "MAGGIO";
-      if (mese == "6")
-        return "GIUGNO";
-      if (mese == "7")
-        return "LUGLIO";
-      if (mese == "8")
-        return "AGOSTO";
-      if (mese == "9")
-        return "SETTEMBRE";
-      if (mese == "10")
-        return "OTTOBRE";
-      if (mese == "11")
-        return "NOVEMBRE";
-      return mese == "12" ? "DICEMBRE" : "";
-    }
-  }
+           
+			writer.Flush();
+			stream = writer.BaseStream;
+			stream.Position=0;
+		
+			
+			XPathDocument xmlDoc=new XPathDocument(stream);
+			string XstName="";
+			if(Riga["id_progetto"].ToString()=="2")//Vodafone
+				XstName="XSLTDIEVod.xslt";
+		    else
+				XstName="XSLTDIE.xslt";
+			//carico il file xslt
+			string XsltFilePath=System.Web.HttpContext.Current.Server.MapPath(@"..\XSLT\" + XstName); 
+			XslTransform xslt = new XslTransform();        
+			xslt.Load(XsltFilePath);  
+			XsltArgumentList args = new XsltArgumentList();
+
+			string PathDIE=System.Web.HttpContext.Current.Server.MapPath(@"..\Doc_DB");  
+			
+			PathDIE=Path.Combine(PathDIE,Riga["codedi"].ToString());
+			if (!Directory.Exists(PathDIE))
+				Directory.CreateDirectory(PathDIE);
+
+			PathDIE=Path.Combine(PathDIE,this.wr_id.ToString());
+			if (!Directory.Exists(PathDIE))
+				Directory.CreateDirectory(PathDIE);
+
+			string FileName=PathDIE + @"\DIE " + CodEdi + " " + FormatNumber(Riga["sga_count"].ToString()) + "-" + System.DateTime.Parse(Riga["dataRichiesta"].ToString()).ToString("yy") +" " + DataCreate +".rtf";
+
+			XmlTextWriter wr = new XmlTextWriter(FileName, null);
+			xslt.Transform(xmlDoc, null, wr,null);
+			wr.Flush();
+			wr.Close();
+
+			stream.Close();
+			
+			string FileNameDIELast=PathDIE + @"\DIE " + CodEdi + " " + FormatNumber(Riga["sga_count"].ToString()) + "-" +System.DateTime.Parse(Riga["dataRichiesta"].ToString()).ToString("yy") +".rtf";
+			if (File.Exists(FileNameDIELast))
+				File.Delete(FileNameDIELast);
+
+			File.Copy(FileName,FileNameDIELast,true);
+
+				
+			string FileZip = Path.GetDirectoryName(FileNameDIELast) + @"\" + Path.GetFileNameWithoutExtension(FileNameDIELast) + ".zip";
+		
+			if (File.Exists(FileZip))
+				File.Delete(FileZip);
+
+			ZipOutputStream s = new ZipOutputStream(File.Create(FileZip)); 
+			s.SetLevel(5); // 0 - store only to 9 - means best compression 
+			FileStream fs = File.OpenRead(FileNameDIELast); 
+			byte[] buffer = new byte[fs.Length]; 
+			fs.Read(buffer, 0, buffer.Length); 
+			ZipEntry entry = new ZipEntry(Path.GetFileName(FileNameDIELast)); 
+			s.PutNextEntry(entry); 
+			s.Write(buffer, 0, buffer.Length); 
+			s.Finish(); 
+			s.Close(); 
+
+
+			string[] doc = new string[2] {FileZip, FileName};
+
+		   return doc;
+		}
+
+
+		private DataTable GetDataDIE()
+		{
+			S_ControlsCollection _SColl = new S_ControlsCollection();
+		
+			S_Controls.Collections.S_Object p = new S_Object();
+			p.ParameterName = "p_wr_id";
+			p.DbType = CustomDBType.Integer;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Value = this.wr_id;
+			_SColl.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "IO_CURSOR";
+			p.DbType = CustomDBType.Cursor;
+			p.Direction = ParameterDirection.Output;
+			p.Index = _SColl.Count;
+			_SColl.Add(p);
+
+			string s_StrSql = "PACK_MANCORRETIVA.SP_GETDATIDIE";
+			 
+			DataSet _Ds =  _OraDl.GetRows(_SColl, s_StrSql);
+			return _Ds.Tables[0];
+		}
+		private string FormatNumber(string numero)
+		{
+			if (numero.Length==0) return "";
+			if (numero.Length==1) return "000" + numero;
+			if (numero.Length==2) return "00" + numero;
+			if (numero.Length==3) return "0" + numero;
+			if (numero.Length==4) return  numero;
+			return "";
+		}
+		private string [] DividiParole(string Value, int [] CarattariPerRiga)
+		{
+			string[] Righe = new string[CarattariPerRiga.Length];
+			int start=0;
+			
+			int i=0;
+			while (i<CarattariPerRiga.Length)
+			{
+
+				
+				int end=CarattariPerRiga[i];
+				int tempEnd=Value.Length-1;
+				if(tempEnd>end)
+					end=CarattariPerRiga[i];
+				else
+					end=Value.Length;
+
+				Righe[i]=Value.Substring(start,end);
+				Value=Value.Substring(end);
+				i++;
+			}
+			return Righe;
+		}
+
+		private string[]  DividiInRIghe(string RigaDaDividere, int[] CarattariPerRiga)
+		{
+				string[] Righe = new string[CarattariPerRiga.Length];
+				//			string[] Parole = RigaDaDividere.Split(Convert.ToChar(" "));
+				//			int cnt=0;
+				//			foreach (string Parola in Parole)
+				//			{
+				//				if(Parola.Length <= CarattariPerRiga[]
+				//			}
+				//			
+				//			return Righe;
+				int IndiceRiga=0;
+				int Lugehezza=0;
+				int i=0;
+				int sup=0;
+				int inf =0;
+				int j=0;
+				if(RigaDaDividere != String.Empty)
+				{
+					for (int cntRiga=0; cntRiga<Righe.Length; cntRiga++)
+					{
+						sup += CarattariPerRiga[cntRiga];
+						while(IndiceRiga<sup)
+						{
+							if(IndiceRiga != -1)
+							{
+								IndiceRiga = RigaDaDividere.IndexOf(" ",i);
+								i++;
+							}
+							else
+							{
+								IndiceRiga= RigaDaDividere.Length;
+								break;
+							}
+						}
+						Lugehezza = IndiceRiga-j;
+						Righe[cntRiga]= RigaDaDividere.Substring(j,Lugehezza);
+						j=IndiceRiga;
+						inf += CarattariPerRiga[cntRiga];
+					}
+				}
+				else
+				{
+					for (int k =0; k<Righe.Length; k++)
+					{
+						Righe[k]=string.Empty;
+					}
+				}
+				return Righe;
+			}
+
+
+	
+
+		private string GetMese(string mese)
+		{
+			if(mese=="1") return "GENNAIO";
+			if(mese=="2") return "FEBBRAIO";
+			if(mese=="3") return "MARZO";
+			if(mese=="4") return "APRILE";
+			if(mese=="5") return "MAGGIO";
+			if(mese=="6") return "GIUGNO";
+			if(mese=="7") return "LUGLIO";
+			if(mese=="8") return "AGOSTO";
+			if(mese=="9") return "SETTEMBRE";
+			if(mese=="10") return "OTTOBRE";
+			if(mese=="11") return "NOVEMBRE";
+			if(mese=="12") return "DICEMBRE";
+			return "";
+		}
+	}
 }

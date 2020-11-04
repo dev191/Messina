@@ -3,6 +3,7 @@
 <%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
 <%@ Page language="c#" Codebehind="Fondi.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.Fondi" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -32,25 +33,47 @@
 					<TD vAlign="top" align="center" height="95%">
 						<TABLE id="tblForm" cellSpacing="1" cellPadding="1" align="center">
 							<TR>
-								<TD style="HEIGHT: 25%" vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" ExpandImageUrl="../Images/down.gif" CollapseImageUrl="../Images/up.gif"
-										CollapseText="Riduci" ExpandText="Espandi" Collapsed="False" AllowTitleExpandCollapse="True" TitleText="Ricerca" CssClass="DataPanel75" TitleStyle-CssClass="TitleSearch">
+								<TD style="HEIGHT: 25%" vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" TitleStyle-CssClass="TitleSearch" CssClass="DataPanel75"
+										TitleText="Ricerca" AllowTitleExpandCollapse="True" Collapsed="False" ExpandText="Espandi" CollapseText="Riduci" CollapseImageUrl="../Images/up.gif"
+										ExpandImageUrl="../Images/down.gif">
 										<TABLE id="tblSearch100" cellSpacing="0" cellPadding="2" border="0">
 											<TR>
-												<TD style="WIDTH: 119px; HEIGHT: 8px" align="left" width="119" colSpan="1">Anno</TD>
-												<TD style="WIDTH: 399px; HEIGHT: 8px" width="399" colSpan="1">
-													<cc1:S_ComboBox id="cmbsAnno" runat="server" DBParameterName="p_anno" DBDirection="Input" DBIndex="1"
-														Width="200px" DBDataType="Integer"></cc1:S_ComboBox></TD>
+												<TD style="WIDTH: 119px; HEIGHT: 8px" align="left" width="119" colSpan="1">Codice</TD>
+												<TD style="WIDTH: 125px; HEIGHT: 8px" width="125" colSpan="1">
+													<asp:TextBox id="txtCodiceFondo" runat="server"></asp:TextBox></TD>
+												<TD style="WIDTH: 66px; HEIGHT: 8px" width="66"></TD>
+												<TD style="WIDTH: 399px; HEIGHT: 8px" width="399"></TD>
 											</TR>
 											<TR>
-												<TD style="WIDTH: 119px; HEIGHT: 24px" align="left" colSpan="1">Tipo Intervento</TD>
-												<TD style="WIDTH: 399px; HEIGHT: 24px" colSpan="1">
-													<cc1:S_ComboBox id="cmbsTipoIntervento" runat="server" DBParameterName="p_TipoIntervento" DBDirection="Input"
-														DBIndex="2" Width="200px" DBDataType="Integer"></cc1:S_ComboBox></TD>
+												<TD style="WIDTH: 119px; HEIGHT: 24px" align="left" colSpan="1">Data Validità:</TD>
+												<TD style="WIDTH: 125px; HEIGHT: 24px" colSpan="3">
+													<TABLE id="Table3" style="WIDTH: 560px; HEIGHT: 59px" cellSpacing="1" cellPadding="1" width="560"
+														border="0">
+														<TR>
+															<TD>Mese Inizio:</TD>
+															<TD>
+																<asp:DropDownList id="DrMeseini" runat="server"></asp:DropDownList></TD>
+															<TD>Anno Inizio:</TD>
+															<TD>
+																<asp:DropDownList id="DrAnnoIni" runat="server"></asp:DropDownList></TD>
+														</TR>
+														<TR>
+															<TD>Mese Fine:</TD>
+															<TD>
+																<asp:DropDownList id="DrMesefine" runat="server"></asp:DropDownList></TD>
+															<TD>Anno Fine:</TD>
+															<TD>
+																<asp:DropDownList id="DrAnnofine" runat="server"></asp:DropDownList></TD>
+														</TR>
+													</TABLE>
+												</TD>
 											</TR>
 											<TR>
-												<TD style="WIDTH: 522px" align="left" colSpan="2">
+												<TD style="WIDTH: 214px" align="left" colSpan="2">
 													<cc1:s_button id="btnsRicerca" runat="server" CssClass="btn" Text="Ricerca"></cc1:s_button>&nbsp;
 													<cc1:S_Button id="BtnReset" tabIndex="4" runat="server" CssClass="btn" Text="Reset"></cc1:S_Button></TD>
+												<TD style="WIDTH: 66px" align="right"></TD>
+												<TD align="right"></TD>
 												<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
                   target=_blank>Guida</A></TD>
 											</TR>
@@ -60,8 +83,8 @@
 							<TR>
 								<TD style="HEIGHT: 3%" align="center"></TD>
 							<TR>
-								<TD style="HEIGHT: 72%" vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" BorderColor="Gray" BorderWidth="1px"
-										GridLines="Vertical" AutoGenerateColumns="False" AllowPaging="True">
+								<TD style="HEIGHT: 72%" vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" AllowPaging="True" AutoGenerateColumns="False"
+										GridLines="Vertical" BorderWidth="1px" BorderColor="Gray">
 										<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 										<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 										<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
@@ -83,12 +106,15 @@
 													</asp:ImageButton>
 												</ItemTemplate>
 											</asp:TemplateColumn>
-											<asp:BoundColumn DataField="Anno" HeaderText="Anno"></asp:BoundColumn>
-											<asp:BoundColumn DataField="descrizione_breve" HeaderText="Tipo Intervento"></asp:BoundColumn>
+											<asp:BoundColumn DataField="codicefondo" HeaderText="Codice Fondo"></asp:BoundColumn>
+											<asp:BoundColumn DataField="meseini" HeaderText="Mese Inizio" DataFormatString="{0:d}"></asp:BoundColumn>
+											<asp:BoundColumn DataField="annoini" HeaderText="Anno inizio" DataFormatString="{0:d}"></asp:BoundColumn>
+											<asp:BoundColumn DataField="mesefine" HeaderText="Mese fine"></asp:BoundColumn>
+											<asp:BoundColumn DataField="annofine" HeaderText="Anno Fine"></asp:BoundColumn>
 											<asp:BoundColumn DataField="importo_netto" HeaderText="Importo Netto" DataFormatString="{0:N2}"></asp:BoundColumn>
 											<asp:BoundColumn DataField="importo_lordo" HeaderText="Importo Lordo" DataFormatString="{0:N2}"></asp:BoundColumn>
 											<asp:BoundColumn DataField="descrizione" HeaderText="Descrizione Fondo"></asp:BoundColumn>
-											<asp:BoundColumn Visible="False" DataField="descrizionestesa" HeaderText="DescrizioneEstesa"></asp:BoundColumn>
+											<asp:BoundColumn Visible="False" DataField="Periodo" HeaderText="Periodicit&#224;"></asp:BoundColumn>
 										</Columns>
 										<PagerStyle Mode="NumericPages"></PagerStyle>
 									</asp:datagrid></TD>
@@ -98,5 +124,6 @@
 				</TR>
 			</TABLE>
 		</form>
-	</body><script language="javascript">parent.left.calcola();</script>
+		<script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

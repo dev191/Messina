@@ -1,11 +1,11 @@
-<%@ Page language="c#" Codebehind="NavigazioneApparecchiature.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnagrafeImpianti.NavigazioneApparecchiature" %>
-<%@ Register TagPrefix="uc1" TagName="UserStanze" Src="../WebControls/UserStanze.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="CodiceApparecchiature" Src="../WebControls/CodiceApparecchiature.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
 <%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CodiceApparecchiature" Src="../WebControls/CodiceApparecchiature.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="UserStanzeRic" Src="../WebControls/UserStanzeRic.ascx" %>
+<%@ Page language="c#" Codebehind="NavigazioneApparecchiature.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnagrafeImpianti.NavigazioneApparecchiature" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -33,7 +33,8 @@
 								<TR>
 									<TD vAlign="top" align="center" colSpan="4">
 										<P>
-											<uc1:RicercaModulo id="RicercaModulo1" runat="server"></uc1:RicercaModulo></P>
+											<uc1:RicercaModulo id="RicercaModulo1" runat="server"></uc1:RicercaModulo>
+											<asp:requiredfieldvalidator id="rfvEdificio" runat="server" ErrorMessage="Selezionare un Edificio per eseguire la ricerca">*</asp:requiredfieldvalidator></P>
 									</TD>
 								</TR>
 								<TR>
@@ -41,12 +42,12 @@
 									<TD style="HEIGHT: 28px">
 										<cc1:s_combobox id="cmbsPiano" runat="server" Width="200px"></cc1:s_combobox></TD>
 									<TD colSpan="2">
-										<uc1:UserStanze id="UserStanze1" runat="server"></uc1:UserStanze></TD>
+										<uc1:UserStanzeRic id="UserStanze1" runat="server"></uc1:UserStanzeRic></TD>
 								</TR>
 								<TR>
-									<TD style="HEIGHT: 6px"><SPAN>Servizio: </SPAN>
+									<TD style="HEIGHT: 13px"><SPAN>Servizio: </SPAN>
 									</TD>
-									<TD style="HEIGHT: 6px" colSpan="3">
+									<TD style="HEIGHT: 13px" colSpan="3">
 										<cc1:S_ComboBox id="cmbsServizio" runat="server" Width="392px" AutoPostBack="True"></cc1:S_ComboBox></TD>
 								</TR>
 								<TR>
@@ -65,12 +66,14 @@
 										<TABLE id="Table1" style="HEIGHT: 19px" cellSpacing="0" cellPadding="0" width="100%" border="0">
 											<TR>
 												<TD style="WIDTH: 242px" align="right">
-													<cc1:S_Button id="S_btMostra" runat="server" CssClass="btn" Width="134px" ToolTip="Avvia la ricerca"
-														Text="Mostra Dettagli"></cc1:S_Button>&nbsp;</TD>
-												<TD>&nbsp;
-													<cc1:S_Button id="btReset" runat="server" CssClass="btn" Width="134px" Text="Reset"></cc1:S_Button></TD>
-												<TD align="right"><A class="GuidaLink" href="<%= HelpLink %>" 
-                  target="_blank">Guida</A></TD>
+													<cc1:S_Button id="S_btMostra" runat="server" CssClass="btn" Width="134px" Text="Mostra Dettagli"
+														ToolTip="Avvia la ricerca"></cc1:S_Button>&nbsp;</TD>
+												<TD style="WIDTH: 169px">&nbsp;
+													<cc1:S_Button id="btReset" runat="server" CssClass="btn" Width="134px" Text="Reset" CausesValidation="False"></cc1:S_Button></TD>
+												<TD style="WIDTH: 170px" align="center">
+													<cc1:S_Button id="S_Button1" runat="server" CssClass="btn" Width="134px" Text="Esporta in excel"></cc1:S_Button></TD>
+												<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
+                  target=_blank>Guida</A></TD>
 											</TR>
 										</TABLE>
 									</TD>
@@ -84,7 +87,7 @@
 						<uc1:GridTitle id="GridTitle1" runat="server"></uc1:GridTitle>
 						<asp:DataGrid id="MyDataGrid1" runat="server" Width="100%" BorderColor="Gray" BorderStyle="None"
 							BorderWidth="1px" BackColor="White" CellPadding="4" AutoGenerateColumns="False" CssClass="DataGrid"
-							AllowPaging="True" GridLines="Vertical">
+							AllowPaging="True" GridLines="Vertical" AllowCustomPaging="True">
 							<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
@@ -94,7 +97,7 @@
 									<HeaderStyle Width="30px"></HeaderStyle>
 									<ItemStyle HorizontalAlign="Center"></ItemStyle>
 									<ItemTemplate>
-										<asp:ImageButton ImageUrl="../Images/edit.gif" Runat="server" OnCommand="imageButton_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ID") %>' ID="Imagebutton1">
+										<asp:ImageButton ImageUrl="../Images/edit.gif" Runat=server OnCommand="imageButton_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ID") %>' ID="Imagebutton1">
 										</asp:ImageButton>
 									</ItemTemplate>
 								</asp:TemplateColumn>
@@ -102,18 +105,18 @@
 									<HeaderStyle Width="30px"></HeaderStyle>
 									<ItemStyle HorizontalAlign="Center"></ItemStyle>
 									<ItemTemplate>
-										<asp:ImageButton ImageUrl="../Images/ChiaveInglese.gif" Runat="server" OnCommand="Richieste_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"id_eq")+ "," + DataBinder.Eval(Container.DataItem,"id") %>' ID="Imagebutton2">
+										<asp:ImageButton ImageUrl="../Images/ChiaveInglese.gif" Runat=server OnCommand="Richieste_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"id_eq")+ "," + DataBinder.Eval(Container.DataItem,"id") %>' ID="Imagebutton2">
 										</asp:ImageButton>
 									</ItemTemplate>
 								</asp:TemplateColumn>
-								<ASP:TEMPLATECOLUMN>
-									<HEADERSTYLE width="30px"></HEADERSTYLE>
-									<ITEMSTYLE horizontalalign="Center"></ITEMSTYLE>
-									<ITEMTEMPLATE>
+								<asp:TemplateColumn>
+									<HeaderStyle Width="30px"></HeaderStyle>
+									<ItemStyle HorizontalAlign="Center"></ItemStyle>
+									<ItemTemplate>
 										<asp:ImageButton ImageUrl="../Images/attach.png" Runat="server" OnCommand="Documenti_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"id_eq")+ "," + DataBinder.Eval(Container.DataItem,"id") %>' ID="Imagebutton3">
 										</asp:ImageButton>
-									</ITEMTEMPLATE>
-								</ASP:TEMPLATECOLUMN>
+									</ItemTemplate>
+								</asp:TemplateColumn>
 								<asp:BoundColumn DataField="bl_id" HeaderText="Cod.Edificio"></asp:BoundColumn>
 								<asp:BoundColumn DataField="ID" HeaderText="Cod. Apparecchiatura"></asp:BoundColumn>
 								<asp:BoundColumn DataField="DESCRIZIONE" HeaderText="Std. Apparecchiatura"></asp:BoundColumn>
@@ -122,11 +125,13 @@
 								<asp:BoundColumn Visible="False" DataField="date_dismiss" HeaderText="Dismessa"></asp:BoundColumn>
 								<asp:BoundColumn DataField="PianoStanza" HeaderText="Piano/Stanza"></asp:BoundColumn>
 							</Columns>
-							<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
+							<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 						</asp:DataGrid>
 					</TD>
 				</TR>
 			</TABLE>
+			<asp:validationsummary id="vlsEdit" style="Z-INDEX: 102; LEFT: 24px; POSITION: absolute; TOP: 648px" runat="server"
+				ShowMessageBox="True" DisplayMode="List" ShowSummary="False"></asp:validationsummary>
 		</form>
 		</TD></TR></TBODY></TABLE><script language="javascript">parent.left.calcola();</script>
 	</body>

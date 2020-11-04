@@ -1,132 +1,154 @@
-ï»¿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ClassMail
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using System.Configuration;
+using System;
 using System.IO;
-using System.Text;
-using System.Web;
 using System.Web.Mail;
 using System.Xml;
+using System.Xml.Xsl;  
 using System.Xml.XPath;
-using System.Xml.Xsl;
-
+using System.Text;
+using System.Web;
+using System.Configuration;
+ 
 namespace TheSite.Classi
 {
-  public class ClassMail
-  {
-    private MailMessage msg;
-    private string name;
-    private string surname;
-    private string idrichiesta;
-    private string descrizione;
-    private string codedi;
-    private string responsabile;
+	/// <summary>
+	/// Descrizione di riepilogo per ClassMail.
+	/// </summary>
+	
+	public class ClassMail
+	{
+		public enum TipoMail
+		{
+			MailCreazioneRichiesta=0,
+			MailEmissioneRichiesta=1
+		}
 
-    public string Name
-    {
-      get => this.name;
-      set => this.name = value;
-    }
+		#region Campi Privati
+		private MailMessage msg;
+		private string name;
+		private string surname;
+		private string idrichiesta;
+		private string descrizione;
+		private string codedi;
+		private string responsabile;
+		#endregion
 
-    public string Surname
-    {
-      get => this.surname;
-      set => this.surname = value;
-    }
+		#region Proprietà pubbliche
+		public string Name
+		{
+			get{return name;}
+			set{name=value;}
+		}
+		public string Surname
+		{
+			get{return surname;}
+			set{surname=value;}
+		}
+		public string Idrichiesta
+		{
+			get{return idrichiesta;}
+			set{idrichiesta=value;}
+		}
+		public string Decription
+		{
+			get{return descrizione;}
+			set{descrizione=value;}
+		}
+		public string CodiceEdificio
+		{
+			get{return codedi;}
+			set{codedi=value;}
+		}
+		public string Responsabile
+		{
+			get{return responsabile;}
+			set{responsabile=value;}
+		}
+		#endregion
 
-    public string Idrichiesta
-    {
-      get => this.idrichiesta;
-      set => this.idrichiesta = value;
-    }
+		public ClassMail(MailMessage Messaggio, string Name, string Surmane, string IDRichiesta)
+		{
+			msg=Messaggio;
+			//imposto le normali proprietà
+			msg.BodyFormat=MailFormat.Html;
+			name=Name;
+			surname=Surmane;
+			idrichiesta=IDRichiesta;
+		}
+		public ClassMail(string Name, string Surmane, string IDRichiesta)
+		{
+			msg=new MailMessage();
+			//imposto le normali proprietà
+			msg.BodyFormat=MailFormat.Html;
+			name=Name;
+			surname=Surmane;
+			idrichiesta=IDRichiesta;
+		}
+		
+		public ClassMail()
+		{
+			msg=new MailMessage();
+		}
+		public MailMessage Messaggio
+		{
+			get {return msg;}
+			set{msg=value;}
+		}
 
-    public string Decription
-    {
-      get => this.descrizione;
-      set => this.descrizione = value;
-    }
+	
+		public void SendMail(TipoMail tipomail)
+		{
+			MemoryStream stream=new MemoryStream();
+			//creo l'oggetto xml
+			XmlTextWriter writer=new XmlTextWriter(stream,Encoding.UTF8);
+			writer.WriteStartElement("data");
+			writer.WriteElementString("name", this.name);
+			writer.WriteElementString("surname",this.surname);
+			writer.WriteElementString("idrichiesta",this.idrichiesta);
+			writer.WriteElementString("descrizione",this.descrizione);
+			writer.WriteElementString("codedi",this.codedi);
+			writer.WriteElementString("responsabile",this.responsabile);
+			
+			writer.WriteEndElement();
+			writer.Flush();
+			stream.Position=0;
+			//carico l'xmldocument
+			XPathDocument xmlDoc=new XPathDocument(stream);
+			//la stringa che conterrà il body
+			StringBuilder message=new StringBuilder();
+			//carico il file xslt
+			XslTransform xmlEngine=new XslTransform();
+			if(tipomail==TipoMail.MailCreazioneRichiesta)
+				xmlEngine.Load(HttpContext.Current.Server.MapPath("..\\emailcreazione.xslt"));
+			else if(tipomail==TipoMail.MailEmissioneRichiesta)
+				xmlEngine.Load(HttpContext.Current.Server.MapPath("..\\email.xslt"));
 
-    public string CodiceEdificio
-    {
-      get => this.codedi;
-      set => this.codedi = value;
-    }
+			//effettuo la trasformazione
+			xmlEngine.Transform(xmlDoc,null,new StringWriter(message),null);
+			msg.Body=HttpContext.Current.Server.HtmlDecode(message.ToString());
+			stream.Close();
+			
+			//Parte riservata all'autenticazione sul server di posta
+			//			msg.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "www.csy.it";
+			//			msg.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverport") = 25;
+			////			sendusing 1 Send message using the local SMTP service pickup directory. 
+			////			sendusing 2 Send the message using the network (SMTP over the network).  
+			//			msg.Fields("http://schemas.microsoft.com/cdo/configuration/sendusing") = 2;
+			////			smtpauthenticate 0 Do not authenticate. 
+			////			smtpauthenticate 1 Use basic (clear-text) authentication. The configuration sendusername/sendpassword or postusername/postpassword fields are used to specify credentials. 
+			////			smtpauthenticate 2 Use NTLM authentication (Secure Password Authentication in Microsoft® Outlook® Express). The current process security context is used to authenticate with the service. 
+			//			msg.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1;
+			//			msg.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername") = "username"; 
+			//			msg.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "password";
+			//SmtpMail.SmtpServer="www.prm-ater-gescal.it.compsys"; 
+			msg.Fields["http://schemas.microsoft.com/cdo/configuration/smtpauthenticate"] = 1;
+			msg.Fields["http://schemas.microsoft.com/cdo/configuration/sendusername"] = ConfigurationSettings.AppSettings["usersmtp"].ToString(); 
+			msg.Fields["http://schemas.microsoft.com/cdo/configuration/sendpassword"] = ConfigurationSettings.AppSettings["pwdsmtp"].ToString();
 
-    public string Responsabile
-    {
-      get => this.responsabile;
-      set => this.responsabile = value;
-    }
+			SmtpMail.SmtpServer = ConfigurationSettings.AppSettings["SmtpServer2"].ToString();
+			//invio l'email
+			SmtpMail.Send(msg);
+			//			Response.Write("messaggio inviato");
+		}
+	}
 
-    public ClassMail(MailMessage Messaggio, string Name, string Surmane, string IDRichiesta)
-    {
-      this.msg = Messaggio;
-      this.msg.BodyFormat = MailFormat.Html;
-      this.name = Name;
-      this.surname = Surmane;
-      this.idrichiesta = IDRichiesta;
-    }
-
-    public ClassMail(string Name, string Surmane, string IDRichiesta)
-    {
-      this.msg = new MailMessage();
-      this.msg.BodyFormat = MailFormat.Html;
-      this.name = Name;
-      this.surname = Surmane;
-      this.idrichiesta = IDRichiesta;
-    }
-
-    public ClassMail() => this.msg = new MailMessage();
-
-    public MailMessage Messaggio
-    {
-      get => this.msg;
-      set => this.msg = value;
-    }
-
-    public void SendMail(ClassMail.TipoMail tipomail)
-    {
-      MemoryStream memoryStream = new MemoryStream();
-      XmlTextWriter xmlTextWriter = new XmlTextWriter((Stream) memoryStream, Encoding.UTF8);
-      xmlTextWriter.WriteStartElement("data");
-      xmlTextWriter.WriteElementString("name", this.name);
-      xmlTextWriter.WriteElementString("surname", this.surname);
-      xmlTextWriter.WriteElementString("idrichiesta", this.idrichiesta);
-      xmlTextWriter.WriteElementString("descrizione", this.descrizione);
-      xmlTextWriter.WriteElementString("codedi", this.codedi);
-      xmlTextWriter.WriteElementString("responsabile", this.responsabile);
-      xmlTextWriter.WriteEndElement();
-      xmlTextWriter.Flush();
-      memoryStream.Position = 0L;
-      XPathDocument xpathDocument = new XPathDocument((Stream) memoryStream);
-      StringBuilder sb = new StringBuilder();
-      XslTransform xslTransform = new XslTransform();
-      switch (tipomail)
-      {
-        case ClassMail.TipoMail.MailCreazioneRichiesta:
-          xslTransform.Load(HttpContext.Current.Server.MapPath("..\\emailcreazione.xslt"));
-          break;
-        case ClassMail.TipoMail.MailEmissioneRichiesta:
-          xslTransform.Load(HttpContext.Current.Server.MapPath("..\\email.xslt"));
-          break;
-      }
-      xslTransform.Transform((IXPathNavigable) xpathDocument, (XsltArgumentList) null, (TextWriter) new StringWriter(sb), (XmlResolver) null);
-      this.msg.Body = HttpContext.Current.Server.HtmlDecode(sb.ToString());
-      memoryStream.Close();
-      this.msg.Fields[(object) "http://schemas.microsoft.com/cdo/configuration/smtpauthenticate"] = (object) 1;
-      this.msg.Fields[(object) "http://schemas.microsoft.com/cdo/configuration/sendusername"] = (object) ConfigurationSettings.AppSettings["usersmtp"].ToString();
-      this.msg.Fields[(object) "http://schemas.microsoft.com/cdo/configuration/sendpassword"] = (object) ConfigurationSettings.AppSettings["pwdsmtp"].ToString();
-      SmtpMail.SmtpServer = ConfigurationSettings.AppSettings["SmtpServer2"].ToString();
-      SmtpMail.Send(this.msg);
-    }
-
-    public enum TipoMail
-    {
-      MailCreazioneRichiesta,
-      MailEmissioneRichiesta,
-    }
-  }
 }

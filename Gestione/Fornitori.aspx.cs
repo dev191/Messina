@@ -9,19 +9,19 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Ditte.
 	/// </summary>
-	public class Fornitori : System.Web.UI.Page    // System.Web.UI.Page
+	public class Fornitori : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
 		public static int FunId = 0;
 		public static string HelpLink = string.Empty;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		protected S_Controls.S_TextBox txtsIndirizzo;
 		protected S_Controls.S_TextBox txtsComune;
 		protected S_Controls.S_TextBox txtsEmail;
@@ -92,7 +92,7 @@ namespace TheSite.Gestione
 
 		}
 		#endregion
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{

@@ -14,7 +14,7 @@ namespace TheSite.ManutenzioneCorretiva
 	/// <summary>
 	/// Descrizione di riepilogo per RapportoTecnicoIntervento.
 	/// </summary>
-	public class ReportDettaglioFondo : System.Web.UI.Page    // System.Web.UI.Page
+	public class ReportDettaglioFondo : System.Web.UI.Page
 	{
 		
 		protected WebControls.PageTitle PageTitle1;

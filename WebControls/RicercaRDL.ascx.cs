@@ -53,6 +53,7 @@ namespace TheSite.WebControls
 				Ricarica();
 				CompareValidator1.ControlToValidate = CalendarPicker2.ID + ":" + CalendarPicker2.Datazione.ID;
 				CompareValidator1.ControlToCompare =  CalendarPicker1.ID + ":" + CalendarPicker1.Datazione.ID;
+		
 			}
 			//txtsRDL.Attributes.Add("onchange","Verifica(this);");
 		}
@@ -64,8 +65,39 @@ namespace TheSite.WebControls
 			get {return operazione;}
 			set	{operazione=value;}
 		}
-
+		/// Ottiene imposta il Nome della combo tipo manutenzione
+		/// </summary>
+		public string NameComboMan
+		{
+			get 
+			{
+				if( ViewState["cmbsServizio"]==null)
+					return string.Empty;
+				else
+					return (string)ViewState["cmbsServizio"];
+			}
+			set 
+			{
+				ViewState["cmbsServizio"] = value;
+			}
+		}
 		//fine
+
+		public string TipoMan
+		{
+			get 
+		{
+			if( ViewState["TipoMan"]==null)
+			return string.Empty;
+			else
+			return (string)ViewState["TipoMan"];
+		}
+			set 
+		{
+			ViewState["TipoMan"] = value;
+		}
+			
+		}
 
 		// Indica che il controlle effettua la multiselezione
 		public string multiselect

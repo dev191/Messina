@@ -1,13 +1,13 @@
-<%@ Register TagPrefix="cr" Namespace="CrystalDecisions.Web" Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" %>
-<%@ Page language="c#" Codebehind="AnalisiCostiOperativiDiGestioneCumulativo.aspx.cs" AutoEventWireup="false" Inherits="TheSite.CostiGesioneCumulativi.AnalisiCostiOperativiDiGestioneCumulativo" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="Addetti" Src="../WebControls/Addetti.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="Richiedenti" Src="../WebControls/Richiedenti.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="Richiedenti" Src="../WebControls/Richiedenti.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="Addetti" Src="../WebControls/Addetti.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Page language="c#" Codebehind="AnalisiCostiOperativiDiGestioneCumulativo.aspx.cs" AutoEventWireup="false" Inherits="TheSite.CostiGesioneCumulativi.AnalisiCostiOperativiDiGestioneCumulativo" %>
+<%@ Register TagPrefix="cr" Namespace="CrystalDecisions.Web" Assembly="CrystalDecisions.Web, Version=9.1.5000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" %>
 <!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en" >
 <HTML>
 	<HEAD>
@@ -153,19 +153,19 @@
 		onbeforeunload="chiudi();" leftMargin="5" topMargin="0" rightMargin="0" ms_positioning="GridLayout">
 		<FORM id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; POSITION: absolute; TOP: 0px" cellSpacing="0"
-				cellPadding="0" width="100%" align="center" border="0">
+				cellPadding="0" width="90%" align="center" border="0">
 				<TBODY>
 					<TR>
 						<TD style="HEIGHT: 50px" align="center"><UC1:PAGETITLE id="PageTitle1" title="Sfoglia RdL e Odl" runat="server"></UC1:PAGETITLE></TD>
 					</TR>
 					<TR>
 						<TD vAlign="top" align="center" height="95%">
-							<TABLE id="tblForm" cellSpacing="1" cellPadding="1" align="center">
+							<TABLE id="tblForm" cellSpacing="1" cellPadding="1" align="center" width="95%">
 								<TBODY>
 									<TR>
 										<TD style="HEIGHT: 25%" vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" titlestyle-cssclass="TitleSearch" cssclass="DataPanel75"
 												titletext="Ricerca" allowtitleexpandcollapse="True" collapsed="False" expandtext="Espandi" collapsetext="Riduci" collapseimageurl="../Images/uparrows_trans.gif"
-												expandimageurl="../Images/downarrows_trans.gif">
+												expandimageurl="../Images/downarrows_trans.gif" Width="95%" Height="359">
 												<TABLE id="tblSearch100" cellSpacing="1" cellPadding="2" border="0">
 													<TR>
 														<TD align="left" colSpan="4">
@@ -174,8 +174,8 @@
 													<TR>
 														<TD align="left" width="13%">Richiesta di Lavoro:</TD>
 														<TD width="30%">
-															<CC1:S_TEXTBOX id="txtsRichiesta" runat="server" dbparametername="p_Wr_Id" dbdirection="Input"
-																width="100px" dbsize="255" maxlength="10" dbdatatype="Integer" dbindex="2"></CC1:S_TEXTBOX></TD>
+															<CC1:S_TEXTBOX id="txtsRichiesta" runat="server" dbindex="2" dbdatatype="Integer" maxlength="10"
+																dbsize="255" width="100px" dbdirection="Input" dbparametername="p_Wr_Id"></CC1:S_TEXTBOX></TD>
 														<TD align="left" width="15%">Addetto:</TD>
 														<TD width="30%">
 															<UC1:ADDETTI id="Addetti1" runat="server"></UC1:ADDETTI></TD>
@@ -187,14 +187,14 @@
 														<TD align="left">Data A:</TD>
 														<TD>
 															<UC1:CALENDARPICKER id="CalendarPicker2" runat="server"></UC1:CALENDARPICKER>
-															<ASP:COMPAREVALIDATOR id="CompareValidator1" runat="server" display="Dynamic" type="Date" operator="GreaterThanEqual"
-																errormessage="Data non valida!"></ASP:COMPAREVALIDATOR></TD>
+															<ASP:COMPAREVALIDATOR id="CompareValidator1" runat="server" errormessage="Data non valida!" operator="GreaterThanEqual"
+																type="Date" display="Dynamic"></ASP:COMPAREVALIDATOR></TD>
 													</TR>
 													<TR>
 														<TD align="left">Ordine di Lavoro:</TD>
 														<TD>
-															<CC1:S_TEXTBOX id="txtsOrdine" runat="server" dbparametername="p_Wr_Id" dbdirection="Input" width="100px"
-																dbsize="255" maxlength="10"></CC1:S_TEXTBOX></TD>
+															<CC1:S_TEXTBOX id="txtsOrdine" runat="server" maxlength="10" dbsize="255" width="100px" dbdirection="Input"
+																dbparametername="p_Wr_Id"></CC1:S_TEXTBOX></TD>
 														<TD align="left">Stato Richiesta:</TD>
 														<TD>
 															<CC1:S_COMBOBOX id="cmbsStatus" runat="server" width="99%"></CC1:S_COMBOBOX></TD>
@@ -218,8 +218,8 @@
 													<TR>
 														<TD align="left" colSpan="1">Descrizione:</TD>
 														<TD colSpan="3">
-															<CC1:S_TEXTBOX id="txtDescrizione" runat="server" dbparametername="p_Wr_Id" dbdirection="Input"
-																width="99%" dbsize="255" maxlength="255"></CC1:S_TEXTBOX></TD>
+															<CC1:S_TEXTBOX id="txtDescrizione" runat="server" maxlength="255" dbsize="255" width="690px" dbdirection="Input"
+																dbparametername="p_Wr_Id"></CC1:S_TEXTBOX></TD>
 													</TR>
 													<TR>
 														<TD align="left">Tipo Manutenzione:</TD>
@@ -257,14 +257,15 @@
 									<TR id="trstraordinaria">
 										<TD vAlign="top" align="center" width="100%"><UC1:GRIDTITLE id="GridTitle1" runat="server"></UC1:GRIDTITLE>
 											<ASP:DATAGRID id="DataGridRicerca" runat="server" cssclass="DataGrid" showfooter="True" allowpaging="True"
-												bordercolor="Gray" borderwidth="1px" gridlines="Vertical" autogeneratecolumns="False">
+												bordercolor="Gray" borderwidth="1px" gridlines="Vertical" autogeneratecolumns="False" Width="100%"
+												AllowCustomPaging="True">
 												<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 												<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 												<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
 												<Columns>
 													<asp:BoundColumn Visible="False" DataField="WR_ID" HeaderText="ID"></asp:BoundColumn>
 													<asp:TemplateColumn>
-														<HeaderStyle Width="3%" HorizontalAlign="Center" VerticalAlign="Middle"></HeaderStyle>
+														<HeaderStyle HorizontalAlign="Center" Width="3%" VerticalAlign="Middle"></HeaderStyle>
 														<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 														<HeaderTemplate>
 															<INPUT type="checkbox" id="ChkSelTutti" onclick="SelCheckbox()">
@@ -277,7 +278,7 @@
 														<HeaderStyle Width="3%"></HeaderStyle>
 														<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 														<ItemTemplate>
-															<ASP:IMAGEBUTTON id="Imagebutton2" runat="server" commandname="Modifica" imageurl="../images/Search16x16_bianca.JPG" commandargument='<%# "ModificaRdl.aspx?ItemId=" + DataBinder.Eval(Container.DataItem,"WR_ID")%>'>
+															<ASP:IMAGEBUTTON id="Imagebutton2" runat="server" commandname="Modifica" imageurl="../images/Search16x16_bianca.JPG" commandargument='<%# "CreazioneSGA.aspx?ItemId=" + DataBinder.Eval(Container.DataItem,"WR_ID")%>'>
 															</ASP:IMAGEBUTTON>
 														</ItemTemplate>
 													</asp:TemplateColumn>
@@ -296,19 +297,19 @@
 													</asp:BoundColumn>
 													<asp:BoundColumn Visible="False" DataField="id_stato" HeaderText="idstato"></asp:BoundColumn>
 												</Columns>
-												<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
+												<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 											</ASP:DATAGRID></TD>
 									</TR>
 									<TR id="trrichiesta">
 										<TD vAlign="top" align="center" width="100%"><UC1:GRIDTITLE id="Gridtitle2" runat="server"></UC1:GRIDTITLE><ASP:DATAGRID id="DataGridRicerca2" runat="server" cssclass="DataGrid" allowpaging="True" bordercolor="Gray"
-												borderwidth="1px" gridlines="Vertical" autogeneratecolumns="False">
-												<ALTERNATINGITEMSTYLE CSSCLASS="DataGridAlternatingItemStyle"></ALTERNATINGITEMSTYLE>
-												<ITEMSTYLE CSSCLASS="DataGridItemStyle"></ITEMSTYLE>
-												<HEADERSTYLE CSSCLASS="DataGridHeaderStyle"></HEADERSTYLE>
-												<COLUMNS>
-													<ASP:BOUNDCOLUMN visible="False" datafield="WR_ID" headertext="ID"></ASP:BOUNDCOLUMN>
+												borderwidth="1px" gridlines="Vertical" autogeneratecolumns="False" Width="100%" AllowCustomPaging="True">
+												<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
+												<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
+												<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
+												<Columns>
+													<asp:BoundColumn Visible="False" DataField="WR_ID" HeaderText="ID"></asp:BoundColumn>
 													<asp:TemplateColumn>
-														<HeaderStyle Width="3%" HorizontalAlign="Center" VerticalAlign="Middle"></HeaderStyle>
+														<HeaderStyle HorizontalAlign="Center" Width="3%" VerticalAlign="Middle"></HeaderStyle>
 														<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 														<HeaderTemplate>
 															<INPUT type="checkbox" id="ChkSelTutti" onclick="SelCheckbox()">
@@ -317,28 +318,28 @@
 															<ASP:CHECKBOX id="ChkSel2" runat="server"></ASP:CHECKBOX>
 														</ItemTemplate>
 													</asp:TemplateColumn>
-													<ASP:TEMPLATECOLUMN visible="False">
-														<HEADERSTYLE WIDTH="3%"></HEADERSTYLE>
-														<ITEMSTYLE HORIZONTALALIGN="Center" VERTICALALIGN="Middle"></ITEMSTYLE>
-														<ITEMTEMPLATE>
-															<ASP:IMAGEBUTTON id="Imagebutton3" runat="server" commandname="Modifica" imageurl="../images/Search16x16_bianca.JPG" commandargument='<%# "ModificaRdl.aspx?ItemId=" + DataBinder.Eval(Container.DataItem,"WR_ID")%>'>
+													<asp:TemplateColumn Visible="False">
+														<HeaderStyle Width="3%"></HeaderStyle>
+														<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
+														<ItemTemplate>
+															<ASP:IMAGEBUTTON id="Imagebutton3" runat="server" commandname="Modifica" imageurl="../images/Search16x16_bianca.JPG" commandargument='<%# "CreazioneSGA.aspx?ItemId=" + DataBinder.Eval(Container.DataItem,"WR_ID")%>'>
 															</ASP:IMAGEBUTTON>
-														</ITEMTEMPLATE>
-													</ASP:TEMPLATECOLUMN>
-													<ASP:BOUNDCOLUMN datafield="INDIRIZZO" headertext="Indirizzo"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN datafield="WO_ID" headertext="OdL"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN datafield="DATA_WO" headertext="Data Emissione" dataformatstring="{0:d}"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN datafield="DITTA" headertext="Ditta"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN datafield="WR_ID" headertext="RdL"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN datafield="DATA_WR" headertext="Data Creazione" dataformatstring="{0:d}"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN datafield="STATO" headertext="Stato Richiesta"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN datafield="PRIORITY" headertext="Priorit&#224;"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN datafield="PIANIFICATA" headertext="Data Pianificata" dataformatstring="{0:d}"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN datafield="COMPLETATA" headertext="Data Fine Lavori" dataformatstring="{0:d}"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN datafield="DESCRIZIONE" headertext="Descrizione"></ASP:BOUNDCOLUMN>
-													<ASP:BOUNDCOLUMN visible="False" datafield="id_stato" headertext="idstato"></ASP:BOUNDCOLUMN>
-												</COLUMNS>
-												<PAGERSTYLE HORIZONTALALIGN="Left" cssclass="DataGridPagerStyle" MODE="NumericPages"></PAGERSTYLE>
+														</ItemTemplate>
+													</asp:TemplateColumn>
+													<asp:BoundColumn DataField="INDIRIZZO" HeaderText="Indirizzo"></asp:BoundColumn>
+													<asp:BoundColumn DataField="WO_ID" HeaderText="OdL"></asp:BoundColumn>
+													<asp:BoundColumn DataField="DATA_WO" HeaderText="Data Emissione" DataFormatString="{0:d}"></asp:BoundColumn>
+													<asp:BoundColumn DataField="DITTA" HeaderText="Ditta"></asp:BoundColumn>
+													<asp:BoundColumn DataField="WR_ID" HeaderText="RdL"></asp:BoundColumn>
+													<asp:BoundColumn DataField="DATA_WR" HeaderText="Data Creazione" DataFormatString="{0:d}"></asp:BoundColumn>
+													<asp:BoundColumn DataField="STATO" HeaderText="Stato Richiesta"></asp:BoundColumn>
+													<asp:BoundColumn DataField="PRIORITY" HeaderText="Priorit&#224;"></asp:BoundColumn>
+													<asp:BoundColumn DataField="PIANIFICATA" HeaderText="Data Pianificata" DataFormatString="{0:d}"></asp:BoundColumn>
+													<asp:BoundColumn DataField="COMPLETATA" HeaderText="Data Fine Lavori" DataFormatString="{0:d}"></asp:BoundColumn>
+													<asp:BoundColumn DataField="DESCRIZIONE" HeaderText="Descrizione"></asp:BoundColumn>
+													<asp:BoundColumn Visible="False" DataField="id_stato" HeaderText="idstato"></asp:BoundColumn>
+												</Columns>
+												<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 											</ASP:DATAGRID>
 											<P>
 												<TABLE id="tableComandi" cellSpacing="1" cellPadding="1" width="900" border="0" runat="server">
@@ -356,7 +357,7 @@
 														</TR>
 													</TBODY>
 												</TABLE>
-												<TABLE id="Table1" cellSpacing="1" cellPadding="1" width="900" border="0" runat="server">
+												<TABLE id="Table1" cellSpacing="1" cellPadding="1" width="90%" border="0" runat="server">
 													<TBODY>
 														<TR>
 															<TD><ASP:LABEL id="lblElementiSelezionati" runat="server"></ASP:LABEL></TD>

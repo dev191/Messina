@@ -14,7 +14,7 @@ namespace TheSite.ManutenzioneCorretiva
 	/// <summary>
 	/// Descrizione di riepilogo per RapportoTecnicoIntervento.
 	/// </summary>
-	public class ReportDettaglio : System.Web.UI.Page    // System.Web.UI.Page
+	public class ReportDettaglio : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Repeater repeater1;
 		protected System.Web.UI.WebControls.Repeater repeater2;

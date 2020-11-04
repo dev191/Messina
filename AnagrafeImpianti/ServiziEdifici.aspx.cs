@@ -18,7 +18,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per ServiziEdifici.
 	/// </summary>
-	public class ServiziEdifici : System.Web.UI.Page    // System.Web.UI.Page
+	public class ServiziEdifici : System.Web.UI.Page
 	{
 		protected Microsoft.Web.UI.WebControls.TreeView TreeCtrl;
 		protected System.Web.UI.HtmlControls.HtmlGenericControl doc;

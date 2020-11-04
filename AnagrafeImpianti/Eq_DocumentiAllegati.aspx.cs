@@ -19,7 +19,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per Eq_DocumentiAllegati.
 	/// </summary>
-	public class Eq_DocumentiAllegati : System.Web.UI.Page    // System.Web.UI.Page
+	public class Eq_DocumentiAllegati : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid MyDataGrid1;
 		protected int id_eq=0;

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="DSSGA1" targetNamespace="http://tempuri.org/DSSGA1.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/DSSGA1.xsd" xmlns:mstns="http://tempuri.org/DSSGA1.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="DsSGA" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="sga">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="rdl" type="xs:integer" minOccurs="0" />
+							<xs:element name="sga" type="xs:string" minOccurs="0" />
+							<xs:element name="data_richiesta" type="xs:string" minOccurs="0" />
+							<xs:element name="edificio" type="xs:string" minOccurs="0" />
+							<xs:element name="piano" type="xs:string" minOccurs="0" />
+							<xs:element name="stanza" type="xs:string" minOccurs="0" />
+							<xs:element name="servizio" type="xs:string" minOccurs="0" />
+							<xs:element name="richiedente" type="xs:string" minOccurs="0" />
+							<xs:element name="tipomanutenzione" type="xs:string" minOccurs="0" />
+							<xs:element name="urgenza" type="xs:string" minOccurs="0" />
+							<xs:element name="stato_rdl" type="xs:string" minOccurs="0" />
+							<xs:element name="descrizione_problema" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -9,7 +9,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using StampaRapportiPdf.WebControls;
-using StampaRapportiPdf.Schemixsd;
 using StampaRapportiPdf.Classi;
 using S_Controls.Collections;
 using S_Controls;
@@ -17,6 +16,7 @@ using ApplicationDataLayer.DBType;
 using TheSite.StampaRapportiPDF.Reports;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
+using RptPdf = TheSite.StampaRapportiPDF.Schemixsd;
 
 
 namespace StampaRapportiPdf.Pagine
@@ -24,7 +24,7 @@ namespace StampaRapportiPdf.Pagine
 	/// <summary>
 	/// Descrizione di riepilogo per Ricerca_e_Stampa.
 	/// </summary>
-	public class Ricerca_e_Stampa : System.Web.UI.Page    // System.Web.UI.Page
+	public class Ricerca_e_Stampa : System.Web.UI.Page
 	{
 		#region Definizione oggetti e variabili globali
 		protected Csy.WebControls.DataPanel DataPanelRicerca;
@@ -262,14 +262,14 @@ namespace StampaRapportiPdf.Pagine
 
 		private void ricerca()
 		{
-			DatasetReport ds;
+			RptPdf.DatasetReport ds;
 			ds = riempiDatasetRicerca();
 			gridtleDataGridRicerca.NumeroRecords = Convert.ToString(ds.Tables["Data_Report_Ricerca"].Rows.Count );
 			DataGridRicerca.DataSource = ds.Tables["Data_Report_Ricerca"];
 			DataGridRicerca.DataBind();
 		}
 
-		private DatasetReport riempiDatasetRicerca()
+		private TheSite.StampaRapportiPDF.Schemixsd.DatasetReport riempiDatasetRicerca()
 		{
 			AgganciaDatalayer io_db  = new AgganciaDatalayer();
 			S_ControlsCollection clDatiRicerca = new S_ControlsCollection();
@@ -376,7 +376,7 @@ namespace StampaRapportiPdf.Pagine
 			io_db.NameProcedureDb = "rapportipdf.get_data_ricerca_report";
 			DataSet dsDatiRicerca = io_db.GetData(clDatiRicerca).Copy();
 
-			DatasetReport DsTipizzato = new DatasetReport();
+			RptPdf.DatasetReport DsTipizzato = new  RptPdf.DatasetReport();
 			int i=0;
 			for(i=0; i<=dsDatiRicerca.Tables[0].Rows.Count-1;i++)
 			{ 
@@ -455,7 +455,6 @@ namespace StampaRapportiPdf.Pagine
 
 			//			txtTotSelezionati.Text=_HS.Count.ToString();
 		}
-	
 		private void EnableControl(bool enable)
 		{
 			S_btnStampa.Enabled =enable;
@@ -632,8 +631,8 @@ namespace StampaRapportiPdf.Pagine
 			pDataCompletamentoEnd.Value = cldpkACompletamento.Datazione.Text;
 			clDatiUpDb.Add(pDataCompletamentoEnd);
 
-			S_Object pComune = new S_Object();
-			pComune.ParameterName = "P_COMUNE";
+			       S_Object pComune = new S_Object();
+			                                        pComune.ParameterName = "P_COMUNE";
 			pComune.DbType = CustomDBType.VarChar;
 			pComune.Direction = ParameterDirection.Input;
 			pComune.Size = 64;
@@ -1032,12 +1031,12 @@ namespace StampaRapportiPdf.Pagine
 		}
 		private void stampaRpt(int nOdl,int idFile)
 		{
-			DatasetReport ds;
+			RptPdf.DatasetReport ds;
 			ds = riempiDatasetStampa(idFile);
 			stampaPdf(ds,nOdl,idFile);
 			creaZip(nOdl,idFile);
 		}
-		private void stampaPdf(DatasetReport ds,int nOdl,int idFile)
+		private void stampaPdf(TheSite.StampaRapportiPDF.Schemixsd.DatasetReport ds,int nOdl,int idFile)
 		{
 			MP_Rapporti_C_MP_long_r6 rptLong = new MP_Rapporti_C_MP_long_r6();
 			MP_Rapporti_C_MP_r6 rptShort = new MP_Rapporti_C_MP_r6();
@@ -1113,7 +1112,7 @@ namespace StampaRapportiPdf.Pagine
 			return strFile;
 		}
 
-		private DatasetReport riempiDatasetStampa(int idFile)
+		private TheSite.StampaRapportiPDF.Schemixsd.DatasetReport riempiDatasetStampa(int idFile)
 		{
 			AgganciaDatalayer io_db  = new AgganciaDatalayer();
 			S_Controls.Collections.S_ControlsCollection clDatiStampa = new S_Controls.Collections.S_ControlsCollection();
@@ -1137,7 +1136,7 @@ namespace StampaRapportiPdf.Pagine
 			io_db.NameProcedureDb = "RapportiPdf.get_data_reports";
 			DataSet dsDatiStampa = io_db.GetData(clDatiStampa).Copy();
 
-			DatasetReport DsTipizzato = new DatasetReport();
+			RptPdf.DatasetReport DsTipizzato = new RptPdf.DatasetReport();
 			int i=0;
 
 			for(i=0; i<=dsDatiStampa.Tables[0].Rows.Count-1;i++)
@@ -1162,7 +1161,7 @@ namespace StampaRapportiPdf.Pagine
 		}
 		private void SelezionaTutti(bool val)
 		{	
-			DatasetReport ds;
+			RptPdf.DatasetReport ds;
 			ds = riempiDatasetRicerca();
 			if(!val)
 			{

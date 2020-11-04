@@ -15,7 +15,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per ListaApparecchiatureServ.
 	/// </summary>
-	public class ListaApparecchiatureServ : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaApparecchiatureServ : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DtgListaApparecchiature;
 		int bl_id;

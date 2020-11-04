@@ -1,9 +1,9 @@
-<%@ Page language="c#" Codebehind="PianoAnnuale.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.PianoAnnuale" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
 <%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Page language="c#" Codebehind="PianoAnnuale.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.PianoAnnuale" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -37,13 +37,13 @@
 													<TD style="WIDTH: 15%"><SPAN>Anno di riferimento: </SPAN>
 													</TD>
 													<TD style="HEIGHT: 28px">
-														<cc1:S_ComboBox id="cmbsAnno" runat="server" AutoPostBack="True" Width="230px"></cc1:S_ComboBox></TD>
+														<cc1:S_ComboBox id="cmbsAnno" runat="server" Width="230px" AutoPostBack="True"></cc1:S_ComboBox></TD>
 												</TR>
 												<TR>
 													<TD style="WIDTH: 15%"><SPAN>Servizio: </SPAN>
 													</TD>
 													<TD style="HEIGHT: 28px">
-														<cc1:S_ComboBox id="cmbsServizio" runat="server" AutoPostBack="True" Width="230px"></cc1:S_ComboBox></TD>
+														<cc1:S_ComboBox id="cmbsServizio" runat="server" Width="230px" AutoPostBack="True"></cc1:S_ComboBox></TD>
 												</TR>
 											</asp:Panel>
 											<TR>
@@ -146,7 +146,7 @@
 				</TR>
 				<tr>
 					<TD vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" BorderColor="Gray" BorderWidth="1px"
-							AutoGenerateColumns="False" GridLines="Vertical" AllowPaging="True">
+							AutoGenerateColumns="False" GridLines="Vertical" AllowPaging="True" AllowCustomPaging="True">
 							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
@@ -156,7 +156,7 @@
 									<HeaderStyle Width="3%"></HeaderStyle>
 									<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 									<ItemTemplate>
-										<asp:ImageButton id="lnkDett" Runat=server CommandName="Dettaglio" ImageUrl="~/images/edit.gif" CommandArgument='<%# "DettPianoAnnuale.aspx?FUNID=" + FunId +"&ID_BL=" + DataBinder.Eval(Container.DataItem,"ID") + "&anno=" + DataBinder.Eval(Container.DataItem,"ANNO") + "&servizio=" + DataBinder.Eval(Container.DataItem,"IDSERVIZIO")%>'>
+										<asp:ImageButton id="lnkDett" Runat=server CommandName="Dettaglio" ImageUrl="~/images/edit.gif" CommandArgument='<%# "DettPianoAnnuale.aspx?FUNID=" + FunId +"&ID_BL=" + DataBinder.Eval(Container.DataItem,"ID") + "&anno=" + DataBinder.Eval(Container.DataItem,"ANNO") + "&servizio=" + DataBinder.Eval(Container.DataItem,"IDSERVIZIO")+ "&descservizio=" + DataBinder.Eval(Container.DataItem,"SERVIZIO")%>'>
 										</asp:ImageButton>
 									</ItemTemplate>
 								</asp:TemplateColumn>

@@ -9,14 +9,17 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
-
+using MyCollection;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
+using ApplicationDataLayer.Collections;
+  
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Fondi.
 	/// </summary>
-	public class Fondi : System.Web.UI.Page    // System.Web.UI.Page
+	public class Fondi : System.Web.UI.Page
 	{
 		protected S_Controls.S_Button btnsRicerca;
 		protected Csy.WebControls.DataPanel PanelRicerca;
@@ -25,13 +28,15 @@ namespace TheSite.Gestione
 		public static string HelpLink = string.Empty;
 		protected WebControls.GridTitle GridTitle1;
 		protected WebControls.PageTitle PageTitle1;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 
 		EditFondi _fp;
-		protected S_Controls.S_ComboBox cmbsAnno;
-		protected S_Controls.S_Button BtnReset;
-		protected S_Controls.S_ComboBox cmbsTipoIntervento;		
-		
+		protected System.Web.UI.WebControls.TextBox txtCodiceFondo;
+		protected S_Controls.S_Button BtnReset;		
+		protected System.Web.UI.WebControls.DropDownList DrMeseini;
+		protected System.Web.UI.WebControls.DropDownList DrAnnoIni;
+		protected System.Web.UI.WebControls.DropDownList DrMesefine;
+		protected System.Web.UI.WebControls.DropDownList DrAnnofine;
 		
 	
 		private void Page_Load(object sender, System.EventArgs e)
@@ -49,7 +54,9 @@ namespace TheSite.Gestione
 		
 			if (!Page.IsPostBack)
 			{
-				CaricaCombo();
+				LoadMese();
+				LoadAnno();
+
 				if(Context.Handler is TheSite.Gestione.EditFondi) 
 				{									
 					_fp = (TheSite.Gestione.EditFondi) Context.Handler;
@@ -62,6 +69,41 @@ namespace TheSite.Gestione
 				}		
 
 			}
+		}
+
+		private void LoadMese()
+		{
+			DrMesefine.Items.Add(new ListItem("- Nessun Mese -","0"));
+			DrMeseini.Items.Add(new ListItem("- Nessun Mese -","0"));
+			ArrayList ar=new ArrayList();
+			ar.Add(new ListItem("Gennaio","1")); 
+			ar.Add(new ListItem("Febbraio","2")); 
+			ar.Add(new ListItem("Marzo","3")); 
+			ar.Add(new ListItem("Aprile","4")); 
+			ar.Add(new ListItem("Maggio","5")); 
+			ar.Add(new ListItem("Giugno","6")); 
+			ar.Add(new ListItem("Luglio","7")); 
+			ar.Add(new ListItem("Agosto","8")); 
+			ar.Add(new ListItem("Settembre","9")); 
+			ar.Add(new ListItem("Ottobre","10")); 
+			ar.Add(new ListItem("Novembre","11")); 
+			ar.Add(new ListItem("Dicembre","12")); 
+			for(int i=0;i<=ar.Count-1;i++)
+			{
+				DrMesefine.Items.Add((ListItem)ar[i]);
+				DrMeseini.Items.Add((ListItem)ar[i]);
+			}
+		}
+		private void LoadAnno()
+		{
+			DrAnnofine.Items.Add(new ListItem("- Nessun Anno -","0"));
+			DrAnnoIni.Items.Add(new ListItem("- Nessun Anno -","0"));
+
+			for (int i=2000; i<= DateTime.Now.Year +20; i++)
+			{
+				DrAnnofine.Items.Add(new ListItem(i.ToString(),i.ToString()));
+				DrAnnoIni.Items.Add(new ListItem(i.ToString(),i.ToString()));
+			}								
 		}
 
 		#region Codice generato da Progettazione Web Form
@@ -81,16 +123,16 @@ namespace TheSite.Gestione
 		private void InitializeComponent()
 		{    
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
+			this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
 			this.DataGridRicerca.ItemCommand += new System.Web.UI.WebControls.DataGridCommandEventHandler(this.DataGridRicerca_ItemCommand);
 			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
 			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
-			this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}
 		#endregion
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
@@ -105,58 +147,73 @@ namespace TheSite.Gestione
 		}
 		
 		#region FunzioniPrivate
-		private void CaricaCombo()
-		{
-			//Carico il Combo degli Anni
-			
-			ListItem _L1 = new ListItem();				
-			_L1.Text="- Tutti -";
-			_L1.Value="0";				
-			cmbsAnno.Items.Add(_L1);
-
-			string anno_corrente = DateTime.Now.Year.ToString();
-			for (int i = 1950; i <= 2051; i++)
-			{ 	
-				ListItem _L2 = new ListItem();				
-				_L2.Text=i.ToString();
-				_L2.Value=i.ToString();				
-				cmbsAnno.Items.Add(_L2);
-			}
-
-			cmbsAnno.SelectedValue="0";		
-
-			//Caricol il combo Del Tipo Intervento
-			cmbsTipoIntervento.Items.Clear();		
-			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
-
-			Classi.ClassiAnagrafiche.TipoIntervento  _TipoIntervento = new TheSite.Classi.ClassiAnagrafiche.TipoIntervento();
-
-			DataSet _MyDs;
-			_MyDs = _TipoIntervento.GetData();
-			
-
-			if (_MyDs.Tables[0].Rows.Count > 0)
-			{	
-				this.cmbsTipoIntervento.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
-					_MyDs.Tables[0], "descrizione_breve", "id", "- Tutti -", "0");
-				this.cmbsTipoIntervento.DataTextField = "descrizione_breve";
-				this.cmbsTipoIntervento.DataValueField = "id";
-				this.cmbsTipoIntervento.DataBind();
-			}
-			else
-			{
-				string s_Messagggio = "- Nessun Tipo Intervento -";
-				this.cmbsTipoIntervento.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
-			}
-
-		}
 
 		private void Ricerca()
 		{
 			Classi.ClassiAnagrafiche.Fondi _Fondi = new TheSite.Classi.ClassiAnagrafiche.Fondi();
 		
 			S_ControlsCollection _SCollection = new S_ControlsCollection();
-			_SCollection.AddItems(this.PanelRicerca.Controls);
+		
+			S_Controls.Collections.S_Object p = new S_Object();
+			p.ParameterName = "p_meseini";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Size=10;
+			p.Index = _SCollection.Count;
+			if(DrMeseini.SelectedValue=="0")
+				p.Value=DBNull.Value; 
+			else
+				p.Value=DrMeseini.SelectedValue;   
+			_SCollection.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_mesefine";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Size=10;
+			p.Index = _SCollection.Count;
+			if(DrMesefine.SelectedValue=="0")
+				p.Value=DBNull.Value; 
+			else
+				p.Value=DrMesefine.SelectedValue;  
+			_SCollection.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_annoini";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Size=10;
+			p.Index = _SCollection.Count;
+			if(DrAnnoIni.SelectedValue=="0")
+				p.Value=DBNull.Value;
+			else
+                p.Value=DrAnnoIni.SelectedValue;   
+			_SCollection.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_annofine";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Size=10;
+			p.Index = _SCollection.Count;
+			if(DrAnnofine.SelectedValue=="0")
+				p.Value=DBNull.Value;
+			else
+				p.Value=DrAnnofine.SelectedValue; 
+			_SCollection.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_codicefondo";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SCollection.Count;
+			p.Size=100;
+			if(txtCodiceFondo.Text=="") 
+				p.Value = DBNull.Value;
+			else
+				p.Value=txtCodiceFondo.Text;  
+			_SCollection.Add(p);
+
 			DataSet _MyDs = _Fondi.GetData(_SCollection).Copy();
 			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
 			if (_MyDs.Tables[0].Rows.Count == 0 )
@@ -217,6 +274,8 @@ namespace TheSite.Gestione
 		{
 				Response.Redirect("Fondi.aspx?FunId=" + FunId);
 		}
+
+
 		
 	}
 }

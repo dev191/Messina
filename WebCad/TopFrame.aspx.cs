@@ -14,7 +14,7 @@ namespace WebCad
 	/// <summary>
 	/// Descrizione di riepilogo per TopFrame.
 	/// </summary>
-	public class TopFrame : System.Web.UI.Page    // System.Web.UI.Page
+	public class TopFrame : System.Web.UI.Page
 	{
 		public string idbl=string.Empty;
 		public string idpiano=string.Empty;

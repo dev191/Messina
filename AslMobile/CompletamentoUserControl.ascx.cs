@@ -15,6 +15,8 @@ namespace TheSite.AslMobile
 	//using System.ComponentModel;
 	//using System.Web.SessionState;
 
+	public delegate void MyDelegate(Hashtable HS,int operazione);
+
 
 
 	/// <summary>

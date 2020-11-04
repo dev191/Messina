@@ -10,13 +10,14 @@ using System.Web.UI.WebControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 
 namespace TheSite.ManutenzioneCorretiva
 {
 	/// <summary>
 	/// Descrizione di riepilogo per AccorpaRdl.
 	/// </summary>
-	public class AccorpaRdl : System.Web.UI.Page    // System.Web.UI.Page
+	public class AccorpaRdl : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.LinkButton RicAccorpante;
 		protected System.Web.UI.WebControls.LinkButton RicAccorpate;

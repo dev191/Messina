@@ -18,7 +18,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per ListaFascicoli.
 	/// </summary>
-	public class ListaFascicoli : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaFascicoli : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.HyperLink Hyperlink2;

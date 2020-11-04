@@ -6,7 +6,7 @@
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
-	<HEAD>
+  <HEAD>
 		<title>Edit Servizi</title>
 		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
 		<meta content="C#" name="CODE_LANGUAGE">
@@ -107,7 +107,34 @@
 				} 
 			}
 					
-					
+function formatta(fl){ 
+ var ris;
+ var tmp;
+ fl=fl.toString(); 
+ i = 0;  
+ 
+   terza = fl.substring(i+2,i+3);
+   ris = parseFloat(fl.substring(0,i+2));     
+   if (terza>4)
+   {
+    ris = ris + parseFloat(0.011);
+    ris=ris.toString();
+ //   j=parseInt(ris.indexOf("."));
+    tmp = parseFloat(ris.substring(0,2));    
+    return tmp;
+   }
+   else
+   {
+    return ris;
+   }
+     
+   
+  ris = parseFloat(fl.substring(0,i+3));
+  return ris;  
+  
+}
+
+
 			function imposta_dec(obj)
 				{
 					val=document.getElementById(obj).value;
@@ -116,7 +143,8 @@
 					else
 					{
 						var Imponibile = parseFloat(document.Form1.S_TxtImponibile.value +"."+document.Form1.S_TxtImponibileDec.value );
-						var Impo = parseFloat(document.Form1.S_TxtImponibile.value/100);
+						var Impo = parseFloat(Imponibile/100);
+						//var Impo = parseFloat(document.Form1.S_TxtImponibile.value/100);
 						var Iva= document.Form1.S_TxtPercentuale.value;
 						var totiva=(Impo * Iva);
 						document.Form1.S_TxtTot.value = parseFloat(Imponibile + totiva);
@@ -127,7 +155,8 @@
 						else
 						{
 						document.Form1.S_TxtTot.value = str.substring(0,indice);
-						document.Form1.S_TxtTotDec.value = str.substring(indice + 1, str.length);
+						var appo=str.substring(indice + 1, indice+4)
+						document.Form1.S_TxtTotDec.value =formatta(appo);
 						}
 					}
 					
@@ -157,41 +186,11 @@
 						document.Form1.S_TxtTotDec.value = str.substring(indice + 1, str.length);
 						}
 						}
+						
 					}	
 					
 					
-			function formatta(fl){	
-				var ris;
-				var tmp;
-				fl=fl.toString();	
-				i = parseInt(fl.indexOf("."));		
-				if(i>0)
-				{			
-					lung = parseInt(fl.substring(i+1).length);			
-					if(lung>2)
-					{
-						terza = fl.substring(i+3,i+4);
-						ris = parseFloat(fl.substring(0,i+3));					
-						if (terza>4)
-						{
-							ris = ris + parseFloat(0.011);
-							ris=ris.toString();
-							j=parseInt(ris.indexOf("."));
-							tmp = parseFloat(ris.substring(0,j+3));				
-							return tmp;
-						}
-						else
-						{
-							return ris;
-						}
-								
-					}	
-					ris = parseFloat(fl.substring(0,i+3));
-					return ris;		
-				}
-				
-				return fl;	
-			}
+			
 			
 
 		function deleteitem(sender,e)
@@ -251,7 +250,7 @@
 											
 			}
 		</script>
-	</HEAD>
+</HEAD>
 	<body onkeypress="if (valutaenter(event) == false) { return false; }" bottomMargin="0"
 		leftMargin="5" topMargin="0" rightMargin="0" MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
@@ -399,24 +398,24 @@
 									</TR>
 									<TR>
 										<TD style="WIDTH: 119px; HEIGHT: 38px" align="left">Descrizione</TD>
-										<TD style="HEIGHT: 38px"><cc1:s_textbox id="S_TxtDescrizione" tabIndex="1" runat="server" Width="224px" DBSize="5" MaxLength="5"
-												DBIndex="2" DBParameterName="p_CODICE" DBDirection="Input" TextMode="MultiLine"></cc1:s_textbox></TD>
+										<TD style="HEIGHT: 38px"><cc1:s_textbox id="S_TxtDescrizione" tabIndex="1" runat="server" Width="376px" DBSize="5" MaxLength="5"
+												DBIndex="2" DBParameterName="p_CODICE" DBDirection="Input" TextMode="MultiLine" Height="80px"></cc1:s_textbox></TD>
 									</TR>
 									<asp:panel id="CampiModifica" runat="server" visible="False">
-										<TR>
-											<TD style="WIDTH: 119px; HEIGHT: 23px" align="left">Data Approvazione</TD>
-											<TD style="HEIGHT: 23px">
-												<uc1:CalendarPicker id="CalendarPicker3" runat="server"></uc1:CalendarPicker></TD>
-										</TR>
-										<TR>
-											<TD style="WIDTH: 119px; HEIGHT: 23px" align="left">Data Pagamento</TD>
-											<TD style="HEIGHT: 23px">
-												<uc1:CalendarPicker id="CalendarPicker4" runat="server"></uc1:CalendarPicker></TD>
-										</TR>
+              <TR>
+                <TD style="WIDTH: 119px; HEIGHT: 23px" align=left>Data 
+                  Approvazione</TD>
+                <TD style="HEIGHT: 23px">
+<uc1:CalendarPicker id=CalendarPicker3 runat="server"></uc1:CalendarPicker></TD></TR>
+              <TR>
+                <TD style="WIDTH: 119px; HEIGHT: 23px" align=left>Data 
+                  Pagamento</TD>
+                <TD style="HEIGHT: 23px">
+<uc1:CalendarPicker id=CalendarPicker4 runat="server"></uc1:CalendarPicker></TD></TR>
 									</asp:panel>
 									<TR>
-										<TD style="WIDTH: 119px; HEIGHT: 24px" align="left">Imponibile</TD>
-										<TD style="HEIGHT: 24px"><cc1:s_textbox id="S_TxtImponibile" tabIndex="1" runat="server" Width="40px" DBSize="5" MaxLength="5"
+										<TD style="WIDTH: 119px; HEIGHT: 24px" align="left">Imponibile €</TD>
+										<TD style="HEIGHT: 24px"><cc1:s_textbox id="S_TxtImponibile" tabIndex="1" runat="server" Width="96px" DBSize="5" MaxLength="8"
 												DBIndex="2" DBParameterName="p_CODICE" DBDirection="Input">0</cc1:s_textbox>,
 											<cc1:s_textbox id="S_TxtImponibileDec" tabIndex="1" runat="server" Width="27px" DBSize="5" MaxLength="2"
 												DBIndex="2" DBParameterName="p_CODICE" DBDirection="Input">00</cc1:s_textbox></TD>
@@ -427,15 +426,14 @@
 												DBIndex="2" DBParameterName="p_CODICE" DBDirection="Input">0</cc1:s_textbox>%</TD>
 									</TR>
 									<TR>
-										<TD align="left">Totale Fattura</TD>
-										<TD><cc1:s_textbox id="S_TxtTot" tabIndex="1" runat="server" Width="40px" DBSize="5" MaxLength="5"
+										<TD align="left">Totale Fattura €</TD>
+										<TD><cc1:s_textbox id="S_TxtTot" tabIndex="1" runat="server" Width="96px" DBSize="5" MaxLength="8"
 												DBIndex="2" DBParameterName="p_CODICE" DBDirection="Input">0</cc1:s_textbox>,
 											<cc1:s_textbox id="S_TxtTotDec" tabIndex="1" runat="server" Width="27px" DBSize="5" MaxLength="2"
 												DBIndex="2" DBParameterName="p_CODICE" DBDirection="Input">00</cc1:s_textbox></TD>
 									</TR>
 								</TBODY>
-							</TABLE>
-							</asp:panel></TD>
+							</TABLE></asp:panel></TD>
 					</TR>
 					<tr>
 						<TD style="HEIGHT: 5%" vAlign="top" align="left"></TD>
@@ -451,8 +449,7 @@
 						<TD style="HEIGHT: 1%" vAlign="top" align="left">
 							<hr noShade SIZE="1">
 						</TD>
-					</TR>
-					</TR>
+					</TR></TR>
 					<TR>
 						<TD style="HEIGHT: 5%" vAlign="top" align="left"></TD>
 						<TD style="HEIGHT: 5%" vAlign="top" align="left"><asp:label id="lblFirstAndLast" runat="server"></asp:label></TD>

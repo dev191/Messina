@@ -1,7 +1,7 @@
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Page language="c#" Codebehind="DescrizioneDoc_Dwf.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.DescrizioneDoc_Dwf" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
 <%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Page language="c#" Codebehind="DescrizioneDoc_Dwf.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.DescrizioneDoc_Dwf" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -124,7 +124,7 @@
 								</TD>
 							</TR>
 							<TR>
-								<TD colSpan="2">
+								<TD style="WIDTH: 128px" colSpan="2">
 									<TABLE id="TableVVf" cellSpacing="1" cellPadding="1" width="400" border="0" runat="server">
 										<TR>
 											<TD style="WIDTH: 145px">N° Fascicolo VVF:<asp:requiredfieldvalidator id="RequiredFieldValidator3" runat="server" Display="None" ControlToValidate="txtNFascicoloVVF"
@@ -149,51 +149,21 @@
 											<TD><cc1:s_checkbox id="checkCollaudoVVF" runat="server"></cc1:s_checkbox></TD>
 										</TR>
 									</TABLE>
-									<TABLE id="TableISPESL" cellSpacing="1" cellPadding="1" border="0" runat="server" style="WIDTH: 99.24%">
+									<TABLE id="TableISPESL" cellSpacing="1" cellPadding="1" width="400" border="0" runat="server">
 										<TR>
-											<TD style="HEIGHT: 10px">Matricola ISPELS:<asp:requiredfieldvalidator id="RequiredFieldValidator4" runat="server" Display="None" ControlToValidate="txtISPESL"
+											<TD>Matricola ISPELS:<asp:requiredfieldvalidator id="RequiredFieldValidator4" runat="server" Display="None" ControlToValidate="txtISPESL"
 													ErrorMessage="Inserire la Matricola ISPELS">*</asp:requiredfieldvalidator></TD>
-											<TD style="HEIGHT: 10px"><cc1:s_textbox id="txtISPESL" runat="server" DBDirection="Input" DBParameterName="p_matricola"
-													DBIndex="7" MaxLength="20" DBSize="20"></cc1:s_textbox></TD>
-											<TD></TD>
-											<TD style="HEIGHT: 10px"></TD>
+											<TD><cc1:s_textbox id="txtISPESL" runat="server" DBDirection="Input" DBParameterName="p_matricola"
+													DBIndex="7" Width="224px" MaxLength="20" DBSize="20"></cc1:s_textbox></TD>
 										</TR>
 										<TR>
 											<TD>Data Prima Verifica:</TD>
-											<TD style="HEIGHT: 20px"><uc1:calendarpicker id="CalendarPicker4ISPESL" runat="server"></uc1:calendarpicker></TD>
-											<TD style="HEIGHT: 20px">
-												<P>Descrizione Prima Verifica:</P>
-											</TD>
-											<TD style="HEIGHT: 20px">
-												<cc1:s_textbox id="s_txtDescPrimaVer" runat="server" DBIndex="7" DBParameterName="p_matricola"
-													DBDirection="Input" DBSize="20" MaxLength="20" TextMode="MultiLine"></cc1:s_textbox></TD>
-										</TR>
-										<TR>
-											<TD>Data Successiva Verifica:</TD>
-											<TD style="HEIGHT: 20px">
-												<uc1:calendarpicker id="CalendarPicker5ISPESL" runat="server"></uc1:calendarpicker></TD>
-											<TD style="HEIGHT: 20px">
-												<P>Descrizione&nbsp;Successiva Verifica:</P>
-											</TD>
-											<TD style="HEIGHT: 20px">
-												<cc1:s_textbox id="s_txtDescSuccVer" runat="server" DBIndex="7" DBParameterName="p_matricola" DBDirection="Input"
-													DBSize="20" MaxLength="20" TextMode="MultiLine"></cc1:s_textbox></TD>
-										</TR>
-										<TR>
-											<TD>Data Scadenza:</TD>
-											<TD>
-												<uc1:calendarpicker id="CalendarPicker6ISPESL" runat="server"></uc1:calendarpicker></TD>
-											<TD>Descrizione data di Scadenza:</TD>
-											<TD>
-												<cc1:s_textbox id="s_txtDescScadenza" runat="server" DBIndex="7" DBParameterName="p_matricola"
-													DBDirection="Input" DBSize="20" MaxLength="20" TextMode="MultiLine"></cc1:s_textbox></TD>
+											<TD><uc1:calendarpicker id="CalendarPicker4ISPESL" runat="server"></uc1:calendarpicker></TD>
 										</TR>
 										<TR>
 											<TD>Anno Scadenza:</TD>
 											<TD><cc1:s_combobox id="S_CbAnno" runat="server" DBDirection="Input" DBParameterName="p_anno" DBIndex="9"
 													Width="128px" DBSize="4"></cc1:s_combobox></TD>
-											<TD></TD>
-											<TD></TD>
 										</TR>
 									</TABLE>
 								</TD>
@@ -226,6 +196,5 @@
 				</TR>
 			</TABLE>
 		</form>
-		<script language="javascript">parent.left.calcola();</script>
-	</body>
+	</body><script language="javascript">parent.left.calcola();</script>
 </HTML>

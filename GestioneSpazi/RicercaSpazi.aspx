@@ -1,11 +1,11 @@
-<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="iewc" Namespace="Microsoft.Web.UI.WebControls" Assembly="Microsoft.Web.UI.WebControls" %>
-<%@ Register TagPrefix="uc1" TagName="UserStanze" Src="../WebControls/UserStanze.ascx" %>
-<%@ Page language="c#" Codebehind="RicercaSpazi.aspx.cs" AutoEventWireup="false" Inherits="TheSite.GestioneSpazi.RicercaSpazi"  TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Page language="c#" Codebehind="RicercaSpazi.aspx.cs" AutoEventWireup="false" Inherits="TheSite.GestioneSpazi.RicercaSpazi"  TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
+<%@ Register TagPrefix="uc1" TagName="UserStanze" Src="../WebControls/UserStanze.ascx" %>
+<%@ Register TagPrefix="iewc" Namespace="Microsoft.Web.UI.WebControls" Assembly="Microsoft.Web.UI.WebControls" %>
+<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -102,12 +102,12 @@
 	 function apri_ricerca_reparto(gruppo,descmat,id)
 	{
 		var	var1=document.getElementById(descmat).value;
-		var W = window.open('../CommonPage/ListaReparto.aspx?utente=ALE&IdMat='+id+'&desc=' + var1 + '&IdTxt='+descmat+'&aa=richiesta_lavoro','vericacodice','width=600,height=400;status=yes')								
+		var W = window.open('../CommonPage/ListaReparto.aspx?utente=ALE&chiamante=Spazi&IdMat='+id+'&desc=' + var1 + '&IdTxt='+descmat+'&aa=richiesta_lavoro','vericacodice','width=600,height=400;status=yes')								
 	}	
 	function apri_ricerca_uso(gruppo,descmat,id)
 	{
 		var	var1=document.getElementById(descmat).value;
-		var W = window.open('../CommonPage/ListaDestinazioneUso.aspx?utente=ALE&IdMat='+id+'&desc=' + var1 + '&IdTxt='+descmat+'&aa=richiesta_lavoro','vericacodice','width=600,height=400;status=yes')								
+		var W = window.open('../CommonPage/ListaDestinazioneUso.aspx?utente=ALE&chiamante=Spazi&IdMat='+id+'&desc=' + var1 + '&IdTxt='+descmat+'&aa=richiesta_lavoro','vericacodice','width=600,height=400;status=yes')								
 	}	
 		</script>
 	</HEAD>
@@ -190,7 +190,7 @@
 											</TR>
 											<TR>
 												<TD align="center" colSpan="2">
-													<cc1:S_ListBox id="S_ListEdifici" runat="server" Width="100%" DBSize="100" DBDirection="Input"></cc1:S_ListBox>&nbsp;
+													<cc1:S_ListBox id="S_ListEdifici" runat="server" Width="100%" DBDirection="Input" DBSize="100"></cc1:S_ListBox>&nbsp;
 													<INPUT id="edifici" type="hidden" name="edifici" runat="server"> <INPUT id="edificidescription" type="hidden" name="edificidescription" runat="server">
 												</TD>
 											</TR>
@@ -200,10 +200,11 @@
 														border="0">
 														<TR>
 															<TD align="right">
-																<cc1:S_Button id="S_btMostra" runat="server" CssClass="btn" Width="134px" Text="Mostra Dettagli"
-																	ToolTip="Avvia la ricerca"></cc1:S_Button>&nbsp;</TD>
+																<cc1:S_Button id="S_btMostra" runat="server" CssClass="btn" Width="134px" ToolTip="Avvia la ricerca"
+																	Text="Mostra Dettagli"></cc1:S_Button>&nbsp;</TD>
 															<TD style="WIDTH: 159px">&nbsp;
-																<cc1:S_Button id="btReset" runat="server" CssClass="btn" Width="134px" Text="Reset" ToolTip="Rimposta i criteri di ricerca"></cc1:S_Button></TD>
+																<cc1:S_Button id="btReset" runat="server" CssClass="btn" Width="134px" ToolTip="Rimposta i criteri di ricerca"
+																	Text="Reset"></cc1:S_Button></TD>
 															<TD align="left">&nbsp; <INPUT id="chk_attiva" onclick="SelCheckbox(this);" type="checkbox" name="chk_attiva" runat="server">
 																Seleziona tutti</TD>
 															<TD align="right"><A class=GuidaLink 
@@ -222,9 +223,9 @@
 				<TR>
 					<TD><asp:panel id="Panel1" runat="server" Height="7px">
 							<uc1:GridTitle id="GridTitle1" runat="server"></uc1:GridTitle>
-							<asp:DataGrid id="DtgRicercaSpazi" runat="server" CssClass="DataGrid" Width="100%" PageSize="20"
-								GridLines="Vertical" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" BackColor="White"
-								BorderWidth="1px" BorderStyle="None" BorderColor="Gray" ShowFooter="True">
+							<asp:DataGrid id="DtgRicercaSpazi" runat="server" CssClass="DataGrid" Width="100%" AllowCustomPaging="True"
+								ShowFooter="True" BorderColor="Gray" BorderStyle="None" BorderWidth="1px" BackColor="White"
+								CellPadding="4" AutoGenerateColumns="False" AllowPaging="True" GridLines="Vertical" PageSize="20">
 								<FooterStyle ForeColor="#003399" BackColor="White"></FooterStyle>
 								<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 								<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>

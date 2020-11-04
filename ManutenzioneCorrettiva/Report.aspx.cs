@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Reflection;
 
 namespace TheSite.ManutenzioneCorretiva
@@ -18,7 +19,7 @@ namespace TheSite.ManutenzioneCorretiva
 	/// Descrizione di riepilogo per Report.
 	/// </summary>
 	
-	public class Report : System.Web.UI.Page    // System.Web.UI.Page
+	public class Report : System.Web.UI.Page
 	{
 		protected S_Controls.S_ComboBox cmbsAnno;
 		protected System.Web.UI.WebControls.Button BtnRicerca;
@@ -55,7 +56,6 @@ namespace TheSite.ManutenzioneCorretiva
 			{
 				CaricaAnno();				
 				TblExcel.Visible=false;
-				//this.PageTitle1. = "SFOGLIA RDL CORRETTIVA";
 			}
 		}
 		/// <summary>

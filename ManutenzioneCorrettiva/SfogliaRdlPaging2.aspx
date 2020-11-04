@@ -308,7 +308,7 @@
 														<HeaderStyle Width="3%"></HeaderStyle>
 														<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 														<ItemTemplate>
-															<asp:ImageButton id=Imagebutton1 Runat="server" CommandArgument='<%# "CompletaRdl1.aspx?wr_id=" + DataBinder.Eval(Container.DataItem,"WR_ID") %>' ImageUrl="~/images/edit.gif" CommandName="Dettaglio">
+															<asp:ImageButton id=Imagebutton1 Runat="server" CommandArgument='<%# "CompletaRdl.aspx?wr_id=" + DataBinder.Eval(Container.DataItem,"WR_ID") %>' ImageUrl="~/images/edit.gif" CommandName="Dettaglio">
 															</asp:ImageButton>
 														</ItemTemplate>
 													</asp:TemplateColumn>

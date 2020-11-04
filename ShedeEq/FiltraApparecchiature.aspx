@@ -1,4 +1,5 @@
 <%@ Register TagPrefix="uc1" TagName="UserStanze" Src="../WebControls/UserStanze.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="UserStanzeRic" Src="../WebControls/UserStanzeRic.ascx" %>
 <%@ Page language="c#" Codebehind="FiltraApparecchiature.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ShedeEq.FiltraApparecchiature" smartNavigation="False" %>
 <%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
@@ -9,7 +10,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
-		<TITLE>NavigazioneApparechiature</TITLE>
+		<TITLE>NavigazioneApparecchiature</TITLE>
 		<META content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
 		<META content="C#" name="CODE_LANGUAGE">
 		<META content="JavaScript" name="vs_defaultClientScript">
@@ -50,6 +51,8 @@
 	</HEAD>
 	<BODY ms_positioning="GridLayout">
 		<FORM id="Form1" method="post" runat="server">
+			<asp:validationsummary id="vlsEdit" style="Z-INDEX: 102; LEFT: 16px; POSITION: absolute; TOP: 624px" runat="server"
+				ShowMessageBox="True" DisplayMode="List" ShowSummary="False"></asp:validationsummary>
 			<TABLE cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
 				<TR>
 					<TD align="center"><UC1:PAGETITLE id="PageTitle1" runat="server"></UC1:PAGETITLE></TD>
@@ -62,7 +65,8 @@
 								<TR>
 									<TD vAlign="top" align="center" colSpan="4">
 										<P>
-											<UC1:RICERCAMODULO id="RicercaModulo1" runat="server"></UC1:RICERCAMODULO></P>
+											<UC1:RICERCAMODULO id="RicercaModulo1" runat="server"></UC1:RICERCAMODULO>
+											<asp:requiredfieldvalidator id="rfvEdificio" runat="server" ErrorMessage="Selezionare un Edificio per eseguire la ricerca">*</asp:requiredfieldvalidator></P>
 									</TD>
 								</TR>
 								<TR>
@@ -70,7 +74,7 @@
 									<TD style="HEIGHT: 28px">
 										<CC1:S_COMBOBOX id="cmbsPiano" runat="server" width="200px"></CC1:S_COMBOBOX></TD>
 									<TD colSpan="2">
-										<uc1:UserStanze id="UserStanze1" runat="server"></uc1:UserStanze></TD>
+										<uc1:UserStanzeRic id="UserStanze1" runat="server"></uc1:UserStanzeRic></TD>
 								</TR>
 								<TR>
 									<TD style="HEIGHT: 2px"><SPAN>Servizio: </SPAN>
@@ -106,29 +110,29 @@
 				</TR>
 				<TR valign="top">
 					<TD valign="top"><UC1:GRIDTITLE id="GridTitle1" runat="server"></UC1:GRIDTITLE><ASP:DATAGRID id="MyDataGrid1" runat="server" cssclass="DataGrid" gridlines="Vertical" allowpaging="True"
-							autogeneratecolumns="False" borderwidth="1px" bordercolor="Gray">
-							<ALTERNATINGITEMSTYLE cssclass="DataGridAlternatingItemStyle"></ALTERNATINGITEMSTYLE>
-							<ITEMSTYLE cssclass="DataGridItemStyle"></ITEMSTYLE>
-							<HEADERSTYLE cssclass="DataGridHeaderStyle"></HEADERSTYLE>
-							<COLUMNS>
-								<ASP:TEMPLATECOLUMN>
-									<HEADERSTYLE horizontalalign="Center" width="3%" verticalalign="Middle"></HEADERSTYLE>
-									<ITEMSTYLE horizontalalign="Center" verticalalign="Middle"></ITEMSTYLE>
-									<HEADERTEMPLATE>
+							autogeneratecolumns="False" borderwidth="1px" bordercolor="Gray" AllowCustomPaging="True">
+							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
+							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
+							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
+							<Columns>
+								<asp:TemplateColumn>
+									<HeaderStyle HorizontalAlign="Center" Width="3%" VerticalAlign="Middle"></HeaderStyle>
+									<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
+									<HeaderTemplate>
 										<INPUT id="ChkSelTutti" type="checkbox" onclick="SelCheckbox()">
-									</HEADERTEMPLATE>
-									<ITEMTEMPLATE>
+									</HeaderTemplate>
+									<ItemTemplate>
 										<ASP:CHECKBOX id="ChkSel" runat="server"></ASP:CHECKBOX>
-									</ITEMTEMPLATE>
-								</ASP:TEMPLATECOLUMN>
-								<ASP:BOUNDCOLUMN visible="true" datafield="id_eq" headertext="ideq"></ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="bl_id" headertext="Cod.Edificio"></ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="ID" headertext="Cod. Apparecchiatura"></ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="DESCRIZIONE" headertext="Std. Apparecchiatura"></ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN datafield="Servizio" headertext="Servizio"></ASP:BOUNDCOLUMN>
-								<ASP:BOUNDCOLUMN visible="False" datafield="date_dismiss" headertext="Dismessa"></ASP:BOUNDCOLUMN>
-							</COLUMNS>
-							<PAGERSTYLE horizontalalign="Left" cssclass="DataGridPagerStyle" mode="NumericPages"></PAGERSTYLE>
+									</ItemTemplate>
+								</asp:TemplateColumn>
+								<asp:BoundColumn Visible="False" DataField="id_eq" HeaderText="ideq"></asp:BoundColumn>
+								<asp:BoundColumn DataField="bl_id" HeaderText="Cod.Edificio"></asp:BoundColumn>
+								<asp:BoundColumn DataField="ID" HeaderText="Cod. Apparecchiatura"></asp:BoundColumn>
+								<asp:BoundColumn DataField="DESCRIZIONE" HeaderText="Std. Apparecchiatura"></asp:BoundColumn>
+								<asp:BoundColumn DataField="Servizio" HeaderText="Servizio"></asp:BoundColumn>
+								<asp:BoundColumn Visible="False" DataField="date_dismiss" HeaderText="Dismessa"></asp:BoundColumn>
+							</Columns>
+							<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 						</ASP:DATAGRID></TD>
 				</TR>
 				<TR>

@@ -51,7 +51,6 @@ function GetNextMonth(){
 }
 
 function GetDate(){
-	
 	//this.dateField   = opener.dateField;
 	this.dateField =document.Form1.controlparent;
     //this.day     =  dateField.value;
@@ -94,7 +93,7 @@ function GetDate(){
 	for( i = 0; i <= 41; i++) {
 		if( ( i < dayOfFirst )  ||  ( var_day > daysOfMonth ) ){ 
 			document.form_buttons.elements[i].value = "    "; 
-			if( var_ie ){				
+			if( var_ie ){
 				document.form_buttons.elements[i].style.visibility = "hidden";
 			}
 		}

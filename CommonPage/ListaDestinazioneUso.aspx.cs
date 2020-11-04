@@ -18,7 +18,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per ListaDestinazioneUso.
 	/// </summary>
-	public class ListaDestinazioneUso : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaDestinazioneUso : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.DataGrid DataGrid1;
@@ -27,6 +27,7 @@ namespace TheSite.CommonPage
 		public string NomeTxtDesc="";
 		public string NomeTxtIdMat="";
 		int id;
+		public string chiamante="";
 		Classi.ClassiAnagrafiche.Stanze ioDati = new TheSite.Classi.ClassiAnagrafiche.Stanze();
 	
 		private void Page_Load(object sender, System.EventArgs e)
@@ -39,11 +40,10 @@ namespace TheSite.CommonPage
 			scriptarray += "<";
 			scriptarray += "/";
 			scriptarray += "script>";
+
 			if(!Page.IsClientScriptBlockRegistered("arrayDest"))
 				Page.RegisterClientScriptBlock("arrayDest", scriptarray);
 
-			if (!Page.IsPostBack)
-			{				
 				if(Request.QueryString["IdTxt"]!=null)
 					this.NomeTxtDesc =	Request.QueryString["IdTxt"]; 
 				else
@@ -52,7 +52,16 @@ namespace TheSite.CommonPage
 				if(Request.QueryString["IdMat"]!=null)
 					this.NomeTxtIdMat =Request.QueryString["IdMat"]; 
 				else
-					this.NomeTxtIdMat =string.Empty;				
+					this.NomeTxtIdMat =string.Empty;	
+	
+			if(Request.QueryString["chiamante"]!=null)
+				this.chiamante =	Request.QueryString["chiamante"]; 
+			else
+				this.chiamante =string.Empty;
+
+            if (!Page.IsPostBack)
+			{				
+						
 
 				if(Request.QueryString["desc"]!=null)
 					this.Desc =	Request.QueryString["desc"]; 
@@ -86,7 +95,16 @@ namespace TheSite.CommonPage
 		private void Cerca(string Descr)
 		{
 			
-			DataSet DsMateriali = ioDati.GetAllDestinazioni(Descr).Copy();
+			DataSet DsMateriali;
+
+			if (chiamante == "Spazi")
+			{					
+				DsMateriali = ioDati.GetDestinazioniMura(Descr).Copy();
+			}
+			else
+			{
+				DsMateriali = ioDati.GetAllDestinazioni(Descr).Copy();
+			}
 			DataGrid1.DataSource=DsMateriali;
 			DataGrid1.DataBind();
 		}

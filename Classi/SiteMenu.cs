@@ -1,105 +1,159 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.SiteMenu
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
+using System;
+using System.IO;
+using System.Xml;
+using System.Data;
+using System.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.Collections;
 using ApplicationDataLayer.DBType;
-using System;
-using System.Configuration;
-using System.Data;
-using System.IO;
-using System.Web;
-using System.Xml;
 
 namespace TheSite.Classi
 {
-  public class SiteMenu
-  {
-    private string s_ConnStr = ConfigurationSettings.AppSettings["ConnectionString"];
+	/// <summary>
+	/// Descrizione di riepilogo per SiteMenu.
+	/// </summary>
+	public class SiteMenu
+	{
+		#region Dichiarazioni
 
-    public StringWriter GetMenu(string url)
-    {
-      XmlDocument xmlDocument = new XmlDocument();
-      StringWriter stringWriter = new StringWriter();
-      XmlTextWriter xTextWriter = new XmlTextWriter((TextWriter) stringWriter);
-      xTextWriter.Formatting = Formatting.Indented;
-      xTextWriter.Indentation = 2;
-      xTextWriter.WriteStartDocument(true);
-      xTextWriter.WriteStartElement("menu");
-      this.ItemMenu(0, xTextWriter, url);
-      xTextWriter.WriteEndElement();
-      xTextWriter.WriteEndDocument();
-      xTextWriter.Close();
-      return stringWriter;
-    }
+		private string s_ConnStr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];						
 
-    private void ItemMenu(int IdMenuPadre, XmlTextWriter xTextWriter, string url)
-    {
-      if (IdMenuPadre > 0)
-        xTextWriter.WriteStartElement("subMenu");
-      try
-      {
-        DataSet itemMenuData = this.GetItemMenuData(IdMenuPadre);
-        if (itemMenuData.Tables[0].Rows.Count <= 0)
-          return;
-        Sicurezza sicurezza = new Sicurezza();
-        foreach (DataRow row in (InternalDataCollectionBase) itemMenuData.Tables[0].Rows)
-        {
-          xTextWriter.WriteStartElement("menuItem");
-          xTextWriter.WriteElementString("text", row["DESCRIZIONE"].ToString());
-          if (row["LINK"] != DBNull.Value && row["LINK"].ToString() != "")
-          {
-            string str1 = row["FUNZIONE_ID"].ToString();
-            string str2 = row["LINK"].ToString() + "?FunId=" + str1 + url;
-            xTextWriter.WriteElementString(nameof (url), str2);
-          }
-          xTextWriter.WriteElementString("target", row["TARGET"].ToString());
-          xTextWriter.WriteElementString("tooltip", row["TOOLTIP"].ToString());
-          xTextWriter.WriteElementString("cssclass", row["CSSCLASS"].ToString());
-          if ((!(row["TOTF"].ToString().Trim() == "") ? Convert.ToInt32(row["TOTF"].ToString()) : 0) > 0)
-            this.ItemMenu(Convert.ToInt32(row["FUNZIONE_MENU_ID"]), xTextWriter, url);
-          xTextWriter.WriteEndElement();
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-      finally
-      {
-        if (IdMenuPadre > 0)
-          xTextWriter.WriteEndElement();
-      }
-    }
+		#endregion
 
-    private DataSet GetItemMenuData(int IdMenuPadre)
-    {
-      HttpContext current = HttpContext.Current;
-      ParameterObjectCollection objectCollection = new ParameterObjectCollection();
-      ParameterObject parameterObject1 = new ParameterObject();
-      parameterObject1.set_ParameterName("p_Menu_Padre_Id");
-      parameterObject1.set_DbType((CustomDBType) 1);
-      parameterObject1.set_Direction(ParameterDirection.Input);
-      parameterObject1.set_Value((object) IdMenuPadre);
-      parameterObject1.set_Index(0);
-      ParameterObject parameterObject2 = new ParameterObject();
-      parameterObject2.set_ParameterName("p_UserName");
-      parameterObject2.set_DbType((CustomDBType) 2);
-      parameterObject2.set_Direction(ParameterDirection.Input);
-      parameterObject2.set_Value((object) current.User.Identity.Name);
-      parameterObject2.set_Index(1);
-      ParameterObject parameterObject3 = new ParameterObject();
-      parameterObject3.set_ParameterName("IO_CURSOR");
-      parameterObject3.set_DbType((CustomDBType) 8);
-      parameterObject3.set_Direction(ParameterDirection.Output);
-      parameterObject3.set_Index(2);
-      objectCollection.Add(parameterObject1);
-      objectCollection.Add(parameterObject2);
-      objectCollection.Add(parameterObject3);
-      return new OracleDataLayer(this.s_ConnStr).GetRows((object) objectCollection, "PACK_UTENTI.SP_MENU_UTENTI").Copy();
-    }
-  }
+		public SiteMenu()
+		{
+			
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public System.IO.StringWriter GetMenu(string url)
+		{
+			System.Xml.XmlDocument _xdoc = new System.Xml.XmlDocument();
+
+			System.IO.StringWriter _Xss = new System.IO.StringWriter();
+			XmlTextWriter _xTxtW = new XmlTextWriter(_Xss);
+			_xTxtW.Formatting = Formatting.Indented;
+		
+			_xTxtW.Indentation = 2;
+			_xTxtW.WriteStartDocument(true);
+			_xTxtW.WriteStartElement("menu");
+
+			this.ItemMenu(0,_xTxtW,url);
+
+			_xTxtW.WriteEndElement();
+			_xTxtW.WriteEndDocument();
+			_xTxtW.Close();			
+
+			return _Xss;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="IdMenuPadre"></param>
+		/// <param name="xTextWriter"></param>
+		private void ItemMenu(int IdMenuPadre, XmlTextWriter xTextWriter,string url)
+		{
+			if (IdMenuPadre > 0)
+				xTextWriter.WriteStartElement("subMenu");			
+			
+			try 
+			{				
+				DataSet _MyDs = this.GetItemMenuData(IdMenuPadre);
+				
+				if (_MyDs.Tables[0].Rows.Count > 0)
+				{
+					Sicurezza _Sic = new Sicurezza();
+					foreach(DataRow DtRo in _MyDs.Tables[0].Rows)
+					{				
+													
+						xTextWriter.WriteStartElement("menuItem");
+						xTextWriter.WriteElementString("text",DtRo["DESCRIZIONE"].ToString());
+						if (DtRo["LINK"] != DBNull.Value && DtRo["LINK"].ToString() != "")
+						{
+							string s_FunzioneId = DtRo["FUNZIONE_ID"].ToString();
+							string s_Link = DtRo["LINK"].ToString();
+							s_Link += "?FunId=" + s_FunzioneId;
+							s_Link +=url;
+							xTextWriter.WriteElementString("url",s_Link);
+						}
+						
+						xTextWriter.WriteElementString("target",DtRo["TARGET"].ToString());
+						xTextWriter.WriteElementString("tooltip",DtRo["TOOLTIP"].ToString());
+						xTextWriter.WriteElementString("cssclass",DtRo["CSSCLASS"].ToString());
+				
+						int i_Totf = 0;
+						if (DtRo["TOTF"].ToString().Trim() == "")
+							i_Totf = 0;
+						else
+							i_Totf = Convert.ToInt32(DtRo["TOTF"].ToString());
+						if (i_Totf > 0)
+							ItemMenu(Convert.ToInt32(DtRo["FUNZIONE_MENU_ID"]), xTextWriter,url);
+
+						xTextWriter.WriteEndElement();
+				
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				if (IdMenuPadre > 0)
+					xTextWriter.WriteEndElement();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="IdMenuPadre"></param>
+		/// <returns></returns>
+		private DataSet GetItemMenuData(int IdMenuPadre)
+		{			
+			
+			System.Web.HttpContext context = System.Web.HttpContext.Current;
+
+			ParameterObjectCollection _PColl = new ParameterObjectCollection();
+			
+			ParameterObject _PMenuPadreId = new ParameterObject();
+
+			_PMenuPadreId.ParameterName = "p_Menu_Padre_Id";
+			_PMenuPadreId.DbType = CustomDBType.Integer;
+			_PMenuPadreId.Direction = ParameterDirection.Input;
+			_PMenuPadreId.Value = IdMenuPadre;
+			_PMenuPadreId.Index = 0;
+
+			ParameterObject _PRuoli = new ParameterObject();
+			_PRuoli.ParameterName = "p_UserName";
+			_PRuoli.DbType = CustomDBType.VarChar;
+			_PRuoli.Direction = ParameterDirection.Input;
+			_PRuoli.Value = context.User.Identity.Name;
+			_PRuoli.Index = 1;
+			
+			ParameterObject _PCursor = new ParameterObject();
+
+			_PCursor.ParameterName = "IO_CURSOR";
+			_PCursor.DbType = CustomDBType.Cursor;
+			_PCursor.Direction = ParameterDirection.Output;
+			_PCursor.Index = 2;
+
+			_PColl.Add(_PMenuPadreId);
+			_PColl.Add(_PRuoli);
+			_PColl.Add(_PCursor);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+			DataSet _MyDs = _OraDl.GetRows(_PColl, "PACK_UTENTI.SP_MENU_UTENTI").Copy();
+
+			return  _MyDs;
+
+		}
+
+	}
 }

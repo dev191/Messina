@@ -17,13 +17,13 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per ServiceDettail.
 	/// </summary>
-	public class ServiceDettail : System.Web.UI.Page    // System.Web.UI.Page
+	public class ServiceDettail : System.Web.UI.Page
 	{
 		protected WebControls.PageTitle PageTitle1;
 		protected Csy.WebControls.DataPanel DataPanelDatiGenerali;
 		protected Csy.WebControls.DataPanel DataPanelDocImage;
 		protected Csy.WebControls.DataPanel PanelElaboratiTecnici;
-		protected Csy.WebControls.DataPanel  DataPanelPrestazioniEnergetiche;
+
 		protected System.Web.UI.WebControls.Repeater Repeaterricfotografica;
 		protected System.Web.UI.WebControls.Repeater RepeaterDatigerali;
 		protected System.Web.UI.WebControls.Repeater RepeaterDiagnosiEnergetica;
@@ -31,7 +31,6 @@ namespace TheSite.AnagrafeImpianti
 		protected System.Web.UI.WebControls.Repeater RepeaterCertificazioni;
 		protected System.Web.UI.WebControls.Repeater RepeaterApparecchiature;
 		protected System.Web.UI.HtmlControls.HtmlInputButton BtnPopUp;
-		protected System.Web.UI.WebControls.Repeater RepeaterPrestazioni;
 		
 		private Int32 _bl_id;
 		private Int32 _servizio_id;
@@ -55,7 +54,6 @@ namespace TheSite.AnagrafeImpianti
 					ElaboratiTecnici();
 					Certificazioni();
 					Apparecchiature();
-					PrestazioniEnergetiche();
 				}
 
 			}
@@ -86,17 +84,6 @@ namespace TheSite.AnagrafeImpianti
 			Ds = _SeviceDettail.GetSingleData(bl_id);
 			RepeaterDatigerali.DataSource =Ds;
 			RepeaterDatigerali.DataBind();
-		}
-		private void PrestazioniEnergetiche()
-		{
-			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
-
-			Classi.AnagrafeImpianti.SeviceDettail  _SeviceDettail = new Classi.AnagrafeImpianti.SeviceDettail(Context.User.Identity.Name);
-
-			DataSet Ds;				
-			Ds = _SeviceDettail.PerestazioniEdificio(bl_id);
-			RepeaterPrestazioni.DataSource =Ds;
-			RepeaterPrestazioni.DataBind();
 		}
 
         /// <summary>
@@ -138,7 +125,9 @@ namespace TheSite.AnagrafeImpianti
 			Classi.AnagrafeImpianti.SeviceDettail  _SeviceDettail = new Classi.AnagrafeImpianti.SeviceDettail(Context.User.Identity.Name);
 
 			DataSet Ds;				
-			Ds = _SeviceDettail.GetElaboratiTecnici(bl_id);
+			// MDG 14-03-2007 Aggiungo il parametro relativo al servizio 
+			//Ds = _SeviceDettail.GetElaboratiTecnici(bl_id);
+			Ds = _SeviceDettail.GetElaboratiTecnici(bl_id,servizio_id);
 			RepeaterElaboratiTecnici.DataSource =Ds;
 			RepeaterElaboratiTecnici.DataBind();
 		}
@@ -185,7 +174,19 @@ namespace TheSite.AnagrafeImpianti
 			}
 		}
 		#endregion
-
+		protected string TipoFile(object f1,object f2,object f3)
+		{
+			if(f1!=null)
+				if(f1!=DBNull.Value)
+					return f1.ToString();
+			if(f2!=null)
+				if(f2!=DBNull.Value)
+					return f2.ToString();
+			if(f3!=null)
+				if(f3!=DBNull.Value)
+					return f3.ToString();
+			return "";
+		}
 		/// <summary>
 		/// Evento ItemDataBound del repeater RepeaterElaboratiTecnici per ElaboratiTecnici
 		/// </summary>
@@ -216,7 +217,7 @@ namespace TheSite.AnagrafeImpianti
 						&& (DataBinder.Eval(e.Item.DataItem, "var_file_dwf").ToString()!=""))
 						{
 							HtmlImage img=new HtmlImage(); 
-							img.Src="../Images/ico_info.gif";
+							img.Src="../Images/dwf.jpg";
 							img.Border=0; 
 							img.Alt="Visualizza Schema";
 		 
@@ -232,7 +233,7 @@ namespace TheSite.AnagrafeImpianti
 							&& (DataBinder.Eval(e.Item.DataItem, "var_file_jpg").ToString()!=""))
 						{
 							HtmlImage img=new HtmlImage(); 
-							img.Src="../Images/ico_info.gif";
+							img.Src="../Images/img.gif";
 							img.Border=0; 
 							img.Alt="Visualizza Immagine";
 
@@ -275,7 +276,7 @@ namespace TheSite.AnagrafeImpianti
 
                     Cella1.Text= Dr["var_servizio"].ToString();
 					Cella2.Controls.Add(href); 
-					Cella3.Text= Dr["var_afm_dwgs_tipo"].ToString(); 
+					Cella3.Text= "";//Dr["var_afm_dwgs_tipo"].ToString(); 
 					Cella4.Text= Dr["var_descrizione"].ToString();
                     Riga.Controls.Add(Cella1);
 					Riga.Controls.Add(Cella2);

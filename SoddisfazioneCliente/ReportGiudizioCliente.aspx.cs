@@ -10,15 +10,16 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls;
 using S_Controls.Collections;
+using MyCollection;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+
 
 namespace TheSite.SoddisfazioneCliente
 {
 	/// <summary>
 	/// Descrizione di riepilogo per ReportGiudizioCliente.
 	/// </summary>
-	public class ReportGiudizioCliente : System.Web.UI.Page    // System.Web.UI.Page
+	public class ReportGiudizioCliente : System.Web.UI.Page
 	{
 		protected S_Controls.S_ComboBox cmbsServizio;
 		protected S_Controls.S_ComboBox cmbsGiudizio;
@@ -43,7 +44,7 @@ namespace TheSite.SoddisfazioneCliente
 		protected System.Web.UI.WebControls.Button btsCodice;
 		protected System.Web.UI.WebControls.Panel PanelRichiedente;
 		protected S_Controls.S_Button cmdExcel;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 
 
 
@@ -52,7 +53,7 @@ namespace TheSite.SoddisfazioneCliente
 			
 			// ***********************  MODIFICA PER I PERMESSI SULLA PAGINA CORRENTE **********************
 			//Classi.SiteModule _SiteModule = (Classi.SiteModule) HttpContext.Current.Items["SiteModule"];			
-			string _mypage="./SoddisfazioneCliente/Giudizio.aspx";			
+			string _mypage="./SoddisfazioneCliente/ReportGiudizioCliente.aspx";			
 			Classi.SiteModule _SiteModule = new TheSite.Classi.SiteModule(_mypage);
 			// ***********************  MODIFICA PER I PERMESSI SULLA PAGINA CORRENTE **********************
 			this.GridTitle1.hplsNuovo.NavigateUrl = "../SoddisfazioneCliente/EditGiudizio.aspx?ItemID=0&FunId=" + _SiteModule.ModuleId;
@@ -272,6 +273,7 @@ namespace TheSite.SoddisfazioneCliente
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
 			this.cmdExcel.Click += new System.EventHandler(this.cmdExcel_Click);
 			this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
 			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
 			this.Load += new System.EventHandler(this.Page_Load);
 
@@ -285,6 +287,7 @@ namespace TheSite.SoddisfazioneCliente
 
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{
+			this.DataGridRicerca.CurrentPageIndex=0;
 			Ricerca();
 		}
 
@@ -318,6 +321,12 @@ namespace TheSite.SoddisfazioneCliente
 					this.RegisterStartupScript ("clientScriptexp", scriptString);
 			}
 			
+		}
+
+		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
+		{
+			this.DataGridRicerca.CurrentPageIndex=e.NewPageIndex;
+			Ricerca();
 		}
 	}
 }

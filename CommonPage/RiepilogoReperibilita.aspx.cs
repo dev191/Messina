@@ -18,7 +18,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per NavigazioneApparechiature.
 	/// </summary>
-	public class RiepilogoReperibilita : System.Web.UI.Page    // System.Web.UI.Page
+	public class RiepilogoReperibilita : System.Web.UI.Page
 	{
 		protected  System.Web.UI.WebControls.DataGrid MyDataGrid1;
 
@@ -179,7 +179,23 @@ namespace TheSite.CommonPage
 		private void MyDataGrid1_PageIndexChanged_1(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			MyDataGrid1.CurrentPageIndex=e.NewPageIndex;
-			Execute();
+			if(Request.QueryString["bl_id"]!=null)
+			{
+				this.bl_id = Request.QueryString["bl_id"].ToString();
+			}
+			else
+			{
+				this.bl_id = "";
+			}
+
+			if (this.bl_id == "")
+			{
+				Execute();
+			}
+			else
+			{
+				Execute(this.bl_id);
+			}
 
 		}
 

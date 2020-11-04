@@ -14,7 +14,7 @@ namespace WebCad
 	/// <summary>
 	/// Descrizione di riepilogo per StandardApp.
 	/// </summary>
-	public class StandardApp : System.Web.UI.Page    // System.Web.UI.Page
+	public class StandardApp : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid MyDataGrid1;
 		protected string elementiTrovati="0";

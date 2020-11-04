@@ -9,14 +9,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per PmpFrequenza.
 	/// </summary>
-	public class PmpFrequenza : System.Web.UI.Page    // System.Web.UI.Page
+	public class PmpFrequenza : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsFrequenza_des;
 		protected S_Controls.S_TextBox txtsFrequenza;	
@@ -27,8 +27,10 @@ namespace TheSite.Gestione
 		protected WebControls.PageTitle PageTitle1;
 		public static int FunId=0;
 		public static string HelpLink = string.Empty;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		protected S_Controls.S_Button BtnReset;
+		protected S_Controls.S_ComboBox CmbCadenza;
+		protected S_Controls.S_Button btnEsportaXsl;
 		EditPmpFrequenza _fp;
 	
 
@@ -79,14 +81,15 @@ namespace TheSite.Gestione
 		private void InitializeComponent()
 		{    
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
+			this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
+			this.btnEsportaXsl.Click += new System.EventHandler(this.btnEsportaXsl_Click);
 			this.DataGridRicerca.ItemCommand += new System.Web.UI.WebControls.DataGridCommandEventHandler(this.DataGridRicerca_ItemCommand);
 			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
-			this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}
 		#endregion
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
@@ -95,6 +98,7 @@ namespace TheSite.Gestione
 		}
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
 		{
+			DataGridRicerca.CurrentPageIndex =0;
 			Ricerca();		
 		
 		}
@@ -111,6 +115,27 @@ namespace TheSite.Gestione
 
 		private void Ricerca()
 		{
+			if(CmbCadenza.SelectedValue=="-1")
+			{
+				DataGridRicerca.Columns[5].Visible =false;
+				DataGridRicerca.Columns[6].Visible =false;
+				DataGridRicerca.Columns[7].Visible =false;
+				DataGridRicerca.Columns[8].Visible =false;
+			}
+			if(CmbCadenza.SelectedValue=="0")
+			{
+				DataGridRicerca.Columns[5].Visible =true;
+				DataGridRicerca.Columns[6].Visible =true;
+				DataGridRicerca.Columns[7].Visible =true;
+				DataGridRicerca.Columns[8].Visible =false;
+			}
+			if(CmbCadenza.SelectedValue=="1")
+			{
+				DataGridRicerca.Columns[5].Visible =false;
+				DataGridRicerca.Columns[6].Visible =false;
+				DataGridRicerca.Columns[7].Visible =false;
+				DataGridRicerca.Columns[8].Visible =true;
+			}
 			
 			Classi.ClassiAnagrafiche.PmpFrequenza _PmpFrequenza= new Classi.ClassiAnagrafiche.PmpFrequenza();
 			this.txtsFrequenza.DBDefaultValue ="%";
@@ -118,6 +143,8 @@ namespace TheSite.Gestione
 			S_ControlsCollection _SCollection = new S_ControlsCollection();
 			_SCollection.AddItems(this.PanelRicerca.Controls);
 			DataSet _MyDs = _PmpFrequenza.GetData(_SCollection).Copy();
+			
+			
 
 			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
 			if (_MyDs.Tables[0].Rows.Count == 0 )
@@ -158,16 +185,24 @@ namespace TheSite.Gestione
 
 				// PAOLO 24/02/06: scambio la dicitura Fisso e Periodico considerando che:
 				// se il campo FIXED ha ZERO (FALSE) il record è PERIODICO
+					if(e.Item.Cells[4].Text=="1")
+					{
+						Classi.ClassiAnagrafiche.PmpFrequenza _PmpFrequenza= new Classi.ClassiAnagrafiche.PmpFrequenza();
+						DataSet ds=_PmpFrequenza.GetDataStag(e.Item.Cells[2].Text); 
+						Repeater rp=(Repeater)e.Item.Cells[8].FindControl("rp"); 
+						rp.DataSource =ds.Tables[0];
+						rp.DataBind(); 
+					}
 
 					if(e.Item.Cells[4].Text=="0")
 						e.Item.Cells[4].Text="Periodico";
 					else
 						e.Item.Cells[4].Text="Fisso";
 
-					if(e.Item.Cells[8].Text=="0")
-						e.Item.Cells[8].Text="NO";
+					if(e.Item.Cells[9].Text=="0")
+						e.Item.Cells[9].Text="NO";
 					else
-						e.Item.Cells[8].Text="SI";	
+						e.Item.Cells[9].Text="SI";	
 				
 			}
 		}
@@ -175,6 +210,45 @@ namespace TheSite.Gestione
 		private void BtnReset_Click(object sender, System.EventArgs e)
 		{
 				Response.Redirect("PmpFrequenza.aspx?FunId=" + FunId);
+		}
+
+		private void btnEsportaXsl_Click(object sender, System.EventArgs e)
+		{
+			Classi.ClassiAnagrafiche.PmpFrequenza GetDati = new Classi.ClassiAnagrafiche.PmpFrequenza();
+			Csy.WebControls.Export 	_objExport = new Csy.WebControls.Export();
+			DataTable _dt = new DataTable();			
+			string SSql= string.Empty;
+			switch(Convert.ToInt32(CmbCadenza.SelectedValue))
+			{
+				case -1:
+					SSql = "PACK_PMPFREQUENZA.SP_GRTPMPFREQ_XLS_SINT";
+					break;
+				case 0:
+					SSql = "PACK_PMPFREQUENZA.SP_GRTPMPFREQ_XLS_PER";
+					break;
+				case 1:
+					SSql = "PACK_PMPFREQUENZA.SP_GRTPMPFREQ_XLS_FIS";
+					break;
+				default:
+					break;
+			}
+				_dt = GetDati.GetDatiXsl(txtsFrequenza.Text,txtsFrequenza_des.Text,SSql);
+			if (_dt.Rows.Count != 0)
+			{
+
+				_objExport.ExportDetails(_dt, Csy.WebControls.Export.ExportFormat.Excel, "exp.xls" ); 		
+			}
+			else
+			{
+				String scriptString = "<script language=JavaScript>alert('Nessun elemento da esportare');";
+				scriptString += "<";
+				scriptString += "/";
+				scriptString += "script>";
+
+				if(!this.IsClientScriptBlockRegistered("clientScriptexp"))
+					this.RegisterStartupScript ("clientScriptexp", scriptString);
+			}
+
 		}
 	}
 }

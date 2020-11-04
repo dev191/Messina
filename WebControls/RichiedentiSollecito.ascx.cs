@@ -35,8 +35,13 @@ namespace TheSite.WebControls
 		protected System.Web.UI.WebControls.DataGrid DataGridEsegui;
 		protected System.Web.UI.WebControls.Panel PanelContatti;
 		protected System.Web.UI.WebControls.LinkButton lnkChiudi;
+		protected System.Web.UI.WebControls.CheckBox CkSendMail;
+		public System.Web.UI.HtmlControls.HtmlInputHidden idProg;
 		public string idtxtRichGruppo= "";
 
+		public void SendMail()
+		{
+		}
 		private void Page_Load(object sender, System.EventArgs e)
 		{
 			idtxtRichNome=txtRichNome.ClientID;
@@ -51,7 +56,13 @@ namespace TheSite.WebControls
 			txtRichCognome.Attributes.Add("onkeydown","SvuotaID()"); 
 			cmbsGruppo.Attributes.Add("onchange","SvuotaIDCmb()"); 
 			//ImageButton1.Attributes.Add("onclick","ControllaId('" + ImageButton1.ClientID + "')");
-			BindGruppo(cmbsGruppo.SelectedValue);
+			if (!IsPostBack)
+			{
+				BindGruppo(cmbsGruppo.SelectedValue);
+				if(Request.QueryString["VarApp"]!=null)
+					Progetto=Request.QueryString["VarApp"];
+			}
+			
 
 		}
 		public  S_Controls.S_TextBox s_RichNome
@@ -100,7 +111,10 @@ namespace TheSite.WebControls
 		{
 			get {return txtRichCognome.Text;}
 		}
-		
+		public bool IsSendMail
+		{
+			get {return CkSendMail.Checked;}
+		}
 		public string telefono
 		{
 			get {return txtstelefono.Text;}
@@ -118,18 +132,23 @@ namespace TheSite.WebControls
 		{
 			get {return RichiedenteShowInfo.ClientID;}
 		}
+		public string Progetto
+		{
+			get {return idProg.Value;}
+			set {idProg.Value=value;}
+		}
 		public string Apici(Object s)
 		{
 			string val= s.ToString().Replace("'","`");
 			return val;
 		}
 
-		private void BindGruppo(string id_tipo)
+		public void BindGruppo(string id_tipo)
 		{
 			this.cmbsGruppo.Items.Clear();
 			Classi.ClassiAnagrafiche.Richiedenti_tipo _Richiedenti = new TheSite.Classi.ClassiAnagrafiche.Richiedenti_tipo();
 				
-			DataSet _MyDs = _Richiedenti.GetAllData().Copy();
+			DataSet _MyDs = _Richiedenti.GetAllAddProg(Progetto).Copy();
 			  
 			if (_MyDs.Tables[0].Rows.Count > 0)
 			{				
@@ -137,10 +156,15 @@ namespace TheSite.WebControls
 					_MyDs.Tables[0], "descrizione","id", "- - - - - - -", "0");
 				this.cmbsGruppo.DataTextField = "descrizione";
 				this.cmbsGruppo.DataValueField = "id";
-				if(id_tipo!="")
-					this.cmbsGruppo.SelectedValue=id_tipo;
+//				if(id_tipo!="")
+//					this.cmbsGruppo.SelectedValue=id_tipo;
 				this.cmbsGruppo.DataBind();
 			}			
+			else
+			{
+				string s_Messagggio = "- Nessun Gruppo -";
+				this.cmbsGruppo.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
+			}
 		}
 
 		private void lnkChiudi_Click(object sender, System.EventArgs e)
@@ -168,7 +192,7 @@ namespace TheSite.WebControls
 			string s_CodaScript = "</script>\n";
 			Classi.ManOrdinaria.Richiesta  _Richiesta = new TheSite.Classi.ManOrdinaria.Richiesta();
 			this.RichiedenteShowInfo.Visible = true;
-			DataSet _MYDs = _Richiesta.GetRichiedenti(this.NomeCompleto, this.CognomeCompleto);
+			DataSet _MYDs = _Richiesta.GetRichiedenti(this.NomeCompleto, this.CognomeCompleto,this.Progetto,this.cmbsGruppo.SelectedValue);
 			DataGridRichiedente.DataSource = _MYDs;
 			DataGridRichiedente.DataBind();
 			//lnkVisContatti.Text+="(" + TotContatti +")";

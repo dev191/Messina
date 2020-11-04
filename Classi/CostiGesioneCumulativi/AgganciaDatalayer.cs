@@ -1,113 +1,167 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.CostiGesioneCumulativi.AgganciaDatalayer
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
-using System;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
+using System;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.CostiGesioneCumulativi
 {
-  public class AgganciaDatalayer : AbstractBase
-  {
-    private string _NameProcedure_Db;
+	/// <summary>
+	/// Descrizione di riepilogo per AgganciaDatalayer.
+	/// </summary>
+	public class AgganciaDatalayer : AbstractBase
+	{
+		private string _NameProcedure_Db;
+		public AgganciaDatalayer()
+		{
+			//
+			// TODO: aggiungere qui la logica del costruttore
+			//
+		}
 
-    public DataSet GetEdificio(string itemId)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_BL_ID");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "pack_CostiGestioneCumulativi.SP_GETSINGLEBL_FROM_BL_ID";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+		/// <summary>
+		/// usa il campo bl_id, di fatto chiave primaria della tabella bl
+		/// </summary>
+		/// <param name="itemId"></param>
+		/// <returns></returns>
+		public DataSet GetEdificio(string itemId)
+		{
+			DataSet _Ds;
 
-    public override DataSet GetData() => (DataSet) null;
+			S_ControlsCollection _SColl = new S_ControlsCollection();
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli) => new OracleDataLayer(this.s_ConnStr).GetRows((object) CollezioneControlli, this._NameProcedure_Db).Copy();
+			S_Controls.Collections.S_Object s_Id = new S_Object();
+			s_Id.ParameterName = "p_BL_ID";
+			s_Id.DbType = CustomDBType.VarChar;
+			s_Id.Direction = ParameterDirection.Input;
+			s_Id.Index = 0;
+			s_Id.Value = itemId;
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+			_SColl.Add(s_Id);
+			_SColl.Add(s_Cursor);
 
-    public int Delete()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("POperazione");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) "DELETE");
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("POut");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      ((ParameterObject) sObject2).set_Value((object) DBNull.Value);
-      controlsCollection.Add(sObject2);
-      return new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) controlsCollection, "pack_CostiGestioneCumulativi.del_Download_Reports_An_Co_Op");
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "pack_CostiGestioneCumulativi.SP_GETSINGLEBL_FROM_BL_ID";	
+			_Ds = _OraDl.GetRows(_SColl, s_StrSql).Copy();			
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("P_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_operazione");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      ((ParameterObject) sObject2).set_Size(30);
-      switch (Operazione)
-      {
-        case ExecuteType.Insert:
-          ((ParameterObject) sObject2).set_Value((object) "INSERT");
-          break;
-        case ExecuteType.Update:
-          ((ParameterObject) sObject2).set_Value((object) "UPDATE");
-          break;
-        case ExecuteType.Delete:
-          ((ParameterObject) sObject2).set_Value((object) "DELETE");
-          break;
-      }
-      CollezioneControlli.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject3).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject3);
-      return new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) CollezioneControlli, this._NameProcedure_Db);
-    }
+			//this.Id = itemId;
+			return _Ds;		
+		}
 
-    public string NameProcedureDb
-    {
-      set => this._NameProcedure_Db = value;
-    }
-  }
+		public override System.Data.DataSet GetData()
+		{
+			return null;
+		}
+		public override System.Data.DataSet GetData(S_Controls.Collections.S_ControlsCollection CollezioneControlli)
+		{
+			System.Data.DataSet _DSet;
+             ApplicationDataLayer.OracleDataLayer _OraDl = new ApplicationDataLayer.OracleDataLayer(s_ConnStr);	
+			//	_DSet =  _OraDl.GetRows(CollezioneControlli, "PACK_ANALISI_STATISTICHE.GET_RDL_MESE_COMPLETATA").Copy();
+			_DSet =  _OraDl.GetRows(CollezioneControlli,_NameProcedure_Db).Copy();
+			return _DSet;
+		}
+
+
+		public override System.Data.DataSet GetSingleData(int itemId)
+		{
+			return null;
+		}
+
+		public int Delete() 
+		{
+			int i_Result=0;
+
+			S_ControlsCollection clDatiUpDb = new S_ControlsCollection();
+
+			S_Object pOp = new S_Object();
+			pOp.ParameterName = "POperazione";
+			pOp.DbType = CustomDBType.VarChar;
+			pOp.Direction = ParameterDirection.Input;
+			//pFinto.Size = 16;
+			pOp.Index = 0;
+			pOp.Value = "DELETE";
+			clDatiUpDb.Add(pOp);
+
+			S_Object pFinto = new S_Object();
+			pFinto.ParameterName = "POut";
+			pFinto.DbType = CustomDBType.Integer;
+			pFinto.Direction = ParameterDirection.Output;
+			//pFinto.Size = 16;
+			pFinto.Index = 1;
+			pFinto.Value = DBNull.Value;
+			clDatiUpDb.Add(pFinto);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+			i_Result = _OraDl.GetRowsAffected(clDatiUpDb, "pack_CostiGestioneCumulativi.del_Download_Reports_An_Co_Op");//  "RapportiPdf.inserisciTabellaDwn");
+
+			return i_Result;
+		}
+
+		protected override int ExecuteUpdate(S_Controls.Collections.S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			
+			S_Object  P_id = new S_Object();
+			P_id.ParameterName = "P_id";
+			P_id.DbType = CustomDBType.Integer;
+			P_id.Direction = ParameterDirection.Input;
+			P_id.Index = CollezioneControlli.Count + 1;
+			P_id.Value =itemId;
+			CollezioneControlli.Add(P_id);
+
+			S_Controls.Collections.S_Object s_p_operazione = new S_Controls.Collections.S_Object();
+			s_p_operazione.ParameterName = "p_operazione";
+			s_p_operazione.DbType = CustomDBType.VarChar;
+			s_p_operazione.Direction = ParameterDirection.Input;
+			s_p_operazione.Index = CollezioneControlli.Count + 1;
+			s_p_operazione.Size =30;
+
+			if (Operazione==ExecuteType.Update)
+			{
+				s_p_operazione.Value = "UPDATE";
+			}
+			else if (Operazione==ExecuteType.Insert)
+			{
+				s_p_operazione.Value = "INSERT";
+			}
+			else if (Operazione==ExecuteType.Delete)
+			{
+				s_p_operazione.Value = "DELETE";
+			}
+			CollezioneControlli.Add(s_p_operazione);
+
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(s_IdOut);
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			int i_Result=0;
+
+				i_Result = _OraDl.GetRowsAffected(CollezioneControlli, _NameProcedure_Db);//  "RapportiPdf.inserisciTabellaDwn");
+
+			return i_Result;
+		}
+
+		public string NameProcedureDb
+		{
+			set
+			{
+				 _NameProcedure_Db = value;
+			}
+		}
+	}
 }

@@ -9,16 +9,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
+using MyCollection;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Addetti.
 	/// </summary>
-	public class Pmp : System.Web.UI.Page    // System.Web.UI.Page
+	public class Pmp : System.Web.UI.Page
 	{	
 		protected Csy.WebControls.DataPanel PanelRicerca;		
 		protected S_Controls.S_Button btnsRicerca;		
@@ -35,7 +35,7 @@ namespace TheSite.Gestione
 		protected S_Controls.S_ComboBox cmbstr_id;
 		protected S_Controls.S_ComboBox cmbsServizio;
 		protected System.Web.UI.WebControls.Button cmdReset;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 	
 		private void Page_Load(object sender, System.EventArgs e)
 		{
@@ -111,7 +111,7 @@ namespace TheSite.Gestione
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;
 		}
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
@@ -290,12 +290,11 @@ namespace TheSite.Gestione
 		{    
 			this.cmbsServizio.SelectedIndexChanged += new System.EventHandler(this.cmbsServizio_SelectedIndexChanged);
 			this.cmbseq_std.SelectedIndexChanged += new System.EventHandler(this.cmbseq_std_SelectedIndexChanged);
-			this.cmbstr_id.SelectedIndexChanged += new System.EventHandler(this.cmbstr_id_SelectedIndexChanged);
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
 			this.cmdReset.Click += new System.EventHandler(this.cmdReset_Click);
 			this.DataGridRicerca.ItemCommand += new System.Web.UI.WebControls.DataGridCommandEventHandler(this.DataGridRicerca_ItemCommand);
 			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
-			this.DataGridRicerca.SelectedIndexChanged += new System.EventHandler(this.DataGridRicerca_SelectedIndexChanged);
+			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}
@@ -367,10 +366,7 @@ namespace TheSite.Gestione
 			Ricerca();
 		}
 
-		private void DataGridRicerca_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
 		
-		}
 
 		private void cmbseq_std_SelectedIndexChanged(object sender, System.EventArgs e)
 		{
@@ -392,14 +388,26 @@ namespace TheSite.Gestione
 //			}
 		}
 
-		private void cmbstr_id_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-		
-		}
+
 
 		private void cmdReset_Click(object sender, System.EventArgs e)
 		{
 			Response.Redirect("Pmp.aspx?FunID=" + ViewState["FunId"]);
+		}
+
+		private void DataGridRicerca_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
+		{
+			
+			if((e.Item.ItemType == ListItemType.Item) ||
+				(e.Item.ItemType == ListItemType.AlternatingItem))
+			{
+			if(e.Item.Cells[9].Text.Trim().ToUpper()=="DISMESSA")
+			{
+				e.Item.ForeColor=System.Drawing.Color.Tomato;			
+				e.Item.ToolTip="PMP Dismessa";
+			}
+			}
+
 		}
 
 		

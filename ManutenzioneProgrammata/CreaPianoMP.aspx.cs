@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Reflection;
 
 
@@ -23,7 +24,7 @@ namespace TheSite.ManutenzioneProgrammata
 	/// <summary>
 	/// Descrizione di riepilogo per CreaPianoMP.
 	/// </summary>
-	public class CreaPianoMP : System.Web.UI.Page    // System.Web.UI.Page
+	public class CreaPianoMP : System.Web.UI.Page
 	{
 		
 		protected S_Controls.S_ComboBox cmbsAnnoA;
@@ -277,12 +278,8 @@ namespace TheSite.ManutenzioneProgrammata
 				this.cmbsDitta.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, String.Empty));
 			}
 		}
-
-		private void Ricerca()
-		{	
-			
-			Session.Remove("DataSet");
-
+		private S_Controls.Collections.S_ControlsCollection GetControl()
+		{
 			S_Controls.Collections.S_ControlsCollection CollezioneControlli = new S_Controls.Collections.S_ControlsCollection();
 			
 			cmbsDitta.DBDefaultValue="0";
@@ -352,21 +349,54 @@ namespace TheSite.ManutenzioneProgrammata
 			s_AnnoA.Index = 4;
 			s_AnnoA.Size=10;
 			s_AnnoA.Value=annoA;
-			CollezioneControlli.Add(s_AnnoA);				
+			CollezioneControlli.Add(s_AnnoA);
+	
+			return CollezioneControlli;
+		}
+		private void Ricerca(bool reset)
+		{	
 			
+			//Session.Remove("DataSet");
+
+				
+			S_Controls.Collections.S_ControlsCollection CollezioneControlli =GetControl();				
+
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+			CollezioneControlli.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca.PageSize;			
+			CollezioneControlli.Add(s_p_pagesize);
+
+
 			Classi.ManProgrammata.CreaPiano _CP = new TheSite.Classi.ManProgrammata.CreaPiano();					
 
-			DataSet _MyDs = _CP.GetData(CollezioneControlli).Copy();
+			DataSet _MyDs = _CP.GetDataPaging(CollezioneControlli).Copy();
 
-			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
-			this.DataGridRicerca.DataBind();			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();
-			
-			if (_MyDs.Tables[0].Rows.Count>0)
-			{				
-				PanelCrea.Visible=true;											
-				Session.Add("DataSet",_MyDs.Tables[0]);
+			if (reset==true)
+			{
+
+				CollezioneControlli =GetControl();	
+				int _totalRecords = _CP.GetDataCount(CollezioneControlli);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
 			}
+
+			DataGridRicerca.Visible =true;
+			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.DataGridRicerca.DataBind();
+			
+			if (int.Parse(this.GridTitle1.NumeroRecords)>0)		
+				PanelCrea.Visible=true;											
 			else
 				PanelCrea.Visible=false;
 		}
@@ -481,10 +511,15 @@ namespace TheSite.ManutenzioneProgrammata
 				SetControlli();										
 			}
 			
+			Classi.ManProgrammata.CreaPiano _CP = new TheSite.Classi.ManProgrammata.CreaPiano();					
+			
+			S_Controls.Collections.S_ControlsCollection CollezioneControlli =GetControl();
+			DataSet _MyDs = _CP.GetData(CollezioneControlli).Copy();
+
 			for(int Pagine = 0;Pagine<=DataGridRicerca.PageCount;Pagine++)
 			{
 	
-				DataGridRicerca.DataSource=Session["DataSet"];
+				DataGridRicerca.DataSource=_MyDs.Tables[0];
 				DataGridRicerca.DataBind();
 				DataGridRicerca.CurrentPageIndex=Pagine;									
 							
@@ -497,8 +532,7 @@ namespace TheSite.ManutenzioneProgrammata
 			}
 
 			DataGridRicerca.CurrentPageIndex=0;
-			DataGridRicerca.DataSource=Session["DataSet"];
-			DataGridRicerca.DataBind();			
+			Ricerca(true);			
 			GetControlli();						
 		}
 
@@ -534,12 +568,12 @@ namespace TheSite.ManutenzioneProgrammata
 			this.cmbsDitta.SelectedIndexChanged += new System.EventHandler(this.cmbsDitta_SelectedIndexChanged);
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
 			this.cmdReset.Click += new System.EventHandler(this.cmdReset_Click);
+			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
+			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
 			this.btnsCrea.Click += new System.EventHandler(this.btnsCrea_Click);
 			this.btnsSelezionaTutti.Click += new System.EventHandler(this.btnsSelezionaTutti_Click);
 			this.btnsDeSelezionaTutti.Click += new System.EventHandler(this.btnsDeSelezionaTutti_Click);
 			this.btnsConfermaSelezioni.Click += new System.EventHandler(this.btnsConfermaSelezioni_Click);
-			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
-			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}
@@ -554,13 +588,13 @@ namespace TheSite.ManutenzioneProgrammata
 		{
 			DataGridRicerca.CurrentPageIndex=0;						
 			Resetta();
-			Ricerca();
+			Ricerca(true);
 		}
 
 		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;	
-			Ricerca();
+			Ricerca(false);
 			GetControlli();			
 		}
 
@@ -592,7 +626,7 @@ namespace TheSite.ManutenzioneProgrammata
 					Hashtable _HS = (Hashtable)Session["DatiList"];
 					IDictionaryEnumerator myEnumerator = _HS.GetEnumerator();								
 					string mesegiorno=String.Empty;
-					int _result=0;
+					
 					string mes=String.Empty;
 
 					while (myEnumerator.MoveNext())
@@ -714,8 +748,9 @@ namespace TheSite.ManutenzioneProgrammata
 					} */
 
 
-					Resetta();					
-					Ricerca();										
+					Resetta();	
+					DataGridRicerca.CurrentPageIndex =0;  
+					Ricerca(true);										
 					
 					//Visualizzo il messaggio
 					Classi.SiteJavaScript.msgBox(this.Page,mes);

@@ -25,7 +25,7 @@ namespace TheSite.AnagrafeImpianti
 	/// Fabio Civerchia
 	/// </summary>
 	
-	public class Apparecchiatura : System.Web.UI.Page    // System.Web.UI.Page
+	public class Apparecchiatura : System.Web.UI.Page
 	{
 		
 		protected System.Web.UI.WebControls.RequiredFieldValidator rfvQtyUnit;

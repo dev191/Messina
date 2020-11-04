@@ -28,7 +28,7 @@ namespace WebCad
 	/// <summary>
 	/// Descrizione di riepilogo per bottomFrame.
 	/// </summary>
-	public class bottomFrame : System.Web.UI.Page    // System.Web.UI.Page, IDataGridDinamico
+	public class bottomFrame : System.Web.UI.Page, IDataGridDinamico
 	{
 		protected System.Web.UI.HtmlControls.HtmlInputHidden tipo;
 		protected System.Web.UI.HtmlControls.HtmlInputHidden categoria;

@@ -8,19 +8,19 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using MyCollection; 
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using ApplicationDataLayer.Collections;
 using S_Controls.Collections;
 using System.IO;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per ListaApparecchiature.
 	/// </summary>
-	public class ListaApparecchiature : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaApparecchiature : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGrid1;
 	    protected WebControls.RicercaModulo RicercaModulo1;
@@ -28,12 +28,12 @@ namespace TheSite.Gestione
         protected WebControls.GridTitleServer GridTitleServer1;
 		protected System.Web.UI.HtmlControls.HtmlInputHidden hiddenblid;
    
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new MyCollection.clMyCollection();
 		protected Csy.WebControls.DataPanel DataPanel1;
 		protected S_Controls.S_Button btRicerca;
 		protected S_Controls.S_Button brreset;
 		DescrizioneApparecchiatura  _fp=null;
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get {return _myColl;}
 		}

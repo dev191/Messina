@@ -14,30 +14,30 @@ using TheSite.Classi.SchedeEq;
 using TheSite.SchemiXSD;
 using System.IO;
 using System.Configuration;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.ShedeEq
 {
 	/// <summary>
 	/// Descrizione di riepilogo per VisualizzaSchedaHtml.
 	/// </summary>
-	public class VisualizzaSchedaHtml : System.Web.UI.Page    // System.Web.UI.Page
+	public class VisualizzaSchedaHtml : System.Web.UI.Page
 	{
 		protected CrystalReportViewer CryVwSchedaEq;
 		protected ReportDocument  crReportDocument;
 		public TheSite.ShedeEq.FiltraApparecchiature fp;
 		protected System.Web.UI.WebControls.Button btnIndietro;
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new MyCollection.clMyCollection();
 		protected System.Web.UI.WebControls.DataGrid DataGrid1;
 		TheSite.ShedeEq.FiltraApparecchiature _fp;
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 		private void Page_Load(object sender, System.EventArgs e)

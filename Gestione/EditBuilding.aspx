@@ -1,10 +1,9 @@
-<%@ Register TagPrefix="iewc" Namespace="Microsoft.Web.UI.WebControls" Assembly="Microsoft.Web.UI.WebControls" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="MessPanel" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="DataPicker" Src="../WebControls/DataPicker.ascx" %>
-<%@ Page language="c#" Codebehind="EditBuilding.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.EditBuilding" %>
 <%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Page language="c#" Codebehind="EditBuilding.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.EditBuilding" %>
+<%@ Register TagPrefix="MessPanel" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="iewc" Namespace="Microsoft.Web.UI.WebControls" Assembly="Microsoft.Web.UI.WebControls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -138,7 +137,7 @@
 	}
 		</SCRIPT>
 	</HEAD>
-	<body onbeforeunload=parent.left.valorizza() onload="Abilita(<%=TabId%>);">
+	<body onbeforeunload="parent.left.valorizza()" onload="Abilita(<%=TabId%>);">
 		<FORM id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px"
 				cellSpacing="0" cellPadding="0" width="100%" align="center" border="0">
@@ -154,8 +153,8 @@
 								<TBODY>
 									<TR>
 										<TD vAlign="top" align="left">&nbsp;</TD>
-										<TD vAlign="top" align="left"><ASP:LABEL id="lblOperazione" runat="server" width="512px" cssclass="TitleOperazione"></ASP:LABEL><MESSPANEL:MESSAGEPANEL id="PanelMess" runat="server" width="136px" messageiconurl="~/Images/ico_info.gif"
-												erroriconurl="~/Images/ico_critical.gif"></MESSPANEL:MESSAGEPANEL></TD>
+										<TD vAlign="top" align="left"><ASP:LABEL id="lblOperazione" runat="server" cssclass="TitleOperazione" width="512px"></ASP:LABEL><MESSPANEL:MESSAGEPANEL id="PanelMess" runat="server" width="136px" erroriconurl="~/Images/ico_critical.gif"
+												messageiconurl="~/Images/ico_info.gif"></MESSPANEL:MESSAGEPANEL></TD>
 									</TR>
 								</TBODY>
 							</TABLE>
@@ -166,8 +165,8 @@
 						</TD>
 						<TD style="vAlign: 'top'" align="left">
 							<HR noShade SIZE="1">
-							<IEWC:TABSTRIP id="TabStrip1" runat="server" tabselectedstyle="background-color:#ffffff;color:#000000;border-style:inset;"
-								tabhoverstyle="background-color:#777777;border-style:inset;border-width:1;" tabdefaultstyle="background-color:darkgray;font-family:verdana;font-weight:bold;font-size:8pt;color:#ffffff;width:79;height:21;text-align:center;border-style:outset;border-width:1;">
+							<IEWC:TABSTRIP id="TabStrip1" runat="server" tabdefaultstyle="background-color:darkgray;font-family:verdana;font-weight:bold;font-size:8pt;color:#ffffff;width:79;height:21;text-align:center;border-style:outset;border-width:1;"
+								tabhoverstyle="background-color:#777777;border-style:inset;border-width:1;" tabselectedstyle="background-color:#ffffff;color:#000000;border-style:inset;">
 								<IEWC:TAB text="Anagrafica"></IEWC:TAB>
 								<IEWC:TAB text="E-Mails"></IEWC:TAB>
 								<IEWC:TAB text="Servizi"></IEWC:TAB>
@@ -204,7 +203,7 @@
 										<TD style="WIDTH: 294px">
 											<CC1:S_TEXTBOX id="txtsIndirizzo" tabIndex="3" runat="server" width="208px" dbindex="2" dbparametername="p_INDIRIZZO"
 												dbsize="50" dbdirection="Input" maxlength="50"></CC1:S_TEXTBOX></TD>
-										<TD style="WIDTH: 498px" vAlign="middle" align="right">Ubicazione</TD>
+										<TD style="WIDTH: 498px" vAlign="middle" align="right">Secondo Indirizzo</TD>
 										<TD>
 											<CC1:S_TEXTBOX id="txtsIndirizzo2" tabIndex="4" runat="server" width="208px" dbindex="3" dbparametername="p_INDIRIZZO2"
 												dbsize="50" dbdirection="Input" maxlength="50"></CC1:S_TEXTBOX></TD>
@@ -229,13 +228,13 @@
 											<ASP:REGULAREXPRESSIONVALIDATOR id="revZIP" runat="server" width="3px" errormessage="Cap Non Valido" controltovalidate="TxtsCAP"
 												height="8px" validationexpression="\d{5}">*</ASP:REGULAREXPRESSIONVALIDATOR>CAP</TD>
 										<TD style="WIDTH: 294px; HEIGHT: 15px" borderColor="red" align="left" rowSpan="1">
-											<CC1:S_TEXTBOX id="TxtsCAP" tabIndex="7" runat="server" width="208px" dbindex="8" dbparametername="p_ZIP"
+											<CC1:S_TEXTBOX id="TxtsCAP" tabIndex="7" runat="server" width="208px" dbindex="7" dbparametername="p_ZIP"
 												dbsize="10" dbdirection="Input" maxlength="10"></CC1:S_TEXTBOX></TD>
 										<TD style="WIDTH: 498px; HEIGHT: 15px" borderColor="red" align="right" rowSpan="1">
 											<ASP:RANGEVALIDATOR id="rvUso" runat="server" errormessage="Valorizzare il campo Uso " controltovalidate="cmbsUso"
 												maximumvalue="9999999999999" minimumvalue="1">*</ASP:RANGEVALIDATOR>Uso</TD>
 										<TD style="HEIGHT: 15px" borderColor="red" align="center" rowSpan="1">
-											<CC1:S_COMBOBOX id="cmbsUso" tabIndex="8" runat="server" width="208px" dbindex="9" dbparametername="p_USE"
+											<CC1:S_COMBOBOX id="cmbsUso" tabIndex="8" runat="server" width="208px" dbindex="8" dbparametername="p_USE"
 												dbsize="10" dbdirection="Input" dbdatatype="Integer"></CC1:S_COMBOBOX></TD>
 									</TR>
 									<TR>
@@ -243,7 +242,20 @@
 											<ASP:RANGEVALIDATOR id="rvDitta" runat="server" errormessage="Valorizzare la Ditta" controltovalidate="cmbsDitta"
 												maximumvalue="9999999999999" minimumvalue="1">*</ASP:RANGEVALIDATOR>Ditta</TD>
 										<TD style="WIDTH: 294px; HEIGHT: 20px" borderColor="#ff0000" align="left">
-											<CC1:S_COMBOBOX id="cmbsDitta" tabIndex="9" runat="server" width="208px" dbindex="11" dbparametername="p_DITTA"
+											<CC1:S_COMBOBOX id="cmbsDitta" tabIndex="9" runat="server" width="208px" dbindex="9" dbparametername="p_DITTA"
+												dbsize="10" dbdirection="Input" dbdatatype="Integer"></CC1:S_COMBOBOX></TD>
+										<TD style="WIDTH: 498px; HEIGHT: 20px" borderColor="#ff0000" align="right">
+											<ASP:RANGEVALIDATOR id="RANGProg" runat="server" errormessage="Valorizzare il campo Progetto" controltovalidate="CmbProgetto"
+												maximumvalue="9999999999999" minimumvalue="1">*</ASP:RANGEVALIDATOR>Progetto</TD>
+										<TD style="HEIGHT: 20px" borderColor="#ff0000" align="center">
+											<CC1:S_COMBOBOX id="CmbProgetto" tabIndex="8" runat="server" width="208px" dbindex="12" dbparametername="p_progetto"
+												dbsize="1" dbdirection="Input" dbdatatype="Integer"></CC1:S_COMBOBOX></TD>
+									</TR>
+									<TR>
+										<TD style="WIDTH: 576px; HEIGHT: 20px" vAlign="middle" borderColor="#ff0000" align="right">Localizzazione 
+											Geografica</TD>
+										<TD style="WIDTH: 294px; HEIGHT: 20px" borderColor="#ff0000" align="left">
+											<CC1:S_COMBOBOX id="cmbsLocalizzazione" tabIndex="9" runat="server" width="208px" dbindex="13" dbparametername="p_localizzazione"
 												dbsize="10" dbdirection="Input" dbdatatype="Integer"></CC1:S_COMBOBOX></TD>
 										<TD style="WIDTH: 498px; HEIGHT: 20px" borderColor="#ff0000" align="right"></TD>
 										<TD style="HEIGHT: 20px" borderColor="#ff0000" align="center"></TD>
@@ -251,7 +263,7 @@
 									<TR>
 										<TD style="WIDTH: 576px" vAlign="middle" borderColor="#ff0000" align="right">Commenti</TD>
 										<TD style="WIDTH: 727px" borderColor="#ff0000" align="left" colSpan="2">
-											<CC1:S_TEXTBOX id="txtsCommenti" tabIndex="10" runat="server" width="269px" dbindex="13" dbparametername="p_COMMENTS"
+											<CC1:S_TEXTBOX id="txtsCommenti" tabIndex="10" runat="server" width="269px" dbindex="10" dbparametername="p_COMMENTS"
 												dbsize="4000" dbdirection="Input" height="104px" textmode="MultiLine" rows="5"></CC1:S_TEXTBOX></TD>
 										<TD borderColor="#ff0000" align="left"></TD>
 									</TR>
@@ -329,11 +341,11 @@
 											<ASP:TEXTBOX id="txtsLeftMail" tabIndex="15" runat="server" width="240px" height="18px"></ASP:TEXTBOX></TD>
 										<TD style="WIDTH: 129px">
 											<P align="center">
-												<ASP:BUTTON id="btnAssociaE" tabIndex="16" runat="server" cssclass="btn" width="110px" text="Aggiungi >>"
-													causesvalidation="False"></ASP:BUTTON></P>
+												<ASP:BUTTON id="btnAssociaE" tabIndex="16" runat="server" width="110px" cssclass="btn" causesvalidation="False"
+													text="Aggiungi >>"></ASP:BUTTON></P>
 											<P align="center">
-												<ASP:BUTTON id="btnEliminaE" tabIndex="18" runat="server" cssclass="btn" width="110px" text="Elimina"
-													causesvalidation="False"></ASP:BUTTON></P>
+												<ASP:BUTTON id="btnEliminaE" tabIndex="18" runat="server" width="110px" cssclass="btn" causesvalidation="False"
+													text="Elimina"></ASP:BUTTON></P>
 											<P align="center">&nbsp;</P>
 										</TD>
 										<TD align="center">
@@ -670,7 +682,7 @@
 					</TR>
 					<TR>
 						<TD>&nbsp;</TD>
-						<TD><ASP:VALIDATIONSUMMARY id="vlsEdit" runat="server" showmessagebox="True" displaymode="List" showsummary="False"></ASP:VALIDATIONSUMMARY></TD>
+						<TD><ASP:VALIDATIONSUMMARY id="vlsEdit" runat="server" showsummary="False" displaymode="List" showmessagebox="True"></ASP:VALIDATIONSUMMARY></TD>
 					</TR>
 				</TBODY>
 			</TABLE>

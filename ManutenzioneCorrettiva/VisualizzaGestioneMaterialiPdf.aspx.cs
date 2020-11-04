@@ -18,7 +18,7 @@ namespace TheSite.ManutenzioneCorrettiva
 	/// <summary>
 	/// Summary description for VisualizzaGestioneMaterialiPdf.
 	/// </summary>
-	public class VisualizzaGestioneMaterialiPdf : System.Web.UI.Page    // System.Web.UI.Page
+	public class VisualizzaGestioneMaterialiPdf : System.Web.UI.Page
 	{
 		protected ReportDocument  crReportDocument;
 		private ExportOptions crExportOptions;

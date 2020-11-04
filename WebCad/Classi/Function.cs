@@ -301,7 +301,7 @@ namespace WebCad.Classi
 
 		public DataSet GetWRfromWO(int wo_id)
 		{
-			string sql = "select wr.wr_id,wr.bl_id from wr where wr.wo_id="+wo_id;
+			string sql = "select wr.wr_id,wr.bl_id from  wr where wr.wo_id="+wo_id;
 			S_ControlsCollection _SCollection = new S_ControlsCollection();			
 		
 			S_Controls.Collections.S_Object s_p_sql = new S_Controls.Collections.S_Object();

@@ -15,7 +15,7 @@ namespace TheSite.Admin
 	/// <summary>
 	/// Descrizione di riepilogo per Ruoli.
 	/// </summary>
-	public class Ruoli : System.Web.UI.Page    // System.Web.UI.Page
+	public class Ruoli : System.Web.UI.Page
 	{
 		protected Csy.WebControls.DataPanel PanelRicerca;
 		protected S_Controls.S_Button btnsRicerca;

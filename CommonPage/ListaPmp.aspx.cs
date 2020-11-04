@@ -14,7 +14,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per ListaPmp.
 	/// </summary>
-	public class ListaPmp : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaPmp : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.DataGrid DataGrid1;

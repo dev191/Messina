@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Reflection;
 
 
@@ -18,7 +19,7 @@ namespace TheSite.ManutenzioneProgrammata
 	/// <summary>
 	/// Descrizione di riepilogo per CreaPianoMP.
 	/// </summary>
-	public class CreaOttimizzaRDL_MP : System.Web.UI.Page    // System.Web.UI.Page
+	public class CreaOttimizzaRDL_MP : System.Web.UI.Page
 	{
 		protected S_Controls.S_Button btnsRicerca;
 		protected Csy.WebControls.DataPanel PanelRicerca;
@@ -231,12 +232,8 @@ namespace TheSite.ManutenzioneProgrammata
 			}
 
 		}
-
-		private void Ricerca()
-		{	
-			
-			Session.Remove("DataSet");
-
+		private S_Controls.Collections.S_ControlsCollection GetControl()
+		{
 			S_Controls.Collections.S_ControlsCollection CollezioneControlli = new S_Controls.Collections.S_ControlsCollection();
 			
 			cmbsComune.DBDefaultValue="0";
@@ -297,20 +294,51 @@ namespace TheSite.ManutenzioneProgrammata
 			s_Servizio.Size=10;
 			s_Servizio.Value=id_servizio;
 			CollezioneControlli.Add(s_Servizio);
+
+			return CollezioneControlli;
+		}
+		private void Ricerca(bool reset)
+		{	
 			
+			//Session.Remove("DataSet");
+
+		    S_Controls.Collections.S_ControlsCollection CollezioneControlli =GetControl();
+
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+			CollezioneControlli.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca.PageSize;			
+			CollezioneControlli.Add(s_p_pagesize);
+
 			Classi.ManProgrammata.CreaOttimizzaRDL_MP  _creaRDL = new TheSite.Classi.ManProgrammata.CreaOttimizzaRDL_MP();
 
-			DataSet _MyDs = _creaRDL.GetData(CollezioneControlli).Copy();
+			DataSet _MyDs = _creaRDL.GetDataPaging(CollezioneControlli).Copy();
 
-			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
-			this.DataGridRicerca.DataBind();			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();
-			
-			if (_MyDs.Tables[0].Rows.Count>0)
-			{				
-				PanelCrea.Visible=true;											
-				Session.Add("DataSet",_MyDs.Tables[0]);
+			if (reset==true)
+			{
+
+				CollezioneControlli =GetControl();	
+				int _totalRecords = _creaRDL.GetDataCount(CollezioneControlli);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
 			}
+
+			DataGridRicerca.Visible =true;
+			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.DataGridRicerca.DataBind();
+			
+			if (int.Parse(this.GridTitle1.NumeroRecords)>0)		
+				PanelCrea.Visible=true;											
 			else
 				PanelCrea.Visible=false;
 		}
@@ -429,10 +457,16 @@ namespace TheSite.ManutenzioneProgrammata
 				SetControlli();										
 			}
 			
+			S_Controls.Collections.S_ControlsCollection CollezioneControlli =GetControl();
+
+			Classi.ManProgrammata.CreaOttimizzaRDL_MP  _creaRDL = new TheSite.Classi.ManProgrammata.CreaOttimizzaRDL_MP();
+
+			DataSet _MyDs = _creaRDL.GetData(CollezioneControlli).Copy();
+
 			for(int Pagine = 0;Pagine<=DataGridRicerca.PageCount;Pagine++)
 			{
 	
-				DataGridRicerca.DataSource=Session["DataSet"];
+				DataGridRicerca.DataSource=_MyDs.Tables[0];
 				DataGridRicerca.DataBind();
 				DataGridRicerca.CurrentPageIndex=Pagine;									
 							
@@ -445,8 +479,7 @@ namespace TheSite.ManutenzioneProgrammata
 			}
 
 			DataGridRicerca.CurrentPageIndex=0;
-			DataGridRicerca.DataSource=Session["DataSet"];
-			DataGridRicerca.DataBind();			
+			Ricerca(true);		
 			GetControlli();						
 		}
 
@@ -503,13 +536,13 @@ namespace TheSite.ManutenzioneProgrammata
 		{
 			DataGridRicerca.CurrentPageIndex=0;						
 			Resetta();
-			Ricerca();
+			Ricerca(true);
 		}
 
 		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;	
-			Ricerca();
+			Ricerca(false);
 			GetControlli();			
 		}
 
@@ -574,7 +607,7 @@ namespace TheSite.ManutenzioneProgrammata
 					_CRDL.commitTransaction();
 					DataGridRicerca.CurrentPageIndex=0;		
 					Resetta();					
-					Ricerca();										
+					Ricerca(true);										
 				
 				//Visualizzo il messaggio
 					Classi.SiteJavaScript.msgBox(this.Page,string.Format("SONO STATI INSERITI N. {0} Richieste di Lavoro.",TotUpdate));

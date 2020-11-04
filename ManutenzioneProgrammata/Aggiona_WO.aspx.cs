@@ -16,7 +16,7 @@ namespace TheSite.ManutenzioneProgrammata
 	/// <summary>
 	/// Descrizione di riepilogo per Aggiona_WO.
 	/// </summary>
-	public class Aggiona_WO : System.Web.UI.Page    // System.Web.UI.Page
+	public class Aggiona_WO : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Repeater RepeaterMaster;
 		protected WebControls.PageTitle PageTitle1;

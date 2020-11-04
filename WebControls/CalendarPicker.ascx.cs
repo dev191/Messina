@@ -24,7 +24,7 @@ namespace TheSite.WebControls
 			string scriptStr = "javascript:return popUpCalendar(" +  this.S_TxtDatecalendar.ClientID + "," + getClientID() + @", 'dd/mm/yyyy', '__doPostBack(\'" + getClientID() + @"\')')";
 			btCalendar.Attributes.Add("onclick", scriptStr);
 			System.Text.StringBuilder strscript=new System.Text.StringBuilder();			
-			//this.S_TxtDatecalendar.Attributes.Add("readonly",""); 
+     		//this.S_TxtDatecalendar.Attributes.Add("readonly",""); 
 			//S_TxtDatecalendar.Attributes.Add("onkeydown","deletedate(this,event);");
 			S_TxtDatecalendar.Attributes.Add("onblur","checkDate(this);");
 			strscript.Append ("<script language=JavaScript>\n");
@@ -81,7 +81,7 @@ namespace TheSite.WebControls
 		public string getClientID()
 		{
 			return S_TxtDatecalendar.ClientID;
-		}
+			}
 		public System.Web.UI.HtmlControls.HtmlInputButton  ButtonCalendar
 		{
 			get {return btCalendar;}

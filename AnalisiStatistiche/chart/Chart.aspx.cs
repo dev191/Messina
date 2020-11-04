@@ -15,7 +15,7 @@ namespace chart
 	/// <summary>
 	/// Descrizione di riepilogo per Chart.
 	/// </summary>
-	public class Chart : System.Web.UI.Page    // System.Web.UI.Page
+	public class Chart : System.Web.UI.Page
 	{
 		
 		protected Int32 latoFrame,Npx,Nhh,Rdisco,ScalaLinare,ScalaLogaritmica,i_Tipologia,Anno;

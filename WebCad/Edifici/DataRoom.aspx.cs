@@ -20,7 +20,7 @@ namespace WebCad.Edifici
 	/// <summary>
 	/// Descrizione di riepilogo per DataRoom.
 	/// </summary>
-	public class DataRoom : System.Web.UI.Page    // System.Web.UI.Page
+	public class DataRoom : System.Web.UI.Page
 	{
 
 		#region Dichiarazioni Oggetti

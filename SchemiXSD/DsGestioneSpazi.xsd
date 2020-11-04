@@ -9,7 +9,7 @@
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="label" type="xs:string" minOccurs="0" />
-							<xs:element name="valore_int" type="xs:float" minOccurs="0" />
+							<xs:element name="valore_int" type="xs:decimal" minOccurs="0" />
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -31,12 +31,13 @@
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="label" type="xs:string" minOccurs="0" />
-							<xs:element name="valore_int" type="xs:float" minOccurs="0" />
+							<xs:element name="valore_int" type="xs:decimal" minOccurs="0" />
 							<xs:element name="edificio" type="xs:string" minOccurs="0" />
 							<xs:element name="piano" type="xs:string" minOccurs="0" />
-							<xs:element name="Lordo" type="xs:float" minOccurs="0" />
-							<xs:element name="Netto" type="xs:float" minOccurs="0" />
-							<xs:element name="Mura" type="xs:float" minOccurs="0" />
+							<xs:element name="Lordo" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Netto" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Mura" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Ordine" type="xs:integer" minOccurs="0" />
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>

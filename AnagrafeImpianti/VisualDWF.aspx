@@ -88,5 +88,5 @@
 				</TR>
 			</TABLE>
 		</form>
-	</body><script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

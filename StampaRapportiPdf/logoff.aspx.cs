@@ -15,7 +15,7 @@ namespace TheSite.StampaRapportiPdf
 	/// <summary>
 	/// Descrizione di riepilogo per logoff.
 	/// </summary>
-	public class logoff : System.Web.UI.Page    // System.Web.UI.Page
+	public class logoff : System.Web.UI.Page
 	{
 		private void Page_Load(object sender, System.EventArgs e)
 		{

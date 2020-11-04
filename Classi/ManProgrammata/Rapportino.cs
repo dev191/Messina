@@ -1,334 +1,443 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ManProgrammata.Rapportino
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
+using System;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
-using System.Web;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.ManProgrammata
 {
-  public class Rapportino : AbstractBase
-  {
-    private string s_Descrizione = string.Empty;
-    private OracleDataLayer _OraDl;
-    public string UserName;
+	/// <summary>
+	/// Descrizione di riepilogo per Rapportino.
+	/// Classe usata dalla Pagina Rapportino.aspx
+	/// </summary>
+	public class Rapportino:AbstractBase
+	{
+		#region Dichiarazioni
 
-    public Rapportino() => this._OraDl = new OracleDataLayer(this.s_ConnStr);
+		private string s_Descrizione = string.Empty;
+		private ApplicationDataLayer.OracleDataLayer _OraDl;
+		#endregion
+		
+		public string UserName;
 
-    public void beginTransaction() => this._OraDl.BeginTransaction();
+		public Rapportino()
+		{
+			_OraDl = new OracleDataLayer(s_ConnStr);
+		}
+		#region Metodi Pubblici
 
-    public void commitTransaction() => this._OraDl.CommitTransaction();
+		/// <summary>
+		/// DataSet con tutti i record
+		/// </summary>
+		/// <returns></returns>
+		
 
-    public void rollbackTransaction() => this._OraDl.RollbackTransaction();
+		/// <summary>
+		/// 
+		/// </summary>		
+		/// 
 
-    public override DataSet GetData() => (DataSet) null;
+		public void beginTransaction()
+		{
+			_OraDl.BeginTransaction();
+		}
 
-    public DataTable GetMonth(int anno)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_anno");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) anno);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      controlsCollection.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_SCHEDULA.Rapportino_GetMesi";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy().Tables[0];
-    }
+		public void commitTransaction()
+		{
+			_OraDl.CommitTransaction();			
+		}
 
-    public DataSet GetComuni(int anno, string MeseDa, string MeseA)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Anno");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) anno);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("Mese1");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(1);
-      ((ParameterObject) sObject2).set_Size(50);
-      ((ParameterObject) sObject2).set_Value((object) MeseDa);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("Mese2");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(2);
-      ((ParameterObject) sObject3).set_Size(50);
-      ((ParameterObject) sObject3).set_Value((object) MeseA);
-      controlsCollection.Add(sObject3);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject4).set_Index(3);
-      controlsCollection.Add(sObject4);
-      string str = "PACK_SCHEDULA.Rapportino_GetComuni";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+		public void rollbackTransaction()
+		{
+			_OraDl.RollbackTransaction();
+		}
 
-    public DataSet GetEdifici(
-      int anno,
-      int id_comune,
-      string Mese1,
-      string Mese2,
-      string username)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_anno");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(1);
-      ((ParameterObject) sObject1).set_Size(50);
-      ((ParameterObject) sObject1).set_Value((object) anno);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_comune");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(2);
-      ((ParameterObject) sObject2).set_Size(50);
-      ((ParameterObject) sObject2).set_Value((object) id_comune);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName(nameof (Mese1));
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(1);
-      ((ParameterObject) sObject3).set_Size(50);
-      ((ParameterObject) sObject3).set_Value((object) Mese1);
-      controlsCollection.Add(sObject3);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName(nameof (Mese2));
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject4).set_Index(2);
-      ((ParameterObject) sObject4).set_Size(50);
-      ((ParameterObject) sObject4).set_Value((object) Mese2);
-      controlsCollection.Add(sObject4);
-      S_Object sObject5 = new S_Object();
-      ((ParameterObject) sObject5).set_ParameterName("p_username");
-      ((ParameterObject) sObject5).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject5).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject5).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject5).set_Size(20);
-      ((ParameterObject) sObject5).set_Value((object) username);
-      controlsCollection.Add(sObject5);
-      S_Object sObject6 = new S_Object();
-      ((ParameterObject) sObject6).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject6).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject6).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject6).set_Index(3);
-      controlsCollection.Add(sObject6);
-      string str = "PACK_SCHEDULA.Rapportino_GetEdifici";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+		public override DataSet GetData()
+		{
+			return null;
+		}
 
-    public DataSet GetServizi(
-      int anno,
-      int id_comune,
-      int id_edificio,
-      string Mese1,
-      string Mese2)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Anno");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Size(50);
-      ((ParameterObject) sObject1).set_Value((object) anno);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_comune");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(1);
-      ((ParameterObject) sObject2).set_Size(50);
-      ((ParameterObject) sObject2).set_Value((object) id_comune);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_edificio");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(2);
-      ((ParameterObject) sObject3).set_Size(50);
-      ((ParameterObject) sObject3).set_Value((object) id_edificio);
-      controlsCollection.Add(sObject3);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName(nameof (Mese1));
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject4).set_Index(3);
-      ((ParameterObject) sObject4).set_Size(50);
-      ((ParameterObject) sObject4).set_Value((object) Mese1);
-      controlsCollection.Add(sObject4);
-      S_Object sObject5 = new S_Object();
-      ((ParameterObject) sObject5).set_ParameterName(nameof (Mese2));
-      ((ParameterObject) sObject5).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject5).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject5).set_Index(4);
-      ((ParameterObject) sObject5).set_Size(50);
-      ((ParameterObject) sObject5).set_Value((object) Mese2);
-      controlsCollection.Add(sObject5);
-      S_Object sObject6 = new S_Object();
-      ((ParameterObject) sObject6).set_ParameterName("p_username");
-      ((ParameterObject) sObject6).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject6).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject6).set_Index(4);
-      ((ParameterObject) sObject6).set_Size(50);
-      ((ParameterObject) sObject6).set_Value((object) HttpContext.Current.User.Identity.Name);
-      controlsCollection.Add(sObject6);
-      S_Object sObject7 = new S_Object();
-      ((ParameterObject) sObject7).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject7).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject7).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject7).set_Index(5);
-      controlsCollection.Add(sObject7);
-      string str = "PACK_SCHEDULA.Rapportino_GetServizi";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+		public DataTable GetMonth(int anno)
+		{
+			DataSet _Ds;
 
-    public DataSet GetAddetti(
-      int anno,
-      int id_comune,
-      int id_edificio,
-      int id_servizio,
-      string Mese1,
-      string Mese2)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Anno");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) anno);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_comune");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(1);
-      ((ParameterObject) sObject2).set_Value((object) id_comune);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_edificio");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(2);
-      ((ParameterObject) sObject3).set_Value((object) id_edificio);
-      controlsCollection.Add(sObject3);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("p_servizio");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject4).set_Index(3);
-      ((ParameterObject) sObject4).set_Value((object) id_servizio);
-      controlsCollection.Add(sObject4);
-      S_Object sObject5 = new S_Object();
-      ((ParameterObject) sObject5).set_ParameterName(nameof (Mese1));
-      ((ParameterObject) sObject5).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject5).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject5).set_Index(4);
-      ((ParameterObject) sObject5).set_Size(50);
-      ((ParameterObject) sObject5).set_Value((object) Mese1);
-      controlsCollection.Add(sObject5);
-      S_Object sObject6 = new S_Object();
-      ((ParameterObject) sObject6).set_ParameterName(nameof (Mese2));
-      ((ParameterObject) sObject6).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject6).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject6).set_Index(5);
-      ((ParameterObject) sObject6).set_Size(50);
-      ((ParameterObject) sObject6).set_Value((object) Mese2);
-      controlsCollection.Add(sObject6);
-      S_Object sObject7 = new S_Object();
-      ((ParameterObject) sObject7).set_ParameterName("p_username");
-      ((ParameterObject) sObject7).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject7).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject7).set_Index(4);
-      ((ParameterObject) sObject7).set_Size(50);
-      ((ParameterObject) sObject7).set_Value((object) HttpContext.Current.User.Identity.Name);
-      controlsCollection.Add(sObject7);
-      S_Object sObject8 = new S_Object();
-      ((ParameterObject) sObject8).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject8).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject8).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject8).set_Index(5);
-      controlsCollection.Add(sObject8);
-      string str = "PACK_SCHEDULA.Rapportino_GetAddetti";
-      return this._OraDl.GetRows((object) controlsCollection, str).Copy();
-    }
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
+ 
+			S_Controls.Collections.S_Object s_p_anno = new S_Object();			
+			s_p_anno.ParameterName = "p_anno";
+			s_p_anno.DbType = CustomDBType.Integer;
+			s_p_anno.Direction = ParameterDirection.Input;
+			s_p_anno.Index = 0;
+			s_p_anno.Value=anno; 
+			CollezioneControlli.Add(s_p_anno);
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_SCHEDULA.Rapportino_GetMesi";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_SCHEDULA.Rapportino_RicercaPaging";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			return _Ds.Tables[0];			
+		}
 
-    public DataSet GetDataSel(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_SCHEDULA.Rapportino_Ricerca";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		public DataSet GetComuni(int anno,string MeseDa, string MeseA)
+		{
 
-    public int getCount(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_SCHEDULA.Rapportino_RicercaCount";
-      return int.Parse(oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy().Tables[0].Rows[0][0].ToString());
-    }
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			DataSet _Ds;
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      return 0;
-    }
-  }
+			S_Controls.Collections.S_Object s_Anno = new S_Object();
+			s_Anno.ParameterName = "p_Anno";
+			s_Anno.DbType = CustomDBType.Integer;
+			s_Anno.Direction = ParameterDirection.Input;
+			s_Anno.Index = 0;
+			s_Anno.Value = anno;
+			CollezioneControlli.Add(s_Anno);
+
+			S_Controls.Collections.S_Object s_Mese1 = new S_Object();
+			s_Mese1.ParameterName = "Mese1";
+			s_Mese1.DbType = CustomDBType.VarChar;
+			s_Mese1.Direction = ParameterDirection.Input;
+			s_Mese1.Index = 1;
+			s_Mese1.Size=50;
+			s_Mese1.Value = MeseDa;
+			CollezioneControlli.Add(s_Mese1);
+
+			S_Controls.Collections.S_Object s_Mese2 = new S_Object();
+			s_Mese2.ParameterName = "Mese2";
+			s_Mese2.DbType = CustomDBType.VarChar;
+			s_Mese2.Direction = ParameterDirection.Input;
+			s_Mese2.Index = 2;
+			s_Mese2.Size=50;
+			s_Mese2.Value = MeseA;
+			CollezioneControlli.Add(s_Mese2);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 3;
+			CollezioneControlli.Add(s_Cursor);
+			
+			string s_StrSql = "PACK_SCHEDULA.Rapportino_GetComuni";
+	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}	
+
+		public DataSet GetEdifici(int anno, int id_comune,string Mese1,string Mese2,string username)
+		{
+
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			DataSet _Ds;
+
+			S_Controls.Collections.S_Object s_Anno = new S_Object();
+			s_Anno.ParameterName = "p_anno";
+			s_Anno.DbType = CustomDBType.Integer;
+			s_Anno.Direction = ParameterDirection.Input;
+			s_Anno.Index = 1;
+			s_Anno.Size=50;
+			s_Anno.Value = anno;
+			CollezioneControlli.Add(s_Anno);
+
+			S_Controls.Collections.S_Object s_idcomune = new S_Object();
+			s_idcomune.ParameterName = "p_comune";
+			s_idcomune.DbType = CustomDBType.Integer;
+			s_idcomune.Direction = ParameterDirection.Input;
+			s_idcomune.Index = 2;
+			s_idcomune.Size=50;
+			s_idcomune.Value = id_comune;
+			CollezioneControlli.Add(s_idcomune);
+
+			S_Controls.Collections.S_Object s_Mese1 = new S_Object();
+			s_Mese1.ParameterName = "Mese1";
+			s_Mese1.DbType = CustomDBType.VarChar;
+			s_Mese1.Direction = ParameterDirection.Input;
+			s_Mese1.Index = 1;
+			s_Mese1.Size=50;
+			s_Mese1.Value = Mese1;
+			CollezioneControlli.Add(s_Mese1);
+
+			S_Controls.Collections.S_Object s_Mese2 = new S_Object();
+			s_Mese2.ParameterName = "Mese2";
+			s_Mese2.DbType = CustomDBType.VarChar;
+			s_Mese2.Direction = ParameterDirection.Input;
+			s_Mese2.Index = 2;
+			s_Mese2.Size=50;
+			s_Mese2.Value = Mese2;
+			CollezioneControlli.Add(s_Mese2);
+
+			S_Controls.Collections.S_Object p = new S_Object();
+			p.ParameterName = "p_username";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Index = CollezioneControlli.Count;
+			p.Size=20;
+			p.Value=username;						
+			CollezioneControlli.Add(p);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 3;
+			CollezioneControlli.Add(s_Cursor);
+			
+			string s_StrSql = "PACK_SCHEDULA.Rapportino_GetEdifici";
+	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}	
+	
+		public DataSet GetServizi(int anno, int id_comune, int id_edificio,string Mese1,string Mese2)
+		{
+
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			DataSet _Ds;
+
+			S_Controls.Collections.S_Object s_Anno = new S_Object();
+			s_Anno.ParameterName = "p_Anno";
+			s_Anno.DbType = CustomDBType.Integer;
+			s_Anno.Direction = ParameterDirection.Input;
+			s_Anno.Index = 0;
+			s_Anno.Size=50;
+			s_Anno.Value = anno;
+			CollezioneControlli.Add(s_Anno);
+
+			S_Controls.Collections.S_Object s_idcomune = new S_Object();
+			s_idcomune.ParameterName = "p_comune";
+			s_idcomune.DbType = CustomDBType.Integer;
+			s_idcomune.Direction = ParameterDirection.Input;
+			s_idcomune.Index = 1;
+			s_idcomune.Size=50;
+			s_idcomune.Value = id_comune;
+			CollezioneControlli.Add(s_idcomune);
+
+			S_Controls.Collections.S_Object s_idedif = new S_Object();
+			s_idedif.ParameterName = "p_edificio";
+			s_idedif.DbType = CustomDBType.Integer;
+			s_idedif.Direction = ParameterDirection.Input;
+			s_idedif.Index = 2;
+			s_idedif.Size=50;
+			s_idedif.Value = id_edificio;
+			CollezioneControlli.Add(s_idedif);
+
+			S_Controls.Collections.S_Object s_Mese1 = new S_Object();
+			s_Mese1.ParameterName = "Mese1";
+			s_Mese1.DbType = CustomDBType.VarChar;
+			s_Mese1.Direction = ParameterDirection.Input;
+			s_Mese1.Index = 3;
+			s_Mese1.Size=50;
+			s_Mese1.Value = Mese1;
+			CollezioneControlli.Add(s_Mese1);
+
+			S_Controls.Collections.S_Object s_Mese2 = new S_Object();
+			s_Mese2.ParameterName = "Mese2";
+			s_Mese2.DbType = CustomDBType.VarChar;
+			s_Mese2.Direction = ParameterDirection.Input;
+			s_Mese2.Index =4;
+			s_Mese2.Size=50;
+			s_Mese2.Value = Mese2;
+			CollezioneControlli.Add(s_Mese2);
+
+			S_Controls.Collections.S_Object s_p_username = new S_Object();
+			s_p_username.ParameterName = "p_username";
+			s_p_username.DbType = CustomDBType.VarChar;
+			s_p_username.Direction = ParameterDirection.Input;
+			s_p_username.Index =4;
+			s_p_username.Size=50;
+			s_p_username.Value = System.Web.HttpContext.Current.User.Identity.Name;;
+			CollezioneControlli.Add(s_p_username);
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 5;
+			CollezioneControlli.Add(s_Cursor);
+			
+
+			string s_StrSql = "PACK_SCHEDULA.Rapportino_GetServizi";
+	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}		
+
+		public DataSet GetAddetti(int anno, int id_comune, int id_edificio,int id_servizio ,string Mese1,string Mese2)
+		{
+
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			DataSet _Ds;
+
+			S_Controls.Collections.S_Object s_Anno = new S_Object();
+			s_Anno.ParameterName = "p_Anno";
+			s_Anno.DbType = CustomDBType.Integer;
+			s_Anno.Direction = ParameterDirection.Input;
+			s_Anno.Index = 0;
+			s_Anno.Value = anno;
+			CollezioneControlli.Add(s_Anno);
+
+			S_Controls.Collections.S_Object s_idcomune = new S_Object();
+			s_idcomune.ParameterName = "p_comune";
+			s_idcomune.DbType = CustomDBType.Integer;
+			s_idcomune.Direction = ParameterDirection.Input;
+			s_idcomune.Index = 1;
+			s_idcomune.Value = id_comune;
+			CollezioneControlli.Add(s_idcomune);
+
+			S_Controls.Collections.S_Object s_idedif = new S_Object();
+			s_idedif.ParameterName = "p_edificio";
+			s_idedif.DbType = CustomDBType.Integer;
+			s_idedif.Direction = ParameterDirection.Input;
+			s_idedif.Index = 2;
+			s_idedif.Value = id_edificio;
+			CollezioneControlli.Add(s_idedif);
+
+			S_Controls.Collections.S_Object s_p_servizio = new S_Object();
+			s_p_servizio.ParameterName = "p_servizio";
+			s_p_servizio.DbType = CustomDBType.Integer;
+			s_p_servizio.Direction = ParameterDirection.Input;
+			s_p_servizio.Index = 3;
+			s_p_servizio.Value = id_servizio;
+			CollezioneControlli.Add(s_p_servizio);
+
+			S_Controls.Collections.S_Object s_Mese1 = new S_Object();
+			s_Mese1.ParameterName = "Mese1";
+			s_Mese1.DbType = CustomDBType.VarChar;
+			s_Mese1.Direction = ParameterDirection.Input;
+			s_Mese1.Index = 4;
+			s_Mese1.Size=50;
+			s_Mese1.Value = Mese1;
+			CollezioneControlli.Add(s_Mese1);
+
+			S_Controls.Collections.S_Object s_Mese2 = new S_Object();
+			s_Mese2.ParameterName = "Mese2";
+			s_Mese2.DbType = CustomDBType.VarChar;
+			s_Mese2.Direction = ParameterDirection.Input;
+			s_Mese2.Index =5;
+			s_Mese2.Size=50;
+			s_Mese2.Value = Mese2;
+			CollezioneControlli.Add(s_Mese2);
+
+			S_Controls.Collections.S_Object s_p_username = new S_Object();
+			s_p_username.ParameterName = "p_username";
+			s_p_username.DbType = CustomDBType.VarChar;
+			s_p_username.Direction = ParameterDirection.Input;
+			s_p_username.Index =4;
+			s_p_username.Size=50;
+			s_p_username.Value = System.Web.HttpContext.Current.User.Identity.Name;;
+			CollezioneControlli.Add(s_p_username);
+
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 5;
+			CollezioneControlli.Add(s_Cursor);
+			
+			string s_StrSql = "PACK_SCHEDULA.Rapportino_GetAddetti";
+	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}		
+
+		public override DataSet GetSingleData(int itemId)
+		{
+			return null;
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="CollezioneControlli"></param>
+		/// <returns></returns>
+		public override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+	
+			DataSet _Ds;
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count+1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_SCHEDULA.Rapportino_RicercaPaging";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	 
+		}		
+
+		public  DataSet GetDataSel(S_ControlsCollection CollezioneControlli)
+		{
+	
+			DataSet _Ds;
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count+1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_SCHEDULA.Rapportino_Ricerca";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;	 
+		}	
+
+		// metodo che fa il count
+		public int getCount(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count+1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_SCHEDULA.Rapportino_RicercaCount";	
+
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();		
+	
+			return  int.Parse(_Ds.Tables[0].Rows[0][0].ToString());
+		}
+
+		#endregion
+
+
+		#region Metodi Private
+
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			return 0;
+		}
+
+		#endregion
+	}
 }

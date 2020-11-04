@@ -11,19 +11,18 @@ namespace TheSite.Gestione
 	using System.Web.UI.WebControls;
 	using System.Web.UI.HtmlControls;
 	using System.Reflection;
-    using global::StampaRapportiPdf.Classi;
 
-    /// <summary>
-    /// Descrizione di riepilogo per EditAnagrafica
-    /// </summary>
-    public enum PageType
+	/// <summary>
+	/// Descrizione di riepilogo per EditAnagrafica
+	/// </summary>
+	public enum PageType
 	{
 		Servizi,
 		Ditte,
 		TipologiaDitta,
 		TipoManutenzione
 	}
-	public class EditAnagrafica : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditAnagrafica : System.Web.UI.Page
 	{
 		protected Csy.WebControls.MessagePanel PanelMess;
 		protected System.Web.UI.WebControls.Panel PanelEdit;
@@ -46,14 +45,14 @@ namespace TheSite.Gestione
 		
 
 		#region proprieta collection
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 		#endregion

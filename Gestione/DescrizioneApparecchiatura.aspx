@@ -33,17 +33,13 @@
 			var finestra;
 			
 		function AbilitaCmbsUM()
-		{//cmbsUDM   
-		
-		tipoInserimento();
+		{//cmbsUDM
 			ctrl=document.getElementById('<%=Contatore.ClientID%>');
 			Cmb=document.getElementById('<%=cmbsUDM.ClientID%>');
 			 if(ctrl.checked==true)
 				Cmb.disabled=false;
     		 else
     		    Cmb.disabled=true;
-    		   
-    		
     		  
 		}
 
@@ -162,7 +158,8 @@ function openallegati(namefile)
 					 td.disabled=true;
 			 }
 	 }
-	function tipoInserimento()
+		
+		function tipoInserimento()
 	{
 		var ctrl=document.getElementById('Radio1');
 	 	var td = document.getElementById('txtApparechiatura');
@@ -175,6 +172,7 @@ function openallegati(namefile)
 	 	{ 	return true;}
 	 	
  	}
+	
 		</script>
 	</HEAD>
 	<body onbeforeunload="chiudi();parent.left.valorizza()" MS_POSITIONING="GridLayout" onload="Abilita(<%=TabId%>);">
@@ -221,14 +219,14 @@ function openallegati(namefile)
 									<TR>
 										<TD>
 											<TABLE id="TableSearch100" cellSpacing="1" cellPadding="1" width="100%" border="1">
-												<TR >
-													<TD style="WIDTH: 168px" >Codice Apparechiatura:</TD>
-													<TD><asp:TextBox ID="txtApparechiatura" Runat="server" Width="168px" MaxLength="50"></asp:TextBox> 	
-													<INPUT type="radio" name="Opt" id="Radio1" runat="server" onclick="JAVASCRIPT:Nascondi();" VALUE="Mano" checked>Inserimento manuale
-													<INPUT type="radio" name="Opt" id="opt1" runat="server" onclick="JAVASCRIPT:Nascondi();" VALUE="Auto">Inserimento automatico
-													</TD>											
-																						
-												</TR>
+											<TR>
+											<TD style="WIDTH: 168px">Codice Apparechiatura:</TD>
+											<TD><asp:TextBox ID="txtApparechiatura" Runat="server" Width="168px" MaxLength="50"></asp:TextBox>
+												<INPUT type="radio" name="Opt" id="Radio1" runat="server" onclick="JAVASCRIPT:Nascondi();"
+													VALUE="Mano" checked>Inserimento manuale <INPUT type="radio" name="Opt" id="opt1" runat="server" onclick="JAVASCRIPT:Nascondi();"
+													VALUE="Auto">Inserimento automatico
+											</TD>
+										</TR>											
 												<TR>
 													<TD style="WIDTH: 168px">Servizio:</TD>
 													<TD>
@@ -260,26 +258,22 @@ function openallegati(namefile)
 													<TD style="WIDTH: 168px">QTA:</TD>
 													<TD width="100%">
 														<table width="100%" border="0">
-														<tr>
-															<td width="7%">
-															<cc1:s_textbox id="S_Txtqta" runat="server" Width="30px"></cc1:s_textbox>
-														<asp:regularexpressionvalidator id="RegularExpressionValidator1" ControlToValidate="S_Txtqta" ErrorMessage="Il campo QTA è numerico!"
-															ValidationExpression="^[0-9]*$" Runat="server">*</asp:regularexpressionvalidator>
-															</td>
-															<td width="12%" align="right">Unità di Misura: </td>
-															<td width="40%">
-															<cc1:s_combobox id="cmbsUnita" runat="server" width="60%"></cc1:s_combobox>
-															
-															<cc1:s_textbox id="S_TxtqtaMatInt" runat="server" Width="50px" Maxlength="8"></cc1:s_textbox>
-															
-															,
-															<cc1:s_textbox id="S_TxtqtaMatDec" runat="server" Width="50px" align="left" Maxlength="5"></cc1:s_textbox>
-															
+														<tr>														
+															<td  align="right">Unità di Misura: </td>
+															<td>
+															<cc1:s_combobox id="cmbsUnita" runat="server" ></cc1:s_combobox>															
+															<cc1:s_textbox id="S_TxtqtaMatInt" runat="server" Width="65px" Maxlength="8"></cc1:s_textbox>							
+															, <cc1:s_textbox id="S_TxtqtaMatDec" runat="server" Width="50px" Maxlength="5"></cc1:s_textbox>
 															</td>
 															<td>
 															<asp:regularexpressionvalidator id="RegularExpressionValidator2" ControlToValidate="S_TxtqtaMatInt" ErrorMessage="*Il campo è numerico!"
 															ValidationExpression="^[0-9]*$" Runat="server"></asp:regularexpressionvalidator>
 															<asp:regularexpressionvalidator id="RegularExpressionValidator3" ControlToValidate="S_TxtqtaMatDec" ErrorMessage="*Il campo è numerico!"
+															ValidationExpression="^[0-9]*$" Runat="server">*</asp:regularexpressionvalidator>
+															</td>
+																<td style="VISIBILITY: hidden">
+															<cc1:s_textbox id="S_Txtqta" runat="server" Width="30px"></cc1:s_textbox>
+														<asp:regularexpressionvalidator id="RegularExpressionValidator1" ControlToValidate="S_Txtqta" ErrorMessage="Il campo QTA è numerico!"
 															ValidationExpression="^[0-9]*$" Runat="server">*</asp:regularexpressionvalidator>
 															</td>
 														</tr>
@@ -335,26 +329,23 @@ function openallegati(namefile)
 												<TR>
 													<TD style="WIDTH: 168px">Riferimento Planimetria:</TD>
 													<TD>
-														<cc1:s_textbox id="S_TxtRif" runat="server" Width="30px"></cc1:s_textbox>
+														<cc1:s_textbox id="S_TxtRif" runat="server" Width="80px"></cc1:s_textbox>
 														
 													</TD>
 													
 												</TR>
-											<TR>							
+											<TR style="VISIBILITY: hidden">							
 												<td  style="PADDING-RIGHT: 1px" >Apparecchiatura <br>soggetta a <br>lettura: </td>
 												<td style="PADDING-RIGHT: 15px"><asp:CheckBox id="Contatore" runat="server"></asp:CheckBox></td>
 											</tr>
-											
-									<!--     NOTE: Campi non + utilizzati
-									
-											<tr>
+											<tr  style="VISIBILITY: hidden">
 												<td style=" PADDING-RIGHT: 1px">Unità di misura: </td>
 												<td><cc1:s_combobox id="cmbsUDM" runat="server"></cc1:s_combobox></td>
 											</tr>
-											<tr>
+											<tr  style="VISIBILITY: hidden">
 												<td style=" PADDING-RIGHT: 1px">Ente Erogante: </td>
 												<td><cc1:s_combobox id="cmbEnteErogante" runat="server"></cc1:s_combobox></td>
-											</tr>   -->
+											</tr>
 												<tr>
 													<TD colspan=2>
 														<asp:validationsummary id="ValidationSummary1" runat="server" Width="488px" ShowSummary="False" ShowMessageBox="True"></asp:validationsummary>

@@ -16,7 +16,7 @@ namespace TheSite.Admin
 	/// <summary>
 	/// Descrizione di riepilogo per RuoliEdifici.
 	/// </summary>
-	public class RuoliEdifici : System.Web.UI.Page    // System.Web.UI.Page
+	public class RuoliEdifici : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Label lblOperazione;
 		protected Csy.WebControls.MessagePanel PanelMess;
@@ -79,7 +79,7 @@ namespace TheSite.Admin
 				this.lblOperazione.Text = "Associazione Ruoli Edifici";
 				
 				this.lblFirstAndLast.Visible = false;					
-				ImpostaProvinciaDefault("BA","- Selezionare un Comune -");
+				//ImpostaProvinciaDefault("CT","- Selezionare un Comune -");
 				ViewState["UrlReferrer"] = Request.UrlReferrer.ToString();
 			}
 		}		

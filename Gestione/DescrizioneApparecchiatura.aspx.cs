@@ -12,20 +12,18 @@ using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using ApplicationDataLayer.Collections;
 using S_Controls.Collections;
-using System.Reflection;
-using StampaRapportiPdf.Classi;
-
+using System.Reflection;  
+     
 namespace TheSite.Gestione
 {
 
 	/// <summary>
 	/// Descrizione di riepilogo per DescrizioneApparecchiatura.
 	/// </summary>
-	public class DescrizioneApparecchiatura : System.Web.UI.Page    // System.Web.UI.Page
+	public class DescrizioneApparecchiatura : System.Web.UI.Page
 	{
 		protected S_Controls.S_ComboBox cmbsCondizione;
 		protected S_Controls.S_ComboBox cmbsUDM;
-		protected System.Web.UI.WebControls.CheckBox ChkInsertMan;
 		protected System.Web.UI.WebControls.CheckBox Contatore;
 		protected S_Controls.S_TextBox S_Txtmodello;
 		protected S_Controls.S_TextBox S_Txttipo;
@@ -80,16 +78,15 @@ namespace TheSite.Gestione
 		protected System.Web.UI.HtmlControls.HtmlInputRadioButton Radio1;
 		protected System.Web.UI.HtmlControls.HtmlInputRadioButton opt1;
 
-
 		#region proprieta collection
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 		#endregion
@@ -98,11 +95,6 @@ namespace TheSite.Gestione
 		{
 			TabStrip1.Attributes.Add("onclick","Abilita(this.selectedIndex);");
 			TabId = TabStrip1.SelectedIndex;
-
-			UserStanze1.NameUserControlRicercaModulo = "RicercaModulo1";
-			UserStanze1.NameComboPiano="cmbsPiano";
-			UserStanze1.NameLblId="S_Lblcodedificio";
-
 
 			// Inserire qui il codice utente necessario per inizializzare la pagina.;
 			Classi.SiteModule _SiteModule = (Classi.SiteModule) HttpContext.Current.Items["SiteModule"];		
@@ -117,24 +109,23 @@ namespace TheSite.Gestione
 			Uploader.Accept="image/*";
 
 			System.Text.StringBuilder sbValidApprova = new System.Text.StringBuilder();
-            sbValidApprova.Append("return tipoInserimento(); if (typeof(ControllaData) == 'function' && typeof(Page_ClientValidate) == 'function') { ");
+			sbValidApprova.Append("if (typeof(ControllaData) == 'function' && typeof(Page_ClientValidate) == 'function') { ");
 			sbValidApprova.Append("if (ControllaData() == false || Page_ClientValidate() == false) { return false; }} ");
 			sbValidApprova.Append(this.Page.GetPostBackEventReference(this.S_BtInvia));
 			sbValidApprova.Append(";");
-			S_BtInvia.Attributes.Add("onclick",sbValidApprova.ToString());
+			S_BtInvia.Attributes.Add("onclick","tipoInserimento(); "+ sbValidApprova.ToString());
 			Contatore.Attributes.Add("onclick","AbilitaCmbsUM();");
 				
 			S_TxtqtaMatInt.Attributes.Add("onkeypress","if (valutanumeri(event) == false) { return false; }");
 			S_TxtqtaMatInt.Attributes.Add("onpaste","return false;");
-			
+			UserStanze1.NameLblId = "S_Lblcodedificio";
+			UserStanze1.NameComboPiano="cmbsPiano";
+		
 
 			S_TxtqtaMatDec.Attributes.Add("onkeypress","if (valutanumeri(event) == false) { return false; }");
 			S_TxtqtaMatDec.Attributes.Add("onpaste","return false;");
 			cmbsPiano.Attributes.Add("onchange","clearRoom();");
-			 
-	//	RBLInserimento.Attributes.Add("onclick","Nascondi();");
-	//	RBLInserimento.Items[1].Attributes.Add("onclick","Nascondi();");
-	//		S_BtInvia.Attributes.Add("onclick","tipoInserimento();");
+			
 
 			if(!IsPostBack)
 			{
@@ -288,10 +279,10 @@ namespace TheSite.Gestione
 				if (Dr["quantita"]!=DBNull.Value)
 					S_Txtqta.Text=Dr["quantita"].ToString();
 				//*****************//
-//				if (Dr["IDUNITAMISURA"]!=DBNull.Value)
-//				{
-//					cmbsUnita.SelectedValue=Dr["IDUNITAMISURA"].ToString();
-//				}
+				if (Dr["IDUNITAMISURA"]!=DBNull.Value)
+				{
+					cmbsUnita.SelectedValue=Dr["IDUNITAMISURA"].ToString();
+				}
 
 				if (Dr["NUMEROUNITA"]!=DBNull.Value)
 				{
@@ -338,8 +329,8 @@ namespace TheSite.Gestione
 						Contatore.Checked=true;
 						cmbsUDM.Enabled=true;
 						
-//						if(Dr["UMD"]!=DBNull.Value)
-//							cmbsUDM.SelectedValue=Dr["UMD"].ToString();
+						if(Dr["UMD"]!=DBNull.Value)
+							cmbsUDM.SelectedValue=Dr["UMD"].ToString();
 
 						
 					}
@@ -350,8 +341,8 @@ namespace TheSite.Gestione
 					}
 				}
 
-//				if(Dr["EnteErogante"]!= DBNull.Value)
-//					cmbEnteErogante.SelectedValue= Dr["EnteErogante"].ToString();
+				if(Dr["EnteErogante"]!= DBNull.Value)
+					cmbEnteErogante.SelectedValue= Dr["EnteErogante"].ToString();
 
 				
 				string query="IDEQ=" + this.IDEQ + "&EQ_ID=" + this.EQ_ID; 
@@ -365,10 +356,9 @@ namespace TheSite.Gestione
 				lblFirstAndLast.Text = _DatiApparecchiatura.GetFirstAndLastUser(Dr);
 
 				lblCodApparecchiatura.Text=string.Format(" Codice Apparecchatura: {0}", Dr["EQ_ID"]); 
-
 				txtApparechiatura.Text =Dr["EQ_ID"].ToString();
 				txtApparechiatura.Enabled=false;
-				}
+			}
 
 		}
 
@@ -717,7 +707,8 @@ namespace TheSite.Gestione
 			int totapp=0;
 			DataSet _Ds; 
 			if (this.IDEQ=="") 
-			{	string d=cmbsPiano.SelectedValue.Split(Convert.ToChar(" "))[1];
+			{	
+				string d=cmbsPiano.SelectedValue.Split(Convert.ToChar(" "))[1];
 				_Ds= _DatiApparecchiatura.GetCountApparecchiature(int.Parse(this.BL_ID),int.Parse(this.cmbsApparecchiatura.SelectedValue.Split(Convert.ToChar(" "))[0]),cmbsPiano.SelectedValue.Split(Convert.ToChar(" "))[1]);
 				if(_Ds.Tables[0].Rows.Count>0)
 					if(_Ds.Tables[0].Rows[0][0]!=DBNull.Value)
@@ -727,9 +718,8 @@ namespace TheSite.Gestione
 			}
 			else
 			{
-				//marianna
-				if( EQ_ID.IndexOf('_') != -1)
-					totapp=int.Parse(this.EQ_ID.Substring(this.EQ_ID.LastIndexOf("_")+1) ); 
+					if( EQ_ID.IndexOf('_') != -1)
+				totapp=int.Parse(this.EQ_ID.Substring(this.EQ_ID.LastIndexOf("_")+1) ); 
 			}
 			S_ControlsCollection _SColl = new S_ControlsCollection();
 
@@ -869,7 +859,6 @@ namespace TheSite.Gestione
 			s_p_eqstd_id.Value =int.Parse(cmbsApparecchiatura.SelectedValue.Split(Convert.ToChar(" "))[0]);
 			_SColl.Add(s_p_eqstd_id);
 
-
 			S_Controls.Collections.S_Object s_p_id_bl = new S_Object();
 			s_p_id_bl.ParameterName = "p_id_bl";
 			s_p_id_bl.DbType = CustomDBType.Integer;
@@ -997,28 +986,24 @@ namespace TheSite.Gestione
 			s_p_contatore.Value = contatore ;
 			_SColl.Add(s_p_contatore);
 
-		
-		
+			S_Controls.Collections.S_Object s_p_um_id= new S_Object();
+			s_p_um_id.ParameterName = "p_um_id";
+			s_p_um_id.DbType = CustomDBType.Float;
+			s_p_um_id.Direction = ParameterDirection.Input;
+			s_p_um_id.Index =_SColl.Count;
+			s_p_um_id.Size =23;
+			s_p_um_id.Value =Convert.ToInt32(cmbsUDM.SelectedValue) ;
+			_SColl.Add(s_p_um_id);
 
-
-//			S_Controls.Collections.S_Object s_p_um_id= new S_Object();
-//			s_p_um_id.ParameterName = "p_um_id";
-//			s_p_um_id.DbType = CustomDBType.Float;
-//			s_p_um_id.Direction = ParameterDirection.Input;
-//			s_p_um_id.Index =_SColl.Count;
-//			s_p_um_id.Size =23;
-//			s_p_um_id.Value =Convert.ToInt32(cmbsUDM.SelectedValue) ;
-//			_SColl.Add(s_p_um_id);
-//
-//			
-//			S_Controls.Collections.S_Object s_p_id_ente_erogante= new S_Object();
-//			s_p_id_ente_erogante.ParameterName = "p_id_ente_erogante";
-//			s_p_id_ente_erogante.DbType = CustomDBType.Integer;
-//			s_p_id_ente_erogante.Direction = ParameterDirection.Input;
-//			s_p_id_ente_erogante.Index =_SColl.Count;
-//			s_p_id_ente_erogante.Size =23;
-//			s_p_id_ente_erogante.Value =Convert.ToInt32(cmbEnteErogante.SelectedValue) ;
-//			_SColl.Add(s_p_id_ente_erogante);
+			
+			S_Controls.Collections.S_Object s_p_id_ente_erogante= new S_Object();
+			s_p_id_ente_erogante.ParameterName = "p_id_ente_erogante";
+			s_p_id_ente_erogante.DbType = CustomDBType.Integer;
+			s_p_id_ente_erogante.Direction = ParameterDirection.Input;
+			s_p_id_ente_erogante.Index =_SColl.Count;
+			s_p_id_ente_erogante.Size =23;
+			s_p_id_ente_erogante.Value =Convert.ToInt32(cmbEnteErogante.SelectedValue) ;
+			_SColl.Add(s_p_id_ente_erogante);
 
 			//*******************//
 			

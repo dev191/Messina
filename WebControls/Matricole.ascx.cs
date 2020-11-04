@@ -50,11 +50,7 @@ namespace TheSite.WebControls
 		{
 			get {return txtmatricola;}
 	    }
-		public string getClientID()
-		{
-			return txtmatricola.ClientID;
-		}
-		
 
+		
 	}
 }

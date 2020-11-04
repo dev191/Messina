@@ -15,7 +15,7 @@ using ApplicationDataLayer.DBType;
 
 namespace TheSite.CommonPage
 {
-	public class Sollecito : System.Web.UI.Page    // System.Web.UI.Page
+	public class Sollecito : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.Panel PanelEdit;
@@ -30,8 +30,9 @@ namespace TheSite.CommonPage
 				this.idric = Request.QueryString["idric"]; 
 
 				this.btnsAggiungi.Attributes.Add("onclick","return ControllaRichiedente('" +  RichiedentiSollecito1.s_RichNome.ClientID + "','" + RichiedentiSollecito1.s_RichCognome.ClientID + "')");
-
-		
+				
+			if(Request.QueryString["VarApp"]!=null)
+					RichiedentiSollecito1.Progetto=	Request.QueryString["VarApp"];
 		}
 
 		private string idric

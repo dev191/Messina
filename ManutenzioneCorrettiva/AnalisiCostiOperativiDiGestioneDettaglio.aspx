@@ -1,5 +1,5 @@
 <%@ Register TagPrefix="uc1" TagName="CostiManodopera" Src="../WebControls/CostiManodopera.ascx" %>
-<%@ Page language="c#" Codebehind="AnalisiCostiOperativiDiGestioneDettaglio.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneCorrettiva.AnalisiCostiOperativiDiGestioneDettaglio" %>
+<%@ Page language="c#" Codebehind="AnalisiCostiOperativiDiGestioneDettaglio.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneCorrettiva.AnalisiCostiOperativiDiGestioneDettaglio" uiCulture="it"%>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="materiali" Src="../WebControls/materiali.ascx" %>
 <%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
@@ -52,7 +52,7 @@
 										<asp:Label id="LblDescIntervento" runat="server"></asp:Label></td>
 								</tr>
 								<tr>
-									<td colspan="2"><strong>Data e ora Pianificata: </strong>
+									<td colspan="2" style="HEIGHT: 10px"><strong>Data e ora Pianificata: </strong>
 										<asp:Label id="LblDataPianificata" runat="server"></asp:Label></td>
 								</tr>
 								<tr>
@@ -106,7 +106,7 @@
 						</TD>
 					</TR>
 					<tr>
-						<td>&nbsp;</td>
+						<td style="HEIGHT: 13px">&nbsp;</td>
 					</tr>
 					<TR>
 						<TD width="100%">
@@ -119,12 +119,11 @@
 					</TR>
 					<TR>
 						<TD style="HEIGHT: 25px" width="100%">TOTALE&nbsp;COSTI OPERATIVI DI GESTIONE&nbsp;
-							<asp:Label id="LblTotale" runat="server" Font-Bold="True">Label</asp:Label></TD>
+							<asp:Literal id="LblTotale" runat="server"></asp:Literal></TD>
 					</TR>
 					<TR>
 						<TD>
-							<ASP:BUTTON id="btnChiudi" runat="server" text="Chiudi" cssclass="btn" Visible="false"></ASP:BUTTON>
-						</TD>
+							<ASP:BUTTON id="btnChiudi" runat="server" text="Chiudi" cssclass="btn" Visible="false"></ASP:BUTTON></TD>
 					</TR>
 					<tr>
 						<td>&nbsp;</td>

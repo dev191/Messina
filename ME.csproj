@@ -95,6 +95,122 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\EditFunzioni.aspx.cs">
+      <DependentUpon>EditFunzioni.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EditMenu.aspx.cs">
+      <DependentUpon>EditMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EditRuoli.aspx.cs">
+      <DependentUpon>EditRuoli.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EditUtenti.aspx.cs">
+      <DependentUpon>EditUtenti.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Funzioni.aspx.cs">
+      <DependentUpon>Funzioni.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Menu.aspx.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Ruoli.aspx.cs">
+      <DependentUpon>Ruoli.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RuoliEdifici.aspx.cs">
+      <DependentUpon>RuoliEdifici.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RuoliEdificiServizi.aspx.cs">
+      <DependentUpon>RuoliEdificiServizi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Utenti.aspx.cs">
+      <DependentUpon>Utenti.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Utenti1.aspx.cs">
+      <DependentUpon>Utenti1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\DataRoom.aspx.cs">
+      <DependentUpon>DataRoom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\DatiTecnici.aspx.cs">
+      <DependentUpon>DatiTecnici.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\DocImageGalery.aspx.cs">
+      <DependentUpon>DocImageGalery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\Eq_DocumentiAllegati.aspx.cs">
+      <DependentUpon>Eq_DocumentiAllegati.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\FullImage.aspx.cs">
+      <DependentUpon>FullImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\ListaApparecchiatureServ.aspx.cs">
+      <DependentUpon>ListaApparecchiatureServ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\ListaDatiApparecchiatura.aspx.cs">
+      <DependentUpon>ListaDatiApparecchiatura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\NavigazioneApparecchiature.aspx.cs">
+      <DependentUpon>NavigazioneApparecchiature.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\NavigazioneAppDEMO.aspx.cs">
+      <DependentUpon>NavigazioneAppDEMO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\NavigazioneCertificati.aspx.cs">
+      <DependentUpon>NavigazioneCertificati.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\NavigazioneDocumenti.aspx.cs">
+      <DependentUpon>NavigazioneDocumenti.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\NavigazioneServizi.aspx.cs">
+      <DependentUpon>NavigazioneServizi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\PageImage.aspx.cs">
+      <DependentUpon>PageImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\RichiesteApparecchiatura.aspx.cs">
+      <DependentUpon>RichiesteApparecchiatura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\SchedaApparecchiatura.aspx.cs">
+      <DependentUpon>SchedaApparecchiatura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\ServiceDettail.aspx.cs">
+      <DependentUpon>ServiceDettail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\ServiziEdifici.aspx.cs">
+      <DependentUpon>ServiziEdifici.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnagrafeImpianti\VisualDWF.aspx.cs">
+      <DependentUpon>VisualDWF.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="AnalisiStatistiche\chart\Chart.aspx.cs">
       <DependentUpon>Chart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -161,8 +277,6 @@
     <Compile Include="AslMobile\Class\ClassSession.cs" />
     <Compile Include="AslMobile\Class\ClassUrgenza.cs" />
     <Compile Include="AslMobile\Class\ClassUser.cs" />
-    <Compile Include="AslMobile\Class\StateType.cs" />
-    <Compile Include="AslMobile\Class\TipoManutenzioneType.cs" />
     <Compile Include="AslMobile\CodiceEdificio.aspx.cs">
       <DependentUpon>CodiceEdificio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -203,12 +317,10 @@
       <DependentUpon>DettProcedurePassi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AslMobile\ExecuteType.cs" />
     <Compile Include="AslMobile\LogOut.aspx.cs">
       <DependentUpon>LogOut.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AslMobile\MyDelegate.cs" />
     <Compile Include="AslMobile\Rcompleta.aspx.cs">
       <DependentUpon>Rcompleta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -221,9 +333,12 @@
       <DependentUpon>VisualRdl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="calendar\Calendar.cs">
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="calendar\Calendar.ascx.cs">
+      <DependentUpon>Calendar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ClassError.cs" />
     <Compile Include="Classi\AbstractBase.cs" />
     <Compile Include="Classi\AnagrafeImpianti\AnagrafeDocDWF.cs" />
     <Compile Include="Classi\AnagrafeImpianti\AnagrafeServizi.cs" />
@@ -231,8 +346,11 @@
     <Compile Include="Classi\AnagrafeImpianti\Certificati.cs" />
     <Compile Include="Classi\AnagrafeImpianti\DataRoom.cs" />
     <Compile Include="Classi\AnagrafeImpianti\DatiApparecchiatura.cs" />
+    <Compile Include="Classi\AnagrafeImpianti\DatiTecnici.cs" />
+    <Compile Include="Classi\AnagrafeImpianti\DatiTecniciApparecchiatura.cs" />
     <Compile Include="Classi\AnagrafeImpianti\DocDWF.cs" />
     <Compile Include="Classi\AnagrafeImpianti\Passi.cs" />
+    <Compile Include="Classi\AnagrafeImpianti\SchedaApparecchiatura.cs" />
     <Compile Include="Classi\AnagrafeImpianti\ServiziEdifici.cs" />
     <Compile Include="Classi\AnagrafeImpianti\SeviceDettail.cs" />
     <Compile Include="Classi\AnalisiStatistiche\AbractQryStr.cs" />
@@ -273,11 +391,8 @@
     <Compile Include="Classi\ClassiAnagrafiche\TipologiaDitta.cs" />
     <Compile Include="Classi\ClassiAnagrafiche\TipoManutenzione.cs" />
     <Compile Include="Classi\ClassiAnagrafiche\UnitaMisura.cs" />
-    <Compile Include="Classi\ClassiDettaglio\DatiTecnici.cs" />
-    <Compile Include="Classi\ClassiDettaglio\DatiTecniciApparecchiatura.cs" />
     <Compile Include="Classi\ClassiDettaglio\Edificio.cs" />
     <Compile Include="Classi\ClassiDettaglio\RichiedentiTipo.cs" />
-    <Compile Include="Classi\ClassiDettaglio\SchedaApparecchiatura.cs" />
     <Compile Include="Classi\ClassiDettaglio\Servizi.cs" />
     <Compile Include="Classi\ClassiDettaglio\UnitaMisura.cs" />
     <Compile Include="Classi\ClassiDettaglio\Urgenza.cs" />
@@ -287,24 +402,13 @@
     <Compile Include="Classi\CostiGesioneCumulativi\ClManCorrettiva.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\clMyDataGridCollection.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\CostiOperativiCumulativo.cs" />
-    <Compile Include="Classi\CostiGesioneCumulativi\ExecuteType.cs" />
-    <Compile Include="Classi\CostiGesioneCumulativi\GestoreDropDownList.cs" />
-    <Compile Include="Classi\CostiGesioneCumulativi\NumberType.cs" />
-    <Compile Include="Classi\CostiGesioneCumulativi\ParamRichiesta.cs" />
-    <Compile Include="Classi\CostiGesioneCumulativi\ParentType.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\Richiesta.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\RichiestaIntervento.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\SiteJavaScript.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\StampaSuDisco.cs" />
-    <Compile Include="Classi\CostiGesioneCumulativi\StateType.cs" />
-    <Compile Include="Classi\CostiGesioneCumulativi\TipoManutenzioneType.cs" />
     <Compile Include="Classi\CostiOperativi\CostoAddetti.cs" />
-    <Compile Include="Classi\DismissioneType.cs" />
-    <Compile Include="Classi\ExecuteType.cs" />
     <Compile Include="Classi\Fatturazione\Contabilita.cs" />
     <Compile Include="Classi\Function.cs" />
-    <Compile Include="Classi\Funzione.cs" />
-    <Compile Include="Classi\GestoreDropDownList.cs" />
     <Compile Include="Classi\GiudizioCliente\Giudizio.cs" />
     <Compile Include="Classi\Helper.cs" />
     <Compile Include="Classi\MailSend.cs" />
@@ -316,7 +420,6 @@
     <Compile Include="Classi\ManOrdinaria\GestioneRdl.cs" />
     <Compile Include="Classi\ManOrdinaria\Richiesta.cs" />
     <Compile Include="Classi\ManOrdinaria\RichiestaIntervento.cs" />
-    <Compile Include="Classi\ManOrdinaria\RichiestaPaging.cs" />
     <Compile Include="Classi\ManOrdinaria\Solleciti.cs" />
     <Compile Include="Classi\ManProgrammata\AccorpaRdl.cs" />
     <Compile Include="Classi\ManProgrammata\AssEQ_PMS.cs" />
@@ -336,14 +439,9 @@
     <Compile Include="Classi\ManProgrammata\SfogliaRdlOdlPaging.cs" />
     <Compile Include="Classi\ManStraordinaria\AggiornamentoRdl.cs" />
     <Compile Include="Classi\ManStraordinaria\GestioneRdl.cs" />
-    <Compile Include="Classi\ManStraordinaria\ManCorrettivaPaging.cs" />
-    <Compile Include="Classi\ManStraordinaria\ParamRichiesta.cs" />
-    <Compile Include="Classi\ManStraordinaria\Report.cs" />
     <Compile Include="Classi\ManStraordinaria\Richiesta.cs" />
     <Compile Include="Classi\Menu.cs" />
     <Compile Include="Classi\Navigazione.cs" />
-    <Compile Include="Classi\NumberType.cs" />
-    <Compile Include="Classi\PmpS.cs" />
     <Compile Include="Classi\Progetti.cs" />
     <Compile Include="Classi\ProvinceComuni.cs" />
     <Compile Include="Classi\RptRtf\DatiRtf.cs" />
@@ -356,8 +454,6 @@
     <Compile Include="Classi\SiteModule.cs" />
     <Compile Include="Classi\SoddCliente\KPI.cs" />
     <Compile Include="Classi\SoddCliente\Soddisfato.cs" />
-    <Compile Include="Classi\StateType.cs" />
-    <Compile Include="Classi\TipoManutenzioneType.cs" />
     <Compile Include="Classi\Utente.cs" />
     <Compile Include="CommonPage\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
@@ -403,6 +499,10 @@
       <DependentUpon>ListaStanze.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="CommonPage\ListaStanzeRic.aspx.cs">
+      <DependentUpon>ListaStanzeRic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CommonPage\ListaStdApparecchiature.aspx.cs">
       <DependentUpon>ListaStdApparecchiature.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -417,6 +517,10 @@
     </Compile>
     <Compile Include="CommonPage\RiepilogoReperibilita.aspx.cs">
       <DependentUpon>RiepilogoReperibilita.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommonPage\RiepilogoReperibilita1.aspx.cs">
+      <DependentUpon>RiepilogoReperibilita1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonPage\RiepilogoSolleciti.aspx.cs">
@@ -451,7 +555,6 @@
       <DependentUpon>CostiOperativi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Eccezioni\NoDataForReportFoundException.cs" />
     <Compile Include="Gestione\Addetti.aspx.cs">
       <DependentUpon>Addetti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -568,6 +671,10 @@
       <DependentUpon>EditRepAddetti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Gestione\EditRepAddetti1.aspx.cs">
+      <DependentUpon>EditRepAddetti1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Gestione\EditReparti.aspx.cs">
       <DependentUpon>EditReparti.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -648,10 +755,6 @@
       <DependentUpon>PmpFrequenza.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gestione\PmpIntervalli.aspx.cs">
-      <DependentUpon>PmpIntervalli.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Gestione\PmpS.aspx.cs">
       <DependentUpon>PmpS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -708,6 +811,72 @@
     <Compile Include="GIC\App_Code\DataSetDef\DataSetReport.cs">
       <DependentUpon>DataSetReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GIC\Classi\ParsingViste.cs" />
+    <Compile Include="GIC\Report\AssociaUtenti.aspx.cs">
+      <DependentUpon>AssociaUtenti.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\DefaultReport.aspx.cs">
+      <DependentUpon>DefaultReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\EliminaVista.aspx.cs">
+      <DependentUpon>EliminaVista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\Esporta.aspx.cs">
+      <DependentUpon>Esporta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\ModificaCampo.aspx.cs">
+      <DependentUpon>ModificaCampo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\NuovoSchema.aspx.cs">
+      <DependentUpon>NuovoSchema.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\SelectSchema.aspx.cs">
+      <DependentUpon>SelectSchema.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\UserControl\ConsultazioniDataGrid.ascx.cs">
+      <DependentUpon>ConsultazioniDataGrid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\UserControl\SelezioneQuery.ascx.cs">
+      <DependentUpon>SelezioneQuery.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\UserControl\VisSelCampi.ascx.cs">
+      <DependentUpon>VisSelCampi.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\ValoriCampo.aspx.cs">
+      <DependentUpon>ValoriCampo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GIC\Report\Visualizza.aspx.cs">
+      <DependentUpon>Visualizza.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HelpApplication\App_Code\SiteMenu.cs" />
+    <Compile Include="HelpApplication\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HelpApplication\LeftFrame.aspx.cs">
+      <DependentUpon>LeftFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HelpApplication\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HelpApplication\MainContent.aspx.cs">
+      <DependentUpon>MainContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ManutenzioneCorrettiva\AccorpaRdl.aspx.cs">
       <DependentUpon>AccorpaRdl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -760,10 +929,6 @@
       <DependentUpon>GestioneCompleta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneCorrettiva\ModificaRdl.aspx.cs">
-      <DependentUpon>ModificaRdl.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneCorrettiva\RapportoRichiestaRdl.aspx.cs">
       <DependentUpon>RapportoRichiestaRdl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -794,14 +959,6 @@
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\ReportDettaglioSaldo.aspx.cs">
       <DependentUpon>ReportDettaglioSaldo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\SfogliaRdl.aspx.cs">
-      <DependentUpon>SfogliaRdl.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlComplete.aspx.cs">
-      <DependentUpon>SfogliaRdlComplete.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\SfogliaRdLEliminare.aspx.cs">
@@ -876,10 +1033,6 @@
       <DependentUpon>Associazione_EQ_PMS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManutenzioneProgrammata\Schedula\CopiaPianoEsistente.aspx.cs">
-      <DependentUpon>CopiaPianoEsistente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ManutenzioneProgrammata\Schedula\CreaOttimizzaRDL_MP.aspx.cs">
       <DependentUpon>CreaOttimizzaRDL_MP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -924,10 +1077,20 @@
       <DependentUpon>ReportGestioneSpazi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ReportXls\PaginaProvaClasse.aspx.cs">
+      <DependentUpon>PaginaProvaClasse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Report\Report_Long2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Report_Long.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Report_SGA1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Report_SGA.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\Report_Short1.cs">
@@ -1116,6 +1279,48 @@
       <DependentUpon>SubRptPassi1C.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\{2C4D4A05-0F26-43C2-8441-BD19F9F7D75B}.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>{2C4D4A05-0F26-43C2-8441-BD19F9F7D75B}.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\{31F80D2A-0571-4CA7-A1FB-4342ABD6B706}.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>{31F80D2A-0571-4CA7-A1FB-4342ABD6B706}.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\{449731A6-1EFD-47C8-8B8B-6DD07D070DF5}.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>{449731A6-1EFD-47C8-8B8B-6DD07D070DF5}.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\{4599EB29-6135-4AB5-BA68-E830AF19D7E3}.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>{4599EB29-6135-4AB5-BA68-E830AF19D7E3}.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\{69B889FF-A5D2-4364-B426-BBB6A1486CB5}.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>{69B889FF-A5D2-4364-B426-BBB6A1486CB5}.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\{7EB5546C-59C1-4759-8C94-0BB0B93C340F}.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>{7EB5546C-59C1-4759-8C94-0BB0B93C340F}.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\{8161FDE7-45D4-4AA9-9791-A98A0A3736BA}.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>{8161FDE7-45D4-4AA9-9791-A98A0A3736BA}.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\{9471FF8B-091C-4411-8569-EA6B328E97F7}.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1128,12 +1333,6 @@
       <DependentUpon>{D4421658-1F64-4242-85AD-852E450E969A}.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report\{D73921A7-ADA1-45FF-94FE-C43D8E3A9F92}.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>{D73921A7-ADA1-45FF-94FE-C43D8E3A9F92}.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="RichiesteDati\Autentica.aspx.cs">
       <DependentUpon>Autentica.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1142,9 +1341,7 @@
       <DependentUpon>prova.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SchemiXSD\DsAnalisiStatistiche.cs">
-      <DependentUpon>DsAnalisiStatistiche.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="SchemiXSD\DsAnalisiStatistiche.cs" />
     <Compile Include="SchemiXSD\DsGestioneSpazi.cs">
       <DependentUpon>DsGestioneSpazi.xsd</DependentUpon>
     </Compile>
@@ -1154,8 +1351,14 @@
     <Compile Include="SchemiXSD\dsRapportino.cs">
       <DependentUpon>DSRapportino.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SchemiXSD\DsRptMpLocali.cs">
-      <DependentUpon>DsRptMpLocali.xsd</DependentUpon>
+    <Compile Include="SchemiXSD\DsRptMpLocali.cs" />
+    <Compile Include="SchemiXSD\DSSGA1.cs">
+      <DependentUpon>DSSGA1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SchemiXSD\DSSGA1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSSGA1.xsd</DependentUpon>
     </Compile>
     <Compile Include="SchemiXSD\GestioneMateriali.cs">
       <DependentUpon>GestioneMateriali.xsd</DependentUpon>
@@ -1164,7 +1367,8 @@
       <DependentUpon>ScmReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="SgaRtf\ClRtf.cs" />
-    <Compile Include="SgaRtf\SGA.cs">
+    <Compile Include="SgaRtf\SGA.aspx.cs">
+      <DependentUpon>SGA.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ShedeEq\FiltraApparecchiature.aspx.cs">
@@ -1204,48 +1408,32 @@
     <Compile Include="GIC\App_Code\Datagrid\DatagridControl.cs" />
     <Compile Include="GIC\App_Code\Datagrid\QueryDTControl.cs" />
     <Compile Include="GIC\App_Code\Datagrid\StandardDTControl.cs" />
-    <Compile Include="GIC\Report\ModificaCampo.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GIC\Report\ValoriCampo.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GIC\Report\Visualizza.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="GIC\Report\UserControl\ConsultazioniDataGrid.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="StampaRapportiPdf\Classi\AbstractBase.cs" />
     <Compile Include="StampaRapportiPdf\Classi\AgganciaDatalayer.cs" />
-    <Compile Include="StampaRapportiPdf\Classi\ParentType.cs" />
     <Compile Include="StampaRapportiPdf\Classi\clMyCollection.cs" />
-    <Compile Include="StampaRapportiPdf\Classi\clMyControl.cs" />
     <Compile Include="StampaRapportiPdf\Classi\clMyDataGridCollection.cs" />
-    <Compile Include="StampaRapportiPdf\Classi\NumberType.cs" />
-    <Compile Include="StampaRapportiPdf\Classi\ExecuteType.cs" />
-    <Compile Include="StampaRapportiPdf\Classi\StateType.cs" />
-    <Compile Include="StampaRapportiPdf\Classi\TipoManutenzioneType.cs" />
-    <Compile Include="StampaRapportiPdf\Classi\GestoreDropDownList.cs" />
+    <Compile Include="StampaRapportiPdf\Classi\Site.cs" />
     <Compile Include="StampaRapportiPdf\Classi\SiteJavaScript.cs" />
     <Compile Include="StampaRapportiPdf\Classi\StampaSuDisco.cs" />
-    <Compile Include="StampaRapportiPdf\Pagine\dettaglioFile.cs">
+    <Compile Include="StampaRapportiPdf\logoff.aspx.cs">
+      <DependentUpon>logoff.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="StampaRapportiPdf\Pagine\Pagina_Download.cs">
+    <Compile Include="StampaRapportiPdf\Pagine\dettaglioFile.aspx.cs">
+      <DependentUpon>dettaglioFile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="StampaRapportiPdf\Pagine\Ricerca_e_Stampa.cs">
+    <Compile Include="StampaRapportiPdf\Pagine\Pagina_Download.aspx.cs">
+      <DependentUpon>Pagina_Download.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="StampaRapportiPdf\Pagine\VisualDWF.cs">
+    <Compile Include="StampaRapportiPdf\Pagine\Ricerca_e_Stampa.aspx.cs">
+      <DependentUpon>Ricerca_e_Stampa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="StampaRapportiPdf\Reports\CachedMP_Rapporti_C_MP_long_r6.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="StampaRapportiPdf\Reports\CachedMP_Rapporti_C_MP_r6.cs">
-      <SubType>Component</SubType>
+    <Compile Include="StampaRapportiPdf\Pagine\VisualDWF.aspx.cs">
+      <DependentUpon>VisualDWF.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="StampaRapportiPdf\Reports\MP_Rapporti_C_MP_long_r6.cs">
       <SubType>Component</SubType>
@@ -1265,21 +1453,224 @@
       <DependentUpon>MP_Rapporti_C_MP_r6.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="StampaRapportiPdf\Schemixsd\DatasetReport.cs">
-      <DependentUpon>DatasetReport.xsd</DependentUpon>
-    </Compile>
     <Compile Include="StampaRapportiPdf\Schemixsd\DatasetReport.Designer.cs">
-      <DependentUpon>DatasetReport.xsd</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetReport.xsd</DependentUpon>
     </Compile>
-    <Compile Include="StampaRapportiPdf\WebControls\CalendarPicker.cs">
+    <Compile Include="StampaRapportiPdf\Schemixsd\DatasetReport1.cs" />
+    <Compile Include="StampaRapportiPdf\WebControls\CalendarPicker.ascx.cs">
+      <DependentUpon>CalendarPicker.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="StampaRapportiPdf\WebControls\GridTitle.cs">
+    <Compile Include="StampaRapportiPdf\WebControls\GridTitle.ascx.cs">
+      <DependentUpon>GridTitle.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="StampaRapportiPdf\WebControls\PageTitle.cs">
+    <Compile Include="StampaRapportiPdf\WebControls\PageTitle.ascx.cs">
+      <DependentUpon>PageTitle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\apparecchiature.aspx.cs">
+      <DependentUpon>apparecchiature.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\Apparecchiature\NavigazioneDocumenti.aspx.cs">
+      <DependentUpon>NavigazioneDocumenti.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\Apparecchiature\PageImage.aspx.cs">
+      <DependentUpon>PageImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\Apparecchiature\SchedaApparecchiatura.aspx.cs">
+      <DependentUpon>SchedaApparecchiatura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\Apparecchiature\VisualDWF.aspx.cs">
+      <DependentUpon>VisualDWF.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\App_Code\Servizi.cs" />
+    <Compile Include="webcad\bottomFrame.aspx.cs">
+      <DependentUpon>bottomFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\CAD\CadViewer.aspx.cs">
+      <DependentUpon>CadViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\Classi\AbstractBase.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\AnagrafeDocDWF.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\AnagrafeServizi.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\Apparecchiature.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\Certificati.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\DataRoom.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\DatiApparecchiatura.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\DatiTecnici.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\DatiTecniciApparecchiatura.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\DocDWF.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\Passi.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\SchedaApparecchiatura.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\ServiziEdifici.cs" />
+    <Compile Include="webcad\Classi\AnagrafeImpianti\SeviceDettail.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Addetti.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\AllegatiEQ.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Buildings.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Categorie.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Contab.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Contatti.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Contatti_tipo.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\DestUso.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Ditte.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Eqstd.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Fondi.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Fornitori.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\ListaMateriali.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Livelli.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Motivo_assenza.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\PercentualiStraordinari.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\PianoFerie.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Pmp.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\PmpFrequenza.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\PmpS.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Reparti.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Reperibilita.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Richiedenti.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Richiedenti_tipo.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Settori.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\Stanze.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\TipoIntervento.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\TipologiaDitta.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\TipoManutenzione.cs" />
+    <Compile Include="webcad\Classi\ClassiAnagrafiche\UnitaMisura.cs" />
+    <Compile Include="webcad\Classi\ClassiDettaglio\Edificio.cs" />
+    <Compile Include="webcad\Classi\ClassiDettaglio\Funzione.cs" />
+    <Compile Include="webcad\Classi\ClassiDettaglio\RichiedentiTipo.cs" />
+    <Compile Include="webcad\Classi\ClassiDettaglio\Servizi.cs" />
+    <Compile Include="webcad\Classi\ClassiDettaglio\UnitaMisura.cs" />
+    <Compile Include="webcad\Classi\ClassiDettaglio\Urgenza.cs" />
+    <Compile Include="webcad\Classi\ClassMail.cs" />
+    <Compile Include="webcad\Classi\clMyCollection.cs" />
+    <Compile Include="webcad\Classi\clMyDataGridCollection.cs" />
+    <Compile Include="webcad\Classi\DataGridTemplate\DataGridImageCheckFileTemplate.cs" />
+    <Compile Include="webcad\Classi\DataGridTemplate\DatagridImageCoordTemplate.cs" />
+    <Compile Include="webcad\Classi\DataGridTemplate\DataGridImageTemplate.cs" />
+    <Compile Include="webcad\Classi\DataGridTemplate\DataGridImageTemplate2Par.cs" />
+    <Compile Include="webcad\Classi\DataGridTemplate\DataGridImageTemplate5Par.cs" />
+    <Compile Include="webcad\Classi\DataGridTemplate\DataGridImageTemplate6Par.cs" />
+    <Compile Include="webcad\Classi\DataGridTemplate\DataGridTemplate.cs" />
+    <Compile Include="webcad\Classi\Function.cs" />
+    <Compile Include="webcad\Classi\ManOrdinaria\Richiesta.cs" />
+    <Compile Include="webcad\Classi\Menu.cs" />
+    <Compile Include="webcad\Classi\Navigazione.cs" />
+    <Compile Include="webcad\Classi\NoDataForReportException.cs" />
+    <Compile Include="webcad\Classi\ProvinceComuni.cs" />
+    <Compile Include="webcad\Classi\Ruolo.cs" />
+    <Compile Include="webcad\Classi\Sicurezza.cs" />
+    <Compile Include="webcad\Classi\Site.cs" />
+    <Compile Include="webcad\Classi\SiteJavaScript.cs" />
+    <Compile Include="webcad\Classi\SiteMenu.cs" />
+    <Compile Include="webcad\Classi\SiteModule.cs" />
+    <Compile Include="webcad\Classi\Utente.cs" />
+    <Compile Include="webcad\Classi\WiewCad\Apparecchiature.cs" />
+    <Compile Include="webcad\Classi\WiewCad\Edifici.cs" />
+    <Compile Include="webcad\Classi\WiewCad\IDataGridDinamico.cs" />
+    <Compile Include="webcad\Classi\WiewCad\RiferimentiCad.cs" />
+    <Compile Include="webcad\CommonPage\ListaEdifici.aspx.cs">
+      <DependentUpon>ListaEdifici.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\Edifici\DataRoom.aspx.cs">
+      <DependentUpon>DataRoom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\Edifici\EditBuilding.aspx.cs">
+      <DependentUpon>EditBuilding.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\Edifici\NavigazioneAppDEMO.aspx.cs">
+      <DependentUpon>NavigazioneAppDEMO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\LeftFrame2.aspx.cs">
+      <DependentUpon>LeftFrame2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\ListLink.aspx.cs">
+      <DependentUpon>ListLink.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\RedirectPages\RedirectDettaglioApparecchiatura.aspx.cs">
+      <DependentUpon>RedirectDettaglioApparecchiatura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\RedirectPages\RedirectEqDocumentiAllegati.aspx.cs">
+      <DependentUpon>RedirectEqDocumentiAllegati.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\RedirectPages\RedirectSchedaEq.aspx.cs">
+      <DependentUpon>RedirectSchedaEq.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\StandardApp.aspx.cs">
+      <DependentUpon>StandardApp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\Stanze.aspx.cs">
+      <DependentUpon>Stanze.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\TopFrame.aspx.cs">
+      <DependentUpon>TopFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\WebControls\CalendarPicker.ascx.cs">
+      <DependentUpon>CalendarPicker.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\WebControls\CodiceApparecchiature.ascx.cs">
+      <DependentUpon>CodiceApparecchiature.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\WebControls\CodiceStdApparecchiatura.ascx.cs">
+      <DependentUpon>CodiceStdApparecchiatura.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\WebControls\DataGridRicercaCad.ascx.cs">
+      <DependentUpon>DataGridRicercaCad.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\WebControls\GridTitle.ascx.cs">
+      <DependentUpon>GridTitle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\WebControls\myDropDownList.ascx.cs">
+      <DependentUpon>myDropDownList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\WebControls\PageTitle.ascx.cs">
+      <DependentUpon>PageTitle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\WebControls\RicercaModulo.ascx.cs">
+      <DependentUpon>RicercaModulo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\WebControls\UserStanze.ascx.cs">
+      <DependentUpon>UserStanze.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="webcad\WebControls\WebUserControlTreeView.ascx.cs">
+      <DependentUpon>WebUserControlTreeView.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\Addetti.ascx.cs">
@@ -1324,10 +1715,6 @@
     </Compile>
     <Compile Include="WebControls\CostiManodopera.ascx.cs">
       <DependentUpon>CostiManodopera.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\DataPicker.ascx.cs">
-      <DependentUpon>DataPicker.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebControls\Fascicolo.ascx.cs">
@@ -1409,6 +1796,93 @@
     <Compile Include="XSLT\DIE.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Admin\EditFunzioni.aspx.resx">
+      <DependentUpon>EditFunzioni.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\EditMenu.aspx.resx">
+      <DependentUpon>EditMenu.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\EditRuoli.aspx.resx">
+      <DependentUpon>EditRuoli.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\EditUtenti.aspx.resx">
+      <DependentUpon>EditUtenti.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Funzioni.aspx.resx">
+      <DependentUpon>Funzioni.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Menu.aspx.resx">
+      <DependentUpon>Menu.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Ruoli.aspx.resx">
+      <DependentUpon>Ruoli.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\RuoliEdifici.aspx.resx">
+      <DependentUpon>RuoliEdifici.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\RuoliEdificiServizi.aspx.resx">
+      <DependentUpon>RuoliEdificiServizi.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Utenti.aspx.resx">
+      <DependentUpon>Utenti.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Utenti1.aspx.resx">
+      <DependentUpon>Utenti1.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\DataRoom.aspx.resx">
+      <DependentUpon>DataRoom.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\DatiTecnici.aspx.resx">
+      <DependentUpon>DatiTecnici.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\DocImageGalery.aspx.resx">
+      <DependentUpon>DocImageGalery.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\Eq_DocumentiAllegati.aspx.resx">
+      <DependentUpon>Eq_DocumentiAllegati.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\FullImage.aspx.resx">
+      <DependentUpon>FullImage.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\ListaApparecchiatureServ.aspx.resx">
+      <DependentUpon>ListaApparecchiatureServ.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\ListaDatiApparecchiatura.aspx.resx">
+      <DependentUpon>ListaDatiApparecchiatura.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneApparecchiature.aspx.resx">
+      <DependentUpon>NavigazioneApparecchiature.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneAppDEMO.aspx.resx">
+      <DependentUpon>NavigazioneAppDEMO.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneCertificati.aspx.resx">
+      <DependentUpon>NavigazioneCertificati.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneDocumenti.aspx.resx">
+      <DependentUpon>NavigazioneDocumenti.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\NavigazioneServizi.aspx.resx">
+      <DependentUpon>NavigazioneServizi.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\PageImage.aspx.resx">
+      <DependentUpon>PageImage.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\RichiesteApparecchiatura.aspx.resx">
+      <DependentUpon>RichiesteApparecchiatura.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\SchedaApparecchiatura.aspx.resx">
+      <DependentUpon>SchedaApparecchiatura.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\ServiceDettail.aspx.resx">
+      <DependentUpon>ServiceDettail.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\ServiziEdifici.aspx.resx">
+      <DependentUpon>ServiziEdifici.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnagrafeImpianti\VisualDWF.aspx.resx">
+      <DependentUpon>VisualDWF.aspx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AnalisiStatistiche\chart\Chart.aspx.resx">
       <DependentUpon>Chart.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -1454,7 +1928,6 @@
     <EmbeddedResource Include="AslMobile\CompletamentoUserControl.ascx.resx">
       <DependentUpon>CompletamentoUserControl.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AslMobile\CompletamentoUserControl\ascx.resx" />
     <EmbeddedResource Include="AslMobile\Completamento_MP_WRList.aspx.resx">
       <DependentUpon>Completamento_MP_WRList.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -1486,9 +1959,6 @@
       <DependentUpon>VisualRdl.aspx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="calendar\Calendar.ascx.resx" />
-    <EmbeddedResource Include="calendar\Calendar.resx">
-      <DependentUpon>Calendar.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CommonPage\ChangePassword.aspx.resx">
       <DependentUpon>ChangePassword.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -1595,7 +2065,6 @@
     <EmbeddedResource Include="Gestione\EditAnagrafica.aspx.resx">
       <DependentUpon>EditAnagrafica.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\EditAnagrafica\aspx.resx" />
     <EmbeddedResource Include="Gestione\EditBuilding.aspx.resx">
       <DependentUpon>EditBuilding.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -1711,9 +2180,6 @@
     <EmbeddedResource Include="Gestione\PmpFrequenza.aspx.resx">
       <DependentUpon>PmpFrequenza.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gestione\PmpIntervalli.aspx.resx">
-      <DependentUpon>PmpIntervalli.aspx.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\PmpS.aspx.resx">
       <DependentUpon>PmpS.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -1753,12 +2219,55 @@
     <EmbeddedResource Include="Gestione\UnitaMisura.aspx.resx">
       <DependentUpon>UnitaMisura.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GIC\Report\ModificaCampo.resx" />
-    <EmbeddedResource Include="GIC\Report\UserControl\ConsultazioniDataGrid.resx" />
-    <EmbeddedResource Include="GIC\Report\UserControl\VisSelCampi.resx" />
-    <EmbeddedResource Include="GIC\Report\ValoriCampo.resx" />
-    <EmbeddedResource Include="GIC\Report\Visualizza.resx" />
+    <EmbeddedResource Include="GIC\Report\AssociaUtenti.aspx.resx">
+      <DependentUpon>AssociaUtenti.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\DefaultReport.aspx.resx">
+      <DependentUpon>DefaultReport.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\EliminaVista.aspx.resx">
+      <DependentUpon>EliminaVista.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\Esporta.aspx.resx">
+      <DependentUpon>Esporta.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\ModificaCampo.aspx.resx">
+      <DependentUpon>ModificaCampo.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\NuovoSchema.aspx.resx">
+      <DependentUpon>NuovoSchema.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\SelectSchema.aspx.resx">
+      <DependentUpon>SelectSchema.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\UserControl\ConsultazioniDataGrid.ascx.resx">
+      <DependentUpon>ConsultazioniDataGrid.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\UserControl\SelezioneQuery.ascx.resx">
+      <DependentUpon>SelezioneQuery.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\UserControl\VisSelCampi.ascx.resx">
+      <DependentUpon>VisSelCampi.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\ValoriCampo.aspx.resx">
+      <DependentUpon>ValoriCampo.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GIC\Report\Visualizza.aspx.resx">
+      <DependentUpon>Visualizza.aspx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Global.asax.resx" />
+    <EmbeddedResource Include="HelpApplication\Default.aspx.resx">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelpApplication\LeftFrame.aspx.resx">
+      <DependentUpon>LeftFrame.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelpApplication\Login.aspx.resx">
+      <DependentUpon>Login.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelpApplication\MainContent.aspx.resx">
+      <DependentUpon>MainContent.aspx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LeftFrame.aspx.resx" />
     <EmbeddedResource Include="Login.aspx.resx" />
     <EmbeddedResource Include="LoginMobile.aspx.resx" />
@@ -1814,9 +2323,6 @@
       <DependentUpon>GestioneCompleta.aspx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\GestioneCompleta1.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\ModificaRdl.aspx.resx">
-      <DependentUpon>ModificaRdl.aspx.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\RapportoRichiestaRdl.aspx.resx">
       <DependentUpon>RapportoRichiestaRdl.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -1844,12 +2350,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaDieSga.aspx.resx" />
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaDoc.aspx.resx" />
-    <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdl.aspx.resx">
-      <DependentUpon>SfogliaRdl.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdlComplete.aspx.resx">
-      <DependentUpon>SfogliaRdlComplete.aspx.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaRdLEliminare.aspx.resx">
       <DependentUpon>SfogliaRdLEliminare.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -1887,7 +2387,6 @@
     <EmbeddedResource Include="ManutenzioneProgrammata\CreaPianoMP.aspx.resx">
       <DependentUpon>CreaPianoMP.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\CreaPianoMP\aspx.resx" />
     <EmbeddedResource Include="ManutenzioneProgrammata\DettPianoAnnuale.aspx.resx">
       <DependentUpon>DettPianoAnnuale.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -1915,9 +2414,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\Associazione_EQ_PMS.aspx.resx">
       <DependentUpon>Associazione_EQ_PMS.aspx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\CopiaPianoEsistente.aspx.resx">
-      <DependentUpon>CopiaPianoEsistente.aspx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneProgrammata\Schedula\CreaOttimizzaRDL_MP.aspx.resx">
       <DependentUpon>CreaOttimizzaRDL_MP.aspx.cs</DependentUpon>
@@ -1958,6 +2454,10 @@
     <EmbeddedResource Include="Report\Report_Long.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Report_Long2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Report_SGA.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Report_SGA1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Short.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -2083,6 +2583,34 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SubRptPassi1C1.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\{2C4D4A05-0F26-43C2-8441-BD19F9F7D75B}.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>{2C4D4A05-0F26-43C2-8441-BD19F9F7D75B}.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\{31F80D2A-0571-4CA7-A1FB-4342ABD6B706}.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>{31F80D2A-0571-4CA7-A1FB-4342ABD6B706}.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\{449731A6-1EFD-47C8-8B8B-6DD07D070DF5}.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>{449731A6-1EFD-47C8-8B8B-6DD07D070DF5}.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\{4599EB29-6135-4AB5-BA68-E830AF19D7E3}.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>{4599EB29-6135-4AB5-BA68-E830AF19D7E3}.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\{69B889FF-A5D2-4364-B426-BBB6A1486CB5}.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>{69B889FF-A5D2-4364-B426-BBB6A1486CB5}.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\{7EB5546C-59C1-4759-8C94-0BB0B93C340F}.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>{7EB5546C-59C1-4759-8C94-0BB0B93C340F}.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\{8161FDE7-45D4-4AA9-9791-A98A0A3736BA}.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>{8161FDE7-45D4-4AA9-9791-A98A0A3736BA}.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\{9471FF8B-091C-4411-8569-EA6B328E97F7}.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>{9471FF8B-091C-4411-8569-EA6B328E97F7}.cs</LastGenOutput>
@@ -2091,10 +2619,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>{D4421658-1F64-4242-85AD-852E450E969A}.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\{D73921A7-ADA1-45FF-94FE-C43D8E3A9F92}.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>{D73921A7-ADA1-45FF-94FE-C43D8E3A9F92}.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="RichiesteDati\Autentica.aspx.resx">
       <DependentUpon>Autentica.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -2102,9 +2626,6 @@
       <DependentUpon>prova.aspx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SgaRtf\SGA.aspx.resx" />
-    <EmbeddedResource Include="SgaRtf\SGA.resx">
-      <DependentUpon>SGA.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ShedeEq\FiltraApparecchiature.aspx.resx">
       <DependentUpon>FiltraApparecchiature.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -2130,10 +2651,21 @@
     <EmbeddedResource Include="SoddisfazioneCliente\ReportGiudizioCliente.aspx.resx">
       <DependentUpon>ReportGiudizioCliente.aspx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StampaRapportiPdf\Pagine\dettaglioFile.resx" />
-    <EmbeddedResource Include="StampaRapportiPdf\Pagine\Pagina_Download.resx" />
-    <EmbeddedResource Include="StampaRapportiPdf\Pagine\Ricerca_e_Stampa.resx" />
-    <EmbeddedResource Include="StampaRapportiPdf\Pagine\VisualDWF.resx" />
+    <EmbeddedResource Include="StampaRapportiPdf\logoff.aspx.resx">
+      <DependentUpon>logoff.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StampaRapportiPdf\Pagine\dettaglioFile.aspx.resx">
+      <DependentUpon>dettaglioFile.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StampaRapportiPdf\Pagine\Pagina_Download.aspx.resx">
+      <DependentUpon>Pagina_Download.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StampaRapportiPdf\Pagine\Ricerca_e_Stampa.aspx.resx">
+      <DependentUpon>Ricerca_e_Stampa.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StampaRapportiPdf\Pagine\VisualDWF.aspx.resx">
+      <DependentUpon>VisualDWF.aspx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StampaRapportiPdf\Reports\MP_Rapporti_C_MP_long_r6.resx">
       <DependentUpon>MP_Rapporti_C_MP_long_r6.cs</DependentUpon>
     </EmbeddedResource>
@@ -2145,9 +2677,108 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>MP_Rapporti_C_MP_r61.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="StampaRapportiPdf\WebControls\CalendarPicker.resx" />
-    <EmbeddedResource Include="StampaRapportiPdf\WebControls\GridTitle.resx" />
-    <EmbeddedResource Include="StampaRapportiPdf\WebControls\PageTitle.resx" />
+    <EmbeddedResource Include="StampaRapportiPdf\WebControls\CalendarPicker.ascx.resx">
+      <DependentUpon>CalendarPicker.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StampaRapportiPdf\WebControls\GridTitle.ascx.resx">
+      <DependentUpon>GridTitle.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StampaRapportiPdf\WebControls\PageTitle.ascx.resx">
+      <DependentUpon>PageTitle.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\apparecchiature.aspx.resx">
+      <DependentUpon>apparecchiature.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\Apparecchiature\NavigazioneDocumenti.aspx.resx">
+      <DependentUpon>NavigazioneDocumenti.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\Apparecchiature\PageImage.aspx.resx">
+      <DependentUpon>PageImage.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\Apparecchiature\SchedaApparecchiatura.aspx.resx">
+      <DependentUpon>SchedaApparecchiatura.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\Apparecchiature\VisualDWF.aspx.resx">
+      <DependentUpon>VisualDWF.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\bottomFrame.aspx.resx">
+      <DependentUpon>bottomFrame.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\CAD\CadViewer.aspx.resx">
+      <DependentUpon>CadViewer.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\CommonPage\ListaEdifici.aspx.resx">
+      <DependentUpon>ListaEdifici.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\Default.aspx.resx">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\Edifici\DataRoom.aspx.resx">
+      <DependentUpon>DataRoom.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\Edifici\EditBuilding.aspx.resx">
+      <DependentUpon>EditBuilding.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\Edifici\NavigazioneAppDEMO.aspx.resx">
+      <DependentUpon>NavigazioneAppDEMO.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\ErrorPage.aspx.resx">
+      <DependentUpon>ErrorPage.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\LeftFrame2.aspx.resx">
+      <DependentUpon>LeftFrame2.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\ListLink.aspx.resx">
+      <DependentUpon>ListLink.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\RedirectPages\RedirectDettaglioApparecchiatura.aspx.resx">
+      <DependentUpon>RedirectDettaglioApparecchiatura.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\RedirectPages\RedirectEqDocumentiAllegati.aspx.resx">
+      <DependentUpon>RedirectEqDocumentiAllegati.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\RedirectPages\RedirectSchedaEq.aspx.resx">
+      <DependentUpon>RedirectSchedaEq.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\StandardApp.aspx.resx">
+      <DependentUpon>StandardApp.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\Stanze.aspx.resx">
+      <DependentUpon>Stanze.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\TopFrame.aspx.resx">
+      <DependentUpon>TopFrame.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\WebControls\CalendarPicker.ascx.resx">
+      <DependentUpon>CalendarPicker.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\WebControls\CodiceApparecchiature.ascx.resx">
+      <DependentUpon>CodiceApparecchiature.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\WebControls\CodiceStdApparecchiatura.ascx.resx">
+      <DependentUpon>CodiceStdApparecchiatura.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\WebControls\DataGridRicercaCad.ascx.resx">
+      <DependentUpon>DataGridRicercaCad.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\WebControls\GridTitle.ascx.resx">
+      <DependentUpon>GridTitle.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\WebControls\myDropDownList.ascx.resx">
+      <DependentUpon>myDropDownList.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\WebControls\PageTitle.ascx.resx">
+      <DependentUpon>PageTitle.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\WebControls\RicercaModulo.ascx.resx">
+      <DependentUpon>RicercaModulo.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\WebControls\UserStanze.ascx.resx">
+      <DependentUpon>UserStanze.ascx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="webcad\WebControls\WebUserControlTreeView.ascx.resx">
+      <DependentUpon>WebUserControlTreeView.ascx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\Addetti.ascx.resx">
       <DependentUpon>Addetti.ascx.cs</DependentUpon>
     </EmbeddedResource>
@@ -2181,9 +2812,6 @@
     <EmbeddedResource Include="WebControls\CostiManodopera.ascx.resx">
       <DependentUpon>CostiManodopera.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\DataPicker.ascx.resx">
-      <DependentUpon>DataPicker.ascx.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WebControls\Fascicolo.ascx.resx">
       <DependentUpon>Fascicolo.ascx.cs</DependentUpon>
     </EmbeddedResource>
@@ -2193,7 +2821,6 @@
     <EmbeddedResource Include="WebControls\GridTitleServer.ascx.resx">
       <DependentUpon>GridTitleServer.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\GridTitleServer\ascx.resx" />
     <EmbeddedResource Include="WebControls\materiali.ascx.resx">
       <DependentUpon>materiali.ascx.cs</DependentUpon>
     </EmbeddedResource>
@@ -2206,11 +2833,9 @@
     <EmbeddedResource Include="WebControls\RicercaModulo.ascx.resx">
       <DependentUpon>RicercaModulo.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\RicercaModulo\ascx.resx" />
     <EmbeddedResource Include="WebControls\RicercaRDL.ascx.resx">
       <DependentUpon>RicercaRDL.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\RicercaRDL\ascx.resx" />
     <EmbeddedResource Include="WebControls\Richiedenti.ascx.resx">
       <DependentUpon>Richiedenti.ascx.cs</DependentUpon>
     </EmbeddedResource>
@@ -2229,14 +2854,12 @@
     <EmbeddedResource Include="WebControls\UserPmp.ascx.resx">
       <DependentUpon>UserPmp.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\UserPmp\ascx.resx" />
     <EmbeddedResource Include="WebControls\UserRdlInail.ascx.resx">
       <DependentUpon>UserRdlInail.ascx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebControls\UserRdlInailLabel.ascx.resx">
       <DependentUpon>UserRdlInailLabel.ascx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WebControls\UserRdlInail\ascx.resx" />
     <EmbeddedResource Include="WebControls\UserStanze.ascx.resx">
       <DependentUpon>UserStanze.ascx.cs</DependentUpon>
     </EmbeddedResource>
@@ -2266,6 +2889,35 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\EditFunzioni.aspx" />
+    <Content Include="Admin\EditMenu.aspx" />
+    <Content Include="Admin\EditRuoli.aspx" />
+    <Content Include="Admin\EditUtenti.aspx" />
+    <Content Include="Admin\Funzioni.aspx" />
+    <Content Include="Admin\Menu.aspx" />
+    <Content Include="Admin\Ruoli.aspx" />
+    <Content Include="Admin\RuoliEdifici.aspx" />
+    <Content Include="Admin\RuoliEdificiServizi.aspx" />
+    <Content Include="Admin\Utenti.aspx" />
+    <Content Include="Admin\Utenti1.aspx" />
+    <Content Include="AnagrafeImpianti\DataRoom.aspx" />
+    <Content Include="AnagrafeImpianti\DatiTecnici.aspx" />
+    <Content Include="AnagrafeImpianti\DocImageGalery.aspx" />
+    <Content Include="AnagrafeImpianti\Eq_DocumentiAllegati.aspx" />
+    <Content Include="AnagrafeImpianti\FullImage.aspx" />
+    <Content Include="AnagrafeImpianti\ListaApparecchiatureServ.aspx" />
+    <Content Include="AnagrafeImpianti\ListaDatiApparecchiatura.aspx" />
+    <Content Include="AnagrafeImpianti\NavigazioneApparecchiature.aspx" />
+    <Content Include="AnagrafeImpianti\NavigazioneAppDEMO.aspx" />
+    <Content Include="AnagrafeImpianti\NavigazioneCertificati.aspx" />
+    <Content Include="AnagrafeImpianti\NavigazioneDocumenti.aspx" />
+    <Content Include="AnagrafeImpianti\NavigazioneServizi.aspx" />
+    <Content Include="AnagrafeImpianti\PageImage.aspx" />
+    <Content Include="AnagrafeImpianti\RichiesteApparecchiatura.aspx" />
+    <Content Include="AnagrafeImpianti\SchedaApparecchiatura.aspx" />
+    <Content Include="AnagrafeImpianti\ServiceDettail.aspx" />
+    <Content Include="AnagrafeImpianti\ServiziEdifici.aspx" />
+    <Content Include="AnagrafeImpianti\VisualDWF.aspx" />
     <Content Include="AnalisiStatistiche\chart\Chart.aspx" />
     <Content Include="AnalisiStatistiche\chart\GraficiLV.aspx" />
     <Content Include="AnalisiStatistiche\chart\Pagine\demo.aspx" />
@@ -2290,8 +2942,6 @@
     <Content Include="AslMobile\images\edit.gif" />
     <Content Include="AslMobile\images\giallo.GIF" />
     <Content Include="AslMobile\images\gnome-fs-home.gif" />
-    <Content Include="AslMobile\images\head.jpg" />
-    <Content Include="AslMobile\images\logo2.jpg" />
     <Content Include="AslMobile\images\Nota1.gif" />
     <Content Include="AslMobile\images\Nota2.gif" />
     <Content Include="AslMobile\images\Nota3.gif" />
@@ -2344,15 +2994,11 @@
     <Content Include="Css\DataPanelTest.css" />
     <Content Include="Css\MainSheet.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Doc_DB\MA-F\120404\pad.f p.t..jpg" />
+    <Content Include="Doc_DB\MA-F\120405\pad.f 1°p.jpg" />
     <Content Include="email.xslt" />
     <Content Include="emailcreazione.xslt" />
-    <Content Include="Errore\errore.html" />
-    <Content Include="Errore\image001.jpg" />
-    <Content Include="Errore\image001_old.jpg" />
-    <Content Include="Errore\image001_old1.jpg" />
-    <Content Include="Errore\Sir-Messaggio-errore.jpg" />
     <Content Include="ErrorPage.aspx" />
-    <Content Include="FileWebStat\statisticheWeb_Anno_2020_Week_41.txt" />
     <Content Include="Gestione\Addetti.aspx" />
     <Content Include="Gestione\Buildings.aspx" />
     <Content Include="Gestione\Categorie.aspx" />
@@ -2403,7 +3049,6 @@
     <Content Include="Gestione\PianoFerie.aspx" />
     <Content Include="Gestione\Pmp.aspx" />
     <Content Include="Gestione\PmpFrequenza.aspx" />
-    <Content Include="Gestione\PmpIntervalli.aspx" />
     <Content Include="Gestione\PmpS.aspx" />
     <Content Include="Gestione\RepAddetti.aspx" />
     <Content Include="Gestione\Reparti.aspx" />
@@ -2417,7 +3062,375 @@
     <Content Include="Gestione\TipologiaDitta.aspx" />
     <Content Include="Gestione\TipoManutenzione.aspx" />
     <Content Include="Gestione\UnitaMisura.aspx" />
+    <Content Include="GIC\Image\bmp.gif" />
+    <Content Include="GIC\Image\body_bg.gif" />
+    <Content Include="GIC\Image\buttonBg.gif" />
+    <Content Include="GIC\Image\edit.gif" />
+    <Content Include="GIC\Image\elimina.gif" />
+    <Content Include="GIC\Image\eye.gif" />
+    <Content Include="GIC\Image\forward.png" />
+    <Content Include="GIC\Image\freccia_bianco_open.gif" />
+    <Content Include="GIC\Image\Freccia_Piccolo.gif" />
+    <Content Include="GIC\Image\freccia_rosso_open.gif" />
+    <Content Include="GIC\Image\gif.gif" />
+    <Content Include="GIC\Image\go.gif" />
+    <Content Include="GIC\Image\ico-crescente.gif" />
+    <Content Include="GIC\Image\ico-decrescente.gif" />
+    <Content Include="GIC\Image\ico-dimensione.gif" />
+    <Content Include="GIC\Image\ico-filtro.gif" />
+    <Content Include="GIC\Image\ico-fx.gif" />
+    <Content Include="GIC\Image\ico-misura.gif" />
+    <Content Include="GIC\Image\ico-opzioni.gif" />
+    <Content Include="GIC\Image\ico-selezione.gif" />
+    <Content Include="GIC\Image\ico-selezioneold.gif" />
+    <Content Include="GIC\Image\ico-vuota.GIF" />
+    <Content Include="GIC\Image\Icon1.ico" />
+    <Content Include="GIC\Image\jpg.gif" />
+    <Content Include="GIC\Image\main_mini.gif" />
+    <Content Include="GIC\Image\main_mini_business.gif" />
+    <Content Include="GIC\Image\main_mini_dir.gif" />
+    <Content Include="GIC\Image\main_mini_macro.gif" />
+    <Content Include="GIC\Image\main_mini_piramidi.gif" />
+    <Content Include="GIC\Image\main_mini_pro.gif" />
+    <Content Include="GIC\Image\main_mini_servizi.gif" />
+    <Content Include="GIC\Image\printer.gif" />
+    <Content Include="GIC\Image\rettangolo_bianco_open.gif" />
+    <Content Include="GIC\Image\rettangolo_blue_open.gif" />
+    <Content Include="GIC\Image\Rettangolo_Piccolo.gif" />
+    <Content Include="GIC\Image\Search.JPG" />
+    <Content Include="GIC\Image\top_z.gif" />
+    <Content Include="GIC\Image\top_z.jpg" />
+    <Content Include="GIC\Image\top_zbg.jpg" />
+    <Content Include="GIC\Image\triangolo_centro_open.gif" />
+    <Content Include="GIC\Image\triangolo_inibito_open.gif" />
+    <Content Include="GIC\Image\Triangolo_Piccolo.gif" />
+    <Content Include="GIC\Image\triangolo_rosso_open.gif" />
+    <Content Include="GIC\Image\triangolo_verde_open.gif" />
+    <Content Include="GIC\imgFunz\annulla.gif" />
+    <Content Include="GIC\imgFunz\cancel.gif" />
+    <Content Include="GIC\imgFunz\CentroCosti.gif" />
+    <Content Include="GIC\imgFunz\Driver.gif" />
+    <Content Include="GIC\imgFunz\edit.gif" />
+    <Content Include="GIC\imgFunz\freccia_dx_macro.gif" />
+    <Content Include="GIC\imgFunz\freccia_dx_piramide.gif" />
+    <Content Include="GIC\imgFunz\freccia_dx_servizi.gif" />
+    <Content Include="GIC\imgFunz\freccia_giu_1.gif" />
+    <Content Include="GIC\imgFunz\freccia_giu_2.gif" />
+    <Content Include="GIC\imgFunz\freccia_giu_3.gif" />
+    <Content Include="GIC\imgFunz\freccia_giu_4.gif" />
+    <Content Include="GIC\imgFunz\freccia_su_4.gif" />
+    <Content Include="GIC\imgFunz\freccia_su_direzioni.gif" />
+    <Content Include="GIC\imgFunz\freccia_sx_macro.gif" />
+    <Content Include="GIC\imgFunz\freccia_sx_piramide.gif" />
+    <Content Include="GIC\imgFunz\freccia_sx_servizi.gif" />
+    <Content Include="GIC\imgFunz\ok.gif" />
+    <Content Include="GIC\imgFunz\Ordini.gif" />
+    <Content Include="GIC\imgFunz\Relazioni.gif" />
+    <Content Include="GIC\imgFunz\salva.gif" />
+    <Content Include="GIC\Report\AssociaUtenti.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="GIC\Report\DefaultReport.aspx" />
+    <Content Include="GIC\Report\EliminaVista.aspx" />
+    <Content Include="GIC\Report\Esporta.aspx" />
+    <Content Include="GIC\Report\ModificaCampo.aspx" />
+    <Content Include="GIC\Report\NuovoSchema.aspx" />
+    <Content Include="GIC\Report\SelectSchema.aspx" />
+    <Content Include="GIC\Report\UserControl\ConsultazioniDataGrid.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="GIC\Report\UserControl\SelezioneQuery.ascx" />
+    <Content Include="GIC\Report\UserControl\VisSelCampi.ascx" />
+    <Content Include="GIC\Report\ValoriCampo.aspx" />
+    <Content Include="GIC\Report\Visualizza.aspx" />
+    <Content Include="GIC\style\StyleSheetReport.css" />
     <Content Include="Global.asax" />
+    <Content Include="HelpApplication\Default.aspx" />
+    <Content Include="HelpApplication\Help\Admin\Funzioni.htm" />
+    <Content Include="HelpApplication\Help\Admin\Menu.htm" />
+    <Content Include="HelpApplication\Help\Admin\Ruoli.htm" />
+    <Content Include="HelpApplication\Help\Admin\Ruoli_file\image005.gif" />
+    <Content Include="HelpApplication\Help\Admin\Utenti.htm" />
+    <Content Include="HelpApplication\Help\Admin\Utenti_file\image005.gif" />
+    <Content Include="HelpApplication\Help\AnagrafeImpianti\DataRoom.htm" />
+    <Content Include="HelpApplication\Help\AnagrafeImpianti\DataRoom_file\image001.png" />
+    <Content Include="HelpApplication\Help\AnagrafeImpianti\DataRoom_file\image003.png" />
+    <Content Include="HelpApplication\Help\AnagrafeImpianti\NavigazioneApparecchiature.htm" />
+    <Content Include="HelpApplication\Help\AnagrafeImpianti\NavigazioneCertificati.htm" />
+    <Content Include="HelpApplication\Help\AnagrafeImpianti\NavigazioneDocumenti.htm" />
+    <Content Include="HelpApplication\Help\AnagrafeImpianti\NavigazioneServizi.htm" />
+    <Content Include="HelpApplication\Help\AnalisiStatistiche\chart\GraficiLV.htm" />
+    <Content Include="HelpApplication\Help\AnalisiStatistiche\GraficiGiudizio.htm" />
+    <Content Include="HelpApplication\Help\AnalisiStatistiche\GraficiMop.htm" />
+    <Content Include="HelpApplication\Help\AnalisiStatistiche\GraficiMor.htm" />
+    <Content Include="HelpApplication\Help\CommonPage\ChangePassword.htm" />
+    <Content Include="HelpApplication\Help\Contabilita\InserimentoFattura.htm" />
+    <Content Include="HelpApplication\Help\Contabilita\InserimentoFattura_file\image003.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\InserimentoFattura_file\image005.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\InserimentoFattura_file\image006.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\InserimentoFattura_file\image007.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture.htm" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image001.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image002.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image003.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image004.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image005.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image006.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image008.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image009.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image011.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image013.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image014.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image015.gif" />
+    <Content Include="HelpApplication\Help\Contabilita\SfogliaFatture_file\image016.gif" />
+    <Content Include="HelpApplication\Help\CostiGesioneCumulativi\AnalisiCostiOperativiDiGestioneCumulativo.htm" />
+    <Content Include="HelpApplication\Help\Files\CreazioneRdl.Html" />
+    <Content Include="HelpApplication\Help\Files\Ditte.html" />
+    <Content Include="HelpApplication\Help\Files\Servizi.html" />
+    <Content Include="HelpApplication\Help\Files\TipoManutezione.Html" />
+    <Content Include="HelpApplication\Help\Files\TipoRichiedenti.Html" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Addetti.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Addetti_file\image005.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrApparecchiature.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrApparecchiature_file\image012.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrApparecchiature_file\image014.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrApparecchiature_file\image015.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrApparecchiature_file\image016.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrDocumenti.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrDocumenti_file\image003.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrDocumenti_file\image005.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrDocumenti_file\image007.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrMateriali.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\AnagrMateriali_file\image010.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Contabilizzazione.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Contabilizzazione_file\image010.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Ditte.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Ditte_file\image013.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Edifici.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Edifici_file\image007.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Fondi.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Fondi_file\image011.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Fornitori.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Fornitori_file\image011.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Frequenze.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Frequenze_file\image006.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Livelli.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Livelli_file\image010.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\PercentStraordinari.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\PercentStraordinari_file\image011.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\ProcedManutenzione.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\ProcedManutenzione_file\image019.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\ReperAddetti.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\ReperAddetti_file\image010.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\ReperAddetti_file\image012.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Richiedenti.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Servizi.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Servizi_file\image011.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Settori.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Settori_file\image011.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Specializzazioni.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\Specializzazioni_file\image006.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\StdApparecchiature.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\StdApparecchiature_file\image011.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\TipoIntervento.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\TipoIntervento_file\image005.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\TipologiaDitte.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\TipologiaDitte_file\image011.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\TipoManutenzione.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\TipoManutenzione_file\image005.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\TipoManutenzione_file\image008.gif" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\TipoRichiedenti.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\UnitàMisura.htm" />
+    <Content Include="HelpApplication\Help\GestioneAnagrafiche\UnitàMisura_file\image010.gif" />
+    <Content Include="HelpApplication\Help\GestionePassword\Cambio.htm" />
+    <Content Include="HelpApplication\Help\GestioneSpazi\RicercaSpazi.htm" />
+    <Content Include="HelpApplication\Help\GestioneUtentiRuoli\Funzioni.htm" />
+    <Content Include="HelpApplication\Help\GestioneUtentiRuoli\Menu.htm" />
+    <Content Include="HelpApplication\Help\GestioneUtentiRuoli\Ruoli.htm" />
+    <Content Include="HelpApplication\Help\GestioneUtentiRuoli\Ruoli_file\image005.gif" />
+    <Content Include="HelpApplication\Help\GestioneUtentiRuoli\Utenti.htm" />
+    <Content Include="HelpApplication\Help\GestioneUtentiRuoli\Utenti_file\image005.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Addetti.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Addetti_file\image005.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Buildings.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Buildings_file\image006.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Categorie.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Contab.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Contab_file\image009.gif" />
+    <Content Include="HelpApplication\Help\Gestione\DestUso.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Ditte.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Ditte_file\image011.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Enti.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Enti_file\image009.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Eqstd.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Eqstd_file\image009.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Fondi.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Fondi_file\image008.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Fornitori.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Fornitori_file\filelist.xml" />
+    <Content Include="HelpApplication\Help\Gestione\Fornitori_file\image004.png" />
+    <Content Include="HelpApplication\Help\Gestione\Fornitori_file\image007.png" />
+    <Content Include="HelpApplication\Help\Gestione\Fornitori_file\image009.png" />
+    <Content Include="HelpApplication\Help\Gestione\Fornitori_file\image011.png" />
+    <Content Include="HelpApplication\Help\Gestione\Fornitori_file\image013.gif" />
+    <Content Include="HelpApplication\Help\Gestione\LetturaContatori.htm" />
+    <Content Include="HelpApplication\Help\Gestione\ListaApparecchiature.htm" />
+    <Content Include="HelpApplication\Help\Gestione\ListaApparecchiature_file\image011.gif" />
+    <Content Include="HelpApplication\Help\Gestione\ListaDoc_Dwf.htm" />
+    <Content Include="HelpApplication\Help\Gestione\ListaMateriali.htm" />
+    <Content Include="HelpApplication\Help\Gestione\ListaMateriali_file\filelist.xml" />
+    <Content Include="HelpApplication\Help\Gestione\ListaMateriali_file\image001.png" />
+    <Content Include="HelpApplication\Help\Gestione\ListaMateriali_file\image004.png" />
+    <Content Include="HelpApplication\Help\Gestione\ListaMateriali_file\image008.png" />
+    <Content Include="HelpApplication\Help\Gestione\ListaMateriali_file\image010.png" />
+    <Content Include="HelpApplication\Help\Gestione\ListaMateriali_file\image012.png" />
+    <Content Include="HelpApplication\Help\Gestione\ListaMateriali_file\image014.gif" />
+    <Content Include="HelpApplication\Help\Gestione\ListaMateriali_file\image015.png" />
+    <Content Include="HelpApplication\Help\Gestione\ListaMateriali_file\image017.png" />
+    <Content Include="HelpApplication\Help\Gestione\Livelli.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Livelli_file\image009.gif" />
+    <Content Include="HelpApplication\Help\Gestione\PercentualiStraordinari.htm" />
+    <Content Include="HelpApplication\Help\Gestione\PercentualiStraordinari_file\image009.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Pmp.htm" />
+    <Content Include="HelpApplication\Help\Gestione\PmpFrequenza.htm" />
+    <Content Include="HelpApplication\Help\Gestione\PmpFrequenza_file\image005.gif" />
+    <Content Include="HelpApplication\Help\Gestione\ProcedManutenzione_file\image019.gif" />
+    <Content Include="HelpApplication\Help\Gestione\RepAddetti.htm" />
+    <Content Include="HelpApplication\Help\Gestione\RepAddetti_file\image009.gif" />
+    <Content Include="HelpApplication\Help\Gestione\RepAddetti_file\image011.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Reparti.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Richiedenti.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Richiedenti_tipo.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Servizi.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Servizi_file\image009.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Settori.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Settori_file\image009.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Specializzazioni.htm" />
+    <Content Include="HelpApplication\Help\Gestione\Specializzazioni_file\image005.gif" />
+    <Content Include="HelpApplication\Help\Gestione\TipoIntervento.htm" />
+    <Content Include="HelpApplication\Help\Gestione\TipoIntervento_file\image005.gif" />
+    <Content Include="HelpApplication\Help\Gestione\Tipologia Ditta_file\image009.gif" />
+    <Content Include="HelpApplication\Help\Gestione\TipologiaDitta.htm" />
+    <Content Include="HelpApplication\Help\Gestione\TipoManutenzione.htm" />
+    <Content Include="HelpApplication\Help\Gestione\TipoManutenzione_file\image005.gif" />
+    <Content Include="HelpApplication\Help\Gestione\TipoManutenzione_file\image008.gif" />
+    <Content Include="HelpApplication\Help\Gestione\UnitaMisura.htm" />
+    <Content Include="HelpApplication\Help\Gestione\UnitaMisura_file\image009.gif" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AccorpaRdLsuRichiesta.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AccorpaRdLsuRichiesta_file\image003.gif" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\filelist.xml" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\image001.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\image003.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\image006.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\image008.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\image011.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\image015.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\image017.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\image019.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\image021.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiMateriali_file\image025.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiOperativiDiGestione.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiRdL.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiRdLCorrettiva.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\Approva ed Emetti Rdl.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\ApprovaRdl.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\ApprovaRdl_file\image010.gif" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\Creazione RdL.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\CreazioneRdL.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\GestioneCompleta.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\Report.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\SfogliaRdL.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneCorrettiva\SfogliaRdlEliminare.htm" />
+    <Content Include="HelpApplication\Help\ManutenzionePreventiva\PianoAnnuale.htm" />
+    <Content Include="HelpApplication\Help\ManutenzionePreventiva\RappProcedPassi.htm" />
+    <Content Include="HelpApplication\Help\ManutenzionePreventiva\RappProcedPassi_file\filelist.xml" />
+    <Content Include="HelpApplication\Help\ManutenzionePreventiva\RappProcedPassi_file\image001.png" />
+    <Content Include="HelpApplication\Help\ManutenzionePreventiva\RappProcedPassi_file\image003.png" />
+    <Content Include="HelpApplication\Help\ManutenzionePreventiva\RappProcedPassi_file\image007.png" />
+    <Content Include="HelpApplication\Help\ManutenzionePreventiva\RappProcedPassi_file\image010.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneProgrammata\CompletamentoMP.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneProgrammata\PianoAnnuale.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneProgrammata\ProcedurePassi.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneProgrammata\Schedulazione.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneProgrammata\Schedula\Rapportino.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneProgrammata\SfogliaOdLRdl.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneProgrammata\SfogliaRdLOdL_file\filelist.xml" />
+    <Content Include="HelpApplication\Help\ManutenzioneProgrammata\SfogliaRdLOdL_file\image001.png" />
+    <Content Include="HelpApplication\Help\ManutenzioneRichiesta\AccorpaRdLsuRichiesta.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneRichiesta\AccorpaRdLsuRichiesta_file\image003.gif" />
+    <Content Include="HelpApplication\Help\ManutenzioneRichiesta\AnalisiRdLCorrettiva.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneRichiesta\Approva ed Emetti Rdl.htm" />
+    <Content Include="HelpApplication\Help\ManutenzioneRichiesta\SfogliaRdL.htm" />
+    <Content Include="HelpApplication\Help\ReportAnalisi\AnalisiLivellidiServizio.htm" />
+    <Content Include="HelpApplication\Help\ReportAnalisi\GraficiMAC.htm" />
+    <Content Include="HelpApplication\Help\ReportAnalisi\GraficiMS.htm" />
+    <Content Include="HelpApplication\Help\ReportAnalisi\GraficoGiudizio.htm" />
+    <Content Include="HelpApplication\Help\ReportGestioneSpazi\ReportGestioneSpazi.htm" />
+    <Content Include="HelpApplication\Help\ShedeEq\FiltraApparecchiature.htm" />
+    <Content Include="HelpApplication\Help\SoddisfazioneCliente\Giudizio a Freddo_file\image010.gif" />
+    <Content Include="HelpApplication\Help\SoddisfazioneCliente\Giudizio.htm" />
+    <Content Include="HelpApplication\Help\SoddisfazioneCliente\ReportGiudizioCliente.htm" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Giudizio a Freddo.htm" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Giudizio a Freddo_file\image010.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Pagina_Download.htm" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Pagina_Download_file\image001.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Pagina_Download_file\image003.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Pagina_Download_file\image004.GIF" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Pagina_Download_file\image005.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Pagina_Download_file\image006.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Pagina_Download_file\image007.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Pagina_Download_file\image008.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Pagina_Download_file\image009.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Pagina_Download_file\image010.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\ReportGiudizioCliente.htm" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa.htm" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image002.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image004.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image005.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image006.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image008.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image010.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image011.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image012.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image014.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image015.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image017.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image019.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image020.GIF" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image021.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image022.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image023.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image024.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image025.gif" />
+    <Content Include="HelpApplication\Help\StampaRapportiPDF\Pagine\Ricerca_e_Stampa_file\image026.gif" />
+    <Content Include="HelpApplication\Images\annulla.gif" />
+    <Content Include="HelpApplication\Images\bg.jpg" />
+    <Content Include="HelpApplication\Images\bgLeftFrame.gif" />
+    <Content Include="HelpApplication\Images\buttondn.gif" />
+    <Content Include="HelpApplication\Images\buttonup.gif" />
+    <Content Include="HelpApplication\Images\chiudi.gif" />
+    <Content Include="HelpApplication\Images\downarrows_trans.gif" />
+    <Content Include="HelpApplication\Images\edit.gif" />
+    <Content Include="HelpApplication\Images\elimina.gif" />
+    <Content Include="HelpApplication\Images\gnome-fs-home.gif" />
+    <Content Include="HelpApplication\Images\IconaDiProva.jpg" />
+    <Content Include="HelpApplication\Images\ico_critical.gif" />
+    <Content Include="HelpApplication\Images\ico_info.gif" />
+    <Content Include="HelpApplication\Images\ico_warning.gif" />
+    <Content Include="HelpApplication\Images\Pie.png" />
+    <Content Include="HelpApplication\Images\salva.gif" />
+    <Content Include="HelpApplication\Images\Search 2.ico" />
+    <Content Include="HelpApplication\Images\Search.ico" />
+    <Content Include="HelpApplication\Images\Search16x16.bmp" />
+    <Content Include="HelpApplication\Images\Search16x16_bianca.bmp" />
+    <Content Include="HelpApplication\Images\Search16x16_bianca.JPG" />
+    <Content Include="HelpApplication\Images\step.jpg" />
+    <Content Include="HelpApplication\Images\uparrows_trans.gif" />
+    <Content Include="HelpApplication\Images\view.gif" />
+    <Content Include="HelpApplication\LeftFrame.aspx" />
+    <Content Include="HelpApplication\Login.aspx" />
+    <Content Include="HelpApplication\MainContent.aspx" />
     <Content Include="Images\annulla.gif" />
     <Content Include="Images\attach.png" />
     <Content Include="Images\bg.jpg" />
@@ -2447,7 +3460,6 @@
     <Content Include="Images\downarrows_trans.gif" />
     <Content Include="Images\downarrows_trans_2.gif" />
     <Content Include="Images\Dt.JPG" />
-    <Content Include="Images\dwf.jpg" />
     <Content Include="Images\edit.gif" />
     <Content Include="Images\elimina.gif" />
     <Content Include="Images\Excel.gif" />
@@ -2535,7 +3547,6 @@
     <Content Include="ManutenzioneCorrettiva\GestioneCompleta.aspx" />
     <Content Include="ManutenzioneCorrettiva\GestioneCompleta1.aspx" />
     <Content Include="ManutenzioneCorrettiva\jscompleta.js" />
-    <Content Include="ManutenzioneCorrettiva\ModificaRdl.aspx" />
     <Content Include="ManutenzioneCorrettiva\RapportoRichiestaRdl.aspx" />
     <Content Include="ManutenzioneCorrettiva\RapportoTecnicoIntervento.aspx" />
     <Content Include="ManutenzioneCorrettiva\RapportoTecnicoInterventoPdf.aspx" />
@@ -2547,8 +3558,6 @@
     <Content Include="ManutenzioneCorrettiva\ReportDettaglioSaldo.aspx" />
     <Content Include="ManutenzioneCorrettiva\SfogliaDieSga.aspx" />
     <Content Include="ManutenzioneCorrettiva\SfogliaDoc.aspx" />
-    <Content Include="ManutenzioneCorrettiva\SfogliaRdl.aspx" />
-    <Content Include="ManutenzioneCorrettiva\SfogliaRdlComplete.aspx" />
     <Content Include="ManutenzioneCorrettiva\SfogliaRdLEliminare.aspx" />
     <Content Include="ManutenzioneCorrettiva\SfogliaRdlPaging.aspx" />
     <Content Include="ManutenzioneCorrettiva\SfogliaRdlPaging1.aspx" />
@@ -2578,7 +3587,6 @@
     <Content Include="ManutenzioneProgrammata\ProcedurePassi.aspx" />
     <Content Include="ManutenzioneProgrammata\Schedulazione.aspx" />
     <Content Include="ManutenzioneProgrammata\Schedula\Associazione_EQ_PMS.aspx" />
-    <Content Include="ManutenzioneProgrammata\Schedula\CopiaPianoEsistente.aspx" />
     <Content Include="ManutenzioneProgrammata\Schedula\CreaOttimizzaRDL_MP.aspx" />
     <Content Include="ManutenzioneProgrammata\Schedula\CreazioneODL_MP.aspx" />
     <Content Include="ManutenzioneProgrammata\Schedula\DisplayRapportino.aspx" />
@@ -2613,7 +3621,192 @@
     <Content Include="SoddisfazioneCliente\KPI_Download.aspx" />
     <Content Include="SoddisfazioneCliente\KPI_vod_report.aspx" />
     <Content Include="SoddisfazioneCliente\ReportGiudizioCliente.aspx" />
-    <Content Include="UpgradeLog.XML" />
+    <Content Include="StampaRapportiPdf\css\DataPanelTest.css" />
+    <Content Include="StampaRapportiPdf\css\MainSheet.css" />
+    <Content Include="StampaRapportiPdf\Images\annulla.gif" />
+    <Content Include="StampaRapportiPdf\Images\bg.jpg" />
+    <Content Include="StampaRapportiPdf\Images\bgLeftFrame.gif" />
+    <Content Include="StampaRapportiPdf\Images\buttondn.gif" />
+    <Content Include="StampaRapportiPdf\Images\buttonup.gif" />
+    <Content Include="StampaRapportiPdf\Images\cal\calendar.gif" />
+    <Content Include="StampaRapportiPdf\Images\cal\close.gif" />
+    <Content Include="StampaRapportiPdf\Images\cal\divider.gif" />
+    <Content Include="StampaRapportiPdf\Images\cal\drop1.gif" />
+    <Content Include="StampaRapportiPdf\Images\cal\drop2.gif" />
+    <Content Include="StampaRapportiPdf\Images\cal\left1.gif" />
+    <Content Include="StampaRapportiPdf\Images\cal\left2.gif" />
+    <Content Include="StampaRapportiPdf\Images\cal\popcalendar.css" />
+    <Content Include="StampaRapportiPdf\Images\cal\popcalendar.js" />
+    <Content Include="StampaRapportiPdf\Images\cal\right1.gif" />
+    <Content Include="StampaRapportiPdf\Images\cal\right2.gif" />
+    <Content Include="StampaRapportiPdf\Images\cal\up2.gif" />
+    <Content Include="StampaRapportiPdf\Images\chart.png" />
+    <Content Include="StampaRapportiPdf\Images\ChiaveInglese.gif" />
+    <Content Include="StampaRapportiPdf\Images\chiudi.gif" />
+    <Content Include="StampaRapportiPdf\Images\Copy of kcalc.jpg" />
+    <Content Include="StampaRapportiPdf\Images\Copy of logoSLucia.gif" />
+    <Content Include="StampaRapportiPdf\Images\Copy of logo_piccolo.gif" />
+    <Content Include="StampaRapportiPdf\Images\Copy of lucc.gif" />
+    <Content Include="StampaRapportiPdf\Images\down.gif" />
+    <Content Include="StampaRapportiPdf\Images\downarrows_trans.gif" />
+    <Content Include="StampaRapportiPdf\Images\edit.gif" />
+    <Content Include="StampaRapportiPdf\Images\elimina.gif" />
+    <Content Include="StampaRapportiPdf\Images\eye.gif" />
+    <Content Include="StampaRapportiPdf\Images\gnome-fs-home.gif" />
+    <Content Include="StampaRapportiPdf\Images\GraficiIstogramma.png" />
+    <Content Include="StampaRapportiPdf\Images\head.jpg" />
+    <Content Include="StampaRapportiPdf\Images\head1.jpg" />
+    <Content Include="StampaRapportiPdf\Images\head11.jpg" />
+    <Content Include="StampaRapportiPdf\Images\ico_critical.gif" />
+    <Content Include="StampaRapportiPdf\Images\ico_info.gif" />
+    <Content Include="StampaRapportiPdf\Images\ico_warning.gif" />
+    <Content Include="StampaRapportiPdf\Images\immagini\BlueExplorer.gif" />
+    <Content Include="StampaRapportiPdf\Images\immagini\downarrows_white.gif" />
+    <Content Include="StampaRapportiPdf\Images\immagini\GrayExplorer.gif" />
+    <Content Include="StampaRapportiPdf\Images\immagini\OrangeExplorer.gif" />
+    <Content Include="StampaRapportiPdf\Images\immagini\RoundedBlueExplorer.gif" />
+    <Content Include="StampaRapportiPdf\Images\immagini\RoundedGrayExplorer.gif" />
+    <Content Include="StampaRapportiPdf\Images\immagini\RoundedOrangeExplorer.gif" />
+    <Content Include="StampaRapportiPdf\Images\immagini\uparrows_white.gif" />
+    <Content Include="StampaRapportiPdf\Images\kcalc.jpg" />
+    <Content Include="StampaRapportiPdf\Images\LogoLungo.JPG" />
+    <Content Include="StampaRapportiPdf\Images\logoSLucia.gif" />
+    <Content Include="StampaRapportiPdf\Images\logo_piccolo.gif" />
+    <Content Include="StampaRapportiPdf\Images\lucc.gif" />
+    <Content Include="StampaRapportiPdf\Images\no pdf_logo.gif" />
+    <Content Include="StampaRapportiPdf\Images\pdf_logo.gif" />
+    <Content Include="StampaRapportiPdf\Images\Piano.gif" />
+    <Content Include="StampaRapportiPdf\Images\Pie.png" />
+    <Content Include="StampaRapportiPdf\Images\salva.gif" />
+    <Content Include="StampaRapportiPdf\Images\Search16x16_bianca.JPG" />
+    <Content Include="StampaRapportiPdf\Images\Stanza.gif" />
+    <Content Include="StampaRapportiPdf\Images\step.jpg" />
+    <Content Include="StampaRapportiPdf\Images\tools.ico" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\gnome-desktop-config.gif" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\gnome-desktop-config.ico" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\gnome-fs-home.gif" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\gnome-fs-home.ico" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\gnome-mime-text-x-sh.gif" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\gnome-mime-text-x-sh.ico" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\oldgnome-fs-home.gif" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\treeimages\gnome-desktop-config.gif" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\treeimages\gnome-desktop-config.ico" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\treeimages\gnome-fs-home.gif" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\treeimages\gnome-fs-home.ico" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\treeimages\gnome-mime-text-x-sh.gif" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\treeimages\gnome-mime-text-x-sh.ico" />
+    <Content Include="StampaRapportiPdf\Images\treeimages\treeimages\oldgnome-fs-home.gif" />
+    <Content Include="StampaRapportiPdf\Images\up.gif" />
+    <Content Include="StampaRapportiPdf\Images\uparrows_trans.gif" />
+    <Content Include="StampaRapportiPdf\Images\view.gif" />
+    <Content Include="StampaRapportiPdf\Images\WFP_logo_white.gif" />
+    <Content Include="StampaRapportiPdf\logoff.aspx" />
+    <Content Include="StampaRapportiPdf\Pagine\dettaglioFile.aspx" />
+    <Content Include="StampaRapportiPdf\Pagine\Pagina_Download.aspx" />
+    <Content Include="StampaRapportiPdf\Pagine\Ricerca_e_Stampa.aspx" />
+    <Content Include="StampaRapportiPdf\Pagine\VisualDWF.aspx" />
+    <Content Include="StampaRapportiPdf\WebControls\CalendarPicker.ascx" />
+    <Content Include="StampaRapportiPdf\WebControls\GridTitle.ascx" />
+    <Content Include="StampaRapportiPdf\WebControls\PageTitle.ascx" />
+    <Content Include="webcad\apparecchiature.aspx" />
+    <Content Include="webcad\Apparecchiature\NavigazioneDocumenti.aspx" />
+    <Content Include="webcad\Apparecchiature\PageImage.aspx" />
+    <Content Include="webcad\Apparecchiature\SchedaApparecchiatura.aspx" />
+    <Content Include="webcad\Apparecchiature\VisualDWF.aspx" />
+    <Content Include="webcad\bottomFrame.aspx" />
+    <Content Include="webcad\CAD\CadViewer.aspx" />
+    <Content Include="webcad\CommonPage\ListaEdifici.aspx" />
+    <Content Include="webcad\Css\DataPanelTest.css" />
+    <Content Include="webcad\Css\MainSheet.css" />
+    <Content Include="webcad\Default.aspx" />
+    <Content Include="webcad\Edifici\DataRoom.aspx" />
+    <Content Include="webcad\Edifici\EditBuilding.aspx" />
+    <Content Include="webcad\Edifici\NavigazioneAppDEMO.aspx" />
+    <Content Include="webcad\ErrorPage.aspx" />
+    <Content Include="webcad\images\annulla.gif" />
+    <Content Include="webcad\images\attach.png" />
+    <Content Include="webcad\images\bg.jpg" />
+    <Content Include="webcad\images\bgLeftFrame.gif" />
+    <Content Include="webcad\images\buttondn.gif" />
+    <Content Include="webcad\images\buttonup.gif" />
+    <Content Include="webcad\images\cal\calendar.gif" />
+    <Content Include="webcad\images\cal\close.gif" />
+    <Content Include="webcad\images\cal\divider.gif" />
+    <Content Include="webcad\images\cal\drop1.gif" />
+    <Content Include="webcad\images\cal\drop2.gif" />
+    <Content Include="webcad\images\cal\left1.gif" />
+    <Content Include="webcad\images\cal\left2.gif" />
+    <Content Include="webcad\images\cal\popcalendar.css" />
+    <Content Include="webcad\images\cal\popcalendar.js" />
+    <Content Include="webcad\images\cal\right1.gif" />
+    <Content Include="webcad\images\cal\right2.gif" />
+    <Content Include="webcad\images\cal\up2.gif" />
+    <Content Include="webcad\images\ChiaveInglese.gif" />
+    <Content Include="webcad\images\chiudi.gif" />
+    <Content Include="webcad\images\DataRoom.jpg" />
+    <Content Include="webcad\images\down.gif" />
+    <Content Include="webcad\images\downarrows_trans.gif" />
+    <Content Include="webcad\images\edit.gif" />
+    <Content Include="webcad\images\elimina.gif" />
+    <Content Include="webcad\images\eye.gif" />
+    <Content Include="webcad\images\forward.png" />
+    <Content Include="webcad\images\gnome-fs-home.gif" />
+    <Content Include="webcad\images\ico_critical.gif" />
+    <Content Include="webcad\images\ico_info.gif" />
+    <Content Include="webcad\images\ico_warning.gif" />
+    <Content Include="webcad\images\immagini\BlueExplorer.gif" />
+    <Content Include="webcad\images\immagini\downarrows_white.gif" />
+    <Content Include="webcad\images\immagini\GrayExplorer.gif" />
+    <Content Include="webcad\images\immagini\OrangeExplorer.gif" />
+    <Content Include="webcad\images\immagini\RoundedBlueExplorer.gif" />
+    <Content Include="webcad\images\immagini\RoundedGrayExplorer.gif" />
+    <Content Include="webcad\images\immagini\RoundedOrangeExplorer.gif" />
+    <Content Include="webcad\images\immagini\uparrows_white.gif" />
+    <Content Include="webcad\images\kcalc.jpg" />
+    <Content Include="webcad\images\lucc.gif" />
+    <Content Include="webcad\images\no pdf_logo.gif" />
+    <Content Include="webcad\images\pdf_logo.gif" />
+    <Content Include="webcad\images\salva.gif" />
+    <Content Include="webcad\images\SchedeEq.jpg" />
+    <Content Include="webcad\images\Search16x16_bianca.JPG" />
+    <Content Include="webcad\images\Stanza.gif" />
+    <Content Include="webcad\images\step.jpg" />
+    <Content Include="webcad\images\treeimages\gnome-desktop-config.gif" />
+    <Content Include="webcad\images\treeimages\gnome-desktop-config.ico" />
+    <Content Include="webcad\images\treeimages\gnome-fs-home.gif" />
+    <Content Include="webcad\images\treeimages\gnome-fs-home.ico" />
+    <Content Include="webcad\images\treeimages\gnome-mime-text-x-sh.gif" />
+    <Content Include="webcad\images\treeimages\gnome-mime-text-x-sh.ico" />
+    <Content Include="webcad\images\treeimages\oldgnome-fs-home.gif" />
+    <Content Include="webcad\images\treeimages\treeimages\gnome-desktop-config.gif" />
+    <Content Include="webcad\images\treeimages\treeimages\gnome-desktop-config.ico" />
+    <Content Include="webcad\images\treeimages\treeimages\gnome-fs-home.gif" />
+    <Content Include="webcad\images\treeimages\treeimages\gnome-fs-home.ico" />
+    <Content Include="webcad\images\treeimages\treeimages\gnome-mime-text-x-sh.gif" />
+    <Content Include="webcad\images\treeimages\treeimages\gnome-mime-text-x-sh.ico" />
+    <Content Include="webcad\images\treeimages\treeimages\oldgnome-fs-home.gif" />
+    <Content Include="webcad\images\up.gif" />
+    <Content Include="webcad\images\uparrows_trans.gif" />
+    <Content Include="webcad\images\view.gif" />
+    <Content Include="webcad\Js\valform.js" />
+    <Content Include="webcad\LeftFrame2.aspx" />
+    <Content Include="webcad\ListLink.aspx" />
+    <Content Include="webcad\RedirectPages\RedirectDettaglioApparecchiatura.aspx" />
+    <Content Include="webcad\RedirectPages\RedirectEqDocumentiAllegati.aspx" />
+    <Content Include="webcad\RedirectPages\RedirectSchedaEq.aspx" />
+    <Content Include="webcad\StandardApp.aspx" />
+    <Content Include="webcad\Stanze.aspx" />
+    <Content Include="webcad\TopFrame.aspx" />
+    <Content Include="webcad\WebControls\CalendarPicker.ascx" />
+    <Content Include="webcad\WebControls\CodiceApparecchiature.ascx" />
+    <Content Include="webcad\WebControls\CodiceStdApparecchiatura.ascx" />
+    <Content Include="webcad\WebControls\DataGridRicercaCad.ascx" />
+    <Content Include="webcad\WebControls\GridTitle.ascx" />
+    <Content Include="webcad\WebControls\myDropDownList.ascx" />
+    <Content Include="webcad\WebControls\PageTitle.ascx" />
+    <Content Include="webcad\WebControls\RicercaModulo.ascx" />
+    <Content Include="webcad\WebControls\UserStanze.ascx" />
+    <Content Include="webcad\WebControls\WebUserControlTreeView.ascx" />
     <Content Include="WebControls\Addetti.ascx" />
     <Content Include="WebControls\AggiungiSollecito.ascx" />
     <Content Include="WebControls\BottomMenu.ascx" />
@@ -2625,7 +3818,6 @@
     <Content Include="WebControls\CollapseDiv.ascx" />
     <Content Include="WebControls\CostiAddetti.ascx" />
     <Content Include="WebControls\CostiManodopera.ascx" />
-    <Content Include="WebControls\DataPicker.ascx" />
     <Content Include="WebControls\Fascicolo.ascx" />
     <Content Include="WebControls\GridTitle.ascx" />
     <Content Include="WebControls\GridTitleServer.ascx" />
@@ -2696,15 +3888,31 @@
   <ItemGroup>
     <None Include="AslMobile\images\Thumbs.db" />
     <None Include="AslMobile\Web.config" />
-    <None Include="FileWebStat\FileWebStat.rar" />
+    <None Include="Doc_DB\MA-A\21185\prot. 388 - Impianti Idrico %28rif. rich. tel. Medina Legale del 02.09.08 Nefrologia%29.doc" />
+    <None Include="Doc_DB\MA-A\21248\PREV\prot. 419 - Impianti Idrico %28rif. rich. 59 del 08.09.08 Locali Ostetricia%29 misc. lavabo levaclinica.doc" />
+    <None Include="Doc_DB\Manutenzione Programmata\PMP2008\MA-A\PIANO_MANUTENZIONE_ELETTRICO.xls" />
+    <None Include="Doc_DB\Manutenzione Programmata\PMP2008\MA-A\PIANO_MANUTENZIONE__ANTINCENDIO.xls" />
+    <None Include="Doc_DB\Manutenzione Programmata\PMP2008\MA-A\schede_di_manutenzione_appar._produz._freddo.xls" />
+    <None Include="Doc_DB\Manutenzione Programmata\PMP2008\MA-A\Schede_di_manutenzione_CDZ.xls" />
+    <None Include="Doc_DB\Manutenzione Programmata\PMP2008\MA-A\schede_di_manutenzione_idrico_sanitari.xls" />
     <None Include="GIC\App_Code\DataSetDef\DataSetReport.xsd" />
     <None Include="GIC\App_Code\DataSetDef\DataSetReport.xsx">
       <DependentUpon>DataSetReport.xsd</DependentUpon>
     </None>
     <None Include="GIC\App_Code\DataSetDef\vssver.scc" />
+    <None Include="GIC\Classi\vssver.scc" />
+    <None Include="GIC\Image\Thumbs.db" />
+    <None Include="GIC\Image\vssver.scc" />
+    <None Include="GIC\imgFunz\Thumbs.db" />
+    <None Include="GIC\imgFunz\vssver.scc" />
+    <None Include="GIC\Report\UserControl\vssver.scc" />
+    <None Include="GIC\Report\vssver.scc" />
+    <None Include="GIC\style\vssver.scc" />
+    <None Include="HelpApplication\Help\Gestione\ProcedManutenzione_file\Thumbs.db" />
+    <None Include="HelpApplication\Help\ManutenzioneProgrammata\CompletamentoMP_file\Thumbs.db" />
+    <None Include="HelpApplication\Help\ManutenzioneProgrammata\SfogliaRdLOdL_file\Thumbs.db" />
+    <None Include="HelpApplication\Images\Thumbs.db" />
     <None Include="ReportXls\MasterQuartoTrimestre_r3.xls" />
-    <None Include="Report\52pqfzahzxxmz245bgtrweyw.pdf" />
-    <None Include="Report\papardo.rar" />
     <None Include="SchemiXSD\DsAnalisiStatistiche.xsd" />
     <None Include="SchemiXSD\DsAnalisiStatistiche.xsx">
       <DependentUpon>DsAnalisiStatistiche.xsd</DependentUpon>
@@ -2729,6 +3937,20 @@
     <None Include="SchemiXSD\DsRptMpLocali.xsx">
       <DependentUpon>DsRptMpLocali.xsd</DependentUpon>
     </None>
+    <None Include="SchemiXSD\DSSGA1.xsc">
+      <DependentUpon>DSSGA1.xsd</DependentUpon>
+    </None>
+    <None Include="SchemiXSD\DSSGA1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSSGA1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SchemiXSD\DSSGA1.xss">
+      <DependentUpon>DSSGA1.xsd</DependentUpon>
+    </None>
+    <None Include="SchemiXSD\DSSGA1.xsx">
+      <DependentUpon>DSSGA1.xsd</DependentUpon>
+    </None>
     <None Include="SchemiXSD\GestioneMateriali.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2739,6 +3961,13 @@
     <None Include="SchemiXSD\ScmReport.xsx">
       <DependentUpon>ScmReport.xsd</DependentUpon>
     </None>
+    <None Include="StampaRapportiPdf\doc\Stampa Rapportini Web.doc" />
+    <None Include="StampaRapportiPdf\Images\cal\Thumbs.db" />
+    <None Include="StampaRapportiPdf\Images\immagini\Thumbs.db" />
+    <None Include="StampaRapportiPdf\Images\treeimages\casa.psd" />
+    <None Include="StampaRapportiPdf\Images\treeimages\Thumbs.db" />
+    <None Include="StampaRapportiPdf\Images\treeimages\treeimages\casa.psd" />
+    <None Include="StampaRapportiPdf\Images\treeimages\treeimages\Thumbs.db" />
     <None Include="StampaRapportiPdf\Schemixsd\DatasetReport.xsc">
       <DependentUpon>DatasetReport.xsd</DependentUpon>
     </None>
@@ -2750,24 +3979,651 @@
     <None Include="StampaRapportiPdf\Schemixsd\DatasetReport.xss">
       <DependentUpon>DatasetReport.xsd</DependentUpon>
     </None>
-    <None Include="StampaRapportiPdf\Schemixsd\DatasetReport.xsx">
-      <DependentUpon>DatasetReport.xsd</DependentUpon>
-    </None>
-    <None Include="Stampe\CostoGestioneCumulativo\reportRDLcomulativo17052018123220.pdf" />
-    <None Include="Stampe\CostoGestioneCumulativo\reportRDLcomulativo17052018123220.zip" />
     <None Include="Web.config" />
+    <None Include="webcad\CadFile\CMP_PTE_ANTIN_R5.dwf" />
+    <None Include="webcad\CadFile\CMP_PTE_ELETT_R5.dwf" />
+    <None Include="webcad\CadFile\CMP_PTE_R5.dwf" />
+    <None Include="webcad\images\cal\Thumbs.db" />
+    <None Include="webcad\images\immagini\Thumbs.db" />
+    <None Include="webcad\images\treeimages\casa.psd" />
+    <None Include="webcad\images\treeimages\Thumbs.db" />
+    <None Include="webcad\images\treeimages\treeimages\casa.psd" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AslMobile\CompletamentoUserControl\" />
     <Folder Include="DocumentiProgetto\" />
-    <Folder Include="Doc_DB\" />
+    <Folder Include="Doc_DB\Correttiva\113354\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\113408\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\113922\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120010\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120045\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120333\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\120333\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120352\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120354\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\120354\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120367\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120369\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120370\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120378\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120379\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120380\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120381\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\120381\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120382\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120388\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120391\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120392\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120394\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120396\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120397\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120403\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120410\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120419\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120421\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120422\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120423\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120426\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120427\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120438\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120441\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120442\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120443\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120445\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120446\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120450\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120451\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120453\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120456\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120457\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120458\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120459\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120460\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120461\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120464\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120465\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120467\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120468\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120469\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120472\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120473\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120475\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120477\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120478\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120479\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120480\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120484\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120487\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120490\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120495\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120496\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120501\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120504\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120505\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120507\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120513\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120515\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120519\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120521\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120522\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120523\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120524\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120525\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120527\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120532\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120533\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120538\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120539\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120540\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120541\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120542\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120543\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120544\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120546\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120552\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120555\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120558\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120567\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120568\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120570\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120572\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120576\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120577\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120582\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120583\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120587\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120589\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120591\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120592\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120595\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120597\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120598\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120601\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120607\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120610\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120611\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120612\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120613\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120614\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120617\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120618\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120621\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120622\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120625\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120630\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120631\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120637\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120639\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120641\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120642\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120644\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120645\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120646\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120647\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120648\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120650\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120654\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120655\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120656\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120659\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120664\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120665\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120666\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120667\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120668\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120672\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120685\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120690\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120691\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120693\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120696\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120704\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120711\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120714\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120715\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120716\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120717\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120721\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120723\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120725\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120727\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120728\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120730\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120734\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120738\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120739\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120741\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120742\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120744\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120747\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120748\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120751\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120752\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120755\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120757\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120761\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120765\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120766\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120770\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120771\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120772\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120778\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120787\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120796\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120797\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120798\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120801\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120810\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120814\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120815\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120816\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120818\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120819\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120820\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120821\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120822\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120823\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120826\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120827\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120828\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120829\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120840\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120842\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120848\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120849\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120851\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120855\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120856\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120861\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120862\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120863\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120864\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120866\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120869\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120870\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120871\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120872\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120873\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120874\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120878\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120879\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120880\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120886\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120887\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120891\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120892\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120893\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120895\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120897\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120899\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120900\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120901\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120902\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120907\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120909\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120911\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120912\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120913\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120914\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120917\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120919\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120920\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120921\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120922\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120933\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120936\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120952\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\120968\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121005\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121009\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121012\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121013\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121014\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121016\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121017\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121021\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121023\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121025\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121028\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121029\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121037\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121038\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121040\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121041\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121043\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121044\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121045\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121046\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121047\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121049\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121050\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121052\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121055\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121056\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121057\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121058\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121059\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121060\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121061\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121062\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121068\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121070\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121071\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121072\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121073\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121075\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121076\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121079\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121080\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121179\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121186\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121189\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121244\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121245\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121246\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121247\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121249\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121250\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121252\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121253\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121255\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121256\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121259\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121294\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121296\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121297\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121303\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121304\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121307\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121308\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121309\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121310\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121314\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121320\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121324\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121329\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121334\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121335\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121337\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121340\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121362\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121365\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121366\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121373\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121376\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121379\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121382\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121383\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121385\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121393\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121398\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121399\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121403\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121405\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121406\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121407\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121409\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121413\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121414\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121419\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121425\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121426\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121429\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121430\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121431\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121432\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121433\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121439\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121442\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121443\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121445\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121449\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121450\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121451\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121452\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121455\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121456\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121458\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121460\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121467\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121468\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121469\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121470\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121477\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121481\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121482\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121483\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121484\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121485\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121488\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121490\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121491\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121495\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121499\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121501\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121504\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121507\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121509\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121510\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121511\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121512\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121514\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121519\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121521\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121522\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121523\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121525\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121528\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121529\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121530\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121532\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121535\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121542\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121543\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121544\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121546\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121550\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121554\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121556\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121564\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121566\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121570\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121574\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121575\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121590\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121591\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121592\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121596\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121597\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121600\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121601\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\121601\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121610\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121618\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121620\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121621\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121622\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\121623\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\121624\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\121624\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121649\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121662\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121669\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\121669\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121676\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121691\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\121691\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121741\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\121741\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121742\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\121742\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\121743\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\121743\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21169\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21214\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21216\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21217\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21218\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21220\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21221\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21222\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21224\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21227\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21248\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21435\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\21500\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\21501\PREV\" />
+    <Folder Include="Doc_DB\Correttiva\44\CONS\" />
+    <Folder Include="Doc_DB\Correttiva\44\PREV\" />
+    <Folder Include="Doc_DB\ELABORATO_GRAFICO\BOOK-FOTOGRAFICO\" />
+    <Folder Include="Doc_DB\ELABORATO_GRAFICO\PLANIMETRIA\" />
+    <Folder Include="Doc_DB\ELABORATO_GRAFICO\SCHEMA-STATO DI FATTO\" />
+    <Folder Include="Doc_DB\ELABORATO_GRAFICO\SEZIONI-STATO DI FATTO\" />
+    <Folder Include="Doc_DB\FOTO\FOTO_ESTERNI_EDIFICIO\" />
+    <Folder Include="Doc_DB\KPI\KPI Vod\KPI Eseguiti\" />
+    <Folder Include="Doc_DB\KPI\KPI Vod\KPI Proposti\" />
+    <Folder Include="Doc_DB\MA-A\120422\" />
+    <Folder Include="Doc_DB\MA-A\1\" />
+    <Folder Include="Doc_DB\MA-A\20040\" />
+    <Folder Include="Doc_DB\MA-A\20044\" />
+    <Folder Include="Doc_DB\MA-A\21248\CONS\" />
+    <Folder Include="Doc_DB\MA-A\2\" />
+    <Folder Include="Doc_DB\MA-A\3\" />
+    <Folder Include="Doc_DB\MA-A\50\" />
+    <Folder Include="Doc_DB\MA-B\112881\" />
+    <Folder Include="Doc_DB\MA-C\120381\CONS\" />
+    <Folder Include="Doc_DB\MA-C\120445\" />
+    <Folder Include="Doc_DB\MA-C\120736\" />
+    <Folder Include="Doc_DB\MA-C\121532\" />
+    <Folder Include="Doc_DB\MA-E\120333\" />
+    <Folder Include="Doc_DB\MA-E\120433\" />
+    <Folder Include="Doc_DB\MA-E\120438\" />
+    <Folder Include="Doc_DB\MA-E\120450\" />
+    <Folder Include="Doc_DB\MA-E\120487\" />
+    <Folder Include="Doc_DB\MA-E\120522\" />
+    <Folder Include="Doc_DB\MA-E\120540\" />
+    <Folder Include="Doc_DB\MA-E\120541\" />
+    <Folder Include="Doc_DB\MA-E\120787\" />
+    <Folder Include="Doc_DB\MA-F\112907\" />
+    <Folder Include="Doc_DB\MA-F\120369\" />
+    <Folder Include="Doc_DB\MA-F\120370\" />
+    <Folder Include="Doc_DB\MA-F\120467\" />
+    <Folder Include="Doc_DB\MA-F\120505\" />
+    <Folder Include="Doc_DB\MA-F\120650\" />
+    <Folder Include="Doc_DB\MA-F\21142\" />
+    <Folder Include="Doc_DB\MA-H\113367\" />
+    <Folder Include="Doc_DB\MA-H\120564\" />
+    <Folder Include="Doc_DB\MA-L\120490\" />
+    <Folder Include="Doc_DB\MA-L\120666\" />
+    <Folder Include="Doc_DB\MA-L\120714\" />
+    <Folder Include="Doc_DB\MA-NI\113370\" />
+    <Folder Include="Doc_DB\MA-NI\120346\" />
+    <Folder Include="Doc_DB\MA-NI\120478\" />
+    <Folder Include="Doc_DB\MA-NI\120513\" />
+    <Folder Include="Doc_DB\MA-TB\120614\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PAM2008\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PAM2009\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2008\PA-A\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2008\PA-B\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2008\PA-C\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2008\PA-D\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2008\PA-E\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2008\PA-F\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2008\PA-H\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2008\PA-L\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2009\PA-A\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2009\PA-B\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2009\PA-C\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2009\PA-D\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2009\PA-E\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2009\PA-F\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2009\PA-H\" />
+    <Folder Include="Doc_DB\Manutenzione Programmata\PMP2009\PA-L\" />
+    <Folder Include="Doc_DB\PA-A\10\PREV\" />
+    <Folder Include="Doc_DB\PA-A\113362\" />
+    <Folder Include="Doc_DB\PA-A\113408\" />
+    <Folder Include="Doc_DB\PA-A\114276\" />
+    <Folder Include="Doc_DB\PA-A\114541\" />
+    <Folder Include="Doc_DB\PA-A\114546\" />
+    <Folder Include="Doc_DB\PA-A\114713\" />
+    <Folder Include="Doc_DB\PA-A\114717\" />
+    <Folder Include="Doc_DB\PA-A\114719\" />
+    <Folder Include="Doc_DB\PA-A\114758\" />
+    <Folder Include="Doc_DB\PA-A\114759\" />
+    <Folder Include="Doc_DB\PA-A\114777\" />
+    <Folder Include="Doc_DB\PA-A\121342\" />
+    <Folder Include="Doc_DB\PA-A\121623\" />
+    <Folder Include="Doc_DB\PA-A\121624\" />
+    <Folder Include="Doc_DB\PA-A\121625\" />
+    <Folder Include="Doc_DB\PA-A\121669\" />
+    <Folder Include="Doc_DB\PA-A\121677\" />
+    <Folder Include="Doc_DB\PA-A\121678\" />
+    <Folder Include="Doc_DB\PA-A\121679\" />
+    <Folder Include="Doc_DB\PA-A\121684\" />
+    <Folder Include="Doc_DB\PA-A\121685\" />
+    <Folder Include="Doc_DB\PA-A\121686\" />
+    <Folder Include="Doc_DB\PA-A\121687\" />
+    <Folder Include="Doc_DB\PA-A\121688\" />
+    <Folder Include="Doc_DB\PA-A\121689\" />
+    <Folder Include="Doc_DB\PA-A\121690\" />
+    <Folder Include="Doc_DB\PA-A\121691\" />
+    <Folder Include="Doc_DB\PA-A\121692\" />
+    <Folder Include="Doc_DB\PA-A\121693\" />
+    <Folder Include="Doc_DB\PA-A\121713\" />
+    <Folder Include="Doc_DB\PA-A\121714\" />
+    <Folder Include="Doc_DB\PA-A\20962\" />
+    <Folder Include="Doc_DB\PA-A\23\" />
+    <Folder Include="Doc_DB\PA-A\44\" />
+    <Folder Include="Doc_DB\PA-B\113376\" />
+    <Folder Include="Doc_DB\PA-B\121630\" />
+    <Folder Include="Doc_DB\PA-B\121681\" />
+    <Folder Include="Doc_DB\PA-B\121683\" />
+    <Folder Include="Doc_DB\PA-B\121718\" />
+    <Folder Include="Doc_DB\PA-B\121719\" />
+    <Folder Include="Doc_DB\PA-B\121741\" />
+    <Folder Include="Doc_DB\PA-B\121742\" />
+    <Folder Include="Doc_DB\PA-B\121743\" />
+    <Folder Include="Doc_DB\PA-C\114708\" />
+    <Folder Include="Doc_DB\PA-C\121601\" />
+    <Folder Include="Doc_DB\PA-C\121622\" />
+    <Folder Include="Doc_DB\PA-C\121626\" />
+    <Folder Include="Doc_DB\PA-C\121712\" />
+    <Folder Include="Doc_DB\PA-EXT\121671\" />
+    <Folder Include="Doc_DB\PA-F\121711\" />
+    <Folder Include="Doc_DB\PA-F\54\" />
+    <Folder Include="Doc_DB\PA-F\8\" />
+    <Folder Include="Doc_DB\TempFile\" />
+    <Folder Include="Eccezioni\" />
     <Folder Include="EQAllegati\" />
     <Folder Include="EQImages\" />
+    <Folder Include="Errore\" />
+    <Folder Include="FileWebStat\" />
+    <Folder Include="Gestione\EditAnagrafica\" />
+    <Folder Include="HelpApplication\Help\Admin\Funzioni_file\" />
+    <Folder Include="HelpApplication\Help\Admin\Menu_file\" />
+    <Folder Include="HelpApplication\Help\AnagrafeImpianti\NavigazioneApparecchiature_file\" />
+    <Folder Include="HelpApplication\Help\AnagrafeImpianti\NavigazioneCertificati_file\" />
+    <Folder Include="HelpApplication\Help\AnagrafeImpianti\NavigazioneDocumenti_file\" />
+    <Folder Include="HelpApplication\Help\AnagrafeImpianti\NavigazioneServizi_file\" />
+    <Folder Include="HelpApplication\Help\AnagrafeImpianti\NavigCertificati_file\" />
+    <Folder Include="HelpApplication\Help\AnalisiStatistiche\chart\AnalisiLivellidiServizio_file\" />
+    <Folder Include="HelpApplication\Help\AnalisiStatistiche\GraficiMAC_file\" />
+    <Folder Include="HelpApplication\Help\AnalisiStatistiche\GraficiMop_file\" />
+    <Folder Include="HelpApplication\Help\AnalisiStatistiche\GraficoGiudizio_file\" />
+    <Folder Include="HelpApplication\Help\CommonPage\ChangePassword_file\" />
+    <Folder Include="HelpApplication\Help\CostiGesioneCumulativi\AnalisiCostiOperativiDiGestioneCumulativo_file\" />
+    <Folder Include="HelpApplication\Help\GestioneAnagrafiche\Richiedenti_file\" />
+    <Folder Include="HelpApplication\Help\GestioneAnagrafiche\TipoRichiedenti_file\" />
+    <Folder Include="HelpApplication\Help\GestionePassword\Cambio_file\" />
+    <Folder Include="HelpApplication\Help\GestioneSpazi\RicercaSpazi_file\" />
+    <Folder Include="HelpApplication\Help\GestioneUtentiRuoli\Funzioni_file\" />
+    <Folder Include="HelpApplication\Help\GestioneUtentiRuoli\Menu_file\" />
+    <Folder Include="HelpApplication\Help\Gestione\AnagrDocumenti_file\" />
+    <Folder Include="HelpApplication\Help\Gestione\Categorie_file\" />
+    <Folder Include="HelpApplication\Help\Gestione\DestUso_file\" />
+    <Folder Include="HelpApplication\Help\Gestione\LetturaContatori_file\" />
+    <Folder Include="HelpApplication\Help\Gestione\Reparti_file\" />
+    <Folder Include="HelpApplication\Help\Gestione\Richiedenti_file\" />
+    <Folder Include="HelpApplication\Help\Gestione\Richiedenti_tipo_file\" />
+    <Folder Include="HelpApplication\Help\Images\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiCostiOperativiDiGestione_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneCorrettiva\AnalisiRdLCorrettiva_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneCorrettiva\Approva ed Emetti Rdl_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneCorrettiva\Creazione RdL_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneCorrettiva\GestioneCompleta_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneCorrettiva\Report_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneCorrettiva\SfogliaRdlEliminare_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneCorrettiva\SfogliaRdL_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzionePreventiva\PianoAnnuale_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneProgrammata\PianoAnnuale_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneProgrammata\RappProcedPassi_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneProgrammata\Schedulazione_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneProgrammata\Schedula\Rapportino_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneRichiesta\AnalisiRdLCorrettiva_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneRichiesta\Approva ed Emetti Rdl_file\" />
+    <Folder Include="HelpApplication\Help\ManutenzioneRichiesta\SfogliaRdL_file\" />
+    <Folder Include="HelpApplication\Help\ReportAnalisi\AnalisiLivellidiServizio_file\" />
+    <Folder Include="HelpApplication\Help\ReportAnalisi\GraficiMAC_file\" />
+    <Folder Include="HelpApplication\Help\ReportAnalisi\GraficiMS_file\" />
+    <Folder Include="HelpApplication\Help\ReportAnalisi\GraficoGiudizio_file\" />
+    <Folder Include="HelpApplication\Help\ReportGestioneSpazi\ReportGestioneSpazi_file\" />
+    <Folder Include="HelpApplication\Help\ShedeEq\FiltraApparecchiature_file\" />
+    <Folder Include="HelpApplication\Help\SoddisfazioneCliente\ReportGiudizioCliente_file\" />
+    <Folder Include="HelpApplication\Help\StampaRapportiPDF\Pagine\ReportGiudizioCliente_file\" />
     <Folder Include="Log\" />
+    <Folder Include="ManutenzioneProgrammata\CreaPianoMP\" />
     <Folder Include="MasterExcel\" />
+    <Folder Include="StampaRapportiPdf\Stampe\" />
+    <Folder Include="Stampe\CostoGestioneCumulativo\" />
     <Folder Include="UserControl\" />
+    <Folder Include="WebControls\GridTitleServer\" />
+    <Folder Include="WebControls\RicercaModulo\" />
+    <Folder Include="WebControls\RicercaRDL\" />
+    <Folder Include="WebControls\UserPmp\" />
+    <Folder Include="WebControls\UserRdlInail\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

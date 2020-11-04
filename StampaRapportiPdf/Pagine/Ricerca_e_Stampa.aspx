@@ -1,9 +1,9 @@
-<%@ Register TagPrefix="cc2" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
-<%@ Page language="c#" Codebehind="Ricerca_e_Stampa.aspx.cs" AutoEventWireup="false" Inherits="StampaRapportiPdf.Pagine.Ricerca_e_Stampa" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
 <%@ Register TagPrefix="cc1" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Page language="c#" Codebehind="Ricerca_e_Stampa.aspx.cs" AutoEventWireup="false" Inherits="StampaRapportiPdf.Pagine.Ricerca_e_Stampa" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Register TagPrefix="cc2" Namespace="S_Controls" Assembly="S_Controls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -79,7 +79,7 @@
 										<TD valign="top" align="left"><CC1:DATAPANEL id="DataPanelRicerca" runat="server" allowtitleexpandcollapse="True" collapseimageurl="../Images/up.gif"
 												cssclass="DataPanel75" collapsetext="Riduci" expandimageurl="../Images/down.gif" expandtext="Espandi" titletext="Ricerca "
 												collapsed="False" titlestyle-cssclass="TitleSearch">
-												<TABLE id="RicercaMain" cellSpacing="0" cellPadding="0" width="100%" border="0">
+												<TABLE id="RicercaMain" cellspacing="0" cellpadding="0" width="100%" border="0">
 													<TR>
 														<TD style="WIDTH: 122px; HEIGHT: 19px" width="122"></TD>
 														<TD style="WIDTH: 27px; HEIGHT: 19px" align="left"></TD>
@@ -98,24 +98,25 @@
 															<CC2:S_LABEL id="S_lblDa1" runat="server" width="24px">Da</CC2:S_LABEL></TD>
 														<TD align="left">&nbsp;
 															<UC1:CALENDARPICKER id="cldpkDaAssegnazione" runat="server"></UC1:CALENDARPICKER>
-															<ASP:COMPAREVALIDATOR id="cmpVldDaAssegnazione" runat="server" operator="LessThanEqual" type="Date" errormessage="La data iniziale dell' intervallo temporale selezionato deve essere minore di quella finale.">*</ASP:COMPAREVALIDATOR></TD>
+															<ASP:COMPAREVALIDATOR id="cmpVldDaAssegnazione" runat="server" errormessage="La data iniziale dell' intervallo temporale selezionato deve essere minore di quella finale."
+																type="Date" operator="LessThanEqual">*</ASP:COMPAREVALIDATOR></TD>
 														<TD style="WIDTH: 16px" align="left">
 															<CC2:S_LABEL id="S_lblA1" runat="server">A</CC2:S_LABEL></TD>
 														<TD align="left">&nbsp;
 															<UC1:CALENDARPICKER id="cldpkAAssegnazione" runat="server"></UC1:CALENDARPICKER>
-															<ASP:COMPAREVALIDATOR id="cmpVldAAssegnazione" runat="server" operator="GreaterThanEqual" type="Date">*</ASP:COMPAREVALIDATOR></TD>
+															<ASP:COMPAREVALIDATOR id="cmpVldAAssegnazione" runat="server" type="Date" operator="GreaterThanEqual">*</ASP:COMPAREVALIDATOR></TD>
 														<TD align="left">
 															<CC2:S_LABEL id="S_lblEdificio" runat="server">Edificio</CC2:S_LABEL></TD>
 														<TD align="left">
 															<CC2:S_COMBOBOX id="S_cmbEdificio" runat="server" width="280px"></CC2:S_COMBOBOX></TD>
 													</TR>
 													<TR>
-														<TD style="WIDTH: 150px; HEIGHT: 33px" align="left" colSpan="2">
-															<CC2:S_OPTIONBUTTON id="S_optSolNonComp" runat="server" checked="True" text="Non completate" groupname="gr1"></CC2:S_OPTIONBUTTON></TD>
+														<TD style="WIDTH: 150px; HEIGHT: 33px" align="left" colspan="2">
+															<CC2:S_OPTIONBUTTON id="S_optSolNonComp" runat="server" groupname="gr1" text="Non completate" checked="True"></CC2:S_OPTIONBUTTON></TD>
 														<TD style="HEIGHT: 33px" align="left">
-															<CC2:S_OPTIONBUTTON id="S_optSolComp" runat="server" text="Completate" groupname="gr1"></CC2:S_OPTIONBUTTON></TD>
-														<TD style="HEIGHT: 33px" align="left" colSpan="2">
-															<CC2:S_OPTIONBUTTON id="S_optDataComp" runat="server" text="Data di completamento " groupname="gr1"></CC2:S_OPTIONBUTTON></TD>
+															<CC2:S_OPTIONBUTTON id="S_optSolComp" runat="server" groupname="gr1" text="Completate"></CC2:S_OPTIONBUTTON></TD>
+														<TD style="HEIGHT: 33px" align="left" colspan="2">
+															<CC2:S_OPTIONBUTTON id="S_optDataComp" runat="server" groupname="gr1" text="Data di completamento "></CC2:S_OPTIONBUTTON></TD>
 														<TD style="HEIGHT: 33px" align="left">
 															<CC2:S_LABEL id="S_lblDitta" runat="server">Ditta</CC2:S_LABEL></TD>
 														<TD style="HEIGHT: 33px" align="left">
@@ -128,12 +129,13 @@
 															<CC2:S_LABEL id="S_lblDa2" runat="server">Da</CC2:S_LABEL></TD>
 														<TD style="HEIGHT: 51px" align="left">&nbsp;
 															<UC1:CALENDARPICKER id="cldpkDaCompletamento" runat="server"></UC1:CALENDARPICKER>
-															<ASP:COMPAREVALIDATOR id="cmpVldDaCompletamento" runat="server" operator="LessThanEqual" type="Date" errormessage="La data iniziale dell' intervallo temporale selezionato deve essere minore di quella finale.">*</ASP:COMPAREVALIDATOR></TD>
+															<ASP:COMPAREVALIDATOR id="cmpVldDaCompletamento" runat="server" errormessage="La data iniziale dell' intervallo temporale selezionato deve essere minore di quella finale."
+																type="Date" operator="LessThanEqual">*</ASP:COMPAREVALIDATOR></TD>
 														<TD style="WIDTH: 16px; HEIGHT: 51px" align="left">
 															<CC2:S_LABEL id="S_lblA2" runat="server">A</CC2:S_LABEL></TD>
 														<TD style="HEIGHT: 51px" align="left">&nbsp;
 															<UC1:CALENDARPICKER id="cldpkACompletamento" runat="server"></UC1:CALENDARPICKER>
-															<ASP:COMPAREVALIDATOR id="cmpVldACompletamento" runat="server" operator="GreaterThanEqual" type="Date">*</ASP:COMPAREVALIDATOR></TD>
+															<ASP:COMPAREVALIDATOR id="cmpVldACompletamento" runat="server" type="Date" operator="GreaterThanEqual">*</ASP:COMPAREVALIDATOR></TD>
 														<TD style="HEIGHT: 51px" align="left">
 															<CC2:S_LABEL id="S_lblCategoria" runat="server">Categoria</CC2:S_LABEL></TD>
 														<TD style="HEIGHT: 37px" align="left">

@@ -14,7 +14,7 @@ namespace WebCad
 	/// <summary>
 	/// Descrizione di riepilogo per _Default.
 	/// </summary>
-	public class _Default : System.Web.UI.Page    // System.Web.UI.Page
+	public class _Default : System.Web.UI.Page
 	{
 		protected string UrlParams;
 		protected string FromPaginaCreazioneRdl = String.Empty;

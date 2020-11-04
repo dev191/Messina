@@ -9,14 +9,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.Gestione
 {
 	/// <summary>
 	/// Descrizione di riepilogo per Addetti.
 	/// </summary>
-	public class Addetti : System.Web.UI.Page    // System.Web.UI.Page
+	public class Addetti : System.Web.UI.Page
 	{	
 		protected Csy.WebControls.DataPanel PanelRicerca;		
 		protected S_Controls.S_Button btnsRicerca;		
@@ -30,7 +30,8 @@ namespace TheSite.Gestione
 		public static string HelpLink = string.Empty;
 		TheSite.Gestione.EditAddetti _fp;
 		protected S_Controls.S_Button BtnReset;
-		clMyCollection _myColl = new clMyCollection();
+		protected S_Controls.S_ComboBox CmbProgetto;
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 	
 		private void Page_Load(object sender, System.EventArgs e)
 		{
@@ -39,7 +40,9 @@ namespace TheSite.Gestione
 			this.GridTitle1.hplsNuovo.Visible = _SiteModule.IsEditable;
 			this.DataGridRicerca.Columns[1].Visible = _SiteModule.IsEditable;				
 			if (!Page.IsPostBack)
-			{	BindDitte();
+			{	
+				BindProgetti();
+				BindDitte();
 				if(Context.Handler is TheSite.Gestione.EditAddetti) 
 					{	
 					_fp = (TheSite.Gestione.EditAddetti) Context.Handler;
@@ -57,7 +60,7 @@ namespace TheSite.Gestione
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;
 		}
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
@@ -83,6 +86,31 @@ namespace TheSite.Gestione
 			}			
 		}
 
+		private void BindProgetti()
+		{
+			
+			this.CmbProgetto.Items.Clear();
+		
+			TheSite.Classi.Progetti _Prog = new TheSite.Classi.Progetti();
+						
+			DataSet _MyDs = _Prog.GetData();			
+			
+			if (_MyDs.Tables[0].Rows.Count > 0)
+			{
+				CmbProgetto.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					_MyDs.Tables[0], "descrizione", "id_progetto", "- Selezionare un Progetto -", "0");				
+				this.CmbProgetto.DataTextField ="descrizione";
+				this.CmbProgetto.DataValueField  ="id_progetto";
+				this.CmbProgetto.DataBind();
+			}
+			else
+			{
+				string s_Messagggio = "- Nessun Progetto  -";
+				this.CmbProgetto.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+						
+			}			
+		}
+
 		#region Codice generato da Progettazione Web Form
 		override protected void OnInit(EventArgs e)
 		{
@@ -100,10 +128,10 @@ namespace TheSite.Gestione
 		private void InitializeComponent()
 		{    
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
+			this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
 			this.DataGridRicerca.ItemCommand += new System.Web.UI.WebControls.DataGridCommandEventHandler(this.DataGridRicerca_ItemCommand);
 			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
 			this.DataGridRicerca.ItemDataBound += new System.Web.UI.WebControls.DataGridItemEventHandler(this.DataGridRicerca_ItemDataBound);
-			this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}

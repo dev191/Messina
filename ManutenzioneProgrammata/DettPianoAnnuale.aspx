@@ -1,6 +1,6 @@
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <%@ Page language="c#" Codebehind="DettPianoAnnuale.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.DettPianoAnnuale" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -34,8 +34,8 @@
 		}	
 		</script>
 	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" onbeforeunload="ChiudiFiglia();" leftMargin="5" topMargin="0" rightMargin="0"
-		MS_POSITIONING="GridLayout">
+	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0"
+		rightMargin="0" MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" cellSpacing="0" cellPadding="0" width="100%" align="center" border="0">
 				<TBODY>
@@ -54,7 +54,7 @@
 									</tr>
 									<TR vAlign="top">
 										<TD vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" BorderColor="Gray" BorderWidth="1px"
-												AutoGenerateColumns="False" GridLines="Vertical" AllowPaging="True">
+												AutoGenerateColumns="False" GridLines="Vertical" AllowPaging="True" PageSize="60">
 												<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 												<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 												<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
@@ -120,7 +120,7 @@
 													</asp:BoundColumn>
 													<asp:BoundColumn Visible="False" DataField="BL_ID" HeaderText="BL_ID"></asp:BoundColumn>
 												</Columns>
-												<PagerStyle HorizontalAlign="Left" cssclass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
+												<PagerStyle HorizontalAlign="Left" CssClass="DataGridPagerStyle" Mode="NumericPages"></PagerStyle>
 											</asp:datagrid></TD>
 									</TR>
 									<tr>
@@ -210,5 +210,6 @@
 				</TBODY>
 			</TABLE>
 			</TD></TR></TBODY></TABLE></form>
-	</body><script language="javascript">parent.left.calcola();</script>
+		<script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

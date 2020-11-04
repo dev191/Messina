@@ -14,7 +14,7 @@ namespace TheSite.Admin
 	/// <summary>
 	/// Descrizione di riepilogo per EditUtenti.
 	/// </summary>
-	public class EditUtenti : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditUtenti : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsUserName;
 		protected S_Controls.S_TextBox txtsCognome;
@@ -41,6 +41,7 @@ namespace TheSite.Admin
 		int FunId = 0;
 		protected Csy.WebControls.MessagePanel PanelMess;
 		protected System.Web.UI.WebControls.RegularExpressionValidator rgeEmail;
+		protected S_Controls.S_ComboBox CmbProgetto;
 		private DataSet _DsListBox;
 	
 		private void Page_Load(object sender, System.EventArgs e)
@@ -84,6 +85,11 @@ namespace TheSite.Admin
 
 						this.lblFirstAndLast.Text = _Utente.GetFirstAndLastUser(_Dr);
 
+						if (_Dr["id_progetto"] != DBNull.Value)
+							 BindProgetti(int.Parse(_Dr["id_progetto"].ToString()));
+                        else
+							BindProgetti(0);
+
 						this.AggiornaListBox();
 //						this.txtsPassword.Enabled=false;
 //						this.txtConfermaPassword.Enabled=false;
@@ -96,6 +102,7 @@ namespace TheSite.Admin
 						this.btnElimina.Enabled = true;
 						this.btnsElimina.Visible = true;
 						this.btnsElimina.Attributes.Add("onclick", "return confirm('Si vuole effettuare la cancellazione?')");
+					  
 					}					
 				}
 				else
@@ -104,10 +111,37 @@ namespace TheSite.Admin
 					this.lblFirstAndLast.Visible = false;
 					this.btnsElimina.Visible = false;
 					this.txtsPassword.Text = "PASSWORD";
-					this.txtConfermaPassword.Text = txtsPassword.Text;					
+					this.txtConfermaPassword.Text = txtsPassword.Text;
+					BindProgetti(0);
 				}
 				ViewState["UrlReferrer"] = Request.UrlReferrer.ToString();
 			}
+		}
+		private void BindProgetti(int progetto)
+		{
+			
+			this.CmbProgetto.Items.Clear();
+		
+			TheSite.Classi.Progetti _Prog = new TheSite.Classi.Progetti();
+						
+			DataSet _MyDs = _Prog.GetData();			
+			
+			if (_MyDs.Tables[0].Rows.Count > 0)
+			{
+				this.CmbProgetto.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					_MyDs.Tables[0], "descrizione", "id_progetto", "- Selezionare un Progetto -", "0");				
+				this.CmbProgetto.DataTextField ="descrizione";
+				this.CmbProgetto.DataValueField  ="id_progetto";
+				this.CmbProgetto.DataBind();
+
+				CmbProgetto.SelectedValue =progetto.ToString();
+			}
+			else
+			{
+				string s_Messagggio = "- Nessun Progetto  -";
+				this.CmbProgetto.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));
+						
+			}			
 		}
 
 		#region Codice generato da Progettazione Web Form

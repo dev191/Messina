@@ -10,13 +10,14 @@ using System.Web.UI.WebControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 
 namespace TheSite.ManutenzioneProgrammata.Schedula
 {
 	/// <summary>
 	/// Descrizione di riepilogo per OttimizzaPianoSalva.
 	/// </summary>
-	public class OttimizzaPianoSalva : System.Web.UI.Page    // System.Web.UI.Page
+	public class OttimizzaPianoSalva : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Label lblpmp;
 		protected System.Web.UI.WebControls.TextBox txtAnno;
@@ -99,7 +100,7 @@ namespace TheSite.ManutenzioneProgrammata.Schedula
 		{	
 			Classi.ManOrdinaria.Richiesta  _Richiesta = new TheSite.Classi.ManOrdinaria.Richiesta();
 			DataSet _MyDs;
-			_MyDs = _Richiesta.GetAddetti(nomecompleto,bl_id);
+			_MyDs = _Richiesta.GetAddetti(nomecompleto,bl_id,0);
 			return _MyDs.Tables[0];
 		}
 		

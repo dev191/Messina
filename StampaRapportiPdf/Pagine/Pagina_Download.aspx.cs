@@ -9,7 +9,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using StampaRapportiPdf;
-using StampaRapportiPdf.Schemixsd;
 using S_Controls.Collections;
 using S_Controls;
 using ApplicationDataLayer;
@@ -18,6 +17,7 @@ using StampaRapportiPdf.Classi;
 using StampaRapportiPdf.WebControls;
 using System.IO;
 using System.Text;
+using  TheSite.StampaRapportiPDF.Schemixsd;
 
 
 namespace StampaRapportiPdf.Pagine
@@ -25,7 +25,7 @@ namespace StampaRapportiPdf.Pagine
 	/// <summary>
 	/// Descrizione di riepilogo per Pagina_Download.
 	/// </summary>
-	public class Pagina_Download : System.Web.UI.Page    // System.Web.UI.Page
+	public class Pagina_Download : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
 		protected S_Controls.S_Button S_btnRicerca;
@@ -99,6 +99,7 @@ namespace StampaRapportiPdf.Pagine
 		/// </summary>
 		private void InitializeComponent()
 		{    
+			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
 			this.S_btnRicerca.Click += new System.EventHandler(this.S_btnRicerca_Click);
 			this.S_btnEliminaTiitiFile.Click += new System.EventHandler(this.S_btnEliminaTiitiFile_Click);
 			this.lnkChiudi.Click += new System.EventHandler(this.lnkChiudi_Click);
@@ -125,13 +126,13 @@ namespace StampaRapportiPdf.Pagine
 		}
 		private void ricerca()
 		{
-			DatasetReport ds;
+			TheSite.StampaRapportiPDF.Schemixsd.DatasetReport ds;
 			ds = riempiDatasetDownload();
 			GridTitleDownLoad.NumeroRecords = Convert.ToString(ds.Tables["DownloadFile"].Rows.Count );
 			DataGridRicerca.DataSource = ds.Tables["DownloadFile"];
 			DataGridRicerca.DataBind();
 		}
-		private DatasetReport riempiDatasetDownload()
+		private TheSite.StampaRapportiPDF.Schemixsd.DatasetReport riempiDatasetDownload()
 		{
 			AgganciaDatalayer io_db  = new AgganciaDatalayer();
 			S_ControlsCollection clDatiRicerca = new S_ControlsCollection();
@@ -148,7 +149,7 @@ namespace StampaRapportiPdf.Pagine
 			io_db.NameProcedureDb = "rapportipdf.get_Download_Reports";
 			DataSet dsDatiRicerca = io_db.GetData(clDatiRicerca).Copy();
 
-			DatasetReport DsTipizzato = new DatasetReport();
+			TheSite.StampaRapportiPDF.Schemixsd.DatasetReport DsTipizzato = new TheSite.StampaRapportiPDF.Schemixsd.DatasetReport();
 			int i=0;
 			for(i=0; i<=dsDatiRicerca.Tables[0].Rows.Count-1;i++)
 			{ 
@@ -446,7 +447,7 @@ namespace StampaRapportiPdf.Pagine
 		protected void lnkDett_Click(object sender, CommandEventArgs e)
 		{
 			string id = (string)e.CommandArgument;
-			DatasetReport ds;
+			TheSite.StampaRapportiPDF.Schemixsd.DatasetReport ds;
 			DataSet dsOdl;
 			ds = riempiDatasetDettaglio(id);
 			riempiSchedaDettaglio(ds);
@@ -491,7 +492,7 @@ namespace StampaRapportiPdf.Pagine
 			string resultOdl = tmpOdl.Remove(tmpOdl.Length-1,1);
 			lblIntervalloOdl.Text = resultOdl;
 		}
-		private DatasetReport riempiDatasetDettaglio(string id)
+		private TheSite.StampaRapportiPDF.Schemixsd.DatasetReport riempiDatasetDettaglio(string id)
 		{
 			AgganciaDatalayer io_db  = new AgganciaDatalayer();
 			S_ControlsCollection clDatiRicerca = new S_ControlsCollection();
@@ -529,7 +530,7 @@ namespace StampaRapportiPdf.Pagine
 			}
 			return DsTipizzato;
 		}
-		private void riempiSchedaDettaglio(DatasetReport ds)
+		private void riempiSchedaDettaglio(TheSite.StampaRapportiPDF.Schemixsd.DatasetReport ds)
 		{
 			lblDataDiCreazione.Text           = ds.Tables["DownloadFile"].Rows[0]["data_created"].ToString();
 			lblTipologiaReport.Text           = ds.Tables["DownloadFile"].Rows[0]["tipologia_report"].ToString();

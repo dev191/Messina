@@ -14,7 +14,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per FullImage.
 	/// </summary>
-	public class FullImage : System.Web.UI.Page    // System.Web.UI.Page
+	public class FullImage : System.Web.UI.Page
 	{
 		protected System.Web.UI.HtmlControls.HtmlImage imgdoc;
 		protected WebControls.PageTitle PageTitle1;

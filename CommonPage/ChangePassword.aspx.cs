@@ -18,7 +18,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per ChangePassword.
 	/// </summary>
-	public class ChangePassword : System.Web.UI.Page    // System.Web.UI.Page
+	public class ChangePassword : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.RequiredFieldValidator rfvPassword;
 		protected Csy.WebControls.MessagePanel PanelMess;

@@ -14,7 +14,7 @@ namespace WebCad
 	/// <summary>
 	/// Descrizione di riepilogo per Stanze.
 	/// </summary>
-	public class Stanze : System.Web.UI.Page    // System.Web.UI.Page
+	public class Stanze : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid MyDataGrid1;
 		public string idbl=string.Empty;

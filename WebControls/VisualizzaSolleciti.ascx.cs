@@ -21,13 +21,21 @@ namespace TheSite.WebControls
 		private void Page_Load(object sender, System.EventArgs e)
 		{
 			idTextCod= txtWR_ID.ClientID;
-			btsCodice.Attributes.Add("onclick","ShowFrameVisSoll('" + idTextCod + "','idric',event);");  
+			string q="'prj=" + Progetto + "&idric'";
+			btsCodice.Attributes.Add("onclick","ShowFrameVisSoll('" + idTextCod + "'," + q + ",event);");  
 			Classi.SiteJavaScript.ShowFrameVisSollecito(Page,1);   
 			btsCodice.CausesValidation = false;
 			if (!Page.IsPostBack)
 			{
 			}
 		}
+		string _Progetto="";
+		public string Progetto
+		{
+			get {return _Progetto;}
+			set {_Progetto=value;}
+		}
+
 
 		#region Codice generato da Progettazione Web Form
 		override protected void OnInit(EventArgs e)

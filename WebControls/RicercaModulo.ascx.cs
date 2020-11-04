@@ -10,6 +10,7 @@ namespace TheSite.WebControls
 	public delegate void DelegateCodiceEdificio(string Cod);
 	public delegate void DelegateIDBLEdificio(string Cod);
 	public delegate void DelegateCodiceServizio();
+	public delegate void DelegatePresidio(string id);
 
 	/// <summary>
 	///		Descrizione di riepilogo per RicercaModulo.
@@ -26,6 +27,7 @@ namespace TheSite.WebControls
 		protected System.Web.UI.WebControls.Label lblCdC;
 		protected System.Web.UI.WebControls.Label lblBlId;
 		protected System.Web.UI.HtmlControls.HtmlInputHidden  hiddenidbl;
+		public System.Web.UI.HtmlControls.HtmlInputHidden idProg;
 		private Classi.ClassiDettaglio.Edificio _Edificio = new TheSite.Classi.ClassiDettaglio.Edificio("");
 		
 		public string idTextCod;
@@ -38,6 +40,13 @@ namespace TheSite.WebControls
 		public DelegateCodiceEdificio DelegateCodiceEdificio1;
 		public DelegateIDBLEdificio DelegateIDBLEdificio1;
 		public DelegateCodiceServizio DelegateCodiceServizio1;
+		public DelegatePresidio DelegatePresidio1;
+		protected System.Web.UI.WebControls.DropDownList CmbProgetto;
+		protected System.Web.UI.WebControls.Label lblProgetto;
+		public string varprj="0";
+		protected System.Web.UI.WebControls.Label presidio;
+		protected System.Web.UI.WebControls.Label LbLPresidio;
+		
         protected System.Web.UI.HtmlControls.HtmlTable tblModulo;
 
 		private void Page_Load(object sender, System.EventArgs e)
@@ -47,11 +56,82 @@ namespace TheSite.WebControls
 			idTextCod=txtsCodEdificio.ClientID;
 			idTextRic=txtRicerca.ClientID;
 			idModulo=this.ClientID;
-			//txtsCodEdificio.Attributes.Add("onchange","Verifica(this);");
+			if(!Page.IsPostBack)
+				BindProgetti();
+			if(Request["VarApp"]!=null)
+			{
+				if(Request["VarApp"]=="1")	
+				{
+					CmbProgetto.SelectedValue ="1";
+					varprj="1";
+					Progetto="1";
+				}
+				if(Request["VarApp"]=="2")	
+				{
+					CmbProgetto.SelectedValue ="2";
+					varprj="2";
+					Progetto="2";
+				}
+			}
+				//txtsCodEdificio.Attributes.Add("onchange","Verifica(this);");
 		}
 
 		#region Proprietà
+		private void BindProgetti()
+		{
+			
+			this.CmbProgetto.Items.Clear();
+		
+			TheSite.Classi.Progetti _Prog = new TheSite.Classi.Progetti();
+						
+			DataSet _MyDs = _Prog.GetData();			
+			
+			if (_MyDs.Tables[0].Rows.Count > 0)
+			{
+				this.CmbProgetto.DataSource = Classi.GestoreDropDownList.ItemBlankDataSource(
+					_MyDs.Tables[0], "descrizione", "id_progetto", "- Visualizza Tutti -", "0");				
+				this.CmbProgetto.DataTextField ="descrizione";
+				this.CmbProgetto.DataValueField  ="id_progetto";
+				this.CmbProgetto.DataBind();
+				CmbProgetto.Attributes.Add("onchange","setprj(this);"); 
+			}
+			else
+			{
+				string s_Messagggio = "- Nessun Progetto  -";
+				this.CmbProgetto.Items.Add(Classi.GestoreDropDownList.ItemMessaggio(s_Messagggio, "-1"));						
+			}			
 
+			if (Context.User.IsInRole("AVE") && Context.User.IsInRole("Vod"))
+			{
+				CmbProgetto.Visible =true;
+				lblProgetto.Visible=true;
+			}
+			else
+			{
+				CmbProgetto.Visible =false;
+				lblProgetto.Visible=false;
+				if (Context.User.IsInRole("AVE") && !Context.User.IsInRole("Vod"))
+				{
+					CmbProgetto.SelectedValue="1";
+					varprj="1";
+					Progetto="1";
+				}
+				if (!Context.User.IsInRole("AVE") && Context.User.IsInRole("Vod"))
+				{
+					CmbProgetto.SelectedValue="2";
+						varprj="2";
+					Progetto="2";
+				}
+				if (Context.User.IsInRole("AMMINISTRATORI") || Context.User.IsInRole("callcenter") )
+				{
+					CmbProgetto.Visible =true;
+					lblProgetto.Visible=true;
+				}
+
+			}
+
+		
+		}
 		// Indica che il controlle effettua la multiselezione
 		public string multiselect
 		{
@@ -83,6 +163,11 @@ namespace TheSite.WebControls
 			get {return  txtRicerca;}
 		}
 
+		public  System.Web.UI.WebControls.DropDownList cmbProgetto
+		{
+			get {return  CmbProgetto;}
+		}
+
 		public string BlId
 		{
 			get 
@@ -93,6 +178,8 @@ namespace TheSite.WebControls
 					return string.Empty;
 			}
 		}
+
+		
 		public string Idbl
 		{
 			get 
@@ -168,7 +255,32 @@ namespace TheSite.WebControls
 					return string.Empty;
 			}
 		}
+		public string Progetto
+		{
+			get 
+			{
+				return idProg.Value;
+			}
+			set {idProg.Value=value;}
+		}
 
+		public string pres
+		{
+			get 
+			{
+				return presidio.Text;
+			}
+			set {presidio.Text=value;}
+		}
+
+		public string presidio_edificio
+		{
+			get 
+			{
+				return LbLPresidio.Text;
+			}
+			set {LbLPresidio.Text=value;}
+		}
 
 		public string Email
 		{
@@ -234,10 +346,11 @@ namespace TheSite.WebControls
 				{
 					DelegateCodiceServizio1();
 					DelegateCodiceEdificio1(txtsCodEdificio.Text);
+					DelegatePresidio1(presidio.Text);
 				}
 
 				if (DelegateIDBLEdificio1!=null) 
-					DelegateIDBLEdificio1("");
+					DelegateIDBLEdificio1("0");
 
 				return;
 			}
@@ -245,6 +358,8 @@ namespace TheSite.WebControls
 			// Controllo che sia stata assegnata una funzione.
 			if (DelegateCodiceEdificio1!=null) 
 				DelegateCodiceEdificio1(txtsCodEdificio.Text);
+			 if (DelegatePresidio1!=null)
+				DelegatePresidio1(presidio.Text);
 
 			Classi.ClassiDettaglio.Edificio _MyEdificio = new TheSite.Classi.ClassiDettaglio.Edificio(Context.User.Identity.Name);
 
@@ -269,6 +384,14 @@ namespace TheSite.WebControls
 			s_Campus.Value = "";
 			_SCollection.Add(s_Campus);
 
+			S_Controls.Collections.S_Object s_progetto = new S_Controls.Collections.S_Object();
+			s_progetto.ParameterName = "p_progetto";
+			s_progetto.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
+			s_progetto.Direction = ParameterDirection.Input;
+			s_progetto.Index = 3;
+			s_progetto.Value = (Progetto=="")?0:int.Parse(Progetto);
+			_SCollection.Add(s_progetto);
+
 			DataSet _MyDs = _MyEdificio.GetData(_SCollection).Copy();  
 		
 			if (_MyDs.Tables[0].Rows.Count == 1)
@@ -278,8 +401,16 @@ namespace TheSite.WebControls
 				if (DelegateIDBLEdificio1!=null) 
 					DelegateIDBLEdificio1(_Dr["ID"].ToString());
 
+				if (DelegatePresidio1!=null) 
+					DelegatePresidio1(_Dr["ID"].ToString());
 				this.hiddenidbl.Value=_Dr["ID"].ToString();
-
+				if (_Dr["presidio"] != DBNull.Value)
+				{
+					if (_Dr["presidio"].ToString()=="1")
+						this.LbLPresidio.Text="SI";
+					else
+						this.LbLPresidio.Text="NO";
+				}
 				this._Edificio.BlId = (string) _Dr["BL_ID"];
 				this.lblBlId.Text = this._Edificio.BlId;
 
@@ -294,6 +425,7 @@ namespace TheSite.WebControls
 					this._Edificio.Address1 = (string) _Dr["INDIRIZZO"];
 					this.lblIndirizzo.Text = this._Edificio.Address1;
 				}
+
 				if (_Dr["CAMPUS"] != DBNull.Value)
 				{
 					this._Edificio.Campus = (string) _Dr["CAMPUS"];
@@ -323,8 +455,7 @@ namespace TheSite.WebControls
 				{
 					this._Edificio.Option2 = (string) _Dr["EMAIL"];
 					this.lblEmail.Value  = this._Edificio.Option2;
-				}
-				
+				}				
 			}
 			else
 			{
@@ -338,6 +469,7 @@ namespace TheSite.WebControls
 			
 
 			this.hiddenidbl.Value= string.Empty;
+			this.idProg.Value= string.Empty;
 
 			this.lblBlId.Text = string.Empty;
 
@@ -356,6 +488,10 @@ namespace TheSite.WebControls
 			this.lblCdC.Text = string.Empty;
 
 			this.lblEmail.Value=string.Empty;
+	
+			this.presidio.Text=string.Empty;
+
+
 		}
 
 

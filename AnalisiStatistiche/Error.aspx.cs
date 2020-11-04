@@ -14,7 +14,7 @@ namespace TheSite.AnalisiStatistiche
 	/// <summary>
 	/// Descrizione di riepilogo per Error.
 	/// </summary>
-	public class Error : System.Web.UI.Page    // System.Web.UI.Page
+	public class Error : System.Web.UI.Page
 	{
 		protected System.Web.UI.HtmlControls.HtmlGenericControl lblError;
 	

@@ -67,12 +67,16 @@ namespace TheSite.WebControls
 
 		void RicercaRichiedenti()
 		{
-						
+			string Progetto="";
+			if(Request.QueryString["VarApp"]!=null)
+				Progetto=Request.QueryString["VarApp"];
+			
 			string s_TestataScript = "<script language=\"javascript\">\n";
 			string s_CodaScript = "</script>\n";
 			Classi.ManOrdinaria.Richiesta  _Richiesta = new TheSite.Classi.ManOrdinaria.Richiesta();
 			this.RichiedenteShowInfo.Visible = true;
-			DataGridRichiedente.DataSource = _Richiesta.GetRichiedenti(this.NomeCompleto);
+			DataGridRichiedente.DataSource = _Richiesta.GetRichiedenti(this.NomeCompleto, "",Progetto,"");
+			//DataGridRichiedente.DataSource = _Richiesta.GetRichiedenti(this.NomeCompleto);
 			DataGridRichiedente.DataBind();
 			
 

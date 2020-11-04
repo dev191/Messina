@@ -15,7 +15,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per ListaStdApparecchiature.
 	/// </summary>
-	public class ListaStdApparecchiature : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaStdApparecchiature : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;
 		protected System.Web.UI.WebControls.DataGrid MyDataGrid1;

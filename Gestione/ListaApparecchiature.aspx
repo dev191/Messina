@@ -36,7 +36,7 @@
 	</HEAD>
 	<body onbeforeunload="parent.left.valorizza()" MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
-			<TABLE id="Table1" style="Z-INDEX: 101; LEFT: 8px; POSITION: absolute; TOP: 8px" cellSpacing="0"
+			<TABLE id="Table1" style="Z-INDEX: 101; POSITION: absolute; TOP: 8px; LEFT: 8px" cellSpacing="0"
 				cellPadding="0" width="100%" border="0">
 				<TR>
 					<TD align="center"><uc1:pagetitle id="PageTitle1" runat="server"></uc1:pagetitle></TD>
@@ -104,7 +104,7 @@
 									<HeaderStyle Width="20px"></HeaderStyle>
 									<ItemStyle HorizontalAlign="Center"></ItemStyle>
 									<ItemTemplate>
-										<asp:ImageButton ImageUrl="../Images/edit.gif" Runat="server" OnCommand="imageButton_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"id")+ "," + DataBinder.Eval(Container.DataItem,"date_dismiss")%>' ID="Imagebutton1">
+										<asp:ImageButton ImageUrl="../Images/edit.gif" Runat=server OnCommand="imageButton_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"id")+ "," + DataBinder.Eval(Container.DataItem,"date_dismiss")%>' ID="Imagebutton1">
 										</asp:ImageButton>
 									</ItemTemplate>
 								</asp:TemplateColumn>

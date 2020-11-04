@@ -1,51 +1,105 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.AnalisiStatistiche.wrapDb
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
+using System;
 
-using ApplicationDataLayer;
-using S_Controls.Collections;
-using System.Data;
+
 
 namespace TheSite.Classi.AnalisiStatistiche
 {
-  public class wrapDb : AbstractBase
-  {
-    private string _s_storedProcedureName;
+	/// <summary>
+	/// Descrizione di riepilogo per wrapDb.
+	/// </summary>
+	public class wrapDb : Classi.AbstractBase
+	{
+		private string _s_storedProcedureName;
+		public wrapDb()
+		{
+			//
+			// TODO: aggiungere qui la logica del costruttore
+			//
+		}
 
-    public override int Add(S_ControlsCollection CollezioneControlli) => base.Add(CollezioneControlli);
+		public override int Add(S_Controls.Collections.S_ControlsCollection CollezioneControlli)
+		{
+			return base.Add (CollezioneControlli);
+		}
+		public override bool Equals(object obj)
+		{
+			return base.Equals (obj);
+		}
+		 public override System.Data.DataSet GetData()
+		{
+					return null;
+		}
+		public override System.Data.DataSet GetData(S_Controls.Collections.S_ControlsCollection CollezioneControlli)
+		{
+			
+//			try
+//			{
+				
+				//				
+				System.Data.DataSet _DSet;
+				ApplicationDataLayer.OracleDataLayer _OraDl = new ApplicationDataLayer.OracleDataLayer(s_ConnStr);	
+			//	_DSet =  _OraDl.GetRows(CollezioneControlli, "PACK_ANALISI_STATISTICHE.GET_RDL_MESE_COMPLETATA").Copy();
+			    _DSet =  _OraDl.GetRows(CollezioneControlli, _s_storedProcedureName).Copy();
+				return _DSet;	
+//			}
+//			catch( System.Data.OracleClient.OracleException e) 
+//			{
+////				throw new Exception("ciao sono andrea e ti mando:" +  _DSet.Tables[0].Rows.Count.ToString());
+//			
+//				}
+//			catch(Exception ex)
+//			{
+//				throw ex;
+//			}
+		}
+		public override int Delete(S_Controls.Collections.S_ControlsCollection CollezioneControlli, int itemId)
+		{
+			return base.Delete (CollezioneControlli, itemId);
+		}
 
-    public override bool Equals(object obj) => base.Equals(obj);
+		protected override int ExecuteUpdate(S_Controls.Collections.S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			return 0;
+		}
+		public override string GetFirstAndLastUser(System.Data.DataRow Data)
+		{
+			return base.GetFirstAndLastUser (Data);
+		}
 
-    public override DataSet GetData() => (DataSet) null;
+		public override int GetHashCode()
+		{
+			return base.GetHashCode ();
+		}
+		public override System.Data.DataSet GetSingleData(int itemId)
+		{
+			return null;
+		}
+		public override string ToString()
+		{
+			return base.ToString ();
+		}
+		public override int Update(S_Controls.Collections.S_ControlsCollection CollezioneControlli, int itemId)
+		{
+			return base.Update (CollezioneControlli, itemId);
+		}
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli) => new OracleDataLayer(this.s_ConnStr).GetRows((object) CollezioneControlli, this._s_storedProcedureName).Copy();
+		/// <summary>
+		/// Imposta il nome della stored procedure
+		/// </summary>
+		public string s_storedProcedureName
+		{
+			get
+			{
+				return null;
+			}
+			set
+			{
+				_s_storedProcedureName = value;
+			}
+		}
+		
 
-    public override int Delete(S_ControlsCollection CollezioneControlli, int itemId) => base.Delete(CollezioneControlli, itemId);
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      return 0;
-    }
 
-    public override string GetFirstAndLastUser(DataRow Data) => base.GetFirstAndLastUser(Data);
-
-    public override int GetHashCode() => base.GetHashCode();
-
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
-
-    public override string ToString() => base.ToString();
-
-    public override int Update(S_ControlsCollection CollezioneControlli, int itemId) => base.Update(CollezioneControlli, itemId);
-
-    public string s_storedProcedureName
-    {
-      get => (string) null;
-      set => this._s_storedProcedureName = value;
-    }
-  }
+	}
 }

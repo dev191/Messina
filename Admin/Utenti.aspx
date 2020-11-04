@@ -1,8 +1,8 @@
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Page language="c#" Codebehind="Utenti.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Admin.Utenti" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Page language="c#" Codebehind="Utenti.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Admin.Utenti" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -13,7 +13,8 @@
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
 		<LINK href="../Css/MainSheet.css" type="text/css" rel="stylesheet">
 	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0" rightMargin="0" MS_POSITIONING="GridLayout">
+	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0"
+		rightMargin="0" MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; POSITION: absolute; TOP: 0px" cellSpacing="0"
 				cellPadding="0" width="100%" align="center" border="0">
@@ -25,36 +26,39 @@
 						<TABLE id="tblForm" cellSpacing="1" cellPadding="1" align="center">
 							<TR>
 								<TD style="HEIGHT: 25%" vAlign="top" align="left">
-									<Collapse:DataPanel id="PanelRicerca" runat="server" ExpandImageUrl="../Images/down.gif"
-										CollapseImageUrl="../Images/up.gif" CollapseText="Riduci" ExpandText="Espandi" Collapsed="False"
-										AllowTitleExpandCollapse="True" TitleText="Ricerca" CssClass="DataPanel75" TitleStyle-CssClass="TitleSearch">
+									<Collapse:DataPanel id="PanelRicerca" runat="server" ExpandImageUrl="../Images/down.gif" CollapseImageUrl="../Images/up.gif"
+										CollapseText="Riduci" ExpandText="Espandi" Collapsed="False" AllowTitleExpandCollapse="True" TitleText="Ricerca"
+										CssClass="DataPanel75" TitleStyle-CssClass="TitleSearch">
 										<TABLE id="tblSearch100" cellSpacing="0" cellPadding="2" border="0">
 											<TR>
 												<TD align="right" width="20%">Utente</TD>
 												<TD width="30%">
-													<cc1:s_textbox id="txtsUserName" runat="server" DBSize="50" width="75%" DBDirection="Input" DBParameterName="p_UserName"></cc1:s_textbox></TD>
-												<TD align="right" width="20%"></TD>
-												<TD width="30%"></TD>
+													<cc1:s_textbox id="txtsUserName" runat="server" DBParameterName="p_UserName" DBDirection="Input"
+														width="75%" DBSize="50"></cc1:s_textbox></TD>
+												<TD align="right" width="20%">Progetto</TD>
+												<TD width="30%">
+													<CC1:S_COMBOBOX id="CmbProgetto" tabIndex="8" runat="server" Width="176px" dbindex="5" dbsize="1"
+														dbdirection="Input" dbparametername="p_progetto" dbdatatype="Integer"></CC1:S_COMBOBOX></TD>
 											</TR>
 											<TR>
 												<TD align="right">Cognome</TD>
 												<TD>
-													<cc1:s_textbox id="txtsCognome" tabIndex="1" runat="server" DBSize="50" width="75%" DBParameterName="p_Cognome"
-														DBIndex="1"></cc1:s_textbox></TD>
+													<cc1:s_textbox id="txtsCognome" tabIndex="1" runat="server" DBParameterName="p_Cognome" width="75%"
+														DBSize="50" DBIndex="1"></cc1:s_textbox></TD>
 												<TD align="right">Nome</TD>
 												<TD>
-													<cc1:s_textbox id="txtsNome" tabIndex="2" runat="server" DBSize="50" width="75%" DBParameterName="p_Nome"
+													<cc1:s_textbox id="txtsNome" tabIndex="2" runat="server" DBParameterName="p_Nome" width="75%" DBSize="50"
 														DBIndex="2"></cc1:s_textbox></TD>
 											</TR>
 											<TR>
 												<TD align="right">Email</TD>
 												<TD>
-													<cc1:s_textbox id="txtsEmail" tabIndex="3" runat="server" DBSize="255" width="75%" DBDirection="Input"
-														DBParameterName="p_Email" DBIndex="3"></cc1:s_textbox></TD>
+													<cc1:s_textbox id="txtsEmail" tabIndex="3" runat="server" DBParameterName="p_Email" DBDirection="Input"
+														width="75%" DBSize="255" DBIndex="3"></cc1:s_textbox></TD>
 												<TD align="right">Telefono</TD>
 												<TD>
-													<cc1:s_textbox id="txtsTelefono" tabIndex="3" runat="server" DBSize="10" width="75%" DBDirection="Input"
-														DBParameterName="p_Telefono" DBIndex="4"></cc1:s_textbox></TD>
+													<cc1:s_textbox id="txtsTelefono" tabIndex="3" runat="server" DBParameterName="p_Telefono" DBDirection="Input"
+														width="75%" DBSize="10" DBIndex="4"></cc1:s_textbox></TD>
 											</TR>
 											<TR>
 												<TD align="left" colSpan="3">
@@ -106,5 +110,6 @@
 				</TR>
 			</TABLE>
 		</form>
-	</body><script language="javascript">parent.left.calcola();</script>
+		<script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

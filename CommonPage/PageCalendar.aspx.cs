@@ -14,7 +14,7 @@ namespace TheSite.CommonPage
 	/// <summary>
 	/// Descrizione di riepilogo per PageCalendar.
 	/// </summary>
-	public class PageCalendar : System.Web.UI.Page    // System.Web.UI.Page
+	public class PageCalendar : System.Web.UI.Page
 	{
 		public DateTime d1 = DateTime.Now;
 		protected System.Web.UI.WebControls.HyperLink HyperLink1;

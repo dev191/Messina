@@ -18,7 +18,7 @@ namespace TheSite.Gestione
 	/// <summary>
 	/// Descrizione di riepilogo per EditRuoli.
 	/// </summary>
-	public class PianoFerie : System.Web.UI.Page    // System.Web.UI.Page
+	public class PianoFerie : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsNome;
 		protected S_Controls.S_TextBox txtsCognome;

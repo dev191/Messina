@@ -1,13 +1,13 @@
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <%@ Page language="c#" Codebehind="ListaStanze.aspx.cs" AutoEventWireup="false" Inherits="TheSite.CommonPage.ListaStanze" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
 		<title>ListaStanze</title>
-		<meta name="GENERATOR" Content="Microsoft Visual Studio .NET 7.1">
-		<meta name="CODE_LANGUAGE" Content="C#">
-		<meta name="vs_defaultClientScript" content="JavaScript">
-		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
+		<meta content="C#" name="CODE_LANGUAGE">
+		<meta content="JavaScript" name="vs_defaultClientScript">
+		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
 		<LINK href="../Css/MainSheet.css" type="text/css" rel="stylesheet">
 		<script language="javascript">
 		function Chiudi()
@@ -28,20 +28,16 @@
 			<TABLE id="Table1" style="Z-INDEX: 101; LEFT: 8px; POSITION: absolute; TOP: 8px" width="100%"
 				border="0">
 				<TR>
-					<TD class="TDCommon">
-						<asp:hyperlink id="HyperLink1" runat="server" NavigateUrl="javascript:Chiudi()" Height="16px" Width="56px">
+					<TD class="TDCommon"><asp:hyperlink id="HyperLink1" runat="server" Width="56px" Height="16px" NavigateUrl="javascript:Chiudi()">
 							<img border="0" src="../Images/chiudi.gif" /></asp:hyperlink></TD>
 				</TR>
 				<TR>
-					<TD width="100%">
-						<uc1:GridTitle id="GridTitle1" runat="server"></uc1:GridTitle>
-						<asp:DataGrid id="MyDataGrid1" runat="server" Width="100%" BorderColor="Gray" BorderStyle="None"
-							BorderWidth="1px" BackColor="White" CellPadding="4" AutoGenerateColumns="False" CssClass="DataGrid"
-							AllowPaging="True" GridLines="Vertical" PageSize="5">
+					<TD width="100%"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="MyDataGrid1" AllowCustomPaging="True" runat="server" Width="100%" PageSize="5"
+							GridLines="Vertical" AllowPaging="True" CssClass="DataGrid" AutoGenerateColumns="False" CellPadding="4" BackColor="White" BorderWidth="1px" BorderStyle="None" BorderColor="Gray">
+							<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 							<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 							<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 							<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
-							<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
 							<Columns>
 								<asp:TemplateColumn>
 									<HeaderStyle Width="30px"></HeaderStyle>
@@ -52,17 +48,14 @@
 								</asp:TemplateColumn>
 								<asp:BoundColumn DataField="Stanza" HeaderText="Descrizione Stanza"></asp:BoundColumn>
 								<asp:BoundColumn DataField="Piano" HeaderText="Piano"></asp:BoundColumn>
-								<asp:BoundColumn DataField="Edificio" HeaderText="Edificio"></asp:BoundColumn>
+								<asp:BoundColumn DataField="edificio" HeaderText="Edificio"></asp:BoundColumn>
 								<asp:BoundColumn Visible="False" DataField="id"></asp:BoundColumn>
 							</Columns>
 							<PagerStyle HorizontalAlign="Left" ForeColor="Black" BackColor="Silver" Mode="NumericPages"></PagerStyle>
-						</asp:DataGrid>
-					</TD>
+						</asp:datagrid></TD>
 				</TR>
 				<TR>
-					<TD class="TDCommon">
-						<asp:hyperlink id="HyperLinkChiudi2" runat="server" NavigateUrl="javascript:Chiudi()" Height="16px"
-							Width="56px">
+					<TD class="TDCommon"><asp:hyperlink id="HyperLinkChiudi2" runat="server" Width="56px" Height="16px" NavigateUrl="javascript:Chiudi()">
 							<img border="0" src="../Images/chiudi.gif" /></asp:hyperlink></TD>
 				</TR>
 			</TABLE>

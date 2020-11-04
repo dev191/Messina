@@ -9,13 +9,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using TheSite.Classi.ClassiDettaglio;
+using S_Controls.Collections;
+using ApplicationDataLayer.DBType;
+using MyCollection;
 
 namespace TheSite.CommonPage
 {
 	/// <summary>
 	/// Descrizione di riepilogo per ListaApparecchiature.
 	/// </summary>
-	public class ListaApparecchiature : System.Web.UI.Page    // System.Web.UI.Page
+	public class ListaApparecchiature : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.HyperLink HyperLinkChiudi2;
 		protected System.Web.UI.WebControls.DataGrid MyDataGrid1;
@@ -76,7 +79,7 @@ namespace TheSite.CommonPage
 				
 				this.dismissione =Request.QueryString["dismissione"];
 
-				Execute();
+				Execute(true);
 			}
 
 			String scriptString = "<script language=JavaScript> var idUsercontrol='" + this.idUsercontrol +"'";
@@ -86,6 +89,7 @@ namespace TheSite.CommonPage
 
 			if(!this.IsClientScriptBlockRegistered("clientScript"))
 				this.RegisterClientScriptBlock("clientScript", scriptString);
+			
 		}
 
 #region Proprietà
@@ -142,8 +146,7 @@ namespace TheSite.CommonPage
 			set {ViewState["s_stanza"] = value;}
 		}
 #endregion
-
-		private void Execute()
+		private S_Controls.Collections.S_ControlsCollection GetControl()
 		{
 			///Istanzio un nuovo oggetto Collection per aggiungere i parametri
 			S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
@@ -195,21 +198,6 @@ namespace TheSite.CommonPage
 			s_p_eq_id.Value = this.codapp;
 			_SCollection.Add(s_p_eq_id);
 
-//			S_Controls.Collections.S_Object s_p_dimesso = new S_Controls.Collections.S_Object();
-//			s_p_dimesso.ParameterName = "p_dismesso";
-//			s_p_dimesso.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
-//			s_p_dimesso.Direction = ParameterDirection.Input;			
-//			s_p_dimesso.Index = _SCollection.Count;
-//			s_p_dimesso.Size =8;		
-//			
-//			if(this.dismissione=="SI") 
-//				s_p_dimesso.Value =Classi.DismissioneType.SI;		
-//			else
-//				s_p_dimesso.Value =Classi.DismissioneType.NO;
-//		
-//			_SCollection.Add(s_p_dimesso);
-
-
 			S_Controls.Collections.S_Object s_p_piano = new S_Controls.Collections.S_Object();
 			s_p_piano.ParameterName = "p_piano";
 			s_p_piano.DbType = ApplicationDataLayer.DBType.CustomDBType.Integer;
@@ -226,23 +214,61 @@ namespace TheSite.CommonPage
 			s_p_stanza.Index = _SCollection.Count;
 			s_p_stanza.Value = (this.stanza=="")?0:int.Parse(this.stanza);
 			_SCollection.Add(s_p_stanza);
-			///Istanzio la Classe per eseguire la Strore Procedure
-			///
-DataSet Ds;
+			return _SCollection;
+		}
+		private void Execute(bool reset)
+		{
+			S_Controls.Collections.S_ControlsCollection _SCollection =GetControl();
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = _SCollection.Count +1;
+			s_p_pageindex.Value=MyDataGrid1.CurrentPageIndex+1;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = _SCollection.Count +1;
+			s_p_pagesize.Value= MyDataGrid1.PageSize;			
+			_SCollection.Add(s_p_pagesize);
+			
+
+			DataSet Ds;
 			if(lettura=="")
 			{
 				Classi.AnagrafeImpianti.Apparecchiature  _Apparecchiature =new Classi.AnagrafeImpianti.Apparecchiature(Context.User.Identity.Name);
 				Ds=_Apparecchiature.RicercaApparecchiaturaPS(_SCollection);
+
+				if (reset==true)
+				{
+					_SCollection  =GetControl();
+					int _totalRecords = _Apparecchiature.RicercaApparecchiaturaPSCount(_SCollection);
+					this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+				}
 			}
 			else
 			{
 				
 				Classi.ClassiAnagrafiche.LetturaContatori  _ApparecchiatureConLett =new Classi.ClassiAnagrafiche.LetturaContatori(Context.User.Identity.Name);
-				Ds=_ApparecchiatureConLett.RicercaApparecchiaturaPS(_SCollection);
+				Ds=_ApparecchiatureConLett.RicercaApparecchiaturaPSPaging(_SCollection);
+
+				if (reset==true)
+				{
+					_SCollection  =GetControl();
+					int _totalRecords = _ApparecchiatureConLett.RicercaApparecchiaturaPSCount(_SCollection);
+					this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+				}
 			}
-			GridTitle1.NumeroRecords=(Ds.Tables[0].Rows.Count)==0? "0":Ds.Tables[0].Rows.Count.ToString();
-			MyDataGrid1.DataSource= Ds;
-			MyDataGrid1.DataBind(); 
+
+			
+			MyDataGrid1.DataSource =Ds.Tables[0];
+			this.MyDataGrid1.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.MyDataGrid1.DataBind();
+
+ 
 		}
 
 		#region Codice generato da Progettazione Web Form
@@ -272,7 +298,7 @@ DataSet Ds;
 		{
 			///Imposto la Nuova Pagina
 			MyDataGrid1.CurrentPageIndex=e.NewPageIndex;
-			Execute();
+			Execute(false);
 		}
 
 		private void MyDataGrid1_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)

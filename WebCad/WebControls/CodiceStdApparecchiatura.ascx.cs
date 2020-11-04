@@ -75,7 +75,7 @@ namespace WebCad.WebControls
 			//Verivico se è presente la combo servizio e presente e la aggiungo come parametro
 			if (NameComboServizio!="")
 			{
-				S_ComboBox cbs=(S_ComboBox)this.Page.FindControl(NameComboServizio);
+				DropDownList cbs=(DropDownList)this.Page.FindControl(NameComboServizio);
 				if (cbs!=null )
 				{
 					_StrBld.Append("var val1=\"&servizioid=\";\n");

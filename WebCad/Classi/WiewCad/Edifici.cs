@@ -107,13 +107,13 @@ namespace WebCad.WiewCad
 			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
 			DataSet _Ds;	
 	
-			S_Controls.Collections.S_Object id_bl = new S_Object();
-			id_bl.ParameterName = "id_bl";
-			id_bl.DbType = CustomDBType.Integer;
-			id_bl.Direction = ParameterDirection.Input;
-			id_bl.Value = itemId;
-			id_bl.Index = CollezioneControlli.Count + 1;
-			CollezioneControlli.Add(id_bl);
+			S_Controls.Collections.S_Object pId_bl = new S_Object();
+			pId_bl.ParameterName = "pId_bl";
+			pId_bl.DbType = CustomDBType.Integer;
+			pId_bl.Direction = ParameterDirection.Input;
+			pId_bl.Value = itemId;
+			pId_bl.Index = CollezioneControlli.Count + 1;
+			CollezioneControlli.Add(pId_bl);
 
 			S_Controls.Collections.S_Object s_Cursor = new S_Object();
 			s_Cursor.ParameterName = "IO_CURSOR";
@@ -126,7 +126,7 @@ namespace WebCad.WiewCad
 			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
 			string s_StrSql = "PACK_CAD.SP_GETEDIFICIPIANI";	
 			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
-													
+			int CountDati = _Ds.Tables[0].Rows.Count;									
 			return _Ds;		
 		}
 

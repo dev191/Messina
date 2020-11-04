@@ -8,15 +8,15 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using MyCollection;
 using System.Reflection;
-using StampaRapportiPdf.Classi;
 
 namespace TheSite.ManutenzioneCorrettiva
 {
 	/// <summary>
 	/// Descrizione di riepilogo per EditCompletamento.
 	/// </summary>
-	public class EditCompletamento : System.Web.UI.Page    // System.Web.UI.Page
+	public class EditCompletamento : System.Web.UI.Page
 	{
 		public Classi.SiteModule _SiteModule;
 		bool IsEditable=false;
@@ -45,14 +45,14 @@ namespace TheSite.ManutenzioneCorrettiva
 
 			}
 		}
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 		#region Codice generato da Progettazione Web Form

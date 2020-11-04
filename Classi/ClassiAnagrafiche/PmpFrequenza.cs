@@ -1,216 +1,284 @@
-ï»¿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ClassiAnagrafiche.PmpFrequenza
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
-using System.Web;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.ClassiAnagrafiche
 {
-  public class PmpFrequenza : AbstractBase
-  {
-    public override DataSet GetData()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(0);
-      controlsCollection.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_PMPFREQUENZA.SP_GETALLPMPFREQUENZA";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+	/// <summary>
+	/// Descrizione di riepilogo per PmpFrequenza.
+	/// </summary>
+	public class PmpFrequenza : AbstractBase
+	{
+		#region Dichiarazioni
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_PMPFREQUENZA.SP_GETPMPFREQUENZA";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		#endregion
+		public PmpFrequenza()
+		{
+		}
+		
 
-    public DataTable GetDatiXsl(
-      string CodiceFrequenza,
-      string DescrizioneFreequenza,
-      string SSql)
-    {
-      int num1 = 0;
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("pFrequenza");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Size(256);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject1).set_Value((object) CodiceFrequenza);
-      controlsCollection.Add(sObject1);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("pFrequenzaDes");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Size(256);
-      S_Object sObject4 = sObject3;
-      int num4 = num3;
-      int num5 = num4 + 1;
-      ((ParameterObject) sObject4).set_Index(num4);
-      ((ParameterObject) sObject3).set_Value((object) DescrizioneFreequenza);
-      controlsCollection.Add(sObject3);
-      S_Object sObject5 = new S_Object();
-      ((ParameterObject) sObject5).set_ParameterName("PCursor");
-      ((ParameterObject) sObject5).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject5).set_Direction(ParameterDirection.Output);
-      S_Object sObject6 = sObject5;
-      int num6 = num5;
-      int num7 = num6 + 1;
-      ((ParameterObject) sObject6).set_Index(num6);
-      controlsCollection.Add(sObject5);
-      return new OracleDataLayer(this.s_ConnStr).GetRows((object) controlsCollection, SSql).Copy().Tables[0];
-    }
+		#region Metodi Pubblici
+		public override DataSet GetData()
+		{
+			DataSet _Ds;
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection(); 
 
-    public DataSet GetDataStag(string Frequenza)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_frequenza");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) Frequenza);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_PMPFREQUENZA.SP_GETFREQSTAG";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+			S_Controls.Collections.S_Object S_Cursor=new S_Object();
+			S_Cursor.ParameterName ="IO_CURSOR";
+			S_Cursor.DbType=CustomDBType.Cursor;
+			S_Cursor.Direction=ParameterDirection.Output;
+			S_Cursor.Index = 0;
+		
+			CollezioneControlli.Add(S_Cursor);
 
-    public override DataSet GetSingleData(int itemId)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_PMPFREQUENZA.SP_GETSINGLEPMPFREQUENZA";
-      DataSet dataSet = oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-      this.Id = itemId;
-      return dataSet;
-    }
+			ApplicationDataLayer.OracleDataLayer _OraDL=new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_PMPFREQUENZA.SP_GETALLPMPFREQUENZA";
+			_Ds=_OraDL.GetRows(CollezioneControlli,s_StrSql).Copy();
+			return _Ds;
+		}
+		public override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+		DataSet _Ds;
 
-    public void DeleteFreqStag(int frequenza)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("fk_frequenza");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject).set_Index(0);
-      ((ParameterObject) sObject).set_Value((object) frequenza);
-      controlsCollection.Add(sObject);
-      new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) controlsCollection, "PACK_PMPFREQUENZA.SP_DeletePMPFREQUENZAStag");
-    }
 
-    public void InsertFreqStag(int frequenza, string strfrequenza, int Mese, int servizio)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_frequenza");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject1).set_Value((object) strfrequenza);
-      controlsCollection.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("fk_frequenza");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject2).set_Value((object) frequenza);
-      controlsCollection.Add(sObject2);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("P_mese_std");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject3).set_Value((object) Mese);
-      controlsCollection.Add(sObject3);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("p_servizio");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject4).set_Index(((CollectionBase) controlsCollection).Count);
-      ((ParameterObject) sObject4).set_Value((object) servizio);
-      controlsCollection.Add(sObject4);
-      new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) controlsCollection, "PACK_PMPFREQUENZA.SP_INSERTPMPFREQUENZAStag");
-    }
+		S_Controls.Collections.S_Object S_Cursor=new S_Object();
+		S_Cursor.ParameterName ="IO_CURSOR";
+        S_Cursor.DbType=CustomDBType.Cursor;
+		S_Cursor.Direction=ParameterDirection.Output;
+		S_Cursor.Index = CollezioneControlli.Count + 1;
+		
+		CollezioneControlli.Add(S_Cursor);
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      int num1 = ((CollectionBase) CollezioneControlli).Count + 1;
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(num1);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_CurrentUser");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Index(num1);
-      ((ParameterObject) sObject2).set_Value((object) HttpContext.Current.User.Identity.Name);
-      int num2 = num1 + 1;
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_Operazione");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Index(num2);
-      ((ParameterObject) sObject3).set_Value((object) Operazione.ToString());
-      int num3 = num2 + 1;
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("p_IdOut");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject4).set_Index(num3);
-      CollezioneControlli.Add(sObject1);
-      CollezioneControlli.Add(sObject2);
-      CollezioneControlli.Add(sObject3);
-      CollezioneControlli.Add(sObject4);
-      return new OracleDataLayer(this.s_ConnStr).GetRowsAffected((object) CollezioneControlli, "PACK_PMPFREQUENZA.SP_EXECUTEPMPFREQUENZA");
-    }
-  }
+		ApplicationDataLayer.OracleDataLayer _OraDL=new OracleDataLayer(s_ConnStr);
+		string s_StrSql = "PACK_PMPFREQUENZA.SP_GETPMPFREQUENZA";
+		_Ds=_OraDL.GetRows(CollezioneControlli,s_StrSql).Copy();
+		return _Ds;
+		}
+		public DataTable GetDatiXsl( string CodiceFrequenza, string DescrizioneFreequenza, string SSql)
+		{
+			int cnt= 0;
+			DataSet _Ds;
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+			
+			S_Object pFrequenza = new S_Object();
+			pFrequenza.ParameterName = "pFrequenza";
+			pFrequenza.DbType = CustomDBType.VarChar;
+			pFrequenza.Direction = ParameterDirection.Input;
+			pFrequenza.Size = 256;
+			pFrequenza.Index = cnt++;
+			pFrequenza.Value =  CodiceFrequenza;
+			CollezioneControlli.Add(pFrequenza);
+
+			S_Object pFrequenzaDes = new S_Object();
+			pFrequenzaDes.ParameterName = "pFrequenzaDes";
+			pFrequenzaDes.DbType = CustomDBType.VarChar;
+			pFrequenzaDes.Direction = ParameterDirection.Input;
+			pFrequenzaDes.Size =256;
+			pFrequenzaDes.Index = cnt++;
+			pFrequenzaDes.Value =  DescrizioneFreequenza;
+			CollezioneControlli.Add(pFrequenzaDes);
+
+			S_Controls.Collections.S_Object S_Cursor=new S_Object();
+			S_Cursor.ParameterName ="PCursor";
+			S_Cursor.DbType=CustomDBType.Cursor;
+			S_Cursor.Direction=ParameterDirection.Output;
+			S_Cursor.Index = cnt++;
+		
+			CollezioneControlli.Add(S_Cursor);
+			ApplicationDataLayer.OracleDataLayer _OraDL=new OracleDataLayer(s_ConnStr);
+			_Ds=_OraDL.GetRows(CollezioneControlli,SSql).Copy();
+			return _Ds.Tables[0];
+		}
+		public DataSet GetDataStag(string Frequenza)
+		{
+			DataSet _Ds;
+
+
+			S_ControlsCollection _SColl = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_Id = new S_Object();
+			s_Id.ParameterName = "p_frequenza";
+			s_Id.DbType = CustomDBType.VarChar;
+			s_Id.Direction = ParameterDirection.Input;
+			s_Id.Index = 0;
+			s_Id.Value = Frequenza;
+			_SColl.Add(s_Id);
+
+			S_Controls.Collections.S_Object S_Cursor=new S_Object();
+			S_Cursor.ParameterName ="IO_CURSOR";
+			S_Cursor.DbType=CustomDBType.Cursor;
+			S_Cursor.Direction=ParameterDirection.Output;
+			S_Cursor.Index = _SColl.Count + 1;
+			_SColl.Add(S_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDL=new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_PMPFREQUENZA.SP_GETFREQSTAG";
+			_Ds=_OraDL.GetRows(_SColl,s_StrSql).Copy();
+			return _Ds;
+		}
+		public override DataSet GetSingleData(int itemId)
+		{
+			DataSet _Ds;
+
+			S_ControlsCollection _SColl = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_Id = new S_Object();
+			s_Id.ParameterName = "p_id";
+			s_Id.DbType = CustomDBType.Integer;
+			s_Id.Direction = ParameterDirection.Input;
+			s_Id.Index = 0;
+			s_Id.Value = itemId;
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+
+			_SColl.Add(s_Id);
+			_SColl.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_PMPFREQUENZA.SP_GETSINGLEPMPFREQUENZA";	
+			_Ds = _OraDl.GetRows(_SColl, s_StrSql).Copy();			
+
+			this.Id = itemId;
+			return _Ds;	
+		}
+
+
+
+        #endregion
+
+		#region Proprietà Pubbliche
+		#endregion
+		
+		public void DeleteFreqStag(int frequenza)
+		{
+
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
+			S_Controls.Collections.S_Object s_freq = new S_Object();
+			s_freq.ParameterName = "fk_frequenza";
+			s_freq.DbType = CustomDBType.Integer;
+			s_freq.Direction = ParameterDirection.Input;
+			s_freq.Index = 0;
+			s_freq.Value = frequenza;
+			CollezioneControlli.Add(s_freq);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+			_OraDl.GetRowsAffected(CollezioneControlli, "PACK_PMPFREQUENZA.SP_DeletePMPFREQUENZAStag");
+				
+		}
+		public void InsertFreqStag(int frequenza,string strfrequenza,int Mese, int servizio )
+		{
+			S_ControlsCollection CollezioneControlli=new S_ControlsCollection();
+			S_Controls.Collections.S_Object s_freq = new S_Object();
+			s_freq.ParameterName = "p_frequenza";
+			s_freq.DbType = CustomDBType.VarChar;
+			s_freq.Direction = ParameterDirection.Input;
+			s_freq.Index = CollezioneControlli.Count;
+			s_freq.Value = strfrequenza;
+			CollezioneControlli.Add(s_freq);
+
+
+			s_freq = new S_Object();
+			s_freq.ParameterName = "fk_frequenza";
+			s_freq.DbType = CustomDBType.Integer;
+			s_freq.Direction = ParameterDirection.Input;
+			s_freq.Index = CollezioneControlli.Count;
+			s_freq.Value = frequenza;
+			CollezioneControlli.Add(s_freq);
+
+			s_freq = new S_Object();
+			s_freq.ParameterName = "P_mese_std";
+			s_freq.DbType = CustomDBType.Integer;
+			s_freq.Direction = ParameterDirection.Input;
+			s_freq.Index = CollezioneControlli.Count;
+			s_freq.Value = Mese;
+			CollezioneControlli.Add(s_freq);
+
+			s_freq = new S_Object();
+			s_freq.ParameterName = "p_servizio";
+			s_freq.DbType = CustomDBType.Integer;
+			s_freq.Direction = ParameterDirection.Input;
+			s_freq.Index = CollezioneControlli.Count;
+			s_freq.Value = servizio;
+			CollezioneControlli.Add(s_freq);
+
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+			_OraDl.GetRowsAffected(CollezioneControlli, "PACK_PMPFREQUENZA.SP_INSERTPMPFREQUENZAStag");
+		}
+
+		#region Metodi privati
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			int i_MaxParametri = CollezioneControlli.Count + 1;			
+
+			// Id
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			s_IdIn.ParameterName = "p_Id";
+			s_IdIn.DbType = CustomDBType.Integer;
+			s_IdIn.Direction = ParameterDirection.Input;
+			s_IdIn.Index = i_MaxParametri;
+			s_IdIn.Value = itemId;
+						
+//			// UTENTE
+
+			S_Controls.Collections.S_Object s_CurrentUser = new S_Object();
+			s_CurrentUser.ParameterName = "p_CurrentUser";
+			s_CurrentUser.DbType = CustomDBType.VarChar;
+			s_CurrentUser.Direction = ParameterDirection.Input;
+			s_CurrentUser.Index = i_MaxParametri;
+			s_CurrentUser.Value = System.Web.HttpContext.Current.User.Identity.Name;
+
+			i_MaxParametri ++;
+			
+			// TIPO OPERAZIONE
+
+			S_Controls.Collections.S_Object s_Operazione = new S_Object();
+			s_Operazione.ParameterName = "p_Operazione";
+			s_Operazione.DbType = CustomDBType.VarChar;
+			s_Operazione.Direction = ParameterDirection.Input;
+			s_Operazione.Index = i_MaxParametri;
+			s_Operazione.Value = Operazione.ToString();
+
+			i_MaxParametri ++;
+
+			// OUT
+
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			s_IdOut.ParameterName = "p_IdOut";
+			s_IdOut.DbType = CustomDBType.Integer;
+			s_IdOut.Direction = ParameterDirection.Output;
+			s_IdOut.Index = i_MaxParametri;
+				
+			CollezioneControlli.Add(s_IdIn);	
+			CollezioneControlli.Add(s_CurrentUser);	
+			CollezioneControlli.Add(s_Operazione);
+			CollezioneControlli.Add(s_IdOut);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+
+			int i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "PACK_PMPFREQUENZA.SP_EXECUTEPMPFREQUENZA");
+				
+			return i_Result;
+		
+		}
+
+
+		#endregion
+
+
+
+	}
 }

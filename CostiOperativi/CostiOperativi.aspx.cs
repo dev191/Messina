@@ -8,15 +8,16 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using MyCollection;
 using System.Reflection;
-using StampaRapportiPdf.Classi;
+
 
 namespace TheSite.CostiOperativi
 {
 	/// <summary>
 	/// Descrizione di riepilogo per CostiOperativi.
 	/// </summary>
-	public class CostiOperativi : System.Web.UI.Page    // System.Web.UI.Page
+	public class CostiOperativi : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Button BntIndietro;
 		public Classi.SiteModule _SiteModule;
@@ -70,16 +71,16 @@ namespace TheSite.CostiOperativi
 
 		private void BntIndietro_Click(object sender, System.EventArgs e)
 		{
-			Server.Transfer("../ManutenzioneCorrettiva/SfogliaRdl.aspx");
+			Server.Transfer("../ManutenzioneCorrettiva/SfogliaRdlPaging.aspx");
 		}
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 		

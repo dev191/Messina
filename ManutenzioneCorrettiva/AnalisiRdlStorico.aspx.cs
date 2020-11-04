@@ -10,14 +10,14 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.ManutenzioneCorretiva
 {
 	/// <summary>
 	/// Descrizione di riepilogo per AnalisiRdlStorico.
 	/// </summary>
-	public class AnalisiRdlStorico : System.Web.UI.Page    // System.Web.UI.Page
+	public class AnalisiRdlStorico : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
 		protected WebControls.GridTitle GridTitle1;
@@ -26,21 +26,21 @@ namespace TheSite.ManutenzioneCorretiva
 		public static int FunId = 0;
 		public static string HelpLink = string.Empty;
 
-		clMyCollection _myColl = new clMyCollection();
-		protected System.Web.UI.WebControls.Button btnsChiudi;
+		MyCollection.clMyCollection _myColl = new clMyCollection();
+		//protected System.Web.UI.WebControls.Button btnsChiudi;
 		protected System.Web.UI.WebControls.Button btnsExcel;		
 		AnalisiRdl _fp;	
 	
 		
 		
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{ 
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 
@@ -54,6 +54,7 @@ namespace TheSite.ManutenzioneCorretiva
 			HelpLink = _SiteModule.HelpLink;
 			this.PageTitle1.Title = _SiteModule.ModuleTitle;
 			this.GridTitle1.hplsNuovo.Visible = false;	
+			//btnsChiudi.Attributes.Add("onclick","javascript:history.back();");
 		           
 			carica_record();
 			
@@ -92,7 +93,6 @@ namespace TheSite.ManutenzioneCorretiva
 		private void InitializeComponent()
 		{    
 			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
-			this.btnsChiudi.Click += new System.EventHandler(this.btnsChiudi_Click);
 			this.btnsExcel.Click += new System.EventHandler(this.btnsExcel_Click);
 			this.Load += new System.EventHandler(this.Page_Load);
 
@@ -156,12 +156,6 @@ namespace TheSite.ManutenzioneCorretiva
 		{		
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;			
 			carica_record();
-		}
-
-		private void btnsChiudi_Click(object sender, System.EventArgs e)
-		{
-			Server.Transfer("AnalisiRdl.aspx");
-		
 		}
 
 		private void btnsExcel_Click(object sender, System.EventArgs e)

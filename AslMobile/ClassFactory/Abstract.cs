@@ -4,12 +4,12 @@ using System.Data.OracleClient;
 
 namespace TheSite.AslMobile
 {
-	//public enum ExecuteType
-	//{
-	//	Insert ,
-	//	Update ,
-	//	Delete 		
-	//}
+	public enum ExecuteType
+	{
+		Insert ,
+		Update ,
+		Delete 		
+	}
 
 	/// <summary>
 	/// Descrizione di riepilogo per Abstract.

@@ -18,7 +18,7 @@ namespace WebCad.Edifici
 	/// <summary>
 	/// Descrizione di riepilogo per NavigazioneAppDEMO.
 	/// </summary>
-	public class NavigazioneAppDEMO : System.Web.UI.Page    // System.Web.UI.Page
+	public class NavigazioneAppDEMO : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid MyDataGrid1;
 		protected WebControls.GridTitle GridTitle1; 

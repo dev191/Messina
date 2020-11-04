@@ -1,159 +1,228 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ClassiAnagrafiche.Enti
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
+using System;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
-using System.Web;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.ClassiAnagrafiche
 {
-  public class Enti : AbstractBase
-  {
-    private string s_Name = string.Empty;
+	/// <summary>
+	/// Descrizione di riepilogo per Enti.
+	/// </summary>
+	public class Enti : AbstractBase
+	{
 
-    public override DataSet GetData()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("io_cursor");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(0);
-      controlsCollection.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_ENTI.BindDescrizioni";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+		#region Dichiarazioni
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli)
-    {
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_ENTI.GETENTI";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		private string s_Name = string.Empty;
 
-    public override DataSet GetSingleData(int itemId)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("pIdEnti");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("io_cursor");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_ENTI.GetEntiById";
-      DataSet dataSet = oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-      this.Id = itemId;
-      return dataSet;
-    }
+		#endregion
 
-    public DataSet GetProvince()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(1);
-      controlsCollection.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_ENTI.BindProvincie";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+		public Enti()
+		{
+			//
+			// TODO: aggiungere qui la logica del costruttore
+			//
+		}
+		//public Enti(int Id)	: this(Id, string.Empty) {}
 
-    public DataSet GetComuni(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("io_cursor");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_ENTI.BindComuni";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+//		public Enti(int Id, string Name) 
+//		{
+//			this.Id = Id;
+//			this.Name = Name;
+//		}
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      int num1 = ((CollectionBase) CollezioneControlli).Count + 1;
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      int num2 = 0;
-      S_Object sObject1 = new S_Object();
-      S_Object sObject2 = new S_Object();
-      S_Object sObject3 = new S_Object();
-      switch (Operazione.ToString().ToUpper())
-      {
-        case "UPDATE":
-          ((ParameterObject) sObject1).set_ParameterName("pId");
-          ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-          ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-          ((ParameterObject) sObject1).set_Index(num1);
-          ((ParameterObject) sObject1).set_Value((object) itemId);
-          CollezioneControlli.Add(sObject1);
-          ((ParameterObject) sObject2).set_ParameterName("pcurrentuser");
-          ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-          ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-          ((ParameterObject) sObject2).set_Index(num1);
-          ((ParameterObject) sObject2).set_Value((object) HttpContext.Current.User.Identity.Name);
-          int num3 = num1 + 1;
-          CollezioneControlli.Add(sObject2);
-          ((ParameterObject) sObject3).set_ParameterName("pOut");
-          ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-          ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-          ((ParameterObject) sObject3).set_Index(num3);
-          CollezioneControlli.Add(sObject3);
-          num2 = oracleDataLayer.GetRowsAffected((object) CollezioneControlli, "pack_enti.UpdateEnti");
-          break;
-        case "DELETE":
-          ((ParameterObject) sObject1).set_ParameterName("pId");
-          ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-          ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-          ((ParameterObject) sObject1).set_Index(num1);
-          ((ParameterObject) sObject1).set_Value((object) itemId);
-          CollezioneControlli.Add(sObject1);
-          ((ParameterObject) sObject3).set_ParameterName("pOut");
-          ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-          ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-          ((ParameterObject) sObject3).set_Index(num1);
-          CollezioneControlli.Add(sObject3);
-          num2 = oracleDataLayer.GetRowsAffected((object) CollezioneControlli, "pack_enti.DeleteEnti");
-          break;
-        case "INSERT":
-          ((ParameterObject) sObject2).set_ParameterName("pcurrentuser");
-          ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-          ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-          ((ParameterObject) sObject2).set_Index(num1);
-          ((ParameterObject) sObject2).set_Value((object) HttpContext.Current.User.Identity.Name);
-          int num4 = num1 + 1;
-          CollezioneControlli.Add(sObject2);
-          ((ParameterObject) sObject3).set_ParameterName("pOut");
-          ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-          ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-          ((ParameterObject) sObject3).set_Index(num4);
-          CollezioneControlli.Add(sObject3);
-          num2 = oracleDataLayer.GetRowsAffected((object) CollezioneControlli, "pack_enti.InsertEnti");
-          break;
-      }
-      return num2;
-    }
-  }
+
+	#region Metodi Pubblici
+
+		public override DataSet GetData()
+		{			
+			DataSet _Ds;
+					
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "io_cursor";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 0;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_ENTI.BindDescrizioni";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;				
+		}
+		
+		
+		public override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_ENTI.GETENTI";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}
+
+		public override DataSet GetSingleData(int itemId)
+		{
+			DataSet _Ds;
+
+			S_ControlsCollection _SColl = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_Id = new S_Object();
+			s_Id.ParameterName = "pIdEnti";
+			s_Id.DbType = CustomDBType.Integer;
+			s_Id.Direction = ParameterDirection.Input;
+			s_Id.Index = 0;
+			s_Id.Value = itemId;
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "io_cursor";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+
+			_SColl.Add(s_Id);
+			_SColl.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_ENTI.GetEntiById";	
+			_Ds = _OraDl.GetRows(_SColl, s_StrSql).Copy();			
+
+			this.Id = itemId;
+			return _Ds;		
+		}
+
+			
+		public DataSet GetProvince()
+		{
+			DataSet _Ds;
+			
+			S_ControlsCollection CollezioneControlli = new  S_ControlsCollection();
+								
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_ENTI.BindProvincie";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}
+
+		public DataSet GetComuni(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
+			
+			
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "io_cursor";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_ENTI.BindComuni";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;		
+		}
+
+
+	#endregion
+
+		#region Metodi Private
+
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			int i_MaxParametri = CollezioneControlli.Count + 1;			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			int i_Result =0;
+			S_Controls.Collections.S_Object s_IdIn = new S_Object();
+			S_Controls.Collections.S_Object s_CurrentUser = new S_Object();
+			S_Controls.Collections.S_Object s_IdOut = new S_Object();
+			switch(Operazione.ToString().ToUpper())
+			{
+				case "UPDATE":
+					s_IdIn.ParameterName = "pId";
+					s_IdIn.DbType = CustomDBType.Integer;
+					s_IdIn.Direction = ParameterDirection.Input;
+					s_IdIn.Index = i_MaxParametri;
+					s_IdIn.Value = itemId;
+					CollezioneControlli.Add(s_IdIn);
+
+					s_CurrentUser.ParameterName = "pcurrentuser";
+					s_CurrentUser.DbType = CustomDBType.VarChar;
+					s_CurrentUser.Direction = ParameterDirection.Input;
+					s_CurrentUser.Index = i_MaxParametri;
+					s_CurrentUser.Value = System.Web.HttpContext.Current.User.Identity.Name;
+					i_MaxParametri ++;
+					CollezioneControlli.Add(s_CurrentUser);
+
+					
+					s_IdOut.ParameterName = "pOut";
+					s_IdOut.DbType = CustomDBType.Integer;
+					s_IdOut.Direction = ParameterDirection.Output;
+					s_IdOut.Index = i_MaxParametri;
+					CollezioneControlli.Add(s_IdOut);
+					i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "pack_enti.UpdateEnti");
+					break;
+				case "DELETE":
+
+					s_IdIn.ParameterName = "pId";
+					s_IdIn.DbType = CustomDBType.Integer;
+					s_IdIn.Direction = ParameterDirection.Input;
+					s_IdIn.Index = i_MaxParametri;
+					s_IdIn.Value = itemId;
+					CollezioneControlli.Add(s_IdIn);
+
+					s_IdOut.ParameterName = "pOut";
+					s_IdOut.DbType = CustomDBType.Integer;
+					s_IdOut.Direction = ParameterDirection.Output;
+					s_IdOut.Index = i_MaxParametri;
+					CollezioneControlli.Add(s_IdOut);
+					i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "pack_enti.DeleteEnti");
+					break;
+				case "INSERT":
+
+					s_CurrentUser.ParameterName = "pcurrentuser";
+					s_CurrentUser.DbType = CustomDBType.VarChar;
+					s_CurrentUser.Direction = ParameterDirection.Input;
+					s_CurrentUser.Index = i_MaxParametri;
+					s_CurrentUser.Value = System.Web.HttpContext.Current.User.Identity.Name;
+					i_MaxParametri ++;
+					CollezioneControlli.Add(s_CurrentUser);
+
+
+					s_IdOut.ParameterName = "pOut";
+					s_IdOut.DbType = CustomDBType.Integer;
+					s_IdOut.Direction = ParameterDirection.Output;
+					s_IdOut.Index = i_MaxParametri;
+					CollezioneControlli.Add(s_IdOut);
+					i_Result = _OraDl.GetRowsAffected(CollezioneControlli, "pack_enti.InsertEnti");
+					break;
+			}
+			return i_Result;
+		}
+
+		#endregion
+	}
 }

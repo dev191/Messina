@@ -10,14 +10,14 @@ using System.Web.UI.WebControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using StampaRapportiPdf.Classi;
+using MyCollection;
 
 namespace TheSite.ManutenzioneProgrammata
 {
 	/// <summary>
 	/// Descrizione di riepilogo per PianoAnnuale.
 	/// </summary>
-	public class PianoAnnuale : System.Web.UI.Page    // System.Web.UI.Page
+	public class PianoAnnuale : System.Web.UI.Page
 	{
 		protected S_Controls.S_ComboBox cmbsServizio;
 		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
@@ -35,12 +35,12 @@ namespace TheSite.ManutenzioneProgrammata
 		protected System.Web.UI.WebControls.Repeater rptFrequenze;
 		public static string HelpLink = string.Empty;
 
-		clMyCollection _myColl = new clMyCollection();
+		MyCollection.clMyCollection _myColl = new clMyCollection();
 		protected System.Web.UI.WebControls.Panel PagePanel;
 		protected System.Web.UI.WebControls.Button cmdReset;
 		DettPianoAnnuale _fp;
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
@@ -78,7 +78,7 @@ namespace TheSite.ManutenzioneProgrammata
 							_myColl.SetValues(this.Page.Controls);		
 							//_myColl.SetValues(this.RicercaModulo1);
 							RicercaModulo1.Ricarica();
-							Ricerca();
+							Ricerca(true);
 						}
 					}					
 				} 
@@ -177,6 +177,8 @@ namespace TheSite.ManutenzioneProgrammata
 		/// </summary>
 		private void InitializeComponent()
 		{    
+			this.cmbsAnno.SelectedIndexChanged += new System.EventHandler(this.cmbsAnno_SelectedIndexChanged);
+			this.cmbsServizio.SelectedIndexChanged += new System.EventHandler(this.cmbsServizio_SelectedIndexChanged);
 			this.btnsRicerca.Click += new System.EventHandler(this.btnsRicerca_Click);
 			this.cmdReset.Click += new System.EventHandler(this.cmdReset_Click);
 			this.lkbInfo.Click += new System.EventHandler(this.lkbInfo_Click);
@@ -190,8 +192,9 @@ namespace TheSite.ManutenzioneProgrammata
 		#endregion
 
 		private void btnsRicerca_Click(object sender, System.EventArgs e)
-		{			
-			Ricerca();
+		{	
+			DataGridRicerca.CurrentPageIndex =0;
+			Ricerca(true);
 		}
 
 		private void DataGridRicerca_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
@@ -227,7 +230,7 @@ namespace TheSite.ManutenzioneProgrammata
 					int i_red = 0;
 					int i_green = 0;
 					int i_blue = 0;
-					string s_colore= Colora(Convert.ToInt16(e.Item.Cells[index].Text));
+					string s_colore= Colora(Convert.ToInt32(e.Item.Cells[index].Text));
 					i_red = Convert.ToInt16(s_colore.Substring(0,2),16);
 					i_green = Convert.ToInt16(s_colore.Substring(2,2),16);
 					i_blue = Convert.ToInt16(s_colore.Substring(4,2),16);				
@@ -280,10 +283,10 @@ namespace TheSite.ManutenzioneProgrammata
 		private void DataGridRicerca_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
 		{
 			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;			
-			Ricerca();
+			Ricerca(false);
 
 		}		
-		private void Ricerca()
+		private void Ricerca(bool reset)
 		{
 			Classi.ManProgrammata.Planner _Planner = new TheSite.Classi.ManProgrammata.Planner(Context.User.Identity.Name);						
 			S_ControlsCollection _SCollection = new S_ControlsCollection();			
@@ -324,32 +327,39 @@ namespace TheSite.ManutenzioneProgrammata
 			s_p_Servizio.Value = (cmbsServizio.SelectedValue ==string.Empty)? 0:Int32.Parse(cmbsServizio.SelectedValue);			
 			_SCollection.Add(s_p_Servizio);
 		
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DataGridRicerca.CurrentPageIndex +1;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DataGridRicerca.PageSize;			
+			_SCollection.Add(s_p_pagesize);
+
 			DataSet _MyDs = _Planner.GetData(_SCollection).Copy();
 
+			if (reset==true)
+			{
+
+				_SCollection.RemoveAt(_SCollection.Count -1); 
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				_SCollection.RemoveAt(_SCollection.Count -1); 
+				_SCollection.RemoveAt(_SCollection.Count -1);
+				int _totalRecords = _Planner.GetDataCount(_SCollection);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+			}
+
+			DataGridRicerca.Visible =true;
 			this.DataGridRicerca.DataSource = _MyDs.Tables[0];
-
-			DataGridRicerca.Visible = true;
-
-			if (_MyDs.Tables[0].Rows.Count == 0 )
-			{
-				DataGridRicerca.CurrentPageIndex=0;
-			}
-			else
-			{
-				int Pagina = 0;
-				if ((_MyDs.Tables[0].Rows.Count % DataGridRicerca.PageSize) >0)
-				{
-					Pagina ++;
-				}
-				if (DataGridRicerca.PageCount != Convert.ToInt16((_MyDs.Tables[0].Rows.Count / DataGridRicerca.PageSize) + Pagina))
-				{					
-					DataGridRicerca.CurrentPageIndex=0;					
-				}
-			}
-			
-			this.DataGridRicerca.DataBind();
-			
-			this.GridTitle1.NumeroRecords = _MyDs.Tables[0].Rows.Count.ToString();	
+			this.DataGridRicerca.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+			this.DataGridRicerca.DataBind();	
 		}
 
 		private void lkbInfo_Click(object sender, System.EventArgs e)
@@ -377,6 +387,15 @@ namespace TheSite.ManutenzioneProgrammata
 			}
 		}
 
+		private void cmbsAnno_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
+			DataGridRicerca.Visible = false;
+		}
+
+		private void cmbsServizio_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
+			DataGridRicerca.Visible = false;
+		}
 
 		private void cmdReset_Click(object sender, System.EventArgs e)
 		{

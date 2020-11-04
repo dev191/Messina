@@ -1,9 +1,9 @@
-<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Page language="c#" Codebehind="ProcedurePassi.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.ProcedurePassi" %>
 <%@ Register TagPrefix="uc1" TagName="UserPmp" Src="../WebControls/UserPmp.ascx" %>
+<%@ Page language="c#" Codebehind="ProcedurePassi.aspx.cs" AutoEventWireup="false" Inherits="TheSite.ManutenzioneProgrammata.ProcedurePassi" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="uc1" TagName="GridTitle" Src="../WebControls/GridTitle.ascx" %>
+<%@ Register TagPrefix="Collapse" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -14,7 +14,8 @@
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
 		<LINK href="../Css/MainSheet.css" type="text/css" rel="stylesheet">
 	</HEAD>
-	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0" rightMargin="0" MS_POSITIONING="GridLayout">
+	<body onbeforeunload="parent.left.valorizza()" bottomMargin="0" leftMargin="5" topMargin="0"
+		rightMargin="0" MS_POSITIONING="GridLayout">
 		<script language="javascript">
 		
 			function Pulisci(des,cod,codnum)
@@ -47,8 +48,8 @@
 								<TBODY>
 									<TR>
 										<TD vAlign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" TitleStyle-CssClass="TitleSearch" CssClass="DataPanel75"
-												ExpandImageUrl="../Images/down.gif" CollapseImageUrl="../Images/up.gif" CollapseText="Riduci" ExpandText="Espandi"
-												Collapsed="False" AllowTitleExpandCollapse="True" TitleText="Ricerca">
+												ExpandImageUrl="../Images/down.gif" CollapseImageUrl="../Images/up.gif" CollapseText="Riduci" ExpandText="Espandi" Collapsed="False"
+												AllowTitleExpandCollapse="True" TitleText="Ricerca">
 												<TABLE id="tblSearch100" cellSpacing="1" cellPadding="2" border="0">
 													<TBODY>
 														<TR>
@@ -90,7 +91,7 @@
 					</tr>
 					<TR vAlign="top">
 						<TD vAlign="top" align="center"><uc1:gridtitle id="GridTitle1" runat="server"></uc1:gridtitle><asp:datagrid id="DataGridRicerca" runat="server" CssClass="DataGrid" BorderColor="Gray" GridLines="Vertical"
-								AutoGenerateColumns="False" BorderWidth="1px" AllowPaging="True">
+								AutoGenerateColumns="False" BorderWidth="1px" AllowPaging="True" AllowCustomPaging="True">
 								<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
 								<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
 								<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
@@ -100,7 +101,8 @@
 										<HeaderStyle Width="3%"></HeaderStyle>
 										<ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
 										<ItemTemplate>
-											<asp:HyperLink ImageUrl="~/images/edit.gif" NavigateUrl='<%# "DettProcedurePassi.aspx?pmp=" + DataBinder.Eval(Container.DataItem,"ID") + "&pmp_id=" + DataBinder.Eval(Container.DataItem,"Attivita")%>' runat="server" ID="Hyperlink1"/>
+											<asp:HyperLink id=Hyperlink1 runat="server" NavigateUrl='<%# "DettProcedurePassi.aspx?pmp=" + DataBinder.Eval(Container.DataItem,"ID") + "&amp;pmp_id=" + DataBinder.Eval(Container.DataItem,"Attivita")+ "&descserv=" + DataBinder.Eval(Container.DataItem,"servizio")+ "&std=" + DataBinder.Eval(Container.DataItem,"description")%>' ImageUrl="~/images/edit.gif">
+											</asp:HyperLink>
 										</ItemTemplate>
 									</asp:TemplateColumn>
 									<asp:BoundColumn DataField="Servizio" HeaderText="Servizio"></asp:BoundColumn>
@@ -116,5 +118,6 @@
 				</TBODY>
 			</TABLE>
 			</TD></TR></TBODY></TABLE></form>
-	</body><script language="javascript">parent.left.calcola();</script>
+		<script language="javascript">parent.left.calcola();</script>
+	</body>
 </HTML>

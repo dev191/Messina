@@ -18,7 +18,7 @@ namespace TheSite.AnagrafeImpianti
 	/// <summary>
 	/// Descrizione di riepilogo per SfogliaRdl.
 	/// </summary>
-	public class RichiesteApparecchiatura : System.Web.UI.Page    // System.Web.UI.Page
+	public class RichiesteApparecchiatura : System.Web.UI.Page
 	{
 		protected S_Controls.S_TextBox txtsRichiesta;
 		protected S_Controls.S_Button btnsRicerca;

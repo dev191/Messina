@@ -1,84 +1,117 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.ManProgrammata.CompletaOrdine
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
+using System;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
 namespace TheSite.Classi.ManProgrammata
 {
-  public class CompletaOrdine : AbstractBase
-  {
-    private string username = (string) null;
-    private OracleDataLayer _OraDl;
+	/// <summary>
+	/// Descrizione di riepilogo per CompletaOrdine.
+	/// </summary>
+	public class CompletaOrdine:AbstractBase
+	{
+		string username=null;
+		private ApplicationDataLayer.OracleDataLayer _OraDl;
+		public CompletaOrdine()
+		{
+				_OraDl = new OracleDataLayer(s_ConnStr);
+		}
+		public CompletaOrdine(string UserName):this()
+		{
+		  this.username =UserName; 
+		}
+		public void beginTransaction()
+		{
+			_OraDl.BeginTransaction();
+		}
 
-    public CompletaOrdine() => this._OraDl = new OracleDataLayer(this.s_ConnStr);
+		public void commitTransaction()
+		{
+			_OraDl.CommitTransaction();			
+		}
 
-    public CompletaOrdine(string UserName)
-      : this()
-      => this.username = UserName;
+		public void rollbackTransaction()
+		{
+			_OraDl.RollbackTransaction();
+		}
 
-    public void beginTransaction() => this._OraDl.BeginTransaction();
+		public override DataSet GetData()
+		{
+			return null;
+		}
+		public override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+			return null;
+		}
+		public override DataSet GetSingleData(int itemId)
+		{
+			return null;
+		}
+		public DataSet CompletaWO(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
 
-    public void commitTransaction() => this._OraDl.CommitTransaction();
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count+1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			string s_StrSql = "PACK_MAN_PROG.CompletaWO";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public void rollbackTransaction() => this._OraDl.RollbackTransaction();
+			return _Ds;		
+		}
+		public DataSet AggiornaWO(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
 
-    public override DataSet GetData() => (DataSet) null;
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count+1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			string s_StrSql = "PACK_MAN_PROG.AggiornaWO";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli) => (DataSet) null;
+			return _Ds;		
+		}
+		public DataSet AggiornaWr(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;		
 
-    public override DataSet GetSingleData(int itemId) => (DataSet) null;
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();			
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count +1;
+			CollezioneControlli.Add(s_Cursor);
+			
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_MAN_PROG.AggiornaWR";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
 
-    public DataSet CompletaWO(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      string str = "PACK_MAN_PROG.CompletaWO";
-      return this._OraDl.GetRows((object) CollezioneControlli, str).Copy();
-    }
+			return _Ds;		
+		}
+		#region Metodi Private
 
-    public DataSet AggiornaWO(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      string str = "PACK_MAN_PROG.AggiornaWO";
-      return this._OraDl.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			int i_Result = 0;				
+			return i_Result;
+		}
 
-    public DataSet AggiornaWr(S_ControlsCollection CollezioneControlli)
-    {
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_MAN_PROG.AggiornaWR";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
+		#endregion
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      return 0;
-    }
-  }
+	}
 }

@@ -1,8 +1,8 @@
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Page language="c#" Codebehind="GraficiMor.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnalisiStatistiche.GraficiMor" %>
-<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
-<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
+<%@ Page language="c#" Codebehind="GraficiMor.aspx.cs" AutoEventWireup="false" Inherits="TheSite.AnalisiStatistiche.GraficiMor" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -35,18 +35,18 @@
 										<TD valign="top" align="left"><CC2:DATAPANEL id="DataPanelRicerca" runat="server" allowtitleexpandcollapse="True" collapseimageurl="../Images/up.gif"
 												cssclass="DataPanel75" collapsetext="Riduci" expandimageurl="../Images/down.gif" expandtext="Espandi" titletext="Ricerca "
 												collapsed="False" titlestyle-cssclass="TitleSearch">
-												<TABLE id="TabellaRicercaMaster" cellSpacing="0" cellPadding="0" width="100%" border="0">
+												<TABLE id="TabellaRicercaMaster" border="0" cellSpacing="0" cellPadding="0" width="100%">
 													<TR>
 														<TD>
-															<TABLE id="tblSearch100" cellSpacing="1" cellPadding="1" width="100%" border="0">
+															<TABLE id="tblSearch100" border="0" cellSpacing="1" cellPadding="1" width="100%">
 																<TR>
-																	<TD align="left" width="10%">Da</TD>
-																	<TD align="left" width="40%">
+																	<TD width="10%" align="left">Da</TD>
+																	<TD width="40%" align="left">
 																		<UC1:CALENDARPICKER id="DataPkInit" runat="server"></UC1:CALENDARPICKER>
 																		<ASP:COMPAREVALIDATOR id="ValidatorDataInit" tabIndex="11" runat="server" type="Date" operator="LessThanEqual"
 																			errormessage="La data iniziale dell' intervallo temporale selezionato deve essere minore di quella finale.">*</ASP:COMPAREVALIDATOR></TD>
-																	<TD align="left" width="10%">A</TD>
-																	<TD align="left" width="40%">
+																	<TD width="10%" align="left">A</TD>
+																	<TD width="40%" align="left">
 																		<UC1:CALENDARPICKER id="DataPkEnd" runat="server"></UC1:CALENDARPICKER>
 																		<ASP:COMPAREVALIDATOR id="ValidatorDataEnd" tabIndex="12" runat="server" type="Date" operator="GreaterThanEqual">*</ASP:COMPAREVALIDATOR>
 																		<SCRIPT language="javascript">
@@ -91,56 +91,56 @@
 													</TR>
 													<TR>
 														<TD>
-															<TABLE id="tblSearch102" cellSpacing="1" cellPadding="1" width="100%" border="0">
+															<TABLE id="tblSearch102" border="0" cellSpacing="1" cellPadding="1" width="100%">
 																<TR>
-																	<TD align="right" width="10%"><IMG src="../Images/Pie.png">
+																	<TD width="10%" align="right"><IMG src="../Images/Pie.png">
 																	</TD>
-																	<TD align="left" width="20%">
+																	<TD width="20%" align="left">
 																		<CC1:S_OPTIONBUTTON id="S_OptBtnRdlMese" tabIndex="3" runat="server" checked="True" groupname="Grkind"
 																			text="Rdl Per Mese"></CC1:S_OPTIONBUTTON></TD>
-																	<TD align="center" width="7%"><IMG src="../Images/GraficiIstogramma.png">
+																	<TD width="7%" align="center"><IMG src="../Images/GraficiIstogramma.png">
 																	</TD>
-																	<TD align="left" width="26%">
+																	<TD width="26%" align="left">
 																		<CC1:S_OPTIONBUTTON id="S_OptBtnRdlServizioMesi" tabIndex="5" runat="server" groupname="Grkind" text="Rdl Per Servizio Nei Mesi"></CC1:S_OPTIONBUTTON></TD>
-																	<TD align="center" width="7%"><IMG src="../Images/Pie.png">
+																	<TD width="7%" align="center"><IMG src="../Images/Pie.png">
 																	</TD>
-																	<TD align="left" width="20%">
+																	<TD width="20%" align="left">
 																		<CC1:S_OPTIONBUTTON id="S_OptBtnRdlStato" tabIndex="7" runat="server" groupname="Grkind" text="Rdl Per Stato"></CC1:S_OPTIONBUTTON></TD>
 																</TR>
 																<TR>
-																	<TD align="right" width="10%"><IMG src="../Images/Pie.png">
+																	<TD width="10%" align="right"><IMG src="../Images/Pie.png">
 																	</TD>
-																	<TD align="left" width="20%">
+																	<TD width="20%" align="left">
 																		<CC1:S_OPTIONBUTTON id="S_OptBtnRdlDitta" tabIndex="4" runat="server" groupname="Grkind" text="Rdl Per Ditta"></CC1:S_OPTIONBUTTON></TD>
-																	<TD align="center" width="7%"><IMG src="../Images/GraficiIstogramma.png">
+																	<TD width="7%" align="center"><IMG src="../Images/GraficiIstogramma.png">
 																	</TD>
-																	<TD align="left" width="26%">
+																	<TD width="26%" align="left">
 																		<CC1:S_OPTIONBUTTON id="S_OptBtnRdlDittaMesi" tabIndex="6" runat="server" groupname="Grkind" text="Rdl Per Ditta Nei Mesi"></CC1:S_OPTIONBUTTON></TD>
-																	<TD align="center" width="7%"><IMG src="../Images/Pie.png">
+																	<TD width="7%" align="center"><IMG src="../Images/Pie.png">
 																	</TD>
-																	<TD align="left" width="20%">
+																	<TD width="20%" align="left">
 																		<CC1:S_OPTIONBUTTON id="S_OptBtnRdlServizio" tabIndex="7" runat="server" groupname="Grkind" text="Rdl Per Servizio"></CC1:S_OPTIONBUTTON></TD>
 																</TR>
 																<TR>
-																	<TD align="right" width="10%">&nbsp;</TD>
-																	<TD align="left" width="20%"></TD>
-																	<TD align="center" width="7%">&nbsp;</TD>
-																	<TD align="left" width="26%"></TD>
-																	<TD align="center" width="7%">&nbsp;</TD>
-																	<TD align="left" width="20%"></TD>
+																	<TD width="10%" align="right">&nbsp;</TD>
+																	<TD width="20%" align="left"></TD>
+																	<TD width="7%" align="center">&nbsp;</TD>
+																	<TD width="26%" align="left"></TD>
+																	<TD width="7%" align="center">&nbsp;</TD>
+																	<TD width="20%" align="left"></TD>
 																</TR>
 																<TR>
-																	<TD align="center" colSpan="6">
-																		<TABLE id="tblSubmit" style="HEIGHT: 26px" cellSpacing="1" cellPadding="1" width="28%"
-																			align="center" border="0">
+																	<TD colSpan="6" align="center">
+																		<TABLE style="HEIGHT: 26px" id="tblSubmit" border="0" cellSpacing="1" cellPadding="1" width="28%"
+																			align="center">
 																			<TR>
 																				<TD noWrap align="left">
 																					<CC1:S_BUTTON id="S_BtnSubmit" tabIndex="9" runat="server" cssclass="btn" text="Genera il Report in Html"
 																						width="150px"></CC1:S_BUTTON></TD>
 																				<TD>
 																					<ASP:BUTTON id="btnReportPdf" runat="server" cssclass="btn" text="Genera il Report In Pdf" width="150px"></ASP:BUTTON></TD>
-																				<TD noWrap align="left"><INPUT class="btn" style="WIDTH: 150px" onclick="superClear();" tabIndex="10" type="reset"
-																						value="Reset">
+																				<TD noWrap align="left"><INPUT style="WIDTH: 150px" class="btn" tabIndex="10" onclick="superClear();" value="Reset"
+																						type="reset">
 																				</TD>
 																				<TD noWrap align="right">&nbsp;&nbsp; <A 
                               class=GuidaLink href="<%= HelpLink %>" 
@@ -163,7 +163,7 @@
 								<TBODY>
 									<TR>
 										<TD><IFRAME class="fram" id="ifrReport" title="Display Report" tabindex="0" name="ifrReport"
-												src="about:blank" frameborder="no" width="100%" scrolling="auto" height="100%"></IFRAME>
+												src="about:blank" frameborder="no" width="100%" height="100%"></IFRAME>
 											<SCRIPT language="javascript">
 																document.getElementById("ifrReport").src='<%=urlRpt%>'
 											</SCRIPT>

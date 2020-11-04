@@ -1,109 +1,181 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.CostiOperativi.CostoAddetti
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
+using System;
 using System.Collections;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Text;
 using System.Data;
+using S_Controls;
+using S_Controls.Collections;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
 
-namespace TheSite.Classi.CostiOperativi
+namespace TheSite.Classi.CostiOperativi 
 {
-  public class CostoAddetti : AbstractBase
-  {
-    private OracleDataLayer _OraDl;
+	/// <summary>
+	/// Descrizione di riepilogo per CostoAddetti.
+	/// </summary>
+	public class CostoAddetti: AbstractBase
+	{
+		#region Dichiarazioni
 
-    public CostoAddetti() => this._OraDl = new OracleDataLayer(this.s_ConnStr);
+		private ApplicationDataLayer.OracleDataLayer _OraDl;
+			
+		#endregion
 
-    public override DataSet GetData()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) controlsCollection).Count + 1);
-      controlsCollection.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_COSTI_ADDETTI.SP_GETSINGLEADDETT0_WR";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+		public CostoAddetti()
+		{
+			_OraDl = new OracleDataLayer(s_ConnStr);
+		}
 
-    public override DataSet GetData(S_ControlsCollection CollezioneControlli)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(((CollectionBase) CollezioneControlli).Count + 1);
-      CollezioneControlli.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_COSTI_ADDETTI.SP_GETSINGLEADDETT0_WR";
-      return oracleDataLayer.GetRows((object) CollezioneControlli, str).Copy();
-    }
 
-    public override DataSet GetSingleData(int wr_id)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_wr_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) wr_id);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      controlsCollection.Add(sObject2);
-      controlsCollection.Add(sObject1);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_COSTI_ADDETTI.SP_GETSINGLEADDETTI_WR";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
+		#region Metodi Pubblici
 
-    protected override int ExecuteUpdate(
-      S_ControlsCollection CollezioneControlli,
-      ExecuteType Operazione,
-      int itemId)
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_wr_id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) itemId);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject2).set_Index(1);
-      controlsCollection.Add(sObject2);
-      controlsCollection.Add(sObject1);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_COSTI_ADDETTI.SP_GETSINGLEADDETTI_WR";
-      return oracleDataLayer.GetRowsAffected((object) controlsCollection, str);
-    }
+		public override DataSet GetData()
+		{			
+			DataSet _Ds;
+			
+			S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
 
-    public DataSet GetAddetti()
-    {
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(1);
-      controlsCollection.Add(sObject);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str = "PACK_COSTI_ADDETTI.SP_GETALLADDETTI";
-      return oracleDataLayer.GetRows((object) controlsCollection, str).Copy();
-    }
-  }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_COSTI_ADDETTI.SP_GETSINGLEADDETT0_WR";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;				
+					
+		}
+
+		/// <summary>
+		/// DataSet con i record selezionati in base alla collection
+		/// </summary>
+		/// <param name="CollezioneCOntrolli"></param>
+		/// <param name="NomeProcedura"></param>
+		/// <returns></returns>
+		public override DataSet GetData(S_ControlsCollection CollezioneControlli)
+		{
+			DataSet _Ds;
+			
+			S_ControlsCollection CollezioneControlli2 = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = CollezioneControlli.Count + 1;
+
+			CollezioneControlli.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_COSTI_ADDETTI.SP_GETSINGLEADDETT0_WR";	
+			_Ds = _OraDl.GetRows(CollezioneControlli, s_StrSql).Copy();			
+
+			return _Ds;				
+			
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="itemId"></param>
+		/// <returns></returns>
+		public override DataSet GetSingleData(int wr_id)
+		{
+			DataSet _Ds;
+
+			S_ControlsCollection _SColl = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_wr_id = new S_Object();
+			s_wr_id.ParameterName = "p_wr_id";
+			s_wr_id.DbType = CustomDBType.Integer;
+			s_wr_id.Direction = ParameterDirection.Input;
+			s_wr_id.Index = 0;
+			s_wr_id.Value = wr_id;	
+		
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+
+			_SColl.Add(s_Cursor);
+
+			_SColl.Add(s_wr_id);
+				
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_COSTI_ADDETTI.SP_GETSINGLEADDETTI_WR";	
+			_Ds = _OraDl.GetRows(_SColl, s_StrSql).Copy();			
+			return _Ds;	
+			
+		}
+		#endregion
+
+
+		#region Metodi Privati
+		protected override int ExecuteUpdate(S_ControlsCollection CollezioneControlli, ExecuteType Operazione, int itemId)
+		{
+			
+
+			S_ControlsCollection _SColl = new S_ControlsCollection();
+
+			S_Controls.Collections.S_Object s_wr_id = new S_Object();
+			s_wr_id.ParameterName = "p_wr_id";
+			s_wr_id.DbType = CustomDBType.Integer;
+			s_wr_id.Direction = ParameterDirection.Input;
+			s_wr_id.Index = 0;
+			s_wr_id.Value = itemId;	
+		
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 1;
+
+			_SColl.Add(s_Cursor);
+
+			_SColl.Add(s_wr_id);
+				
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "PACK_COSTI_ADDETTI.SP_GETSINGLEADDETTI_WR";	
+		
+			
+			int i_Result = _OraDl.GetRowsAffected(_SColl, s_StrSql);
+				
+			return i_Result;
+			
+		}
+
+		#endregion
+
+		public DataSet GetAddetti()
+			{
+				DataSet _Ds;
+
+				S_ControlsCollection _SColl = new S_ControlsCollection();
+				
+				S_Controls.Collections.S_Object s_Cursor = new S_Object();
+				s_Cursor.ParameterName = "IO_CURSOR";
+				s_Cursor.DbType = CustomDBType.Cursor;
+				s_Cursor.Direction = ParameterDirection.Output;
+				s_Cursor.Index = 1;
+				
+				
+				_SColl.Add(s_Cursor);
+
+				ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+				string s_StrSql = "PACK_COSTI_ADDETTI.SP_GETALLADDETTI";	
+				_Ds = _OraDl.GetRows(_SColl, s_StrSql).Copy();			
+				
+				return _Ds;		
+			}
+
+		
+	}
 }

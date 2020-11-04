@@ -10,16 +10,16 @@ using System.Web.UI.WebControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 using System.Web.UI.HtmlControls;
-using System.Reflection;
-using StampaRapportiPdf.Classi;
+using System.Reflection; 
 
 namespace TheSite.ManutenzioneProgrammata
 {
 	/// <summary>
 	/// Descrizione di riepilogo per DettPianoAnnuale.
 	/// </summary>
-	public class DettPianoAnnuale : System.Web.UI.Page    // System.Web.UI.Page
+	public class DettPianoAnnuale : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
 		protected string ANNO = "";
@@ -36,15 +36,16 @@ namespace TheSite.ManutenzioneProgrammata
 		protected WebControls.PageTitle PageTitle1; 
 	    public string DirectoryUp=null;
 		public static int FunId = 0;
+		string DescServ="";
 
-		public clMyCollection _Contenitore
+		public MyCollection.clMyCollection _Contenitore
 		{
 			get 
 			{
 				if(this.ViewState["mioContenitore"]!=null)
-					return (clMyCollection)this.ViewState["mioContenitore"];
+					return (MyCollection.clMyCollection)this.ViewState["mioContenitore"];
 				else
-					return new clMyCollection();
+					return new MyCollection.clMyCollection();
 			}
 		}
 		private string e_Page 
@@ -71,6 +72,7 @@ namespace TheSite.ManutenzioneProgrammata
 				txtAnno.Text = Request.QueryString["anno"]; //Request.Params["anno"];
 				txtID_BL.Text = Request.QueryString["ID_BL"];
 				txtServizio.Text = Request.QueryString["servizio"];
+				DescServ= Request.QueryString["descservizio"];
 				this.e_Page=Request.QueryString["p"];
 				if (this.e_Page=="ottimizza")
 				{
@@ -78,7 +80,7 @@ namespace TheSite.ManutenzioneProgrammata
 					PageTitle1.Title="OTTIMIZZA IL PIANO"; 
 				
 				}
-				lblpmp.Text= "Piano Manutenzione Programmata Anno: " + txtAnno.Text;
+				lblpmp.Text= "Piano Manutenzione Programmata Anno: " + txtAnno.Text +" "+ DescServ;
 				GetDataGrid();
 
 

@@ -1,176 +1,311 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: TheSite.Classi.SiteModule
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer;
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls.Collections;
 using System;
-using System.Configuration;
-using System.Data;
 using System.Web;
+using System.Web.UI;
+using System.Data;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
+using S_Controls;
+using S_Controls.Collections;
 using System.Web.Security;
 
 namespace TheSite.Classi
 {
-  public class SiteModule
-  {
-    private int i_ModuleId = 0;
-    private string s_ModuleSrc = (string) null;
-    private string s_ModuleTitle = (string) null;
-    private bool b_IsEditable = false;
-    private bool b_IsPrintable = false;
-    private bool b_IsDeletable = false;
-    private string s_Link = (string) null;
-    private string s_HelpLink = (string) null;
-    private string s_ConnStr = ConfigurationSettings.AppSettings["ConnectionString"];
+	/// <summary>
+	/// SiteModule
+	/// </summary>
+	public class SiteModule
+	{	
+		#region Dichiarazioni
 
-    public SiteModule()
-    {
-    }
+		private int i_ModuleId = 0;
+		private string s_ModuleSrc = null;
+		private string s_ModuleTitle = null;
+		private bool b_IsEditable = false;
+		private bool b_IsPrintable = false;
+		private bool b_IsDeletable = false;
+		private string s_Link = null;
+		private string s_HelpLink = null;
+		private string s_ConnStr = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"];						
 
-    public SiteModule(int ModuleId)
-    {
-      this.i_ModuleId = ModuleId;
-      if (this.i_ModuleId <= 0)
-        return;
-      this.GetSetting();
-    }
+		#endregion
 
-    public SiteModule(string MenuSRC)
-    {
-      this.s_ModuleSrc = MenuSRC.Trim();
-      if (!(this.s_ModuleSrc.Trim() != ""))
-        return;
-      this.GetSettingPage();
-    }
+		public SiteModule()	
+		{
+		
+		}
 
-    public void GetSettingPage()
-    {
-      HttpContext current = HttpContext.Current;
-      if (current.Request.Cookies[FormsAuthentication.FormsCookieName] == null)
-      {
-        current.Response.Cookies[FormsAuthentication.FormsCookieName].Value = (string) null;
-        current.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = new DateTime(1999, 10, 12);
-        current.Response.Cookies[FormsAuthentication.FormsCookieName].Path = "/";
-        current.Response.Redirect(current.Request.ApplicationPath + "/Default.aspx");
-        current.Response.End();
-        Console.WriteLine("Entrato");
-      }
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_path");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Size((int) byte.MaxValue);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) this.s_ModuleSrc);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_UserName");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Size(50);
-      ((ParameterObject) sObject2).set_Index(1);
-      string empty = string.Empty;
-      string str1 = current.User == null ? FormsAuthentication.Decrypt(current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name : current.User.Identity.Name;
-      ((ParameterObject) sObject2).set_Value((object) str1);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject3).set_Index(2);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      controlsCollection.Add(sObject3);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str2 = "SITO.SP_GETSETTINGS_PAGE";
-      DataSet dataSet = oracleDataLayer.GetRows((object) controlsCollection, str2).Copy();
-      if (dataSet.Tables[0].Rows.Count != 1)
-        return;
-      this.s_ModuleTitle = dataSet.Tables[0].Rows[0]["DESCRIZIONE"].ToString();
-      Decimal num = (Decimal) dataSet.Tables[0].Rows[0]["ISMODIFICA"];
-      this.i_ModuleId = int.Parse(dataSet.Tables[0].Rows[0]["FUNZIONE_ID"].ToString());
-      this.b_IsEditable = num < 0M;
-      this.b_IsPrintable = (Decimal) dataSet.Tables[0].Rows[0]["ISSTAMPA"] < 0M;
-      this.b_IsDeletable = (Decimal) dataSet.Tables[0].Rows[0]["ISCANCELLAZIONE"] < 0M;
-      if (dataSet.Tables[0].Rows[0]["LINK"] != DBNull.Value)
-        this.s_Link = dataSet.Tables[0].Rows[0]["LINK"].ToString();
-      if (dataSet.Tables[0].Rows[0]["LINK_HELP"] == DBNull.Value)
-        return;
-      this.s_HelpLink = ConfigurationSettings.AppSettings["LinkHelp"] + dataSet.Tables[0].Rows[0]["LINK_HELP"].ToString();
-    }
+		public SiteModule(int ModuleId)
+		{
+			i_ModuleId = ModuleId;
+			if (i_ModuleId > 0)
+				this.GetSetting();
+		}
 
-    public void GetSetting()
-    {
-      if (this.ModuleId == 0)
-        return;
-      HttpContext current = HttpContext.Current;
-      if (current.Request.Cookies[FormsAuthentication.FormsCookieName] == null)
-      {
-        current.Response.Cookies[FormsAuthentication.FormsCookieName].Value = (string) null;
-        current.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = new DateTime(1999, 10, 12);
-        current.Response.Cookies[FormsAuthentication.FormsCookieName].Path = "/";
-        current.Response.Redirect(current.Request.ApplicationPath + "/Default.aspx");
-        current.Response.End();
-        Console.WriteLine("Entrato");
-      }
-      S_ControlsCollection controlsCollection = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_Funzione_Id");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Index(0);
-      ((ParameterObject) sObject1).set_Value((object) this.ModuleId);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("p_UserName");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Size(50);
-      ((ParameterObject) sObject2).set_Index(1);
-      string empty = string.Empty;
-      string str1 = current.User == null ? FormsAuthentication.Decrypt(current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name : current.User.Identity.Name;
-      ((ParameterObject) sObject2).set_Value((object) str1);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("IO_CURSOR");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject3).set_Index(2);
-      controlsCollection.Add(sObject1);
-      controlsCollection.Add(sObject2);
-      controlsCollection.Add(sObject3);
-      OracleDataLayer oracleDataLayer = new OracleDataLayer(this.s_ConnStr);
-      string str2 = "SITO.SP_GETSETTINGS";
-      DataSet dataSet = oracleDataLayer.GetRows((object) controlsCollection, str2).Copy();
-      if (dataSet.Tables[0].Rows.Count != 1)
-        return;
-      this.s_ModuleTitle = dataSet.Tables[0].Rows[0]["DESCRIZIONE"].ToString();
-      this.b_IsEditable = (Decimal) dataSet.Tables[0].Rows[0]["ISMODIFICA"] < 0M;
-      this.b_IsPrintable = (Decimal) dataSet.Tables[0].Rows[0]["ISSTAMPA"] < 0M;
-      this.b_IsDeletable = (Decimal) dataSet.Tables[0].Rows[0]["ISCANCELLAZIONE"] < 0M;
-      if (dataSet.Tables[0].Rows[0]["LINK"] != DBNull.Value)
-        this.s_Link = dataSet.Tables[0].Rows[0]["LINK"].ToString();
-      if (dataSet.Tables[0].Rows[0]["LINK_HELP"] == DBNull.Value)
-        return;
-      this.s_HelpLink = ConfigurationSettings.AppSettings["LinkHelp"] + dataSet.Tables[0].Rows[0]["LINK_HELP"].ToString();
-    }
+		public SiteModule(string MenuSRC)
+		{
+			s_ModuleSrc = MenuSRC.Trim();
+			if (s_ModuleSrc.Trim() != "")
+				this.GetSettingPage();
 
-    public int ModuleId => this.i_ModuleId;
+		}
+				
+		public void GetSettingPage()
+		{			
 
-    public string ModuleSrc => this.s_ModuleSrc;
+			DataSet _Ds;
 
-    public string ModuleTitle => this.s_ModuleTitle;
+			System.Web.HttpContext context = System.Web.HttpContext.Current;
+			if (context.Request.Cookies[FormsAuthentication.FormsCookieName]==null)
+			{
+				//			        context.Response.Redirect("../Default.aspx");
+				//					return;
+    
+				// Invalidate roles token
+				context.Response.Cookies[FormsAuthentication.FormsCookieName].Value = null;
+				context.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = new System.DateTime(1999, 10, 12);
+				context.Response.Cookies[FormsAuthentication.FormsCookieName].Path = "/";
+    
+				// Redirect user back to the Portal Home Page
+				context.Response.Redirect(context.Request.ApplicationPath + "/Default.aspx");
+				context.Response.End(); 
+				Console.WriteLine("Entrato"); 
+			}
 
-    public bool IsEditable => this.b_IsEditable;
+			S_ControlsCollection _SCollection = new S_ControlsCollection();
+			
+			S_Controls.Collections.S_Object s_lnk = new S_Object();
+			s_lnk.ParameterName = "p_path";
+			s_lnk.DbType = CustomDBType.VarChar;
+			s_lnk.Direction = ParameterDirection.Input;
+			s_lnk.Size = 255;
+			s_lnk.Index = 0;
+			s_lnk.Value=s_ModuleSrc;
 
-    public bool IsPrintable => this.b_IsPrintable;
+			S_Controls.Collections.S_Object s_UserName = new S_Object();
+			s_UserName.ParameterName = "p_UserName";
+			s_UserName.DbType = CustomDBType.VarChar;
+			s_UserName.Direction = ParameterDirection.Input;
+			s_UserName.Size = 50;
+			s_UserName.Index = 1;
+			string s_User = string.Empty;
 
-    public bool IsDeletable => this.b_IsDeletable;
+			if (context.User != null)
+				s_User = context.User.Identity.Name;
+			else
+			{
+				System.Web.Security.FormsAuthenticationTicket ticket = System.Web.Security.FormsAuthentication.Decrypt(context.Request.Cookies[FormsAuthentication.FormsCookieName].Value);
 
-    public string Link => this.s_Link;
+				s_User = ticket.Name;
+			}
+			s_UserName.Value = s_User;
 
-    public string HelpLink => this.s_HelpLink;
-  }
+			S_Controls.Collections.S_Object s_Cursor = new S_Object();
+			s_Cursor.ParameterName = "IO_CURSOR";
+			s_Cursor.DbType = CustomDBType.Cursor;
+			s_Cursor.Direction = ParameterDirection.Output;
+			s_Cursor.Index = 2;
+
+			_SCollection.Add(s_lnk);
+			_SCollection.Add(s_UserName);
+			_SCollection.Add(s_Cursor);
+
+			ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+			string s_StrSql = "SITO.SP_GETSETTINGS_PAGE";	
+			_Ds = _OraDl.GetRows(_SCollection, s_StrSql).Copy();
+
+			if (_Ds.Tables[0].Rows.Count == 1 )
+			{
+				this.s_ModuleTitle = _Ds.Tables[0].Rows[0]["DESCRIZIONE"].ToString();
+				decimal i_Modifica = (decimal) _Ds.Tables[0].Rows[0]["ISMODIFICA"];
+				this.i_ModuleId=int.Parse(_Ds.Tables[0].Rows[0]["FUNZIONE_ID"].ToString());
+
+				if (i_Modifica < 0)
+					this.b_IsEditable = true;
+				else
+					this.b_IsEditable = false;
+
+				decimal i_Stampa = (decimal) _Ds.Tables[0].Rows[0]["ISSTAMPA"];
+				if (i_Stampa < 0)
+					this.b_IsPrintable = true;
+				else
+					this.b_IsPrintable = false;
+
+				decimal i_Cancella = (decimal) _Ds.Tables[0].Rows[0]["ISCANCELLAZIONE"];
+				if (i_Cancella < 0)
+					this.b_IsDeletable = true;
+				else
+					this.b_IsDeletable = false;
+
+				if (_Ds.Tables[0].Rows[0]["LINK"] != DBNull.Value)
+					this.s_Link = _Ds.Tables[0].Rows[0]["LINK"].ToString();
+				if (_Ds.Tables[0].Rows[0]["LINK_HELP"] != DBNull.Value)
+					this.s_HelpLink =System.Configuration.ConfigurationSettings.AppSettings["LinkHelp"]+ _Ds.Tables[0].Rows[0]["LINK_HELP"].ToString();
+
+				//	this.s_HelpLink = _Ds.Tables[0].Rows[0]["LINK_HELP"].ToString();
+			}
+			
+		}
+
+		public void GetSetting()
+		{
+			
+
+			if (this.ModuleId != 0)
+			{
+				DataSet _Ds;
+
+				System.Web.HttpContext context = System.Web.HttpContext.Current;
+				if (context.Request.Cookies[FormsAuthentication.FormsCookieName]==null)
+				{
+					//			        context.Response.Redirect("../Default.aspx");
+					//					return;
+      
+					// Invalidate roles token
+					context.Response.Cookies[FormsAuthentication.FormsCookieName].Value = null;
+					context.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = new System.DateTime(1999, 10, 12);
+					context.Response.Cookies[FormsAuthentication.FormsCookieName].Path = "/";
+        
+					// Redirect user back to the Portal Home Page
+					context.Response.Redirect(context.Request.ApplicationPath + "/Default.aspx");
+					context.Response.End(); 
+					Console.WriteLine("Entrato"); 
+				}
+
+				S_ControlsCollection _SCollection = new S_ControlsCollection();
+				
+				S_Controls.Collections.S_Object s_FunzioneId = new S_Object();
+				s_FunzioneId.ParameterName = "p_Funzione_Id";
+				s_FunzioneId.DbType = CustomDBType.Integer;
+				s_FunzioneId.Direction = ParameterDirection.Input;
+				s_FunzioneId.Index = 0;
+				s_FunzioneId.Value = this.ModuleId;
+
+				S_Controls.Collections.S_Object s_UserName = new S_Object();
+				s_UserName.ParameterName = "p_UserName";
+				s_UserName.DbType = CustomDBType.VarChar;
+				s_UserName.Direction = ParameterDirection.Input;
+				s_UserName.Size = 50;
+				s_UserName.Index = 1;
+				string s_User = string.Empty;
+
+				if (context.User != null)
+					s_User = context.User.Identity.Name;
+				else
+				{
+					System.Web.Security.FormsAuthenticationTicket ticket = System.Web.Security.FormsAuthentication.Decrypt(context.Request.Cookies[FormsAuthentication.FormsCookieName].Value);
+
+					s_User = ticket.Name;
+				}
+				s_UserName.Value = s_User;
+
+				S_Controls.Collections.S_Object s_Cursor = new S_Object();
+				s_Cursor.ParameterName = "IO_CURSOR";
+				s_Cursor.DbType = CustomDBType.Cursor;
+				s_Cursor.Direction = ParameterDirection.Output;
+				s_Cursor.Index = 2;
+
+				_SCollection.Add(s_FunzioneId);
+				_SCollection.Add(s_UserName);
+				_SCollection.Add(s_Cursor);
+
+				ApplicationDataLayer.OracleDataLayer _OraDl = new OracleDataLayer(s_ConnStr);
+				string s_StrSql = "SITO.SP_GETSETTINGS";	
+				_Ds = _OraDl.GetRows(_SCollection, s_StrSql).Copy();
+	
+				if (_Ds.Tables[0].Rows.Count == 1 )
+				{
+					this.s_ModuleTitle = _Ds.Tables[0].Rows[0]["DESCRIZIONE"].ToString();
+					decimal i_Modifica = (decimal) _Ds.Tables[0].Rows[0]["ISMODIFICA"];
+					
+					if (i_Modifica < 0)
+						this.b_IsEditable = true;
+					else
+						this.b_IsEditable = false;
+
+					decimal i_Stampa = (decimal) _Ds.Tables[0].Rows[0]["ISSTAMPA"];
+					if (i_Stampa < 0)
+						this.b_IsPrintable = true;
+					else
+						this.b_IsPrintable = false;
+
+					decimal i_Cancella = (decimal) _Ds.Tables[0].Rows[0]["ISCANCELLAZIONE"];
+					if (i_Cancella < 0)
+						this.b_IsDeletable = true;
+					else
+						this.b_IsDeletable = false;
+
+					if (_Ds.Tables[0].Rows[0]["LINK"] != DBNull.Value)
+						this.s_Link = _Ds.Tables[0].Rows[0]["LINK"].ToString();
+					if (_Ds.Tables[0].Rows[0]["LINK_HELP"] != DBNull.Value)
+					{
+						this.s_HelpLink =System.Configuration.ConfigurationSettings.AppSettings["LinkHelp"]+ _Ds.Tables[0].Rows[0]["LINK_HELP"].ToString();
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int ModuleId
+		{
+			get {return i_ModuleId;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string ModuleSrc
+		{
+			get {return s_ModuleSrc;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string ModuleTitle
+		{
+			get {return s_ModuleTitle;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsEditable
+		{
+			get {return b_IsEditable;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsPrintable
+		{
+			get {return b_IsPrintable;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsDeletable
+		{
+			get {return b_IsDeletable;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Link
+		{
+			get {return s_Link;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string HelpLink
+		{
+			get {return s_HelpLink;}
+		}
+	}
 }

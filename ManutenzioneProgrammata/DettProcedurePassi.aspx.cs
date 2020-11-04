@@ -16,7 +16,7 @@ namespace TheSite.ManutenzioneProgrammata
 	/// <summary>
 	/// Descrizione di riepilogo per DettProcedurePassi.
 	/// </summary>
-	public class DettProcedurePassi : System.Web.UI.Page    // System.Web.UI.Page
+	public class DettProcedurePassi : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
 		protected WebControls.GridTitle GridTitle1;
@@ -24,6 +24,8 @@ namespace TheSite.ManutenzioneProgrammata
 		public static string HelpLink = string.Empty;
 		protected System.Web.UI.WebControls.Label lblpmp;		
 		protected string PMP = "";
+		string descserv="";
+		string std="";
 	
 		private void Page_Load(object sender, System.EventArgs e)
 		{
@@ -35,8 +37,11 @@ namespace TheSite.ManutenzioneProgrammata
 				FunId = _SiteModule.ModuleId;
 				HelpLink = _SiteModule.HelpLink;	
 				GridTitle1.hplsNuovo.Visible = false;
+				
 				PMP = Request.Params["pmp"];
-				lblpmp.Text= "Passi per procedura: " + Request.Params["pmp_id"];
+				descserv= Request.Params["descserv"];
+				std=Request.Params["std"];
+				lblpmp.Text= "Passi per procedura: " + Request.Params["pmp_id"]+ "   servizio:  "+ descserv +"         Std. Apparecchiatura:  "+std;
 				GetDataGrid();
 			}
 		}

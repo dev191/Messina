@@ -34,7 +34,17 @@ namespace TheSite.WebControls
 			{
 				_wrId = Convert.ToInt32(Request.QueryString["ItemId"]);
 			}
-		
+			if(Request["WR_ID"]!=null)
+			{
+				_wrId = Convert.ToInt32(Request["WR_ID"]);
+			}
+			//Faccio i conti
+			Classi.ManCorrettiva.ClManCorrettiva _Totale = new TheSite.Classi.ManCorrettiva.ClManCorrettiva();
+			DataSet DsManodoperaCosti = _Totale.TotManodopera(Convert.ToInt32(wrId));			
+			if(DsManodoperaCosti.Tables[0].Rows.Count>0)
+				tot=Convert.ToDouble(DsManodoperaCosti.Tables[0].Rows[0]["totaddetto"]);//Convert.ToDouble(DsManodoperaCosti.Tables[0].Rows[0]["totaddetto"])+;
+			lblTot1.Text=Convert.ToString(tot);
+			//
 			if (!Page.IsPostBack )
 			{
 				
@@ -58,15 +68,8 @@ namespace TheSite.WebControls
 				DataGridEsegui.DataSource =TbDati; 
 				DataGridEsegui.DataBind();
 				
-				ViewState["UrlReferrer"] = Request.UrlReferrer.ToString();
+			//	ViewState["UrlReferrer"] = Request.UrlReferrer.ToString();
 
-				//Faccio i conti
-				Classi.ManCorrettiva.ClManCorrettiva _Totale = new TheSite.Classi.ManCorrettiva.ClManCorrettiva();
-				DataSet DsManodoperaCosti = _Totale.TotManodopera(Convert.ToInt32(wrId));			
-				if(DsManodoperaCosti.Tables[0].Rows.Count>0)
-					tot=Convert.ToDouble(DsManodoperaCosti.Tables[0].Rows[0]["totaddetto"]);//Convert.ToDouble(DsManodoperaCosti.Tables[0].Rows[0]["totaddetto"])+;
-				lblTot1.Text=Convert.ToString(tot);
-				//
 			}
 		}
 		private DataTable AggiungiColonnaTotProgressivo(DataTable tb)

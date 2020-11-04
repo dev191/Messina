@@ -10,13 +10,14 @@ using System.Web.UI.WebControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
+using MyCollection;
 
 namespace TheSite.ManutenzioneProgrammata
 {
 	/// <summary>
 	/// Descrizione di riepilogo per PassiPianoAnnuale.
 	/// </summary>
-	public class PassiPianoAnnuale : System.Web.UI.Page    // System.Web.UI.Page
+	public class PassiPianoAnnuale : System.Web.UI.Page
 	{
 		protected System.Web.UI.WebControls.Label lblpmp;
 		protected System.Web.UI.WebControls.TextBox txtAnno;
@@ -178,7 +179,7 @@ namespace TheSite.ManutenzioneProgrammata
 				{
 				
 					SetControl(false,drv,e);
-					e.Item.Cells[3].Text=  Convert.ToDateTime(drv.Row["DATA"].ToString()).ToString("MMM").ToUpper() + " - " + Convert.ToDateTime(drv.Row["DATA"].ToString()).Year.ToString();
+					e.Item.Cells[3].Text= Convert.ToDateTime(drv.Row["DATA"].ToString()).ToShortDateString(); //Convert.ToDateTime(drv.Row["DATA"].ToString()).ToString("MMM").ToUpper() + " - " + Convert.ToDateTime(drv.Row["DATA"].ToString()).Year.ToString();
 					DataGrid dtgIstruzioni = new DataGrid();
   				
 					dtgIstruzioni.CssClass="DataGrid";

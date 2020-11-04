@@ -60,7 +60,7 @@
 							<TR>
 								<td align="center"><b>Impianto</b></td>
 								<td align="center"><b>Cod. RdL</b></td>
-								<td align="center"><b>OdL UNIBA</b></td>
+								<td align="center"><b>OdL</b></td>
 								<%if(Request.QueryString["servizio"].ToString()=="true"){%>
 								<td align="center"><b>Servizio</b></td>
 								<%}%>

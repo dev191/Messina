@@ -1,7 +1,7 @@
-<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Page language="c#" Codebehind="SchedaApparecchiatura.aspx.cs" AutoEventWireup="false" Inherits="TheSite.CommonPage.SchedaApparecchiatura" enableViewState="False"%>
-<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
 <%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="cc1" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Page language="c#" Codebehind="SchedaApparecchiatura.aspx.cs" AutoEventWireup="false" Inherits="TheSite.CommonPage.SchedaApparecchiatura" enableViewState="False"%>
+<%@ Register TagPrefix="cc2" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -11,16 +11,6 @@
 		<meta content="JavaScript" name="vs_defaultClientScript">
 		<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
 		<LINK href="../Css/MainSheet.css" type="text/css" rel="stylesheet">
-		<script language="javascript">
-					function openallegati(namefile)
-					{
-						var url;		
-						   
-						url = "../ManutenzioneCorrettiva/Visualpdf.aspx?name=" +namefile + "&mittente=Apparecchiatura" ; 
-						   
-						finestra=window.open(url,'','menubar=yes,toolbar=no,location=no,directories=no,status=no,scrollbars=yes,resizable=yes,copyhistory=no,width=800,height=600,align=center');	
-					}	
-		</script>
 	</HEAD>
 	<body MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
@@ -69,12 +59,17 @@
 											<cc1:S_Label id="S_lblstanza" runat="server"></cc1:S_Label></TD>
 									</TR>
 									<TR>
+										<TD>Stato:</TD>
+										<TD>
+											<cc1:S_Label id="S_LblStato" runat="server"></cc1:S_Label></TD>
+									</TR>
+									<TR>
 										<TD>Quantita:</TD>
 										<TD>
 											<cc1:S_Label id="S_lblqta" runat="server"></cc1:S_Label></TD>
 									</TR>
 									<TR>
-										<TD style="WIDTH: 15%">Locale Tecnico:</TD>
+										<TD style="WIDTH: 15%">Macrocomponente:</TD>
 										<TD>
 											<cc1:S_Label id="S_lbltecnico" runat="server"></cc1:S_Label></TD>
 									</TR>
@@ -106,8 +101,8 @@
 							</asp:panel><cc2:datapanel id="DataPanelCaratteristiche" runat="server" TitleStyle-CssClass="TitleSearch" Collapsed="False"
 								TitleText="Caratteristiche Tecniche " ExpandText="Espandi" ExpandImageUrl="../Images/downarrows_trans.gif"
 								CollapseText="Espandi/Riduci" CssClass="DataPanel75" CollapseImageUrl="../Images/uparrows_trans.gif" AllowTitleExpandCollapse="True">
-								<asp:datalist id="DataList1" runat="server" Width="100%" BorderWidth="0px" GridLines="Both" RepeatDirection="Horizontal"
-									RepeatColumns="2">
+								<asp:datalist id="DataList1" runat="server" Width="100%" RepeatColumns="2" RepeatDirection="Horizontal"
+									GridLines="Both" BorderWidth="0px">
 									<ItemTemplate>
 										<span>
 											<%# DataBinder.Eval(Container, "DataItem.tipologia") %>
@@ -119,7 +114,6 @@
 								</asp:datalist>
 							</cc2:datapanel></TD>
 					</TR>
-				
 					<TR>
 						<TD align="left">&nbsp;
 							<cc2:datapanel id="DataPanelPassi" runat="server" TitleStyle-CssClass="TitleSearch" Collapsed="False"
@@ -153,7 +147,7 @@
 											<td><asp:Label id="Label5" runat="server"><%# DataBinder.Eval(Container,"DataItem.units_hour") %></asp:Label></td>
 											<td><asp:Label id="Label6" runat="server"><%# DataBinder.Eval(Container,"DataItem.tr_id") %></asp:Label></td>
 										</tr>
-										<br>
+										<!--<br>-->
 										<tr>
 											<td colspan="6">
 												<div style="display:none;" id="expand" runat="server">
@@ -175,34 +169,7 @@
 			<FooterTemplate>
 			</TABLE>
 			</FooterTemplate>
-			</asp:datalist></cc2:datapanel></TD></TR>
-				<TR>
-						<TD align="left">&nbsp;
-							<cc2:datapanel id="DataPanelDoc" runat="server" TitleStyle-CssClass="TitleSearch" Collapsed="False"
-								TitleText="Documenti allegati " ExpandText="Espandi" ExpandImageUrl="../Images/downarrows_trans.gif"
-								CollapseText="Espandi/Riduci" CssClass="DataPanel75" CollapseImageUrl="../Images/uparrows_trans.gif"
-								AllowTitleExpandCollapse="True">
-						<asp:datagrid id="MyDataGrid1" runat="server" GridLines="Vertical" AllowPaging="False" CssClass="DataGrid"
-								AutoGenerateColumns="False" CellPadding="4" BackColor="White" BorderWidth="1px" BorderStyle="None" BorderColor="Gray"
-								Width="100%" DataKeyField="ID">
-								<AlternatingItemStyle CssClass="DataGridAlternatingItemStyle"></AlternatingItemStyle>
-								<ItemStyle CssClass="DataGridItemStyle"></ItemStyle>
-								<HeaderStyle CssClass="DataGridHeaderStyle"></HeaderStyle>
-								<FooterStyle ForeColor="#003399" BackColor="#99CCCC"></FooterStyle>
-								<Columns>
-									<asp:BoundColumn DataField="Descrizione" HeaderText="Descrizione"></asp:BoundColumn>
-									<asp:TemplateColumn HeaderText="File Allegati">
-										<HeaderStyle Width="50%"></HeaderStyle>
-										<ItemTemplate>
-											<asp:HyperLink id="Hyperlink1" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "NOMEFILE") %>' NavigateUrl=<%# "javascript:openallegati("+ "'" + DataBinder.Eval(Container.DataItem, "nomefile") + "'" + " );"%> >
-											</asp:HyperLink>
-										</ItemTemplate>
-									</asp:TemplateColumn>
-								</Columns>
-								<PagerStyle HorizontalAlign="Left" ForeColor="Black" BackColor="Silver" Mode="NumericPages"></PagerStyle>
-							</asp:datagrid>
-							</cc2:datapanel></TD></TR>
-							</TBODY></TABLE>
+			</asp:datalist></cc2:datapanel></TD></TR></TBODY></TABLE>
 			<%if(Context.Handler is TheSite.AnagrafeImpianti.NavigazioneApparecchiature){%>
 			<table>
 				<tr>

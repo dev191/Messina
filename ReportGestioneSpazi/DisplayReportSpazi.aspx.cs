@@ -19,13 +19,14 @@ using CrystalDecisions.Web;
 using TheSite.Classi.AnalisiStatistiche;
 using System.Configuration;
 
+
 namespace TheSite.ReportGestioneSpazi
 {
 	
 	/// <summary>
 	/// Descrizione di riepilogo per DisplayReportSpazi.
 	/// </summary>
-	public class DisplayReportSpazi : System.Web.UI.Page    // System.Web.UI.Page
+	public class DisplayReportSpazi : System.Web.UI.Page
 	{
 		protected bool S_Categorie, S_Destinazione, S_Reparti, S_Misure;
 		protected string tipoDocumento;
@@ -52,12 +53,15 @@ namespace TheSite.ReportGestioneSpazi
 		private DiskFileDestinationOptions crDiskFileDestinationOptions;
 
 		private string stringaEdifici="";
+		private string stringaPiano="";
 		private string stringaReparto="";
 		private string stringaDestinazione="";
+		private string stringaCategoria="";
 		private string idCategoria="";
 		private string stringaStanza="";
 		protected System.Web.UI.WebControls.Label LabelMessaggio;
 		private string piano="";
+		private string stanza="";
 
 		private string operatoreMq="";
 		protected System.Web.UI.WebControls.Button Button1;
@@ -75,10 +79,13 @@ namespace TheSite.ReportGestioneSpazi
 
 			stringaEdifici=Request["stringaEdifici"];
 			stringaReparto=Request["stringaReparto"];
+			stringaPiano=Request["lblpiano"];
 			stringaDestinazione=Request["stringaDestinazione"];
+			stringaCategoria=Request["stringaCategoria"];
 			idCategoria=Request["idCategoria"];
 			stringaStanza=Request["stringaStanza"];
 			piano=Request["piano"];
+			stanza=Request["stanza"];
 			operatoreMq=Request["operatoreMq"];
 			valoreMq=Request["valoreMq"];
 //			if (!IsPostBack)
@@ -192,7 +199,7 @@ namespace TheSite.ReportGestioneSpazi
 				p_Id_Stanza.Direction = ParameterDirection.Input;
 				p_Id_Stanza.Size =255;
 				p_Id_Stanza.Index = index++;
-				p_Id_Stanza.Value = stringaStanza;
+				p_Id_Stanza.Value = stanza;
 				_Scollection.Add(p_Id_Stanza);
 
 				S_Controls.Collections.S_Object p_Str_Dest_Uso  = new S_Controls.Collections.S_Object();
@@ -254,8 +261,9 @@ namespace TheSite.ReportGestioneSpazi
 		
 				SchemiXSD.DsGestioneSpazi.parametriRow rigaParametri = (SchemiXSD.DsGestioneSpazi.parametriRow)ds.parametri.NewRow();
 				rigaParametri.edifici=stringaEdifici.Replace("','", " ");
+				rigaParametri.piano=stringaPiano;
 				rigaParametri.stanza=stringaStanza;
-				rigaParametri.categoria=idCategoria;
+				rigaParametri.categoria=stringaCategoria;
 				rigaParametri.destUso=stringaDestinazione;
 				rigaParametri.reparto=stringaReparto;
 				rigaParametri.opMq=operatoreMq;
@@ -263,7 +271,7 @@ namespace TheSite.ReportGestioneSpazi
 				ds.Tables["parametri"].Rows.Add(rigaParametri);
 				
 				int i = 0;
-				//string xml="";
+				string xml="";
 				for(i=0; i<= _MyDataset.Tables[0].Rows.Count-1;i++)
 				{ 
 					if (!Convert.ToBoolean(S_Misure))
@@ -280,12 +288,12 @@ namespace TheSite.ReportGestioneSpazi
 				{
 					throw new Eccezioni.NoDataForReportFoundException();
 				}
-				//xml=ds.GetXml();
+				xml=ds.GetXml();
 				return ds;
 			}
 			catch(Eccezioni.NoDataForReportFoundException ex)
 			{
-				LabelMessaggio.Text="Non ho trovato alcun item per i parametri di ricerca delezionati";
+				LabelMessaggio.Text="Nono sono presenti dati per i criteri di ricerca selezionati";
 				rptEngineOra.Visible=false;
 				return null;
 			}

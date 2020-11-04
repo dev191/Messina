@@ -6,7 +6,7 @@
 <%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
-	<HEAD>
+  <HEAD>
 		<TITLE>Ditte</TITLE>
 		<META content="Microsoft Visual Studio .NET 7.1" name="GENERATOR">
 		<META content="C#" name="CODE_LANGUAGE">
@@ -21,7 +21,7 @@
 		}	
 	}	
 		</SCRIPT>
-	</HEAD>
+</HEAD>
 	<BODY onbeforeunload="parent.left.valorizza()" ms_positioning="GridLayout">
 		<FORM id="Form1" method="post" runat="server">
 			<TABLE id="TableMain" style="Z-INDEX: 101; LEFT: 0px; POSITION: absolute; TOP: 0px" cellspacing="0"
@@ -35,60 +35,50 @@
 							<TR>
 								<TD style="HEIGHT: 25%" valign="top" align="left"><COLLAPSE:DATAPANEL id="PanelRicerca" runat="server" expandimageurl="../Images/down.gif" collapseimageurl="../Images/up.gif"
 										collapsetext="Riduci" expandtext="Espandi" collapsed="False" allowtitleexpandcollapse="True" titletext="Ricerca" cssclass="DataPanel75" titlestyle-cssclass="TitleSearch">
-										<TABLE id="tblSearch100" cellSpacing="0" cellPadding="2" border="0">
-											<TR>
-												<TD style="HEIGHT: 24px" align="right" width="20%">Codice Edificio
-												</TD>
-												<TD style="WIDTH: 219px; HEIGHT: 24px" width="219">
-													<CC1:S_TEXTBOX id="txtsBL_ID" tabIndex="1" runat="server" width="208px" maxlength="6" dbindex="0"
-														dbsize="8" dbdirection="Input" dbparametername="p_BL_ID"></CC1:S_TEXTBOX></TD>
-												<TD style="HEIGHT: 24px" align="right" width="20%">Nome</TD>
-												<TD style="HEIGHT: 24px" width="30%">
-													<CC1:S_TEXTBOX id="txtsName" tabIndex="2" runat="server" width="208px" maxlength="50" dbindex="1"
-														dbsize="50" dbdirection="Input" dbparametername="p_NAME"></CC1:S_TEXTBOX></TD>
-											</TR>
-											<TR>
-												<TD style="HEIGHT: 24px" align="right">Indirizzo</TD>
-												<TD style="WIDTH: 219px; HEIGHT: 24px">
-													<CC1:S_TEXTBOX id="txtsIndirizzo" tabIndex="3" runat="server" width="208px" maxlength="50" dbindex="2"
-														dbsize="50" dbparametername="p_INDIRIZZO"></CC1:S_TEXTBOX></TD>
-												<TD style="HEIGHT: 24px" align="right">Ditta Referente</TD>
-												<TD style="HEIGHT: 24px">
-													<CC1:S_TEXTBOX id="txtsReferente" tabIndex="4" runat="server" width="208px" dbindex="3" dbsize="50"
-														dbparametername="p_REFERENTE"></CC1:S_TEXTBOX></TD>
-											</TR>
-											<TR>
-												<TD style="HEIGHT: 23px" align="right">Comune</TD>
-												<TD style="WIDTH: 219px; HEIGHT: 23px">
-													<CC1:S_TEXTBOX id="txtsComune" tabIndex="5" runat="server" width="208px" dbindex="4" dbsize="50"
-														dbparametername="p_COMUNE"></CC1:S_TEXTBOX></TD>
-												<TD style="HEIGHT: 23px" align="right"></TD>
-												<TD style="HEIGHT: 23px"></TD>
-											</TR>
-											<TR>
-												<TD style="HEIGHT: 23px" align="right"></TD>
-												<TD style="WIDTH: 219px; HEIGHT: 23px"></TD>
-												<TD style="HEIGHT: 23px" align="right"></TD>
-												<TD style="HEIGHT: 23px"></TD>
-											</TR>
-											<TR>
-											</TR>
-											<TR>
-												<TD colSpan="2">
-													<CC1:S_BUTTON id="btnsRicerca" tabIndex="6" runat="server" cssclass="btn" width="125px" text="Ricerca"></CC1:S_BUTTON>&nbsp;
-													<ASP:BUTTON id="btnEsporta" runat="server" cssclass="btn" width="125px" text="Esporta Dati In Excel"></ASP:BUTTON>&nbsp;
-													<CC1:S_BUTTON id="BtnReset" tabIndex="4" runat="server" cssclass="btn" width="60px" text="Reset"></CC1:S_BUTTON></TD>
-												<TD></TD>
-												<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
-                  target=_blank>Guida</A></TD>
-											</TR>
-											<TR>
-											</TR>
-										</TABLE>
+            <TABLE id=tblSearch100 cellSpacing=0 cellPadding=2 border=0>
+              <TR>
+                <TD style="HEIGHT: 24px" align=right width="20%">Codice 
+                  Edificio </TD>
+                <TD style="WIDTH: 219px; HEIGHT: 24px" width=219>
+<CC1:S_TEXTBOX id=txtsBL_ID tabIndex=1 runat="server" dbparametername="p_BL_ID" dbdirection="Input" dbsize="8" dbindex="0" maxlength="6" width="208px"></CC1:S_TEXTBOX></TD>
+                <TD style="HEIGHT: 24px" align=right width="20%">Nome</TD>
+                <TD style="HEIGHT: 24px" width="30%">
+<CC1:S_TEXTBOX id=txtsName tabIndex=2 runat="server" dbparametername="p_NAME" dbdirection="Input" dbsize="50" dbindex="1" maxlength="50" width="208px"></CC1:S_TEXTBOX></TD></TR>
+              <TR>
+                <TD style="HEIGHT: 24px" align=right>Indirizzo</TD>
+                <TD style="WIDTH: 219px; HEIGHT: 24px">
+<CC1:S_TEXTBOX id=txtsIndirizzo tabIndex=3 runat="server" dbparametername="p_INDIRIZZO" dbsize="50" dbindex="2" maxlength="50" width="208px"></CC1:S_TEXTBOX></TD>
+                <TD style="HEIGHT: 24px" align=right>Ditta Referente</TD>
+                <TD style="HEIGHT: 24px">
+<CC1:S_TEXTBOX id=txtsReferente tabIndex=4 runat="server" dbparametername="p_REFERENTE" dbsize="50" dbindex="3" width="208px"></CC1:S_TEXTBOX></TD></TR>
+              <TR>
+                <TD style="HEIGHT: 23px" align=right>Comune</TD>
+                <TD style="WIDTH: 219px; HEIGHT: 23px">
+<CC1:S_TEXTBOX id=txtsComune tabIndex=5 runat="server" dbparametername="p_COMUNE" dbsize="50" dbindex="4" width="208px"></CC1:S_TEXTBOX></TD>
+                <TD style="HEIGHT: 23px" align=right>Progetto</TD>
+                <TD style="HEIGHT: 23px">
+<CC1:S_COMBOBOX id=CmbProgetto tabIndex=8 runat="server" dbparametername="p_progetto" dbdirection="Input" dbsize="1" dbindex="5" width="208px" dbdatatype="Integer"></CC1:S_COMBOBOX></TD></TR>
+              <TR>
+                <TD style="HEIGHT: 23px" align=right></TD>
+                <TD style="WIDTH: 219px; HEIGHT: 23px"></TD>
+                <TD style="HEIGHT: 23px" align=right></TD>
+                <TD style="HEIGHT: 23px">
+<asp:Button id=Button1 runat="server" Text="Calcola tutte le superfici"></asp:Button></TD></TR>
+              <TR></TR>
+              <TR>
+                <TD colSpan=2>
+<CC1:S_BUTTON id=btnsRicerca tabIndex=6 runat="server" cssclass="btn" width="125px" text="Ricerca"></CC1:S_BUTTON>&nbsp; 
+<ASP:BUTTON id=btnEsporta runat="server" cssclass="btn" width="125px" text="Esporta Dati In Excel"></ASP:BUTTON>&nbsp; 
+<CC1:S_BUTTON id=BtnReset tabIndex=4 runat="server" cssclass="btn" width="60px" text="Reset"></CC1:S_BUTTON></TD>
+                <TD></TD>
+                <TD align=right><A class=GuidaLink href="<%= HelpLink %>" 
+                  target=_blank>Guida</A></TD></TR>
+              <TR></TR></TABLE>
 									</COLLAPSE:DATAPANEL></TD>
 							</TR>
 							<TR>
-								<TD style="HEIGHT: 3%" align="center"></TD>
+								<TD style="HEIGHT: 3%" align="center">
+									<asp:Label id="lbMessage" runat="server"></asp:Label></TD>
 							<TR>
 								<TD style="HEIGHT: 72%" valign="top" align="center"><UC1:GRIDTITLE id="GridTitle1" runat="server"></UC1:GRIDTITLE><ASP:DATAGRID id="DataGridRicerca" runat="server" cssclass="DataGrid" allowpaging="True" bordercolor="Gray"
 										borderwidth="1px" gridlines="Vertical" autogeneratecolumns="False">
@@ -126,6 +116,9 @@
 												<HEADERSTYLE width="15%"></HEADERSTYLE>
 											</ASP:BOUNDCOLUMN>
 											<ASP:BOUNDCOLUMN datafield="prcom" headertext="Comune">
+												<HEADERSTYLE width="15%"></HEADERSTYLE>
+											</ASP:BOUNDCOLUMN>
+											<ASP:BOUNDCOLUMN datafield="progetto" headertext="Progetto">
 												<HEADERSTYLE width="15%"></HEADERSTYLE>
 											</ASP:BOUNDCOLUMN>
 										</COLUMNS>

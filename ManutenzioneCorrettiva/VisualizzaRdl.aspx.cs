@@ -8,13 +8,19 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
+using S_Controls.Collections;
+using System.IO;
+using System.Globalization;
+
 
 namespace TheSite.ManutenzioneCorretiva
 {
 	/// <summary>
 	/// Descrizione di riepilogo per VisualizzaRdl.
 	/// </summary>
-	public class VisualizzaRdl : System.Web.UI.Page    // System.Web.UI.Page
+	public class VisualizzaRdl : System.Web.UI.Page
 	{
 		protected WebControls.PageTitle PageTitle1;
 
@@ -46,11 +52,44 @@ namespace TheSite.ManutenzioneCorretiva
 		protected System.Web.UI.WebControls.Label lblstanzaed;
 		protected System.Web.UI.WebControls.Label lblTelefonoDitta;
 		protected S_Controls.S_Button btnModificaRDL;
+		protected System.Web.UI.WebControls.Label LblEffetto;
+		protected System.Web.UI.WebControls.Label LblAnomalia;
+		protected System.Web.UI.WebControls.Label LblIdASeguito;
+		protected System.Web.UI.WebControls.Label lblAseguito1;
+		protected System.Web.UI.WebControls.Label lblAseguito2;
+		protected System.Web.UI.WebControls.Label lblAseguito3;
+		protected System.Web.UI.WebControls.Label lblAseguito4;
+		
+		protected System.Web.UI.WebControls.CheckBox ChkConduzione;
+		protected System.Web.UI.WebControls.Label TxtOraAseguito;
+		protected System.Web.UI.WebControls.Panel Conduzione;
+		protected System.Web.UI.WebControls.Label CmbASeguito;
+		protected System.Web.UI.WebControls.Label TxtASeguito1;
+		protected System.Web.UI.WebControls.CheckBox ChkSopralluogo;
+		protected System.Web.UI.WebControls.Label TxtSopralluogo;
+		protected System.Web.UI.WebControls.Panel Sopralluogo;
+		protected System.Web.UI.WebControls.Label TxtASeguito4;
+		protected System.Web.UI.WebControls.Label CPConduzioneData;
+		protected System.Web.UI.WebControls.Label CPAseguito;
+		protected System.Web.UI.WebControls.Label CPSopralluogoDie;
+		protected System.Web.UI.WebControls.Label CPSopralluogoData;
+		protected System.Web.UI.WebControls.Button BtSalvaSGA;
 		int itemId = 0;
-
+		Classi.ManCorrettiva.ClManCorrettiva _ClManCorrettiva;
+		string HSga;
+		protected System.Web.UI.WebControls.Label LblSga;
+		protected System.Web.UI.WebControls.Label LblInvioSga;
+		protected System.Web.UI.HtmlControls.HtmlInputHidden hidprog;
+		protected System.Web.UI.WebControls.Label lblTipoIntervento;
+		protected System.Web.UI.HtmlControls.HtmlInputHidden HidTipInter;
+		int id_bl=0;
 		private void Page_Load(object sender, System.EventArgs e)
 		{
+			//Istanzio la classe 
+			_ClManCorrettiva=new TheSite.Classi.ManCorrettiva.ClManCorrettiva(Context.User.Identity.Name);
+			
 			FunId = Int32.Parse(Request.Params["FunId"]);
+			
 			if (Request.QueryString["chiamante"]=="Materiali")
 			{
 				btnModificaRDL.Visible=false;
@@ -61,13 +100,16 @@ namespace TheSite.ManutenzioneCorretiva
 			if (Request.Params["ItemId"] != null)
 			{
 				itemId = Int32.Parse(Request.Params["ItemId"]);
-				PageTitle1.Title = "Inserimento Richiesta di Lavoro N° " + itemId ;
+				PageTitle1.Title = "Richiesta di Lavoro N° " + itemId ;
 				txtWrHidden.Text= itemId.ToString();
+						
+	
+		
+
 
 				Classi.ManOrdinaria.Richiesta _Richiesta = new TheSite.Classi.ManOrdinaria.Richiesta();					
 
 				DataSet _MyDs = _Richiesta.GetSingleData(itemId).Copy();
-					
 				if (_MyDs.Tables[0].Rows.Count == 1)
 				{
 					DataRow _Dr = _MyDs.Tables[0].Rows[0];
@@ -76,6 +118,22 @@ namespace TheSite.ManutenzioneCorretiva
 					DateTime d_TimeRequested = (DateTime) _Dr["TIME_REQUESTED"];
 					this.lblOra.Text = d_TimeRequested.ToShortTimeString();
 					this.lblCodiceEdificio.Text = _Dr["BL_ID"].ToString();
+					
+					if (_Dr["sga"] != DBNull.Value)
+						this.LblSga.Text =_Dr["sga"].ToString();
+					//recupero data di invio sga
+					DataSet DsData = _ClManCorrettiva.GetDataInvioSga(itemId,DocType.SGA);
+				
+					if (DsData.Tables[0].Rows.Count == 1)
+					{
+						DataRow _DrData = DsData.Tables[0].Rows[0];
+						LblInvioSga.Text=_DrData["data_invio"].ToString();
+					}
+					if (_Dr["id_bl"] != DBNull.Value)
+						this.id_bl =Convert.ToInt32(_Dr["id_bl"].ToString());
+					
+					if (_Dr["id_progetto"] != DBNull.Value)
+						this.hidprog.Value =_Dr["id_progetto"].ToString();
 					
 					if (_Dr["DENOMINAZIONE"] != DBNull.Value)
 						this.lblDenominazione.Text = _Dr["DENOMINAZIONE"].ToString();
@@ -137,6 +195,104 @@ namespace TheSite.ManutenzioneCorretiva
 					if (_Dr["EQ_ID"] != DBNull.Value)
 						this.lblEqId.Text = _Dr["EQ_ID"].ToString();
 
+					//aggiunta SGA
+					if (_Dr["sga_anomalia"] != DBNull.Value)
+						this.LblAnomalia.Text = _Dr["sga_anomalia"].ToString();
+
+					if (_Dr["sga_effetto"] != DBNull.Value)
+						this.LblEffetto.Text = _Dr["sga_effetto"].ToString();
+
+					if (_Dr["conduzione"] != DBNull.Value)
+						ChkConduzione.Checked=(_Dr["conduzione"].ToString()=="1")?true:false;
+
+					if (_Dr["data_conduzione"] != DBNull.Value)
+						CPConduzioneData.Text=_Dr["data_conduzione"].ToString();
+
+					if (_Dr["ora_conduzione"] != DBNull.Value)
+					{
+						TxtOraAseguito.Text=_Dr["ora_conduzione"].ToString();
+					}
+
+					if (_Dr["sga_seguito"] != DBNull.Value)
+					{
+						CmbASeguito.Text=_Dr["sga_seguito"].ToString();
+					}
+					if (_Dr["DescTipoIntervento"] != DBNull.Value)
+					{
+						lblTipoIntervento.Text=_Dr["DescTipoIntervento"].ToString();
+					}
+					HidTipInter.Value=_Dr["tipointervento_id"].ToString();
+					if (_Dr["tipointervento_id"].ToString() =="83")
+					{
+							BtSalvaSGA.Text="Salva/Invia DIE";
+					}
+
+
+					if (_Dr["die_numero"] != DBNull.Value)
+						TxtASeguito1.Text=_Dr["die_numero"].ToString();
+
+					if (_Dr["die_del"] != DBNull.Value)
+						CPAseguito.Text=_Dr["die_del"].ToString();
+
+					if (_Dr["sopralluogo"] != DBNull.Value)
+						ChkSopralluogo.Checked=(_Dr["sopralluogo"].ToString()=="1")?true:false;
+
+					if (_Dr["sopralluogo_n"] != DBNull.Value)
+						TxtSopralluogo.Text=_Dr["sopralluogo_n"].ToString();
+
+					if (_Dr["sopralluogo_del"] != DBNull.Value)
+						CPSopralluogoDie.Text=_Dr["sopralluogo_del"].ToString();
+
+					if (_Dr["sopralluogo_data"] != DBNull.Value)
+						CPSopralluogoData.Text=_Dr["sopralluogo_data"].ToString();
+
+					if (_Dr["sopralluogo_da"] != DBNull.Value)
+						TxtASeguito4.Text=_Dr["sopralluogo_da"].ToString();
+//
+//					if (_Dr["sga_aseguito1"] != DBNull.Value && _Dr["id_sga_seguito"]!= DBNull.Value)
+//					{
+//						switch(_Dr["id_sga_seguito"].ToString())
+//						{
+//							case "1":
+//								this.lblAseguito1.Text ="IN DATA: " +  _Dr["sga_aseguito1"].ToString();
+//								lblAseguito3.Visible=false;
+//								lblAseguito4.Visible=false;
+//							break;
+//							case "4":
+//								this.lblAseguito1.Text ="DIE N°: " +  _Dr["sga_aseguito1"].ToString();
+//								lblAseguito3.Visible=false;
+//								lblAseguito4.Visible=false;
+//							break;
+//							case "5":
+//								this.lblAseguito1.Text ="N°: " +  _Dr["sga_aseguito1"].ToString();
+//								lblAseguito3.Visible=true;
+//								lblAseguito4.Visible=true;
+//							break;
+//						}			
+//					}		
+//
+//					if (_Dr["sga_aseguito2"] != DBNull.Value && _Dr["id_sga_seguito"]!= DBNull.Value)
+//					{
+//						switch(_Dr["id_sga_seguito"].ToString())
+//						{
+//							case "1":
+//								this.lblAseguito2.Text ="ORA: " +  _Dr["sga_aseguito2"].ToString();
+//								break;
+//							case "4": case "5":
+//								this.lblAseguito2.Text ="DEL°: " +  _Dr["sga_aseguito2"].ToString();
+//								break;
+//								default:
+//								break;
+//						}			
+//					}		
+//
+//					if (_Dr["sga_aseguito3"] != DBNull.Value)
+//						this.lblAseguito3.Text = "Sopralluogo effettuato in data   "+_Dr["sga_aseguito3"].ToString();
+//
+//					
+//					if (_Dr["sga_aseguito4"] != DBNull.Value)
+//						this.lblAseguito4.Text = "DA  "+_Dr["sga_aseguito4"].ToString();
+
 				}					
 			}
 			else
@@ -162,6 +318,7 @@ namespace TheSite.ManutenzioneCorretiva
 			this.btnsNuova.Click += new System.EventHandler(this.btnsNuova_Click);
 			this.cmdApprova.Click += new System.EventHandler(this.cmdApprova_Click);
 			this.btnModificaRDL.Click += new System.EventHandler(this.btnModificaRDL_Click);
+			this.BtSalvaSGA.Click += new System.EventHandler(this.BtSalvaSGA_Click);
 			this.Load += new System.EventHandler(this.Page_Load);
 
 		}
@@ -169,17 +326,183 @@ namespace TheSite.ManutenzioneCorretiva
 
 		private void btnsNuova_Click(object sender, System.EventArgs e)
 		{
-			Response.Redirect("CreazioneRdl.aspx?FunId=" + FunId);
+			string VarApp="";
+			if (Request["VarApp"]!=null)
+			{
+				VarApp="&VarApp=" + Request["VarApp"];
+			}
+			Response.Redirect("CreazioneSGA.aspx?FunId=" + FunId + VarApp);
 		}
 
 		private void cmdApprova_Click(object sender, System.EventArgs e)
 		{
-			Response.Redirect("EditApprovaEmetti.aspx?wr_id=" + txtWrHidden.Text);			
+			Response.Redirect("CompletaRdl.aspx?wr_id=" + txtWrHidden.Text);	
 		}
 
 		private void btnModificaRDL_Click(object sender, System.EventArgs e)
 		{
-		Response.Redirect("ModificaRdl.aspx?ItemId=" + txtWrHidden.Text);			
-		}		
+			string VarApp="";
+			if (Request["VarApp"]!=null)
+			{
+				VarApp="&VarApp=" + Request["VarApp"];
+			}
+			Response.Redirect("CreazioneSGA.aspx?ItemId=" + txtWrHidden.Text + VarApp);			
+		}
+
+		private void BtSalvaSGA_Click(object sender, System.EventArgs e)
+		{
+			//CreaCodSGA();
+			
+			if (HidTipInter.Value=="83")
+				inviaDie();
+			else
+				inviaSGA();
+		}
+		
+	
+		private void CreaCodSGA()
+		{
+			int num=0;
+			num = _ClManCorrettiva.CreaNumeroSGA(Convert.ToInt32(txtWrHidden.Text));
+			HSga=lblCodiceEdificio.Text+"_"+num+"_"+System.DateTime.Parse(lblData.Text).ToString("yy");
+			LblSga.Text=HSga.ToString();
+		
+		}
+
+		private void inviaSGA()
+		{
+			HSga=LblSga.Text;
+			string formatdate=DateTime.Now.Millisecond.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Hour.ToString() +DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() +DateTime.Now.Year.ToString();	
+			string fileName="";
+			if (hidprog.Value=="2") // vodafone
+				fileName = @"\XSLT\XSLsgaRptVod04.xslt";
+			else
+				fileName = @"\XSLT\XSLsgaRpt04.xslt";
+			string PathSgaXlst = Server.MapPath(Request.ApplicationPath + fileName);
+			TheSite.Classi.RptRtf.SGARTF trs = new TheSite.Classi.RptRtf.SGARTF();
+			trs.FileXlst = PathSgaXlst;
+			int wr_id = Convert.ToInt32(this.txtWrHidden.Text);
+			string[] Files=trs.GeneraRtf(wr_id,formatdate);
+			TheSite.Classi.MailSend mail=new TheSite.Classi.MailSend();
+			SaveInvio(Files[1],DocType.SGA);
+			mail.SendMail(Files[0],wr_id,DocType.SGA);
+			//recupero data di invio sga
+			DataSet DsData = _ClManCorrettiva.GetDataInvioSga(itemId,DocType.SGA);
+				
+			if (DsData.Tables[0].Rows.Count == 1)
+			{
+				DataRow _DrData = DsData.Tables[0].Rows[0];
+				LblInvioSga.Text=_DrData["data_invio"].ToString();
+			}
+			//
+		}
+		private void inviaDie()
+		{
+			HSga=LblSga.Text;
+			int wr_id = Convert.ToInt32(this.txtWrHidden.Text);
+			string formatdate=DateTime.Now.Millisecond.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Hour.ToString() +DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() +DateTime.Now.Year.ToString();	
+			TheSite.XSLT.DIE die =new TheSite.XSLT.DIE(wr_id,formatdate);
+			string[] Files=die.GenerateDIE();
+
+			TheSite.Classi.MailSend mail=new TheSite.Classi.MailSend();
+			mail.SendMail(Files[0],wr_id,DocType.DIE);
+
+			SaveInvio(Files[1],DocType.DIE);
+			
+		}
+		private void SaveInvio(string FileName,DocType TipoDoc)
+		{
+			S_ControlsCollection _SColl =new S_ControlsCollection();
+	
+
+			S_Object p = new S_Object();
+			p.ParameterName = "p_id";
+			p.DbType = CustomDBType.Integer;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Value =0;
+			_SColl.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_NOME_DOC";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Size=255;
+			p.Value =Path.GetFileName(FileName);
+			_SColl.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_DATA_INVIO";
+			p.DbType = CustomDBType.Date;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Size=15;
+			p.Value =DateTime.Now;
+			_SColl.Add(p);
+                                        
+			p = new S_Object();
+			p.ParameterName = "p_USERS";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Size=255;
+			p.Value =Context.User.Identity.Name;
+			_SColl.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_TIPO_DOC";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Size=32;
+			p.Value =TipoDoc.ToString();
+			_SColl.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_CODICE";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Size=255;
+			p.Value =this.HSga.ToString();
+			_SColl.Add(p);
+ 
+			p = new S_Object();
+			p.ParameterName = "p_ID_WR";
+			p.DbType = CustomDBType.Integer;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Value =this.txtWrHidden.Text;
+			_SColl.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_ID_BL";
+			p.DbType = CustomDBType.Integer;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Value =this.id_bl;
+			_SColl.Add(p);
+            
+			p = new S_Object();
+			p.ParameterName = "p_CODICE_BL";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Size=255;
+			p.Value =lblCodiceEdificio.Text;
+			_SColl.Add(p);
+
+			p = new S_Object();
+			p.ParameterName = "p_Operazione";
+			p.DbType = CustomDBType.VarChar;
+			p.Direction = ParameterDirection.Input;
+			p.Index = _SColl.Count;
+			p.Size=255;
+			p.Value ="Insert";
+			_SColl.Add(p);
+
+			int result= _ClManCorrettiva.ExecuteTracciaDoc(_SColl); 
+		}
 	}
 }

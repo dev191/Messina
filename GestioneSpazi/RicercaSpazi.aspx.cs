@@ -9,6 +9,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
+using TheSite.AnagrafeImpianti; 
+using Microsoft.Web.UI.WebControls;
 using ApplicationDataLayer.DBType;
 
 
@@ -17,7 +19,7 @@ namespace TheSite.GestioneSpazi
 	/// <summary>
 	/// Descrizione di riepilogo per RicercaSpazi.
 	/// </summary>
-	public class RicercaSpazi : System.Web.UI.Page    // System.Web.UI.Page
+	public class RicercaSpazi : System.Web.UI.Page
 	{
 		protected System.Web.UI.HtmlControls.HtmlForm Form1;
 		protected S_Controls.S_ListBox S_ListEdifici;
@@ -55,6 +57,7 @@ namespace TheSite.GestioneSpazi
 		public string sql_where= String.Empty;
 		public string sql_group= String.Empty;
 		public string sql= String.Empty;
+		public string sqlCount = String.Empty;
 		protected S_Controls.S_TextBox s_txtReparto;
 		protected S_Controls.S_TextBox s_txtDestinazione;
 		protected S_Controls.S_ComboBox cmbsConfronto;
@@ -73,7 +76,7 @@ namespace TheSite.GestioneSpazi
 
 		private void Page_Load(object sender, System.EventArgs e)
 		{
-			
+					
 
 			System.Text.StringBuilder sbValid = new System.Text.StringBuilder();
 			S_ListEdifici.Attributes.Add("title","Premere il tasto canc per eliminare un elemento dalla lista.");  
@@ -222,8 +225,9 @@ namespace TheSite.GestioneSpazi
 
 		private void S_btMostra_Click(object sender, System.EventArgs e)
 		{
+			DtgRicercaSpazi.CurrentPageIndex =0; 
 			LoadList();
-			BindingEdifici(edifici.Value);
+			BindingEdifici(edifici.Value,true);
 		}
 
 		private void LoadList()
@@ -244,16 +248,17 @@ namespace TheSite.GestioneSpazi
 			}
 			
 		}
-		private void BindingEdifici(string BlId)
+		private void BindingEdifici(string BlId, bool reset)
 		{
 			if (BlId != "")
 				BlId="'" + BlId.Replace(",","','") + "'";
 
+			// da qui
       
 			if (chkEdificio.Checked == true)
 			{
-				sql_select += " BL.BL_ID as EDIFICIO " ;
-				sql_group += " BL.BL_ID";
+				sql_select += " BL.BL_ID || ' - '  ||  BL.ADDRESS1 as EDIFICIO" ;
+				sql_group += " BL.BL_ID || ' - '  ||  BL.ADDRESS1";
 			}
 
 			if (chkPiano.Checked == true)
@@ -310,6 +315,8 @@ namespace TheSite.GestioneSpazi
 				sql_select += " RM_REPARTO.DESCRIZIONE as REPARTO ";
 				sql_group += " RM_REPARTO.DESCRIZIONE ";
 			}
+
+			// a  qui 
 
 			if ( BlId != "")
 			{
@@ -374,6 +381,12 @@ namespace TheSite.GestioneSpazi
 			if (sql_group!="")
 				sql += " GROUP BY " + sql_group ; 
 
+//			sqlCount = "SELECT count(distinct RM.RM_ID)  FROM BL JOIN FL ON (FL.Id_Bl = BL.Id) " + 
+//				"JOIN RM USING (id_piani, id_bl) JOIN PIANI ON (id_piani = PIANI.id) " +
+//				"left JOIN RM_REPARTO ON (RM.ID_RM_REPARTO = RM_REPARTO.ID_RM_REPARTO) " +
+//				"left JOIN RM_DEST_USO ON (RM.ID_RM_DEST_USO = RM_DEST_USO.ID_RM_DEST_USO) " +
+//				" left JOIN RM_CAT ON (RM.ID_RM_CAT = RM_CAT.ID_RM_CAT) " + sql_where   ;
+
 			//			///Istanzio un nuovo oggetto Collection per aggiungere i parametri
 			S_Controls.Collections.S_ControlsCollection _SCollection = new S_Controls.Collections.S_ControlsCollection();
 			//			///creo i parametri		
@@ -387,29 +400,71 @@ namespace TheSite.GestioneSpazi
 			s_sql.Value = sql;
 			_SCollection.Add(s_sql);	
 
+			// nuovi parametri paginazione
+
+			S_Controls.Collections.S_Object s_p_pageindex = new S_Object();
+			s_p_pageindex.ParameterName = "pageindex";
+			s_p_pageindex.DbType = CustomDBType.Integer;
+			s_p_pageindex.Direction = ParameterDirection.Input;
+			s_p_pageindex.Index = 16;
+			s_p_pageindex.Value=DtgRicercaSpazi.CurrentPageIndex +1;			
+			_SCollection.Add(s_p_pageindex);
+
+			S_Controls.Collections.S_Object s_p_pagesize = new S_Object();
+			s_p_pagesize.ParameterName = "pagesize";
+			s_p_pagesize.DbType = CustomDBType.Integer;
+			s_p_pagesize.Direction = ParameterDirection.Input;
+			s_p_pagesize.Index = 17;
+			s_p_pagesize.Value= DtgRicercaSpazi.PageSize;			
+			_SCollection.Add(s_p_pagesize);
 
 			Classi.AnagrafeImpianti.ServiziEdifici _ServiziEdifici= new Classi.AnagrafeImpianti.ServiziEdifici(Context.User.Identity.Name);
   
 			DataSet Ds=_ServiziEdifici.GetRicerca(_SCollection);
 
-			if (Ds.Tables[0].Rows.Count>0)
+			if (reset )
 			{
-				int Pagina = 0;
-				if ((Ds.Tables[0].Rows.Count % DtgRicercaSpazi.PageSize) >0)
-				{
-					Pagina ++;
-				}
-				if (DtgRicercaSpazi.PageCount != Convert.ToInt16((Ds.Tables[0].Rows.Count / DtgRicercaSpazi.PageSize) + Pagina))
-				{					
-					DtgRicercaSpazi.CurrentPageIndex=0;					
-				}
-				
-			 
+				_SCollection.Clear();
+
+				///edifici
+				S_Controls.Collections.S_Object s_sqlCount = new S_Controls.Collections.S_Object();
+				s_sqlCount.ParameterName = "p_sql";
+				s_sqlCount.DbType =CustomDBType.VarChar;
+				s_sqlCount.Direction = ParameterDirection.Input;
+				s_sqlCount.Size =4000;
+				s_sqlCount.Index = 0;
+				s_sqlCount.Value = sql;
+				_SCollection.Add(s_sqlCount);	
+
+
+				int _totalRecords = _ServiziEdifici.GetRicercaCount(_SCollection);
+				this.GridTitle1.NumeroRecords=_totalRecords.ToString();
+
 			}
-			else
-			{
+
+			this.DtgRicercaSpazi.VirtualItemCount =int.Parse(this.GridTitle1.NumeroRecords);
+
+
+			if (Ds.Tables[0].Rows.Count==0)
 				Panel1.Visible=false;
-			}
+//			{
+//				int Pagina = 0;
+//				if ((Ds.Tables[0].Rows.Count % DtgRicercaSpazi.PageSize) >0)
+//				{
+//					Pagina ++;
+//				}
+//				if (DtgRicercaSpazi.PageCount != Convert.ToInt16((Ds.Tables[0].Rows.Count / DtgRicercaSpazi.PageSize) + Pagina))
+//				{					
+//					DtgRicercaSpazi.CurrentPageIndex=0;					
+//				}
+		
+
+			 
+//			}
+//			else
+//			{
+//				Panel1.Visible=false;
+//			}
 			Panel1.Visible=true;
 
 			DtgRicercaSpazi.Visible=true;
@@ -471,7 +526,7 @@ namespace TheSite.GestioneSpazi
 			DtgRicercaSpazi.DataBind();
 		
 			GridTitle1.DescriptionTitle="";
-			GridTitle1.NumeroRecords = Ds.Tables[0].Rows.Count.ToString();
+//			GridTitle1.NumeroRecords = Ds.Tables[0].Rows.Count.ToString();
 
 		}
 
@@ -594,7 +649,7 @@ namespace TheSite.GestioneSpazi
 			DtgRicercaSpazi.CurrentPageIndex= e.NewPageIndex;
 			startIndex=DtgRicercaSpazi.CurrentPageIndex * DtgRicercaSpazi.PageSize;
 			LoadList();
-			BindingEdifici(edifici.Value);
+			BindingEdifici(edifici.Value, false);
 		}
 
 	}

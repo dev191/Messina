@@ -1,9 +1,9 @@
-<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
-<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
-<%@ Register TagPrefix="cc1" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
-<%@ Register TagPrefix="cc2" Namespace="S_Controls" Assembly="S_Controls" %>
-<%@ Page language="c#" Codebehind="ListaDoc_Dwf.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.ListaDoc_Dwf" %>
 <%@ Register TagPrefix="uc1" TagName="GridTitleServer" Src="../WebControls/GridTitleServer.ascx" %>
+<%@ Page language="c#" Codebehind="ListaDoc_Dwf.aspx.cs" AutoEventWireup="false" Inherits="TheSite.Gestione.ListaDoc_Dwf" %>
+<%@ Register TagPrefix="cc2" Namespace="S_Controls" Assembly="S_Controls" %>
+<%@ Register TagPrefix="cc1" Namespace="Csy.WebControls" Assembly="CsyWebControls" %>
+<%@ Register TagPrefix="uc1" TagName="PageTitle" Src="../WebControls/PageTitle.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="RicercaModulo" Src="../WebControls/RicercaModulo.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <HTML>
 	<HEAD>
@@ -16,7 +16,7 @@
 	</HEAD>
 	<body onbeforeunload="parent.left.valorizza()" MS_POSITIONING="GridLayout">
 		<form id="Form1" method="post" runat="server">
-			<TABLE id="Table1" style="Z-INDEX: 101; LEFT: 8px; POSITION: absolute; TOP: 8px" cellSpacing="0"
+			<TABLE id="Table1" style="Z-INDEX: 101; POSITION: absolute; TOP: 8px; LEFT: 8px" cellSpacing="0"
 				cellPadding="0" width="100%" border="0">
 				<TR>
 					<TD align="center">
@@ -30,18 +30,18 @@
 									<cc1:DataPanel id="DataPanel1" runat="server" TitleStyle-CssClass="TitleSearch" Collapsed="False"
 										TitleText="Anagrafe Documenti" ExpandText="Espandi" ExpandImageUrl="../Images/down.gif" CollapseText="Riduci"
 										CssClass="DataPanel75" CollapseImageUrl="../Images/up.gif" AllowTitleExpandCollapse="True">
-										<TABLE id="tblSearch100" cellSpacing="0" cellPadding="0" width="100%" border="0">
+										<TABLE id="tblSearch100" border="0" cellSpacing="0" cellPadding="0" width="100%">
 											<TR>
 												<TD>
 													<uc1:RicercaModulo id="RicercaModulo1" runat="server"></uc1:RicercaModulo></TD>
 											</TR>
 										</TABLE>
-										<TABLE width="100%" border="0">
+										<TABLE border="0" width="100%">
 											<TR>
 												<TD style="WIDTH: 87px">
-													<cc2:S_Button id="btRicerca" runat="server" CssClass="btn" Width="88px" Text="Ricerca"></cc2:S_Button></TD>
+													<cc2:S_Button id="btRicerca" runat="server" CssClass="btn" Text="Ricerca" Width="88px"></cc2:S_Button></TD>
 												<TD>
-													<cc2:S_Button id="btReset" runat="server" CssClass="btn" Width="88px" Text="Reset"></cc2:S_Button></TD>
+													<cc2:S_Button id="btReset" runat="server" CssClass="btn" Text="Reset" Width="88px"></cc2:S_Button></TD>
 												<TD align="right"><A class=GuidaLink href="<%= HelpLink %>" 
                   target=_blank>Guida</A></TD>
 											</TR>
