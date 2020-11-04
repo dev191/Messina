@@ -381,6 +381,7 @@
     <Compile Include="Classi\ClassiAnagrafiche\PianoFerie.cs" />
     <Compile Include="Classi\ClassiAnagrafiche\Pmp.cs" />
     <Compile Include="Classi\ClassiAnagrafiche\PmpFrequenza.cs" />
+    <Compile Include="Classi\ClassiAnagrafiche\PmpS.cs" />
     <Compile Include="Classi\ClassiAnagrafiche\Reparti.cs" />
     <Compile Include="Classi\ClassiAnagrafiche\Reperibilita.cs" />
     <Compile Include="Classi\ClassiAnagrafiche\Richiedenti.cs" />
@@ -392,18 +393,23 @@
     <Compile Include="Classi\ClassiAnagrafiche\TipoManutenzione.cs" />
     <Compile Include="Classi\ClassiAnagrafiche\UnitaMisura.cs" />
     <Compile Include="Classi\ClassiDettaglio\Edificio.cs" />
+    <Compile Include="Classi\ClassiDettaglio\Funzione.cs" />
     <Compile Include="Classi\ClassiDettaglio\RichiedentiTipo.cs" />
     <Compile Include="Classi\ClassiDettaglio\Servizi.cs" />
     <Compile Include="Classi\ClassiDettaglio\UnitaMisura.cs" />
     <Compile Include="Classi\ClassiDettaglio\Urgenza.cs" />
     <Compile Include="Classi\ClassMail.cs" />
+    <Compile Include="Classi\clMyCollection.cs" />
     <Compile Include="Classi\clMyDataGridCollection.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\AbstractBase.cs" />
+    <Compile Include="Classi\CostiGesioneCumulativi\AgganciaDatalayer.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\ClManCorrettiva.cs" />
+    <Compile Include="Classi\CostiGesioneCumulativi\clMyCollection.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\clMyDataGridCollection.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\CostiOperativiCumulativo.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\Richiesta.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\RichiestaIntervento.cs" />
+    <Compile Include="Classi\CostiGesioneCumulativi\Site.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\SiteJavaScript.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\StampaSuDisco.cs" />
     <Compile Include="Classi\CostiOperativi\CostoAddetti.cs" />
@@ -412,6 +418,7 @@
     <Compile Include="Classi\GiudizioCliente\Giudizio.cs" />
     <Compile Include="Classi\Helper.cs" />
     <Compile Include="Classi\MailSend.cs" />
+    <Compile Include="Classi\ManCorrettivaPaging.cs" />
     <Compile Include="Classi\ManCorrettiva\AnalisiCostiMateriali.cs" />
     <Compile Include="Classi\ManCorrettiva\ClManCorrettiva.cs" />
     <Compile Include="Classi\ManCorrettiva\MaterialiWrDb.cs" />
@@ -435,20 +442,26 @@
     <Compile Include="Classi\ManProgrammata\Rapportino.cs" />
     <Compile Include="Classi\ManProgrammata\RecuperoDocPmp.cs" />
     <Compile Include="Classi\ManProgrammata\RptMpDataDinamic.cs" />
+    <Compile Include="Classi\ManProgrammata\RptMptData.cs" />
     <Compile Include="Classi\ManProgrammata\SfogliaRdlOdl.cs" />
     <Compile Include="Classi\ManProgrammata\SfogliaRdlOdlPaging.cs" />
     <Compile Include="Classi\ManStraordinaria\AggiornamentoRdl.cs" />
     <Compile Include="Classi\ManStraordinaria\GestioneRdl.cs" />
+    <Compile Include="Classi\ManStraordinaria\Report.cs" />
     <Compile Include="Classi\ManStraordinaria\Richiesta.cs" />
+    <Compile Include="Classi\ManStraordinaria\RichiestaPaging.cs" />
     <Compile Include="Classi\Menu.cs" />
     <Compile Include="Classi\Navigazione.cs" />
+    <Compile Include="Classi\NoDataForReportException.cs" />
     <Compile Include="Classi\Progetti.cs" />
     <Compile Include="Classi\ProvinceComuni.cs" />
     <Compile Include="Classi\RptRtf\DatiRtf.cs" />
     <Compile Include="Classi\RptRtf\SGARTF.cs" />
     <Compile Include="Classi\Ruolo.cs" />
     <Compile Include="Classi\SchedeEq\DatiShcedeEq.cs" />
+    <Compile Include="Classi\SGADIE\SGADIE.cs" />
     <Compile Include="Classi\Sicurezza.cs" />
+    <Compile Include="Classi\Site.cs" />
     <Compile Include="Classi\SiteJavaScript.cs" />
     <Compile Include="Classi\SiteMenu.cs" />
     <Compile Include="Classi\SiteModule.cs" />
@@ -553,6 +566,10 @@
     </Compile>
     <Compile Include="CostiOperativi\CostiOperativi.aspx.cs">
       <DependentUpon>CostiOperativi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestioneSpazi\RicercaSpazi.aspx.cs">
+      <DependentUpon>RicercaSpazi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gestione\Addetti.aspx.cs">
@@ -905,8 +922,48 @@
       <DependentUpon>ApprovaRDL.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ManutenzioneCorrettiva\ApprovaRDL1.aspx.cs">
+      <DependentUpon>ApprovaRDL1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\CompletaRdl.aspx.cs">
+      <DependentUpon>CompletaRdl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\CompletaRdl1.aspx.cs">
+      <DependentUpon>CompletaRdl1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\CostiAddetti.aspx.cs">
+      <DependentUpon>CostiAddetti.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\CostoMateriali.aspx.cs">
+      <DependentUpon>CostoMateriali.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ManutenzioneCorrettiva\CreazioneRdl.aspx.cs">
       <DependentUpon>CreazioneRdl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\CreazioneSGA.aspx.cs">
+      <DependentUpon>CreazioneSGA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\CreazioneSGA1.aspx.cs">
+      <DependentUpon>CreazioneSGA1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\CreazioneSGA2.aspx.cs">
+      <DependentUpon>CreazioneSGA2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\CreazioneTemp.aspx.cs">
+      <DependentUpon>CreazioneTemp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\DettDestinatariInvio.aspx.cs">
+      <DependentUpon>DettDestinatariInvio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\EditApprovaEmetti.aspx.cs">
@@ -927,6 +984,10 @@
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\GestioneCompleta.aspx.cs">
       <DependentUpon>GestioneCompleta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\GestioneCompleta1.aspx.cs">
+      <DependentUpon>GestioneCompleta1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\RapportoRichiestaRdl.aspx.cs">
@@ -961,8 +1022,40 @@
       <DependentUpon>ReportDettaglioSaldo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ManutenzioneCorrettiva\ReportSgaPdf.aspx.cs">
+      <DependentUpon>ReportSgaPdf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\SfogliaDieSga.aspx.cs">
+      <DependentUpon>SfogliaDieSga.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\SfogliaDoc.aspx.cs">
+      <DependentUpon>SfogliaDoc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ManutenzioneCorrettiva\SfogliaRdLEliminare.aspx.cs">
       <DependentUpon>SfogliaRdLEliminare.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlPaging.aspx.cs">
+      <DependentUpon>SfogliaRdlPaging.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlPaging1.aspx.cs">
+      <DependentUpon>SfogliaRdlPaging1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlPaging2.aspx.cs">
+      <DependentUpon>SfogliaRdlPaging2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlPaging4.aspx.cs">
+      <DependentUpon>SfogliaRdlPaging4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\SfogliaRdlPaging5.aspx.cs">
+      <DependentUpon>SfogliaRdlPaging5.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\VisualizzaGestioneMaterialiPdf.aspx.cs">
@@ -971,6 +1064,14 @@
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\VisualizzaRdl.aspx.cs">
       <DependentUpon>VisualizzaRdl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\VisualizzaRdl1.aspx.cs">
+      <DependentUpon>VisualizzaRdl1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManutenzioneCorrettiva\VisualizzaRdl2.aspx.cs">
+      <DependentUpon>VisualizzaRdl2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManutenzioneCorrettiva\VisualizzaRdlEliminare.aspx.cs">
@@ -1352,9 +1453,6 @@
       <DependentUpon>DSRapportino.xsd</DependentUpon>
     </Compile>
     <Compile Include="SchemiXSD\DsRptMpLocali.cs" />
-    <Compile Include="SchemiXSD\DSSGA1.cs">
-      <DependentUpon>DSSGA1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="SchemiXSD\DSSGA1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1785,6 +1883,10 @@
       <DependentUpon>UserStanze.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="WebControls\UserStanzeRic.ascx.cs">
+      <DependentUpon>UserStanzeRic.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="WebControls\VisualizzaReperibilita.ascx.cs">
       <DependentUpon>VisualizzaReperibilita.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2032,6 +2134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Default.aspx.resx" />
     <EmbeddedResource Include="ErrorPage.aspx.resx" />
+    <EmbeddedResource Include="GestioneSpazi\RicercaSpazi.aspx.resx">
+      <DependentUpon>RicercaSpazi.aspx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gestione\Addetti.aspx.resx">
       <DependentUpon>Addetti.aspx.cs</DependentUpon>
     </EmbeddedResource>
@@ -2347,6 +2452,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\ReportDettaglioSaldo.aspx.resx">
       <DependentUpon>ReportDettaglioSaldo.aspx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManutenzioneCorrettiva\ReportSgaPdf.aspx.resx">
+      <DependentUpon>ReportSgaPdf.aspx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaDieSga.aspx.resx" />
     <EmbeddedResource Include="ManutenzioneCorrettiva\SfogliaDoc.aspx.resx" />
@@ -2999,6 +3107,7 @@
     <Content Include="email.xslt" />
     <Content Include="emailcreazione.xslt" />
     <Content Include="ErrorPage.aspx" />
+    <Content Include="GestioneSpazi\RicercaSpazi.aspx" />
     <Content Include="Gestione\Addetti.aspx" />
     <Content Include="Gestione\Buildings.aspx" />
     <Content Include="Gestione\Categorie.aspx" />
@@ -3550,12 +3659,12 @@
     <Content Include="ManutenzioneCorrettiva\RapportoRichiestaRdl.aspx" />
     <Content Include="ManutenzioneCorrettiva\RapportoTecnicoIntervento.aspx" />
     <Content Include="ManutenzioneCorrettiva\RapportoTecnicoInterventoPdf.aspx" />
-    <Content Include="ManutenzioneCorrettiva\rendicontazione.aspx" />
     <Content Include="ManutenzioneCorrettiva\Report.aspx" />
     <Content Include="ManutenzioneCorrettiva\ReportDettaglio.aspx" />
     <Content Include="ManutenzioneCorrettiva\ReportDettaglioFondo.aspx" />
     <Content Include="ManutenzioneCorrettiva\ReportDettaglioPresunto.aspx" />
     <Content Include="ManutenzioneCorrettiva\ReportDettaglioSaldo.aspx" />
+    <Content Include="ManutenzioneCorrettiva\ReportSgaPdf.aspx" />
     <Content Include="ManutenzioneCorrettiva\SfogliaDieSga.aspx" />
     <Content Include="ManutenzioneCorrettiva\SfogliaDoc.aspx" />
     <Content Include="ManutenzioneCorrettiva\SfogliaRdLEliminare.aspx" />
@@ -3937,19 +4046,10 @@
     <None Include="SchemiXSD\DsRptMpLocali.xsx">
       <DependentUpon>DsRptMpLocali.xsd</DependentUpon>
     </None>
-    <None Include="SchemiXSD\DSSGA1.xsc">
-      <DependentUpon>DSSGA1.xsd</DependentUpon>
-    </None>
     <None Include="SchemiXSD\DSSGA1.xsd">
+      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DSSGA1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="SchemiXSD\DSSGA1.xss">
-      <DependentUpon>DSSGA1.xsd</DependentUpon>
-    </None>
-    <None Include="SchemiXSD\DSSGA1.xsx">
-      <DependentUpon>DSSGA1.xsd</DependentUpon>
     </None>
     <None Include="SchemiXSD\GestioneMateriali.xsd">
       <SubType>Designer</SubType>

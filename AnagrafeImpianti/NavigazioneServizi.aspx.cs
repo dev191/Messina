@@ -12,6 +12,9 @@ using S_Controls.Collections;
 using TheSite.AnagrafeImpianti; 
 using Microsoft.Web.UI.WebControls;
 using ApplicationDataLayer.DBType;
+//  set di migrazione
+using TreeNodeCollection = Microsoft.Web.UI.WebControls.TreeNodeCollection;
+using TreeNode = Microsoft.Web.UI.WebControls.TreeNode;
 
 namespace TheSite.AnagrafeImpianti
 {

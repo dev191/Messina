@@ -10,6 +10,9 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using Microsoft.Web.UI.WebControls;
+//  set di migrazione
+using TreeNodeCollection = Microsoft.Web.UI.WebControls.TreeNodeCollection;
+using TreeNode = Microsoft.Web.UI.WebControls.TreeNode;
 
 namespace TheSite.Admin
 {

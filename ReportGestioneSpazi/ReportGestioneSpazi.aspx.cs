@@ -12,6 +12,9 @@ using System.Web.UI.HtmlControls;
 using TheSite.AnalisiStatistiche;
 using TheSite.Classi.AnalisiStatistiche;
 using S_Controls.Collections;
+//  set di migrazione
+using TreeNodeCollection = Microsoft.Web.UI.WebControls.TreeNodeCollection;
+using TreeNode = Microsoft.Web.UI.WebControls.TreeNode;
 
 namespace TheSite.ReportGestioneSpazi
 {

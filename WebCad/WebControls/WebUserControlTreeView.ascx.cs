@@ -11,6 +11,9 @@ namespace WebCad.WebControls
 	using ApplicationDataLayer.DBType;
 	using WebCad.WiewCad;
 	using WebCad.Classi.ClassiAnagrafiche;
+	//  set di migrazione
+	using TreeNodeCollection = Microsoft.Web.UI.WebControls.TreeNodeCollection;
+	using TreeNode = Microsoft.Web.UI.WebControls.TreeNode;
 
 	/// <summary>
 	///		Descrizione di riepilogo per WebUserControlTreeView.
