@@ -284,7 +284,6 @@
     <Compile Include="Classi\ClassMail.cs" />
     <Compile Include="Classi\clMyDataGridCollection.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\AbstractBase.cs" />
-    <Compile Include="Classi\CostiGesioneCumulativi\AgganciaDatalayer.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\ClManCorrettiva.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\clMyDataGridCollection.cs" />
     <Compile Include="Classi\CostiGesioneCumulativi\CostiOperativiCumulativo.cs" />
@@ -1161,7 +1160,6 @@
     <Compile Include="SchemiXSD\GestioneMateriali.cs">
       <DependentUpon>GestioneMateriali.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SchemiXSD\NewDataSet.cs" />
     <Compile Include="SchemiXSD\ScmReport.cs">
       <DependentUpon>ScmReport.xsd</DependentUpon>
     </Compile>
@@ -1243,13 +1241,37 @@
     <Compile Include="StampaRapportiPdf\Pagine\VisualDWF.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="StampaRapportiPdf\Reports\CachedMP_Rapporti_C_MP_long_r6.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StampaRapportiPdf\Reports\CachedMP_Rapporti_C_MP_r6.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StampaRapportiPdf\Reports\MP_Rapporti_C_MP_long_r6.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StampaRapportiPdf\Reports\MP_Rapporti_C_MP_long_r61.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MP_Rapporti_C_MP_long_r6.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StampaRapportiPdf\Reports\MP_Rapporti_C_MP_r6.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StampaRapportiPdf\Reports\MP_Rapporti_C_MP_r61.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MP_Rapporti_C_MP_r6.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="StampaRapportiPdf\Schemixsd\DatasetReport.cs">
       <DependentUpon>DatasetReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="StampaRapportiPdf\Schemixsd\DatasetReport.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>DatasetReport.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="StampaRapportiPdf\WebControls\CalendarPicker.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -2112,6 +2134,17 @@
     <EmbeddedResource Include="StampaRapportiPdf\Pagine\Pagina_Download.resx" />
     <EmbeddedResource Include="StampaRapportiPdf\Pagine\Ricerca_e_Stampa.resx" />
     <EmbeddedResource Include="StampaRapportiPdf\Pagine\VisualDWF.resx" />
+    <EmbeddedResource Include="StampaRapportiPdf\Reports\MP_Rapporti_C_MP_long_r6.resx">
+      <DependentUpon>MP_Rapporti_C_MP_long_r6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StampaRapportiPdf\Reports\MP_Rapporti_C_MP_long_r6.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MP_Rapporti_C_MP_long_r61.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StampaRapportiPdf\Reports\MP_Rapporti_C_MP_r6.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MP_Rapporti_C_MP_r61.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="StampaRapportiPdf\WebControls\CalendarPicker.resx" />
     <EmbeddedResource Include="StampaRapportiPdf\WebControls\GridTitle.resx" />
     <EmbeddedResource Include="StampaRapportiPdf\WebControls\PageTitle.resx" />
@@ -2710,9 +2743,9 @@
       <DependentUpon>DatasetReport.xsd</DependentUpon>
     </None>
     <None Include="StampaRapportiPdf\Schemixsd\DatasetReport.xsd">
+      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DatasetReport.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </None>
     <None Include="StampaRapportiPdf\Schemixsd\DatasetReport.xss">
       <DependentUpon>DatasetReport.xsd</DependentUpon>

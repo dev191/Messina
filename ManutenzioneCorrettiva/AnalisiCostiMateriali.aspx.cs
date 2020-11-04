@@ -11,7 +11,6 @@ using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using MyCollection;
 using System.Globalization;
 
 namespace TheSite.ManutenzioneCorrettiva

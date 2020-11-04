@@ -19,6 +19,7 @@ using TheSite.SchemiXSD;
 using ICSharpCode.SharpZipLib.Zip;
 using TheSite.ManutenzioneCorrettiva;
 using TheSite.Classi.CostiGesioneCumulativi;
+using StampaRapportiPdf.Classi;
 
 namespace TheSite.CostiGesioneCumulativi
 {

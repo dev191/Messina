@@ -20,8 +20,7 @@ using System.IO;
 using System.Text;
 //using TheSite.Classi;
 using TheSite.Classi.CostiGesioneCumulativi;
-
-
+using StampaRapportiPdf.Classi;
 
 namespace TheSite.CostiGesioneCumulativi
 {

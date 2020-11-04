@@ -9,7 +9,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using S_Controls.Collections;
-using MyCollection;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using StampaRapportiPdf.Classi;

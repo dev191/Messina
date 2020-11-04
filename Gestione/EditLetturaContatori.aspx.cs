@@ -12,7 +12,6 @@ using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
 using TheSite.Classi.ClassiDettaglio;
-using MyCollection;
 using TheSite.Classi;
 using StampaRapportiPdf.Classi;
 

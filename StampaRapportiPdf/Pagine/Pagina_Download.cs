@@ -1,569 +1,596 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: StampaRapportiPdf.Pagine.Pagina_Download
-// Assembly: ME, Version=1.0.3728.28568, Culture=neutral, PublicKeyToken=null
-// MVID: C29CC0F3-9682-4F13-A7DC-CF27C967E605
-// Assembly location: C:\SIR_LAVORO\ME.dll
-
-using ApplicationDataLayer.Collections;
-using ApplicationDataLayer.DBType;
-using S_Controls;
-using S_Controls.Collections;
-using StampaRapportiPdf.Classi;
-using StampaRapportiPdf.WebControls;
-using System;
-using System.Configuration;
+﻿using System;
+using System.Collections;
+using System.ComponentModel;
 using System.Data;
-using System.IO;
-using System.Text;
+using System.Drawing;
 using System.Web;
+using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using TheSite.Classi;
-using TheSite.StampaRapportiPDF.Schemixsd;
+using System.Web.UI.HtmlControls;
+using StampaRapportiPdf;
+using S_Controls.Collections;
+using S_Controls;
+using ApplicationDataLayer;
+using ApplicationDataLayer.DBType;
+using StampaRapportiPdf.Classi;
+using StampaRapportiPdf.WebControls;
+using System.IO;
+using System.Text;
+using TheSite.StampaRapportiPdf.Schemixsd;
+
 
 namespace StampaRapportiPdf.Pagine
 {
-  public class Pagina_Download : Page
-  {
-    protected DataGrid DataGridRicerca;
-    protected S_Button S_btnRicerca;
-    protected PageTitle pgtlDownoloadStampe;
-    protected Label lblId;
-    protected LinkButton lnkChiudi;
-    protected Panel pnlShowInfo;
-    protected Label LABEL18;
-    protected Label LABEL19;
-    protected Label LABEL20;
-    protected Label LABEL21;
-    protected Label LABEL22;
-    protected Label LABEL23;
-    protected Label LABEL24;
-    protected Label LABEL25;
-    protected Label LABEL26;
-    protected Label LABEL27;
-    protected Label LABEL28;
-    protected Label LABEL29;
-    protected Label LABEL30;
-    protected Label LABEL31;
-    protected Label LABEL32;
-    protected Label lblIntestazione;
-    protected Label lblDataDiCreazione;
-    protected Label lblTipologiaReport;
-    protected Label lblEdificio;
-    protected Label lblComune;
-    protected Label lblIntervalloOdl;
-    protected Label lblDitta;
-    protected Label lblCategoria;
-    protected Label lblAddetto;
-    protected Label lblDimensioneFilePdf;
-    protected Label lblDataAssegnazioneIniziale;
-    protected Label lblDataAssegnazioneFinale;
-    protected Label lblDataCompletamentoIniziale;
-    protected Label lblDataCompletamentoFinale;
-    protected Label lblC11;
-    protected Label lblSoloNonCompletate;
-    protected Label lblSoloCompletate;
-    protected Label lblDimensioneFileZip;
-    protected Label Label1;
-    protected Label lblSoloCompletateConFiltro;
-    protected S_Button S_btnEliminaTiitiFile;
-    protected GridTitle GridTitleDownLoad;
-    public static string HelpLink = string.Empty;
+	/// <summary>
+	/// Descrizione di riepilogo per Pagina_Download.
+	/// </summary>
+	public class Pagina_Download : System.Web.UI.Page
+	{
+		protected System.Web.UI.WebControls.DataGrid DataGridRicerca;
+		protected S_Controls.S_Button S_btnRicerca;
+		protected WebControls.PageTitle pgtlDownoloadStampe;
+		protected System.Web.UI.WebControls.Label lblId;
+		protected System.Web.UI.WebControls.LinkButton lnkChiudi;
+		protected System.Web.UI.WebControls.Panel pnlShowInfo;
+		protected System.Web.UI.WebControls.Label LABEL18;
+		protected System.Web.UI.WebControls.Label LABEL19;
+		protected System.Web.UI.WebControls.Label LABEL20;
+		protected System.Web.UI.WebControls.Label LABEL21;
+		protected System.Web.UI.WebControls.Label LABEL22;
+		protected System.Web.UI.WebControls.Label LABEL23;
+		protected System.Web.UI.WebControls.Label LABEL24;
+		protected System.Web.UI.WebControls.Label LABEL25;
+		protected System.Web.UI.WebControls.Label LABEL26;
+		protected System.Web.UI.WebControls.Label LABEL27;
+		protected System.Web.UI.WebControls.Label LABEL28;
+		protected System.Web.UI.WebControls.Label LABEL29;
+		protected System.Web.UI.WebControls.Label LABEL30;
+		protected System.Web.UI.WebControls.Label LABEL31;
+		protected System.Web.UI.WebControls.Label LABEL32;
+		protected System.Web.UI.WebControls.Label lblIntestazione;
+		protected System.Web.UI.WebControls.Label lblDataDiCreazione;
+		protected System.Web.UI.WebControls.Label lblTipologiaReport;
+		protected System.Web.UI.WebControls.Label lblEdificio;
+		protected System.Web.UI.WebControls.Label lblComune;
+		protected System.Web.UI.WebControls.Label lblIntervalloOdl;
+		protected System.Web.UI.WebControls.Label lblDitta;
+		protected System.Web.UI.WebControls.Label lblCategoria;
+		protected System.Web.UI.WebControls.Label lblAddetto;
+		protected System.Web.UI.WebControls.Label lblDimensioneFilePdf;
+		protected System.Web.UI.WebControls.Label lblDataAssegnazioneIniziale;
+		protected System.Web.UI.WebControls.Label lblDataAssegnazioneFinale;
+		protected System.Web.UI.WebControls.Label lblDataCompletamentoIniziale;
+		protected System.Web.UI.WebControls.Label lblDataCompletamentoFinale;
+		protected System.Web.UI.WebControls.Label lblC11;
+		protected System.Web.UI.WebControls.Label lblSoloNonCompletate;
+		protected System.Web.UI.WebControls.Label lblSoloCompletate;
+		protected System.Web.UI.WebControls.Label lblDimensioneFileZip;
+		protected System.Web.UI.WebControls.Label Label1;
+		protected System.Web.UI.WebControls.Label lblSoloCompletateConFiltro;
+		protected S_Controls.S_Button S_btnEliminaTiitiFile;
+		protected GridTitle GridTitleDownLoad;
+		public static string HelpLink = string.Empty;
 
-    private void Page_Load(object sender, EventArgs e)
-    {
-      Pagina_Download.HelpLink = ((SiteModule) HttpContext.Current.Items[(object) "SiteModule"]).HelpLink;
-      this.pgtlDownoloadStampe.MainTitle = "Download Stampe Rapporti";
-      ((Control) this.GridTitleDownLoad.hplsNuovo).Visible = false;
-      this.caricaDataGridRicerca();
-    }
+		private void Page_Load(object sender, System.EventArgs e)
+		{
+			TheSite.Classi.SiteModule _SiteModule = (TheSite.Classi.SiteModule)HttpContext.Current.Items["SiteModule"];
+			HelpLink = _SiteModule.HelpLink;
+			// Inserire qui il codice utente necessario per inizializzare la pagina.
+			pgtlDownoloadStampe.MainTitle = "Download Stampe Rapporti";
+			GridTitleDownLoad.hplsNuovo.Visible = false;
+			caricaDataGridRicerca();
+		}
 
-    protected override void OnInit(EventArgs e)
-    {
-      this.InitializeComponent();
-      base.OnInit(e);
-    }
 
-    private void InitializeComponent()
-    {
-      this.DataGridRicerca.PageIndexChanged += new DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
-      ((Button) this.S_btnRicerca).Click += new EventHandler(this.S_btnRicerca_Click);
-      ((Button) this.S_btnEliminaTiitiFile).Click += new EventHandler(this.S_btnEliminaTiitiFile_Click);
-      this.lnkChiudi.Click += new EventHandler(this.lnkChiudi_Click);
-      this.Load += new EventHandler(this.Page_Load);
-    }
+		#region Codice generato da Progettazione Web Form
+		override protected void OnInit(EventArgs e)
+		{
+			//
+			// CODEGEN: questa chiamata è richiesta da Progettazione Web Form ASP.NET.
+			//
+			InitializeComponent();
+			base.OnInit(e);
+		}
 
-    private void caricaDataGridRicerca()
-    {
-      if (this.DataGridRicerca.Items.Count == 1 && this.DataGridRicerca.CurrentPageIndex != 0)
-        --this.DataGridRicerca.CurrentPageIndex;
-      else if (this.DataGridRicerca.Items.Count == 1)
-        this.DataGridRicerca.CurrentPageIndex = 0;
-      this.ricerca();
-    }
+		/// <summary>
+		/// Metodo necessario per il supporto della finestra di progettazione. Non modificare
+		/// il contenuto del metodo con l'editor di codice.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			this.DataGridRicerca.PageIndexChanged += new System.Web.UI.WebControls.DataGridPageChangedEventHandler(this.DataGridRicerca_PageIndexChanged);
+			this.S_btnRicerca.Click += new System.EventHandler(this.S_btnRicerca_Click);
+			this.S_btnEliminaTiitiFile.Click += new System.EventHandler(this.S_btnEliminaTiitiFile_Click);
+			this.lnkChiudi.Click += new System.EventHandler(this.lnkChiudi_Click);
+			this.Load += new System.EventHandler(this.Page_Load);
 
-    private void ricerca()
-    {
-      DatasetReport datasetReport = this.riempiDatasetDownload();
-      this.GridTitleDownLoad.NumeroRecords = Convert.ToString(datasetReport.Tables["DownloadFile"].Rows.Count);
-      this.DataGridRicerca.DataSource = (object) datasetReport.Tables["DownloadFile"];
-      this.DataGridRicerca.DataBind();
-    }
+		}
+		#endregion
 
-    private DatasetReport riempiDatasetDownload()
-    {
-      AgganciaDatalayer agganciaDatalayer = new AgganciaDatalayer();
-      S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("RSCursor");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Output);
-      ((ParameterObject) sObject).set_Index(0);
-      CollezioneControlli.Add(sObject);
-      agganciaDatalayer.NameProcedureDb = "rapportipdf.get_Download_Reports";
-      DataSet dataSet = agganciaDatalayer.GetData(CollezioneControlli).Copy();
-      DatasetReport datasetReport = new DatasetReport();
-      for (int index = 0; index <= dataSet.Tables[0].Rows.Count - 1; ++index)
-        datasetReport.Tables["DownloadFile"].ImportRow(dataSet.Tables[0].Rows[index]);
-      return datasetReport;
-    }
+		private void caricaDataGridRicerca()
+		{
 
-    private void S_btnRicerca_Click(object sender, EventArgs e) => this.Response.Redirect("Ricerca_e_stampa.aspx");
 
-    private void DataGridRicerca_PageIndexChanged(object sender, DataGridPageChangedEventArgs e)
-    {
-      this.DataGridRicerca.CurrentPageIndex = e.NewPageIndex;
-      this.ricerca();
-    }
+			//DataGridRicerca.CurrentPageIndex = 0;
+			if (DataGridRicerca.Items.Count == 1 && DataGridRicerca.CurrentPageIndex != 0)
+			{
+				DataGridRicerca.CurrentPageIndex--;
+			}
+			else if (DataGridRicerca.Items.Count == 1)
+			{
+				DataGridRicerca.CurrentPageIndex = 0;
+			}
 
-    protected void imgBtnVisualizza_Click(object sender, CommandEventArgs e)
-    {
-      this.Context.Items.Add((object) "nome_file", (object) (string) e.CommandArgument);
-      this.Server.Transfer("VisualDWF.aspx");
-    }
+			ricerca();
+		}
+		private void ricerca()
+		{
+			TheSite.StampaRapportiPdf.Schemixsd.DatasetReport ds;
+			ds = riempiDatasetDownload();
+			GridTitleDownLoad.NumeroRecords = Convert.ToString(ds.Tables["DownloadFile"].Rows.Count);
+			DataGridRicerca.DataSource = ds.Tables["DownloadFile"];
+			DataGridRicerca.DataBind();
+		}
+		private TheSite.StampaRapportiPdf.Schemixsd.DatasetReport riempiDatasetDownload()
+		{
+			AgganciaDatalayer io_db = new AgganciaDatalayer();
+			S_ControlsCollection clDatiRicerca = new S_ControlsCollection();
 
-    protected void imgBtnElimina_Click(object sender, CommandEventArgs e)
-    {
-      string[] strArray = Convert.ToString(e.CommandArgument).Split(Convert.ToChar(","));
-      int int32 = Convert.ToInt32(strArray[0].ToString());
-      string nomefile = strArray[1].ToString();
-      int num = this.deleteDb(int32);
-      this.deleteTblNorm(int32);
-      if (int32 != num)
-        throw new Exception();
-      this.elininaFile(nomefile);
-      this.caricaDataGridRicerca();
-    }
 
-    private void deleteTblNorm(int idFile)
-    {
-      AgganciaDatalayer agganciaDatalayer = new AgganciaDatalayer();
-      S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
-      int num1 = 0;
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_idFile");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Size(16);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject1).set_Value((object) idFile);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("p_Odl");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject3).set_Size(16);
-      S_Object sObject4 = sObject3;
-      int num4 = num3;
-      int num5 = num4 + 1;
-      ((ParameterObject) sObject4).set_Index(num4);
-      ((ParameterObject) sObject3).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject3);
-      agganciaDatalayer.NameProcedureDb = "RapportiPdf.inserisciTblNorm";
-      agganciaDatalayer.Delete(CollezioneControlli, 0);
-    }
+			S_Object Cursor = new S_Object();
+			Cursor.ParameterName = "RSCursor";
+			Cursor.DbType = CustomDBType.Cursor;
+			Cursor.Direction = ParameterDirection.Output;
+			Cursor.Index = 0;
+			clDatiRicerca.Add(Cursor);
 
-    private int deleteDb(int idFile)
-    {
-      int num1 = 0;
-      AgganciaDatalayer agganciaDatalayer = new AgganciaDatalayer();
-      S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("p_NOME_FILE");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject1).set_Size(128);
-      ((ParameterObject) sObject1).set_Index(num1);
-      ((ParameterObject) sObject1).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject2 = new S_Object();
-      ((ParameterObject) sObject2).set_ParameterName("P_DATA_ASSEGNAZIONE_INIT");
-      ((ParameterObject) sObject2).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject2).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject2).set_Size(10);
-      S_Object sObject3 = sObject2;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject3).set_Index(num2);
-      ((ParameterObject) sObject2).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject2);
-      S_Object sObject4 = new S_Object();
-      ((ParameterObject) sObject4).set_ParameterName("P_DATA_ASSEGNAZIONE_END");
-      ((ParameterObject) sObject4).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject4).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject4).set_Size(10);
-      S_Object sObject5 = sObject4;
-      int num4 = num3;
-      int num5 = num4 + 1;
-      ((ParameterObject) sObject5).set_Index(num4);
-      ((ParameterObject) sObject4).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject4);
-      S_Object sObject6 = new S_Object();
-      ((ParameterObject) sObject6).set_ParameterName("P_DATA_COMPLETAMENTO_INIT");
-      ((ParameterObject) sObject6).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject6).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject6).set_Size(10);
-      S_Object sObject7 = sObject6;
-      int num6 = num5;
-      int num7 = num6 + 1;
-      ((ParameterObject) sObject7).set_Index(num6);
-      ((ParameterObject) sObject6).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject6);
-      S_Object sObject8 = new S_Object();
-      ((ParameterObject) sObject8).set_ParameterName("P_DATA_COMPLETAMENTO_END");
-      ((ParameterObject) sObject8).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject8).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject8).set_Size(10);
-      S_Object sObject9 = sObject8;
-      int num8 = num7;
-      int num9 = num8 + 1;
-      ((ParameterObject) sObject9).set_Index(num8);
-      ((ParameterObject) sObject8).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject8);
-      S_Object sObject10 = new S_Object();
-      ((ParameterObject) sObject10).set_ParameterName("P_COMUNE");
-      ((ParameterObject) sObject10).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject10).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject10).set_Size(64);
-      S_Object sObject11 = sObject10;
-      int num10 = num9;
-      int num11 = num10 + 1;
-      ((ParameterObject) sObject11).set_Index(num10);
-      ((ParameterObject) sObject10).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject10);
-      S_Object sObject12 = new S_Object();
-      ((ParameterObject) sObject12).set_ParameterName("P_EDIFICIO");
-      ((ParameterObject) sObject12).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject12).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject12).set_Size((int) byte.MaxValue);
-      S_Object sObject13 = sObject12;
-      int num12 = num11;
-      int num13 = num12 + 1;
-      ((ParameterObject) sObject13).set_Index(num12);
-      ((ParameterObject) sObject12).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject12);
-      S_Object sObject14 = new S_Object();
-      ((ParameterObject) sObject14).set_ParameterName("P_DITTA");
-      ((ParameterObject) sObject14).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject14).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject14).set_Size(32);
-      S_Object sObject15 = sObject14;
-      int num14 = num13;
-      int num15 = num14 + 1;
-      ((ParameterObject) sObject15).set_Index(num14);
-      ((ParameterObject) sObject14).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject14);
-      S_Object sObject16 = new S_Object();
-      ((ParameterObject) sObject16).set_ParameterName("P_CATEGORIA");
-      ((ParameterObject) sObject16).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject16).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject16).set_Size(32);
-      S_Object sObject17 = sObject16;
-      int num16 = num15;
-      int num17 = num16 + 1;
-      ((ParameterObject) sObject17).set_Index(num16);
-      ((ParameterObject) sObject16).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject16);
-      S_Object sObject18 = new S_Object();
-      ((ParameterObject) sObject18).set_ParameterName("P_ADDETTO");
-      ((ParameterObject) sObject18).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject18).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject18).set_Size(128);
-      S_Object sObject19 = sObject18;
-      int num18 = num17;
-      int num19 = num18 + 1;
-      ((ParameterObject) sObject19).set_Index(num18);
-      ((ParameterObject) sObject18).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject18);
-      S_Object sObject20 = new S_Object();
-      ((ParameterObject) sObject20).set_ParameterName("P_SOLO_NON_COMPLETATE");
-      ((ParameterObject) sObject20).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject20).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject20).set_Size(8);
-      S_Object sObject21 = sObject20;
-      int num20 = num19;
-      int num21 = num20 + 1;
-      ((ParameterObject) sObject21).set_Index(num20);
-      ((ParameterObject) sObject20).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject20);
-      S_Object sObject22 = new S_Object();
-      ((ParameterObject) sObject22).set_ParameterName("P_SOLO_COMPLETATE");
-      ((ParameterObject) sObject22).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject22).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject22).set_Size(8);
-      S_Object sObject23 = sObject22;
-      int num22 = num21;
-      int num23 = num22 + 1;
-      ((ParameterObject) sObject23).set_Index(num22);
-      ((ParameterObject) sObject22).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject22);
-      S_Object sObject24 = new S_Object();
-      ((ParameterObject) sObject24).set_ParameterName("P_DATA_DI_COMPLETAMENTO");
-      ((ParameterObject) sObject24).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject24).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject24).set_Size(8);
-      S_Object sObject25 = sObject24;
-      int num24 = num23;
-      int num25 = num24 + 1;
-      ((ParameterObject) sObject25).set_Index(num24);
-      ((ParameterObject) sObject24).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject24);
-      S_Object sObject26 = new S_Object();
-      ((ParameterObject) sObject26).set_ParameterName("P_DIMENSIONE_FILE");
-      ((ParameterObject) sObject26).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject26).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject26).set_Size(32);
-      S_Object sObject27 = sObject26;
-      int num26 = num25;
-      int num27 = num26 + 1;
-      ((ParameterObject) sObject27).set_Index(num26);
-      ((ParameterObject) sObject26).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject26);
-      S_Object sObject28 = new S_Object();
-      ((ParameterObject) sObject28).set_ParameterName("P_DIMENSIONE_FILE_ZIP");
-      ((ParameterObject) sObject28).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject28).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject28).set_Size(32);
-      S_Object sObject29 = sObject28;
-      int num28 = num27;
-      int num29 = num28 + 1;
-      ((ParameterObject) sObject29).set_Index(num28);
-      ((ParameterObject) sObject28).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject28);
-      S_Object sObject30 = new S_Object();
-      ((ParameterObject) sObject30).set_ParameterName("P_INTERVALLO_ODL_SELEZIONATI");
-      ((ParameterObject) sObject30).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject30).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject30).set_Size(256);
-      S_Object sObject31 = sObject30;
-      int num30 = num29;
-      int num31 = num30 + 1;
-      ((ParameterObject) sObject31).set_Index(num30);
-      ((ParameterObject) sObject30).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject30);
-      S_Object sObject32 = new S_Object();
-      ((ParameterObject) sObject32).set_ParameterName("P_TIPOLOGIA_REPORT");
-      ((ParameterObject) sObject32).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject32).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject32).set_Size(16);
-      S_Object sObject33 = sObject32;
-      int num32 = num31;
-      int num33 = num32 + 1;
-      ((ParameterObject) sObject33).set_Index(num32);
-      ((ParameterObject) sObject32).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject32);
-      S_Object sObject34 = new S_Object();
-      ((ParameterObject) sObject34).set_ParameterName("p_DIMENSIONEFILE_PDF_ZIP");
-      ((ParameterObject) sObject34).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject34).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject34).set_Size(128);
-      S_Object sObject35 = sObject34;
-      int num34 = num33;
-      int num35 = num34 + 1;
-      ((ParameterObject) sObject35).set_Index(num34);
-      ((ParameterObject) sObject34).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject34);
-      S_Object sObject36 = new S_Object();
-      ((ParameterObject) sObject36).set_ParameterName("p_COMPLETATE");
-      ((ParameterObject) sObject36).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject36).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject36).set_Size(128);
-      S_Object sObject37 = sObject36;
-      int num36 = num35;
-      int num37 = num36 + 1;
-      ((ParameterObject) sObject37).set_Index(num36);
-      ((ParameterObject) sObject36).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject36);
-      S_Object sObject38 = new S_Object();
-      ((ParameterObject) sObject38).set_ParameterName("P_Data_ass_in_out");
-      ((ParameterObject) sObject38).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject38).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject38).set_Size(30);
-      S_Object sObject39 = sObject38;
-      int num38 = num37;
-      int num39 = num38 + 1;
-      ((ParameterObject) sObject39).set_Index(num38);
-      ((ParameterObject) sObject38).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject38);
-      agganciaDatalayer.NameProcedureDb = "RapportiPdf.inserisciTabellaDwn";
-      return agganciaDatalayer.Delete(CollezioneControlli, idFile);
-    }
 
-    private void elininaFile(string nomefile)
-    {
-      string empty1 = string.Empty;
-      string empty2 = string.Empty;
-      string[] values = ConfigurationSettings.AppSettings.GetValues("DirectoryStampa");
-      string fileName1 = this.Server.MapPath(values[0]) + nomefile + ".pdf";
-      string fileName2 = this.Server.MapPath(values[0]) + nomefile + ".zip";
-      FileInfo fileInfo1 = new FileInfo(fileName1);
-      FileInfo fileInfo2 = new FileInfo(fileName2);
-      if (!fileInfo1.Exists)
-        throw new IOException();
-      fileInfo1.Delete();
-      if (!fileInfo2.Exists)
-        throw new IOException();
-      fileInfo2.Delete();
-    }
+			io_db.NameProcedureDb = "rapportipdf.get_Download_Reports";
+			DataSet dsDatiRicerca = io_db.GetData(clDatiRicerca).Copy();
 
-    protected void imgBtnDownLoad_Click(object sender, CommandEventArgs e) => this.Response.Redirect("../stampe/" + (string) e.CommandArgument + ".zip");
+			TheSite.StampaRapportiPdf.Schemixsd.DatasetReport DsTipizzato = new TheSite.StampaRapportiPdf.Schemixsd.DatasetReport();
+			int i = 0;
+			for (i = 0; i <= dsDatiRicerca.Tables[0].Rows.Count - 1; i++)
+			{
+				DsTipizzato.Tables["DownloadFile"].ImportRow(dsDatiRicerca.Tables[0].Rows[i]);
+			}
 
-    protected void lnkDett_Click(object sender, CommandEventArgs e)
-    {
-      string commandArgument = (string) e.CommandArgument;
-      this.riempiSchedaDettaglio(this.riempiDatasetDettaglio(commandArgument));
-      this.riempiSchedaDettaglioOdl(this.riempiDatasetDettaglioOdl(commandArgument));
-      this.pnlShowInfo.Visible = true;
-    }
+			if (i == 0)
+			{
 
-    private DataSet riempiDatasetDettaglioOdl(string id)
-    {
-      AgganciaDatalayer agganciaDatalayer = new AgganciaDatalayer();
-      S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
-      int num1 = 0;
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("Pid");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject1).set_Value((object) Convert.ToInt32(id));
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("RSCursor");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      S_Object sObject4 = sObject3;
-      int num4 = num3;
-      int num5 = num4 + 1;
-      ((ParameterObject) sObject4).set_Index(num4);
-      CollezioneControlli.Add(sObject3);
-      agganciaDatalayer.NameProcedureDb = "rapportipdf.RecuperaOdl";
-      return agganciaDatalayer.GetData(CollezioneControlli).Copy();
-    }
+			}
+			return DsTipizzato;
 
-    private void riempiSchedaDettaglioOdl(DataSet dsOdl)
-    {
-      string empty = string.Empty;
-      StringBuilder stringBuilder = new StringBuilder();
-      for (int index = 0; index <= dsOdl.Tables[0].Rows.Count - 1; ++index)
-      {
-        stringBuilder.Append(dsOdl.Tables[0].Rows[index][0].ToString());
-        stringBuilder.Append("-");
-      }
-      string str = stringBuilder.ToString();
-      this.lblIntervalloOdl.Text = str.Remove(str.Length - 1, 1);
-    }
+		}
+		private void S_btnRicerca_Click(object sender, System.EventArgs e)
+		{
+			Response.Redirect("Ricerca_e_stampa.aspx");
+		}
+		private void DataGridRicerca_PageIndexChanged(object sender, DataGridPageChangedEventArgs e)
+		{
+			DataGridRicerca.CurrentPageIndex = e.NewPageIndex;
+			ricerca();
+		}
 
-    private DatasetReport riempiDatasetDettaglio(string id)
-    {
-      AgganciaDatalayer agganciaDatalayer = new AgganciaDatalayer();
-      S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
-      int num1 = 0;
-      S_Object sObject1 = new S_Object();
-      ((ParameterObject) sObject1).set_ParameterName("Pid");
-      ((ParameterObject) sObject1).set_DbType((CustomDBType) 1);
-      ((ParameterObject) sObject1).set_Direction(ParameterDirection.Input);
-      S_Object sObject2 = sObject1;
-      int num2 = num1;
-      int num3 = num2 + 1;
-      ((ParameterObject) sObject2).set_Index(num2);
-      ((ParameterObject) sObject1).set_Value((object) Convert.ToInt32(id));
-      CollezioneControlli.Add(sObject1);
-      S_Object sObject3 = new S_Object();
-      ((ParameterObject) sObject3).set_ParameterName("RSCursor");
-      ((ParameterObject) sObject3).set_DbType((CustomDBType) 8);
-      ((ParameterObject) sObject3).set_Direction(ParameterDirection.Output);
-      S_Object sObject4 = sObject3;
-      int num4 = num3;
-      int num5 = num4 + 1;
-      ((ParameterObject) sObject4).set_Index(num4);
-      CollezioneControlli.Add(sObject3);
-      agganciaDatalayer.NameProcedureDb = "rapportipdf.RecuperaDettagli";
-      DataSet dataSet = agganciaDatalayer.GetData(CollezioneControlli).Copy();
-      DatasetReport datasetReport = new DatasetReport();
-      for (int index = 0; index <= dataSet.Tables[0].Rows.Count - 1; ++index)
-        datasetReport.Tables["DownloadFile"].ImportRow(dataSet.Tables[0].Rows[index]);
-      return datasetReport;
-    }
+		protected void imgBtnVisualizza_Click(Object sender, CommandEventArgs e)
+		{
+			Context.Items.Add("nome_file", (string)e.CommandArgument);
+			Server.Transfer("VisualDWF.aspx");
+		}
+		protected void imgBtnElimina_Click(object sender, CommandEventArgs e)
+		{
+			string[] arrDatagridIthem = Convert.ToString(e.CommandArgument).Split(Convert.ToChar(","));
+			int idFile = Convert.ToInt32(arrDatagridIthem[0].ToString());
+			string nomeFile = arrDatagridIthem[1].ToString();
 
-    private void riempiSchedaDettaglio(DatasetReport ds)
-    {
-      this.lblDataDiCreazione.Text = ds.Tables["DownloadFile"].Rows[0]["data_created"].ToString();
-      this.lblTipologiaReport.Text = ds.Tables["DownloadFile"].Rows[0]["tipologia_report"].ToString();
-      this.lblEdificio.Text = ds.Tables["DownloadFile"].Rows[0]["edificio"].ToString();
-      this.lblComune.Text = ds.Tables["DownloadFile"].Rows[0]["comune"].ToString();
-      this.lblDitta.Text = ds.Tables["DownloadFile"].Rows[0]["ditta"].ToString();
-      this.lblCategoria.Text = ds.Tables["DownloadFile"].Rows[0]["categoria"].ToString();
-      this.lblAddetto.Text = ds.Tables["DownloadFile"].Rows[0]["addetto"].ToString();
-      this.lblSoloNonCompletate.Text = ds.Tables["DownloadFile"].Rows[0]["solo_non_completate"].ToString();
-      this.lblSoloCompletate.Text = ds.Tables["DownloadFile"].Rows[0]["solo_completate"].ToString();
-      this.lblSoloCompletateConFiltro.Text = ds.Tables["DownloadFile"].Rows[0]["data_di_completamento"].ToString();
-      this.lblDimensioneFilePdf.Text = ds.Tables["DownloadFile"].Rows[0]["dimensione_file"].ToString();
-      this.lblDimensioneFileZip.Text = ds.Tables["DownloadFile"].Rows[0]["dimensione_file_zip"].ToString();
-      this.lblDataAssegnazioneIniziale.Text = ds.Tables["DownloadFile"].Rows[0]["data_assegnazione_init"].ToString();
-      this.lblDataAssegnazioneFinale.Text = ds.Tables["DownloadFile"].Rows[0]["data_assegnazione_end"].ToString();
-      this.lblDataCompletamentoIniziale.Text = ds.Tables["DownloadFile"].Rows[0]["data_completamento_init"].ToString();
-      this.lblDataCompletamentoFinale.Text = ds.Tables["DownloadFile"].Rows[0]["data_completamento_end"].ToString();
-    }
+			int idFileDlete = deleteDb(idFile);
+			deleteTblNorm(idFile);
+			if (idFile != idFileDlete)
+			{
+				throw new Exception();
+			}
+			elininaFile(nomeFile);
+			caricaDataGridRicerca();
 
-    private void lnkChiudi_Click(object sender, EventArgs e) => this.pnlShowInfo.Visible = false;
+		}
+		private void deleteTblNorm(int idFile)
+		{
+			AgganciaDatalayer io_db = new AgganciaDatalayer();
+			S_ControlsCollection clDatiUpDb = new S_ControlsCollection();
+			int pIndex = 0;
 
-    private void S_btnEliminaTiitiFile_Click(object sender, EventArgs e)
-    {
-      this.eliminaTuutiFile();
-      this.eliminaRecordDb();
-      this.Response.Redirect("Ricerca_e_Stampa.aspx");
-    }
+			S_Object pIddFile = new S_Object();
+			pIddFile.ParameterName = "p_idFile";
+			pIddFile.DbType = CustomDBType.Integer;
+			pIddFile.Direction = ParameterDirection.Input;
+			pIddFile.Size = 16;
+			pIddFile.Index = pIndex++;
+			pIddFile.Value = idFile;
+			clDatiUpDb.Add(pIddFile);
 
-    private void eliminaTuutiFile()
-    {
-      foreach (FileInfo file in new DirectoryInfo(this.Server.MapPath(ConfigurationSettings.AppSettings.GetValues("DirectoryStampa")[0])).GetFiles())
-      {
-        file.Attributes = FileAttributes.Normal;
-        file.Delete();
-      }
-    }
+			S_Object pOdl = new S_Object();
+			pOdl.ParameterName = "p_Odl";
+			pOdl.DbType = CustomDBType.Integer;
+			pOdl.Direction = ParameterDirection.Input;
+			pOdl.Size = 16;
+			pOdl.Index = pIndex++;
+			pOdl.Value = DBNull.Value;
+			clDatiUpDb.Add(pOdl);
+			io_db.NameProcedureDb = "RapportiPdf.inserisciTblNorm";
+			int result = io_db.Delete(clDatiUpDb, 0);
 
-    private void eliminaRecordDb()
-    {
-      AgganciaDatalayer agganciaDatalayer = new AgganciaDatalayer();
-      S_ControlsCollection CollezioneControlli = new S_ControlsCollection();
-      S_Object sObject = new S_Object();
-      ((ParameterObject) sObject).set_ParameterName("p_finto");
-      ((ParameterObject) sObject).set_DbType((CustomDBType) 2);
-      ((ParameterObject) sObject).set_Direction(ParameterDirection.Input);
-      ((ParameterObject) sObject).set_Size(16);
-      ((ParameterObject) sObject).set_Index(0);
-      ((ParameterObject) sObject).set_Value((object) DBNull.Value);
-      CollezioneControlli.Add(sObject);
-      agganciaDatalayer.NameProcedureDb = "RapportiPdf.svutaTbelleAppoggio";
-      agganciaDatalayer.Delete(CollezioneControlli, 0);
-    }
-  }
+		}
+		private int deleteDb(int idFile)
+		{
+			int pIndex = 0;
+			AgganciaDatalayer io_db = new AgganciaDatalayer();
+			S_ControlsCollection clDatiUpDb = new S_ControlsCollection();
+
+			S_Object pNomeFile = new S_Object();
+			pNomeFile.ParameterName = "p_NOME_FILE";
+			pNomeFile.DbType = CustomDBType.VarChar;
+			pNomeFile.Direction = ParameterDirection.Input;
+			pNomeFile.Size = 128;
+			pNomeFile.Index = pIndex;
+			pNomeFile.Value = DBNull.Value;
+			clDatiUpDb.Add(pNomeFile);
+
+			S_Object pDataAssegnazioneIn = new S_Object();
+			pDataAssegnazioneIn.ParameterName = "P_DATA_ASSEGNAZIONE_INIT";
+			pDataAssegnazioneIn.DbType = CustomDBType.VarChar;
+			pDataAssegnazioneIn.Direction = ParameterDirection.Input;
+			pDataAssegnazioneIn.Size = 10;
+			pDataAssegnazioneIn.Index = pIndex++;
+			pDataAssegnazioneIn.Value = DBNull.Value;
+			clDatiUpDb.Add(pDataAssegnazioneIn);
+
+			S_Object pDataAssegnazioneEnd = new S_Object();
+			pDataAssegnazioneEnd.ParameterName = "P_DATA_ASSEGNAZIONE_END";
+			pDataAssegnazioneEnd.DbType = CustomDBType.VarChar;
+			pDataAssegnazioneEnd.Direction = ParameterDirection.Input;
+			pDataAssegnazioneEnd.Size = 10;
+			pDataAssegnazioneEnd.Index = pIndex++;
+			pDataAssegnazioneEnd.Value = DBNull.Value;
+			clDatiUpDb.Add(pDataAssegnazioneEnd);
+
+			S_Object pDataCompletamentoIn = new S_Object();
+			pDataCompletamentoIn.ParameterName = "P_DATA_COMPLETAMENTO_INIT";
+			pDataCompletamentoIn.DbType = CustomDBType.VarChar;
+			pDataCompletamentoIn.Direction = ParameterDirection.Input;
+			pDataCompletamentoIn.Size = 10;
+			pDataCompletamentoIn.Index = pIndex++;
+			pDataCompletamentoIn.Value = DBNull.Value;
+			clDatiUpDb.Add(pDataCompletamentoIn);
+
+			S_Object pDataCompletamentoEnd = new S_Object();
+			pDataCompletamentoEnd.ParameterName = "P_DATA_COMPLETAMENTO_END";
+			pDataCompletamentoEnd.DbType = CustomDBType.VarChar;
+			pDataCompletamentoEnd.Direction = ParameterDirection.Input;
+			pDataCompletamentoEnd.Size = 10;
+			pDataCompletamentoEnd.Index = pIndex++;
+			pDataCompletamentoEnd.Value = DBNull.Value;
+			clDatiUpDb.Add(pDataCompletamentoEnd);
+
+			S_Object pComune = new S_Object();
+			pComune.ParameterName = "P_COMUNE";
+			pComune.DbType = CustomDBType.VarChar;
+			pComune.Direction = ParameterDirection.Input;
+			pComune.Size = 64;
+			pComune.Index = pIndex++;
+			pComune.Value = DBNull.Value;
+			clDatiUpDb.Add(pComune);
+
+			S_Object pEdificio = new S_Object();
+			pEdificio.ParameterName = "P_EDIFICIO";
+			pEdificio.DbType = CustomDBType.VarChar;
+			pEdificio.Direction = ParameterDirection.Input;
+			pEdificio.Size = 255;
+			pEdificio.Index = pIndex++;
+			pEdificio.Value = DBNull.Value;
+			clDatiUpDb.Add(pEdificio);
+
+			S_Object pDitta = new S_Object();
+			pDitta.ParameterName = "P_DITTA";
+			pDitta.DbType = CustomDBType.VarChar;
+			pDitta.Direction = ParameterDirection.Input;
+			pDitta.Size = 32;
+			pDitta.Index = pIndex++;
+			pDitta.Value = DBNull.Value;
+			clDatiUpDb.Add(pDitta);
+
+			S_Object pCategoria = new S_Object();
+			pCategoria.ParameterName = "P_CATEGORIA";
+			pCategoria.DbType = CustomDBType.VarChar;
+			pCategoria.Direction = ParameterDirection.Input;
+			pCategoria.Size = 32;
+			pCategoria.Index = pIndex++;
+			pCategoria.Value = DBNull.Value;
+			clDatiUpDb.Add(pCategoria);
+
+			S_Object pAddetto = new S_Object();
+			pAddetto.ParameterName = "P_ADDETTO";
+			pAddetto.DbType = CustomDBType.VarChar;
+			pAddetto.Direction = ParameterDirection.Input;
+			pAddetto.Size = 128;
+			pAddetto.Index = pIndex++;
+			pAddetto.Value = DBNull.Value;
+			clDatiUpDb.Add(pAddetto);
+
+			S_Object pSoloNonCompletate = new S_Object();
+			pSoloNonCompletate.ParameterName = "P_SOLO_NON_COMPLETATE";
+			pSoloNonCompletate.DbType = CustomDBType.VarChar;
+			pSoloNonCompletate.Direction = ParameterDirection.Input;
+			pSoloNonCompletate.Size = 8;
+			pSoloNonCompletate.Index = pIndex++;
+			pSoloNonCompletate.Value = DBNull.Value;
+			clDatiUpDb.Add(pSoloNonCompletate);
+
+			S_Object pSoloCompletate = new S_Object();
+			pSoloCompletate.ParameterName = "P_SOLO_COMPLETATE";
+			pSoloCompletate.DbType = CustomDBType.VarChar;
+			pSoloCompletate.Direction = ParameterDirection.Input;
+			pSoloCompletate.Size = 8;
+			pSoloCompletate.Index = pIndex++;
+			pSoloCompletate.Value = DBNull.Value;
+			clDatiUpDb.Add(pSoloCompletate);
+
+			S_Object pDataDiCompletamento = new S_Object();
+			pDataDiCompletamento.ParameterName = "P_DATA_DI_COMPLETAMENTO";
+			pDataDiCompletamento.DbType = CustomDBType.VarChar;
+			pDataDiCompletamento.Direction = ParameterDirection.Input;
+			pDataDiCompletamento.Size = 8;
+			pDataDiCompletamento.Index = pIndex++;
+			pDataDiCompletamento.Value = DBNull.Value;
+			clDatiUpDb.Add(pDataDiCompletamento);
+
+			S_Object pDimensioneFile = new S_Object();
+			pDimensioneFile.ParameterName = "P_DIMENSIONE_FILE";
+			pDimensioneFile.DbType = CustomDBType.Integer;
+			pDimensioneFile.Direction = ParameterDirection.Input;
+			pDimensioneFile.Size = 32;
+			pDimensioneFile.Index = pIndex++;
+			pDimensioneFile.Value = DBNull.Value;
+			clDatiUpDb.Add(pDimensioneFile);
+
+			S_Object pDimensioneFileZip = new S_Object();
+			pDimensioneFileZip.ParameterName = "P_DIMENSIONE_FILE_ZIP";
+			pDimensioneFileZip.DbType = CustomDBType.Integer;
+			pDimensioneFileZip.Direction = ParameterDirection.Input;
+			pDimensioneFileZip.Size = 32;
+			pDimensioneFileZip.Index = pIndex++;
+			pDimensioneFileZip.Value = DBNull.Value;
+			clDatiUpDb.Add(pDimensioneFileZip);
+
+			S_Object pOdlSelezionati = new S_Object();
+			pOdlSelezionati.ParameterName = "P_INTERVALLO_ODL_SELEZIONATI";
+			pOdlSelezionati.DbType = CustomDBType.VarChar;
+			pOdlSelezionati.Direction = ParameterDirection.Input;
+			pOdlSelezionati.Size = 256;
+			pOdlSelezionati.Index = pIndex++;
+			pOdlSelezionati.Value = DBNull.Value;
+			clDatiUpDb.Add(pOdlSelezionati);
+
+			S_Object pTipologiaReport = new S_Object();
+			pTipologiaReport.ParameterName = "P_TIPOLOGIA_REPORT";
+			pTipologiaReport.DbType = CustomDBType.VarChar;
+			pTipologiaReport.Direction = ParameterDirection.Input;
+			pTipologiaReport.Size = 16;
+			pTipologiaReport.Index = pIndex++;
+			pTipologiaReport.Value = DBNull.Value;
+			clDatiUpDb.Add(pTipologiaReport);
+
+			S_Object pDimensionePdfZip = new S_Object();
+			pDimensionePdfZip.ParameterName = "p_DIMENSIONEFILE_PDF_ZIP";
+			pDimensionePdfZip.DbType = CustomDBType.VarChar;
+			pDimensionePdfZip.Direction = ParameterDirection.Input;
+			pDimensionePdfZip.Size = 128;
+			pDimensionePdfZip.Index = pIndex++;
+			pDimensionePdfZip.Value = DBNull.Value;
+			clDatiUpDb.Add(pDimensionePdfZip);
+
+			S_Object pCompletate = new S_Object();
+			pCompletate.ParameterName = "p_COMPLETATE";
+			pCompletate.DbType = CustomDBType.VarChar;
+			pCompletate.Direction = ParameterDirection.Input;
+			pCompletate.Size = 128;
+			pCompletate.Index = pIndex++;
+			pCompletate.Value = DBNull.Value;
+			clDatiUpDb.Add(pCompletate);
+
+			S_Object pDataAssInOut = new S_Object();
+			pDataAssInOut.ParameterName = "P_Data_ass_in_out";
+			pDataAssInOut.DbType = CustomDBType.VarChar;
+			pDataAssInOut.Direction = ParameterDirection.Input;
+			pDataAssInOut.Size = 30;
+			pDataAssInOut.Index = pIndex++;
+			pDataAssInOut.Value = DBNull.Value;
+			clDatiUpDb.Add(pDataAssInOut);
+
+			io_db.NameProcedureDb = "RapportiPdf.inserisciTabellaDwn";
+			int result = io_db.Delete(clDatiUpDb, idFile);
+			return result;
+		}
+		private void elininaFile(string nomefile)
+		{
+			string percosoAssolutoFilePdf = string.Empty;
+			string percosoAssolutoFileZip = string.Empty;
+			string[] DirectoryName = ((string[])(System.Configuration.ConfigurationSettings.AppSettings.GetValues("DirectoryStampa")));
+			percosoAssolutoFilePdf = Server.MapPath(DirectoryName[0]) + nomefile + ".pdf";
+			percosoAssolutoFileZip = Server.MapPath(DirectoryName[0]) + nomefile + ".zip";
+			FileInfo fiPdf = new FileInfo(percosoAssolutoFilePdf);
+			FileInfo fiZip = new FileInfo(percosoAssolutoFileZip);
+			if (fiPdf.Exists)
+			{
+				fiPdf.Delete();
+			}
+			else
+			{
+				throw new IOException();
+			}
+			if (fiZip.Exists)
+			{
+				fiZip.Delete();
+			}
+			else
+			{
+				throw new IOException();
+			}
+
+		}
+		protected void imgBtnDownLoad_Click(object sender, CommandEventArgs e)
+		{
+			string nomeFileZip = "../stampe/" + (string)e.CommandArgument + ".zip";
+			Response.Redirect(nomeFileZip);
+
+		}
+		protected void lnkDett_Click(object sender, CommandEventArgs e)
+		{
+			string id = (string)e.CommandArgument;
+			TheSite.StampaRapportiPdf.Schemixsd.DatasetReport ds;
+			DataSet dsOdl;
+			ds = riempiDatasetDettaglio(id);
+			riempiSchedaDettaglio(ds);
+			dsOdl = riempiDatasetDettaglioOdl(id);
+			riempiSchedaDettaglioOdl(dsOdl);
+			this.pnlShowInfo.Visible = true;
+		}
+		private DataSet riempiDatasetDettaglioOdl(string id)
+		{
+			AgganciaDatalayer io_db = new AgganciaDatalayer();
+			S_ControlsCollection clDatiRicerca = new S_ControlsCollection();
+			int index = 0;
+
+			S_Object Pid = new S_Object();
+			Pid.ParameterName = "Pid";
+			Pid.DbType = CustomDBType.Integer;
+			Pid.Direction = ParameterDirection.Input;
+			Pid.Index = index++;
+			Pid.Value = Convert.ToInt32(id);
+			clDatiRicerca.Add(Pid);
+
+			S_Object Cursor = new S_Object();
+			Cursor.ParameterName = "RSCursor";
+			Cursor.DbType = CustomDBType.Cursor;
+			Cursor.Direction = ParameterDirection.Output;
+			Cursor.Index = index++;
+			clDatiRicerca.Add(Cursor);
+			io_db.NameProcedureDb = "rapportipdf.RecuperaOdl";
+			DataSet dsDatiRicerca = io_db.GetData(clDatiRicerca).Copy();
+			return dsDatiRicerca;
+		}
+		private void riempiSchedaDettaglioOdl(DataSet dsOdl)
+		{
+			string tmpOdl = string.Empty;
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i <= dsOdl.Tables[0].Rows.Count - 1; i++)
+			{
+				sb.Append(dsOdl.Tables[0].Rows[i][0].ToString());
+				sb.Append("-");
+			}
+			tmpOdl = sb.ToString();
+			string resultOdl = tmpOdl.Remove(tmpOdl.Length - 1, 1);
+			lblIntervalloOdl.Text = resultOdl;
+		}
+		private TheSite.StampaRapportiPdf.Schemixsd.DatasetReport riempiDatasetDettaglio(string id)
+		{
+			AgganciaDatalayer io_db = new AgganciaDatalayer();
+			S_ControlsCollection clDatiRicerca = new S_ControlsCollection();
+			int index = 0;
+
+			S_Object Pid = new S_Object();
+			Pid.ParameterName = "Pid";
+			Pid.DbType = CustomDBType.Integer;
+			Pid.Direction = ParameterDirection.Input;
+			Pid.Index = index++;
+			Pid.Value = Convert.ToInt32(id);
+			clDatiRicerca.Add(Pid);
+
+			S_Object Cursor = new S_Object();
+			Cursor.ParameterName = "RSCursor";
+			Cursor.DbType = CustomDBType.Cursor;
+			Cursor.Direction = ParameterDirection.Output;
+			Cursor.Index = index++;
+			clDatiRicerca.Add(Cursor);
+
+
+			io_db.NameProcedureDb = "rapportipdf.RecuperaDettagli";
+			DataSet dsDatiRicerca = io_db.GetData(clDatiRicerca).Copy();
+
+			DatasetReport DsTipizzato = new DatasetReport();
+			int i = 0;
+			for (i = 0; i <= dsDatiRicerca.Tables[0].Rows.Count - 1; i++)
+			{
+				DsTipizzato.Tables["DownloadFile"].ImportRow(dsDatiRicerca.Tables[0].Rows[i]);
+			}
+
+			if (i == 0)
+			{
+
+			}
+			return DsTipizzato;
+		}
+		private void riempiSchedaDettaglio(TheSite.StampaRapportiPdf.Schemixsd.DatasetReport ds)
+		{
+			lblDataDiCreazione.Text = ds.Tables["DownloadFile"].Rows[0]["data_created"].ToString();
+			lblTipologiaReport.Text = ds.Tables["DownloadFile"].Rows[0]["tipologia_report"].ToString();
+			lblEdificio.Text = ds.Tables["DownloadFile"].Rows[0]["edificio"].ToString();
+			lblComune.Text = ds.Tables["DownloadFile"].Rows[0]["comune"].ToString();
+			lblDitta.Text = ds.Tables["DownloadFile"].Rows[0]["ditta"].ToString();
+			lblCategoria.Text = ds.Tables["DownloadFile"].Rows[0]["categoria"].ToString();
+			lblAddetto.Text = ds.Tables["DownloadFile"].Rows[0]["addetto"].ToString();
+			lblSoloNonCompletate.Text = ds.Tables["DownloadFile"].Rows[0]["solo_non_completate"].ToString();
+			lblSoloCompletate.Text = ds.Tables["DownloadFile"].Rows[0]["solo_completate"].ToString();
+			lblSoloCompletateConFiltro.Text = ds.Tables["DownloadFile"].Rows[0]["data_di_completamento"].ToString();
+			lblDimensioneFilePdf.Text = ds.Tables["DownloadFile"].Rows[0]["dimensione_file"].ToString();
+			lblDimensioneFileZip.Text = ds.Tables["DownloadFile"].Rows[0]["dimensione_file_zip"].ToString();
+			lblDataAssegnazioneIniziale.Text = ds.Tables["DownloadFile"].Rows[0]["data_assegnazione_init"].ToString();
+			lblDataAssegnazioneFinale.Text = ds.Tables["DownloadFile"].Rows[0]["data_assegnazione_end"].ToString();
+			lblDataCompletamentoIniziale.Text = ds.Tables["DownloadFile"].Rows[0]["data_completamento_init"].ToString();
+			lblDataCompletamentoFinale.Text = ds.Tables["DownloadFile"].Rows[0]["data_completamento_end"].ToString();
+		}
+		private void lnkChiudi_Click(object sender, System.EventArgs e)
+		{
+			this.pnlShowInfo.Visible = false;
+		}
+
+		private void S_btnEliminaTiitiFile_Click(object sender, System.EventArgs e)
+		{
+			eliminaTuutiFile();
+			eliminaRecordDb();
+			Response.Redirect("Ricerca_e_Stampa.aspx");
+		}
+		private void eliminaTuutiFile()
+		{
+			string[] DirectoryName = ((string[])(System.Configuration.ConfigurationSettings.AppSettings.GetValues("DirectoryStampa")));
+			DirectoryInfo di = new DirectoryInfo(Server.MapPath(DirectoryName[0]));
+			foreach (FileInfo f in di.GetFiles())
+			{
+				f.Attributes = System.IO.FileAttributes.Normal;
+				f.Delete();
+
+			}
+		}
+		private void eliminaRecordDb()
+		{
+			AgganciaDatalayer io_db = new AgganciaDatalayer();
+			S_ControlsCollection clDatiUpDb = new S_ControlsCollection();
+
+			S_Object pFinto = new S_Object();
+			pFinto.ParameterName = "p_finto";
+			pFinto.DbType = CustomDBType.VarChar;
+			pFinto.Direction = ParameterDirection.Input;
+			pFinto.Size = 16;
+			pFinto.Index = 0;
+			pFinto.Value = DBNull.Value;
+			clDatiUpDb.Add(pFinto);
+			io_db.NameProcedureDb = "RapportiPdf.svutaTbelleAppoggio";
+			int result = io_db.Delete(clDatiUpDb, 0);
+
+		}
+
+
+
+
+	}
 }

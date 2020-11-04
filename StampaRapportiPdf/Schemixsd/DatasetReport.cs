@@ -20,7 +20,7 @@ namespace TheSite.StampaRapportiPdf.Schemixsd
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Diagnostics.DebuggerStepThrough()]
     [System.ComponentModel.ToolboxItem(true)]
-    public class DatasetReport : DataSet
+    public partial class DatasetReport : DataSet
     {
 
         private MP_REPORT_LONGDataTable tableMP_REPORT_LONG;

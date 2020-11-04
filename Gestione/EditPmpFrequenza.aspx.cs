@@ -8,7 +8,6 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using MyCollection;
 using StampaRapportiPdf.Classi;
 
 namespace TheSite.Gestione

@@ -10,7 +10,6 @@ using System.Web.UI.WebControls;
 using S_Controls.Collections;
 using ApplicationDataLayer;
 using ApplicationDataLayer.DBType;
-using MyCollection;
 
 namespace TheSite.ManutenzioneProgrammata.Schedula
 {
