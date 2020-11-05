@@ -7,7 +7,7 @@
 <%@ Register TagPrefix="uc1" TagName="Addetti" Src="../WebControls/Addetti.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="CalendarPicker" Src="../WebControls/CalendarPicker.ascx" %>
 <%@ Page language="c#" Codebehind="AnalisiCostiOperativiDiGestioneCumulativo.aspx.cs" AutoEventWireup="false" Inherits="TheSite.CostiGesioneCumulativi.AnalisiCostiOperativiDiGestioneCumulativo" %>
-<%@ Register TagPrefix="cr" Namespace="CrystalDecisions.Web" Assembly="CrystalDecisions.Web, Version=9.1.5000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" %>
+<%@ Register TagPrefix="cr" Namespace="CrystalDecisions.Web" Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" %>
 <!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en" >
 <HTML>
 	<HEAD>
