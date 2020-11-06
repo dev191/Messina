@@ -13,7 +13,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>TheSite</RootNamespace>
-    <AssemblyName>Messina</AssemblyName>
+    <AssemblyName>Me</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MyType>Custom</MyType>
     <UseIISExpress>true</UseIISExpress>
@@ -32,7 +32,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>Messina.xml</DocumentationFile>
+    <DocumentationFile>Me.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -42,7 +42,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>Messina.xml</DocumentationFile>
+    <DocumentationFile>Me.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
@@ -383,7 +383,7 @@
     <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\JS\_vti_cnf\strings_it.js" />
     <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\JS\_vti_cnf\strings_ja.js" />
     <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\JS\_vti_cnf\strings_ko.js" />
-    <Content Include="AssemblyInfo.cs" />
+    <Compile Include="AssemblyInfo.cs" />
     <Content Include="bin\ApplicationSecurity.dll" />
     <Content Include="bin\arTreeMenu.dll" />
     <Content Include="bin\CsyWebControls.dll" />
@@ -455,7 +455,7 @@
     <Content Include="calendar\images\left_over.gif" />
     <Content Include="calendar\images\right.gif" />
     <Content Include="calendar\images\right_over.gif" />
-    <Content Include="ClassError.cs" />
+    <Compile Include="ClassError.cs" />
     <Content Include="Classi\AbstractBase.cs" />
     <Content Include="Classi\AnagrafeImpianti\AnagrafeDocDWF.cs" />
     <Content Include="Classi\AnagrafeImpianti\AnagrafeServizi.cs" />
@@ -639,14 +639,14 @@
     <Content Include="Css\DataPanelTest.css" />
     <Content Include="Css\MainSheet.css" />
     <Content Include="Default.aspx" />
-    <Content Include="Default.aspx.cs" />
+    <Compile Include="Default.aspx.cs" />
     <Content Include="Doc_DB\MA-F\120404\pad.f p.t..jpg" />
     <Content Include="Doc_DB\MA-F\120405\pad.f 1°p.jpg" />
     <Content Include="email.xslt" />
     <Content Include="emailcreazione.xslt" />
     <Content Include="EQImages\_vti_cnf\ImmagineNonDisponibile.jpg" />
     <Content Include="ErrorPage.aspx" />
-    <Content Include="ErrorPage.aspx.cs" />
+    <Compile Include="ErrorPage.aspx.cs" />
     <Content Include="GestioneSpazi\RicercaSpazi.aspx" />
     <Content Include="GestioneSpazi\RicercaSpazi.aspx.cs" />
     <Content Include="Gestione\Addetti.aspx" />
@@ -878,7 +878,7 @@
     <Content Include="GIC\Report\Visualizza.aspx.cs" />
     <Content Include="GIC\style\StyleSheetReport.css" />
     <Content Include="Global.asax" />
-    <Content Include="Global.asax.cs" />
+    <Compile Include="Global.asax.cs" />
     <Content Include="HelpApplication\App_Code\SiteMenu.cs" />
     <Content Include="HelpApplication\Default.aspx" />
     <Content Include="HelpApplication\Default.aspx.cs" />
@@ -1257,15 +1257,15 @@
     <Content Include="Js\CommonScript.js" />
     <Content Include="Js\sort.htc" />
     <Content Include="LeftFrame.aspx" />
-    <Content Include="LeftFrame.aspx.cs" />
+    <Compile Include="LeftFrame.aspx.cs" />
     <Content Include="Login.aspx" />
-    <Content Include="Login.aspx.cs" />
+    <Compile Include="Login.aspx.cs" />
     <Content Include="LoginMobile.aspx" />
-    <Content Include="LoginMobile.aspx.cs" />
+    <Compile Include="LoginMobile.aspx.cs" />
     <Content Include="Logoff.aspx" />
-    <Content Include="Logoff.aspx.cs" />
+    <Compile Include="Logoff.aspx.cs" />
     <Content Include="MainContent.aspx" />
-    <Content Include="MainContent.aspx.cs" />
+    <Compile Include="MainContent.aspx.cs" />
     <Content Include="ManutenzioneCorrettiva\AccorpaRdl.aspx" />
     <Content Include="ManutenzioneCorrettiva\AccorpaRdl.aspx.cs" />
     <Content Include="ManutenzioneCorrettiva\AnalisiCostiMateriali.aspx" />
@@ -1421,7 +1421,7 @@
     <Content Include="ManutenzioneProgrammata\SfogliaRdlOdl_MP.aspx.cs" />
     <Content Include="menu.xml" />
     <Content Include="OpenWebCad.aspx" />
-    <Content Include="OpenWebCad.aspx.cs" />
+    <Compile Include="OpenWebCad.aspx.cs" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\csc.exe" />
