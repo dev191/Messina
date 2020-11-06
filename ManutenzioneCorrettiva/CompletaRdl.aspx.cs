@@ -113,7 +113,6 @@ namespace TheSite.ManutenzioneCorrettiva
 		Double tot;
 		protected System.Web.UI.WebControls.Label lblSGA;
 		protected System.Web.UI.WebControls.Label LblDataInvioSga;
-		protected System.Web.UI.WebControls.DropDownList CmbPeriodo;
 		protected System.Web.UI.WebControls.Label presidio;
 		protected S_Controls.S_ComboBox MinutiFine;
 		protected S_Controls.S_ComboBox OraFine;
