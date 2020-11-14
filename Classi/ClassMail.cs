@@ -126,7 +126,7 @@ namespace TheSite.Classi
 			xmlEngine.Transform(xmlDoc,null,new StringWriter(message),null);
 			msg.Body=HttpContext.Current.Server.HtmlDecode(message.ToString());
 			stream.Close();
-			
+
 			//Parte riservata all'autenticazione sul server di posta
 			//			msg.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "www.csy.it";
 			//			msg.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverport") = 25;
@@ -140,7 +140,7 @@ namespace TheSite.Classi
 			//			msg.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername") = "username"; 
 			//			msg.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "password";
 			//SmtpMail.SmtpServer="www.prm-ater-gescal.it.compsys"; 
-			msg.Fields["http://schemas.microsoft.com/cdo/configuration/smtpauthenticate"] = 1;
+			//msg.Fields["http://schemas.microsoft.com/cdo/configuration/smtpauthenticate"] = 1;
 			msg.Fields["http://schemas.microsoft.com/cdo/configuration/sendusername"] = ConfigurationSettings.AppSettings["usersmtp"].ToString(); 
 			msg.Fields["http://schemas.microsoft.com/cdo/configuration/sendpassword"] = ConfigurationSettings.AppSettings["pwdsmtp"].ToString();
 

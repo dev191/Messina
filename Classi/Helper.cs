@@ -17,7 +17,7 @@ namespace TheSite.Classi
 	{
 		public static string GetApplicationName()
 		{
-			string ApplicationName="Cofely Italia s.p.a.";
+			string ApplicationName="Engie Servizi s.p.a.";
 			if(HttpContext.Current.User.IsInRole("MA") && !HttpContext.Current.User.IsInRole("PA"))
 				ApplicationName="Martino";
 

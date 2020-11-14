@@ -18,7 +18,7 @@
          Descrizione del problema: <xsl:value-of select="descrizione" />
          <!--
          <br/>  
-         Per ulteriori informazioni <a href="http://www.cft-sir.it/me/Default.aspx">http://www.cft-sir.it/me/Default.aspx</a>
+         Per ulteriori informazioni <a href="http://martino.cofasir.it">http://martino.cofasir.it</a>
          <br/>-->
          Distinti Saluti.
 		</FONT></DIV></BODY></HTML>
