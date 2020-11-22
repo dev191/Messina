@@ -14,7 +14,7 @@
 			<TABLE>
 				<TR>
 					<TD align="left">
-						<CR:CRYSTALREPORTVIEWER id="CRView" runat="server" hasdrillupbutton="False" displaygrouptree="False" width="350px"
+						<CR:CRYSTALREPORTVIEWER id="CRView" runat="server" hasdrillupbutton="False" width="350px"
 							height="50px"></CR:CRYSTALREPORTVIEWER></TD>
 				</TR>
 				<TR>

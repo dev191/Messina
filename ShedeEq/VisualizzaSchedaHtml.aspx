@@ -14,7 +14,7 @@
 		<FORM id="Form1" method="post" runat="server">
 			<TABLE id="TblMain" width="100%">
 				<TR>
-					<TD><CR:CRYSTALREPORTVIEWER id="CryVwSchedaEq" runat="server" displaygrouptree="False" width="350px" height="50px"
+					<TD><CR:CRYSTALREPORTVIEWER id="CryVwSchedaEq" runat="server" width="350px" height="50px"
 							enabledrilldown="False" hasdrillupbutton="False" hassearchbutton="False" borderstyle="None" pagetotreeratio="10"></CR:CRYSTALREPORTVIEWER></TD>
 				</TR>
 				<TR>

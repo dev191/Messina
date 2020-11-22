@@ -75,7 +75,7 @@
 				<TR>
 					<TD>
 						<CR1:CRYSTALREPORTVIEWER id="rptEngineOra" runat="server" borderstyle="None" width="350px" height="50px"
-							displaygrouptree="False" enabledrilldown="False" hasdrillupbutton="False" hassearchbutton="False"></CR1:CRYSTALREPORTVIEWER>
+							enabledrilldown="False" hasdrillupbutton="False" hassearchbutton="False"></CR1:CRYSTALREPORTVIEWER>
 					</TD>
 				</TR>
 			</TABLE>

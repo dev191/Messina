@@ -13,7 +13,7 @@
 		<FORM id="Form1" method="post" runat="server">
 			<TABLE>
 				<TR>
-					<TD><CR:CRYSTALREPORTVIEWER id="crlRptPianoMp" runat="server" displaygrouptree="False" width="350px" height="50px"></CR:CRYSTALREPORTVIEWER></TD>
+					<TD><CR:CRYSTALREPORTVIEWER id="crlRptPianoMp" runat="server" width="350px" height="50px"></CR:CRYSTALREPORTVIEWER></TD>
 				</TR>
 				<TR>
 					<TD></TD>
